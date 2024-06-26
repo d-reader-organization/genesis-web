@@ -1,40 +1,95 @@
-import type { Config } from "tailwindcss"
+import type { Config } from 'tailwindcss'
 
 const config = {
-  darkMode: ["class"],
-  content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-  ],
-  prefix: "",
+  darkMode: ['class'],
+  content: ['./src/**/*.{ts,tsx}'],
   theme: {
+    colors: {
+      grey: {
+        50: '#ebedf3',
+        100: '#c2c5ce',
+        200: '#777d8c',
+        300: '#414756',
+        400: '#2f333e',
+        500: '#1f222a',
+        600: '#15171c', // main
+        700: '#12141c',
+      },
+      green: {
+        400: '#5fe1a2',
+        500: '#49c187', // main
+        600: '#34a26d',
+      },
+      yellow: {
+        100: '#fffce3',
+        400: '#fff174',
+        500: '#fceb54', // main
+        600: '#cabc41',
+      },
+      orange: {
+        500: '#e9a860', //main
+      },
+      red: {
+        100: '#cf5656',
+        500: '#e3635b', // main
+      },
+      blue: {
+        100: '#00a6ed',
+        500: '#3926b4', // main
+      },
+      purple: {
+        500: '#8377f2', // main
+      },
+      pink: {
+        500: '#c413e0', // main
+      },
+      'important-color': '#fceb54',
+      'text-color': '#fafafa',
+    },
     container: {
       center: true,
-      padding: "2rem",
+      padding: '2rem',
       screens: {
-        "2xl": "1400px",
+        '2xl': '1400px',
       },
     },
+    screens: {
+      xs: '0px',
+      sm: '580px',
+      md: '900px',
+      lg: '1200px',
+      xl: '1536px',
+    },
     extend: {
+      aspectRatio: {
+        'comic-cover-aspect-ratio': '1000/900',
+        'comic-banner-aspect-ratio': '1920/900',
+        'comic-logo-aspect-ratio': '800/450',
+
+        'comic-issue-cover-aspect-ratio': '690/1000',
+        'comic-issue-signature-aspect-ratio': '380/240',
+
+        'creator-banner-aspect-ratio': '1920/900',
+        'creator-avatar-aspect-ratio': '500/500',
+        'creator-logo-aspect-ratio': '800/450',
+      },
       keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
         },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
         },
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require('tailwindcss-animate'), require('tailwind-scrollbar')],
 } satisfies Config
 
 export default config
