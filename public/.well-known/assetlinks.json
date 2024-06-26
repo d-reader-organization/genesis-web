@@ -1,0 +1,24 @@
+[
+	{
+		"relation": ["delegate_permission/common.handle_all_urls"],
+		"target": {
+			"namespace": "android_app",
+			"package_name": "io.app.dreader",
+			"sha256_cert_fingerprints": [
+				"1C:39:BD:0F:8B:4C:2E:93:22:38:65:D1:39:CB:2D:0D:67:BA:ED:0A:B1:88:EE:87:98:AC:66:17:8F:9E:B2:88",
+				"F3:EA:55:1B:B6:DC:24:D9:3E:91:F6:12:95:69:B6:3A:C5:F0:6F:25:16:B4:2F:1B:2A:16:EE:45:6E:F9:0B:AA"
+			]
+		}
+	},
+	{
+		"relation": ["delegate_permission/common.handle_all_urls"],
+		"target": {
+			"namespace": "android_app",
+			"package_name": "io.app.dreader.dev",
+			"sha256_cert_fingerprints": [
+				"12:CA:2C:B8:D7:33:6F:7F:93:2B:D8:C8:76:B4:BF:1D:D1:B1:B6:D5:D2:62:73:02:1B:5F:14:89:DD:40:5F:1D",
+				"F3:EA:55:1B:B6:DC:24:D9:3E:91:F6:12:95:69:B6:3A:C5:F0:6F:25:16:B4:2F:1B:2A:16:EE:45:6E:F9:0B:AA"
+			]
+		}
+	}
+]

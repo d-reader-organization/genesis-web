@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://dreader.app
+
+# Sitemaps
+Sitemap: https://dreader.app/sitemap.xml
