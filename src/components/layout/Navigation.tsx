@@ -36,7 +36,9 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
         (isHome || isDiscover) && 'fixed  left-0 right-0'
       )}
     >
-      <FullLogo className='h-8 min-w-fit' />
+      <Link href={RoutePath.Home}>
+        <FullLogo className='h-8 min-w-fit' />
+      </Link>
       <Input
         className='w-[50%]'
         placeholder='Search comics, episodes, genres, and creators'
