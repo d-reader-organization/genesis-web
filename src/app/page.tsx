@@ -22,7 +22,7 @@ export default function Home() {
     <>
       <Navigation />
       <main className='flex bg-grey-600 min-h-screen flex-col items-center justify-between p-24 bg'>
-        <p> body</p>
+        <div></div>
       </main>
     </>
   )

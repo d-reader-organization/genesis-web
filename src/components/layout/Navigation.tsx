@@ -8,7 +8,7 @@ import SearchIcon from 'public/assets/vector-icons/search-icon.svg'
 import DiscoverIcon from 'public/assets/vector-icons/discover-icon.svg'
 import LibraryIcon from 'public/assets/vector-icons/library-icon.svg'
 import ProfileIcon from 'public/assets/vector-icons/profile.svg'
-import { Input } from '../ui'
+import { Button, Input } from '../ui'
 import Link from 'next/link'
 import clsx from 'clsx'
 
@@ -30,7 +30,12 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
   return isMobile ? (
     <BottomNavigation />
   ) : (
-    <div className={clsx('w-full px-8 pt-8 pb-4 max-w-[1536px] gap-4 flex justify-between items-center my-0 mx-auto', (isHome || isDiscover) && 'fixed  left-0 right-0')}>
+    <div
+      className={clsx(
+        'w-full px-8 pt-8 pb-4 max-w-[1536px] gap-4 flex justify-between items-center my-0 mx-auto',
+        (isHome || isDiscover) && 'fixed  left-0 right-0'
+      )}
+    >
       <FullLogo className='h-8 min-w-fit' />
       <Input
         className='w-[50%]'
@@ -42,6 +47,7 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
         <MenuItem href={RoutePath.Library} isActive={isLibrary} icon={<LibraryIcon />} title='Library' />
         <MenuItem href={RoutePath.Profile} isActive={isProfile} icon={<ProfileIcon />} title='Profile' />
       </div>
+      <Button className='min-h-12'>Hop in</Button>
     </div>
   )
 }
