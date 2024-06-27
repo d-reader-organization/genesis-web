@@ -13,17 +13,19 @@
     "jsx": "preserve",
     "incremental": true,
     "noImplicitAny": true,
-		"noImplicitThis": true,
+    "noImplicitThis": true,
     "strictNullChecks": true,
+    "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "tailwindconfig": ["./tailwind.config.ts"]
     }
   },
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "middleware.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

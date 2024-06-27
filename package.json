@@ -24,6 +24,7 @@
     "@solana/wallet-adapter-react": "^0.15.35",
     "@solana/wallet-adapter-react-ui": "^0.9.35",
     "@solana/wallet-adapter-wallets": "^0.19.32",
+    "@svgr/webpack": "^8.1.0",
     "@tiplink/wallet-adapter": "^2.1.17",
     "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",

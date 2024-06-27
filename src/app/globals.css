@@ -1,4 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-  
+
+@layer base {
+  html {
+    scrollbar-color: #c2c5ce #1f222a;
+  }
+  body {
+    @apply text-white;
+    @apply bg-grey-600;
+  }
+  svg {
+    height: 24px;
+    width: auto;
+    /* @apply text-text-color; */
+  }
+
+  /* Scroll bar stylings */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-grey-100;
+    @apply rounded;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-grey-50;
+  }
+}
