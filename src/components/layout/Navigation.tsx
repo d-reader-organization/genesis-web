@@ -2,7 +2,7 @@ import React from 'react'
 import { RoutePath } from '@/enums/routePath'
 import { usePathname } from 'next/navigation'
 import { useIsMobile } from '@/hooks/useBreakpoints'
-import { BottomNavigation } from './BottomNavigation'
+import { BottomNavItem, BottomNavigation } from './BottomNavigation'
 import FullLogo from 'public/assets/vector-icons/full-logo.svg'
 import SearchIcon from 'public/assets/vector-icons/search-icon.svg'
 import DiscoverIcon from 'public/assets/vector-icons/discover-icon.svg'
@@ -35,7 +35,9 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
   const isMint = paramId ? pathname === RoutePath.Mint(paramId) || RoutePath.ComicIssue(paramId) : false
 
   return isMobile ? (
-    <BottomNavigation />
+    <BottomNavigation
+      initialNavItem={isDiscover ? BottomNavItem.discover : isProfile ? BottomNavItem.profile : BottomNavItem.home}
+    />
   ) : (
     <div
       className={clsx(

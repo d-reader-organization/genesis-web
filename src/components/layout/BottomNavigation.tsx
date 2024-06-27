@@ -11,7 +11,7 @@ type Props = {
   initialNavItem?: BottomNavItem
 }
 
-enum BottomNavItem {
+export enum BottomNavItem {
   home = 'home',
   discover = 'discover',
   profile = 'profile',
@@ -71,10 +71,6 @@ const BottomNavigationItem: React.FC<BottomNavItemProps> = ({ href, icon, isSele
     onClick={onClick}
   >
     {icon}
-    <span
-      className={`text-sm font-normal ${isSelected ? 'text-yellow-500' : 'text-white'} group-hover:text-yellow-500`}
-    >
-      {title}
-    </span>
+    <span className='text-sm font-normal'>{title}</span>
   </Link>
 )
