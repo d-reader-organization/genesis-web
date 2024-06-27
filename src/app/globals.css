@@ -12,8 +12,7 @@
   }
   svg {
     height: 24px;
-    width: auto;
-    /* @apply text-text-color; */
+
   }
 
   /* Scroll bar stylings */

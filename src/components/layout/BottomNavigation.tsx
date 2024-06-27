@@ -5,6 +5,7 @@ import ProfileIcon from 'public/assets/vector-icons/profile.svg'
 import { useSessionStorage } from '@/hooks/useSessionStorage'
 import { RoutePath } from '@/enums/routePath'
 import Link from 'next/link'
+import clsx from 'clsx'
 
 type Props = {
   initialNavItem?: BottomNavItem
@@ -62,7 +63,10 @@ export const BottomNavigation: React.FC<Props> = ({ initialNavItem }) => {
 
 const BottomNavigationItem: React.FC<BottomNavItemProps> = ({ href, icon, isSelected, onClick, title }) => (
   <Link
-    className='inline-flex flex-col items-center justify-center font-medium px-5 group'
+    className={clsx(
+      'inline-flex flex-col items-center justify-center font-medium px-5 group',
+      isSelected && 'text-yellow-500'
+    )}
     href={href}
     onClick={onClick}
   >
