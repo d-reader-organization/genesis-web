@@ -4,48 +4,6 @@ const config = {
   darkMode: ['class'],
   content: ['./src/**/*.{ts,tsx}'],
   theme: {
-    colors: {
-      grey: {
-        50: '#ebedf3',
-        100: '#c2c5ce',
-        200: '#777d8c',
-        300: '#414756',
-        400: '#2f333e',
-        500: '#1f222a',
-        600: '#15171c', // main
-        700: '#12141c',
-      },
-      green: {
-        400: '#5fe1a2',
-        500: '#49c187', // main
-        600: '#34a26d',
-      },
-      yellow: {
-        100: '#fffce3',
-        400: '#fff174',
-        500: '#fceb54', // main
-        600: '#cabc41',
-      },
-      orange: {
-        500: '#e9a860', //main
-      },
-      red: {
-        100: '#cf5656',
-        500: '#e3635b', // main
-      },
-      blue: {
-        100: '#00a6ed',
-        500: '#3926b4', // main
-      },
-      purple: {
-        500: '#8377f2', // main
-      },
-      pink: {
-        500: '#c413e0', // main
-      },
-      'important-color': '#fceb54',
-      'text-color': '#fafafa',
-    },
     container: {
       center: true,
       padding: '2rem',
@@ -73,6 +31,49 @@ const config = {
         'creator-avatar-aspect-ratio': '500/500',
         'creator-logo-aspect-ratio': '800/450',
       },
+      colors: {
+        grey: {
+          50: '#ebedf3',
+          100: '#c2c5ce',
+          200: '#777d8c',
+          300: '#414756',
+          400: '#2f333e',
+          500: '#1f222a',
+          600: '#15171c', // main
+          700: '#12141c',
+        },
+        green: {
+          400: '#5fe1a2',
+          500: '#49c187', // main
+          600: '#34a26d',
+        },
+        yellow: {
+          100: '#fffce3',
+          400: '#fff174',
+          500: '#fceb54', // main
+          600: '#cabc41',
+        },
+        orange: {
+          500: '#e9a860', //main
+        },
+        red: {
+          100: '#cf5656',
+          500: '#e3635b', // main
+        },
+        blue: {
+          100: '#00a6ed',
+          500: '#3926b4', // main
+        },
+        purple: {
+          500: '#8377f2', // main
+        },
+        pink: {
+          500: '#c413e0', // main
+        },
+        'important-color': '#fceb54',
+        'text-color': '#fafafa',
+      },
+      
       keyframes: {
         'accordion-down': {
           from: { height: '0' },

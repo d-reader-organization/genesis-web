@@ -1,3 +1,5 @@
 export * from './Alert'
 export * from './Progress'
-export * from './toast';
+export * from './toast'
+export * from './Input'
+export * from './Button'
