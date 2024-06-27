@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { RoutePath } from '@/enums/routePath'
 import { usePathname } from 'next/navigation'
