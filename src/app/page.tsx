@@ -22,7 +22,9 @@ export default function Home() {
     <>
       <Navigation />
       <main className='flex bg-grey-600 min-h-screen flex-col items-center justify-between p-24 bg'>
-        <div></div>
+        <div className='flex items-center justify-center h-[80vh]'>
+          <p className='font-bold text-2xl tracking-wider'>dReader-web</p>
+        </div>
       </main>
     </>
   )
