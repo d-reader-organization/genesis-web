@@ -11,6 +11,13 @@ import ProfileIcon from 'public/assets/vector-icons/profile.svg'
 import { Button, Input } from '../ui'
 import Link from 'next/link'
 import clsx from 'clsx'
+import { WALLET_LABELS } from '@/constants/wallets'
+import dynamic from 'next/dynamic'
+
+const BaseWalletMultiButtonDynamic = dynamic(
+  async () => (await import('@solana/wallet-adapter-react-ui')).BaseWalletMultiButton,
+  { ssr: false }
+)
 
 type Props = {
   paramId?: string | number
@@ -50,6 +57,7 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
         <MenuItem href={RoutePath.Profile} isActive={isProfile} icon={<ProfileIcon />} title='Profile' />
       </div>
       <Button className='min-h-12'>Hop in</Button>
+      {isMint ? <BaseWalletMultiButtonDynamic style={{ fontSize: '17px' }} labels={WALLET_LABELS} /> : null}
     </div>
   )
 }
