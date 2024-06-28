@@ -1,16 +1,16 @@
+'use client'
+
 import React from 'react'
 import { Carousel, CarouselContent, CarouselItem } from './Carousel'
 import Image from 'next/image'
-import { useFetchCarouselSlides } from '@/api/carousel'
 import { CarouselSlide } from '@/models/carousel/carouselSlide'
-import { CarouselLocation } from '@/enums/carouselLocation'
 import { RoutePath } from '@/enums/routePath'
 import clsx from 'clsx'
-import { useIsMobile } from '@/hooks/useBreakpoints'
 import LogoIcon from 'public/assets/vector-icons/logo.svg'
 import { ButtonLink } from '../Button'
 import { Text } from '../Text'
 import Autoplay from 'embla-carousel-autoplay'
+import { useIsMobile } from '@/hooks/useBreakpoints'
 
 const getSlideUrl = (slide: CarouselSlide) => {
   if (slide.comicIssueId) return RoutePath.ComicIssue(slide.comicIssueId)
@@ -19,24 +19,13 @@ const getSlideUrl = (slide: CarouselSlide) => {
   else return slide.externalLink
 }
 
-const DUMMY_SLIDE: CarouselSlide = {
-  id: 0,
-  image: '',
-  priority: 0,
-  title: '',
-  subtitle: '',
-  isPublished: false,
-  isExpired: false,
-  location: CarouselLocation.Home,
-  comicIssueId: undefined,
-  comicSlug: undefined,
-  creatorSlug: undefined,
-  externalLink: undefined,
+type Props = {
+  carouselSlides: CarouselSlide[]
 }
 
-export const HeroCarousel: React.FC = () => {
-  const { data: carouselSlides = [DUMMY_SLIDE] } = useFetchCarouselSlides()
+export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
   const isMobile = useIsMobile()
+
   return (
     <Carousel
       className='w-full portrait:h-[60vh] landscape:h-[84vh] max-h-[780px] mt-24'
@@ -54,7 +43,7 @@ export const HeroCarousel: React.FC = () => {
               {visitUrl && (
                 <Image
                   src={slide.image}
-                  alt=''
+                  alt={slide.title ?? ''}
                   fill
                   quality={isMobile ? 90 : 100}
                   className={clsx('-z-[1] object-cover max-h-full select-none', !isMobile && 'px-0 py-2 rounded-lg')}
