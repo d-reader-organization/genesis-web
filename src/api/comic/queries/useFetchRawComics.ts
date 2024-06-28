@@ -10,30 +10,30 @@ import http from '@/api/http'
 const { COMIC, GET_RAW } = COMIC_QUERY_KEYS
 
 const fetchRawComics = async (params: RawComicParams): Promise<RawComic[]> => {
-	const response = await http.get<RawComic[]>(`${COMIC}/${GET_RAW}`, { params })
-	return response.data
+  const response = await http.get<RawComic[]>(`${COMIC}/${GET_RAW}`, { params })
+  return response.data
 }
 
 export const useFetchRawComics = (params: RawComicParams, enabled = true) => {
-	const { isAuthenticated } = useCreatorAuth()
-	const toaster = useToaster()
+  const { isAuthenticated } = useCreatorAuth()
+  const toaster = useToaster()
 
-	const infiniteQuery = useInfiniteQuery({
-		queryKey: comicKeys.getManyRaw(params),
-		queryFn: ({ pageParam = 0 }) => fetchRawComics({ ...params, skip: pageParam * params.take }),
-		getNextPageParam: (lastPage, allPages) => {
-			if (lastPage.length >= params.take) return allPages.length
-		},
-		staleTime: 1000 * 60 * 30, // stale for 30 minutes
-		enabled: isAuthenticated && enabled && !!params.creatorSlug && !!params.take,
-		onError: toaster.onQueryError,
-	})
+  const infiniteQuery = useInfiniteQuery({
+    queryKey: comicKeys.getManyRaw(params),
+    queryFn: ({ pageParam = 0 }) => fetchRawComics({ ...params, skip: pageParam * params.take }),
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage.length >= params.take) return allPages.length
+    },
+    staleTime: 1000 * 60 * 30, // stale for 30 minutes
+    enabled: isAuthenticated && enabled && !!params.creatorSlug && !!params.take,
+    onError: toaster.onQueryError,
+  })
 
-	const { data } = infiniteQuery
-	const flatData = useMemo(() => {
-		if (!data) return []
-		return data.pages.flatMap((page) => page)
-	}, [data])
+  const { data } = infiniteQuery
+  const flatData = useMemo(() => {
+    if (!data) return []
+    return data.pages.flatMap((page) => page)
+  }, [data])
 
-	return { ...infiniteQuery, flatData }
+  return { ...infiniteQuery, flatData }
 }

@@ -16,32 +16,31 @@ import { useWalletAdapter } from '@/hooks/useWalletAdapter'
 export const ClientContext = createContext(null)
 
 const queryClient = new QueryClient({
-	defaultOptions: {
-		queries: {
-			refetchOnWindowFocus: true,
-			refetchOnMount: false,
-			refetchOnReconnect: false,
-			retry: 1,
-			staleTime: 10 * 1000, // stale for 10 seconds
-		},
-	},
+  defaultOptions: {
+    queries: {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      retry: 1,
+      staleTime: 10 * 1000, // stale for 10 seconds
+    },
+  },
 })
 
 const ClientContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-	const pathname = usePathname()
-	// only autoconnect on /comic-issue and /mint screens
-	const autoConnect =
-		pathname.toLowerCase().startsWith(RoutePath.ComicIssue('')) || pathname.toLowerCase().startsWith(RoutePath.Mint(''))
-	// const [isFirstTimeVisitor, setIsFirstTimeVisitor] = useLocalStorage('firstTimeVisitor', true)
-	const wallets = useWalletAdapter();
+  const pathname = usePathname()
+  // only autoconnect on /comic-issue and /mint screens
+  const autoConnect =
+    pathname.toLowerCase().startsWith(RoutePath.ComicIssue('')) || pathname.toLowerCase().startsWith(RoutePath.Mint(''))
+  // const [isFirstTimeVisitor, setIsFirstTimeVisitor] = useLocalStorage('firstTimeVisitor', true)
+  const wallets = useWalletAdapter()
 
-	return (
-		<QueryClientProvider client={queryClient}>
-				<ConnectionProvider endpoint={endpoint}>
-					<WalletProvider wallets={wallets} autoConnect={autoConnect}>
-						<WalletModalProvider className='wallet-dialog'>
-							{children}
-							{/* <Dialog
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ConnectionProvider endpoint={endpoint}>
+        <WalletProvider wallets={wallets} autoConnect={autoConnect}>
+          <WalletModalProvider className='wallet-dialog'>
+            {children}
+            {/* <Dialog
 								style={{ backdropFilter: 'blur(4px)' }}
 								PaperProps={{ className: 'text-dialog' }}
 								onClose={() => setIsFirstTimeVisitor(false)}
@@ -53,11 +52,11 @@ const ClientContextProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 								<strong>🚧 IMPORTANT NOTICE! 🚧</strong>
 								<p>{IMPORTANT_NOTICE}</p>
 							</Dialog> */}
-						</WalletModalProvider>
-					</WalletProvider>
-				</ConnectionProvider>
-		</QueryClientProvider>
-	)
+          </WalletModalProvider>
+        </WalletProvider>
+      </ConnectionProvider>
+    </QueryClientProvider>
+  )
 }
 
 export default ClientContextProvider

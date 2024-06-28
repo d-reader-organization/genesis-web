@@ -1,4 +1,4 @@
 export interface CancelBidParams {
-	assetAddress: string
-	receiptAddress?: string
+  assetAddress: string
+  receiptAddress?: string
 }

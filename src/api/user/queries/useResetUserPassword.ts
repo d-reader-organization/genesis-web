@@ -7,18 +7,18 @@ import http from '@/api/http'
 const { USER, RESET_PASSWORD } = USER_QUERY_KEYS
 
 const resetUserPassword = async (resetPasswordData: ResetPasswordData): Promise<void> => {
-	const response = await http.patch<void>(`${USER}/${RESET_PASSWORD}`, resetPasswordData)
-	return response.data
+  const response = await http.patch<void>(`${USER}/${RESET_PASSWORD}`, resetPasswordData)
+  return response.data
 }
 
 export const useResetUserPassword = () => {
-	const toaster = useToaster()
+  const toaster = useToaster()
 
-	return useMutation({
-		mutationFn: (resetPasswordData: ResetPasswordData) => resetUserPassword(resetPasswordData),
-		onSuccess: () => {
-			toaster.add('Password reset successful!', 'success')
-		},
-		onError: toaster.onQueryError,
-	})
+  return useMutation({
+    mutationFn: (resetPasswordData: ResetPasswordData) => resetUserPassword(resetPasswordData),
+    onSuccess: () => {
+      toaster.add('Password reset successful!', 'success')
+    },
+    onError: toaster.onQueryError,
+  })
 }

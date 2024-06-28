@@ -1,5 +1,5 @@
 export interface CreatorStats {
-	comicIssuesCount: number
-	totalVolume: number
-	followersCount: number
+  comicIssuesCount: number
+  totalVolume: number
+  followersCount: number
 }

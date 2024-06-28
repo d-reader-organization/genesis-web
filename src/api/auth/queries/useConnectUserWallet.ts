@@ -15,43 +15,43 @@ const { AUTH, WALLET, CONNECT } = AUTH_QUERY_KEYS
 type ConnectRequest = { address: string; encoding: string }
 
 const connectUserWallet = async (address: string, encoding: string): Promise<void> => {
-	const response = await http.patch<void>(`${AUTH}/${WALLET}/${CONNECT}/${address}/${encoding}`)
-	return response.data
+  const response = await http.patch<void>(`${AUTH}/${WALLET}/${CONNECT}/${address}/${encoding}`)
+  return response.data
 }
 
 export const useConnectUserWallet = () => {
-	const toaster = useToaster()
-	const queryClient = useQueryClient()
-	const { data: me } = useFetchMe()
+  const toaster = useToaster()
+  const queryClient = useQueryClient()
+  const { data: me } = useFetchMe()
 
-	return useMutation({
-		mutationFn: ({ address, encoding }: ConnectRequest) => connectUserWallet(address, encoding),
-		onSuccess: () => {
-			toaster.add('Wallet connected!', 'success')
-			queryClient.invalidateQueries({
-				predicate: (query) => {
-					return (
-						query.queryKey[0] === COMIC_ISSUE_QUERY_KEYS.COMIC_ISSUE &&
-						query.queryKey[1] === COMIC_ISSUE_QUERY_KEYS.GET &&
-						!isNil(query.queryKey[2]) &&
-						isFinite(toNumber(query.queryKey[2]))
-					)
-				},
-			})
-			queryClient.invalidateQueries(comicIssueKeys.getByOwner(me?.id || 0))
-			queryClient.invalidateQueries(comicKeys.getByOwner(me?.id || 0))
-			queryClient.invalidateQueries([TRANSACTION_QUERY_KEYS.TRANSACTION])
-			queryClient.invalidateQueries([ASSET_QUERY_KEYS.ASSET, ASSET_QUERY_KEYS.GET])
-			queryClient.invalidateQueries({
-				predicate: (query) => {
-					return (
-						query.queryKey[0] === USER_QUERY_KEYS.USER &&
-						query.queryKey[1] === USER_QUERY_KEYS.GET &&
-						query.queryKey[3] === USER_QUERY_KEYS.WALLETS
-					)
-				},
-			})
-		},
-		onError: toaster.onQueryError,
-	})
+  return useMutation({
+    mutationFn: ({ address, encoding }: ConnectRequest) => connectUserWallet(address, encoding),
+    onSuccess: () => {
+      toaster.add('Wallet connected!', 'success')
+      queryClient.invalidateQueries({
+        predicate: (query) => {
+          return (
+            query.queryKey[0] === COMIC_ISSUE_QUERY_KEYS.COMIC_ISSUE &&
+            query.queryKey[1] === COMIC_ISSUE_QUERY_KEYS.GET &&
+            !isNil(query.queryKey[2]) &&
+            isFinite(toNumber(query.queryKey[2]))
+          )
+        },
+      })
+      queryClient.invalidateQueries(comicIssueKeys.getByOwner(me?.id || 0))
+      queryClient.invalidateQueries(comicKeys.getByOwner(me?.id || 0))
+      queryClient.invalidateQueries([TRANSACTION_QUERY_KEYS.TRANSACTION])
+      queryClient.invalidateQueries([ASSET_QUERY_KEYS.ASSET, ASSET_QUERY_KEYS.GET])
+      queryClient.invalidateQueries({
+        predicate: (query) => {
+          return (
+            query.queryKey[0] === USER_QUERY_KEYS.USER &&
+            query.queryKey[1] === USER_QUERY_KEYS.GET &&
+            query.queryKey[3] === USER_QUERY_KEYS.WALLETS
+          )
+        },
+      })
+    },
+    onError: toaster.onQueryError,
+  })
 }

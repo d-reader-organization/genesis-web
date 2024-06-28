@@ -1,4 +1,4 @@
 export interface CancelListingParams {
-	assetAddress: string
-	receiptAddress?: string
+  assetAddress: string
+  receiptAddress?: string
 }

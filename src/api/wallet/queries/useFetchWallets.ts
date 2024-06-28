@@ -7,17 +7,17 @@ import http from '@/api/http'
 const { WALLET, GET } = WALLET_QUERY_KEYS
 
 const fetchWallets = async (): Promise<Wallet[]> => {
-	const response = await http.get<Wallet[]>(`${WALLET}/${GET}`)
-	return response.data
+  const response = await http.get<Wallet[]>(`${WALLET}/${GET}`)
+  return response.data
 }
 
 export const useFetchWallets = () => {
-	const toaster = useToaster()
+  const toaster = useToaster()
 
-	return useQuery({
-		queryFn: () => fetchWallets(),
-		queryKey: walletKeys.getMany,
-		staleTime: 1000 * 60 * 60 * 1, // stale for 1 hour
-		onError: toaster.onQueryError,
-	})
+  return useQuery({
+    queryFn: () => fetchWallets(),
+    queryKey: walletKeys.getMany,
+    staleTime: 1000 * 60 * 60 * 1, // stale for 1 hour
+    onError: toaster.onQueryError,
+  })
 }

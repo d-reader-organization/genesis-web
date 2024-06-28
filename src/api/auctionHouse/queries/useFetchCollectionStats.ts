@@ -8,18 +8,18 @@ import http from '@/api/http'
 const { AUCTION_HOUSE, GET, COLLECTION_STATS } = AUCTION_HOUSE_QUERY_KEYS
 
 const fetchCollectionStats = async (comicIssueId: string | number): Promise<CollectionStats> => {
-	const response = await http.get<CollectionStats>(`${AUCTION_HOUSE}/${GET}/${COLLECTION_STATS}/${comicIssueId}`)
-	return response.data
+  const response = await http.get<CollectionStats>(`${AUCTION_HOUSE}/${GET}/${COLLECTION_STATS}/${comicIssueId}`)
+  return response.data
 }
 
 export const useFetchCollectionStats = (comicIssueId: string | number) => {
-	const toaster = useToaster()
+  const toaster = useToaster()
 
-	return useQuery({
-		queryFn: () => fetchCollectionStats(comicIssueId),
-		queryKey: auctionHouseKeys.getCollectionStats(comicIssueId),
-		staleTime: 1000 * 60 * 5, // stale for 5 minutes
-		enabled: !isNil(comicIssueId),
-		onError: toaster.onQueryError,
-	})
+  return useQuery({
+    queryFn: () => fetchCollectionStats(comicIssueId),
+    queryKey: auctionHouseKeys.getCollectionStats(comicIssueId),
+    staleTime: 1000 * 60 * 5, // stale for 5 minutes
+    enabled: !isNil(comicIssueId),
+    onError: toaster.onQueryError,
+  })
 }

@@ -1,59 +1,59 @@
 type StaticImageData = {
-	src: string
-	height: number
-	width: number
-	placeholder?: string
+  src: string
+  height: number
+  width: number
+  placeholder?: string
 }
 
 declare module '*.png' {
-	const content: StaticImageData
-	export default content
+  const content: StaticImageData
+  export default content
 }
 
 declare module '*.svg' {
-	const content: React.FC<React.SVGProps<SVGSVGElement>>
-	export default content
+  const content: React.FC<React.SVGProps<SVGSVGElement>>
+  export default content
 }
 
 declare module '*.jpg' {
-	const content: StaticImageData
-	export default content
+  const content: StaticImageData
+  export default content
 }
 
 declare module '*.jpeg' {
-	const content: StaticImageData
-	export default content
+  const content: StaticImageData
+  export default content
 }
 
 declare module '*.gif' {
-	const content: StaticImageData
-	export default content
+  const content: StaticImageData
+  export default content
 }
 
 declare module '*.webp' {
-	const content: StaticImageData
-	export default content
+  const content: StaticImageData
+  export default content
 }
 
 declare module '*.ico' {
-	const content: StaticImageData
-	export default content
+  const content: StaticImageData
+  export default content
 }
 
 declare module '*.bmp' {
-	const content: StaticImageData
-	export default content
+  const content: StaticImageData
+  export default content
 }
 
 declare module '*.avif' {
-	const content: StaticImageData
-	export default content
+  const content: StaticImageData
+  export default content
 }
 
 declare global {
-	interface Window {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		solana?: any
-		// solana?: { publicKey: PublicKey }
-	}
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    solana?: any
+    // solana?: { publicKey: PublicKey }
+  }
 }

@@ -1,3 +1,3 @@
 export interface RateComicIssue {
-	rating: number
+  rating: number
 }

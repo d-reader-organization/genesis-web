@@ -1,4 +1,4 @@
 export type Step = {
-	label: string
-	isActive: boolean
+  label: string
+  isActive: boolean
 }

@@ -1,4 +1,4 @@
 export interface ResetPasswordData {
-	verificationToken: string
-	newPassword: string
+  verificationToken: string
+  newPassword: string
 }

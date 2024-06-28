@@ -7,17 +7,17 @@ import http from '@/api/http'
 const { CAROUSEL, SLIDES, GET } = CAROUSEL_QUERY_KEYS
 
 const fetchCarouselSlide = async (id: string | number): Promise<CarouselSlide> => {
-	const response = await http.get<CarouselSlide>(`${CAROUSEL}/${SLIDES}/${GET}/${id}`)
-	return response.data
+  const response = await http.get<CarouselSlide>(`${CAROUSEL}/${SLIDES}/${GET}/${id}`)
+  return response.data
 }
 
 export const useFetchCarouselSlide = (id: string | number) => {
-	const toaster = useToaster()
+  const toaster = useToaster()
 
-	return useQuery({
-		queryFn: () => fetchCarouselSlide(id),
-		queryKey: carouselKeys.get(id),
-		staleTime: 1000 * 60 * 10, // stale for 10 minutes
-		onError: toaster.onQueryError,
-	})
+  return useQuery({
+    queryFn: () => fetchCarouselSlide(id),
+    queryKey: carouselKeys.get(id),
+    staleTime: 1000 * 60 * 10, // stale for 10 minutes
+    onError: toaster.onQueryError,
+  })
 }

@@ -6,20 +6,20 @@ import http from '@/api/http'
 const { CAROUSEL, SLIDES, EXPIRE } = CAROUSEL_QUERY_KEYS
 
 const expireCarouselSlide = async (id: string | number): Promise<void> => {
-	const response = await http.patch<void>(`${CAROUSEL}/${SLIDES}/${EXPIRE}/${id}`)
-	return response.data
+  const response = await http.patch<void>(`${CAROUSEL}/${SLIDES}/${EXPIRE}/${id}`)
+  return response.data
 }
 
 export const useExpireCarouselSlide = (id: string | number) => {
-	const toaster = useToaster()
-	const queryClient = useQueryClient()
+  const toaster = useToaster()
+  const queryClient = useQueryClient()
 
-	return useMutation({
-		mutationFn: () => expireCarouselSlide(id),
-		onSuccess: () => {
-			toaster.add('Carousel slide deprecated! 🎉', 'success')
-			queryClient.invalidateQueries(carouselKeys.getMany)
-		},
-		onError: toaster.onQueryError,
-	})
+  return useMutation({
+    mutationFn: () => expireCarouselSlide(id),
+    onSuccess: () => {
+      toaster.add('Carousel slide deprecated! 🎉', 'success')
+      queryClient.invalidateQueries(carouselKeys.getMany)
+    },
+    onError: toaster.onQueryError,
+  })
 }

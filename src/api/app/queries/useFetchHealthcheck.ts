@@ -6,16 +6,16 @@ import http from '@/api/http'
 const { APP, HEALTHCHECK } = APP_QUERY_KEYS
 
 const fetchHealthcheck = async (): Promise<string> => {
-	const response = await http.get<string>(`${APP}/${HEALTHCHECK}`)
-	return response.data
+  const response = await http.get<string>(`${APP}/${HEALTHCHECK}`)
+  return response.data
 }
 
 export const useFetchHealthcheck = () => {
-	const toaster = useToaster()
+  const toaster = useToaster()
 
-	return useQuery({
-		queryFn: fetchHealthcheck,
-		queryKey: appKeys.healthcheck,
-		onError: toaster.onQueryError,
-	})
+  return useQuery({
+    queryFn: fetchHealthcheck,
+    queryKey: appKeys.healthcheck,
+    onError: toaster.onQueryError,
+  })
 }

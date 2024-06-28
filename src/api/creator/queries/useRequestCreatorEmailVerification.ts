@@ -6,18 +6,18 @@ import http from '@/api/http'
 const { CREATOR, REQUEST_EMAIL_VERIFICATION } = CREATOR_QUERY_KEYS
 
 const requestCreatorEmailVerification = async (): Promise<void> => {
-	const response = await http.patch<void>(`${CREATOR}/${REQUEST_EMAIL_VERIFICATION}`)
-	return response.data
+  const response = await http.patch<void>(`${CREATOR}/${REQUEST_EMAIL_VERIFICATION}`)
+  return response.data
 }
 
 export const useRequestCreatorEmailVerification = () => {
-	const toaster = useToaster()
+  const toaster = useToaster()
 
-	return useMutation({
-		mutationFn: () => requestCreatorEmailVerification(),
-		onSuccess: () => {
-			toaster.add('Verification email sent, check your inbox!', 'success')
-		},
-		onError: toaster.onQueryError,
-	})
+  return useMutation({
+    mutationFn: () => requestCreatorEmailVerification(),
+    onSuccess: () => {
+      toaster.add('Verification email sent, check your inbox!', 'success')
+    },
+    onError: toaster.onQueryError,
+  })
 }

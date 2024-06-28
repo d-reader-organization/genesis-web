@@ -1,4 +1,4 @@
 export interface AssetAttribute {
-	trait: string
-	value: string
+  trait: string
+  value: string
 }

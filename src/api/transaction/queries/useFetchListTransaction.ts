@@ -9,17 +9,17 @@ import http from '@/api/http'
 const { TRANSACTION, LIST } = TRANSACTION_QUERY_KEYS
 
 const fetchListTransaction = async (params: ListParams): Promise<Transaction> => {
-	const response = await http.get<string>(`${TRANSACTION}/${LIST}`, { params })
-	return decodeTransaction(response.data, 'base64')
+  const response = await http.get<string>(`${TRANSACTION}/${LIST}`, { params })
+  return decodeTransaction(response.data, 'base64')
 }
 
 export const useFetchListTransaction = (params: ListParams) => {
-	const toaster = useToaster()
+  const toaster = useToaster()
 
-	return useQuery({
-		queryFn: () => fetchListTransaction(params),
-		queryKey: transactionKeys.list(params),
-		staleTime: 1000 * 60 * 10, // stale for 10 minutes
-		onError: toaster.onQueryError,
-	})
+  return useQuery({
+    queryFn: () => fetchListTransaction(params),
+    queryKey: transactionKeys.list(params),
+    staleTime: 1000 * 60 * 10, // stale for 10 minutes
+    onError: toaster.onQueryError,
+  })
 }

@@ -7,19 +7,19 @@ import http from '@/api/http'
 const { APP, HELLO_AUTHENTICATED_CREATOR } = APP_QUERY_KEYS
 
 const fetchHelloAuthenticatedCreator = async (): Promise<string> => {
-	const response = await http.get<string>(`${APP}/${HELLO_AUTHENTICATED_CREATOR}`)
-	return response.data
+  const response = await http.get<string>(`${APP}/${HELLO_AUTHENTICATED_CREATOR}`)
+  return response.data
 }
 
 export const useFetchHelloAuthenticatedCreator = () => {
-	const { isAuthenticated } = useCreatorAuth()
-	const toaster = useToaster()
+  const { isAuthenticated } = useCreatorAuth()
+  const toaster = useToaster()
 
-	return useQuery({
-		queryFn: fetchHelloAuthenticatedCreator,
-		queryKey: appKeys.helloAuthenticatedCreator,
-		staleTime: 1000 * 60 * 60 * 24, // stale for 1 day
-		enabled: isAuthenticated,
-		onError: toaster.onQueryError,
-	})
+  return useQuery({
+    queryFn: fetchHelloAuthenticatedCreator,
+    queryKey: appKeys.helloAuthenticatedCreator,
+    staleTime: 1000 * 60 * 60 * 24, // stale for 1 day
+    enabled: isAuthenticated,
+    onError: toaster.onQueryError,
+  })
 }

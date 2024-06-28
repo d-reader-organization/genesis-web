@@ -12,22 +12,22 @@ export const getKeys = Object.keys as <T extends object>(object: T) => Array<key
  * or undefined if parsing failed
  */
 export function parseJwtPayload<T extends object = { [k: string]: string | number }>(token: string): JwtPayload<T> {
-	try {
-		const base64Payload = token.split('.')[1]
-		const base64 = base64Payload.replace(/-/g, '+').replace(/_/g, '/')
-		const jsonPayload = JSON.parse(
-			decodeURIComponent(
-				atob(base64)
-					.split('')
-					.map(function (c) {
-						return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-					})
-					.join('')
-			)
-		)
+  try {
+    const base64Payload = token.split('.')[1]
+    const base64 = base64Payload.replace(/-/g, '+').replace(/_/g, '/')
+    const jsonPayload = JSON.parse(
+      decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+          })
+          .join('')
+      )
+    )
 
-		return jsonPayload
-	} catch {
-		throw new Error('Invalid session token')
-	}
+    return jsonPayload
+  } catch {
+    throw new Error('Invalid session token')
+  }
 }

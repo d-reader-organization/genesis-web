@@ -1,14 +1,14 @@
 import { ComicRarity } from '@/enums/comicRarity'
 
 export interface StatefulCover {
-	artist: string
-	isSigned: boolean
-	isUsed: boolean
-	rarity: ComicRarity
-	image: string
+  artist: string
+  isSigned: boolean
+  isUsed: boolean
+  rarity: ComicRarity
+  image: string
 }
 
 export interface CreateStatefulCoverData
-	extends Pick<StatefulCover, 'artist' | 'isSigned' | 'isUsed' | 'rarity' | 'image'> {
-	// image?: File
+  extends Pick<StatefulCover, 'artist' | 'isSigned' | 'isUsed' | 'rarity' | 'image'> {
+  // image?: File
 }
