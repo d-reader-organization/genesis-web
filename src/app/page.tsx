@@ -1,6 +1,7 @@
 'use client'
 
 import { Navigation } from '@/components/layout/Navigation'
+import { HeroCarousel } from '@/components/ui/carousel/HeroCarousel'
 import { useBreakpoints } from '@/hooks/useBreakpoints'
 import { useMemo } from 'react'
 
@@ -21,10 +22,8 @@ export default function Home() {
   return (
     <>
       <Navigation />
-      <main className='flex bg-grey-600 min-h-screen flex-col items-center justify-between p-24 bg'>
-        <div className='flex items-center justify-center h-[80vh]'>
-          <p className='font-bold text-2xl tracking-wider'>dReader-web</p>
-        </div>
+      <main className='flex flex-col w-full h-full bg-cover'>
+        <HeroCarousel />
       </main>
     </>
   )

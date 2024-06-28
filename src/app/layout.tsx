@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
 import { Toaster } from '@/components/ui/toast/Toaster'
+import ClientContextProvider from '@/providers/ClientContextProvider'
 
 const satoshi = localFont({
   src: [
@@ -60,8 +61,10 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={satoshi.className}>
-        {children}
-        <Toaster />
+        <ClientContextProvider>
+          {children}
+          <Toaster />
+        </ClientContextProvider>
       </body>
     </html>
   )
