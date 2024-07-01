@@ -4,28 +4,28 @@ import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect'
 import useEventListener from './useEventListener'
 
 interface WindowSize {
-	width: number
-	height: number
+  width: number
+  height: number
 }
 
 export function useWindowSize(): WindowSize {
-	const [windowSize, setWindowSize] = useState<WindowSize>({
-		width: 0,
-		height: 0,
-	})
+  const [windowSize, setWindowSize] = useState<WindowSize>({
+    width: 0,
+    height: 0,
+  })
 
-	const handleSize = () => {
-		setWindowSize({
-			width: window.innerWidth,
-			height: window.innerHeight,
-		})
-	}
+  const handleSize = () => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    })
+  }
 
-	useEventListener('resize', handleSize)
+  useEventListener('resize', handleSize)
 
-	useIsomorphicLayoutEffect(() => {
-		handleSize()
-	}, [])
+  useIsomorphicLayoutEffect(() => {
+    handleSize()
+  }, [])
 
-	return windowSize
+  return windowSize
 }

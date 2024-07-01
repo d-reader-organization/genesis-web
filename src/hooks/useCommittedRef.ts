@@ -10,11 +10,11 @@ import { useEffect, useRef } from 'react'
  * @param value The `Ref` value
  */
 function useCommittedRef<TValue>(value: TValue): React.MutableRefObject<TValue> {
-	const ref = useRef(value)
-	useEffect(() => {
-		ref.current = value
-	}, [value])
-	return ref
+  const ref = useRef(value)
+  useEffect(() => {
+    ref.current = value
+  }, [value])
+  return ref
 }
 
 export default useCommittedRef

@@ -1,4 +1,4 @@
 export interface SignComicParams {
-	assetAddress: string
-	signerAddress: string
+  assetAddress: string
+  signerAddress: string
 }

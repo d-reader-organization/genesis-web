@@ -1,4 +1,4 @@
 export interface UseComicIssueAssetParams {
-	assetAddress: string
-	ownerAddress: string
+  assetAddress: string
+  ownerAddress: string
 }

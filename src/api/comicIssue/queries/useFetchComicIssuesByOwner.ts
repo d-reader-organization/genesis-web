@@ -9,29 +9,29 @@ import http from '@/api/http'
 const { COMIC_ISSUE, GET, BY_OWNER } = COMIC_ISSUE_QUERY_KEYS
 
 const fetchComicIssuesByOwner = async (params: ComicIssueParams, userId: number): Promise<ComicIssue[]> => {
-	const response = await http.get<ComicIssue[]>(`${COMIC_ISSUE}/${GET}/${BY_OWNER}/${userId}`, { params })
-	return response.data
+  const response = await http.get<ComicIssue[]>(`${COMIC_ISSUE}/${GET}/${BY_OWNER}/${userId}`, { params })
+  return response.data
 }
 
 export const useFetchComicIssuesByOwner = (params: ComicIssueParams, userId: number, enabled = true) => {
-	const toaster = useToaster()
+  const toaster = useToaster()
 
-	const infiniteQuery = useInfiniteQuery({
-		queryKey: comicIssueKeys.getMany(params),
-		queryFn: ({ pageParam = 0 }) => fetchComicIssuesByOwner({ ...params, skip: pageParam * params.take }, userId),
-		getNextPageParam: (lastPage, allPages) => {
-			if (lastPage.length >= params.take) return allPages.length
-		},
-		staleTime: 1000 * 60 * 60 * 1, // stale for 1 hour
-		enabled: enabled && !!params.take,
-		onError: toaster.onQueryError,
-	})
+  const infiniteQuery = useInfiniteQuery({
+    queryKey: comicIssueKeys.getMany(params),
+    queryFn: ({ pageParam = 0 }) => fetchComicIssuesByOwner({ ...params, skip: pageParam * params.take }, userId),
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage.length >= params.take) return allPages.length
+    },
+    staleTime: 1000 * 60 * 60 * 1, // stale for 1 hour
+    enabled: enabled && !!params.take,
+    onError: toaster.onQueryError,
+  })
 
-	const { data } = infiniteQuery
-	const flatData = useMemo(() => {
-		if (!data) return []
-		return data.pages.flatMap((page) => page)
-	}, [data])
+  const { data } = infiniteQuery
+  const flatData = useMemo(() => {
+    if (!data) return []
+    return data.pages.flatMap((page) => page)
+  }, [data])
 
-	return { ...infiniteQuery, flatData }
+  return { ...infiniteQuery, flatData }
 }

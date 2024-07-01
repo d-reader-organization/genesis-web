@@ -7,10 +7,10 @@ export const generateMinNumberErrorMessage = (name: string, min: number) => `Min
 export const generateMaxNumberErrorMessage = (name: string, max: number) => `Maximum value for ${name} is ${max}`
 
 export const generateMinLengthErrorMessage = (name: string, minLength: string | number) =>
-	`Max length for ${name} is ${minLength} characters`
+  `Max length for ${name} is ${minLength} characters`
 
 export const generateMaxLengthErrorMessage = (name: string, maxLength: string | number) =>
-	`Max length for ${name} is ${maxLength} characters`
+  `Max length for ${name} is ${maxLength} characters`
 
 export const generateNotCheckedErrorMessage = (name: string) => `${name} must be checked`
 

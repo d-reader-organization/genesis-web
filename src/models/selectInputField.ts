@@ -1,4 +1,4 @@
 export type SelectInputField = {
-	selectValue: string
-	inputValue: string
+  selectValue: string
+  inputValue: string
 }

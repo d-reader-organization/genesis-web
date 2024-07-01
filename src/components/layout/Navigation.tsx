@@ -43,25 +43,27 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
   ) : (
     <div
       className={clsx(
-        'w-full px-8 pt-8 pb-4 max-w-[1536px] gap-4 flex justify-between items-center my-0 mx-auto',
+        'w-full min-h-16 z-10 bg-grey-600/75 backdrop-blur-[10px]',
         (isHome || isDiscover) && 'fixed  left-0 right-0'
       )}
     >
-      <Link href={RoutePath.Home}>
-        <FullLogo className='h-8 min-w-fit' />
-      </Link>
-      <Input
-        className='w-[50%]'
-        placeholder='Search comics, episodes, genres, and creators'
-        prefixIcon={<SearchIcon />}
-      />
-      <div className='flex gap-4 md:gap-6'>
-        <MenuItem href={RoutePath.DiscoverComics} icon={<DiscoverIcon />} isActive={isDiscover} title='Discover' />
-        <MenuItem href={RoutePath.Library} isActive={isLibrary} icon={<LibraryIcon />} title='Library' />
-        <MenuItem href={RoutePath.Profile} isActive={isProfile} icon={<ProfileIcon />} title='Profile' />
+      <div className='gap-4 flex justify-between items-center my-0 mx-auto max-w-[1536px] px-8 pt-8 pb-6 w-full'>
+        <Link href={RoutePath.Home}>
+          <FullLogo className='h-8 min-w-fit' />
+        </Link>
+        <Input
+          className='w-[50%]'
+          placeholder='Search comics, episodes, genres, and creators'
+          prefixIcon={<SearchIcon />}
+        />
+        <div className='flex gap-4 md:gap-6'>
+          <MenuItem href={RoutePath.DiscoverComics} icon={<DiscoverIcon />} isActive={isDiscover} title='Discover' />
+          <MenuItem href={RoutePath.Library} isActive={isLibrary} icon={<LibraryIcon />} title='Library' />
+          <MenuItem href={RoutePath.Profile} isActive={isProfile} icon={<ProfileIcon />} title='Profile' />
+        </div>
+        <Button className='min-h-12'>Hop in</Button>
+        {isMint ? <BaseWalletMultiButtonDynamic style={{ fontSize: '17px' }} labels={WALLET_LABELS} /> : null}
       </div>
-      <Button className='min-h-12'>Hop in</Button>
-      {isMint ? <BaseWalletMultiButtonDynamic style={{ fontSize: '17px' }} labels={WALLET_LABELS} /> : null}
     </div>
   )
 }

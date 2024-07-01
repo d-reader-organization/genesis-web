@@ -6,15 +6,15 @@ import http from '@/api/http'
 const { NEWSLETTER, UNSUBSCRIBE } = NEWSLETTER_QUERY_KEYS
 
 const newsletterUnsubscribe = async (verificationToken: string): Promise<void> => {
-	const response = await http.delete<void>(`${NEWSLETTER}/${UNSUBSCRIBE}/${verificationToken}`)
-	return response.data
+  const response = await http.delete<void>(`${NEWSLETTER}/${UNSUBSCRIBE}/${verificationToken}`)
+  return response.data
 }
 
 export const useNewsletterUnsubscribe = () => {
-	const toaster = useToaster()
+  const toaster = useToaster()
 
-	return useMutation({
-		mutationFn: (verificationToken: string) => newsletterUnsubscribe(verificationToken),
-		onError: toaster.onQueryError,
-	})
+  return useMutation({
+    mutationFn: (verificationToken: string) => newsletterUnsubscribe(verificationToken),
+    onError: toaster.onQueryError,
+  })
 }

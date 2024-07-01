@@ -1,5 +1,5 @@
 export interface MintOneParams {
-	candyMachineAddress: string
-	minterAddress: string
-	label: string
+  candyMachineAddress: string
+  minterAddress: string
+  label: string
 }

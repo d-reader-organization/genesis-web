@@ -1,5 +1,5 @@
 export interface WalletAsset {
-	address: string
-	image: string
-	name: string
+  address: string
+  image: string
+  name: string
 }

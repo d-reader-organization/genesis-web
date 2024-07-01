@@ -6,16 +6,16 @@ import http from '@/api/http'
 const { AUTH, CREATOR, VALIDATE_EMAIL } = AUTH_QUERY_KEYS
 
 const fetchValidateCreatorEmail = async (email: string): Promise<void> => {
-	const response = await http.get<void>(`${AUTH}/${CREATOR}/${VALIDATE_EMAIL}/${email}`)
-	return response.data
+  const response = await http.get<void>(`${AUTH}/${CREATOR}/${VALIDATE_EMAIL}/${email}`)
+  return response.data
 }
 
 export const useFetchValidateCreatorEmail = (email: string) => {
-	const toaster = useToaster()
+  const toaster = useToaster()
 
-	return useQuery({
-		queryFn: () => fetchValidateCreatorEmail(email),
-		queryKey: creatorAuthKeys.validateEmail(email),
-		onError: toaster.onQueryError,
-	})
+  return useQuery({
+    queryFn: () => fetchValidateCreatorEmail(email),
+    queryKey: creatorAuthKeys.validateEmail(email),
+    onError: toaster.onQueryError,
+  })
 }

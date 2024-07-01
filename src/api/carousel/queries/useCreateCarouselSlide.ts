@@ -8,20 +8,20 @@ const { CAROUSEL, SLIDES, CREATE } = CAROUSEL_QUERY_KEYS
 
 // CreateCarouselSlideData
 const createCarouselSlide = async (request: FormData): Promise<CarouselSlide> => {
-	const response = await http.post<CarouselSlide>(`${CAROUSEL}/${SLIDES}/${CREATE}`, request)
-	return response.data
+  const response = await http.post<CarouselSlide>(`${CAROUSEL}/${SLIDES}/${CREATE}`, request)
+  return response.data
 }
 
 export const useCreateCarouselSlide = () => {
-	const toaster = useToaster()
-	const queryClient = useQueryClient()
+  const toaster = useToaster()
+  const queryClient = useQueryClient()
 
-	return useMutation({
-		mutationFn: (request: FormData) => createCarouselSlide(request),
-		onSuccess: () => {
-			toaster.add('Carousel slide created! 🎉', 'success')
-			queryClient.invalidateQueries(carouselKeys.getMany)
-		},
-		onError: toaster.onQueryError,
-	})
+  return useMutation({
+    mutationFn: (request: FormData) => createCarouselSlide(request),
+    onSuccess: () => {
+      toaster.add('Carousel slide created! 🎉', 'success')
+      queryClient.invalidateQueries(carouselKeys.getMany)
+    },
+    onError: toaster.onQueryError,
+  })
 }

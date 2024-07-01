@@ -6,30 +6,30 @@ import useCancelablePromise from './useCancelablePromise'
 type WalletBalanceHook = () => [number, () => Promise<void>]
 
 export const useWalletBalance: WalletBalanceHook = () => {
-	const { connection } = useConnection()
-	const wallet = useWallet()
-	const { publicKey } = wallet
-	const [balance, setBalance] = useState(0)
-	const makeCancelable = useCancelablePromise()
+  const { connection } = useConnection()
+  const wallet = useWallet()
+  const { publicKey } = wallet
+  const [balance, setBalance] = useState(0)
+  const makeCancelable = useCancelablePromise()
 
-	const fetchBalance = useCallback(async () => {
-		if (!publicKey) setBalance(0)
-		else {
-			try {
-				const lamportBalance = await connection.getBalance(publicKey)
-				setBalance(lamportBalance / LAMPORTS_PER_SOL)
-			} catch {
-				setBalance(0)
-			}
-		}
-	}, [connection, publicKey])
+  const fetchBalance = useCallback(async () => {
+    if (!publicKey) setBalance(0)
+    else {
+      try {
+        const lamportBalance = await connection.getBalance(publicKey)
+        setBalance(lamportBalance / LAMPORTS_PER_SOL)
+      } catch {
+        setBalance(0)
+      }
+    }
+  }, [connection, publicKey])
 
-	// Refetch balance whenever wallet or connection change
-	useEffect(() => {
-		makeCancelable(fetchBalance())
-	}, [wallet, connection, makeCancelable, fetchBalance])
+  // Refetch balance whenever wallet or connection change
+  useEffect(() => {
+    makeCancelable(fetchBalance())
+  }, [wallet, connection, makeCancelable, fetchBalance])
 
-	return [balance, fetchBalance]
+  return [balance, fetchBalance]
 }
 
 export default useWalletBalance

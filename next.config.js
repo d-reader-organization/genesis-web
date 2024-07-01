@@ -43,6 +43,8 @@ const nextConfig = {
     ],
   },
   webpack(config) {
+    config.resolve.fallback = { fs: false, net: false, tls: false }
+    config.externals.push('pino-pretty', 'encoding')
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],

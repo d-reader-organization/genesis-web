@@ -6,16 +6,16 @@ import http from '@/api/http'
 const { APP, HELLO } = APP_QUERY_KEYS
 
 const fetchHello = async (): Promise<string> => {
-	const response = await http.get<string>(`${APP}/${HELLO}`)
-	return response.data
+  const response = await http.get<string>(`${APP}/${HELLO}`)
+  return response.data
 }
 
 export const useFetchHello = () => {
-	const toaster = useToaster()
+  const toaster = useToaster()
 
-	return useQuery({
-		queryFn: fetchHello,
-		queryKey: appKeys.hello,
-		onError: toaster.onQueryError,
-	})
+  return useQuery({
+    queryFn: fetchHello,
+    queryKey: appKeys.hello,
+    onError: toaster.onQueryError,
+  })
 }

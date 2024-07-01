@@ -1,9 +1,9 @@
 export interface Genre {
-	name: string
-	slug: string
-	icon: string
-	color: string
-	priority: number
+  name: string
+  slug: string
+  icon: string
+  color: string
+  priority: number
 }
 
 export type CreateGenreData = Pick<Genre, 'name' | 'icon' | 'color' | 'priority'>

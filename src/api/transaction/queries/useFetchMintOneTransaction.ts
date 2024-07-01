@@ -10,17 +10,17 @@ const { TRANSACTION, MINT_ONE } = TRANSACTION_QUERY_KEYS
 
 /** @deprecated */
 const fetchMintOneTransaction = async (params: MintOneParams): Promise<VersionedTransaction[]> => {
-	const response = await http.get<string[]>(`${TRANSACTION}/${MINT_ONE}`, { params })
-	return response.data.map(versionedTransactionFromBs64)
+  const response = await http.get<string[]>(`${TRANSACTION}/${MINT_ONE}`, { params })
+  return response.data.map(versionedTransactionFromBs64)
 }
 
 export const useFetchMintOneTransaction = (params: MintOneParams, enabled?: boolean) => {
-	const toaster = useToaster()
-	return useQuery({
-		queryFn: () => fetchMintOneTransaction(params),
-		queryKey: transactionKeys.mintOne(params),
-		staleTime: 1000 * 60, // stale for 60 seconds
-		enabled: enabled && !!params.candyMachineAddress && !!params.minterAddress && !!params.label,
-		onError: toaster.onQueryError,
-	})
+  const toaster = useToaster()
+  return useQuery({
+    queryFn: () => fetchMintOneTransaction(params),
+    queryKey: transactionKeys.mintOne(params),
+    staleTime: 1000 * 60, // stale for 60 seconds
+    enabled: enabled && !!params.candyMachineAddress && !!params.minterAddress && !!params.label,
+    onError: toaster.onQueryError,
+  })
 }

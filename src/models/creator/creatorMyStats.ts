@@ -1,3 +1,3 @@
 export interface CreatorMyStats {
-	isFollowing: boolean
+  isFollowing: boolean
 }

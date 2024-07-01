@@ -73,7 +73,6 @@ const config = {
         'important-color': '#fceb54',
         'text-color': '#fafafa',
       },
-      
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
@@ -87,6 +86,16 @@ const config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+      boxShadow: {
+        3: '3px 3px 3px #15171c',
+      },
+      gradientColorStopPositions: {
+        '36%': '36%',
+        '72%': '72%',
+      },
+      backgroundPosition: {
+        '0-top': '0 top',
       },
     },
   },

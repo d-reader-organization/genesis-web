@@ -1,9 +1,9 @@
 export interface TwitterIntentComicMintedParams {
-	comicAddress: string
-	utmSource?: UtmSource
+  comicAddress: string
+  utmSource?: UtmSource
 }
 
 export enum UtmSource {
-	WEB = 'web',
-	MOBILE = 'mobile',
+  WEB = 'web',
+  MOBILE = 'mobile',
 }

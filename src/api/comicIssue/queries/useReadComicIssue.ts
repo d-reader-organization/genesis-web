@@ -6,19 +6,19 @@ import http from '@/api/http'
 const { COMIC_ISSUE, READ } = COMIC_ISSUE_QUERY_KEYS
 
 const readComicIssue = async (id: string | number): Promise<void> => {
-	const response = await http.patch<void>(`${COMIC_ISSUE}/${READ}/${id}`)
-	return response.data
+  const response = await http.patch<void>(`${COMIC_ISSUE}/${READ}/${id}`)
+  return response.data
 }
 
 export const useReadComicIssue = (id: string | number) => {
-	const toaster = useToaster()
-	const queryClient = useQueryClient()
+  const toaster = useToaster()
+  const queryClient = useQueryClient()
 
-	return useMutation({
-		mutationFn: () => readComicIssue(id),
-		onSuccess: () => {
-			queryClient.invalidateQueries(comicIssueKeys.get(id))
-		},
-		onError: toaster.onQueryError,
-	})
+  return useMutation({
+    mutationFn: () => readComicIssue(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries(comicIssueKeys.get(id))
+    },
+    onError: toaster.onQueryError,
+  })
 }

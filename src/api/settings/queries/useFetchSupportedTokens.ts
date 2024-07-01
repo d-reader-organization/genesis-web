@@ -7,17 +7,17 @@ import http from '@/api/http'
 const { SETTINGS, SPL_TOKEN, GET } = SETTINGS_QUERY_KEYS
 
 const fetchSupportedTokens = async (): Promise<SplToken[]> => {
-	const response = await http.get<SplToken[]>(`${SETTINGS}/${SPL_TOKEN}/${GET}`)
-	return response.data
+  const response = await http.get<SplToken[]>(`${SETTINGS}/${SPL_TOKEN}/${GET}`)
+  return response.data
 }
 
 export const useFetchSupportedTokens = () => {
-	const toaster = useToaster()
+  const toaster = useToaster()
 
-	return useQuery({
-		queryFn: fetchSupportedTokens,
-		queryKey: settingsKeys.getSupportedTokens,
-		staleTime: 1000 * 60 * 60 * 12, // stale for 12 hours
-		onError: toaster.onQueryError,
-	})
+  return useQuery({
+    queryFn: fetchSupportedTokens,
+    queryKey: settingsKeys.getSupportedTokens,
+    staleTime: 1000 * 60 * 60 * 12, // stale for 12 hours
+    onError: toaster.onQueryError,
+  })
 }
