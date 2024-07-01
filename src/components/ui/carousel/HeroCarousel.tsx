@@ -28,9 +28,9 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
 
   return (
     <Carousel
-      className='w-full portrait:h-[60vh] landscape:h-[84vh] max-h-[780px] mt-24'
+      className='w-full portrait:h-[60vh] landscape:h-[84vh] max-h-[780px] mt-24 mb-6'
       opts={{ loop: true }}
-      plugins={[Autoplay({ delay: 5000, stopOnMouseEnter: true })]}
+      plugins={[Autoplay({ delay: 5000 })]}
     >
       <CarouselContent>
         {carouselSlides.map((slide, index) => {
