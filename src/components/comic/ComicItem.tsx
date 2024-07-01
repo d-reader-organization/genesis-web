@@ -16,6 +16,7 @@ const blurDataUrl = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO
 const ComicItem: React.FC<Props> = ({ comic, className, priority, fetchPriority }) => {
   const nextPage = RoutePath.Comic(comic.slug)
 
+  // TODO skeleton
   return (
     <div
       className={clsx(

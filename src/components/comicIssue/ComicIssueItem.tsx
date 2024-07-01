@@ -12,6 +12,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const ComicIssueItem: React.FC<Props> = ({ comicIssue, className, ...props }) => (
+  // TODO skeleton
   <div
     className={clsx(
       'relative border-[3.2px] rounded-2xl border-solid border-grey-500 aspect-comic-issue-cover-aspect-ratio w-full cursor-pointer pointer transition ease-in transform duration-200 hover:-translate-y-1',
