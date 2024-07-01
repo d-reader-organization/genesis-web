@@ -14,6 +14,8 @@ import { HeroCarousel } from '@/components/ui/carousel/HeroCarousel'
 import { ComicList } from '@/components/comic/ComicList'
 import { ComicIssueList } from '@/components/comicIssue/ComicIssueList'
 import { CreatorList } from '@/components/creator/CreatorList'
+import { Section } from '@/components/shared/Section'
+import { RoutePath } from '@/enums/routePath'
 
 const { COMIC, GET: GET_COMICS } = COMIC_QUERY_KEYS
 const { COMIC_ISSUE, GET } = COMIC_ISSUE_QUERY_KEYS
@@ -77,12 +79,49 @@ export default async function HomePage() {
       <Navigation />
       <main className='flex flex-col w-full h-full bg-cover'>
         <HeroCarousel carouselSlides={carouselSlides} />
-        <ComicList className='mb-5' comics={promotedComics} />
-        <ComicList className='mb-5' comics={popularComics} />
-        <ComicIssueList className='mb-5' comicIssues={freeEpisodes} />
-        <CreatorList className='mb-5' creators={topCreators} animate={false} />
-        <ComicIssueList className='mb-5' comicIssues={newEpisodes} />
-        <ComicList className='mb-5' comics={newComics} />
+        <Section
+          id='promoted-comics'
+          title='Get started'
+          actionProps={{ title: 'See All', href: RoutePath.DiscoverComics }}
+        >
+          <ComicList comics={promotedComics} />
+        </Section>
+
+        <Section
+          id='popular-comics'
+          title='Popular comics'
+          actionProps={{ title: 'See All', href: RoutePath.DiscoverComics }}
+        >
+          <ComicList comics={popularComics} />
+        </Section>
+
+        <Section
+          id='new-episodes'
+          title='New episodes'
+          actionProps={{ title: 'See All', href: RoutePath.DiscoverComicIssues }}
+        >
+          <ComicIssueList comicIssues={newEpisodes} />
+        </Section>
+
+        <Section
+          id='free-comic-issues'
+          title='Free episodes'
+          actionProps={{ title: 'See All', href: RoutePath.DiscoverComicIssues }}
+        >
+          <ComicIssueList comicIssues={freeEpisodes} />
+        </Section>
+
+        <Section
+          id='top-creators'
+          title='Top creators'
+          actionProps={{ title: 'See All', href: RoutePath.DiscoverCreators }}
+        >
+          <CreatorList creators={topCreators} animate={false} />
+        </Section>
+
+        <Section id='new-comics' title='New comics' actionProps={{ title: 'See All', href: RoutePath.DiscoverComics }}>
+          <ComicList comics={newComics} />
+        </Section>
       </main>
     </>
   )
