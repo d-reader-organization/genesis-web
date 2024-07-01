@@ -77,9 +77,9 @@ export default async function HomePage() {
   return (
     <>
       <Navigation />
-      <main className='flex flex-col w-full h-full bg-cover'>
+      <main className='flex flex-col w-full h-full items-center'>
         <HeroCarousel carouselSlides={carouselSlides} />
-        <div className='max-w-screen-xl flex flex-col my-0 mx-auto md:mb-10'>
+        <div className='max-w-screen-xl w-full flex flex-col md:mb-10'>
           <Section
             id='promoted-comics'
             title='Get started'

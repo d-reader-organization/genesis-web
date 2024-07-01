@@ -1,6 +1,5 @@
 'use client'
 
-import clsx from 'clsx'
 import React, { PropsWithChildren } from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
@@ -19,12 +18,7 @@ export const CustomSlider: React.FC<Props> = ({ className, children, slider }) =
 
   const slidesToTake = slider === SliderType.comicList ? take.comicsPerPage : take.comicIssuesPerPage
   return (
-    <Slider
-      className={clsx('flex', className)}
-      slidesToScroll={slidesToTake}
-      slidesToShow={slidesToTake}
-      lazyLoad='anticipated'
-    >
+    <Slider key={slider} slidesToScroll={slidesToTake} slidesToShow={slidesToTake} lazyLoad='anticipated'>
       {children}
     </Slider>
   )
