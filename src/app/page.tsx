@@ -11,7 +11,8 @@ import { CreatorParams } from '@/models/creator/creatorParams'
 import { Creator } from '@/models/creator'
 import { Navigation } from '@/components/layout/Navigation'
 import { HeroCarousel } from '@/components/ui/carousel/HeroCarousel'
-import ComicList from '@/components/comic/ComicList'
+import { ComicList } from '@/components/comic/ComicList'
+import { ComicIssueList } from '@/components/comicIssue/ComicIssueList'
 
 const { COMIC, GET: GET_COMICS } = COMIC_QUERY_KEYS
 const { COMIC_ISSUE, GET } = COMIC_ISSUE_QUERY_KEYS
@@ -77,6 +78,8 @@ export default async function HomePage() {
         <HeroCarousel carouselSlides={carouselSlides} />
         <ComicList className='mb-5' comics={promotedComics} />
         <ComicList className='mb-5' comics={popularComics} />
+        <ComicIssueList className='mb-5' comicIssues={newEpisodes} />
+        <ComicIssueList className='mb-5' comicIssues={freeEpisodes} />
         <ComicList className='mb-5' comics={newComics} />
       </main>
     </>
