@@ -9,6 +9,7 @@
   body {
     @apply text-white;
     @apply bg-grey-600;
+    @apply mb-16 md:mb-0;
   }
   svg {
     height: 24px;
@@ -27,5 +28,50 @@
 
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-grey-50;
+  }
+}
+
+.slick-slide {
+  div {
+    line-height: 0;
+
+    & * {
+      line-height: initial;
+    }
+  }
+}
+
+.slick-slider {
+  .slick-list {
+    padding: 0.5rem 0;
+  }
+
+  .slick-prev {
+    left: 4px;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+  }
+
+  .slick-next {
+    right: 4px;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+
+  .slick-prev,
+  .slick-next {
+    z-index: 1;
+    height: calc(100% - 1rem);
+    padding: 0 0.5rem;
+    width: 40px;
+    opacity: 0;
+  }
+
+  &:hover {
+    .slick-prev,
+    .slick-next {
+      opacity: 1;
+      background-color: rgba('#1f222a', 0.5);
+    }
   }
 }
