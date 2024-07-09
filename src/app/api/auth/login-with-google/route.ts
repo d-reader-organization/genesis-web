@@ -1,23 +1,25 @@
-import { getServerSession } from 'next-auth'
+import { RoutePath } from '@/enums/routePath'
 import { Authorization } from '@/models/auth'
-import { NextResponse } from 'next/server'
-import { authOptions } from '@/utils/auth'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function PATCH() {
-  const session = await getServerSession(authOptions)
-  if (!session || !session.accessToken) {
-    return NextResponse.json({
-      message: 'Unauthorized',
-      status: 401,
-    })
-  }
+const appendSsoQueryIfNeeded = (query: string) => (query.includes('sso=google') ? query : `${query}&sso=google`)
+
+export async function PATCH(request: NextRequest) {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/user/login-with-google`, {
     method: 'PATCH',
     headers: {
-      authorization: `Google ${session.accessToken}`,
+      authorization: request.headers.get('authorization') ?? '',
     },
   })
 
   const data: Authorization | boolean = await response.json()
-  return NextResponse.json(data)
+  const isNewUser = typeof data === 'boolean'
+
+  if (!isNewUser) {
+    return NextResponse.json(data)
+  }
+
+  const searchParams = request.nextUrl.searchParams
+  const queryParams = searchParams.size ? decodeURIComponent(searchParams.toString()) : ''
+  return NextResponse.json(`${RoutePath.Register}?${appendSsoQueryIfNeeded(queryParams)}`)
 }

@@ -1,7 +1,7 @@
 import { baseApiUrl } from '@/constants/environment'
 import { cookies } from 'next/headers'
 
-const headers = {
+const defaultHeaders = {
   Accept: 'application/json',
   Cookie: cookies().toString(),
   'Access-Control-Allow-Credentials': 'true',
@@ -16,11 +16,13 @@ const generateQueryParams = (params: Record<string, unknown>) =>
 
 export const fetchWrapper = ({
   body,
+  headers,
   method = 'GET',
   path = '',
   params,
 }: {
   body?: unknown
+  headers?: HeadersInit
   method?: 'GET' | 'POST' | 'PATCH' | 'DELETE' | 'OPTIONS'
   path?: string
   params?: Record<string, unknown>
@@ -28,6 +30,6 @@ export const fetchWrapper = ({
   return fetch(`${baseApiUrl}/${path}${params ? `?${generateQueryParams(params)}` : ''}`, {
     body: JSON.stringify(body),
     method,
-    headers,
+    headers: { ...defaultHeaders, ...headers },
   })
 }

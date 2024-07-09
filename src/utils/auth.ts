@@ -1,5 +1,8 @@
+import { RoutePath } from '@/enums/routePath'
+import { Authorization } from '@/models/auth'
 import { AuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
+import { cookies } from 'next/headers'
 
 export const authOptions = {
   providers: [
@@ -17,19 +20,20 @@ export const authOptions = {
   ],
   session: { strategy: 'jwt' },
   callbacks: {
-    jwt: async ({ account, token }) => {
-      if (account) {
-        token.accessToken = account.access_token
+    signIn: async ({ account }) => {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/login-with-google`, {
+        method: 'PATCH',
+        headers: {
+          authorization: `Google ${account?.access_token}`,
+        },
+      })
+      const parsed: Authorization | string = await response.json()
+      if (typeof parsed === 'string') {
+        return parsed
       }
-      return token
-    },
-    session: async ({ session, token }) => {
-      if (!token.accessToken) {
-        return session
-      }
-      session.accessToken = token.accessToken
 
-      return session
+      cookies().set('access_token', parsed.accessToken)
+      return RoutePath.Home
     },
   },
 } satisfies AuthOptions
