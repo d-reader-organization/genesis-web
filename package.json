@@ -17,10 +17,13 @@
     "format": "prettier --write \"**/*.{ts,tsx,md,mdx,css,scss}\""
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
     "@metaplex-foundation/js": "^0.20.1",
     "@next/mdx": "^14.2.4",
+    "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-progress": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.1",
@@ -41,13 +44,14 @@
     "next-pwa": "^5.6.0",
     "react": "^18",
     "react-dom": "^18",
-    "react-hook-form": "^7.52.0",
+    "react-hook-form": "^7.52.1",
     "react-query": "^3.39.3",
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/lodash": "^4.17.5",

@@ -1,8 +1,8 @@
 import { USER_QUERY_KEYS } from '@/api/user/userKeys'
-import { useToaster } from '@/providers/ToastProvider'
 import { useMutation } from 'react-query'
 import { RequestPasswordResetParams } from '@/models/user/requestPasswordResetParams'
 import http from '@/api/http'
+import { useToast } from '@/components/ui'
 
 const { USER, REQUEST_PASSWORD_RESET } = USER_QUERY_KEYS
 
@@ -12,13 +12,21 @@ const requestUserPasswordReset = async (params: RequestPasswordResetParams): Pro
 }
 
 export const useRequestUserPasswordReset = () => {
-  const toaster = useToaster()
+  const toaster = useToast()
 
   return useMutation({
     mutationFn: (params: RequestPasswordResetParams) => requestUserPasswordReset(params),
     onSuccess: () => {
-      toaster.add('Password reset instructions sent to your inbox!', 'success')
+      toaster.toast({
+        title: 'Password reset instructions sent to your inbox!',
+      })
     },
-    onError: toaster.onQueryError,
+    onError: () => {
+      // TODO create new toast global provider
+      toaster.toast({
+        title: 'Error',
+        className: 'bg-red-500',
+      })
+    },
   })
 }

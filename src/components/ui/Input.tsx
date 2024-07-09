@@ -13,7 +13,10 @@ const Input = forwardRef<HTMLInputElement, Props>(({ className, prefix, prefixIc
       {prefix}
       <input
         {...props}
-        className='w-full border-[1.5px] border-grey-300 border-solid rounded-lg bg-grey-500 inline-flex gap-2 items-center pl-9 sm:py-4 py-[14px] pr-4'
+        className={clsx(
+          'w-full border-[1.5px] border-grey-300 border-solid rounded-lg bg-grey-500 inline-flex gap-2 items-center p-4 font-medium',
+          prefixIcon && 'pl-9'
+        )}
         ref={ref}
       ></input>
     </div>

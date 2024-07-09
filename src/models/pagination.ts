@@ -1,4 +1,4 @@
-export interface Pagination {
+export type Pagination = {
   skip: number
   take: number
 }

@@ -12,6 +12,7 @@ export type AppIdentity = Readonly<{
 // RPC Node Endpoint
 export const endpoint = (process.env.NEXT_PUBLIC_SOLANA_RPC_NODE_ENDPOINT as string) || clusterApiUrl('devnet')
 export const network = (process.env.NEXT_PUBLIC_SOLANA_CLUSTER as WalletAdapterNetwork) || WalletAdapterNetwork.Devnet
+export const baseApiUrl = `${process.env.NEXT_PUBLIC_API_ENDPOINT}`
 
 export const APP_IDENTITY: AppIdentity = {
   uri: undefined, // auto generated if not present

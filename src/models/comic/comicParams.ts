@@ -14,7 +14,7 @@ export enum ComicSortTag {
   Published = 'published',
 }
 
-export interface ComicParams extends Pagination {
+export type ComicParams = Pagination & {
   creatorSlug?: string
   titleSubstring?: string
   genreSlugs?: string[]

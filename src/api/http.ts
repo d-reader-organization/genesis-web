@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const http = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT,
-  // withCredentials: true,
+  withCredentials: true,
 })
 
 export const addAuthHeaders = (token: string | null): void => {

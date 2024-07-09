@@ -61,7 +61,10 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
           <MenuItem href={RoutePath.Library} isActive={isLibrary} icon={<LibraryIcon />} title='Library' />
           <MenuItem href={RoutePath.Profile} isActive={isProfile} icon={<ProfileIcon />} title='Profile' />
         </div>
-        <Button className='min-h-12'>Hop in</Button>
+        <Button asChild className='min-h-12'>
+          {/* dont show this if user is already logged in */}
+          <Link href={RoutePath.Login}>Hop in</Link>
+        </Button>
         {isMint ? <BaseWalletMultiButtonDynamic style={{ fontSize: '17px' }} labels={WALLET_LABELS} /> : null}
       </div>
     </div>
