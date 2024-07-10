@@ -1,4 +1,4 @@
-import { baseApiUrl } from '@/constants/general'
+import { accessTokenKey, baseApiUrl } from '@/constants/general'
 import { cookies } from 'next/headers'
 
 const defaultHeaders = {
@@ -26,9 +26,15 @@ export const fetchWrapper = ({
   path?: string
   params?: Record<string, unknown>
 }) => {
+  const token = cookies().get(accessTokenKey)?.value ?? ''
   return fetch(`${baseApiUrl}/${path}${params ? `?${generateQueryParams(params)}` : ''}`, {
     body: JSON.stringify(body),
     method,
-    headers: { ...defaultHeaders, ...headers, Cookie: cookies().toString() },
+    headers: {
+      ...defaultHeaders,
+      ...headers,
+      authorization: token,
+      Cookie: cookies().toString(),
+    },
   })
 }

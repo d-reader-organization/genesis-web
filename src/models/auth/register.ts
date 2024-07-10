@@ -5,8 +5,3 @@ export interface RegisterData {
 }
 
 export interface GoogleRegisterData extends Pick<RegisterData, 'name'> {}
-
-export type RegisterFormState = {
-  error?: string
-  success: boolean
-}

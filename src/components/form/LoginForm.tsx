@@ -2,7 +2,7 @@
 
 import { Button, Input, Label } from '@/components/ui'
 import React from 'react'
-import { login } from '@/app/lib/actions'
+import { loginAction } from '@/app/lib/actions/login'
 import { useFormState, useFormStatus } from 'react-dom'
 
 const SubmitButton: React.FC = () => {
@@ -15,7 +15,7 @@ const SubmitButton: React.FC = () => {
 }
 
 const LoginForm: React.FC = () => {
-  const [state, action] = useFormState(login, null)
+  const [state, action] = useFormState(loginAction, null)
   return (
     <form action={action} className='space-y-8'>
       <div className='space-y-6'>
@@ -27,7 +27,7 @@ const LoginForm: React.FC = () => {
           <Label>Password</Label>
           <Input placeholder='********' type='password' name='password' />
         </div>
-        {state && <p className='text-red-600'>{state}</p>}
+        {!state?.success && state?.error && <p className='text-red-600'>{state.error}</p>}
       </div>
       <SubmitButton />
     </form>
