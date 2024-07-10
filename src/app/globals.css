@@ -76,3 +76,43 @@
     }
   }
 }
+
+.wallet-adapter-button-trigger {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 160px;
+  padding: 14px;
+  border-radius: 8px !important;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: 600;
+  background: #fceb54 !important;
+  color: #15171c !important;
+}
+
+.wallet-adapter-dropdown-list {
+  display: none;
+}
+
+.wallet-adapter-button-trigger:hover {
+  filter: brightness(1.05);
+  background: #fceb54 !important;
+}
+
+.wallet-adapter-modal {
+  z-index: 9999 !important;
+}
+
+.wallet-adapter-modal-wrapper .wallet-adapter-modal-button-close {
+  background-color: #15171c !important;
+}
+
+.wallet-adapter-modal-list {
+  background-color: #1f222a !important;
+}
+.connect-wallet-dialog .wallet-adapter-dropdown {
+  width: min-content;
+}

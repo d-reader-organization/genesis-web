@@ -48,7 +48,12 @@ const ForgotPasswordForm: React.FC<Props> = ({ onClose }) => {
           )}
         />
         <div className='flex w-full border-t-2 border-grey-600'>
-          <Button className='p-4 w-full border-r-2 border-grey-600 rounded-r-none' onClick={onClose} type='button' variant='ghost'>
+          <Button
+            className='p-4 w-full border-r-2 border-grey-600 rounded-r-none'
+            onClick={onClose}
+            type='button'
+            variant='ghost'
+          >
             Cancel
           </Button>
           <Button className='p-4 w-full rounded-l-none' type='submit' variant='ghost'>

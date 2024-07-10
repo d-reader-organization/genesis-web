@@ -25,7 +25,7 @@ const login = async (prev: string | null, formData: FormData): Promise<string | 
     password: formData.get('password') ?? '',
   })
   if (!parsed.success) {
-    return `Provide proper username or email and password`
+    return `Provide username or email and password`
   }
 
   try {
@@ -41,7 +41,7 @@ const login = async (prev: string | null, formData: FormData): Promise<string | 
     }
     await parseAndSetCookie(response)
   } catch (error) {
-    return `error`
+    return `Failed to login user`
   }
   redirect(RoutePath.Home)
 }

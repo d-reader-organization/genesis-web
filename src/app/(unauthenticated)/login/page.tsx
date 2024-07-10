@@ -6,6 +6,7 @@ import { GoogleSignInButton } from '@/components/shared/GoogleSignInButton'
 import { ForgotPasswordDialog } from '@/components/shared/dialogs/ForgotPasswordDialog'
 import Link from 'next/link'
 import { RoutePath } from '@/enums/routePath'
+import { DividerWithText } from '@/components/shared/Divider'
 
 export default async function LoginPage() {
   return (
@@ -16,9 +17,7 @@ export default async function LoginPage() {
           Welcome back
         </Text>
         <GoogleSignInButton />
-        <div className='flex w-full items-center my-4 mx-0 before:flex-1 before:content-[""] before:p-[1px] before:bg-grey-300 before:my-2 before:mr-2 after:flex-1 after:content-[""] after:p-[1px] after:bg-grey-300 after:my-2 after:ml-2 text-base font-normal'>
-          or with
-        </div>
+        <DividerWithText text='or with' />
         <LoginForm />
         <ForgotPasswordDialog />
         <Link className='flex hover:brightness-150' href={RoutePath.Register}>
