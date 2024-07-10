@@ -1,4 +1,4 @@
-import { accessTokenCookieKey } from '@/constants/general'
+import { accessTokenKey, googleAccessTokenKey } from '@/constants/general'
 import { RoutePath } from '@/enums/routePath'
 import { Authorization } from '@/models/auth'
 import { AuthOptions } from 'next-auth'
@@ -30,10 +30,11 @@ export const authOptions = {
       })
       const parsed: Authorization | string = await response.json()
       if (typeof parsed === 'string') {
+        cookies().set(googleAccessTokenKey, account?.access_token ?? '')
         return parsed
       }
 
-      cookies().set(accessTokenCookieKey, parsed.accessToken)
+      cookies().set(accessTokenKey, parsed.accessToken)
       return RoutePath.Home
     },
   },

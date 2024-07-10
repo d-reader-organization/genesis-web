@@ -1,6 +1,6 @@
 'use client'
 
-import { register } from '@/app/lib/actions'
+import { register, registerWithGoogle } from '@/app/lib/actions'
 import React, { useEffect } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
 import { Label } from '../ui/Label'
@@ -22,9 +22,13 @@ const CreateAccountContent: React.FC<Props> = ({ isGoogleSignUp = false, onSucce
     <Text as='h1' className='text-center pt-8 mb-4 sm:mb-8 font-semibold'>
       {isGoogleSignUp ? 'Set your details' : 'Welcome!'}
     </Text>
-    <GoogleSignInButton buttonText='Sign up with google' />
-    <DividerWithText text='or with' />
-    <RegisterForm onSuccess={onSuccess} />
+    {isGoogleSignUp ? null : (
+      <>
+        <GoogleSignInButton buttonText='Sign up with google' />
+        <DividerWithText text='or with' />
+      </>
+    )}
+    <RegisterForm isGoogleSignUp={isGoogleSignUp} onSuccess={onSuccess} />
     <Link className='flex justify-center hover:brightness-150 font-semibold mb-4 mt-4 md:mt-2' href={RoutePath.Login}>
       <Text as='p' className='text-grey-100'>
         Already have account?&nbsp;
@@ -47,11 +51,12 @@ const RegisterButton: React.FC = () => {
 }
 
 type FormProps = {
+  isGoogleSignUp: boolean
   onSuccess: () => void
 }
 
-const RegisterForm: React.FC<FormProps> = ({ onSuccess }) => {
-  const [state, action] = useFormState(register, null)
+const RegisterForm: React.FC<FormProps> = ({ isGoogleSignUp, onSuccess }) => {
+  const [state, action] = useFormState(isGoogleSignUp ? registerWithGoogle : register, null)
   const { toast } = useToast()
   useEffect(() => {
     if (state?.success) {
@@ -67,7 +72,14 @@ const RegisterForm: React.FC<FormProps> = ({ onSuccess }) => {
     }
   }, [state?.success, state?.error, toast])
 
-  return (
+  return isGoogleSignUp ? (
+    <form action={action} className='flex flex-col gap-6'>
+      <Label>Username</Label>
+      <DescriptionText text='3-20 chars. Numbers, dashes, underscores allowed' />
+      <Input placeholder='john-doe' name='name' />
+      <RegisterButton />
+    </form>
+  ) : (
     <form action={action} className='flex flex-col gap-6'>
       <div className='flex flex-col gap-6'>
         <div className='flex flex-col w-full space-y-2'>

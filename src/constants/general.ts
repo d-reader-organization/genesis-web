@@ -1,2 +1,3 @@
 export const baseApiUrl = `${process.env.NEXT_PUBLIC_API_ENDPOINT}`
-export const accessTokenCookieKey = 'access_token'
+export const accessTokenKey = 'access_token'
+export const googleAccessTokenKey = 'google_access_token'

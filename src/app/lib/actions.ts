@@ -4,15 +4,15 @@ import { AUTH_QUERY_KEYS } from '@/api/auth/authKeys'
 import { RoutePath } from '@/enums/routePath'
 import { Authorization } from '@/models/auth'
 import { revalidatePath } from 'next/cache'
-import { cookies } from 'next/headers'
+import { cookies, headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { fetchWrapper } from './fetchWrapper'
-import { accessTokenCookieKey } from '@/constants/general'
+import { accessTokenKey, googleAccessTokenKey } from '@/constants/general'
 import { generateMinLengthErrorMessage } from '@/utils/error'
 import { RegisterFormState } from '@/models/auth/register'
 
-const { AUTH, USER, LOGIN, REGISTER } = AUTH_QUERY_KEYS
+const { AUTH, USER, LOGIN, REGISTER, REGISTER_WITH_GOOGLE } = AUTH_QUERY_KEYS
 const SUCC_RESPONSE_STATUS_CODES = [200, 201]
 
 type NullableString = string | null
@@ -55,7 +55,7 @@ const parseAndSetCookie = async (response: Response): Promise<void> => {
   const tokens = (await response.json()) as Authorization
   const expiresDate = new Date(Date.now() + 10 * 1000)
   expiresDate.setTime(expiresDate.getTime() + 30 * 24 * 60 * 60)
-  cookies().set(accessTokenCookieKey, tokens.accessToken, {
+  cookies().set(accessTokenKey, tokens.accessToken, {
     httpOnly: true,
     secure: true,
     expires: expiresDate,
@@ -97,4 +97,43 @@ const register = async (prev: RegisterFormState | null, formData: FormData): Pro
   return { success: true }
 }
 
-export { login, register }
+const registerWithGoogleSchema = z.object({
+  name: z.string().min(3, generateMinLengthErrorMessage('name', 3)),
+})
+
+const registerWithGoogle = async (
+  prev: RegisterFormState | null,
+  formData: FormData
+): Promise<RegisterFormState | null> => {
+  const parsed = registerWithGoogleSchema.safeParse({
+    name: formData.get('name') ?? '',
+  })
+
+  if (!parsed.success) {
+    return { error: `Please provide valid username`, success: false }
+  }
+
+  try {
+    const response = await fetchWrapper({
+      body: parsed.data,
+      headers: {
+        authorization: `Google ${cookies().get(googleAccessTokenKey)?.value}`,
+      },
+      method: 'POST',
+      path: `${AUTH}/${USER}/${REGISTER_WITH_GOOGLE}`,
+    })
+
+    if (!SUCC_RESPONSE_STATUS_CODES.includes(response.status)) {
+      const error: { message: string } = await response.json()
+      return { error: error.message, success: false }
+    }
+    await parseAndSetCookie(response)
+    cookies().delete(googleAccessTokenKey)
+    revalidatePath(RoutePath.Register)
+  } catch (error) {
+    return { error: `Failed to register user`, success: false }
+  }
+  return { success: true }
+}
+
+export { login, register, registerWithGoogle }
