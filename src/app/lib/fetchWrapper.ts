@@ -1,4 +1,4 @@
-import { baseApiUrl } from '@/constants/environment'
+import { baseApiUrl } from '@/constants/general'
 import { cookies } from 'next/headers'
 
 const defaultHeaders = {

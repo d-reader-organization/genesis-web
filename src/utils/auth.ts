@@ -1,3 +1,4 @@
+import { accessTokenCookieKey } from '@/constants/general'
 import { RoutePath } from '@/enums/routePath'
 import { Authorization } from '@/models/auth'
 import { AuthOptions } from 'next-auth'
@@ -32,7 +33,7 @@ export const authOptions = {
         return parsed
       }
 
-      cookies().set('access_token', parsed.accessToken)
+      cookies().set(accessTokenCookieKey, parsed.accessToken)
       return RoutePath.Home
     },
   },
