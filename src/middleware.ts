@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { isAuthorized } from './data/auth'
+import { RoutePath } from './enums/routePath'
 
 const allowedOrigins = ['https://dial.to']
 
@@ -8,6 +10,14 @@ const corsOptions = {
 }
 
 export function middleware(request: NextRequest) {
+  const requestUrlPath = request.nextUrl.pathname
+
+  if (authRoutesRegex.test(requestUrlPath)) {
+    if (!isAuthorized()) {
+      return NextResponse.redirect(new URL(RoutePath.Login, request.url))
+    }
+  }
+
   // Check the origin from the request
   const origin = request.headers.get('origin') ?? ''
   const isAllowedOrigin = allowedOrigins.includes(origin)
@@ -40,3 +50,5 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: '/:path*',
 }
+
+const authRoutesRegex = /^\/(comic|comic-issue|discover|profile)(\/.*)?$/

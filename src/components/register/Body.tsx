@@ -8,13 +8,13 @@ import { ConnectWalletContent } from './ConnectWallet'
 import { EmailVerificationContent } from './EmailVerification'
 
 enum TabValue {
-  account = 'account',
+  createAccount = 'createAccount',
   connectWallet = 'connect-wallet',
   verifyEmail = 'verify-email',
 }
 
 const defaultTabs = [
-  { label: '01 Create account', value: TabValue.account },
+  { label: '01 Create account', value: TabValue.createAccount },
   { label: '02 Connect wallet', value: TabValue.connectWallet },
 ]
 
@@ -25,37 +25,29 @@ export const RegisterBody: React.FC = () => (
 )
 
 const InnerRegisterBody: React.FC = () => {
-  const [activeTab, setActiveTab] = React.useState<string>(TabValue.account)
+  const [activeTab, setActiveTab] = React.useState<string>(TabValue.createAccount)
   const searchParams = useSearchParams()
   const isGoogleSignUp = (searchParams.get('sso') ?? '') === 'google'
   const redirectTo = searchParams.get('redirectTo')
   const tabs = [...defaultTabs, ...(isGoogleSignUp ? [] : [{ label: '03 Verify email', value: TabValue.verifyEmail }])]
 
   return (
-    <Tabs
-      defaultValue={defaultTabs.at(0)?.value}
-      className='w-full'
-      activationMode='manual'
-      value={activeTab}
-      onValueChange={(value) => {
-        setActiveTab(value)
-      }}
-    >
+    <Tabs defaultValue={defaultTabs.at(0)?.value} className='w-full' activationMode='manual' value={activeTab}>
       <TabsList className={`grid w-full grid-cols-${tabs.length}`}>
         {tabs.map((tab) => {
           return (
-            <TabsTrigger key={tab.value} value={tab.value}>
+            <TabsTrigger className='cursor-default' key={tab.value} value={tab.value}>
               <span className={activeTab !== tab.value ? 'opacity-20' : ''}>{tab.label}</span>
             </TabsTrigger>
           )
         })}
       </TabsList>
 
-      <TabsContent value={TabValue.account}>
-        <CreateAccountContent isGoogleSignUp={isGoogleSignUp} />
+      <TabsContent value={TabValue.createAccount}>
+        <CreateAccountContent isGoogleSignUp={isGoogleSignUp} onSuccess={() => setActiveTab(TabValue.connectWallet)} />
       </TabsContent>
       <TabsContent value={TabValue.connectWallet}>
-        <ConnectWalletContent isGoogleSignUp={isGoogleSignUp} />
+        <ConnectWalletContent isGoogleSignUp={isGoogleSignUp} onSkip={() => setActiveTab(TabValue.verifyEmail)} />
       </TabsContent>
       {tabs.length > 2 ? (
         <TabsContent value={TabValue.verifyEmail}>

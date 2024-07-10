@@ -3,7 +3,7 @@
 import React from 'react'
 import { Text } from '../ui/Text'
 import { WhyDoINeedAWalletDialog } from '../shared/dialogs/WhyDoINeedAWalletDialog'
-import { ButtonLink } from '../ui'
+import { Button } from '../ui/Button'
 import { useSearchParams } from 'next/navigation'
 import { RoutePath } from '@/enums/routePath'
 import dynamic from 'next/dynamic'
@@ -12,6 +12,7 @@ import Link from 'next/link'
 
 type Props = {
   isGoogleSignUp?: boolean
+  onSkip: () => void
 }
 
 const BaseWalletMultiButtonDynamic = dynamic(
@@ -19,13 +20,9 @@ const BaseWalletMultiButtonDynamic = dynamic(
   { ssr: false }
 )
 
-const ConnectWalletContent: React.FC<Props> = ({ isGoogleSignUp }) => {
+const ConnectWalletContent: React.FC<Props> = ({ isGoogleSignUp, onSkip }) => {
   const searchParams = useSearchParams()
   const redirectTo = searchParams.get('redirectTo')
-  const queryParams = searchParams.size ? `?${searchParams.toString()}` : ''
-  const nextPage = isGoogleSignUp
-    ? redirectTo ?? RoutePath.Home
-    : `${RoutePath.RegisterEmailVerification}${queryParams}`
 
   return (
     <main className='container mb-4 md:mb-8 sm:p-0 flex flex-col max-w-sm gap-4'>
@@ -36,13 +33,18 @@ const ConnectWalletContent: React.FC<Props> = ({ isGoogleSignUp }) => {
         Connect with your favorite Solana wallet to store digital comics & other collectibles.
       </Text>
       <div className='flex justify-center gap-4 mt-2'>
-        <Link
-          href={nextPage}
-          className='flex justify-center items-center min-w-40 p-2 text-base text-grey-100 rounded-lg bg-transparent border border-grey-100'
-        >
-          Skip
-        </Link>
-
+        {isGoogleSignUp ? (
+          <Link
+            className='flex justify-center items-center min-w-40 p-2 text-base text-grey-100 rounded-lg bg-transparent border border-grey-300'
+            href={redirectTo ?? RoutePath.Home}
+          >
+            Skip
+          </Link>
+        ) : (
+          <Button className='w-[unset] min-w-40' onClick={onSkip} variant='outline'>
+            Skip
+          </Button>
+        )}
         <BaseWalletMultiButtonDynamic labels={WALLET_LABELS} />
       </div>
       <WhyDoINeedAWalletDialog />

@@ -22,7 +22,7 @@ export const fetchWrapper = ({
 }: {
   body?: unknown
   headers?: HeadersInit
-  method?: 'GET' | 'POST' | 'PATCH' | 'DELETE' | 'OPTIONS'
+  method?: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTIONS'
   path?: string
   params?: Record<string, unknown>
 }) => {

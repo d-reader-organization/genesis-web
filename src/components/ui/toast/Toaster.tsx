@@ -10,11 +10,13 @@ import {
 } from '@/components/ui/toast/Toast'
 import { useToast } from '@/components/ui/toast/use-toast'
 
+const TOAST_DURATION_IN_MILISECONDS = 4000
+
 export function Toaster() {
   const { toasts } = useToast()
 
   return (
-    <ToastProvider>
+    <ToastProvider duration={TOAST_DURATION_IN_MILISECONDS}>
       {toasts.map(function ({ id, title, description, action, ...props }) {
         return (
           <Toast key={id} {...props}>

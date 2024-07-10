@@ -9,17 +9,20 @@ import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { fetchWrapper } from './fetchWrapper'
 import { accessTokenCookieKey } from '@/constants/general'
+import { generateMinLengthErrorMessage } from '@/utils/error'
+import { RegisterFormState } from '@/models/auth/register'
 
-const { AUTH, USER, LOGIN } = AUTH_QUERY_KEYS
-
+const { AUTH, USER, LOGIN, REGISTER } = AUTH_QUERY_KEYS
 const SUCC_RESPONSE_STATUS_CODES = [200, 201]
+
+type NullableString = string | null
 
 const loginSchema = z.object({
   nameOrEmail: z.string(),
   password: z.string(),
 })
 
-const login = async (prev: string | null, formData: FormData): Promise<string | null> => {
+const login = async (prev: string | null, formData: FormData): Promise<NullableString> => {
   const parsed = loginSchema.safeParse({
     nameOrEmail: formData.get('nameOrEmail') ?? '',
     password: formData.get('password') ?? '',
@@ -40,6 +43,7 @@ const login = async (prev: string | null, formData: FormData): Promise<string | 
       return error.message
     }
     await parseAndSetCookie(response)
+    revalidatePath(RoutePath.Login)
   } catch (error) {
     return `Failed to login user`
   }
@@ -56,11 +60,41 @@ const parseAndSetCookie = async (response: Response): Promise<void> => {
     secure: true,
     expires: expiresDate,
   })
-  revalidatePath(RoutePath.Login)
 }
 
-const register = async (): Promise<boolean> => {
-  return true
+const registerSchema = z.object({
+  name: z.string().min(3, generateMinLengthErrorMessage('name', 3)),
+  email: z.string().email(),
+  password: z.string(),
+})
+
+const register = async (prev: RegisterFormState | null, formData: FormData): Promise<RegisterFormState | null> => {
+  const parsed = registerSchema.safeParse({
+    name: formData.get('name') ?? '',
+    email: formData.get('email') ?? '',
+    password: formData.get('password') ?? '',
+  })
+  if (!parsed.success) {
+    return { error: `Please provide valid data`, success: false }
+  }
+
+  try {
+    const response = await fetchWrapper({
+      body: parsed.data,
+      method: 'POST',
+      path: `${AUTH}/${USER}/${REGISTER}`,
+    })
+
+    if (!SUCC_RESPONSE_STATUS_CODES.includes(response.status)) {
+      const error: { message: string } = await response.json()
+      return { error: error.message, success: false }
+    }
+    await parseAndSetCookie(response)
+    revalidatePath(RoutePath.Register)
+  } catch (error) {
+    return { error: `Failed to register user`, success: false }
+  }
+  return { success: true }
 }
 
 export { login, register }
