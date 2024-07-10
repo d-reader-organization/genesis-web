@@ -1,6 +1,6 @@
 import { baseApiUrl } from '@/constants/general'
+import { cookies } from 'next/headers'
 
-// TODO handle cookies
 const defaultHeaders = {
   Accept: 'application/json',
   'Access-Control-Allow-Credentials': 'true',
@@ -29,6 +29,6 @@ export const fetchWrapper = ({
   return fetch(`${baseApiUrl}/${path}${params ? `?${generateQueryParams(params)}` : ''}`, {
     body: JSON.stringify(body),
     method,
-    headers: { ...defaultHeaders, ...headers },
+    headers: { ...defaultHeaders, ...headers, Cookie: cookies().toString() },
   })
 }
