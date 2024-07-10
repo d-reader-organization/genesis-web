@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs'
 import { useSearchParams } from 'next/navigation'
 import { CreateAccountContent } from './CreateAccount'
@@ -18,7 +18,13 @@ const defaultTabs = [
   { label: '02 Connect wallet', value: TabValue.connectWallet },
 ]
 
-export const RegisterBody: React.FC = () => {
+export const RegisterBody: React.FC = () => (
+  <Suspense>
+    <InnerRegisterBody />
+  </Suspense>
+)
+
+const InnerRegisterBody: React.FC = () => {
   const [activeTab, setActiveTab] = React.useState<string>(TabValue.account)
   const searchParams = useSearchParams()
   const isGoogleSignUp = (searchParams.get('sso') ?? '') === 'google'
@@ -49,7 +55,7 @@ export const RegisterBody: React.FC = () => {
         <CreateAccountContent isGoogleSignUp={isGoogleSignUp} />
       </TabsContent>
       <TabsContent value={TabValue.connectWallet}>
-        <ConnectWalletContent />
+        <ConnectWalletContent isGoogleSignUp={isGoogleSignUp} />
       </TabsContent>
       {tabs.length > 2 ? (
         <TabsContent value={TabValue.verifyEmail}>

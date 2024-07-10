@@ -1,9 +1,8 @@
 import { baseApiUrl } from '@/constants/general'
-import { cookies } from 'next/headers'
 
+// TODO handle cookies
 const defaultHeaders = {
   Accept: 'application/json',
-  Cookie: cookies().toString(),
   'Access-Control-Allow-Credentials': 'true',
   'Content-Type': 'application/json',
 }

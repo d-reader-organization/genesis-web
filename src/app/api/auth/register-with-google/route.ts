@@ -1,22 +1,12 @@
-import { getServerSession } from 'next-auth'
 import { Authorization } from '@/models/auth'
 import { NextResponse } from 'next/server'
-import { authOptions } from '@/utils/auth'
 
 export async function POST(req: Request) {
-  const session = await getServerSession(authOptions)
-
-  if (!session || !session.accessToken) {
-    return NextResponse.json({
-      message: 'Unauthorized',
-      status: 401,
-    })
-  }
   const { name } = await req.json()
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/user/register-with-google`, {
     method: 'POST',
     headers: {
-      authorization: `Google ${session.accessToken}`,
+      // authorization: `Google ${req.}`, add proper token
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
