@@ -4,7 +4,7 @@ import { ComicIssueFilterTag, ComicIssueSortTag } from '@/models/comicIssue/comi
 import { Navigation } from '@/components/layout/Navigation'
 import { HeroCarousel } from '@/components/ui/carousel/HeroCarousel'
 import { ComicList } from '@/components/comic/ComicList'
-import { ComicIssueList } from '@/components/comicIssue/ComicIssueList'
+import { ComicIssueSliderList } from '@/components/comicIssue/ComicIssueSliderList'
 import { CreatorList } from '@/components/creator/CreatorList'
 import { Section } from '@/components/shared/Section'
 import { RoutePath } from '@/enums/routePath'
@@ -60,7 +60,7 @@ export default async function HomePage() {
             title='New episodes'
             actionProps={{ title: 'See All', href: RoutePath.DiscoverComicIssues }}
           >
-            <ComicIssueList comicIssues={newEpisodes} />
+            <ComicIssueSliderList comicIssues={newEpisodes} />
           </Section>
 
           <Section
@@ -68,7 +68,7 @@ export default async function HomePage() {
             title='Free episodes'
             actionProps={{ title: 'See All', href: RoutePath.DiscoverComicIssues }}
           >
-            <ComicIssueList comicIssues={freeEpisodes} />
+            <ComicIssueSliderList comicIssues={freeEpisodes} />
           </Section>
 
           <Section
