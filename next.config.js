@@ -19,6 +19,16 @@ const nextConfig = {
   // 	missingSuspenseWithCSRBailout: false,
   // },
   reactStrictMode: true,
+  rewrites: [
+    {
+      source: '/api/:path*',
+      destination: '/api/:path*',
+    },
+    {
+      source: '/(.*)',
+      destination: '/',
+    },
+  ],
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
