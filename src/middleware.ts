@@ -18,6 +18,12 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  if (requestUrlPath.includes(RoutePath.Login)) {
+    if (isAuthorized()) {
+      return NextResponse.redirect(new URL(RoutePath.Home, request.url))
+    }
+  }
+
   // Check the origin from the request
   const origin = request.headers.get('origin') ?? ''
   const isAllowedOrigin = allowedOrigins.includes(origin)

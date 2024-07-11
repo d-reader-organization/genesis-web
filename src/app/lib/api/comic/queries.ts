@@ -6,9 +6,9 @@ import { fetchWrapper } from '../../fetchWrapper'
 const { COMIC, GET: GET_COMICS } = COMIC_QUERY_KEYS
 
 export const fetchComics = async (params: ComicParams): Promise<Comic[]> => {
-  const response = await fetchWrapper({
+  const { data } = await fetchWrapper<Comic[]>({
     params,
     path: `${COMIC}/${GET_COMICS}`,
   })
-  return response.json()
+  return data ?? []
 }

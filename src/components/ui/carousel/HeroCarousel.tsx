@@ -37,7 +37,7 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
           const visitUrl = getSlideUrl(slide)
           return (
             <CarouselItem
-              className='relative z-10  portrait:h-[60vh] landscape:h-[84vh] max-h-[780px] basis-[92%]'
+              className='relative z-10  portrait:h-[60vh] landscape:h-[84vh] max-h-[780px] basis-full md:basis-[92%]'
               key={slide.id}
             >
               {visitUrl && (

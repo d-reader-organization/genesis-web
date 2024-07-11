@@ -1,5 +1,7 @@
-import { accessTokenKey, baseApiUrl } from '@/constants/general'
+import { accessTokenKey, baseApiUrl, refreshTokenKey } from '@/constants/general'
 import { cookies } from 'next/headers'
+
+export const SUCC_RESPONSE_STATUS_CODES = [200, 201]
 
 const defaultHeaders = {
   Accept: 'application/json',
@@ -13,7 +15,7 @@ const generateQueryParams = (params: Record<string, unknown>) =>
     return prev.length ? `${prev}&${current}` : current
   }, '')
 
-export const fetchWrapper = ({
+export async function fetchWrapper<T>({
   body,
   headers,
   method = 'GET',
@@ -25,16 +27,49 @@ export const fetchWrapper = ({
   method?: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTIONS'
   path?: string
   params?: Record<string, unknown>
-}) => {
+}): Promise<{
+  data: T | null
+  errorMessage?: string
+  status: number
+}> {
   const token = cookies().get(accessTokenKey)?.value ?? ''
-  return fetch(`${baseApiUrl}/${path}${params ? `?${generateQueryParams(params)}` : ''}`, {
+  const url = `${baseApiUrl}/${path}${params ? `?${generateQueryParams(params)}` : ''}`
+  const options = {
     body: JSON.stringify(body),
     method,
     headers: {
       ...defaultHeaders,
       ...headers,
       authorization: token,
-      Cookie: cookies().toString(),
     },
-  })
+  }
+  try {
+    const response = await fetch(url, options)
+    const parsed = await response.json()
+
+    if (!SUCC_RESPONSE_STATUS_CODES.includes(response.status)) {
+      const refreshToken = cookies().get(refreshTokenKey)?.value ?? ''
+      if (response.status === 401 && refreshToken) {
+        // refresh token
+      }
+
+      const error: { message: string } = parsed
+      return {
+        data: null,
+        errorMessage: error.message,
+        status: response.status,
+      }
+    }
+
+    return {
+      data: parsed,
+      status: response.status,
+    }
+  } catch (error) {
+    return {
+      data: null,
+      errorMessage: 'Something went wrong',
+      status: 500,
+    }
+  }
 }

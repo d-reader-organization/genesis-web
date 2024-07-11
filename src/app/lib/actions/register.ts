@@ -6,10 +6,10 @@ import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { z } from 'zod'
 import { fetchWrapper } from '../fetchWrapper'
-import { googleAccessTokenKey, SUCC_RESPONSE_STATUS_CODES } from '@/constants/general'
+import { googleAccessTokenKey } from '@/constants/general'
 import { generateMinLengthErrorMessage } from '@/utils/error'
-import { AuthFormState } from '@/models/auth/'
-import { parseAndSetCookie } from './login'
+import { AuthFormState, Authorization } from '@/models/auth/'
+import { parseAndSetCookieAfterAuth } from './login'
 
 const { AUTH, USER, REGISTER, REGISTER_WITH_GOOGLE } = AUTH_QUERY_KEYS
 
@@ -30,17 +30,23 @@ const registerAction = async (prev: AuthFormState | null, formData: FormData): P
   }
 
   try {
-    const response = await fetchWrapper({
+    const response = await fetchWrapper<Authorization>({
       body: parsed.data,
       method: 'POST',
       path: `${AUTH}/${USER}/${REGISTER}`,
     })
 
-    if (!SUCC_RESPONSE_STATUS_CODES.includes(response.status)) {
-      const error: { message: string } = await response.json()
-      return { error: error.message, success: false }
+    if (response.errorMessage) {
+      return { error: response.errorMessage, success: false }
     }
-    await parseAndSetCookie(response)
+    if (!response.data) {
+      return {
+        error: 'Missing data',
+        success: false,
+      }
+    }
+
+    parseAndSetCookieAfterAuth(response.data)
     revalidatePath(RoutePath.Register)
   } catch (error) {
     return { error: `Failed to register user`, success: false }
@@ -65,7 +71,7 @@ const registerWithGoogleAction = async (
   }
 
   try {
-    const response = await fetchWrapper({
+    const response = await fetchWrapper<Authorization>({
       body: parsed.data,
       headers: {
         authorization: `Google ${cookies().get(googleAccessTokenKey)?.value}`,
@@ -74,11 +80,16 @@ const registerWithGoogleAction = async (
       path: `${AUTH}/${USER}/${REGISTER_WITH_GOOGLE}`,
     })
 
-    if (!SUCC_RESPONSE_STATUS_CODES.includes(response.status)) {
-      const error: { message: string } = await response.json()
-      return { error: error.message, success: false }
+    if (response.errorMessage) {
+      return { error: response.errorMessage, success: false }
     }
-    await parseAndSetCookie(response)
+    if (!response.data) {
+      return {
+        error: 'Missing data',
+        success: false,
+      }
+    }
+    parseAndSetCookieAfterAuth(response.data)
     cookies().delete(googleAccessTokenKey)
     revalidatePath(RoutePath.Register)
   } catch (error) {

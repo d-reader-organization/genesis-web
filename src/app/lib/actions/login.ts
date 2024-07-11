@@ -8,7 +8,7 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { fetchWrapper } from '../fetchWrapper'
-import { accessTokenKey, SUCC_RESPONSE_STATUS_CODES } from '@/constants/general'
+import { accessTokenKey, refreshTokenKey } from '@/constants/general'
 
 const { AUTH, USER, LOGIN } = AUTH_QUERY_KEYS
 
@@ -30,20 +30,27 @@ export const loginAction = async (prev: AuthFormState | null, formData: FormData
   }
 
   try {
-    const response = await fetchWrapper({
+    const response = await fetchWrapper<Authorization>({
       body: parsed.data,
       method: 'PATCH',
       path: `${AUTH}/${USER}/${LOGIN}`,
     })
 
-    if (!SUCC_RESPONSE_STATUS_CODES.includes(response.status)) {
-      const error: { message: string } = await response.json()
+    if (response.errorMessage) {
       return {
-        error: error.message,
+        error: response.errorMessage,
         success: false,
       }
     }
-    await parseAndSetCookie(response)
+
+    if (!response.data) {
+      return {
+        error: 'Missing data',
+        success: false,
+      }
+    }
+
+    parseAndSetCookieAfterAuth(response.data)
     revalidatePath(RoutePath.Login)
   } catch (error) {
     return {
@@ -55,15 +62,31 @@ export const loginAction = async (prev: AuthFormState | null, formData: FormData
   redirect(RoutePath.Home)
 }
 
-// TODO encrypt and decrypt token from cookie
-// TODO think what about expiry time
-export const parseAndSetCookie = async (response: Response): Promise<void> => {
-  const tokens = (await response.json()) as Authorization
-  const expiresDate = new Date(Date.now() + 10 * 1000)
-  expiresDate.setTime(expiresDate.getTime() + 30 * 24 * 60 * 60)
-  cookies().set(accessTokenKey, tokens.accessToken, {
+export const parseAndSetCookieAfterAuth = (data: Authorization): void => {
+  const { accessToken, refreshToken } = data
+  setCookie({
+    name: accessTokenKey,
+    value: accessToken,
+  })
+  setCookie({
+    expiresInDays: 100,
+    name: refreshTokenKey,
+    value: refreshToken,
+  })
+}
+
+export const setCookie = ({
+  expiresInDays = 30,
+  name,
+  value,
+}: {
+  expiresInDays?: number
+  name: string
+  value: string
+}) => {
+  cookies().set(name, value, {
     httpOnly: true,
     secure: true,
-    expires: expiresDate,
+    maxAge: expiresInDays * 24 * 60 * 60,
   })
 }

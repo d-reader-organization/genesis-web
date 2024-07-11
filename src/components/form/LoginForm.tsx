@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Input, Label } from '@/components/ui'
+import { Button, Input, Label, toast } from '@/components/ui'
 import React from 'react'
 import { loginAction } from '@/app/lib/actions/login'
 import { useFormState, useFormStatus } from 'react-dom'
@@ -16,6 +16,16 @@ const SubmitButton: React.FC = () => {
 
 const LoginForm: React.FC = () => {
   const [state, action] = useFormState(loginAction, null)
+  React.useEffect(() => {
+    if (state?.error) {
+      toast({
+        title: 'Error',
+        description: state.error,
+        variant: 'destructive',
+      })
+    }
+  }, [state?.error, toast])
+
   return (
     <form action={action} className='space-y-8'>
       <div className='space-y-6'>
