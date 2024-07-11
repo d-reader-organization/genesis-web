@@ -54,7 +54,7 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: '/:path*',
+  matcher: ['/:path*', '/api/:path*'],
 }
 
 const authRoutesRegex = /^\/(comic|comic-issue|discover|profile)(\/.*)?$/
