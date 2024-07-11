@@ -6,6 +6,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import { cookies } from 'next/headers'
 
 export const authOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_AUTH_CLIENT_ID ?? '',
