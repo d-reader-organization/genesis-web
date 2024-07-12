@@ -11,7 +11,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   comicIssue: ComicIssue
 }
 
-export const ComicIssueItem: React.FC<Props> = ({ comicIssue, className, ...props }) => (
+export const ComicIssueCard: React.FC<Props> = ({ comicIssue, className, ...props }) => (
   // TODO skeleton
   <div
     className={clsx(

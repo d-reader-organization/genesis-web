@@ -1,5 +1,5 @@
 import React from 'react'
 
-export const ComicIssueItems: React.FC = () => {
+export const ComicIssueList: React.FC = () => {
   return <div></div>
 }

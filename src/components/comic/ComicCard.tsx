@@ -13,7 +13,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 const blurDataUrl = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOUV9LaBAAB8gEfSTtbmAAAAABJRU5ErkJggg=='
 
-const ComicItem: React.FC<Props> = ({ comic, className, priority, fetchPriority }) => {
+export const ComicCard: React.FC<Props> = ({ comic, className, priority, fetchPriority }) => {
   const nextPage = RoutePath.Comic(comic.slug)
 
   // TODO skeleton
@@ -51,5 +51,3 @@ const ComicItem: React.FC<Props> = ({ comic, className, priority, fetchPriority 
     </div>
   )
 }
-
-export default ComicItem
