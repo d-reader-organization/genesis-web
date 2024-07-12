@@ -1,19 +1,16 @@
 import { useMemo } from 'react'
-import { comicIssueKeys, COMIC_ISSUE_QUERY_KEYS } from '@/api/comicIssue/comicIssueKeys'
+import { comicIssueKeys } from '@/api/comicIssue/comicIssueKeys'
 import { useToaster } from '@/providers/ToastProvider'
-import { ComicIssue } from '@/models/comicIssue'
 import { ComicIssueParams } from '@/models/comicIssue/comicIssueParams'
 import { useInfiniteQuery } from 'react-query'
-import http from '@/api/http'
+import { fetchComicIssues } from '@/app/lib/api/comicIssue/queries'
 
-const { COMIC_ISSUE, GET } = COMIC_ISSUE_QUERY_KEYS
-
-const fetchComicIssues = async (params: ComicIssueParams): Promise<ComicIssue[]> => {
-  const response = await http.get<ComicIssue[]>(`${COMIC_ISSUE}/${GET}`, { params })
-  return response.data
+type Input = {
+  enabled?: boolean
+  params: ComicIssueParams
 }
 
-export const useFetchComicIssues = (params: ComicIssueParams, enabled = true) => {
+export const useFetchComicIssues = ({ enabled = true, params }: Input) => {
   const toaster = useToaster()
 
   const infiniteQuery = useInfiniteQuery({

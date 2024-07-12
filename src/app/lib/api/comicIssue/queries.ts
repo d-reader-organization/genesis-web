@@ -1,3 +1,5 @@
+'use server'
+
 import { ComicIssue } from '@/models/comicIssue'
 import { ComicIssueParams } from '@/models/comicIssue/comicIssueParams'
 import { fetchWrapper } from '../../fetchWrapper'
