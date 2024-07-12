@@ -7,13 +7,13 @@ import { ComicIssueInfoSection } from '@/components/comicIssue/InfoSection'
 import { Navigation } from '@/components/layout/Navigation'
 import React from 'react'
 
-type Props = {
+export type ComicIssuePageParams = {
   params: {
     id: string
   }
 }
 
-export default async function ComicIssuePage({ params: { id } }: Props) {
+export default async function ComicIssuePage({ params: { id } }: ComicIssuePageParams) {
   const comicIssue = await fetchComicIssue(id)
 
   if (!comicIssue || !comicIssue.stats || !comicIssue.myStats) return null
