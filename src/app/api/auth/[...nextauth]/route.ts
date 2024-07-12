@@ -1,4 +1,4 @@
-import { accessTokenKey, googleAccessTokenKey } from '@/constants/general'
+import { accessTokenKey, googleAccessTokenKey, refreshTokenKey } from '@/constants/general'
 import { RoutePath } from '@/enums/routePath'
 import { Authorization } from '@/models/auth'
 import GoogleProvider from 'next-auth/providers/google'
@@ -29,12 +29,14 @@ const handler = NextAuth({
         },
       })
       const parsed: Authorization | string = await response.json()
+      const requestCookies = cookies()
       if (typeof parsed === 'string') {
-        cookies().set(googleAccessTokenKey, account?.access_token ?? '')
+        requestCookies.set(googleAccessTokenKey, account?.access_token ?? '')
         return parsed
       }
 
-      cookies().set(accessTokenKey, parsed.accessToken)
+      requestCookies.set(accessTokenKey, parsed.accessToken)
+      requestCookies.set(refreshTokenKey, parsed.refreshToken)
       return RoutePath.Home
     },
   },
