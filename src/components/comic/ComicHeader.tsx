@@ -1,8 +1,6 @@
 import React from 'react'
 import { Text } from '../ui/Text'
 import { Comic } from '@/models/comic'
-import { AvatarImage } from '../shared/AvatarImage'
-import VerifiedIcon from 'public/assets/vector-icons/verified-icon.svg'
 import { IconLink } from '../shared/IconLink'
 import WebsiteIcon from 'public/assets/vector-icons/web-icon.svg'
 import TwitterIcon from 'public/assets/vector-icons/twitter-icon.svg'
@@ -12,6 +10,9 @@ import InstagramIcon from 'public/assets/vector-icons/instagram-icon.svg'
 import TikTokIcon from 'public/assets/vector-icons/tiktok-icon.svg'
 import YouTubeIcon from 'public/assets/vector-icons/youtube-icon.svg'
 import { ComicStats } from './ComicStats'
+import { FlavorText } from '../shared/FlavorText'
+import { CreatorInfoLink } from '../shared/CreatorInfoLink'
+import { GenresList } from '../shared/GenresList'
 
 type Props = {
   comic: Comic
@@ -31,23 +32,12 @@ const LeftSection: React.FC<Props> = ({ comic }) => {
       <Text className='font-normal' as='h1'>
         {title}
       </Text>
-      {genres && (
-        <div className='flex mt-8 mb-4 overflow-y-auto gap-10'>
-          {genres.map((genre) => (
-            <div className='flex items-center gap-2 whitespace-nowrap' key={genre.slug}>
-              <img src={genre.icon} alt='' className='size-6 rounded-[4px]' />
-              <Text className='text-lg' as='p'>
-                {genre.name}
-              </Text>
-            </div>
-          ))}
-        </div>
-      )}
+      {genres && <GenresList genres={genres} />}
       <FlavorText text={flavorText} />
       <Text className='text-lg' as='p'>
         {description}
       </Text>
-      <ComicCreator comic={comic} />
+      <CreatorInfoLink creator={comic.creator} />
     </div>
   )
 }
@@ -61,35 +51,6 @@ const RightSection: React.FC<Props> = ({ comic }) => (
     <ComicStats comic={comic} />
   </div>
 )
-
-const FlavorText: React.FC<{ text: string }> = ({ text }) => (
-  <Text className='border-l-4 border-l-important-color italic pl-2 mb-2 text-grey-100' as='p'>
-    {text}
-  </Text>
-)
-
-const ComicCreator: React.FC<Props> = ({ comic }) => {
-  const { creator } = comic
-  if (!creator) {
-    return null
-  }
-  return (
-    <div className='flex items-center gap-2 mt-1'>
-      <AvatarImage size={48} src={creator.avatar} />
-      <div className='ml-2 flex flex-col gap-1'>
-        <Text className='text-grey-100 italic -mb-1 text-xs' as='p'>
-          author
-        </Text>
-        <div className='flex items-center gap-2'>
-          <Text className='font-bold text-lg' as='p'>
-            {creator.name}
-          </Text>
-          {creator.isVerified && <VerifiedIcon className='size-[14px] ' />}
-        </div>
-      </div>
-    </div>
-  )
-}
 
 const Socials: React.FC<Props> = ({ comic }) => (
   <div className='flex gap-2 LINKS'>

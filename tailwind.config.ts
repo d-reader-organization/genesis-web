@@ -97,6 +97,9 @@ const config = {
       backgroundPosition: {
         '0-top': '0 top',
       },
+      transitionProperty: {
+        height: 'height',
+      },
     },
   },
   plugins: [require('tailwindcss-animate'), require('tailwind-scrollbar')],

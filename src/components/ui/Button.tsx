@@ -72,7 +72,7 @@ const ButtonLink: React.FC<Props> = ({
     <Link
       className={clsx(
         className,
-        'flex justify-center items-center min-w-40 p-[14px] rounded-lg border-none cursor-pointer text-base font-semibold hover:brightness-105',
+        'flex justify-center items-center min-w-40 p-[14px] rounded-lg cursor-pointer text-base font-semibold hover:brightness-105',
         {
           'button-link--background-color-important': backgroundColor === 'important',
           'bg-transparent': backgroundColor === 'transparent',
@@ -83,7 +83,7 @@ const ButtonLink: React.FC<Props> = ({
           'button-link--border-color-important': borderColor === 'important',
           'button-link--border-color-transparent': borderColor === 'transparent',
           'border border-grey-100': borderColor === 'grey-100',
-          'button-link--border-color-grey-300': borderColor === 'grey-300',
+          'border border-grey-300': borderColor === 'grey-300',
           'button-link--clickable-effect': clickableEffect,
           'button-link--no-min-width': noMinWidth,
           'button-link--bold': bold,

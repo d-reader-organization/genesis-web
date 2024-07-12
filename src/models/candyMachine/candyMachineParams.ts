@@ -4,7 +4,7 @@ export interface CandyMachineReceiptParams extends Pagination {
   candyMachineAddress: string
 }
 
-export interface CandyMachineParams {
+export type CandyMachineParams = {
   candyMachineAddress: string
   walletAddress?: string
 }

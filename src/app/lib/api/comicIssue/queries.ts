@@ -14,3 +14,11 @@ export const fetchComicIssues = async (params: ComicIssueParams): Promise<ComicI
   })
   return data ?? []
 }
+
+export const fetchComicIssue = async (id: string): Promise<ComicIssue | null> => {
+  const { data } = await fetchWrapper<ComicIssue>({
+    path: `${COMIC_ISSUE}/${GET}/${id}`,
+  })
+
+  return data
+}

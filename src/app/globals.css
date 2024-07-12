@@ -134,3 +134,16 @@
     rgb(21, 23, 28) 100%
   );
 }
+
+.comic-issue-banner-standard {
+  background: linear-gradient(rgba(21, 23, 28, 0.85) 0%, rgb(21, 23, 28) 100%);
+}
+
+.comic-issue-banner-simpler {
+  background: linear-gradient(
+    rgba(21, 23, 28, 0.2) 0%,
+    rgba(21, 23, 28, 0.2) 16%,
+    rgba(21, 23, 28, 0.75) 72%,
+    rgb(21, 23, 28) 100%
+  );
+}

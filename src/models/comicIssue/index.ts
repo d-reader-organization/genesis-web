@@ -7,6 +7,8 @@ import { ComicIssueCollaborator } from './comicIssueCollaborator'
 import { StatefulCover } from './statefulCover'
 import { StatelessCover } from './statelessCover'
 import { RoyaltyWallet } from './royaltyWallet'
+import { Nullable } from '../common'
+import { CandyMachine } from '../candyMachine'
 
 export interface BasicComicIssue {
   id: number
@@ -90,3 +92,5 @@ export type UpdateComicIssueFilesData = Partial<{
   signature: File
   pdf: File
 }>
+
+export type ComicIssueInfoProps = { candyMachine?: Nullable<CandyMachine>; comicIssue: ComicIssue }

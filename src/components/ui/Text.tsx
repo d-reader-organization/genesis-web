@@ -12,7 +12,7 @@ type TextProps = {
 }
 
 const variantStyles: Record<Variant, string> = {
-  h1: 'scroll-m-20 text-4xl font-bold tracking-wide lg:text-5xl',
+  h1: 'scroll-m-20 text-4xl font-bold tracking-wide',
   h2: 'mt-10 scroll-m-20 text-3xl font-semibold tracking-wide transition-colors first:mt-0',
   h3: 'mt-2 scroll-m-20 text-2xl font-semibold tracking-wide',
   h4: 'scroll-m-20 text-xl font-semibold tracking-wide',
