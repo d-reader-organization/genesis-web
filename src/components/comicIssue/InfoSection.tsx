@@ -15,7 +15,7 @@ export const ComicIssueInfoSection: React.FC<ComicIssueInfoProps> = ({ candyMach
         {title}
       </Text>
       <InfoListActions
-        className='w-fit my-4 [&>*]:min-w-20'
+        className='flex md:hidden w-fit my-4 [&>*]:min-w-20'
         averageRating={comicIssue.stats?.averageRating}
         favouritesCount={comicIssue.stats?.favouritesCount}
         isFavourite={comicIssue.myStats?.isFavourite}

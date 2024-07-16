@@ -2,17 +2,16 @@
 
 import React from 'react'
 import PageBanner from 'public/assets/page-banner.png'
-import { ComicIssue } from '@/models/comicIssue'
 import clsx from 'clsx'
 import { useIsMobile } from '@/hooks/useBreakpoints'
 
 type Props = {
-  comicIssue: ComicIssue
+  cover: string
 }
 
-export const ComicIssueBanner: React.FC<Props> = ({ comicIssue }) => {
+export const ComicIssueBanner: React.FC<Props> = ({ cover }) => {
   const isMobile = useIsMobile()
-  const heroImage = comicIssue.cover || PageBanner.src
+  const heroImage = cover || PageBanner.src
   return (
     <div
       className='bg-cover bg-no-repeat bg-center relative md:absolute -z-[1] w-full h-[65vh] max-h-[620px] blur-none md:blur-[10px]'

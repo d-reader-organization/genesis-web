@@ -25,7 +25,7 @@ export default async function ComicIssuePage({ params: { id } }: ComicIssuePageP
     <>
       <Navigation />
       <main className=''>
-        <ComicIssueBanner comicIssue={comicIssue} />
+        <ComicIssueBanner cover={comicIssue.cover} />
         <div className='px-4 md:px-8 max-w-screen-xl mb-8'>
           <ComicIssueHeader>
             <ComicIssueInfoSection comicIssue={comicIssue} candyMachine={candyMachine} />
