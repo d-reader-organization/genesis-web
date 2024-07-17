@@ -4,13 +4,8 @@ import { ComicIssueBanner } from '@/components/comicIssue/ComicIssueBanner'
 import { ComicIssueHeader } from '@/components/comicIssue/ComicIssueHeader'
 import { ComicIssueInfoSection } from '@/components/comicIssue/InfoSection'
 import { Navigation } from '@/components/layout/Navigation'
+import { ComicIssuePageParams } from '@/models/common'
 import React from 'react'
-
-export type ComicIssuePageParams = {
-  params: {
-    id: string
-  }
-}
 
 export default async function ComicIssuePage({ params: { id } }: ComicIssuePageParams) {
   const comicIssue = await fetchComicIssue(id)
