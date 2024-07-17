@@ -13,6 +13,7 @@ import { AssetMintedDialog } from './dialogs/AssetMintedDialog'
 import { ComicIssue } from '@/models/comicIssue'
 import { EmailVerificationDialog } from './dialogs/EmailVerificationDialog'
 import { NoWalletConnectedDialog } from './dialogs/NoWalletConnectedDialog'
+import { ConfirmingTransactionDialog } from './dialogs/ConfirmingTransactionDialog'
 
 type Props = {
   candyMachine: CandyMachine
@@ -60,9 +61,7 @@ export const MintButton: React.FC<Props> = ({
         comicIssue={comicIssue}
         isAuthenticated={isAuthenticated}
         open={false}
-        onClose={function (): void {
-          // update state to false
-        }}
+        toggleDialog={() => {}}
       />
       <EmailVerificationDialog
         onClose={() => {
@@ -70,6 +69,7 @@ export const MintButton: React.FC<Props> = ({
         }}
       />
       <NoWalletConnectedDialog onClose={() => {}} />
+      <ConfirmingTransactionDialog open={false} toggleDialog={() => {}} />
     </>
   ) : null
 }

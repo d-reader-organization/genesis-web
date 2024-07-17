@@ -1,23 +1,44 @@
 'use client'
 
-import { ResetPasswordForm } from '@/components/form/ResetPasswordForm'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/Dialog'
-import useToggle from '@/hooks/useToggle'
+import { Text } from '@/components/ui'
+import { Checkbox } from '@/components/ui/Checkbox'
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/Dialog'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
+import { CommonDialogProps } from '@/models/common'
+import ConnectButton from '../ConnectButton'
+import { Loader } from '../Loader'
 
-type Props = {
-  open: boolean
-}
+export const unwrapWarningKey = 'unwrapWarning'
 
-export const UnwrapWarningDialog: React.FC<Props> = ({ open }) => {
-  const [passwordDialogOpen, togglePasswordDialog] = useToggle(open)
+type Props = { handleUnwrap: () => Promise<void>; isLoading: boolean } & CommonDialogProps
+
+export const UnwrapWarningDialog: React.FC<Props> = ({ handleUnwrap, isLoading, open, toggleDialog }) => {
+  const [isUnwrapWarningRead, setIsUnwrapWarningRead] = useLocalStorage(unwrapWarningKey, false)
   return (
-    <Dialog open={passwordDialogOpen} onOpenChange={togglePasswordDialog}>
-      <DialogContent className='sm:max-w-[444px] p-0 '>
-        <DialogHeader className='p-4'>
-          <DialogTitle>Unwrap warning dialog</DialogTitle>
-          <DialogDescription>TODO</DialogDescription>
-        </DialogHeader>
-        <ResetPasswordForm onClose={togglePasswordDialog} />
+    <Dialog open={open} onOpenChange={toggleDialog}>
+      <DialogContent aria-describedby='' className='flex flex-col justify-between gap-8 bg-grey-400 p-5 rounded-lg'>
+        <div className='flex flex-col items-center gap-2'>
+          <DialogTitle>Comic unwrapping</DialogTitle>
+          <Text className='text-center' as='p'>
+            By unwrapping the comic, you&quot;ll be able to read it. This action is irreversible and will make the comic
+            lose the mint condition.
+          </Text>
+        </div>
+        <ConnectButton className='self-center w-full bg-important-color my-5' onClick={handleUnwrap}>
+          {isLoading ? <Loader /> : 'Unwrap'}
+        </ConnectButton>
+        <div className='flex items-center justify-center space-x-2'>
+          <Checkbox
+            id='ask-again'
+            checked={isUnwrapWarningRead}
+            onCheckedChange={(value) => {
+              setIsUnwrapWarningRead(!!value)
+            }}
+          />
+          <label htmlFor='ask-again' className='text-base font-medium leading-5 cursor-pointer'>
+            Accept terms and conditions
+          </label>
+        </div>
       </DialogContent>
     </Dialog>
   )

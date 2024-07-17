@@ -5,13 +5,12 @@ import { Button, toast } from '@/components/ui'
 import { useRouter } from 'next/navigation'
 import { rateComic } from '@/app/lib/api/comic/mutations'
 import { rateComicIssue } from '@/app/lib/api/comicIssue/mutations'
+import { CommonDialogProps } from '@/models/common'
 
 type Props = {
   comicIssueId?: number
   comicSlug?: string
-  open: boolean
-  toggleDialog: () => void
-}
+} & CommonDialogProps
 
 export const StarRatingDialog: React.FC<Props> = ({ comicIssueId, comicSlug, toggleDialog, open }) => {
   const [rating, setRating] = React.useState<number | null>(null)
