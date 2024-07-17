@@ -1,8 +1,9 @@
+'use server'
+
 import { fetchWrapper } from '../../fetchWrapper'
 import { CANDY_MACHINE_QUERY_KEYS } from '@/api/candyMachine/candyMachineKeys'
 import { CandyMachine } from '@/models/candyMachine'
 import { CandyMachineParams } from '@/models/candyMachine/candyMachineParams'
-import {} from '@/models/comic'
 import { Nullable } from '@/models/common'
 
 const { CANDY_MACHINE, GET } = CANDY_MACHINE_QUERY_KEYS

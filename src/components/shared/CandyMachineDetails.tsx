@@ -1,3 +1,5 @@
+'use client'
+
 import { CandyMachine } from '@/models/candyMachine'
 import { CandyMachineGroupWithSource, WhiteListType } from '@/models/candyMachine/candyMachineGroup'
 import clsx from 'clsx'
@@ -9,6 +11,9 @@ import LockIcon from 'public/assets/vector-icons/lock.svg'
 import { MAX_PROTOCOL_FEE } from '@/constants/fee'
 import { MintButton } from './MintButton'
 import { ComicIssue } from '@/models/comicIssue'
+import { useFetchCandyMachine } from '@/api/candyMachine/queries/useFetchCandyMachine'
+import { useWallet } from '@solana/wallet-adapter-react'
+import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
 
 const toSol = (lamports: number) => +(lamports / LAMPORTS_PER_SOL).toFixed(3)
 const normalise = (value: number, MAX: number) => (value * 100) / MAX
@@ -24,26 +29,27 @@ const getItemsMinted = (candyMachine: CandyMachine) => {
   }
 }
 
-export const CandyMachineDetails: React.FC<Props & { comicIssue: ComicIssue; isAuthenticated: boolean }> = ({
-  candyMachine,
+export const CandyMachineDetails: React.FC<{ comicIssue: ComicIssue; isAuthenticated: boolean }> = ({
   comicIssue,
   isAuthenticated,
 }) => {
-  return (
+  const { publicKey } = useWallet()
+  const { data: candyMachine, refetch } = useFetchCandyMachine({
+    candyMachineAddress: comicIssue.activeCandyMachineAddress ?? '',
+    walletAddress: publicKey?.toBase58() ?? '',
+  })
+  useAuthorizeWallet(refetch)
+
+  return candyMachine ? (
     <div className='flex flex-col rounded-lg p-4 sm:p-6 bg-grey-500 border border-grey-200 mb-6'>
       <GroupDetails candyMachine={candyMachine} />
       <UserDetails candyMachine={candyMachine} />
       <ProgressBar className='my-3' value={normalise(candyMachine.itemsMinted, candyMachine.supply)} />
       <ComicVault />
       <BalanceDetails candyMachine={candyMachine} />
-      <MintButton
-        candyMachine={candyMachine}
-        comicIssue={comicIssue}
-        isMintTransactionLoading={false}
-        isAuthenticated={isAuthenticated}
-      />
+      <MintButton candyMachine={candyMachine} comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
     </div>
-  )
+  ) : null
 }
 
 const GroupDetails: React.FC<Props> = ({ candyMachine }) => {
@@ -118,7 +124,7 @@ const ComicVault: React.FC = () => (
 const BalanceDetails: React.FC<Props> = ({ candyMachine }) => {
   const { mintPrice } = candyMachine.groups.at(0) as CandyMachineGroupWithSource
   return (
-    <div className='flex text-base font-bold justify-between mt-1 mb-2'>
+    <div className='flex text-base font-bold justify-between mt-2 mb-4'>
       <div>Total</div>
       <div>≈ {toSol(mintPrice + MAX_PROTOCOL_FEE)} SOL</div>
     </div>

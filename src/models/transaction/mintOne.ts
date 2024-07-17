@@ -1,4 +1,4 @@
-export interface MintOneParams {
+export type MintOneParams = {
   candyMachineAddress: string
   minterAddress: string
   label: string

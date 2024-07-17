@@ -7,7 +7,7 @@ import { ComicIssueInfoProps } from '@/models/comicIssue'
 import { GenresList } from '../shared/GenresList'
 import { CandyMachineDetails } from '../shared/CandyMachineDetails'
 
-export const ComicIssueInfoSection: React.FC<ComicIssueInfoProps> = ({ candyMachine, comicIssue }) => {
+export const ComicIssueInfoSection: React.FC<ComicIssueInfoProps> = ({ comicIssue }) => {
   const { description, flavorText, genres, title } = comicIssue
   return (
     <div className='flex flex-col gap-2 max-w-[680px]'>
@@ -29,7 +29,7 @@ export const ComicIssueInfoSection: React.FC<ComicIssueInfoProps> = ({ candyMach
         {description}
       </Text>
       <CreatorInfoLink className='my-8' creator={comicIssue.creator} />
-      {candyMachine && <CandyMachineDetails candyMachine={candyMachine} comicIssue={comicIssue} isAuthenticated />}
+      <CandyMachineDetails comicIssue={comicIssue} isAuthenticated />
     </div>
   )
 }
