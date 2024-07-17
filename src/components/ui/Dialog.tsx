@@ -31,10 +31,13 @@ DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { showCloseIcon?: boolean }
->(({ className, children, showCloseIcon = true, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
+    overlayClassName?: string
+    showCloseIcon?: boolean
+  }
+>(({ className, children, overlayClassName = '', showCloseIcon = true, ...props }, ref) => (
   <DialogPortal>
-    <DialogOverlay className='backdrop-blur-sm' />
+    <DialogOverlay className={cn('backdrop-blur-sm', overlayClassName)} />
     <DialogPrimitive.Content
       ref={ref}
       className={cn(

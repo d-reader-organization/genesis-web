@@ -1,6 +1,5 @@
 import React from 'react'
 import { Dialog, DialogContent } from '@/components/ui/Dialog'
-import { Asset } from '@/models/asset'
 import { ComicRarity } from '@/enums/comicRarity'
 import { Loader } from '../Loader'
 import { ComicIssue } from '@/models/comicIssue'
@@ -14,49 +13,34 @@ import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { RoutePath } from '@/enums/routePath'
 import { UnwrapWarningDialog, unwrapWarningKey } from './UnwrapWarningDialog'
 import { CommonDialogProps } from '@/models/common'
+import { useFetchAsset } from '@/api/asset/queries'
+import { useFetchTwitterIntentComicMinted } from '@/api/twitter/queries/useFetchIntentComicMinted'
+import { UtmSource } from '@/models/twitter/twitterIntentComicMintedParams'
 
 type Props = {
+  assetAddress?: string
   comicIssue: ComicIssue
   isAuthenticated: boolean
 } & CommonDialogProps
 
-export const AssetMintedDialog: React.FC<Props> = ({ comicIssue, isAuthenticated, open, toggleDialog }) => {
+export const AssetMintedDialog: React.FC<Props> = ({
+  assetAddress,
+  comicIssue,
+  isAuthenticated,
+  open,
+  toggleDialog,
+}) => {
+  const { data: asset } = useFetchAsset(assetAddress || '')
   const [unwrapWarningDialog, toggleUnwrapDialog] = useToggle(false)
   const [isUnwrapWarningRead] = useLocalStorage(unwrapWarningKey, false)
-  const asset: Asset = {
-    address: '9oCJ3T7BgQLvqhssHcKCTW6z1EnPxiHjownLsq72iYzK',
-    uri: 'https://arweave.net/sAv5BM67BeSQ2_YeNdQvIgv5iixToMHcNB5R64EwouY',
-    image: 'https://arweave.net/EX0Mooo8ForD3Dyf9UL-VZPanqJqq1LBhmeIp5vTl-Q',
-    name: 'Tome of Knowledge #18',
-    description:
-      'The Lupers of Arx Urbis are a proud and noble race of wolves descended from the she-wolf of Lupercal, who raised Romulus and Remus',
-    ownerAddress: '5hJKqD4uzZYb2Q95mJ2ZGbSVwrgNFzjw8cpbSCfyeiRs',
-    royalties: 5.4,
-    isUsed: false,
-    isSigned: false,
-    rarity: ComicRarity.Common,
-    comicName: 'Lupers',
-    comicIssueName: 'Tome of Knowledge',
-    comicIssueId: 5,
-    attributes: [
-      {
-        trait: 'rarity',
-        value: 'Common',
-      },
-      {
-        trait: 'used',
-        value: 'false',
-      },
-      {
-        trait: 'signed',
-        value: 'false',
-      },
-    ],
-    isListed: false,
-  }
-  const twitterIntentComicMinted = 'TODO'
+
+  const { data: twitterIntentComicMinted } = useFetchTwitterIntentComicMinted({
+    comicAddress: assetAddress ?? '',
+    utmSource: UtmSource.WEB,
+  })
 
   const handleUnwrap = async () => {}
+
   return (
     <>
       <Dialog open={open} onOpenChange={toggleDialog}>

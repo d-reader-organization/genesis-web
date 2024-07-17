@@ -1,15 +1,7 @@
-import { assetKeys, ASSET_QUERY_KEYS } from '@/api/asset/assetKeys'
+import { assetKeys } from '@/api/asset/assetKeys'
 import { useToaster } from '@/providers/ToastProvider'
-import { Asset } from '@/models/asset'
 import { useQuery } from 'react-query'
-import http from '@/api/http'
-
-const { ASSET, GET } = ASSET_QUERY_KEYS
-
-const fetchAsset = async (address: string): Promise<Asset> => {
-  const response = await http.get<Asset>(`${ASSET}/${GET}/${address}`)
-  return response.data
-}
+import { fetchAsset } from '@/app/lib/api/asset/queries'
 
 export const useFetchAsset = (address: string, enabled = true) => {
   const toaster = useToaster()

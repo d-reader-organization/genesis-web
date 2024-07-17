@@ -1,4 +1,4 @@
-export interface TwitterIntentComicMintedParams {
+export type TwitterIntentComicMintedParams = {
   comicAddress: string
   utmSource?: UtmSource
 }

@@ -4,7 +4,7 @@ import { CandyMachine } from '@/models/candyMachine'
 import { CandyMachineGroupWithSource } from '@/models/candyMachine/candyMachineGroup'
 import { getActiveGroup, validateMintEligibilty } from '@/utils/mint'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '../ui/Button'
 import dynamic from 'next/dynamic'
 import { Loader } from './Loader'
@@ -18,6 +18,10 @@ import { useToggle } from '@/hooks'
 import { toast } from '../ui'
 import { fetchMintOneTransaction } from '@/app/lib/api/transaction/queries'
 import { useFetchCandyMachine } from '@/api/candyMachine'
+import { versionedTransactionFromBs64 } from '@/utils/transactions'
+import { io } from 'socket.io-client'
+import { CandyMachineReceipt } from '@/models/candyMachine/candyMachineReceipt'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   candyMachine: CandyMachine
@@ -36,9 +40,11 @@ export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthen
   // const [showWalletNotConnected, toggleWalletNotConnected] = useToggle()
   const [showConfirmingTransaction, toggleConfirmingTransaction] = useToggle()
   const [isMintTransactionLoading, setIsMintTransactionLoading] = useState(false)
+  const [assetAddress, setAssetAddress] = useState<string>()
 
   const { publicKey, signAllTransactions } = useWallet()
   const { connection } = useConnection()
+  const { refresh } = useRouter()
 
   const walletAddress = publicKey?.toBase58()
   const hasWalletConnected = !!walletAddress
@@ -51,6 +57,20 @@ export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthen
     candyMachineAddress: candyMachine.address,
     walletAddress,
   })
+
+  useEffect(() => {
+    if (!walletAddress) {
+      return
+    }
+    const socket = io(process.env.NEXT_PUBLIC_API_ENDPOINT || '')
+    socket.on(`wallet/${walletAddress}/item-minted`, async (data: CandyMachineReceipt): Promise<void> => {
+      setAssetAddress(data.asset.address)
+      refresh
+    })
+    return () => {
+      socket.disconnect()
+    }
+  }, [walletAddress])
 
   const handleMint = async () => {
     setIsMintTransactionLoading(true)
@@ -69,7 +89,7 @@ export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthen
       candyMachineAddress: candyMachine.address,
       minterAddress: walletAddress ?? '',
       label: getActiveGroup(candyMachine)?.label ?? '',
-    })
+    }).then((value) => value.map(versionedTransactionFromBs64))
     if (!signAllTransactions) {
       return toast({ description: 'Wallet does not support signing multiple transactions', variant: 'destructive' })
     }
@@ -88,6 +108,7 @@ export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthen
           console.log('Response error log: ', response.value.err)
           throw new Error()
         }
+        toggleConfirmingTransaction()
         toggleAssetMinted()
         toast({ description: 'Successfully minted the comic! Find the asset in your wallet', variant: 'success' })
       } catch (e) {
@@ -124,6 +145,7 @@ export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthen
         <BaseWalletMultiButtonDynamic labels={WALLET_LABELS} style={{ width: '100%' }} />
       )}
       <AssetMintedDialog
+        assetAddress={assetAddress}
         comicIssue={comicIssue}
         isAuthenticated={isAuthenticated}
         open={showAssetMinted}
