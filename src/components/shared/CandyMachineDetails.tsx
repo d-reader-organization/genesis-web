@@ -8,6 +8,7 @@ import { Expandable } from './Expandable'
 import LockIcon from 'public/assets/vector-icons/lock.svg'
 import { MAX_PROTOCOL_FEE } from '@/constants/fee'
 import { MintButton } from './MintButton'
+import { ComicIssue } from '@/models/comicIssue'
 
 const toSol = (lamports: number) => +(lamports / LAMPORTS_PER_SOL).toFixed(3)
 const normalise = (value: number, MAX: number) => (value * 100) / MAX
@@ -23,7 +24,11 @@ const getItemsMinted = (candyMachine: CandyMachine) => {
   }
 }
 
-export const CandyMachineDetails: React.FC<Props> = ({ candyMachine }) => {
+export const CandyMachineDetails: React.FC<Props & { comicIssue: ComicIssue; isAuthenticated: boolean }> = ({
+  candyMachine,
+  comicIssue,
+  isAuthenticated,
+}) => {
   return (
     <div className='flex flex-col rounded-lg p-4 sm:p-6 bg-grey-500 border border-grey-200 mb-6'>
       <GroupDetails candyMachine={candyMachine} />
@@ -31,7 +36,12 @@ export const CandyMachineDetails: React.FC<Props> = ({ candyMachine }) => {
       <ProgressBar className='my-3' value={normalise(candyMachine.itemsMinted, candyMachine.supply)} />
       <ComicVault />
       <BalanceDetails candyMachine={candyMachine} />
-      <MintButton candyMachine={candyMachine} isMintTransactionLoading={false} isAuthenticated />
+      <MintButton
+        candyMachine={candyMachine}
+        comicIssue={comicIssue}
+        isMintTransactionLoading={false}
+        isAuthenticated={isAuthenticated}
+      />
     </div>
   )
 }

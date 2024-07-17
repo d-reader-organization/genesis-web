@@ -17,7 +17,7 @@ const buttonVariants = cva(
         outline: 'border border-grey-300 text-white bg-transparent w-full text-base font-semibold',
         secondary:
           'bg-slate-100 text-slate-900 hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80',
-        ghost: 'bg-transparent text-base font-normal text-grey-100',
+        ghost: 'w-full bg-transparent text-base font-normal text-grey-100',
         link: 'text-base text-important-color bg-transparent font-normal',
       },
       size: {
@@ -74,7 +74,7 @@ const ButtonLink: React.FC<Props> = ({
         className,
         'flex justify-center items-center min-w-40 p-[14px] rounded-lg cursor-pointer text-base font-semibold hover:brightness-105',
         {
-          'button-link--background-color-important': backgroundColor === 'important',
+          'bg-important-color': backgroundColor === 'important',
           'bg-transparent': backgroundColor === 'transparent',
           'button-link--background-color-grey-100': backgroundColor === 'grey-100',
           'button-link--background-color-grey-600': backgroundColor === 'grey-600',

@@ -1,7 +1,11 @@
 import React from 'react'
 
-export const Loader: React.FC = () => (
-  <div role='status'>
+type Props = {
+  className?: string
+}
+
+export const Loader: React.FC<Props> = ({ className = '' }) => (
+  <div className={className} role='status'>
     <svg
       aria-hidden='true'
       className='size-8 text-gray-300 animate-spin  fill-grey-500'

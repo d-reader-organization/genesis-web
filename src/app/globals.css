@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('@solana/wallet-adapter-react-ui/styles.css');
 @layer base {
   html {
     scrollbar-color: #c2c5ce #1f222a;
@@ -102,15 +103,11 @@
   background: #fceb54 !important;
 }
 
-.wallet-adapter-modal {
-  z-index: 9999 !important;
-}
-
 .wallet-adapter-modal-wrapper .wallet-adapter-modal-button-close {
   background-color: #15171c !important;
 }
 
-.wallet-adapter-modal-list {
+.wallet-adapter-modal-list .wallet-adapter-button:hover {
   background-color: #1f222a !important;
 }
 .connect-wallet-dialog .wallet-adapter-dropdown {

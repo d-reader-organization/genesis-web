@@ -9,12 +9,17 @@ import { Button } from '../ui/Button'
 import dynamic from 'next/dynamic'
 import { Loader } from './Loader'
 import { WALLET_LABELS } from '@/constants/wallets'
+import { AssetMintedDialog } from './dialogs/AssetMintedDialog'
+import { ComicIssue } from '@/models/comicIssue'
+import { EmailVerificationDialog } from './dialogs/EmailVerificationDialog'
+import { NoWalletConnectedDialog } from './dialogs/NoWalletConnectedDialog'
 
 type Props = {
   candyMachine: CandyMachine
+  comicIssue: ComicIssue
   //   handleMint: () => Promise<void> TODO
   isMintTransactionLoading: boolean
-  isAuthenticated?: boolean
+  isAuthenticated: boolean
 }
 
 const BaseWalletMultiButtonDynamic = dynamic(
@@ -22,7 +27,12 @@ const BaseWalletMultiButtonDynamic = dynamic(
   { ssr: false }
 )
 
-export const MintButton: React.FC<Props> = ({ candyMachine, isMintTransactionLoading }) => {
+export const MintButton: React.FC<Props> = ({
+  candyMachine,
+  comicIssue,
+  isAuthenticated,
+  isMintTransactionLoading,
+}) => {
   const { isEligible, error } = validateMintEligibilty(candyMachine.groups.at(0))
   const { publicKey } = useWallet()
 
@@ -35,7 +45,7 @@ export const MintButton: React.FC<Props> = ({ candyMachine, isMintTransactionLoa
     <>
       {hasWalletConnected ? (
         isEligible ? (
-          <Button className='mint-button' onClick={() => console.log(`missing`)}>
+          <Button className='bg-important-color min-h-[53px]' onClick={() => console.log(`missing`)}>
             {!isMintTransactionLoading ? 'Mint' : <Loader />}
           </Button>
         ) : (
@@ -46,6 +56,20 @@ export const MintButton: React.FC<Props> = ({ candyMachine, isMintTransactionLoa
       ) : (
         <BaseWalletMultiButtonDynamic labels={WALLET_LABELS} style={{ width: '100%' }} />
       )}
+      <AssetMintedDialog
+        comicIssue={comicIssue}
+        isAuthenticated={isAuthenticated}
+        open={false}
+        onClose={function (): void {
+          // update state to false
+        }}
+      />
+      <EmailVerificationDialog
+        onClose={() => {
+          // TODO
+        }}
+      />
+      <NoWalletConnectedDialog onClose={() => {}} />
     </>
   ) : null
 }

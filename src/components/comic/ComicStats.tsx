@@ -22,6 +22,7 @@ export const ComicStats: React.FC<Props> = ({ comic }) => {
 
       <InfoListActions
         averageRating={comic.stats?.averageRating}
+        comicSlug={comic.slug}
         favouritesCount={comic.stats?.favouritesCount}
         isFavourite={comic.myStats?.isFavourite}
         rating={comic.myStats?.rating}

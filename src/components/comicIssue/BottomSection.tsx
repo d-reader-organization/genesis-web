@@ -14,6 +14,7 @@ export const ComicIssueBottomSection: React.FC<Props> = ({ comicIssue }) => (
     <InfoListActions
       className='hidden md:flex w-fit my-4 [&>*]:min-w-20'
       averageRating={comicIssue.stats?.averageRating}
+      comicIssueId={comicIssue.id}
       favouritesCount={comicIssue.stats?.favouritesCount}
       isFavourite={comicIssue.myStats?.isFavourite}
       orientation='vertical'
@@ -37,6 +38,5 @@ export const ComicIssueBottomSection: React.FC<Props> = ({ comicIssue }) => (
         Read
       </ButtonLink>
     </div>
-    
   </div>
 )

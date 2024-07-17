@@ -15,8 +15,9 @@ export const ComicIssueInfoSection: React.FC<ComicIssueInfoProps> = ({ candyMach
         {title}
       </Text>
       <InfoListActions
-        className='flex md:hidden w-fit my-4 [&>*]:min-w-20'
         averageRating={comicIssue.stats?.averageRating}
+        className='flex md:hidden w-fit my-4 [&>*]:min-w-20'
+        comicIssueId={comicIssue.id}
         favouritesCount={comicIssue.stats?.favouritesCount}
         isFavourite={comicIssue.myStats?.isFavourite}
         orientation='horizontal'
@@ -28,7 +29,7 @@ export const ComicIssueInfoSection: React.FC<ComicIssueInfoProps> = ({ candyMach
         {description}
       </Text>
       <CreatorInfoLink className='my-8' creator={comicIssue.creator} />
-      {candyMachine && <CandyMachineDetails candyMachine={candyMachine} />}
+      {candyMachine && <CandyMachineDetails candyMachine={candyMachine} comicIssue={comicIssue} isAuthenticated />}
     </div>
   )
 }

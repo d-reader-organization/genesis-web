@@ -93,4 +93,7 @@ export type UpdateComicIssueFilesData = Partial<{
   pdf: File
 }>
 
-export type ComicIssueInfoProps = { candyMachine?: Nullable<CandyMachine>; comicIssue: ComicIssue }
+export type ComicIssueInfoProps = {
+  candyMachine?: Nullable<CandyMachine>
+  comicIssue: ComicIssue
+}
