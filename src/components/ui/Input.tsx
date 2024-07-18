@@ -14,8 +14,9 @@ const Input = forwardRef<HTMLInputElement, Props>(({ className, prefix, prefixIc
       <input
         {...props}
         className={clsx(
-          'w-full border-[1.5px] border-grey-300 border-solid rounded-lg bg-grey-500 inline-flex gap-2 items-center p-4 font-medium',
-          prefixIcon && 'pl-9'
+          'w-full border border-grey-300 rounded-lg bg-grey-500 inline-flex gap-2 items-center p-4 font-medium',
+          prefixIcon && 'pl-9',
+          props.type === 'password' && 'placeholder:translate-y-1'
         )}
         ref={ref}
       ></input>
