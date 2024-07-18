@@ -4,10 +4,6 @@ import { Button } from '@/components/ui/Button'
 import { useRequestUserEmailVerification } from '@/api/user/queries/useRequestUserEmailVerification'
 import { CommonDialogProps } from '@/models/common'
 
-type Props = {
-  onClose: () => void
-}
-
 export const EmailVerificationDialog: React.FC<CommonDialogProps> = ({ open, toggleDialog }) => {
   // use actions?
   const { mutateAsync: requestUserEmailVerification } = useRequestUserEmailVerification()

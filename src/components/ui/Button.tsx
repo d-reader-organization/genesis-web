@@ -71,8 +71,8 @@ const ButtonLink: React.FC<Props> = ({
   return (
     <Link
       className={clsx(
-        className,
         'flex justify-center items-center min-w-40 p-[14px] rounded-lg cursor-pointer text-base font-semibold hover:brightness-105',
+        className,
         {
           'bg-important-color': backgroundColor === 'important',
           'bg-transparent': backgroundColor === 'transparent',

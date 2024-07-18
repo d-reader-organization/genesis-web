@@ -20,7 +20,8 @@ export function middleware(request: NextRequest) {
 
   if (requestUrlPath.includes(RoutePath.Login)) {
     if (isAuthorized()) {
-      return NextResponse.redirect(new URL(RoutePath.Home, request.url))
+      const redirectTo = request.nextUrl.searchParams.get('redirectTo')
+      return NextResponse.redirect(new URL(redirectTo ?? RoutePath.Home, request.url))
     }
   }
 
