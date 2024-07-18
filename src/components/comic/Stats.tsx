@@ -2,8 +2,8 @@ import React from 'react'
 import { InfoList } from '../shared/InfoList'
 import { Comic } from '@/models/comic'
 import { CollectionStatusItem } from '../shared/CollectionStatusItem'
-import { PriceTag } from '../tags/PriceTag'
 import { InfoListActions } from '../shared/InfoListActions'
+import { PriceTag } from '../shared/tags/PriceTag'
 
 type Props = { comic: Comic }
 

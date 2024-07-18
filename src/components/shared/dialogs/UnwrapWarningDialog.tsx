@@ -5,7 +5,7 @@ import { Checkbox } from '@/components/ui/Checkbox'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/Dialog'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { CommonDialogProps } from '@/models/common'
-import ConnectButton from '../ConnectButton'
+import ConnectButton from '../buttons/ConnectButton'
 import { Loader } from '../Loader'
 
 export const unwrapWarningKey = 'unwrapWarning'

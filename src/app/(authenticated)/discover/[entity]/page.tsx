@@ -8,7 +8,7 @@ function DiscoverPage({ params }: { params: Params }) {
   return (
     <>
       <Navigation />
-      <div>Discover</div>
+      <div>Discover {params.entity}</div>
     </>
   )
 }

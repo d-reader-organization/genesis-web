@@ -8,11 +8,10 @@ import { useHomeArgs } from '@/hooks/useHomeArgs'
 import { SliderType } from '@/enums/sliderType'
 
 type Props = {
-  className?: string
   slider: SliderType
 } & PropsWithChildren
 
-export const CustomSlider: React.FC<Props> = ({ className, children, slider }) => {
+export const CustomSlider: React.FC<Props> = ({ children, slider }) => {
   const take = useHomeArgs()
   if (!take) return null
 

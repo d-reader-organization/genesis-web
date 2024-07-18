@@ -6,8 +6,8 @@ import { Wallet } from '@solana/wallet-adapter-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { usePreviousValue } from '@/hooks/usePreviousValue'
-import { Button, ButtonProps } from '../ui/Button'
-import { WalletListItem } from './WalletListItem'
+import { Button, ButtonProps } from '../../ui/Button'
+import { WalletListItem } from '../WalletListItem'
 
 interface Props extends ButtonProps {
   text?: string

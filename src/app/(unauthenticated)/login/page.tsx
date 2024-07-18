@@ -2,7 +2,7 @@ import { UnauthenticatedNavigation } from '@/components/layout/UnauthenticatedNa
 import { Text } from '@/components/ui'
 import React from 'react'
 import { LoginForm } from '@/components/form/LoginForm'
-import { GoogleSignInButton } from '@/components/shared/GoogleSignInButton'
+import { GoogleSignInButton } from '@/components/shared/buttons/GoogleSignInButton'
 import { ForgotPasswordDialog } from '@/components/shared/dialogs/ForgotPasswordDialog'
 import Link from 'next/link'
 import { RoutePath } from '@/enums/routePath'

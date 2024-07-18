@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Button } from '../ui/Button'
+import { Button } from '../../ui/Button'
 import GoogleLogoIcon from 'public/assets/vector-icons/google-logo.svg'
 import { signIn } from 'next-auth/react'
 

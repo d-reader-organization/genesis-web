@@ -1,7 +1,7 @@
 import { Text } from '@/components/ui/Text'
 import React from 'react'
 import { FlavorText } from '../shared/FlavorText'
-import { CreatorInfoLink } from '../shared/CreatorInfoLink'
+import { CreatorInfoLink } from '../creator/InfoLink'
 import { InfoListActions } from '../shared/InfoListActions'
 import { ComicIssueInfoProps } from '@/models/comicIssue'
 import { GenresList } from '../shared/GenresList'

@@ -3,9 +3,9 @@
 import React, { Suspense } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs'
 import { useSearchParams } from 'next/navigation'
-import { CreateAccountContent } from './CreateAccount'
-import { ConnectWalletContent } from './ConnectWallet'
-import { EmailVerificationContent } from './EmailVerification'
+import { CreateAccountContent } from './tabs/CreateAccount'
+import { ConnectWalletContent } from './tabs/ConnectWallet'
+import { EmailVerificationContent } from './tabs/EmailVerification'
 
 enum TabValue {
   createAccount = 'createAccount',

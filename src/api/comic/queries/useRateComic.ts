@@ -2,8 +2,8 @@ import { COMIC_QUERY_KEYS, comicKeys } from '@/api/comic/comicKeys'
 import { useToaster } from '@/providers/ToastProvider'
 import { RateComic } from '@/models/comic/rateComic'
 import { useMutation, useQueryClient } from 'react-query'
-import { useFetchMe } from '@/api/creator'
 import http from '@/api/http'
+import { useFetchMe } from '@/api/user/queries/useFetchMe'
 
 const { COMIC, RATE } = COMIC_QUERY_KEYS
 

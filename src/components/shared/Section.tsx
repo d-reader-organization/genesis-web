@@ -9,7 +9,7 @@ interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDi
   show?: boolean
 }
 
-export const Section: React.FC<Props> = ({ title, className, children, actionProps, show = true, ...props }) => {
+export const Section: React.FC<Props> = ({ title, className, children, actionProps, ...props }) => {
   return (
     <section className={clsx('relative mx-4', className)} {...props}>
       {title || actionProps ? (

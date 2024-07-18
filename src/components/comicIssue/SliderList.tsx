@@ -1,4 +1,4 @@
-import { ComicIssueCard } from './ComicIssueCard'
+import { ComicIssueCard } from './Card'
 import { ComicIssue } from '@/models/comicIssue'
 import { CustomSlider } from '../shared/CustomSlider'
 import { SliderType } from '@/enums/sliderType'

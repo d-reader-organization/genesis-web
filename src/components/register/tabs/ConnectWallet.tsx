@@ -1,9 +1,9 @@
 'use client'
 
 import React from 'react'
-import { Text } from '../ui/Text'
-import { WhyDoINeedAWalletDialog } from '../shared/dialogs/WhyDoINeedAWalletDialog'
-import { Button } from '../ui/Button'
+import { Text } from '../../ui/Text'
+import { WhyDoINeedAWalletDialog } from '../../shared/dialogs/WhyDoINeedAWalletDialog'
+import { Button } from '../../ui/Button'
 import { useSearchParams } from 'next/navigation'
 import { RoutePath } from '@/enums/routePath'
 import dynamic from 'next/dynamic'

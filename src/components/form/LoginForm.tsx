@@ -21,7 +21,7 @@ const LoginForm: React.FC = () => {
       toast({
         title: 'Error',
         description: state.error,
-        variant: 'destructive',
+        variant: 'error',
       })
     }
   }, [state?.error, toast])

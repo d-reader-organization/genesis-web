@@ -3,7 +3,7 @@ import SolanaColoredIcon from 'public/assets/vector-icons/solana-colored-icon.sv
 import { formatPrice } from '@/utils/helpers'
 import { isNil } from 'lodash'
 import { roundNumber } from '@/utils/numbers'
-import { Text } from '../ui'
+import { Text } from '../../ui'
 import clsx from 'clsx'
 import React from 'react'
 

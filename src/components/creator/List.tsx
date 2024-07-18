@@ -1,6 +1,6 @@
 'use client'
 
-import { CreatorItem } from './CreatorItem'
+import { CreatorItem } from './Item'
 import { Creator } from '@/models/creator'
 import { AnimatedGridItem } from '../ui/AnimatedGrid'
 import { useHomeArgs } from '@/hooks/useHomeArgs'
@@ -10,7 +10,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   creators: Creator[]
 }
 
-export const CreatorList: React.FC<Props> = ({ animate, className, creators, ...props }) => {
+export const CreatorList: React.FC<Props> = ({ animate, creators }) => {
   const take = useHomeArgs()
   return (
     <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>

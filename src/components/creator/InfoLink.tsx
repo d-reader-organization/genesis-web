@@ -1,6 +1,6 @@
 import React from 'react'
 import { Creator } from '@/models/creator'
-import { AvatarImage } from './AvatarImage'
+import { AvatarImage } from '../shared/AvatarImage'
 import { Text } from '@/components/ui/Text'
 import VerifiedIcon from 'public/assets/vector-icons/verified-icon.svg'
 import clsx from 'clsx'

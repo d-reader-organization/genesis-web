@@ -1,48 +1,23 @@
-import { generateMaxLengthErrorMessage, generateMinLengthErrorMessage, yupRequiredMessage } from '@/utils/error'
-import * as yup from 'yup'
+import { generateMinLengthErrorMessage } from '@/utils/error'
+import { z } from 'zod'
 
-export const updateUserValidationSchema = yup.object().shape({
-  email: yup.string().email(),
-  name: yup
-    .string()
-    .min(2, generateMinLengthErrorMessage('name', 2))
-    .max(20, generateMaxLengthErrorMessage('name', 20)),
+const loginSchema = z.object({
+  nameOrEmail: z.string(),
+  password: z.string(),
 })
 
-export const updateUserPasswordValidationSchema = yup.object().shape({
-  oldPassword: yup.string().required(yupRequiredMessage('Old password')),
-  newPassword: yup.string().required(yupRequiredMessage('New password')),
+const registerSchema = z.object({
+  name: z.string().min(3, generateMinLengthErrorMessage('name', 3)),
+  email: z.string().email(),
+  password: z.string(),
 })
 
-export const loginValidationSchema = yup.object().shape({
-  nameOrEmail: yup.string().required(yupRequiredMessage('Email')),
-  password: yup.string().required(yupRequiredMessage('Password')),
+const registerWithGoogleSchema = z.object({
+  name: z.string().min(3, generateMinLengthErrorMessage('name', 3)),
 })
 
-export const resetPasswordValidationSchema = yup.object().shape({
-  verificationToken: yup.string().required(yupRequiredMessage('Verification token')),
-  newPassword: yup.string().required(yupRequiredMessage('New password')),
+const resetPasswordSchema = z.object({
+  nameOrEmail: z.string().email('Must be an email address'),
 })
 
-export const registerValidationSchema = yup.object().shape({
-  name: yup
-    .string()
-    .required(yupRequiredMessage('Name'))
-    .min(3, generateMinLengthErrorMessage('name', 3))
-    .max(20, generateMaxLengthErrorMessage('name', 20)),
-  email: yup.string().email().required(yupRequiredMessage('Email')),
-  password: yup.string().required(yupRequiredMessage('Password')),
-})
-export const googleRegisterValidationSchema = yup.object().shape({
-  name: yup
-    .string()
-    .required(yupRequiredMessage('Name'))
-    .min(3, generateMinLengthErrorMessage('name', 3))
-    .max(20, generateMaxLengthErrorMessage('name', 20)),
-  email: yup.string().email().optional().default(''),
-  password: yup.string().optional().default(''),
-})
-
-export const updateUserAvatarValidationSchema = yup.object().shape({
-  avatar: yup.mixed(),
-})
+export { loginSchema, registerSchema, registerWithGoogleSchema, resetPasswordSchema }

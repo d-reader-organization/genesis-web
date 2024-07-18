@@ -5,17 +5,17 @@ import { CandyMachineGroupWithSource } from '@/models/candyMachine/candyMachineG
 import { getActiveGroup, validateMintEligibilty } from '@/utils/mint'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import React, { useEffect, useState } from 'react'
-import { Button } from '../ui/Button'
+import { Button } from '../../ui/Button'
 import dynamic from 'next/dynamic'
-import { Loader } from './Loader'
+import { Loader } from '../Loader'
 import { WALLET_LABELS } from '@/constants/wallets'
-import { AssetMintedDialog } from './dialogs/AssetMintedDialog'
+import { AssetMintedDialog } from '../dialogs/AssetMintedDialog'
 import { ComicIssue } from '@/models/comicIssue'
 // import { EmailVerificationDialog } from './dialogs/EmailVerificationDialog'
 // import { NoWalletConnectedDialog } from './dialogs/NoWalletConnectedDialog'
-import { ConfirmingTransactionDialog } from './dialogs/ConfirmingTransactionDialog'
+import { ConfirmingTransactionDialog } from '../dialogs/ConfirmingTransactionDialog'
 import { useToggle } from '@/hooks'
-import { toast } from '../ui'
+import { toast } from '../../ui'
 import { fetchMintOneTransaction } from '@/app/lib/api/transaction/queries'
 import { useFetchCandyMachine } from '@/api/candyMachine'
 import { versionedTransactionFromBs64 } from '@/utils/transactions'
@@ -91,7 +91,7 @@ export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthen
       label: getActiveGroup(candyMachine)?.label ?? '',
     }).then((value) => value.map(versionedTransactionFromBs64))
     if (!signAllTransactions) {
-      return toast({ description: 'Wallet does not support signing multiple transactions', variant: 'destructive' })
+      return toast({ description: 'Wallet does not support signing multiple transactions', variant: 'error' })
     }
     const signedTransactions = await signAllTransactions(mintTransactions)
     setIsMintTransactionLoading(false)
@@ -116,12 +116,12 @@ export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthen
         if (signedTransactions.length === 2 && i === 0) {
           toast({
             description: 'Wallet is not allowlisted to mint this comic',
-            variant: 'destructive',
+            variant: 'error',
           })
         } else {
           toast({
             description: 'Something went wrong',
-            variant: 'destructive',
+            variant: 'error',
           })
         }
       }

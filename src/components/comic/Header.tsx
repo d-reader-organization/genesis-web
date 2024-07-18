@@ -9,9 +9,9 @@ import TelegramIcon from 'public/assets/vector-icons/telegram-icon.svg'
 import InstagramIcon from 'public/assets/vector-icons/instagram-icon.svg'
 import TikTokIcon from 'public/assets/vector-icons/tiktok-icon.svg'
 import YouTubeIcon from 'public/assets/vector-icons/youtube-icon.svg'
-import { ComicStats } from './ComicStats'
+import { ComicStats } from './Stats'
 import { FlavorText } from '../shared/FlavorText'
-import { CreatorInfoLink } from '../shared/CreatorInfoLink'
+import { CreatorInfoLink } from '../creator/InfoLink'
 import { GenresList } from '../shared/GenresList'
 
 type Props = {

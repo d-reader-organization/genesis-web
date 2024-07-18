@@ -8,10 +8,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/Form'
 import { useRequestUserPasswordReset } from '@/api/user/queries/useRequestUserPasswordReset'
-
-const resetPasswordSchema = z.object({
-  nameOrEmail: z.string().email('Must be an email address'),
-})
+import { resetPasswordSchema } from '@/constants/schemas'
 
 type Props = {
   onClose: () => void

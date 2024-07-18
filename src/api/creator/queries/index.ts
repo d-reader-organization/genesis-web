@@ -1,7 +1,6 @@
 export * from './useDeleteCreator'
 export * from './useFetchCreator'
 export * from './useFetchCreators'
-export * from './useFetchMe'
 export * from './useFollowCreator'
 export * from './useRecoverCreator'
 export * from './useRequestCreatorEmailVerification'

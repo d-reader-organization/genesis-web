@@ -3,17 +3,17 @@
 import { registerAction, registerWithGoogleAction } from '@/app/lib/actions/register'
 import React, { useEffect } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
-import { Label } from '../ui/Label'
-import { Input } from '../ui/Input'
-import { Button } from '../ui/Button'
-import { DividerWithText } from '../shared/Divider'
-import { GoogleSignInButton } from '../shared/GoogleSignInButton'
-import { Text } from '../ui/Text'
-import { DescriptionText } from '../shared/DescriptionText'
+import { Label } from '../../ui/Label'
+import { Input } from '../../ui/Input'
+import { Button } from '../../ui/Button'
+import { DividerWithText } from '../../shared/Divider'
+import { GoogleSignInButton } from '../../shared/buttons/GoogleSignInButton'
+import { Text } from '../../ui/Text'
+import { DescriptionText } from '../../shared/DescriptionText'
 import Link from 'next/link'
 import { RoutePath } from '@/enums/routePath'
-import { TermsOfServiceAndPrivacyPolicy } from '../shared/TermsOfServiceAndPrivacyText'
-import { useToast } from '../ui/toast/use-toast'
+import { TermsOfServiceAndPrivacyPolicy } from '../../shared/TermsOfServiceAndPrivacyText'
+import { useToast } from '../../ui/toast/use-toast'
 
 type Props = { isGoogleSignUp?: boolean; onSuccess: () => void }
 
@@ -69,7 +69,7 @@ const RegisterForm: React.FC<FormProps> = ({ isGoogleSignUp, onSuccess }) => {
       toast({
         title: 'Error',
         description: state.error,
-        variant: 'destructive',
+        variant: 'error',
       })
     }
   }, [state?.success, state?.error, toast])

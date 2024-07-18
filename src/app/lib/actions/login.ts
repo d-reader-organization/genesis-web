@@ -6,16 +6,11 @@ import { AuthFormState, Authorization } from '@/models/auth'
 import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { z } from 'zod'
 import { fetchWrapper } from '../fetchWrapper'
 import { accessTokenKey, refreshTokenKey } from '@/constants/general'
+import { loginSchema } from '@/constants/schemas'
 
 const { AUTH, USER, LOGIN } = AUTH_QUERY_KEYS
-
-const loginSchema = z.object({
-  nameOrEmail: z.string(),
-  password: z.string(),
-})
 
 export const loginAction = async (prev: AuthFormState | null, formData: FormData): Promise<AuthFormState | null> => {
   const parsed = loginSchema.safeParse({
