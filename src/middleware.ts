@@ -65,7 +65,7 @@ export const config = {
   matcher: ['/:path*', '/api/:path*'],
 }
 
-const authRoutesRegex = /^\/(comic|comic-issue|discover|profile)(\/.*)?$/
+const authRoutesRegex = /^\/(comic|comic-issue|library|profile)(\/.*)?$/
 
 const handleUnauthorized = async ({ path, refreshToken, url }: { path: string; refreshToken: string; url: string }) => {
   if (refreshToken) {

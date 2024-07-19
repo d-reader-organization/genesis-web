@@ -11,7 +11,7 @@ type Props = {
 
 export const SignUpBanner: React.FC<Props> = ({ comicIssueId, discountAmount }) => {
   return (
-    <div className='flex flex-col justify-between rounded-lg border border-grey-200 bg-grey-500 p-4 max-w-sm  min-h-[224px] md:max-w-2xl md:max-h-[160px] md:min-h-[160px] relative'>
+    <div className='flex flex-col justify-between rounded-lg border border-grey-200 bg-grey-500 p-4 min-h-[224px] md:max-h-[160px] md:min-h-[160px] relative'>
       <DiscountSection comicIssueId={comicIssueId} discountAmount={discountAmount} />
       <SignUpButton comicIssueId={comicIssueId} />
       <LoginLink comicIssueId={comicIssueId} />

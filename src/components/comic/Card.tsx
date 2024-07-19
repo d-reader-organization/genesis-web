@@ -4,14 +4,13 @@ import Link from 'next/link'
 import { RoutePath } from '@/enums/routePath'
 import React from 'react'
 import Image from 'next/image'
+import { blurDataUrl } from '@/constants/general'
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   comic: Comic
   priority?: boolean
   fetchPriority?: 'auto' | 'high' | 'low'
 }
-
-const blurDataUrl = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOUV9LaBAAB8gEfSTtbmAAAAABJRU5ErkJggg=='
 
 export const ComicCard: React.FC<Props> = ({ comic, className, priority, fetchPriority }) => {
   const nextPage = RoutePath.Comic(comic.slug)

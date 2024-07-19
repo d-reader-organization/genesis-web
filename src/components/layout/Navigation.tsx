@@ -9,12 +9,13 @@ import FullLogo from 'public/assets/vector-icons/full-logo.svg'
 import SearchIcon from 'public/assets/vector-icons/search-icon.svg'
 import DiscoverIcon from 'public/assets/vector-icons/discover-icon.svg'
 import LibraryIcon from 'public/assets/vector-icons/library-icon.svg'
-import ProfileIcon from 'public/assets/vector-icons/profile.svg'
-import { Button, Input } from '../ui'
+import MarketplaceIcon from 'public/assets/vector-icons/marketplace.svg'
+import { Input } from '../ui'
 import Link from 'next/link'
 import clsx from 'clsx'
 import { WALLET_LABELS } from '@/constants/wallets'
 import dynamic from 'next/dynamic'
+import { cn } from '@/lib/utils'
 
 const BaseWalletMultiButtonDynamic = dynamic(
   async () => (await import('@solana/wallet-adapter-react-ui')).BaseWalletMultiButton,
@@ -47,35 +48,47 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
         (isHome || isDiscover) && 'fixed  left-0 right-0'
       )}
     >
-      <div className='gap-4 flex justify-between items-center my-0 mx-auto max-w-[1536px] px-8 py-4 w-full'>
+      <div className='flex gap-4 justify-between items-center my-0 mx-auto max-w-[1536px] px-8 py-4 w-full'>
         <Link href={RoutePath.Home}>
           <FullLogo className='h-8 min-w-fit' />
         </Link>
-        <Input
-          className='w-[50%]'
-          placeholder='Search comics, episodes, genres, and creators'
-          prefixIcon={<SearchIcon />}
-        />
+        {!isMint && (
+          <Input
+            className='w-full max-w-sm lg:max-w-md xl:max-w-lg lg:justify-self-center'
+            placeholder='Search comics, episodes, genres, and creators'
+            prefixIcon={<SearchIcon />}
+          />
+        )}
         <div className='flex gap-4 md:gap-6'>
           <MenuItem href={RoutePath.DiscoverComics} icon={<DiscoverIcon />} isActive={isDiscover} title='Discover' />
+          <MenuItem comingSoon href='' isActive={false} icon={<MarketplaceIcon />} title='Marketplace' />
           <MenuItem href={RoutePath.Library} isActive={isLibrary} icon={<LibraryIcon />} title='Library' />
-          <MenuItem href={RoutePath.Profile} isActive={isProfile} icon={<ProfileIcon />} title='Profile' />
+          <BaseWalletMultiButtonDynamic style={{ fontSize: '17px' }} labels={WALLET_LABELS} />
         </div>
-        <Button asChild className='min-h-12'>
-          {/* dont show this if user is already logged in */}
-          <Link href={RoutePath.Login}>Hop in</Link>
-        </Button>
-        {isMint ? <BaseWalletMultiButtonDynamic style={{ fontSize: '17px' }} labels={WALLET_LABELS} /> : null}
       </div>
     </div>
   )
 }
 
-type MenuItemProps = { href: string; icon: React.ReactNode; isActive: boolean; title: string }
+type MenuItemProps = {
+  comingSoon?: boolean
+  href: string
+  icon: React.ReactNode
+  isActive: boolean
+  title: string
+}
 
-const MenuItem: React.FC<MenuItemProps> = ({ href, icon, isActive, title }) => (
-  <Link className={clsx('flex gap-2 items-center', isActive && 'text-yellow-500')} href={href}>
+const MenuItem: React.FC<MenuItemProps> = ({ comingSoon, href, icon, isActive, title }) => (
+  <Link
+    className={clsx('flex gap-2 items-center', comingSoon && 'cursor-default', isActive && 'text-yellow-500')}
+    href={href}
+  >
     {icon}
-    <span className='text-xl font-medium'>{title}</span>
+    <span className={cn('text-lg font-medium', comingSoon && 'text-grey-200')}>{title}</span>
+    {comingSoon && (
+      <div className='bg-grey-200 rounded-xl p-1.5 flex justify-center items-center text-text-black text-[10px] font-bold'>
+        SOON
+      </div>
+    )}
   </Link>
 )

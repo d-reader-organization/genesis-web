@@ -54,6 +54,7 @@ const config = {
           600: '#cabc41',
         },
         orange: {
+          400: '#F2CA63',
           500: '#e9a860', //main
         },
         red: {
@@ -72,6 +73,7 @@ const config = {
         },
         'important-color': '#fceb54',
         'text-color': '#fafafa',
+        'text-black': '#17191D',
       },
       keyframes: {
         'accordion-down': {
@@ -89,6 +91,7 @@ const config = {
       },
       boxShadow: {
         3: '3px 3px 3px #15171c',
+        'issue-cover': '6px 6px 0px 0px #000',
       },
       gradientColorStopPositions: {
         '36%': '36%',

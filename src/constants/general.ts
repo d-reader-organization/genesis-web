@@ -11,3 +11,6 @@ export const jwtCookieProps: Partial<ResponseCookie> = {
   secure: true,
   maxAge: 100 * 24 * 60 * 60,
 }
+
+export const blurDataUrl =
+  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOUV9LaBAAB8gEfSTtbmAAAAABJRU5ErkJggg=='
