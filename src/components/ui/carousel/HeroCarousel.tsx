@@ -28,7 +28,7 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
 
   return (
     <Carousel
-      className='w-full portrait:h-[60vh] landscape:h-[84vh] max-h-[780px] mt-0 md:mt-24 mb-6'
+      className='w-full portrait:h-[60vh] landscape:h-[84vh] max-h-[780px] mt-0 md:mt-20 mb-6'
       opts={{ loop: true }}
       plugins={[Autoplay({ delay: 5000 })]}
     >
@@ -69,7 +69,7 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
                 </Text>
               </div>
 
-              <div className='absolute left-0 right-0 top-auto bottom-0 -z-[1] h-full opacity-100 w-full bg-transparent bg-gradient-to-b from-transparent from-36 via-[#15171cbf] via-72 to-grey-600 to-100% bg-0-top bg-repeat-x bg-cover' />
+              <div className='absolute left-0 right-0 top-auto bottom-0 -z-[1] h-full opacity-100 w-full bg-transparent bg-gradient-to-b from-transparent to-grey-600 bg-0-top bg-repeat-x bg-cover' />
             </CarouselItem>
           )
         })}

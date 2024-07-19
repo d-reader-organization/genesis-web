@@ -1,17 +1,9 @@
 import { useMemo } from 'react'
-import { comicKeys, COMIC_QUERY_KEYS } from '@/api/comic/comicKeys'
+import { comicKeys } from '@/api/comic/comicKeys'
 import { ComicParams } from '@/models/comic/comicParams'
 import { useToaster } from '@/providers/ToastProvider'
 import { useInfiniteQuery } from 'react-query'
-import { Comic } from '@/models/comic'
-import http from '@/api/http'
-
-const { COMIC, GET } = COMIC_QUERY_KEYS
-
-const fetchComics = async (params: ComicParams): Promise<Comic[]> => {
-  const response = await http.get<Comic[]>(`${COMIC}/${GET}`, { params })
-  return response.data
-}
+import { fetchComics } from '@/app/lib/api/comic/queries'
 
 export const useFetchComics = (params: ComicParams, enabled = true) => {
   const toaster = useToaster()

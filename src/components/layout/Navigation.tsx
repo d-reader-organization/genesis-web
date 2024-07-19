@@ -47,7 +47,7 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
         (isHome || isDiscover) && 'fixed  left-0 right-0'
       )}
     >
-      <div className='gap-4 flex justify-between items-center my-0 mx-auto max-w-[1536px] px-8 pt-8 pb-6 w-full'>
+      <div className='gap-4 flex justify-between items-center my-0 mx-auto max-w-[1536px] px-8 py-4 w-full'>
         <Link href={RoutePath.Home}>
           <FullLogo className='h-8 min-w-fit' />
         </Link>

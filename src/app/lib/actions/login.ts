@@ -7,7 +7,7 @@ import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { fetchWrapper } from '../fetchWrapper'
-import { accessTokenKey, refreshTokenKey } from '@/constants/general'
+import { accessTokenKey, jwtCookieProps, refreshTokenKey } from '@/constants/general'
 import { loginSchema } from '@/constants/schemas'
 
 const { AUTH, USER, LOGIN } = AUTH_QUERY_KEYS
@@ -64,24 +64,11 @@ export const parseAndSetCookieAfterAuth = (data: Authorization): void => {
     value: accessToken,
   })
   setCookie({
-    expiresInDays: 100,
     name: refreshTokenKey,
     value: refreshToken,
   })
 }
 
-export const setCookie = ({
-  expiresInDays = 30,
-  name,
-  value,
-}: {
-  expiresInDays?: number
-  name: string
-  value: string
-}) => {
-  cookies().set(name, value, {
-    httpOnly: true,
-    secure: true,
-    maxAge: expiresInDays * 24 * 60 * 60,
-  })
+export const setCookie = ({ name, value }: { name: string; value: string }) => {
+  cookies().set(name, value, jwtCookieProps)
 }

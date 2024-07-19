@@ -1,7 +1,5 @@
-import { accessTokenKey, baseApiUrl, refreshTokenKey } from '@/constants/general'
+import { accessTokenKey, baseApiUrl, SUCC_RESPONSE_STATUS_CODES } from '@/constants/general'
 import { cookies } from 'next/headers'
-
-export const SUCC_RESPONSE_STATUS_CODES = [200, 201]
 
 const defaultHeaders = {
   Accept: 'application/json',
@@ -48,11 +46,6 @@ export async function fetchWrapper<T>({
     const parsed = await response.json()
 
     if (!SUCC_RESPONSE_STATUS_CODES.includes(response.status)) {
-      const refreshToken = cookies().get(refreshTokenKey)?.value ?? ''
-      if (response.status === 401 && refreshToken) {
-        // refresh token
-      }
-
       const error: { message: string } = parsed
       return {
         data: null,

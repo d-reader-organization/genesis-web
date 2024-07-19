@@ -1,3 +1,5 @@
+'use server'
+
 import { COMIC_QUERY_KEYS } from '@/api/comic/comicKeys'
 import { Comic } from '@/models/comic'
 import { ComicParams } from '@/models/comic/comicParams'

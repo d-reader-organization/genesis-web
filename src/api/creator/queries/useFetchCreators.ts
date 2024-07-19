@@ -1,17 +1,9 @@
 import { useMemo } from 'react'
-import { creatorKeys, CREATOR_QUERY_KEYS } from '@/api/creator/creatorKeys'
+import { creatorKeys } from '@/api/creator/creatorKeys'
 import { useToaster } from '@/providers/ToastProvider'
 import { CreatorParams } from '@/models/creator/creatorParams'
-import { Creator } from '@/models/creator'
 import { useInfiniteQuery } from 'react-query'
-import http from '@/api/http'
-
-const { CREATOR, GET } = CREATOR_QUERY_KEYS
-
-const fetchCreators = async (params: CreatorParams): Promise<Creator[]> => {
-  const response = await http.get<Creator[]>(`${CREATOR}/${GET}`, { params })
-  return response.data
-}
+import { fetchCreators } from '@/app/lib/api/creator/queries'
 
 export const useFetchCreators = (params: CreatorParams, enabled = true) => {
   const toaster = useToaster()

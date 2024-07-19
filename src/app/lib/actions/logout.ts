@@ -1,0 +1,13 @@
+'use server'
+
+import { accessTokenKey, refreshTokenKey } from '@/constants/general'
+import { RoutePath } from '@/enums/routePath'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
+
+export const logoutAction = async () => {
+  const initCookies = cookies()
+  initCookies.delete(accessTokenKey)
+  initCookies.delete(refreshTokenKey)
+  redirect(RoutePath.Login)
+}

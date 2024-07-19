@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { isAuthorized } from './data/auth'
 import { RoutePath } from './enums/routePath'
+import { accessTokenKey, jwtCookieProps, refreshTokenKey } from './constants/general'
+import { refreshTokenCall } from './app/lib/api/auth/queries'
 
 const allowedOrigins = ['https://dial.to']
 
@@ -9,20 +11,25 @@ const corsOptions = {
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 }
 
-export function middleware(request: NextRequest) {
+const redirectToKey = 'redirectTo'
+
+export async function middleware(request: NextRequest) {
   const requestUrlPath = request.nextUrl.pathname
 
   if (authRoutesRegex.test(requestUrlPath)) {
+    const refreshToken = request.cookies.get(refreshTokenKey)?.value ?? ''
     if (!isAuthorized()) {
-      return NextResponse.redirect(new URL(RoutePath.Login, request.url))
+      return await handleUnauthorized({
+        path: requestUrlPath,
+        refreshToken,
+        url: request.url,
+      })
     }
   }
 
-  if (requestUrlPath.includes(RoutePath.Login)) {
-    if (isAuthorized()) {
-      const redirectTo = request.nextUrl.searchParams.get('redirectTo')
-      return NextResponse.redirect(new URL(redirectTo ?? RoutePath.Home, request.url))
-    }
+  if (requestUrlPath.includes(RoutePath.Login) && isAuthorized()) {
+    const redirectTo = request.nextUrl.searchParams.get('redirectTo')
+    return NextResponse.redirect(new URL(redirectTo ?? RoutePath.Home, request.url))
   }
 
   // Check the origin from the request
@@ -59,3 +66,18 @@ export const config = {
 }
 
 const authRoutesRegex = /^\/(comic|comic-issue|discover|profile)(\/.*)?$/
+
+const handleUnauthorized = async ({ path, refreshToken, url }: { path: string; refreshToken: string; url: string }) => {
+  if (refreshToken) {
+    const newToken = await refreshTokenCall(refreshToken)
+
+    if (newToken) {
+      const response = NextResponse.redirect(url)
+      response.cookies.set(accessTokenKey, newToken, jwtCookieProps)
+      return response
+    }
+  }
+  const updatedUrl = new URL(RoutePath.Login, url)
+  updatedUrl.searchParams.append(redirectToKey, path)
+  return NextResponse.redirect(updatedUrl)
+}

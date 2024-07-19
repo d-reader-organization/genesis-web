@@ -3,5 +3,3 @@ export interface RegisterData {
   email: string
   password: string
 }
-
-export interface GoogleRegisterData extends Pick<RegisterData, 'name'> {}
