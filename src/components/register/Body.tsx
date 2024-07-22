@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation'
 import { CreateAccountContent } from './tabs/CreateAccount'
 import { ConnectWalletContent } from './tabs/ConnectWallet'
 import { EmailVerificationContent } from './tabs/EmailVerification'
+import { redirectToKey } from '@/constants/general'
 
 enum TabValue {
   createAccount = 'createAccount',
@@ -28,7 +29,7 @@ const InnerRegisterBody: React.FC = () => {
   const [activeTab, setActiveTab] = React.useState<string>(TabValue.createAccount)
   const searchParams = useSearchParams()
   const isGoogleSignUp = (searchParams.get('sso') ?? '') === 'google'
-  const redirectTo = searchParams.get('redirectTo')
+  const redirectTo = searchParams.get(redirectToKey)
   const tabs = [...defaultTabs, ...(isGoogleSignUp ? [] : [{ label: '03 Verify email', value: TabValue.verifyEmail }])]
 
   return (

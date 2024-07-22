@@ -9,6 +9,7 @@ import { RoutePath } from '@/enums/routePath'
 import dynamic from 'next/dynamic'
 import { WALLET_LABELS } from '@/constants/wallets'
 import Link from 'next/link'
+import { redirectToKey } from '@/constants/general'
 
 type Props = {
   isGoogleSignUp?: boolean
@@ -22,7 +23,7 @@ const BaseWalletMultiButtonDynamic = dynamic(
 
 const ConnectWalletContent: React.FC<Props> = ({ isGoogleSignUp, onSkip }) => {
   const searchParams = useSearchParams()
-  const redirectTo = searchParams.get('redirectTo')
+  const redirectTo = searchParams.get(redirectToKey)
 
   return (
     <main className='container mb-4 md:mb-8 sm:p-0 flex flex-col max-w-sm gap-4'>

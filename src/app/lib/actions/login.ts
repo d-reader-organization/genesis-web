@@ -12,7 +12,11 @@ import { loginSchema } from '@/constants/schemas'
 
 const { AUTH, USER, LOGIN } = AUTH_QUERY_KEYS
 
-export const loginAction = async (prev: AuthFormState | null, formData: FormData): Promise<AuthFormState | null> => {
+export const loginAction = async (
+  redirectTo: string | null,
+  _: AuthFormState | null,
+  formData: FormData
+): Promise<AuthFormState | null> => {
   const parsed = loginSchema.safeParse({
     nameOrEmail: formData.get('nameOrEmail') ?? '',
     password: formData.get('password') ?? '',
@@ -54,7 +58,7 @@ export const loginAction = async (prev: AuthFormState | null, formData: FormData
     }
   }
 
-  redirect(RoutePath.Home)
+  redirect(redirectTo ?? RoutePath.Home)
 }
 
 export const parseAndSetCookieAfterAuth = (data: Authorization): void => {

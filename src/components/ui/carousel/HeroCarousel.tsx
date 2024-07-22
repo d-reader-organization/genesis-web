@@ -48,7 +48,6 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
                   quality={isMobile ? 90 : 100}
                   className={clsx('-z-[1] object-cover max-h-full select-none', !isMobile && 'px-0 py-2 rounded-lg')}
                   priority={index === 0}
-                  fetchPriority={index === 0 ? 'high' : 'low'}
                 />
               )}
               <div className='text-left absolute bottom-[10%] left-[16%] transition-[translateX(-50%)]'>

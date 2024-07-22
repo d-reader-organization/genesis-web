@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { isAuthorized } from './data/auth'
 import { RoutePath } from './enums/routePath'
-import { accessTokenKey, jwtCookieProps, refreshTokenKey } from './constants/general'
+import { accessTokenKey, jwtCookieProps, redirectToKey, refreshTokenKey } from './constants/general'
 import { refreshTokenCall } from './app/lib/api/auth/queries'
 
 const allowedOrigins = ['https://dial.to']
@@ -10,8 +10,6 @@ const corsOptions = {
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 }
-
-const redirectToKey = 'redirectTo'
 
 export async function middleware(request: NextRequest) {
   const requestUrlPath = request.nextUrl.pathname
@@ -28,7 +26,7 @@ export async function middleware(request: NextRequest) {
   }
 
   if (requestUrlPath.includes(RoutePath.Login) && isAuthorized()) {
-    const redirectTo = request.nextUrl.searchParams.get('redirectTo')
+    const redirectTo = request.nextUrl.searchParams.get(redirectToKey)
     return NextResponse.redirect(new URL(redirectTo ?? RoutePath.Home, request.url))
   }
 

@@ -1,9 +1,11 @@
 'use client'
 
 import { Button, Input, Label, toast } from '@/components/ui'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { loginAction } from '@/app/lib/actions/login'
 import { useFormState, useFormStatus } from 'react-dom'
+import { useSearchParams } from 'next/navigation'
+import { redirectToKey } from '@/constants/general'
 
 const SubmitButton: React.FC = () => {
   const { pending } = useFormStatus()
@@ -14,8 +16,10 @@ const SubmitButton: React.FC = () => {
   )
 }
 
-const LoginForm: React.FC = () => {
-  const [state, action] = useFormState(loginAction, null)
+const Form: React.FC = () => {
+  const searchParams = useSearchParams()
+  const redirectTo = searchParams.get(redirectToKey)
+  const [state, action] = useFormState(loginAction.bind(null, redirectTo), null)
   React.useEffect(() => {
     if (state?.error) {
       toast({
@@ -44,4 +48,8 @@ const LoginForm: React.FC = () => {
   )
 }
 
-export { LoginForm }
+export const LoginForm: React.FC = () => (
+  <Suspense>
+    <Form />
+  </Suspense>
+)

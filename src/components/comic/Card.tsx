@@ -25,7 +25,7 @@ export const ComicCard: React.FC<Props> = ({ comic, className, priority, fetchPr
     >
       <Link className='absolute top-0 left-0 w-full h-full' href={nextPage}>
         <Image
-          sizes='1000px'
+          sizes='500px'
           className='-z-[1] object-cover rounded-2xl opacity-1 brightness-[0.7] bg-grey-500 aspect-comic-cover-aspect-ratio group-hover:brightness-100'
           src={comic.cover}
           alt={`cover-${comic.title}`}
@@ -36,7 +36,7 @@ export const ComicCard: React.FC<Props> = ({ comic, className, priority, fetchPr
           blurDataURL={blurDataUrl}
         />
         <Image
-          sizes='450px'
+          sizes='230px'
           className='max-w-[180px] max-h-[80%] object-cover p-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
           src={comic.logo}
           alt={`logo-${comic.title}`}

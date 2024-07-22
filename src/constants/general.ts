@@ -5,6 +5,7 @@ export const accessTokenKey = 'access_token'
 export const refreshTokenKey = 'refresh_token'
 export const googleAccessTokenKey = 'google_access_token'
 export const SUCC_RESPONSE_STATUS_CODES = [200, 201]
+export const redirectToKey = 'redirectTo'
 
 export const jwtCookieProps: Partial<ResponseCookie> = {
   httpOnly: true,

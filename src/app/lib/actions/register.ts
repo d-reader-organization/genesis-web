@@ -12,7 +12,7 @@ import { registerSchema, registerWithGoogleSchema } from '@/constants/schemas'
 
 const { AUTH, USER, REGISTER, REGISTER_WITH_GOOGLE } = AUTH_QUERY_KEYS
 
-const registerAction = async (prev: AuthFormState | null, formData: FormData): Promise<AuthFormState | null> => {
+const registerAction = async (_: AuthFormState | null, formData: FormData): Promise<AuthFormState | null> => {
   const parsed = registerSchema.safeParse({
     name: formData.get('name') ?? '',
     email: formData.get('email') ?? '',

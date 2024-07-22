@@ -23,7 +23,6 @@ export const CreatorItem: React.FC<Props> = ({ creator, className, ...props }) =
         height={60}
         className='z-0 object-cover rounded-full bg-grey-700 w-[60px] h-[60px]'
         src={creator.avatar}
-        loading='eager'
         alt=''
       />
       <div className='flex flex-col py-2 pr-2 pl-1 w-full overflow-hidden'>

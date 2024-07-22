@@ -26,7 +26,6 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, className, ...prop
         sizes='(max-width: 580px) 100vw,(max-width: 900px) 50vw,(max-width: 1200)33vw,25vw'
         className='-z-[1] object-cover rounded-2xl'
         src={comicIssue.cover}
-        loading='eager'
         alt=''
         fill
       />
