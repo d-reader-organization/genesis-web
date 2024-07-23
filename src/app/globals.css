@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('@solana/wallet-adapter-react-ui/styles.css');
 @layer base {
   html {
     scrollbar-color: #c2c5ce #1f222a;

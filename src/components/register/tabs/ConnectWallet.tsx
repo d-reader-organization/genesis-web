@@ -7,7 +7,6 @@ import { Button } from '../../ui/Button'
 import { useSearchParams } from 'next/navigation'
 import { RoutePath } from '@/enums/routePath'
 import dynamic from 'next/dynamic'
-import { WALLET_LABELS } from '@/constants/wallets'
 import Link from 'next/link'
 import { redirectToKey } from '@/constants/general'
 
@@ -17,8 +16,7 @@ type Props = {
 }
 
 const BaseWalletMultiButtonDynamic = dynamic(
-  async () => (await import('@solana/wallet-adapter-react-ui')).BaseWalletMultiButton,
-  { ssr: false }
+  async () => (await import('@/components/shared/buttons/SolanaBaseWalletButton')).SolanaBaseWalletButton
 )
 
 const ConnectWalletContent: React.FC<Props> = ({ isGoogleSignUp, onSkip }) => {
@@ -46,7 +44,7 @@ const ConnectWalletContent: React.FC<Props> = ({ isGoogleSignUp, onSkip }) => {
             Skip
           </Button>
         )}
-        <BaseWalletMultiButtonDynamic labels={WALLET_LABELS} />
+        <BaseWalletMultiButtonDynamic />
       </div>
       <WhyDoINeedAWalletDialog />
     </main>

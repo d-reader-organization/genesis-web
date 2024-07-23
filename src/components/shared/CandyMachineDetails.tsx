@@ -42,7 +42,7 @@ export const CandyMachineDetails: React.FC<{ comicIssue: ComicIssue; isAuthentic
 
   return candyMachine ? (
     <div className='flex flex-col rounded-lg p-4 sm:p-6 bg-grey-500 border border-grey-200 mb-6'>
-      <GroupDetails candyMachine={candyMachine} />
+      <GroupDetails candyMachine={candyMachine} isAuthenticated={isAuthenticated} />
       <UserDetails candyMachine={candyMachine} />
       <ProgressBar className='my-3' value={normalise(candyMachine.itemsMinted, candyMachine.supply)} />
       <ComicVault />
@@ -52,12 +52,12 @@ export const CandyMachineDetails: React.FC<{ comicIssue: ComicIssue; isAuthentic
   ) : null
 }
 
-const GroupDetails: React.FC<Props> = ({ candyMachine }) => {
+const GroupDetails: React.FC<Props & { isAuthenticated: boolean }> = ({ candyMachine, isAuthenticated }) => {
   const { startDate, endDate, mintPrice } = candyMachine.groups.at(0) as CandyMachineGroupWithSource
   const isLive = new Date(startDate) <= new Date() && new Date(endDate) > new Date()
   const isEnded = new Date() > new Date(endDate)
   const countdownString = '' // TODO
-  const highlightDiscount = false // isAuthenticated && candyMachine.discount
+  const highlightDiscount = isAuthenticated && candyMachine.discount
   return (
     <div className='flex justify-between w-full'>
       <div className='font-bold'>

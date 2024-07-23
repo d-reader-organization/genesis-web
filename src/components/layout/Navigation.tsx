@@ -13,13 +13,11 @@ import MarketplaceIcon from 'public/assets/vector-icons/marketplace.svg'
 import { Input } from '../ui'
 import Link from 'next/link'
 import clsx from 'clsx'
-import { WALLET_LABELS } from '@/constants/wallets'
 import dynamic from 'next/dynamic'
 import { cn } from '@/lib/utils'
 
 const BaseWalletMultiButtonDynamic = dynamic(
-  async () => (await import('@solana/wallet-adapter-react-ui')).BaseWalletMultiButton,
-  { ssr: false }
+  async () => (await import('@/components/shared/buttons/SolanaBaseWalletButton')).SolanaBaseWalletButton
 )
 
 type Props = {
@@ -63,7 +61,7 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
           <MenuItem href={RoutePath.DiscoverComics} icon={<DiscoverIcon />} isActive={isDiscover} title='Discover' />
           <MenuItem comingSoon href='' isActive={false} icon={<MarketplaceIcon />} title='Marketplace' />
           <MenuItem href={RoutePath.Library} isActive={isLibrary} icon={<LibraryIcon />} title='Library' />
-          <BaseWalletMultiButtonDynamic style={{ fontSize: '17px' }} labels={WALLET_LABELS} />
+          <BaseWalletMultiButtonDynamic style={{ fontSize: '17px' }} />
         </div>
       </div>
     </div>

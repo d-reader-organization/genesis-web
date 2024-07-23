@@ -8,7 +8,6 @@ import React, { useEffect, useState } from 'react'
 import { Button } from '../../ui/Button'
 import dynamic from 'next/dynamic'
 import { Loader } from '../Loader'
-import { WALLET_LABELS } from '@/constants/wallets'
 import { AssetMintedDialog } from '../dialogs/AssetMintedDialog'
 import { ComicIssue } from '@/models/comicIssue'
 // import { EmailVerificationDialog } from './dialogs/EmailVerificationDialog'
@@ -30,8 +29,7 @@ type Props = {
 }
 
 const BaseWalletMultiButtonDynamic = dynamic(
-  async () => (await import('@solana/wallet-adapter-react-ui')).BaseWalletMultiButton,
-  { ssr: false }
+  async () => (await import('@/components/shared/buttons/SolanaBaseWalletButton')).SolanaBaseWalletButton
 )
 
 export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthenticated }) => {
@@ -104,14 +102,15 @@ export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthen
 
         const latestBlockhash = await connection.getLatestBlockhash()
         const response = await connection.confirmTransaction({ signature, ...latestBlockhash }, 'confirmed')
+        toggleConfirmingTransaction()
         if (!!response.value.err) {
           console.log('Response error log: ', response.value.err)
           throw new Error()
         }
-        toggleConfirmingTransaction()
         toggleAssetMinted()
         toast({ description: 'Successfully minted the comic! Find the asset in your wallet', variant: 'success' })
       } catch (e) {
+        toggleConfirmingTransaction()
         console.log('error: ', e)
         if (signedTransactions.length === 2 && i === 0) {
           toast({
@@ -142,7 +141,7 @@ export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthen
           </>
         )
       ) : (
-        <BaseWalletMultiButtonDynamic labels={WALLET_LABELS} style={{ width: '100%' }} />
+        <BaseWalletMultiButtonDynamic style={{ width: '100%' }} />
       )}
       <AssetMintedDialog
         assetAddress={assetAddress}
