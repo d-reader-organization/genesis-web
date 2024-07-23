@@ -1,5 +1,3 @@
-export * from './useCreateComic'
-export * from './useDeleteComic'
 export * from './useFavouritiseComic'
 export * from './useFetchComic'
 export * from './useFetchComics'

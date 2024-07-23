@@ -2,7 +2,6 @@
 
 import React, { useMemo, createContext, useContext, useState, useCallback, useEffect } from 'react'
 import { Authorization, JwtPayload, UserPayload, emptyUserPayload } from '@/models/auth'
-import { refreshUserToken } from '@/api/auth/queries/useRefreshUserToken'
 import http, { addAuthHeaders, removeAuthHeaders } from '@/api/http'
 import {
   defaultAuthorization,
@@ -17,6 +16,7 @@ import { parseJwtPayload } from '@/utils/objects'
 import { isNil } from 'lodash'
 import axios from 'axios'
 import { signOut } from 'next-auth/react'
+import { refreshTokenCall } from '@/app/lib/api/auth/queries'
 
 interface UserAuthContextState {
   isAuthenticated: boolean
@@ -69,7 +69,7 @@ export const UserAuthProvider: React.FC<Props> = ({ children }) => {
   const refreshAuthorization = useCallback(
     async (refreshToken: string) => {
       try {
-        const accessToken = await refreshUserToken(refreshToken)
+        const accessToken = await refreshTokenCall(refreshToken)
         addAuthorization({ accessToken, refreshToken })
         return accessToken
       } catch {
