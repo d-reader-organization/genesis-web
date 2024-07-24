@@ -6,12 +6,13 @@ import { loginAction } from '@/app/lib/actions/login'
 import { useFormState, useFormStatus } from 'react-dom'
 import { useSearchParams } from 'next/navigation'
 import { redirectToKey } from '@/constants/general'
+import { Loader } from '../shared/Loader'
 
 const SubmitButton: React.FC = () => {
   const { pending } = useFormStatus()
   return (
     <Button className='w-full' type='submit' aria-disabled={pending}>
-      Login
+      {pending ? <Loader /> : <p>Login</p>}
     </Button>
   )
 }

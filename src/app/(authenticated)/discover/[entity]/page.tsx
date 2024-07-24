@@ -8,7 +8,9 @@ function DiscoverPage({ params }: { params: Params }) {
   return (
     <>
       <Navigation />
-      <div>Discover {params.entity}</div>
+      <main className='pt-24 flex flex-col justify-center'>
+        <p>Discover {params.entity}</p>
+      </main>
     </>
   )
 }

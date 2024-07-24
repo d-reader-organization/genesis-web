@@ -10,6 +10,7 @@
     @apply text-white;
     @apply bg-grey-600;
     @apply mb-16 md:mb-0;
+    overflow-y: scroll;
   }
   svg {
     height: 24px;
@@ -17,8 +18,7 @@
 
   /* Scroll bar stylings */
   ::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+    @apply size-1;
   }
 
   ::-webkit-scrollbar-thumb {

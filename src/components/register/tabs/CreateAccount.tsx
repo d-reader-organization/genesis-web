@@ -14,6 +14,7 @@ import Link from 'next/link'
 import { RoutePath } from '@/enums/routePath'
 import { TermsOfServiceAndPrivacyPolicy } from '../../shared/TermsOfServiceAndPrivacyText'
 import { useToast } from '../../ui/toast/use-toast'
+import { Loader } from '@/components/shared/Loader'
 
 type Props = { isGoogleSignUp?: boolean; onSuccess: () => void }
 
@@ -45,7 +46,7 @@ const RegisterButton: React.FC = () => {
   const { pending } = useFormStatus()
   return (
     <Button className='w-full' type='submit' aria-disabled={pending}>
-      Register
+      {pending ? <Loader /> : <p>Register</p>}
     </Button>
   )
 }
