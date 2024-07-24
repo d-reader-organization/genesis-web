@@ -14,7 +14,6 @@ type Props = {
   onClose: () => void
 }
 
-// TODO use server action for reset password
 const ForgotPasswordForm: React.FC<Props> = ({ onClose }) => {
   const { mutateAsync: requestPasswordReset } = useRequestUserPasswordReset()
   const form = useForm<z.infer<typeof resetPasswordSchema>>({

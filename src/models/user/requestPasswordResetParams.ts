@@ -1,3 +1,3 @@
-export interface RequestPasswordResetParams {
+export type RequestPasswordResetParams = {
   nameOrEmail: string
 }

@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { isAuthorized } from './data/auth'
 import { RoutePath } from './enums/routePath'
 import { accessTokenKey, jwtCookieProps, redirectToKey, refreshTokenKey } from './constants/general'
 import { refreshTokenCall } from './app/lib/api/auth/queries'
+import { isAuthenticatedUser } from './app/lib/auth'
 
 const allowedOrigins = ['https://dial.to']
 
@@ -16,7 +16,7 @@ export async function middleware(request: NextRequest) {
 
   if (authRoutesRegex.test(requestUrlPath)) {
     const refreshToken = request.cookies.get(refreshTokenKey)?.value ?? ''
-    if (!isAuthorized()) {
+    if (!isAuthenticatedUser()) {
       return await handleUnauthorized({
         path: requestUrlPath,
         refreshToken,
@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  if (requestUrlPath.includes(RoutePath.Login) && isAuthorized()) {
+  if (requestUrlPath.includes(RoutePath.Login) && isAuthenticatedUser()) {
     const redirectTo = request.nextUrl.searchParams.get(redirectToKey)
     return NextResponse.redirect(new URL(redirectTo ?? RoutePath.Home, request.url))
   }
