@@ -1,9 +1,9 @@
 import { transactionKeys, TRANSACTION_QUERY_KEYS } from '@/api/transaction/transactionKeys'
-import { useToaster } from '@/providers/ToastProvider'
+import { onQueryError } from '@/components/ui/toast/use-toast'
 import { MintParams } from '@/models/transaction/mint'
 import { versionedTransactionFromBs64 } from '@/utils/transactions'
 import { VersionedTransaction } from '@solana/web3.js'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import http from '@/api/http'
 
 const { TRANSACTION, MINT } = TRANSACTION_QUERY_KEYS
@@ -15,13 +15,11 @@ const fetchMintTransaction = async (params: MintParams): Promise<VersionedTransa
 }
 
 export const useFetchMintTransaction = (params: MintParams) => {
-  const toaster = useToaster()
-
   return useQuery({
     queryFn: () => fetchMintTransaction(params),
     queryKey: transactionKeys.mint(params),
     staleTime: 1000 * 60 * 10, // stale for 10 minutes
     enabled: !!params.candyMachineAddress && !!params.minterAddress && !!params.label,
-    onError: toaster.onQueryError,
+    throwOnError: onQueryError,
   })
 }

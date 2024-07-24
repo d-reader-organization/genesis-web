@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
 import { comicIssueKeys } from '@/api/comicIssue/comicIssueKeys'
-import { useToaster } from '@/providers/ToastProvider'
 import { ComicIssueParams } from '@/models/comicIssue/comicIssueParams'
-import { useInfiniteQuery } from 'react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { fetchComicIssues } from '@/app/lib/api/comicIssue/queries'
+import { onQueryError } from '@/components/ui/toast/use-toast'
 
 type Input = {
   enabled?: boolean
@@ -11,9 +11,8 @@ type Input = {
 }
 
 export const useFetchComicIssues = ({ enabled = true, params }: Input) => {
-  const toaster = useToaster()
-
   const infiniteQuery = useInfiniteQuery({
+    initialPageParam: 0,
     queryKey: comicIssueKeys.getMany(params),
     queryFn: ({ pageParam = 0 }) => fetchComicIssues({ ...params, skip: pageParam * params.take }),
     getNextPageParam: (lastPage, allPages) => {
@@ -21,7 +20,7 @@ export const useFetchComicIssues = ({ enabled = true, params }: Input) => {
     },
     staleTime: 1000 * 60 * 60 * 1, // stale for 1 hour
     enabled: enabled && !!params.take,
-    onError: toaster.onQueryError,
+    throwOnError: onQueryError,
   })
 
   const { data } = infiniteQuery

@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { TwitterIntentComicMintedParams } from '@/models/twitter/twitterIntentComicMintedParams'
 import { twitterKeys } from '@/api/twitter/twitterKeys'
 import { fetchTwitterIntentComicMinted } from '@/app/lib/api/twitter/queries'

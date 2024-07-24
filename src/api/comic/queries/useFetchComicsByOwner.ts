@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
 import { comicKeys, COMIC_QUERY_KEYS } from '@/api/comic/comicKeys'
 import { ComicParams } from '@/models/comic/comicParams'
-import { useToaster } from '@/providers/ToastProvider'
-import { useInfiniteQuery } from 'react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { Comic } from '@/models/comic'
 import http from '@/api/http'
+import { onQueryError } from '@/components/ui/toast/use-toast'
 
 const { COMIC, GET, BY_OWNER } = COMIC_QUERY_KEYS
 
@@ -14,9 +14,8 @@ const fetchComicsByOwner = async (params: ComicParams, userId: number): Promise<
 }
 
 export const useFetchComicsByOwner = (params: ComicParams, userId: number, enabled = true) => {
-  const toaster = useToaster()
-
   const infiniteQuery = useInfiniteQuery({
+    initialPageParam: 0,
     queryKey: comicKeys.getMany(params),
     queryFn: ({ pageParam = 0 }) => fetchComicsByOwner({ ...params, skip: pageParam * params.take }, userId),
     getNextPageParam: (lastPage, allPages) => {
@@ -24,7 +23,7 @@ export const useFetchComicsByOwner = (params: ComicParams, userId: number, enabl
     },
     staleTime: 1000 * 60 * 60 * 1, // stale for 1 hour
     enabled: enabled && !!params.take,
-    onError: toaster.onQueryError,
+    throwOnError: onQueryError,
   })
 
   const { data } = infiniteQuery

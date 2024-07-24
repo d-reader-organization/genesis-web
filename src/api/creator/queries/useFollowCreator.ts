@@ -1,7 +1,8 @@
-import { CREATOR_QUERY_KEYS, creatorKeys } from '@/api/creator/creatorKeys'
-import { useToaster } from '@/providers/ToastProvider'
-import { useMutation, useQueryClient } from 'react-query'
+import { CREATOR_QUERY_KEYS } from '@/api/creator/creatorKeys'
+import { useMutation } from '@tanstack/react-query'
 import http from '@/api/http'
+import { onQueryError, toast } from '@/components/ui/toast/use-toast'
+import { useRouter } from 'next/navigation'
 
 const { CREATOR, FOLLOW } = CREATOR_QUERY_KEYS
 
@@ -11,25 +12,17 @@ const followCreator = async (slug: string): Promise<void> => {
 }
 
 export const useFollowCreator = (slug: string) => {
-  const toaster = useToaster()
-  const queryClient = useQueryClient()
+  const { refresh } = useRouter()
 
   return useMutation({
     mutationFn: () => followCreator(slug),
     onSuccess: () => {
-      toaster.add('Creator followed!', 'success')
-      queryClient.invalidateQueries(creatorKeys.get(slug))
-      // queryClient.invalidateQueries([CREATOR_QUERY_KEYS.CREATOR, CREATOR_QUERY_KEYS.GET])
-      queryClient.invalidateQueries({
-        predicate: (query) => {
-          return (
-            query.queryKey[0] === CREATOR_QUERY_KEYS.CREATOR &&
-            query.queryKey[1] === CREATOR_QUERY_KEYS.GET &&
-            query.queryKey[2] !== CREATOR_QUERY_KEYS.ME // no need to invalidate /me endpoint
-          )
-        },
+      toast({
+        description: 'Creator followed!',
+        variant: 'success',
       })
+      refresh()
     },
-    onError: toaster.onQueryError,
+    throwOnError: onQueryError,
   })
 }

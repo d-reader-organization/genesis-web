@@ -1,14 +1,13 @@
 import { useMemo } from 'react'
 import { creatorKeys } from '@/api/creator/creatorKeys'
-import { useToaster } from '@/providers/ToastProvider'
 import { CreatorParams } from '@/models/creator/creatorParams'
-import { useInfiniteQuery } from 'react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { fetchCreators } from '@/app/lib/api/creator/queries'
+import { onQueryError } from '@/components/ui'
 
 export const useFetchCreators = (params: CreatorParams, enabled = true) => {
-  const toaster = useToaster()
-
   const infiniteQuery = useInfiniteQuery({
+    initialPageParam: 0,
     queryKey: creatorKeys.getMany(params),
     queryFn: ({ pageParam = 0 }) => fetchCreators({ ...params, skip: pageParam * params.take }),
     getNextPageParam: (lastPage, allPages) => {
@@ -16,7 +15,7 @@ export const useFetchCreators = (params: CreatorParams, enabled = true) => {
     },
     staleTime: 1000 * 60 * 60 * 1, // stale for 1 hour
     enabled: enabled && !!params.take,
-    onError: toaster.onQueryError,
+    throwOnError: onQueryError,
   })
 
   const { data } = infiniteQuery

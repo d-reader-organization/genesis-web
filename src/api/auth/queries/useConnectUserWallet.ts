@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import { connectUserWallet } from '@/app/lib/api/auth/mutations'
 import { toast } from '@/components/ui'
 import { useRouter } from 'next/navigation'

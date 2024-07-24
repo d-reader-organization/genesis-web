@@ -1,6 +1,6 @@
 import { USER_QUERY_KEYS } from '@/api/user/userKeys'
-import { useToaster } from '@/providers/ToastProvider'
-import { useMutation } from 'react-query'
+import { onQueryError, toast } from '@/components/ui/toast/use-toast'
+import { useMutation } from '@tanstack/react-query'
 import http from '@/api/http'
 import { ReuqestEmailChangeParams } from '@/models/user/requestEmailChangeParams'
 
@@ -12,13 +12,14 @@ const requestUserEmailChange = async (data: ReuqestEmailChangeParams): Promise<v
 }
 
 export const useRequestUserEmailChange = () => {
-  const toaster = useToaster()
-
   return useMutation({
     mutationFn: (data: ReuqestEmailChangeParams) => requestUserEmailChange(data),
     onSuccess: () => {
-      toaster.add('Verification mail sent to your new email address. Check your inbox!', 'success')
+      toast({
+        description: 'Verification mail sent to your new email address. Check your inbox!',
+        variant: 'success',
+      })
     },
-    onError: toaster.onQueryError,
+    throwOnError: onQueryError,
   })
 }

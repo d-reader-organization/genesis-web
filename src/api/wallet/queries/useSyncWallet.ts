@@ -1,6 +1,6 @@
 import { walletKeys, WALLET_QUERY_KEYS } from '@/api/wallet/walletKeys'
-import { useToaster } from '@/providers/ToastProvider'
-import { useQuery, useQueryClient } from 'react-query'
+import { onQueryError } from '@/components/ui/toast/use-toast'
+import { useQuery } from '@tanstack/react-query'
 import http from '@/api/http'
 
 const { WALLET, SYNC } = WALLET_QUERY_KEYS
@@ -11,17 +11,11 @@ const syncWallet = async (address: string): Promise<void> => {
 }
 
 export const useSyncWallet = (address: string) => {
-  const toaster = useToaster()
-  const queryClient = useQueryClient()
-
   return useQuery({
     queryFn: () => syncWallet(address),
     queryKey: walletKeys.get(address),
     staleTime: Infinity, // never becomes stale
-    onSuccess: () => {
-      toaster.add('Wallet synced!', 'success')
-      queryClient.invalidateQueries(walletKeys.getAssets(address))
-    },
-    onError: toaster.onQueryError,
+
+    throwOnError: onQueryError,
   })
 }

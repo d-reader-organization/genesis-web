@@ -1,9 +1,9 @@
 import { transactionKeys, TRANSACTION_QUERY_KEYS } from '@/api/transaction/transactionKeys'
-import { useToaster } from '@/providers/ToastProvider'
+import { onQueryError } from '@/components/ui/toast/use-toast'
 import { PrivateBidParams } from '@/models/transaction/privateBid'
 import { decodeTransaction } from '@/utils/transactions'
 import { Transaction } from '@solana/web3.js'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import http from '@/api/http'
 
 const { TRANSACTION, PRIVATE_BID } = TRANSACTION_QUERY_KEYS
@@ -14,12 +14,10 @@ const fetchPrivateBidTransaction = async (params: PrivateBidParams): Promise<Tra
 }
 
 export const useFetchPrivateBidTransaction = (params: PrivateBidParams) => {
-  const toaster = useToaster()
-
   return useQuery({
     queryFn: () => fetchPrivateBidTransaction(params),
     queryKey: transactionKeys.privateBid(params),
     staleTime: 1000 * 60 * 10, // stale for 10 minutes
-    onError: toaster.onQueryError,
+    throwOnError: onQueryError,
   })
 }

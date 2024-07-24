@@ -15,7 +15,6 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 export const ComicCard: React.FC<Props> = ({ comic, className, priority, fetchPriority }) => {
   const nextPage = RoutePath.Comic(comic.slug)
 
-  // TODO skeleton
   return (
     <div
       className={clsx(

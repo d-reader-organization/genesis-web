@@ -166,6 +166,23 @@ function toast({ ...props }: Toast) {
   }
 }
 
+function uploadingFiles() {
+  toast({
+    description: 'Uploading file(s)',
+    variant: 'default',
+    open: true,
+  })
+}
+
+function onQueryError(error: Error): boolean {
+  const errorMessage = error.message
+  toast({
+    description: errorMessage,
+    variant: 'error',
+  })
+  return false
+}
+
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState)
 
@@ -186,4 +203,4 @@ function useToast() {
   }
 }
 
-export { useToast, toast }
+export { useToast, toast, onQueryError, uploadingFiles }

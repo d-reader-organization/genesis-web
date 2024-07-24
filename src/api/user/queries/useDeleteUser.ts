@@ -1,7 +1,8 @@
 import { USER_QUERY_KEYS } from '@/api/user/userKeys'
-import { useToaster } from '@/providers/ToastProvider'
-import { useMutation, useQueryClient } from 'react-query'
+import { onQueryError, toast } from '@/components/ui/toast/use-toast'
+import { useMutation } from '@tanstack/react-query'
 import http from '@/api/http'
+import { useRouter } from 'next/navigation'
 
 const { USER, DELETE } = USER_QUERY_KEYS
 
@@ -11,15 +12,17 @@ const deleteUser = async (slug: string): Promise<void> => {
 }
 
 export const useDeleteUser = (slug: string) => {
-  const toaster = useToaster()
-  const queryClient = useQueryClient()
+  const { refresh } = useRouter()
 
   return useMutation({
     mutationFn: () => deleteUser(slug),
     onSuccess: () => {
-      toaster.add('Account deleted!', 'success')
-      queryClient.invalidateQueries([USER_QUERY_KEYS.USER, USER_QUERY_KEYS.GET])
+      toast({
+        description: 'Account deleted!',
+        variant: 'success',
+      })
+      refresh()
     },
-    onError: toaster.onQueryError,
+    throwOnError: onQueryError,
   })
 }

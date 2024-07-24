@@ -1,7 +1,7 @@
 import { USER_QUERY_KEYS } from '@/api/user/userKeys'
-import { useToaster } from '@/providers/ToastProvider'
+import { onQueryError, toast } from '@/components/ui/toast/use-toast'
 import { UpdatePasswordData } from '@/models/auth/updatePassword'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import http from '@/api/http'
 
 const { USER, UPDATE_PASSWORD } = USER_QUERY_KEYS
@@ -12,13 +12,14 @@ const updateUserPassword = async (id: string | number, request: UpdatePasswordDa
 }
 
 export const useUpdateUserPassword = (id: string | number) => {
-  const toaster = useToaster()
-
   return useMutation({
     mutationFn: (updateData: UpdatePasswordData) => updateUserPassword(id, updateData),
     onSuccess: () => {
-      toaster.add('Password updated!', 'success')
+      toast({
+        description: 'Password updated!',
+        variant: 'success',
+      })
     },
-    onError: toaster.onQueryError,
+    throwOnError: onQueryError,
   })
 }

@@ -1,9 +1,9 @@
 import { transactionKeys, TRANSACTION_QUERY_KEYS } from '@/api/transaction/transactionKeys'
-import { useToaster } from '@/providers/ToastProvider'
+import { onQueryError } from '@/components/ui/toast/use-toast'
 import { SignComicParams } from '@/models/transaction/signComic'
 import { decodeTransaction } from '@/utils/transactions'
 import { Transaction } from '@solana/web3.js'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import http from '@/api/http'
 
 const { TRANSACTION, SIGN_COMIC } = TRANSACTION_QUERY_KEYS
@@ -14,12 +14,10 @@ const fetchSignComicTransaction = async (params: SignComicParams): Promise<Trans
 }
 
 export const useFetchSignComicTransaction = (params: SignComicParams) => {
-  const toaster = useToaster()
-
   return useQuery({
     queryFn: () => fetchSignComicTransaction(params),
     queryKey: transactionKeys.signComic(params),
     staleTime: 1000 * 60 * 10, // stale for 10 minutes
-    onError: toaster.onQueryError,
+    throwOnError: onQueryError,
   })
 }

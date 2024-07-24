@@ -1,8 +1,8 @@
 import { USER_QUERY_KEYS } from '@/api/user/userKeys'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import { RequestPasswordResetParams } from '@/models/user/requestPasswordResetParams'
 import http from '@/api/http'
-import { useToast } from '@/components/ui'
+import { onQueryError, useToast } from '@/components/ui'
 
 const { USER, REQUEST_PASSWORD_RESET } = USER_QUERY_KEYS
 
@@ -21,12 +21,6 @@ export const useRequestUserPasswordReset = () => {
         title: 'Password reset instructions sent to your inbox!',
       })
     },
-    onError: () => {
-      // TODO create new toast global provider
-      toaster.toast({
-        title: 'Error',
-        className: 'bg-red-500',
-      })
-    },
+    onError: onQueryError,
   })
 }
