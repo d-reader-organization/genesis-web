@@ -7,6 +7,6 @@ const BaseWalletMultiButtonDynamic = dynamic(
   async () => (await import('@solana/wallet-adapter-react-ui')).BaseWalletMultiButton
 )
 
-export const SolanaBaseWalletButton: React.FC<React.HTMLAttributes<HTMLButtonElement>> = () => (
-  <BaseWalletMultiButtonDynamic labels={WALLET_LABELS} />
+export const SolanaBaseWalletButton: React.FC<React.HTMLAttributes<HTMLButtonElement>> = (props) => (
+  <BaseWalletMultiButtonDynamic labels={WALLET_LABELS} {...props} />
 )

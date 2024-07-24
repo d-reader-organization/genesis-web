@@ -18,10 +18,11 @@ export default async function MintPage({ params }: ComicIssuePageParams) {
     <>
       <Navigation paramId={params.id} />
       <BackgroundImageWithGradient image={comicIssue.cover}>
-        <div className='px-4 md:px-8 max-w-screen-xl flex max-md:flex-col max-md:items-center justify-center items-start gap-8 max-md:mb-20'>
+        <div className='px-4 md:px-8 max-w-screen-xl flex max-md:flex-col max-md:items-center justify-center items-start gap-8 mb-20'>
           <Image
             className='rounded-2xl shadow-issue-cover'
             src={comicIssue.cover}
+            sizes='(max-width: 1080px) 250px'
             width={354}
             height={514}
             alt='issue-cover'
