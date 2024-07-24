@@ -13,7 +13,7 @@ import React from 'react'
 export default async function MintPage({ params }: ComicIssuePageParams) {
   const comicIssue = await fetchPublicComicIssue(params.id)
   if (!comicIssue) return null
-
+  const isAuthenticated = isAuthenticatedUser()
   return (
     <>
       <Navigation paramId={params.id} />
@@ -29,8 +29,8 @@ export default async function MintPage({ params }: ComicIssuePageParams) {
           <div className='flex flex-col gap-4 w-full max-w-sm md:max-w-2xl'>
             <MintComicInfo comicIssue={comicIssue} />
             <MintComicTitle title={comicIssue.title} />
-            <MintTabs comicIssue={comicIssue} isAuthenticated={isAuthenticatedUser()} />
-            <SignUpBanner comicIssueId={params.id} />
+            <MintTabs comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
+            {isAuthenticated ? null : <SignUpBanner comicIssueId={params.id} />}
           </div>
         </div>
       </BackgroundImageWithGradient>
