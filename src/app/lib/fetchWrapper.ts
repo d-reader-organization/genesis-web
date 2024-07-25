@@ -7,11 +7,15 @@ const defaultHeaders = {
   'Content-Type': 'application/json',
 }
 
-const generateQueryParams = (params: Record<string, unknown>) =>
-  Object.entries(params).reduce((prev, [key, value]) => {
-    const current = `${key}=${value}`
-    return prev.length ? `${prev}&${current}` : current
-  }, '')
+type ParamsType = Record<string, unknown> | Array<Record<string, unknown>>
+
+const generateQueryParams = (params: ParamsType) =>
+  Array.isArray(params)
+    ? '' // TODO HANDLE ARRAY PARAMS
+    : Object.entries(params).reduce((prev, [key, value]) => {
+        const current = `${key}=${value}`
+        return prev.length ? `${prev}&${current}` : current
+      }, '')
 
 export async function fetchWrapper<T>({
   body,
@@ -24,7 +28,7 @@ export async function fetchWrapper<T>({
   headers?: HeadersInit
   method?: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTIONS'
   path?: string
-  params?: Record<string, unknown>
+  params?: ParamsType
 }): Promise<{
   data: T | null
   errorMessage?: string

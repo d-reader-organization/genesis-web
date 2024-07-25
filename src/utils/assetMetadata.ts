@@ -2,7 +2,6 @@ import { JsonMetadata } from '@metaplex-foundation/js'
 import { RARITY_TRAIT, SIGNED_TRAIT, USED_TRAIT } from '../constants/metadata'
 import { ComicRarity } from '@/enums/comicRarity'
 import { isNil } from 'lodash'
-import axios from 'axios'
 
 const findTrait = (jsonMetadata: JsonMetadata, traitType: string) => {
   const trait = jsonMetadata.attributes?.find((a) => a.trait_type === traitType)
@@ -21,5 +20,5 @@ export const findRarityTrait = (jsonMetadata: JsonMetadata): ComicRarity | undef
 }
 
 export const fetchOffChainMetadata = async (uri: string) => {
-  return (await axios.get<JsonMetadata>(uri)).data
+  return (await fetch(uri)).json()
 }

@@ -1,15 +1,7 @@
-import { USER_QUERY_KEYS } from '@/api/user/userKeys'
 import { onQueryError, toast } from '@/components/ui/toast/use-toast'
 import { useMutation } from '@tanstack/react-query'
-import http from '@/api/http'
 import { useRouter } from 'next/navigation'
-
-const { USER, DELETE } = USER_QUERY_KEYS
-
-const deleteUser = async (slug: string): Promise<void> => {
-  const response = await http.patch<void>(`${USER}/${DELETE}/${slug}`)
-  return response.data
-}
+import { deleteUser } from '@/app/lib/api/user/mutations'
 
 export const useDeleteUser = (slug: string) => {
   const { refresh } = useRouter()

@@ -1,4 +1,4 @@
-export interface CancelListingParams {
+export type CancelListingParams = {
   assetAddress: string
   receiptAddress?: string
 }

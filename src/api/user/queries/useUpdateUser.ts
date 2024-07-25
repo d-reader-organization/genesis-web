@@ -1,16 +1,8 @@
-import { USER_QUERY_KEYS } from '@/api/user/userKeys'
 import { onQueryError, toast } from '@/components/ui/toast/use-toast'
-import { User, UpdateUserData } from '@/models/user'
+import { UpdateUserData } from '@/models/user'
 import { useMutation } from '@tanstack/react-query'
-import http from '@/api/http'
 import { useRouter } from 'next/navigation'
-
-const { USER, UPDATE } = USER_QUERY_KEYS
-
-const updateUser = async (id: string | number, request: UpdateUserData): Promise<User> => {
-  const response = await http.patch<User>(`${USER}/${UPDATE}/${id}`, request)
-  return response.data
-}
+import { updateUser } from '@/app/lib/api/user/mutations'
 
 export const useUpdateUser = (id: string | number) => {
   const { refresh } = useRouter()

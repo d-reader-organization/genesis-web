@@ -4,13 +4,13 @@ import { CancelBidParams } from '@/models/transaction/cancelBid'
 import { decodeTransaction } from '@/utils/transactions'
 import { Transaction } from '@solana/web3.js'
 import { useQuery } from '@tanstack/react-query'
-import http from '@/api/http'
+import { fetchWrapper } from '@/app/lib/fetchWrapper'
 
 const { TRANSACTION, CANCEL_BID } = TRANSACTION_QUERY_KEYS
 
 const fetchCancelBidTransaction = async (params: CancelBidParams): Promise<Transaction> => {
-  const response = await http.get<string>(`${TRANSACTION}/${CANCEL_BID}`, { params })
-  return decodeTransaction(response.data, 'base64')
+  const response = await fetchWrapper<string>({ path: `${TRANSACTION}/${CANCEL_BID}`, params })
+  return decodeTransaction(response.data ?? '', 'base64')
 }
 
 export const useFetchCancelBidTransaction = (params: CancelBidParams) => {

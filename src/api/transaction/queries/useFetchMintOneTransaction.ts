@@ -4,14 +4,14 @@ import { MintOneParams } from '@/models/transaction/mintOne'
 import { versionedTransactionFromBs64 } from '@/utils/transactions'
 import { VersionedTransaction } from '@solana/web3.js'
 import { useQuery } from '@tanstack/react-query'
-import http from '@/api/http'
+import { fetchWrapper } from '@/app/lib/fetchWrapper'
 
 const { TRANSACTION, MINT_ONE } = TRANSACTION_QUERY_KEYS
 
 /** @deprecated */
 const fetchMintOneTransaction = async (params: MintOneParams): Promise<VersionedTransaction[]> => {
-  const response = await http.get<string[]>(`${TRANSACTION}/${MINT_ONE}`, { params })
-  return response.data.map(versionedTransactionFromBs64)
+  const response = await fetchWrapper<string[]>({ path: `${TRANSACTION}/${MINT_ONE}`, params })
+  return response.data?.map(versionedTransactionFromBs64) ?? []
 }
 
 export const useFetchMintOneTransaction = (params: MintOneParams, enabled?: boolean) => {

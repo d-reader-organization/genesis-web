@@ -2,14 +2,14 @@ import { genreKeys, GENRE_QUERY_KEYS } from '@/api/genre/genreKeys'
 import { Pagination } from '@/models/pagination'
 import { useQuery } from '@tanstack/react-query'
 import { Genre } from '@/models/genre'
-import http from '@/api/http'
+import { fetchWrapper } from '@/app/lib/fetchWrapper'
 import { onQueryError } from '@/components/ui/toast/use-toast'
 
 const { GENRE, GET } = GENRE_QUERY_KEYS
 
 const fetchGenres = async (params?: Pagination): Promise<Genre[]> => {
-  const response = await http.get<Genre[]>(`${GENRE}/${GET}`, { params })
-  return response.data
+  const response = await fetchWrapper<Genre[]>({ path: `${GENRE}/${GET}`, params })
+  return response.data ?? []
 }
 
 export const useFetchGenres = (params?: Pagination) => {

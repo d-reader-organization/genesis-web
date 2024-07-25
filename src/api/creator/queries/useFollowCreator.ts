@@ -1,14 +1,13 @@
 import { CREATOR_QUERY_KEYS } from '@/api/creator/creatorKeys'
 import { useMutation } from '@tanstack/react-query'
-import http from '@/api/http'
+import { fetchWrapper } from '@/app/lib/fetchWrapper'
 import { onQueryError, toast } from '@/components/ui/toast/use-toast'
 import { useRouter } from 'next/navigation'
 
 const { CREATOR, FOLLOW } = CREATOR_QUERY_KEYS
 
 const followCreator = async (slug: string): Promise<void> => {
-  const response = await http.patch<void>(`${CREATOR}/${FOLLOW}/${slug}`)
-  return response.data
+  await fetchWrapper<void>({ path: `${CREATOR}/${FOLLOW}/${slug}`, method: 'PATCH' })
 }
 
 export const useFollowCreator = (slug: string) => {

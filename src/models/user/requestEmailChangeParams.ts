@@ -1,3 +1,3 @@
-export interface ReuqestEmailChangeParams {
+export interface RequestEmailChangeParams {
   newEmail: string
 }

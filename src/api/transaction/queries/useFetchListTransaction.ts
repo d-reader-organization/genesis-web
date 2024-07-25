@@ -4,13 +4,13 @@ import { ListParams } from '@/models/transaction/list'
 import { decodeTransaction } from '@/utils/transactions'
 import { Transaction } from '@solana/web3.js'
 import { useQuery } from '@tanstack/react-query'
-import http from '@/api/http'
+import { fetchWrapper } from '@/app/lib/fetchWrapper'
 
 const { TRANSACTION, LIST } = TRANSACTION_QUERY_KEYS
 
 const fetchListTransaction = async (params: ListParams): Promise<Transaction> => {
-  const response = await http.get<string>(`${TRANSACTION}/${LIST}`, { params })
-  return decodeTransaction(response.data, 'base64')
+  const response = await fetchWrapper<string>({ path: `${TRANSACTION}/${LIST}`, params })
+  return decodeTransaction(response.data ?? '', 'base64')
 }
 
 export const useFetchListTransaction = (params: ListParams) => {

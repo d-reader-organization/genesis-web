@@ -4,13 +4,13 @@ import { MultipleBuyParams } from '@/models/transaction/multipleBuy'
 import { decodeTransaction } from '@/utils/transactions'
 import { Transaction } from '@solana/web3.js'
 import { useQuery } from '@tanstack/react-query'
-import http from '@/api/http'
+import { fetchWrapper } from '@/app/lib/fetchWrapper'
 
 const { TRANSACTION, MULTIPLE_BUY } = TRANSACTION_QUERY_KEYS
 
 const fetchMultipleBuyTransaction = async (params: MultipleBuyParams): Promise<Transaction> => {
-  const response = await http.get<string>(`${TRANSACTION}/${MULTIPLE_BUY}`, { params })
-  return decodeTransaction(response.data, 'base64')
+  const response = await fetchWrapper<string>({ path: `${TRANSACTION}/${MULTIPLE_BUY}`, params })
+  return decodeTransaction(response.data ?? '', 'base64')
 }
 
 export const useFetchMultipleBuyTransaction = (params: MultipleBuyParams) => {

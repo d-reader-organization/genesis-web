@@ -1,5 +1,3 @@
-export const yupRequiredMessage = (name: string) => `${name} is required`
-
 export const generateRequiredArrayElementErrorMessage = (name: string) => `All of ${name} inputs are required`
 
 export const generateMinNumberErrorMessage = (name: string, min: number) => `Minimum value for ${name} is ${min}`

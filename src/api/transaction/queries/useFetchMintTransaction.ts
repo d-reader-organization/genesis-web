@@ -4,14 +4,14 @@ import { MintParams } from '@/models/transaction/mint'
 import { versionedTransactionFromBs64 } from '@/utils/transactions'
 import { VersionedTransaction } from '@solana/web3.js'
 import { useQuery } from '@tanstack/react-query'
-import http from '@/api/http'
+import { fetchWrapper } from '@/app/lib/fetchWrapper'
 
 const { TRANSACTION, MINT } = TRANSACTION_QUERY_KEYS
 
 // TODO: this is incorrect, should return array of arrays? update all transactions to match backend
 const fetchMintTransaction = async (params: MintParams): Promise<VersionedTransaction[]> => {
-  const response = await http.get<string[]>(`${TRANSACTION}/${MINT}`, { params })
-  return response.data.map(versionedTransactionFromBs64)
+  const response = await fetchWrapper<string[]>({ path: `${TRANSACTION}/${MINT}`, params })
+  return response.data?.map(versionedTransactionFromBs64) ?? []
 }
 
 export const useFetchMintTransaction = (params: MintParams) => {

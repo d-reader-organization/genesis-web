@@ -4,13 +4,13 @@ import { CancelListingParams } from '@/models/transaction/cancelListing'
 import { decodeTransaction } from '@/utils/transactions'
 import { Transaction } from '@solana/web3.js'
 import { useQuery } from '@tanstack/react-query'
-import http from '@/api/http'
+import { fetchWrapper } from '@/app/lib/fetchWrapper'
 
 const { TRANSACTION, CANCEL_LISTING } = TRANSACTION_QUERY_KEYS
 
 const fetchCancelListingTransaction = async (params: CancelListingParams): Promise<Transaction> => {
-  const response = await http.get<string>(`${TRANSACTION}/${CANCEL_LISTING}`, { params })
-  return decodeTransaction(response.data, 'base64')
+  const response = await fetchWrapper<string>({ path: `${TRANSACTION}/${CANCEL_LISTING}`, params })
+  return decodeTransaction(response.data ?? '', 'base64')
 }
 
 export const useFetchCancelListingTransaction = (params: CancelListingParams) => {

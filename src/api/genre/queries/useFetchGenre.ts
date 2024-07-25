@@ -1,14 +1,14 @@
 import { genreKeys, GENRE_QUERY_KEYS } from '@/api/genre/genreKeys'
 import { useQuery } from '@tanstack/react-query'
 import { Genre } from '@/models/genre'
-import http from '@/api/http'
+import { fetchWrapper } from '@/app/lib/fetchWrapper'
 import { onQueryError } from '@/components/ui/toast/use-toast'
 
 const { GENRE, GET } = GENRE_QUERY_KEYS
 
 const fetchGenre = async (slug: string): Promise<Genre[]> => {
-  const response = await http.get<Genre[]>(`${GENRE}/${GET}/${slug}`)
-  return response.data
+  const response = await fetchWrapper<Genre[]>({ path: `${GENRE}/${GET}/${slug}` })
+  return response.data ?? []
 }
 
 export const useFetchGenre = (slug: string) => {

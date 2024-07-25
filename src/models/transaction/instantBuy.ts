@@ -1,4 +1,4 @@
-export interface InstantBuyParams {
+export type InstantBuyParams = {
   buyerAddress: string
   mintAccount: string
   price: number

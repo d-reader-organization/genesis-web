@@ -4,13 +4,13 @@ import { UseComicIssueAssetParams } from '@/models/transaction/useComicIssueAsse
 import { decodeTransaction } from '@/utils/transactions'
 import { Transaction } from '@solana/web3.js'
 import { useQuery } from '@tanstack/react-query'
-import http from '@/api/http'
+import { fetchWrapper } from '@/app/lib/fetchWrapper'
 
 const { TRANSACTION, USE_COMIC_ISSUE_ASSET } = TRANSACTION_QUERY_KEYS
 
 const fetchUseComicIssueAssetTransaction = async (params: UseComicIssueAssetParams): Promise<Transaction> => {
-  const response = await http.get<string>(`${TRANSACTION}/${USE_COMIC_ISSUE_ASSET}`, { params })
-  return decodeTransaction(response.data, 'base64')
+  const response = await fetchWrapper<string>({ path: `${TRANSACTION}/${USE_COMIC_ISSUE_ASSET}`, params })
+  return decodeTransaction(response.data ?? '', 'base64')
 }
 
 export const useFetchUseComicIssueAssetTransaction = (params: UseComicIssueAssetParams, enabled = true) => {

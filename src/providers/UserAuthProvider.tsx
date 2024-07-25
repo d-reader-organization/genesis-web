@@ -2,19 +2,16 @@
 
 import React, { useMemo, createContext, useContext, useState, useCallback, useEffect } from 'react'
 import { Authorization, JwtPayload, UserPayload, emptyUserPayload } from '@/models/auth'
-import http, { addAuthHeaders, removeAuthHeaders } from '@/api/http'
 import {
   defaultAuthorization,
   lsGetUser,
   lsGetActiveUserId,
   lsRemoveUserAuth,
   lsSetUser,
-  lsGetActiveUser,
   lsRemoveActiveUser,
 } from '@/utils/localStorage'
 import { parseJwtPayload } from '@/utils/objects'
 import { isNil } from 'lodash'
-import axios from 'axios'
 import { signOut } from 'next-auth/react'
 import { refreshTokenCall } from '@/app/lib/api/auth/queries'
 
@@ -50,7 +47,7 @@ export const UserAuthProvider: React.FC<Props> = ({ children }) => {
   )
 
   const addAuthorization = useCallback((auth: Authorization): JwtPayload<UserPayload> => {
-    addAuthHeaders(auth.accessToken)
+    // addAuthHeaders(auth.accessToken)
     setAuthorization(auth)
 
     const payload = parseJwtPayload<UserPayload>(auth.accessToken)
@@ -59,7 +56,7 @@ export const UserAuthProvider: React.FC<Props> = ({ children }) => {
   }, [])
 
   const removeAuthorization = useCallback((refreshToken: string) => {
-    removeAuthHeaders()
+    // removeAuthHeaders()
     setAuthorization(defaultAuthorization)
 
     const payload = parseJwtPayload<UserPayload>(refreshToken)
@@ -104,7 +101,7 @@ export const UserAuthProvider: React.FC<Props> = ({ children }) => {
 
         if (isAccessTokenValid) {
           setAuthorization({ accessToken, refreshToken })
-          addAuthHeaders(accessToken)
+          // addAuthHeaders(accessToken)
         } else {
           lsSetUser(lsUserId, { accessToken: '' })
         }
@@ -124,46 +121,6 @@ export const UserAuthProvider: React.FC<Props> = ({ children }) => {
       setIsAuthenticating(false)
     }
   }, [refreshAuthorization, removeAuthorization])
-
-  // I hate this code below from the bottom of my soul
-  // I'm insecure about it's functionality so take it with a grain of salt
-  useEffect(() => {
-    const httpInterceptor = http.interceptors.response.use(
-      (response) => response,
-      async (error) => {
-        if (axios.isAxiosError(error)) {
-          const message = (error.response?.data?.message || '') as string
-          const status = error.response?.status
-          const refreshToken = authorization.refreshToken || lsGetActiveUser()?.refreshToken
-
-          const originalRequest = error.config
-          if (originalRequest && refreshToken) {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            if (message.includes('Authorization invalid or expired') && !originalRequest?._retry && status == 401) {
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              originalRequest._retry = true
-              try {
-                const accessToken = await refreshAuthorization(refreshToken)
-                originalRequest.headers.Authorization = accessToken
-                return http(originalRequest)
-              } catch {
-                // ignore and proceed with the standard flow
-              }
-            }
-          }
-        }
-
-        if (error.response?.data) return Promise.reject(error.response.data)
-        else return Promise.reject(error)
-      }
-    )
-
-    return () => {
-      axios.interceptors.response.eject(httpInterceptor)
-    }
-  }, [authorization.refreshToken, refreshAuthorization])
 
   const value = useMemo(
     () => ({ isAuthenticated, isAuthenticating, addAuthorization, removeAuthorization, logout }),

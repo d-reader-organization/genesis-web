@@ -1,4 +1,4 @@
-export interface PrivateBidParams {
+export type PrivateBidParams = {
   buyerAddress: string
   mintAccount: string
   price: number

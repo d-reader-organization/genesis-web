@@ -1,16 +1,8 @@
-import { WALLET_QUERY_KEYS } from '@/api/wallet/walletKeys'
 import { onQueryError, toast } from '@/components/ui/toast/use-toast'
-import { Wallet, UpdateWalletData } from '@/models/wallet'
+import { UpdateWalletData } from '@/models/wallet'
 import { useMutation } from '@tanstack/react-query'
-import http from '@/api/http'
 import { useRouter } from 'next/navigation'
-
-const { WALLET, UPDATE } = WALLET_QUERY_KEYS
-
-const updateWallet = async (address: string, request: UpdateWalletData): Promise<Wallet> => {
-  const response = await http.patch<Wallet>(`${WALLET}/${UPDATE}/${address}`, request)
-  return response.data
-}
+import { updateWallet } from '@/app/lib/api/wallet/mutations'
 
 export const useUpdateWallet = (address: string) => {
   const { refresh } = useRouter()
