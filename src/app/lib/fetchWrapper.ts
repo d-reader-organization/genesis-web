@@ -14,6 +14,12 @@ const generateQueryParams = (params: ParamsType) =>
     return { ...prev, [key]: `${value}` }
   }, {})
 
+/**
+ * if params is an array, you should use `generateQueryParamsArray` util
+ * and pass it as `params`
+ *
+ * example: `fetchWrapper<MyType>({ params: generateQueryParamsArray(params, myQueryParamKey) })`
+ */
 export async function fetchWrapper<T>({
   body,
   headers,
