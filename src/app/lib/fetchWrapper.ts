@@ -7,15 +7,12 @@ const defaultHeaders = {
   'Content-Type': 'application/json',
 }
 
-type ParamsType = Record<string, unknown> | Array<Record<string, unknown>>
+type ParamsType = Record<string, unknown>
 
 const generateQueryParams = (params: ParamsType) =>
-  Array.isArray(params)
-    ? '' // TODO HANDLE ARRAY PARAMS
-    : Object.entries(params).reduce((prev, [key, value]) => {
-        const current = `${key}=${value}`
-        return prev.length ? `${prev}&${current}` : current
-      }, '')
+  Object.entries(params).reduce((prev, [key, value]) => {
+    return { ...prev, [key]: `${value}` }
+  }, {})
 
 export async function fetchWrapper<T>({
   body,
@@ -35,8 +32,12 @@ export async function fetchWrapper<T>({
   status: number
 }> {
   const token = cookies().get(accessTokenKey)?.value ?? ''
-  const url = `${baseApiUrl}/${path}${params ? `?${generateQueryParams(params)}` : ''}`
-  const options = {
+  const url = new URL(`${baseApiUrl}/${path}`)
+  const queryParams: Record<string, string> | null = !!params ? generateQueryParams(params) : null
+  const search = !!queryParams ? new URLSearchParams(queryParams) : null
+  url.search = search?.toString() ?? ''
+
+  const options: RequestInit = {
     body: JSON.stringify(body),
     method,
     headers: {
