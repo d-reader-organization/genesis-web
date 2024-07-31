@@ -16,12 +16,18 @@ export const MintTabs: React.FC<Props> = ({ comicIssue, isAuthenticated }) => {
   const [isMintTabActive, setMintActiveTab] = useState(true)
   return (
     <div className='flex flex-col gap-10 my-6'>
-      <div className='flex gap-6  border-b border-grey-200 [&>p]:cursor-pointer'>
-        <Tab isActive={isMintTabActive} onClick={() => setMintActiveTab(true)} text='Mint' />
-        <Tab isActive={!isMintTabActive} onClick={() => setMintActiveTab(false)} text='About' />
-      </div>
-      {isMintTabActive ? (
-        <CandyMachineDetails comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
+      {comicIssue.activeCandyMachineAddress ? (
+        <>
+          <div className='flex gap-6  border-b border-grey-200 [&>p]:cursor-pointer'>
+            <Tab isActive={isMintTabActive} onClick={() => setMintActiveTab(true)} text='Mint' />
+            <Tab isActive={!isMintTabActive} onClick={() => setMintActiveTab(false)} text='About' />
+          </div>
+          {isMintTabActive ? (
+            <CandyMachineDetails comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
+          ) : (
+            <AboutTab comicIssue={comicIssue} />
+          )}
+        </>
       ) : (
         <AboutTab comicIssue={comicIssue} />
       )}

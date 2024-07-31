@@ -16,9 +16,9 @@ import { useWallet } from '@solana/wallet-adapter-react'
 import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
 
 const toSol = (lamports: number) => +(lamports / LAMPORTS_PER_SOL).toFixed(3)
-const normalise = (value: number, MAX: number) => (value * 100) / MAX
+const normalise = (value: number, MAX: number): number => (value * 100) / MAX
 
-type Props = { candyMachine: CandyMachine }
+type DetailsProps = { candyMachine: CandyMachine }
 
 const getItemsMinted = (candyMachine: CandyMachine) => {
   const group = candyMachine.groups.at(0)
@@ -29,10 +29,9 @@ const getItemsMinted = (candyMachine: CandyMachine) => {
   }
 }
 
-export const CandyMachineDetails: React.FC<{ comicIssue: ComicIssue; isAuthenticated: boolean }> = ({
-  comicIssue,
-  isAuthenticated,
-}) => {
+type Props = { comicIssue: ComicIssue; isAuthenticated: boolean }
+
+export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticated }) => {
   const { publicKey } = useWallet()
   const { data: candyMachine, refetch } = useFetchCandyMachine({
     candyMachineAddress: comicIssue.activeCandyMachineAddress ?? '',
@@ -40,19 +39,21 @@ export const CandyMachineDetails: React.FC<{ comicIssue: ComicIssue; isAuthentic
   })
   useAuthorizeWallet(refetch)
 
-  return candyMachine ? (
-    <div className='flex flex-col rounded-lg p-4 sm:p-6 bg-grey-500 border border-grey-200 mb-6'>
-      <GroupDetails candyMachine={candyMachine} isAuthenticated={isAuthenticated} />
-      <UserDetails candyMachine={candyMachine} />
-      <ProgressBar className='my-3' value={normalise(candyMachine.itemsMinted, candyMachine.supply)} />
-      <ComicVault />
-      <BalanceDetails candyMachine={candyMachine} />
-      <MintButton candyMachine={candyMachine} comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
-    </div>
-  ) : null
+  return (
+    candyMachine && (
+      <div className='flex flex-col rounded-lg p-4 sm:p-6 bg-grey-500 border border-grey-200 mb-6'>
+        <GroupDetails candyMachine={candyMachine} isAuthenticated={isAuthenticated} />
+        <UserDetails candyMachine={candyMachine} />
+        <ProgressBar className='my-3' value={normalise(candyMachine.itemsMinted, candyMachine.supply)} />
+        <ComicVault />
+        <BalanceDetails candyMachine={candyMachine} />
+        <MintButton candyMachine={candyMachine} comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
+      </div>
+    )
+  )
 }
 
-const GroupDetails: React.FC<Props & { isAuthenticated: boolean }> = ({ candyMachine, isAuthenticated }) => {
+const GroupDetails: React.FC<DetailsProps & { isAuthenticated: boolean }> = ({ candyMachine, isAuthenticated }) => {
   const { startDate, endDate, mintPrice } = candyMachine.groups.at(0) as CandyMachineGroupWithSource
   const isLive = new Date(startDate) <= new Date() && new Date(endDate) > new Date()
   const isEnded = new Date() > new Date(endDate)
@@ -85,7 +86,7 @@ const GroupDetails: React.FC<Props & { isAuthenticated: boolean }> = ({ candyMac
   )
 }
 
-const UserDetails: React.FC<Props> = ({ candyMachine }) => {
+const UserDetails: React.FC<DetailsProps> = ({ candyMachine }) => {
   const itemsMintedPerUserOrWallet = getItemsMinted(candyMachine)
   const { mintLimit } = candyMachine.groups.at(0) as CandyMachineGroupWithSource
   return (
@@ -121,7 +122,7 @@ const ComicVault: React.FC = () => (
   </Expandable>
 )
 
-const BalanceDetails: React.FC<Props> = ({ candyMachine }) => {
+const BalanceDetails: React.FC<DetailsProps> = ({ candyMachine }) => {
   const { mintPrice } = candyMachine.groups.at(0) as CandyMachineGroupWithSource
   return (
     <div className='flex text-base font-bold justify-between mt-2 mb-4'>
