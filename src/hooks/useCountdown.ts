@@ -66,5 +66,3 @@ export const useCountdown: CountdownHook = ({ expirationDate, onExpire }) => {
 
   return formatTime(remainingSeconds, expirationDate)
 }
-
-export default useCountdown

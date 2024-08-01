@@ -14,6 +14,7 @@ import { ComicIssue } from '@/models/comicIssue'
 import { useFetchCandyMachine } from '@/api/candyMachine/queries/useFetchCandyMachine'
 import { useWallet } from '@solana/wallet-adapter-react'
 import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
+import { useCountdown } from '@/hooks/useCountdown'
 
 const toSol = (lamports: number) => +(lamports / LAMPORTS_PER_SOL).toFixed(3)
 const normalise = (value: number, MAX: number): number => (value * 100) / MAX
@@ -57,7 +58,7 @@ const GroupDetails: React.FC<DetailsProps & { isAuthenticated: boolean }> = ({ c
   const { startDate, endDate, mintPrice } = candyMachine.groups.at(0) as CandyMachineGroupWithSource
   const isLive = new Date(startDate) <= new Date() && new Date(endDate) > new Date()
   const isEnded = new Date() > new Date(endDate)
-  const countdownString = '' // TODO
+  const { countdownString } = useCountdown({ expirationDate: startDate.toString() })
   const highlightDiscount = isAuthenticated && candyMachine.discount
   return (
     <div className='flex justify-between w-full'>
@@ -67,9 +68,7 @@ const GroupDetails: React.FC<DetailsProps & { isAuthenticated: boolean }> = ({ c
         ) : isEnded ? (
           <span className='text-red-500'>Ended</span>
         ) : (
-          <span className='text-important-color'>
-            Upcoming <div className='countdown'>{countdownString}</div>
-          </span>
+          <span className='text-important-color'>Upcoming {countdownString}</span>
         )}
       </div>
       <div className='flex items-center'>
