@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useOptimistic } from 'react'
 import { InfoList } from './InfoList'
 import { Button } from '../ui/Button'
 import { StarIcon } from './icons/StarIcon'
@@ -67,9 +67,22 @@ type HeartIconButtonProps = {
 }
 
 const HeartIconButton: React.FC<HeartIconButtonProps> = ({ comicIssueId, comicSlug, count, isFavourite }) => {
+  const [state, setNewState] = useOptimistic(
+    {
+      count,
+      isFavourite,
+    },
+    (state, _) => {
+      return {
+        count: state.isFavourite ? state.count - 1 : state.count + 1,
+        isFavourite: !state.isFavourite,
+      }
+    }
+  )
   const { refresh } = useRouter()
 
   const handleSubmit = async () => {
+    setNewState(null)
     if (comicSlug) {
       await favouritiseComic(comicSlug)
     } else if (comicIssueId) {
@@ -80,8 +93,8 @@ const HeartIconButton: React.FC<HeartIconButtonProps> = ({ comicIssueId, comicSl
 
   return (
     <Button onClick={handleSubmit} variant='ghost'>
-      <HeartIcon solid={isFavourite} />
-      &nbsp;<span>{count}</span>
+      <HeartIcon solid={state.isFavourite} />
+      &nbsp;<span>{state.count}</span>
     </Button>
   )
 }

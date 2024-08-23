@@ -8,7 +8,7 @@ export const useRedeemUserReferral = () => {
 
   return useMutation({
     mutationFn: (referrer: string) => redeemUserReferral(referrer),
-    onSuccess: (user) => {
+    onSuccess: () => {
       toast({
         description: 'Referral claimed!',
         variant: 'success',

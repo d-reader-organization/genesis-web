@@ -174,6 +174,14 @@ function uploadingFiles() {
   })
 }
 
+function confirmingTransaction() {
+  toast({
+    description: 'Confirming transaction(s)',
+    variant: 'default',
+    open: true,
+  })
+}
+
 function onQueryError(error: Error): boolean {
   const errorMessage = error.message
   toast({
@@ -203,4 +211,4 @@ function useToast() {
   }
 }
 
-export { useToast, toast, onQueryError, uploadingFiles }
+export { useToast, toast, onQueryError, uploadingFiles, confirmingTransaction }
