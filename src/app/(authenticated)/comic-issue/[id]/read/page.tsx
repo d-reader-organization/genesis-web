@@ -28,13 +28,18 @@ export default async function ReadComicIssuePage({ params }: ComicIssuePageParam
         {(!comicIssue.myStats?.canRead || !comicIssue.isFullyUploaded) && (
           <div className='rounded-2xl relative m-4 w-full border-2 border-grey-300 p-4 min-h-80'>
             <PreviewPagesIcon className='w-full h-auto brightness-50' />
-            <div className='absolute text-center p-4 top-1/2 left-1/2 w-full max-w-[380px] transform -translate-x-1/2 -translate-y-1/2'>
+            <div className='flex flex-col gap-2 absolute text-center p-4 top-1/2 left-1/2 w-full max-w-[380px] transform -translate-x-1/2 -translate-y-1/2'>
               <p className='text-lg sm:text-xl font-bold'>This is a comic preview!</p>
               {!comicIssue.myStats?.canRead && (
                 <p className='text-sm sm:text-base md:text-xl'>
                   To view all pages you need to own at least one <strong>opened</strong> comic issue asset.
                 </p>
               )}
+              <UnwrapIssueDialog
+                assets={assets}
+                comicIssue={comicIssue}
+                showUnwrapButton={hasUnusedAssets && !comicIssue.myStats?.canRead}
+              />
               {!comicIssue.isFullyUploaded && (
                 <p className='preview-message-text'>
                   This comic is not yet fully uploaded. New chapters/pages might be added weekly or the comic is still
@@ -44,11 +49,6 @@ export default async function ReadComicIssuePage({ params }: ComicIssuePageParam
             </div>
           </div>
         )}
-        <UnwrapIssueDialog
-          assets={assets}
-          comicIssue={comicIssue}
-          showUnwrapButton={hasUnusedAssets && !comicIssue.myStats?.canRead}
-        />
       </main>
     </>
   )
