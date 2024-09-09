@@ -37,7 +37,9 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
     />
   ) : (
     <div
-      className={clsx('mx-4 mt-4 max-h-20  flex items-center justify-between p-4 bg-grey-400 rounded-2xl shadow-')}
+      className={clsx(
+        'mx-4 mt-4 max-h-20  flex items-center justify-between p-4 bg-grey-400 rounded-2xl shadow-[4px_4px_0px_0px_#000]'
+      )}
       style={{ boxShadow: '4px 4px 0px 0px #00' }}
     >
       <div className='flex gap-8 xl:gap-12'>

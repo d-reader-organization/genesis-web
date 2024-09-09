@@ -1,16 +1,14 @@
 'use client'
 
-import React from 'react'
-import { Carousel, CarouselContent, CarouselItem } from './Carousel'
+import React, { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { CarouselSlide } from '@/models/carousel/carouselSlide'
 import { RoutePath } from '@/enums/routePath'
-import clsx from 'clsx'
-import LogoIcon from 'public/assets/vector-icons/logo.svg'
-import { ButtonLink } from '../Button'
-import { Text } from '../Text'
-import Autoplay from 'embla-carousel-autoplay'
 import { useIsMobile } from '@/hooks/useBreakpoints'
+import { Badge } from '../Badge'
+import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay'
+import { cn } from '@/lib/utils'
 
 const getSlideUrl = (slide: CarouselSlide) => {
   if (slide.comicIssueId) return RoutePath.ComicIssue(slide.comicIssueId)
@@ -24,55 +22,93 @@ type Props = {
 }
 
 export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()])
+  const [selectedIndex, setSelectedIndex] = useState(0)
   const isMobile = useIsMobile()
 
-  return (
-    <Carousel
-      className='w-full portrait:h-[60vh] landscape:h-[84vh] max-h-[780px] mt-0 md:mt-20 mb-6'
-      opts={{ loop: true }}
-      plugins={[Autoplay({ delay: 5000 })]}
-    >
-      <CarouselContent>
-        {carouselSlides.map((slide, index) => {
-          const visitUrl = getSlideUrl(slide)
-          return (
-            <CarouselItem
-              className='relative z-10  portrait:h-[60vh] landscape:h-[84vh] max-h-[780px] basis-full md:basis-[92%]'
-              key={slide.id}
-            >
-              {visitUrl && (
-                <Image
-                  src={slide.image}
-                  alt={slide.title ?? ''}
-                  fill
-                  quality={isMobile ? 90 : 100}
-                  className={clsx('-z-[1] object-cover max-h-full select-none', !isMobile && 'px-0 py-2 rounded-lg')}
-                  priority={index === 0}
-                />
-              )}
-              <div className='text-left absolute bottom-[10%] left-[16%] transition-[translateX(-50%)]'>
-                {visitUrl && (
-                  <ButtonLink
-                    className='bg-important-color text-grey-600 py-2 px-4 shadow-3 min-w-[unset] max-w-fit'
-                    href={visitUrl}
-                    target={!!slide.externalLink ? '_blank' : undefined}
-                  >
-                    <LogoIcon className='pr-2' /> Visit
-                  </ButtonLink>
-                )}
-                <Text as='h2' className='bold mt-4 mx-0 mb-1 text-2xl md:text-3xl'>
-                  {slide.title}
-                </Text>
-                <Text as='p' className='md:text-lg sm:text-base text-sm leading-5'>
-                  {slide.subtitle}
-                </Text>
-              </div>
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return
+    setSelectedIndex(emblaApi.selectedScrollSnap())
+  }, [emblaApi, setSelectedIndex])
 
-              <div className='absolute left-0 right-0 top-auto bottom-0 -z-[1] h-full opacity-100 w-full bg-transparent bg-gradient-to-b from-transparent to-grey-600 bg-0-top bg-repeat-x bg-cover' />
-            </CarouselItem>
-          )
-        })}
-      </CarouselContent>
-    </Carousel>
+  useEffect(() => {
+    onSelect()
+    emblaApi?.on('select', onSelect)
+    return () => {
+      emblaApi?.off('select', onSelect)
+    }
+  }, [emblaApi, onSelect])
+
+  const dots = (
+    <div className='flex justify-center gap-4 relative -top-4'>
+      {carouselSlides.map((_, dotIndex) => (
+        <button
+          key={dotIndex}
+          className={cn(
+            'h-1 w-10 transition-all duration-300 rounded-2xl',
+            dotIndex === selectedIndex ? 'bg-yellow-500' : 'bg-grey-200'
+          )}
+          onClick={() => emblaApi && emblaApi.scrollTo(dotIndex)}
+        />
+      ))}
+    </div>
+  )
+
+  const slides = carouselSlides
+  return (
+    <>
+      <div className='relative max-w-full md:max-w-[748px] h-96 md:h-[511px] rounded-2xl shadow-[4px_4px_0px_0px_#000] max-md:rounded-t-none'>
+        <div className='overflow-hidden' ref={emblaRef}>
+          <div className='flex'>
+            {slides.map((slide, index) => {
+              const visitUrl = getSlideUrl(slide)
+              return (
+                <div className='flex-[0_0_100%] min-w-0' key={index}>
+                  <div className='overflow-hidden rounded-2xl max-md:rounded-t-none'>
+                    <div className='p-0 relative w-full h-96 md:h-[511px]'>
+                      {visitUrl && (
+                        <Image
+                          src={slide.image}
+                          alt={slide.title ?? ''}
+                          fill
+                          quality={isMobile ? 90 : 100}
+                          priority={index === 0}
+                          objectFit='cover'
+                        />
+                      )}
+                      <div className='absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-90' />
+                      <div className='h-full flex flex-col justify-between p-4 md:p-6'>
+                        <TopSection />
+                        <div className='flex flex-col gap-4 relative mb-4'>
+                          <p className='text-white line-clamp-1 text-ellipsis text-2xl md:text-5xl font-semibold'>
+                            {slide.title}
+                          </p>
+                          <p className='text-base md:text-[22px] font-medium leading-normal md:leading-7 tracking-[0.2px] line-clamp-2 text-ellipsis'>
+                            {slide.subtitle}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+      {dots}
+    </>
   )
 }
+
+const TopSection: React.FC = () => (
+  <div className='flex justify-between'>
+    <Badge variant='secondary' className='bg-white/20 text-white'>
+      <span className='size-[14px] rounded-full bg-green-500 mr-2' />
+      Minting Live
+    </Badge>
+    <Badge variant='secondary' className='bg-white/20 text-white'>
+      EP 1
+    </Badge>
+  </div>
+)

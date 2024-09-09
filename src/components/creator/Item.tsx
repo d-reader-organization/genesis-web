@@ -18,13 +18,15 @@ export const CreatorItem: React.FC<Props> = ({ creator, className, ...props }) =
       )}
       {...props}
     >
-      <Image
-        width={60}
-        height={60}
-        className='z-0 object-cover rounded-full bg-grey-700 w-[60px] h-[60px]'
-        src={creator.avatar}
-        alt=''
-      />
+      {creator.avatar && (
+        <Image
+          width={60}
+          height={60}
+          className='z-0 object-cover rounded-full bg-grey-700 w-[60px] h-[60px]'
+          src={creator.avatar}
+          alt=''
+        />
+      )}
       <div className='flex flex-col py-2 pr-2 pl-1 w-full overflow-hidden'>
         <div className='flex items-center w-full'>
           <Text as='p' className='font-bold text-ellipsis overflow-hidden whitespace-nowrap'>
