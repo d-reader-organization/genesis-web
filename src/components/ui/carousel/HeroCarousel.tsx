@@ -5,10 +5,10 @@ import Image from 'next/image'
 import { CarouselSlide } from '@/models/carousel/carouselSlide'
 import { RoutePath } from '@/enums/routePath'
 import { useIsMobile } from '@/hooks/useBreakpoints'
-import { Badge } from '../Badge'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { cn } from '@/lib/utils'
+import { Badge } from '@/components/shared/Badge'
 
 const getSlideUrl = (slide: CarouselSlide) => {
   if (slide.comicIssueId) return RoutePath.ComicIssue(slide.comicIssueId)
@@ -56,8 +56,8 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
 
   const slides = carouselSlides
   return (
-    <>
-      <div className='relative max-w-full md:max-w-[748px] h-96 md:h-[511px] rounded-2xl shadow-[4px_4px_0px_0px_#000] max-md:rounded-t-none'>
+    <div>
+      <div className='relative max-w-full md:max-w-[748px] carousel-height rounded-2xl shadow-[4px_4px_0px_0px_#000] max-md:rounded-t-none'>
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='flex'>
             {slides.map((slide, index) => {
@@ -65,7 +65,7 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
               return (
                 <div className='flex-[0_0_100%] min-w-0' key={index}>
                   <div className='overflow-hidden rounded-2xl max-md:rounded-t-none'>
-                    <div className='p-0 relative w-full h-96 md:h-[511px]'>
+                    <div className='p-0 relative w-full carousel-height'>
                       {visitUrl && (
                         <Image
                           src={slide.image}
@@ -73,7 +73,7 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
                           fill
                           quality={isMobile ? 90 : 100}
                           priority={index === 0}
-                          objectFit='cover'
+                          className='object-cover'
                         />
                       )}
                       <div className='absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-90' />
@@ -97,18 +97,16 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
         </div>
       </div>
       {dots}
-    </>
+    </div>
   )
 }
 
 const TopSection: React.FC = () => (
   <div className='flex justify-between'>
-    <Badge variant='secondary' className='bg-white/20 text-white'>
-      <span className='size-[14px] rounded-full bg-green-500 mr-2' />
+    <Badge>
+      <span className='size-[14px] rounded-full bg-green-500 mr-2 text-white' />
       Minting Live
     </Badge>
-    <Badge variant='secondary' className='bg-white/20 text-white'>
-      EP 1
-    </Badge>
+    <Badge>EP 1</Badge>
   </div>
 )

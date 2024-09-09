@@ -12,6 +12,7 @@ import { fetchComics } from './lib/api/comic/queries'
 import { fetchComicIssues } from './lib/api/comicIssue/queries'
 import { fetchCreators } from './lib/api/creator/queries'
 import { fetchCarouselSlides } from './lib/api/carousel/queries'
+import { CarouselCard } from '@/components/ui/carousel/CarouselCard'
 
 const TAKE_COMICS = 18
 const TAKE_ISSUES = 18
@@ -37,8 +38,14 @@ export default async function HomePage() {
     <>
       <Navigation />
       <main className='flex flex-col w-full h-full items-center md:mt-10'>
-        <HeroCarousel carouselSlides={carouselSlides} />
-        <div className='max-w-screen-xl w-full flex flex-col md:mb-10'>
+        <div className='max-w-screen-xl w-full flex flex-col md:mb-10 md:p-4'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 carousel-height max-md:mb-44'>
+            <HeroCarousel carouselSlides={carouselSlides} />
+            <div className='grid grid-cols-2 gap-4 max-md:p-4'>
+              <CarouselCard />
+              <CarouselCard />
+            </div>
+          </div>
           <Section
             id='promoted-comics'
             title='Get started'
