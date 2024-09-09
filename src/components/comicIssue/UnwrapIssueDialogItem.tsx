@@ -44,7 +44,7 @@ export const UnwrapIssueDialogItem: React.FC<{ asset: Asset; comicIssue: ComicIs
               className={cn(
                 traitLabelStyle,
                 asset.rarity === ComicRarity.Common && 'border-white',
-                asset.rarity === ComicRarity.Uncommon && 'border-yellow-100',
+                asset.rarity === ComicRarity.Uncommon && 'border-yellow-50',
                 asset.rarity === ComicRarity.Rare && 'border-blue-500',
                 asset.rarity === ComicRarity.Epic && 'border-pink-500',
                 asset.rarity === ComicRarity.Legendary && 'border-purple-500'

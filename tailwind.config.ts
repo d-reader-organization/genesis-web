@@ -48,7 +48,7 @@ const config = {
           600: '#34a26d',
         },
         yellow: {
-          100: '#fffce3',
+          50: '#fffce3',
           400: '#fff174',
           500: '#fceb54', // main
           600: '#cabc41',

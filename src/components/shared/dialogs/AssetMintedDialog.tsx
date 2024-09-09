@@ -63,7 +63,7 @@ export const AssetMintedDialog: React.FC<Props> = ({
                   className={clsx(
                     'flex items-center gap-1 rounded-[4px] border border-white py-0.5 px-1.5 text-lg',
                     asset.rarity === ComicRarity.Common && 'text-white',
-                    asset.rarity === ComicRarity.Uncommon && 'text-yellow-100',
+                    asset.rarity === ComicRarity.Uncommon && 'text-yellow-50',
                     asset.rarity === ComicRarity.Rare && 'text-blue-500',
                     asset.rarity === ComicRarity.Epic && 'text-pink-500',
                     asset.rarity === ComicRarity.Legendary && 'text-purple-500'
