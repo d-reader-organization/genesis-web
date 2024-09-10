@@ -36,31 +36,34 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
       initialNavItem={isDiscover ? BottomNavItem.discover : isProfile ? BottomNavItem.profile : BottomNavItem.home}
     />
   ) : (
-    <div
-      className={clsx(
-        'mx-4 mt-4 max-h-20  flex items-center justify-between p-4 bg-grey-400 rounded-2xl shadow-[4px_4px_0px_0px_#000]'
-      )}
-      style={{ boxShadow: '4px 4px 0px 0px #00' }}
-    >
-      <div className='flex gap-8 xl:gap-12'>
-        <Link href={RoutePath.Home}>
-          <Logo className='h-8 min-w-fit fill-white ml-4' />
-        </Link>
-        <MenuItem href={RoutePath.DiscoverComics} icon={<DiscoverIcon />} isActive={isDiscover} title='Discover' />
-        <MenuItem comingSoon href='' isActive={false} icon={<MarketplaceIcon />} title='Marketplace' />
-        <MenuItem comingSoon href='' isActive={false} icon={<InvestIcon />} title='Invest' />
-      </div>
-      {!isMint && (
-        <Input
-          className='inline-flex justify-center items-center max-w-64 lg:max-w-80 w-full'
-          placeholder='Search comics or creators'
-          prefixIcon={<SearchIcon />}
-        />
-      )}
-      <div className='flex gap-8 xl:gap-12'>
-        <MenuItem href={RoutePath.Library} isActive={isLibrary} icon={<LibraryIcon />} title='Library' />
-        <div className='flex gap-4'>
-          {/* <div
+    <>
+      <div className='bg-grey-600 opacity-85 h-4 w-full fixed top-0 z-10' />
+      <div
+        className={clsx(
+          'max-h-20 flex items-center justify-between p-4 bg-grey-400 rounded-2xl shadow-[4px_4px_0px_0px_#000]',
+          'fixed top-4 left-4 z-10'
+        )}
+        style={{ width: 'calc(100% - 32px)' }}
+      >
+        <div className='flex gap-8 xl:gap-12'>
+          <Link href={RoutePath.Home}>
+            <Logo className='h-8 min-w-fit fill-white ml-4' />
+          </Link>
+          <MenuItem href={RoutePath.DiscoverComics} icon={<DiscoverIcon />} isActive={isDiscover} title='Discover' />
+          <MenuItem comingSoon href='' isActive={false} icon={<MarketplaceIcon />} title='Marketplace' />
+          <MenuItem comingSoon href='' isActive={false} icon={<InvestIcon />} title='Invest' />
+        </div>
+        {!isMint && (
+          <Input
+            className='inline-flex justify-center items-center max-w-64 lg:max-w-80 w-full'
+            placeholder='Search comics or creators'
+            prefixIcon={<SearchIcon />}
+          />
+        )}
+        <div className='flex gap-8 xl:gap-12'>
+          <MenuItem href={RoutePath.Library} isActive={isLibrary} icon={<LibraryIcon />} title='Library' />
+          <div className='flex gap-4'>
+            {/* <div
             className='flex py-4 px-2 size-12 items-center justify-center rounded-xl border border-white bg-yellow-50 cursor-pointer'
             style={{
               boxShadow: '2px 2px 0px 0px #000',
@@ -68,10 +71,11 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
           >
             <SparklesIcon />
           </div> */}
-          <Button className='rounded-xl min-w-28'>Hop in</Button>
+            <Button className='rounded-xl min-w-28'>Hop in</Button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
