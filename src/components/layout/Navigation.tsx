@@ -93,7 +93,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ comingSoon, href, icon, isActive, t
     href={href}
   >
     {icon}
-    <span className={cn('text-lg font-medium', comingSoon && 'text-grey-200')}>{title}</span>
+    <span className={cn('text-lg font-medium max-lg:hidden', comingSoon && 'text-grey-200')}>{title}</span>
     {/* {comingSoon && (
       <div className='bg-grey-200 rounded-xl p-1.5 flex justify-center items-center text-text-black text-[10px] font-bold'>
         SOON

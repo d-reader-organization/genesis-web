@@ -54,13 +54,12 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
     </div>
   )
 
-  const slides = carouselSlides
   return (
     <div>
-      <div className='relative max-w-full md:max-w-[748px] carousel-height rounded-2xl shadow-[4px_4px_0px_0px_#000] max-md:rounded-t-none'>
+      <div className='relative max-w-full md:max-w-[748px] carousel-height rounded-2xl shadow-[4px_4px_0px_0px_#000] max-md:rounded-t-none select-none'>
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='flex'>
-            {slides.map((slide, index) => {
+            {carouselSlides.map((slide, index) => {
               const visitUrl = getSlideUrl(slide)
               return (
                 <div className='flex-[0_0_100%] min-w-0' key={index}>
@@ -80,10 +79,10 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
                       <div className='h-full flex flex-col justify-between p-4 md:p-6'>
                         <TopSection />
                         <div className='flex flex-col gap-4 relative mb-4'>
-                          <p className='text-white line-clamp-1 text-ellipsis text-2xl md:text-5xl font-semibold'>
+                          <p className='text-white line-clamp-1 text-ellipsis text-2xl md:text-3xl lg:text-5xl font-semibold'>
                             {slide.title}
                           </p>
-                          <p className='text-base md:text-[22px] font-medium leading-normal md:leading-7 tracking-[0.2px] line-clamp-2 text-ellipsis'>
+                          <p className='text-base md:text-xl lg:text-[22px] font-medium leading-normal md:leading-5 lg:leading-7 tracking-[0.2px] line-clamp-2 text-ellipsis'>
                             {slide.subtitle}
                           </p>
                         </div>
