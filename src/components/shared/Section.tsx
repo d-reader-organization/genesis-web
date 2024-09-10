@@ -1,50 +1,30 @@
-import clsx from 'clsx'
-import React, { DetailedHTMLProps, HTMLAttributes } from 'react'
-import { Button, Text } from '../ui'
+import React from 'react'
 import Link from 'next/link'
+import ChevronRight from 'public/assets/vector-icons/chevron-right.svg'
+import { ControlledArrows } from './ControlledArrows'
 
-interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  title?: string
-  actionProps?: { title: string; href: string }
-  show?: boolean
-}
+type Props = {
+  actionHref: string
+  title: string
+} & React.PropsWithChildren
 
-export const Section: React.FC<Props> = ({ title, className, children, actionProps, ...props }) => {
+export const Section: React.FC<Props> = ({ actionHref, children, title }) => {
   return (
-    <section className={clsx('relative mx-4', className)} {...props}>
-      {title || actionProps ? (
-        <div className='flex justify-between pb-2 overflow-x-hidden'>
-          {title && (
-            <Text as='h3' className='capitalize font-bold'>
-              {title}
-            </Text>
-          )}
-          {actionProps && (
-            <Button asChild {...actionProps} variant='link'>
-              <Link href={actionProps.href}>{actionProps.title}</Link>
-            </Button>
-          )}
+    <div className='flex flex-col gap-5'>
+      <div className='flex justify-between'>
+        <div className='flex items-center gap-8'>
+          <p className='text-xl md:text-[28px] font-semibold tracking-wide'>{title}</p>
+          <Link
+            className='max-h-[50px] bg-grey-400 p-4 pr-2 rounded-2xl flex gap-1 items-center hover:brightness-125'
+            href={actionHref}
+          >
+            <p className='text-base md:text-lg tracking-wide font-medium text-[#AFB3BC]'>See all</p>
+            <ChevronRight />
+          </Link>
         </div>
-      ) : null}
+        <ControlledArrows />
+      </div>
       {children}
-
-      {/* <div
-        position='absolute'
-        zIndex={-100}
-        top={0}
-        left={0}
-        right={0}
-        bottom={0}
-        margin='auto'
-        // width='100%'
-        height={{
-          xs: `calc(100% - ${60}px)`,
-          sm: `calc(100% - ${80}px)`,
-          md: `calc(100% - ${100}px)`,
-          lg: `calc(100% - ${120}px)`,
-        }}
-        ref={ref}
-      /> */}
-    </section>
+    </div>
   )
 }

@@ -4,8 +4,6 @@ import { ComicIssueFilterTag, ComicIssueSortTag } from '@/models/comicIssue/comi
 import { Navigation } from '@/components/layout/Navigation'
 import { HeroCarousel } from '@/components/ui/carousel/HeroCarousel'
 import { ComicList } from '@/components/comic/List'
-import { ComicIssueSliderList } from '@/components/comicIssue/SliderList'
-import { CreatorList } from '@/components/creator/List'
 import { Section } from '@/components/shared/Section'
 import { RoutePath } from '@/enums/routePath'
 import { fetchComics } from './lib/api/comic/queries'
@@ -39,60 +37,26 @@ export default async function HomePage() {
       <Navigation />
       <main className='flex flex-col w-full h-full items-center md:mt-10'>
         <div className='max-w-screen-xl w-full flex flex-col md:mb-10 md:p-4'>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 carousel-height max-md:mb-44'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-6 carousel-height mb-52 md:mb-10'>
             <HeroCarousel carouselSlides={carouselSlides} />
             <div className='grid grid-cols-2 gap-4 max-md:p-4'>
               <CarouselCard />
               <CarouselCard />
             </div>
           </div>
-          <Section
-            id='promoted-comics'
-            title='Get started'
-            actionProps={{ title: 'See All', href: RoutePath.DiscoverComics }}
-          >
-            <ComicList comics={promotedComics} />
-          </Section>
+          <div className='mx-4 flex flex-col gap-8'>
+            <Section actionHref={RoutePath.DiscoverComics} title='Top 10 trending'>
+              <ComicList comics={promotedComics} />
+            </Section>
 
-          <Section
-            id='popular-comics'
-            title='Popular comics'
-            actionProps={{ title: 'See All', href: RoutePath.DiscoverComics }}
-          >
-            <ComicList comics={popularComics} />
-          </Section>
+            <Section actionHref={RoutePath.DiscoverComics} title='Popular comics'>
+              <ComicList comics={popularComics} />
+            </Section>
 
-          <Section
-            id='new-episodes'
-            title='New episodes'
-            actionProps={{ title: 'See All', href: RoutePath.DiscoverComicIssues }}
-          >
-            <ComicIssueSliderList comicIssues={newEpisodes} />
-          </Section>
-
-          <Section
-            id='free-comic-issues'
-            title='Free episodes'
-            actionProps={{ title: 'See All', href: RoutePath.DiscoverComicIssues }}
-          >
-            <ComicIssueSliderList comicIssues={freeEpisodes} />
-          </Section>
-
-          <Section
-            id='top-creators'
-            title='Top creators'
-            actionProps={{ title: 'See All', href: RoutePath.DiscoverCreators }}
-          >
-            <CreatorList creators={topCreators} animate={false} />
-          </Section>
-
-          <Section
-            id='new-comics'
-            title='New comics'
-            actionProps={{ title: 'See All', href: RoutePath.DiscoverComics }}
-          >
-            <ComicList comics={newComics} />
-          </Section>
+            <Section actionHref={RoutePath.DiscoverComics} title='New comics'>
+              <ComicList comics={newComics} />
+            </Section>
+          </div>
         </div>
       </main>
     </>

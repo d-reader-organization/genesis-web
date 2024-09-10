@@ -62,7 +62,7 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
             {carouselSlides.map((slide, index) => {
               const visitUrl = getSlideUrl(slide)
               return (
-                <div className='flex-[0_0_100%] min-w-0' key={index}>
+                <div className='flex-[0_0_100%]' key={index}>
                   <div className='overflow-hidden rounded-2xl max-md:rounded-t-none'>
                     <div className='p-0 relative w-full carousel-height'>
                       {visitUrl && (
