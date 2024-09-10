@@ -9,6 +9,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/shared/Badge'
+import Link from 'next/link'
 
 const getSlideUrl = (slide: CarouselSlide) => {
   if (slide.comicIssueId) return RoutePath.ComicIssue(slide.comicIssueId)
@@ -22,7 +23,7 @@ type Props = {
 }
 
 export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()])
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ stopOnMouseEnter: true })])
   const [selectedIndex, setSelectedIndex] = useState(0)
   const isMobile = useIsMobile()
 
@@ -40,16 +41,17 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
   }, [emblaApi, onSelect])
 
   const dots = (
-    <div className='flex justify-center gap-4 relative -top-4'>
+    <div className='flex justify-center items-center gap-4 relative bottom-8 px-4 md:px-6 max-h-4'>
       {carouselSlides.map((_, dotIndex) => (
         <button
           key={dotIndex}
-          className={cn(
-            'h-1 w-10 transition-all duration-300 rounded-2xl',
-            dotIndex === selectedIndex ? 'bg-yellow-500' : 'bg-grey-200'
-          )}
+          className={cn('transition-all duration-300 rounded-2xl w-full py-4')}
           onClick={() => emblaApi && emblaApi.scrollTo(dotIndex)}
-        />
+        >
+          <span
+            className={cn('flex w-full', dotIndex === selectedIndex ? 'bg-yellow-500 h-[3px]' : 'bg-grey-200 h-[1px]')}
+          ></span>
+        </button>
       ))}
     </div>
   )
@@ -62,7 +64,7 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
             {carouselSlides.map((slide, index) => {
               const visitUrl = getSlideUrl(slide)
               return (
-                <div className='flex-[0_0_100%]' key={index}>
+                <Link className='flex-[0_0_100%]' key={index} href={visitUrl ?? ''}>
                   <div className='overflow-hidden rounded-2xl max-md:rounded-t-none'>
                     <div className='p-0 relative w-full carousel-height'>
                       {visitUrl && (
@@ -78,10 +80,10 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
                       <div className='absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-90' />
                       <div className='h-full flex flex-col justify-between p-4 md:p-6'>
                         <TopSection />
-                        <div className='flex flex-col gap-4 relative mb-4'>
-                          <p className='text-white line-clamp-1 text-ellipsis text-2xl md:text-3xl lg:text-5xl font-semibold'>
+                        <div className='flex flex-col gap-4 relative mb-8'>
+                          <h1 className='text-white line-clamp-1 text-ellipsis text-2xl md:text-3xl lg:text-5xl font-semibold'>
                             {slide.title}
-                          </p>
+                          </h1>
                           <p className='text-base md:text-xl lg:text-[22px] font-medium leading-normal md:leading-5 lg:leading-7 tracking-[0.2px] line-clamp-2 text-ellipsis'>
                             {slide.subtitle}
                           </p>
@@ -89,7 +91,7 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               )
             })}
           </div>

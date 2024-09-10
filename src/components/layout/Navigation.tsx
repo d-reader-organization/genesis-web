@@ -11,7 +11,7 @@ import DiscoverIcon from 'public/assets/vector-icons/discover-icon.svg'
 import LibraryIcon from 'public/assets/vector-icons/library-icon.svg'
 import MarketplaceIcon from 'public/assets/vector-icons/marketplace.svg'
 import InvestIcon from 'public/assets/vector-icons/invest-icon.svg'
-import SparklesIcon from 'public/assets/vector-icons/sparkles-icon.svg'
+// import SparklesIcon from 'public/assets/vector-icons/sparkles-icon.svg'
 import { Button, Input } from '../ui'
 import Link from 'next/link'
 import clsx from 'clsx'
@@ -53,21 +53,21 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
       {!isMint && (
         <Input
           className='inline-flex justify-center items-center max-w-64 lg:max-w-80 w-full'
-          placeholder='Search comics, episodes, genres, and creators'
+          placeholder='Search comics or creators'
           prefixIcon={<SearchIcon />}
         />
       )}
       <div className='flex gap-8 xl:gap-12'>
         <MenuItem href={RoutePath.Library} isActive={isLibrary} icon={<LibraryIcon />} title='Library' />
         <div className='flex gap-4'>
-          <div
+          {/* <div
             className='flex py-4 px-2 size-12 items-center justify-center rounded-xl border border-white bg-yellow-50 cursor-pointer'
             style={{
               boxShadow: '2px 2px 0px 0px #000',
             }}
           >
             <SparklesIcon />
-          </div>
+          </div> */}
           <Button className='rounded-xl min-w-28'>Hop in</Button>
         </div>
       </div>

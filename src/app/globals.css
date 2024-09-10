@@ -12,6 +12,9 @@
     @apply mb-16 md:mb-0;
     overflow-y: scroll;
   }
+  h1 {
+    font-family: var(--font-obviously-narrow);
+  }
   svg {
     height: 24px;
   }
