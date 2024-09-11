@@ -1,6 +1,5 @@
 import { CarouselSlide } from '@/models/carousel/carouselSlide'
 import { ComicFilterTag, ComicSortTag } from '@/models/comic/comicParams'
-import { Navigation } from '@/components/layout/Navigation'
 import { HeroCarousel } from '@/components/ui/carousel/HeroCarousel'
 import { ComicList } from '@/components/comic/List'
 import { Section } from '@/components/shared/Section'

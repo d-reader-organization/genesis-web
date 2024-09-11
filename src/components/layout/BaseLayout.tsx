@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navigation } from './Navigation'
 
-type Props = {} & React.PropsWithChildren
+type Props = React.PropsWithChildren
 
 export const BaseLayout: React.FC<Props> = ({ children }) => {
   return (
