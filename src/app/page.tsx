@@ -8,6 +8,7 @@ import { RoutePath } from '@/enums/routePath'
 import { fetchComics } from './lib/api/comic/queries'
 import { fetchCarouselSlides } from './lib/api/carousel/queries'
 import { CarouselCard } from '@/components/ui/carousel/CarouselCard'
+import { BaseLayout } from '@/components/layout/BaseLayout'
 
 const TAKE_COMICS = 18
 
@@ -20,32 +21,29 @@ export default async function HomePage() {
   ])
 
   return (
-    <>
-      <Navigation />
-      <main className='flex flex-col w-full h-full items-center md:mt-10'>
-        <div className='max-w-screen-xl w-full flex flex-col md:mb-10 md:p-4'>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-6 carousel-height mb-52 md:mb-10'>
-            <HeroCarousel carouselSlides={carouselSlides} />
-            <div className='grid grid-cols-2 gap-4 max-md:p-4'>
-              <CarouselCard />
-              <CarouselCard />
-            </div>
-          </div>
-          <div className='mx-4 flex flex-col gap-8'>
-            <Section actionHref={RoutePath.DiscoverComics} title='Top 10 trending'>
-              <ComicList comics={promotedComics} />
-            </Section>
-
-            <Section actionHref={RoutePath.DiscoverComics} title='Popular comics'>
-              <ComicList comics={popularComics} />
-            </Section>
-
-            <Section actionHref={RoutePath.DiscoverComics} title='New comics'>
-              <ComicList comics={newComics} />
-            </Section>
+    <BaseLayout>
+      <div className='max-w-screen-xl w-full flex flex-col md:mb-10 md:p-4'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-6 carousel-height mb-52 md:mb-10'>
+          <HeroCarousel carouselSlides={carouselSlides} />
+          <div className='grid grid-cols-2 gap-4 max-md:p-4'>
+            <CarouselCard />
+            <CarouselCard />
           </div>
         </div>
-      </main>
-    </>
+        <div className='mx-4 flex flex-col gap-8'>
+          <Section actionHref={RoutePath.DiscoverComics} title='Top 10 trending'>
+            <ComicList comics={promotedComics} />
+          </Section>
+
+          <Section actionHref={RoutePath.DiscoverComics} title='Popular comics'>
+            <ComicList comics={popularComics} />
+          </Section>
+
+          <Section actionHref={RoutePath.DiscoverComics} title='New comics'>
+            <ComicList comics={newComics} />
+          </Section>
+        </div>
+      </div>
+    </BaseLayout>
   )
 }
