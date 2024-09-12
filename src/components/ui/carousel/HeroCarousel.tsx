@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
-import { CarouselSlide } from '@/models/carousel/carouselSlide'
+import { CarouselSlide, CarouselTag } from '@/models/carousel/carouselSlide'
 import { RoutePath } from '@/enums/routePath'
 import { useIsMobile } from '@/hooks/useBreakpoints'
 import useEmblaCarousel from 'embla-carousel-react'
@@ -19,10 +19,10 @@ const getSlideUrl = (slide: CarouselSlide) => {
 }
 
 type Props = {
-  carouselSlides: CarouselSlide[]
+  slides: CarouselSlide[]
 }
 
-export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
+export const HeroCarousel: React.FC<Props> = ({ slides }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ stopOnMouseEnter: true })])
   const [selectedIndex, setSelectedIndex] = useState(0)
   const isMobile = useIsMobile()
@@ -42,7 +42,7 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
 
   const dots = (
     <div className='flex justify-center items-center gap-4 relative bottom-8 px-4 md:px-6 max-h-4'>
-      {carouselSlides.map((_, dotIndex) => (
+      {slides.map((_, dotIndex) => (
         <button
           key={dotIndex}
           className={cn('transition-all duration-300 rounded-2xl w-full py-4')}
@@ -61,7 +61,7 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
       <div className='relative max-w-full md:max-w-[748px] carousel-height rounded-2xl shadow-[4px_4px_0px_0px_#000] max-md:rounded-t-none select-none'>
         <div className='overflow-hidden' ref={emblaRef}>
           <div className='flex'>
-            {carouselSlides.map((slide, index) => {
+            {slides.map((slide, index) => {
               const visitUrl = getSlideUrl(slide)
               return (
                 <Link className='flex-[0_0_100%]' key={index} href={visitUrl ?? ''}>
@@ -79,7 +79,7 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
                       )}
                       <div className='absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-90' />
                       <div className='h-full flex flex-col justify-between p-4 md:p-6'>
-                        <TopSection />
+                        <TopSection tags={slide.tags ?? []} />
                         <div className='flex flex-col gap-4 relative mb-8'>
                           <h1 className='text-white line-clamp-1 text-ellipsis text-2xl md:text-3xl lg:text-5xl font-semibold'>
                             {slide.title}
@@ -102,12 +102,14 @@ export const HeroCarousel: React.FC<Props> = ({ carouselSlides }) => {
   )
 }
 
-const TopSection: React.FC = () => (
-  <div className='flex justify-between'>
-    <Badge>
-      <span className='size-[14px] rounded-full bg-green-500 mr-2 text-white' />
-      Minting Live
-    </Badge>
-    <Badge>EP 1</Badge>
+type TopSectionProps = {
+  tags: CarouselTag[]
+}
+
+const TopSection: React.FC<TopSectionProps> = ({ tags }) => (
+  <div className='flex items-center gap-2'>
+    {tags.map((tag) => (
+      <Badge key={tag.title}>{tag.title}</Badge>
+    ))}
   </div>
 )

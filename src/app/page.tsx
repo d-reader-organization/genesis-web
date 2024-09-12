@@ -23,7 +23,7 @@ export default async function HomePage() {
     <BaseLayout>
       <div className='max-w-screen-xl w-full flex flex-col md:mb-10 md:p-4'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6 carousel-height mb-52 md:mb-10'>
-          <HeroCarousel carouselSlides={carouselSlides} />
+          <HeroCarousel slides={carouselSlides} />
           <div className='grid grid-cols-2 gap-4 max-md:p-4'>
             <CarouselCard />
             <CarouselCard />

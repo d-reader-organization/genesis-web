@@ -72,7 +72,7 @@ const HeartIconButton: React.FC<HeartIconButtonProps> = ({ comicIssueId, comicSl
       count,
       isFavourite,
     },
-    (state, _) => {
+    (state) => {
       return {
         count: state.isFavourite ? state.count - 1 : state.count + 1,
         isFavourite: !state.isFavourite,

@@ -1,6 +1,11 @@
 import { CarouselLocation } from '@/enums/carouselLocation'
 
-export interface CarouselSlide {
+export type CarouselTag = {
+  title: string
+  timestamp?: string
+}
+
+export type CarouselSlide = {
   id: number
   image: string
   priority: number
@@ -13,6 +18,7 @@ export interface CarouselSlide {
   comicSlug?: string
   creatorSlug?: string
   externalLink?: string
+  tags?: CarouselTag[]
 }
 
 export type CreateCarouselSlideData = Pick<
