@@ -1,6 +1,6 @@
 <h1 align="center">d-reader-web</h1>
 
-> Next.js frontend for dReader dapp on Solana
+> Next.js frontend for genesis dapp on Solana
 
 ## Setup
 
