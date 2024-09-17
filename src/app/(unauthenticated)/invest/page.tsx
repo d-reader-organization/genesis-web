@@ -35,7 +35,10 @@ export const metadata: Metadata = {
 export default async function InvestPage() {
   return (
     <BaseLayout>
-      <div className='flex flex-col items-center'>Invest page</div>
+      <div className='flex flex-col items-center gap-4 text-lg'>
+        <p>Demo app going live on September 18th</p>
+        <p>Revisit this page on September 18th</p>
+      </div>
     </BaseLayout>
   )
 }
