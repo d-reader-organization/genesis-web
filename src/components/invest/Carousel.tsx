@@ -77,7 +77,13 @@ export const InvestCarousel: React.FC<Props> = ({ slides }) => {
                       />
                     )}
                     <div className='absolute inset-0 bg-gradient-to-l from-transparent to-black'></div>
-                    <DetailsSection slide={slide} />
+                    <div className='flex justify-between relative'>
+                      <DetailsSection slide={slide} />
+                      <div className='max-h-9 bg-black bg-opacity-20 p-2 flex justify-center items-center gap-1 rounded-lg backdrop-blur-[25px] m-4'>
+                        <span className='size-3 rounded-lg bg-white' />
+                        <Paragraph text={slide.status} />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -91,24 +97,24 @@ export const InvestCarousel: React.FC<Props> = ({ slides }) => {
 }
 
 const DetailsSection: React.FC<{ slide: InvestSlide }> = ({ slide }) => (
-  <div className='h-full flex flex-col justify-between p-4 md:p-16 relative'>
+  <div className='h-full flex flex-col justify-between p-4 md:p-16'>
     <RecruitsLogo className='h-full' />
     <div className='flex flex-col gap-6 max-w-[550px]'>
       <h1 className='text-[40px] font-semibold tracking-[0.08px] mb-4'>{slide.title}</h1>
-      <StatsSection stats={slide.stats} />
+      <InfoSection infos={slide.infos} />
       <Paragraph text={slide.subtitle ?? ''} />
       <Tags tags={slide.tags ?? []} />
     </div>
   </div>
 )
 
-const StatsSection: React.FC<{ stats: SlideStats[] }> = ({ stats }) => (
+const InfoSection: React.FC<{ infos: SlideStats[] }> = ({ infos }) => (
   <div className='flex gap-2 items-center text-grey-100'>
-    {stats.map((stat, index) => (
-      <div className='flex items-center gap-2' key={stat.text}>
-        {stat.text.includes('left') ? <Hourglass className='size-4 ' /> : null}
-        <Paragraph text={stat.text} />
-        {index < stats.length - 1 && <span className='size-2 rounded-lg bg-grey-100' />}
+    {infos.map((info, index) => (
+      <div className='flex items-center gap-2' key={info.text}>
+        {info.text.includes('left') ? <Hourglass className='size-4 ' /> : null}
+        <Paragraph text={info.text} />
+        {index < infos.length - 1 && <span className='size-2 rounded-lg bg-grey-100' />}
       </div>
     ))}
   </div>

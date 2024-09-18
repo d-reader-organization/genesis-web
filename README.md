@@ -1,4 +1,4 @@
-<h1 align="center">d-reader-web</h1>
+<h1 align="center">Genesis</h1>
 
 > Next.js frontend for genesis dapp on Solana
 

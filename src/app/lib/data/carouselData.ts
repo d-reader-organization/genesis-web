@@ -7,7 +7,8 @@ export type InvestSlide = {
   image: string
   title: string
   subtitle: string
-  stats: SlideStats[]
+  status: string
+  infos: SlideStats[]
   tags: { title: string }[]
 }
 
@@ -18,7 +19,8 @@ export const investSlides: InvestSlide[] = [
     title: 'The Recruits - comic series',
     subtitle:
       'After a heist to capture the all powerful Matrix Opal goes badly wrong, Roach gets landed with a batch...',
-    stats: [
+    status: 'LIVE',
+    infos: [
       {
         text: 'by Degen Apes',
       },
@@ -43,7 +45,8 @@ export const investSlides: InvestSlide[] = [
     image: '/assets/images/invest-carousel.jpeg',
     title: 'Slide 2',
     subtitle: 'Subtitle for Slide 2',
-    stats: [
+    status: 'LIVE',
+    infos: [
       {
         text: 'by Degen Apes2',
       },
@@ -68,7 +71,8 @@ export const investSlides: InvestSlide[] = [
     title: 'Slide 3',
     subtitle: 'subtitle 3',
     image: '/assets/images/invest-carousel.jpeg',
-    stats: [
+    status: 'LIVE',
+    infos: [
       {
         text: 'by Degen Apes',
       },
