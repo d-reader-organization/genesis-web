@@ -46,6 +46,7 @@ const config = {
           400: '#5fe1a2',
           500: '#49c187', // main
           600: '#34a26d',
+          genesis: '#08CC77',
         },
         yellow: {
           50: '#fffce3',

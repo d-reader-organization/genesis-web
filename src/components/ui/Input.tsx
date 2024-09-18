@@ -8,13 +8,13 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 
 const Input = forwardRef<HTMLInputElement, Props>(({ className, prefix, prefixIcon, ...props }, ref) => {
   return (
-    <div className={cn('inline-flex gap-0 items-center', className)}>
-      {prefixIcon && <div className='-mr-8 z-10'>{prefixIcon}</div>}
+    <div className={cn('inline-flex gap-0 items-center ', className)}>
+      {prefixIcon && <div className='-mr-8 z-10 text-grey-200'>{prefixIcon}</div>}
       {prefix}
       <input
         {...props}
         className={cn(
-          'w-full rounded-2xl border-b border-b-grey-300 bg-grey-600 backdrop-blur-[5px] inline-flex gap-2 items-center p-4 font-medium placeholder:pl-2',
+          'w-[400px] max-w-[400px] rounded-xl bg-white bg-opacity-15 backdrop-blur-[5px] inline-flex gap-2 items-center pl-4 py-3 font-medium placeholder:text-grey-200 placeholder:pl-2 placeholder:text-sm',
           prefixIcon && 'pl-9',
           props.type === 'password' && 'placeholder:translate-y-1'
         )}
