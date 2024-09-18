@@ -1,3 +1,5 @@
+import { investSlides } from '@/app/lib/data/carouselData'
+import { InvestCarousel } from '@/components/invest/Carousel'
 import { BaseLayout } from '@/components/layout/BaseLayout'
 import { Metadata } from 'next'
 
@@ -35,10 +37,7 @@ export const metadata: Metadata = {
 export default async function InvestPage() {
   return (
     <BaseLayout>
-      <div className='flex flex-col items-center gap-4 text-lg'>
-        <p>Demo app going live on September 18th</p>
-        <p>Revisit this page on September 18th</p>
-      </div>
+      <InvestCarousel slides={investSlides} />
     </BaseLayout>
   )
 }
