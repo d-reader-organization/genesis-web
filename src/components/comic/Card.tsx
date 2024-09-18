@@ -35,10 +35,10 @@ export const ComicCard: React.FC<Props> = ({ comic, className, priority, fetchPr
           blurDataURL={blurDataUrl}
         />
         <Image
-          sizes='230px'
-          className='max-w-[180px] max-h-[80%] object-cover p-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
-          src={comic.logo}
           alt={`logo-${comic.title}`}
+          sizes='230px'
+          src={comic.logo}
+          className='max-w-[180px] max-h-[80%] object-cover p-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
           width={180}
           height={180}
           priority={priority}

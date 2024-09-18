@@ -9,7 +9,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import RecruitsLogo from 'public/assets/vector-icons/recruits.svg'
 import { Hourglass } from 'lucide-react'
-import { InvestSlide, SlideStats } from '@/app/lib/data/carouselData'
+import { InvestSlide, SlideStats } from '@/app/lib/data/invest/carouselData'
 
 type Props = {
   slides: InvestSlide[]
