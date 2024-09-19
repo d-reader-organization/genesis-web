@@ -1,18 +1,11 @@
-import { Navigation } from '@/components/layout/Navigation'
+import { BaseLayout } from '@/components/layout/BaseLayout'
 
 interface Params {
   entity: string
 }
 
 function DiscoverPage({ params }: { params: Params }) {
-  return (
-    <>
-      <Navigation />
-      <main className='pt-24 flex flex-col justify-center'>
-        <p>Discover {params.entity}</p>
-      </main>
-    </>
-  )
+  return <BaseLayout>Discover {params.entity}</BaseLayout>
 }
 
 export default DiscoverPage

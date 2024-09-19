@@ -5,7 +5,8 @@ import { RoutePath } from '@/enums/routePath'
 import { usePathname } from 'next/navigation'
 import { useIsMobile } from '@/hooks/useBreakpoints'
 import { BottomNavItem, BottomNavigation } from './BottomNavigation'
-import Logo from 'public/assets/vector-icons/genesis-logo.svg'
+import DReaderLogo from 'public/assets/vector-icons/full-logo.svg'
+import GenesisLogo from 'public/assets/vector-icons/genesis-logo.svg'
 import SearchIcon from 'public/assets/vector-icons/search-icon.svg'
 import DiscoverIcon from 'public/assets/vector-icons/discover-icon.svg'
 import MarketplaceIcon from 'public/assets/vector-icons/marketplace.svg'
@@ -45,7 +46,11 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
         <div className='flex items-center justify-between p-4 max-w-screen-xl w-full'>
           <div className='flex items-center gap-8'>
             <Link href={RoutePath.Home}>
-              <Logo className='h-8 min-w-fit fill-white ml-4' />
+              {isInvest ? (
+                <GenesisLogo className='h-8 min-w-fit fill-white ml-4' />
+              ) : (
+                <DReaderLogo className='h-8 min-w-fit fill-white ml-4' />
+              )}
             </Link>
             {!isMint && (
               <Input
@@ -65,7 +70,7 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
           </div>
 
           <div className='flex gap-4 items-center max-h-14'>
-            <div className='flex py-4 px-2 size-10 items-center justify-center rounded-xl bg-green-genesis cursor-pointer'>
+            <div className='flex py-4 px-2 size-10 items-center justify-center rounded-xl bg-yellow-500 cursor-pointer'>
               <SparklesIcon />
             </div>
             {isInvest ? (

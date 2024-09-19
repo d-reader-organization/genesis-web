@@ -43,10 +43,7 @@ export const InvestCarousel: React.FC<Props> = ({ slides }) => {
           onClick={() => emblaApi && emblaApi.scrollTo(dotIndex)}
         >
           <span
-            className={cn(
-              'flex w-full',
-              dotIndex === selectedIndex ? 'bg-green-genesis h-[3px]' : 'bg-grey-200 h-[1px]'
-            )}
+            className={cn('flex w-full', dotIndex === selectedIndex ? 'bg-yellow-500 h-[3px]' : 'bg-grey-200 h-[1px]')}
           ></span>
         </button>
       ))}

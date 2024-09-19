@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { PlusIcon, MinusIcon } from 'lucide-react'
-import { Divider } from '../shared/Divider'
+import { cn } from '@/lib/utils'
 
 interface FAQItem {
   question: string
@@ -50,8 +50,7 @@ const FAQItem: React.FC<{ item: FAQItem }> = ({ item }) => {
   const contentRef = useRef<HTMLDivElement>(null)
 
   return (
-    <div>
-      <Divider />
+    <div className={cn('border-y border-grey-300', isExpanded && 'border-b-0')}>
       <button
         className='flex justify-between items-center w-full text-left py-8 focus:outline-none'
         onClick={() => setIsExpanded(!isExpanded)}
@@ -72,9 +71,8 @@ const FAQItem: React.FC<{ item: FAQItem }> = ({ item }) => {
           opacity: isExpanded ? 1 : 0,
         }}
       >
-        <div className='pb-8 text-base font-medium leading-[140%]'>{item.answer}</div>
+        <div className='text-base font-medium leading-[140%]'>{item.answer}</div>
       </div>
-      <Divider />
     </div>
   )
 }
