@@ -19,7 +19,7 @@ const orientationClasses: Record<ArrowOrientation, string> = {
 export const Arrow: React.FC<Props> = ({ arrowOrientation, onClick }) => {
   return (
     <button
-      className='inline-flex justify-center items-center p-4 max-h-[50px] rounded-2xl bg-grey-400 hover:brightness-125 shadow-[2px_2px_0px_0px_#000]'
+      className='inline-flex justify-center items-center size-[42px] rounded-xl bg-grey-400 hover:brightness-125'
       onClick={onClick}
     >
       <ChevronRight className={orientationClasses[arrowOrientation]} />

@@ -10,4 +10,6 @@ const DividerWithText: React.FC<Props> = ({ text }) => (
   </div>
 )
 
-export { DividerWithText }
+const Divider: React.FC = () => <div className='h-[1px] flex w-full bg-grey-300' />
+
+export { Divider, DividerWithText }

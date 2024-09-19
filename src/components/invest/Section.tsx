@@ -1,79 +1,59 @@
-import { Project } from '@/app/lib/data/invest/projectsData'
-import { RoutePath } from '@/enums/routePath'
-import { ChevronRightIcon, InfoIcon } from 'lucide-react'
+import { InterestProject } from '@/app/lib/data/invest/projectsData'
+import React from 'react'
+import { Section } from '../shared/Section'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/Tooltip'
+import { RoutePath } from '@/enums/routePath'
+import AnnouncementIcon from 'public/assets/vector-icons/announcement.svg'
+import { cn } from '@/lib/utils'
 
 type Props = {
-  projects: Project[]
+  actionHref: string
+  data: InterestProject[]
   title: string
 }
 
-export const InvestSection: React.FC<Props> = ({ projects, title }) => {
+export const InvestSection: React.FC<Props> = ({ actionHref, data, title }) => {
   return (
-    <div className='flex flex-col max-h-[414px] gap-10'>
-      <h1 className='text-[32px] font-semibold leading-8 tracking-[0.064px]'>{title}</h1>
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8 lg:gap-10'>
-        {projects.map((project) => (
-          <Card project={project} key={project.slug} />
+    <Section actionHref={actionHref} title={title}>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-10 '>
+        {data.map((project) => (
+          <Link
+            href={RoutePath.InvestDetails(project.slug)}
+            className='relative  max-h-[382px] min-h-[382px] rounded-xl hover:brightness-125'
+            key={project.title}
+          >
+            <Image
+              alt={`Background image of the project - ${project.title}`}
+              src={project.image}
+              className='object-cover rounded-xl'
+              fill
+            />
+            <div className='absolute inset-0 bg-gradient-to-b from-transparent to-black rounded-xl'></div>
+            <div className='relative z-10 p-6 flex flex-col gap-2 justify-end h-full'>
+              <h2 className='text-2xl font-bold'>{project.title}</h2>
+              <div className='inline-flex items-center gap-2'>
+                <AnnouncementIcon />
+                <p className='text-2xl font-bold'>{project.stats.likes}</p>
+                <p className='text-xs font-bold text-grey-100'>PEOPLE EXPRESSED INTEREST</p>
+              </div>
+              <div className='flex flex-wrap gap-2'>
+                {project.tags.map((tag, index) => (
+                  <div
+                    className={cn(
+                      'flex justify-center items-center h-[28px] p-2 rounded-lg bg-white bg-opacity-20 backdrop-blur-[25px]',
+                      index === 0 && 'bg-transparent border border-grey-100'
+                    )}
+                    key={`${tag}-${index}`}
+                  >
+                    <p className='text-base font-medium text-grey-100'>{tag}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Link>
         ))}
       </div>
-    </div>
+    </Section>
   )
 }
-
-type CardProps = {
-  project: Project
-}
-
-const Card: React.FC<CardProps> = ({ project }) => (
-  <div className='bg-grey-500 flex flex-col items-center gap-[30px] p-6 pt-8 rounded-xl mb-20'>
-    <Image
-      alt={`logo-${project.logo}`}
-      src={project.logo}
-      className='max-w-[180px] max-h-[84px] object-cover p-4'
-      width={180}
-      height={180}
-    />
-    <RoiWidget roi={project.roi} tooltipText={project.tooltipText} />
-    <div className='flex justify-center gap-12  lg:gap-16 xl:gap-20 items-center'>
-      <div className='flex flex-col gap-2'>
-        <p className='text-xs font-bold text-grey-100'>RAISED</p>
-        <p className='text-base font-bold leading-[22.4px]'>${project.raised}</p>
-      </div>
-      <div className='flex flex-col gap-2'>
-        <p className='text-xs font-bold text-grey-100'>BACKERS</p>
-        <p className='text-base font-bold leading-[22.4px]'>{project.backers}</p>
-      </div>
-    </div>
-    <p className='text-base font-bold leading-[22.4px] text-center'>{project.description}</p>
-    <Link
-      href={RoutePath.Payout(project.slug)}
-      className='flex justify-center items-center gap-2 self-stretch text-[#AFB3BC] rounded-xl bg-grey-400 py-3 pr-2 pl-4 hover:brightness-125'
-    >
-      <p>Learn more</p>
-      <ChevronRightIcon />
-    </Link>
-  </div>
-)
-
-const RoiWidget: React.FC<{ roi: number; tooltipText: string }> = ({ roi, tooltipText }) => (
-  <div className='flex justify-center items-center p-3 gap-3 bg-grey-600 rounded-xl'>
-    <p className='text-[32px] font-bold leading-8'>{roi}%</p>
-    <p className='text-xs font-bold leading-normal text-grey-100'>RETURN ON INVESTMENT</p>
-    <InfoTooltip text={tooltipText} />
-  </div>
-)
-
-const InfoTooltip: React.FC<{ text: string }> = ({ text }) => (
-  <TooltipProvider>
-    <Tooltip delayDuration={10}>
-      <TooltipTrigger>
-        <InfoIcon className='text-green-genesis size-[18px]' />
-      </TooltipTrigger>
-      <TooltipContent side='right'>{text}</TooltipContent>
-    </Tooltip>
-  </TooltipProvider>
-)

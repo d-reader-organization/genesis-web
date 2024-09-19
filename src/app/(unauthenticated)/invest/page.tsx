@@ -1,6 +1,8 @@
 import { investSlides } from '@/app/lib/data/invest/carouselData'
-import { successfulProjects } from '@/app/lib/data/invest/projectsData'
+import { highInterestProjects, successfulProjects } from '@/app/lib/data/invest/projectsData'
 import { InvestCarousel } from '@/components/invest/Carousel'
+import { FaqSection } from '@/components/invest/Faq'
+import { ProjectsSection } from '@/components/invest/ProjectsSection'
 import { InvestSection } from '@/components/invest/Section'
 import { BaseLayout } from '@/components/layout/BaseLayout'
 import { Metadata } from 'next'
@@ -41,7 +43,9 @@ export default async function InvestPage() {
     <BaseLayout>
       <div className='flex flex-col gap-10 max-w-screen-xl w-full'>
         <InvestCarousel slides={investSlides} />
-        <InvestSection projects={successfulProjects} title='Recent Successful Projects' />
+        <ProjectsSection projects={successfulProjects} title='Recent Successful Projects' />
+        <InvestSection actionHref='/invest' data={highInterestProjects} title='Gauging Interest' />
+        <FaqSection />
       </div>
     </BaseLayout>
   )
