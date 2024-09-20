@@ -2,6 +2,8 @@
 
 > Next.js frontend for genesis dapp on Solana
 
+👉 See the mock demo here: [demo link](https://genesis-app-web.vercel.app/invest)
+
 ## Setup
 
 First, make sure your node version matches the one specified in `.nvmrc`
