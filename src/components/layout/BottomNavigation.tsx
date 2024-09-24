@@ -28,7 +28,7 @@ type BottomNavItemProps = {
 export const BottomNavigation: React.FC<Props> = ({ initialNavItem }) => {
   return (
     <div className='fixed bottom-0 backdrop-blur-[10px] left-0 z-50 w-full p-4 h-14 bg-grey-500 bg-opacity-70'>
-      <div className='grid h-full max-w-lg grid-cols-4 gap-4'>
+      <div className='flex justify-center gap-4'>
         <BottomNavigationItem
           href={RoutePath.Home}
           icon={<HomeIcon />}
