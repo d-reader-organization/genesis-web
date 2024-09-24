@@ -31,11 +31,15 @@ export const InvestSection: React.FC<Props> = ({ actionHref, data, title }) => {
             />
             <div className='absolute inset-0 bg-gradient-to-b from-transparent to-black rounded-xl'></div>
             <div className='relative z-10 p-6 flex flex-col gap-2 justify-end h-full'>
-              <h2 className='text-2xl font-bold'>{project.title}</h2>
+              <h2 className='text-xl md:text-2xl font-semibold md:font-bold leading-[20px] md:leading-[24px] max-md:tracking-[0.04px]'>
+                {project.title}
+              </h2>
               <div className='inline-flex items-center gap-2'>
                 <AnnouncementIcon />
-                <p className='text-2xl font-bold'>{project.stats.likes}</p>
-                <p className='text-xs font-bold text-grey-100'>PEOPLE EXPRESSED INTEREST</p>
+                <div className='flex max-md:flex-col md:items-center gap-1'>
+                  <p className='text-base max-md:leading-[16px] md:text-2xl font-bold'>{project.stats.likes}</p>
+                  <p className='text-[10px] md:text-xs font-bold text-grey-100'>PEOPLE EXPRESSED INTEREST</p>
+                </div>
               </div>
               <div className='flex flex-wrap gap-2'>
                 {project.tags.map((tag, index) => (
@@ -46,7 +50,7 @@ export const InvestSection: React.FC<Props> = ({ actionHref, data, title }) => {
                     )}
                     key={`${tag}-${index}`}
                   >
-                    <p className='text-base font-medium text-grey-100'>{tag}</p>
+                    <p className='text-[10px] leading-normal md:text-base font-medium text-grey-100'>{tag}</p>
                   </div>
                 ))}
               </div>
