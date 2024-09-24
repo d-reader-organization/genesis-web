@@ -1,7 +1,8 @@
 import React from 'react'
 import HomeIcon from 'public/assets/vector-icons/home-icon.svg'
 import DiscoverIcon from 'public/assets/vector-icons/discover-icon.svg'
-import ProfileIcon from 'public/assets/vector-icons/profile.svg'
+import InvestIcon from 'public/assets/vector-icons/invest-icon-fill.svg'
+import BookmarkIcon from 'public/assets/vector-icons/bookmark-icon.svg'
 import { RoutePath } from '@/enums/routePath'
 import Link from 'next/link'
 import clsx from 'clsx'
@@ -13,7 +14,8 @@ type Props = {
 export enum BottomNavItem {
   home = 'home',
   discover = 'discover',
-  profile = 'profile',
+  invest = 'invest',
+  library = 'library',
 }
 
 type BottomNavItemProps = {
@@ -25,8 +27,8 @@ type BottomNavItemProps = {
 
 export const BottomNavigation: React.FC<Props> = ({ initialNavItem }) => {
   return (
-    <div className='fixed bottom-0 backdrop-blur-[10px] left-0 z-50 w-full h-16 bg-grey-500'>
-      <div className='grid h-full max-w-lg grid-cols-3 mx-auto'>
+    <div className='fixed bottom-0 backdrop-blur-[10px] left-0 z-50 w-full p-4 h-14 bg-grey-500 bg-opacity-70'>
+      <div className='grid h-full max-w-lg grid-cols-4 gap-4'>
         <BottomNavigationItem
           href={RoutePath.Home}
           icon={<HomeIcon />}
@@ -40,10 +42,16 @@ export const BottomNavigation: React.FC<Props> = ({ initialNavItem }) => {
           title='Discover'
         />
         <BottomNavigationItem
-          href={RoutePath.Profile}
-          icon={<ProfileIcon />}
-          isSelected={initialNavItem === BottomNavItem.profile}
-          title='Profile'
+          href={RoutePath.Invest}
+          icon={<InvestIcon />}
+          isSelected={initialNavItem === BottomNavItem.invest}
+          title='Invest'
+        />
+        <BottomNavigationItem
+          href={RoutePath.Library}
+          icon={<BookmarkIcon />}
+          isSelected={initialNavItem === BottomNavItem.library}
+          title='Library'
         />
       </div>
     </div>
@@ -59,6 +67,6 @@ const BottomNavigationItem: React.FC<BottomNavItemProps> = ({ href, icon, isSele
     href={href}
   >
     {icon}
-    <span className='text-sm font-normal'>{title}</span>
+    {/* <span className='text-sm font-normal'>{title}</span> */}
   </Link>
 )

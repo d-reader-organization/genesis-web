@@ -6,6 +6,7 @@ export type InvestSlide = {
   slug: string
   image: string
   title: string
+  logo: string
   subtitle: string
   status: string
   infos: SlideStats[]
@@ -20,6 +21,7 @@ export const investSlides: InvestSlide[] = [
     subtitle:
       'After a heist to capture the all powerful Matrix Opal goes badly wrong, Roach gets landed with a batch...',
     status: 'LIVE',
+    logo: 'https://d323dls9ny69nf.cloudfront.net/comics/the-recruits-1714399610806/logo-1714399886123.png',
     infos: [
       {
         text: 'by Degen Apes',
@@ -46,6 +48,7 @@ export const investSlides: InvestSlide[] = [
     title: 'Slide 2',
     subtitle: 'Subtitle for Slide 2',
     status: 'LIVE',
+    logo: 'https://d323dls9ny69nf.cloudfront.net/comics/the-recruits-1714399610806/logo-1714399886123.png',
     infos: [
       {
         text: 'by Degen Apes2',
@@ -72,6 +75,7 @@ export const investSlides: InvestSlide[] = [
     subtitle: 'subtitle 3',
     image: '/assets/images/invest-carousel.jpeg',
     status: 'LIVE',
+    logo: 'https://d323dls9ny69nf.cloudfront.net/comics/the-recruits-1714399610806/logo-1714399886123.png',
     infos: [
       {
         text: 'by Degen Apes',

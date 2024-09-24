@@ -21,20 +21,27 @@ type Props = {
   paramId?: string | number
 }
 
+const initialMobileNavItem = (pathname: string) => {
+  if (pathname.startsWith(RoutePath.Discover)) {
+    return BottomNavItem.discover
+  } else if (pathname.startsWith(RoutePath.Library)) {
+    return BottomNavItem.library
+  } else if (pathname.startsWith(RoutePath.Invest)) {
+    return BottomNavItem.invest
+  }
+  return BottomNavItem.home
+}
+
 export const Navigation: React.FC<Props> = ({ paramId }) => {
   const pathname = usePathname()
+  const isMobile = useIsMobile()
 
   const isDiscover = pathname.startsWith(RoutePath.Discover)
-  const isProfile = pathname.startsWith(RoutePath.Profile)
   const isInvest = pathname.startsWith(RoutePath.Invest)
-
-  const isMobile = useIsMobile()
   const isMint = paramId ? pathname === RoutePath.Mint(paramId) || RoutePath.ComicIssue(paramId) : false
 
   return isMobile ? (
-    <BottomNavigation
-      initialNavItem={isDiscover ? BottomNavItem.discover : isProfile ? BottomNavItem.profile : BottomNavItem.home}
-    />
+    <BottomNavigation initialNavItem={initialMobileNavItem(pathname)} />
   ) : (
     <>
       <div

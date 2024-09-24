@@ -13,9 +13,11 @@ type Props = {
 
 export const ProjectsSection: React.FC<Props> = ({ projects, title }) => {
   return (
-    <div className='flex flex-col gap-10 my-10'>
-      <h1 className='text-[32px] font-semibold leading-8 tracking-[0.064px]'>{title}</h1>
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8 lg:gap-10'>
+    <div className='flex flex-col gap-4 md:gap-10 md:my-10'>
+      <h1 className='text-xl md:text-[32px] font-semibold leading-[20px] md:leading-8 tracking-[0.04px] md:tracking-[0.064px]'>
+        {title}
+      </h1>
+      <div className='flex overflow-x-auto max-md:py-2 md:overflow-x-visible md:flex-wrap gap-5 md:gap-8 lg:gap-10'>
         {projects.map((project) => (
           <Card project={project} key={project.slug} />
         ))}
@@ -29,7 +31,7 @@ type CardProps = {
 }
 
 const Card: React.FC<CardProps> = ({ project }) => (
-  <div className='bg-grey-500 flex flex-col items-center gap-[30px] p-6 pt-4 rounded-xl'>
+  <div className='bg-grey-500 flex flex-col items-center gap-4 md:gap-[30px] p-4 md:p-6 pt-4 rounded-xl max-w-[242px] md:max-w-[354px]'>
     <Image
       alt={`logo-${project.logo}`}
       src={project.logo}
@@ -38,26 +40,30 @@ const Card: React.FC<CardProps> = ({ project }) => (
       height={180}
     />
     <RoiWidget roi={project.roi} tooltipText={project.tooltipText} />
-    <div className='flex justify-center gap-12  lg:gap-16 xl:gap-20 items-center'>
+    <div className='flex max-md:flex-col justify-center gap-4 md:gap-12  lg:gap-16 xl:gap-20 items-center'>
       <InvestmentStatsBox title='RAISED' value={project.raised} />
       <InvestmentStatsBox title='BACKERS' value={project.backers} />
     </div>
-    <p className='text-base font-bold leading-[22.4px] text-center'>{project.description}</p>
+    <p className='text-xs md:text-base font-bold leading-normal md:leading-[22.4px] text-center'>
+      {project.description}
+    </p>
     <Link
       href={RoutePath.Payout(project.slug)}
-      className='flex justify-center items-center gap-2 self-stretch text-[#AFB3BC] rounded-xl bg-grey-400 py-3 pr-2 pl-4 hover:brightness-125'
+      className='flex justify-center items-center gap-2 self-stretch text-[#AFB3BC] rounded-xl bg-grey-400 py-3 pr-2 pl-4 hover:brightness-125 max-h-[36px] md:max-h-[42px]'
     >
-      <p>Learn more</p>
+      <p className='text-xs md:text-base font-medium leading-normal md:leading-[22.4px]'>Learn more</p>
       <ChevronRightIcon />
     </Link>
   </div>
 )
 
 const RoiWidget: React.FC<{ roi: number; tooltipText: string }> = ({ roi, tooltipText }) => (
-  <div className='flex justify-center items-center p-3 gap-3 bg-grey-600 rounded-xl max-h-12'>
-    <p className='text-[32px] font-bold leading-8'>{roi}%</p>
-    <p className='text-xs font-bold leading-normal text-grey-100'>RETURN ON INVESTMENT</p>
-    <InfoTooltip text={tooltipText} />
+  <div className='flex max-md:flex-col justify-center items-center p-3 gap-2 md:gap-3 bg-grey-600 rounded-xl max-h-[60px] md:max-h-12'>
+    <p className='text-base md:text-[32px] font-bold leading:[22.4px] md:leading-8'>{roi}%</p>
+    <div className='flex items-center gap-2 md:gap-3'>
+      <p className='text-[10px] md:text-xs font-bold leading-normal text-grey-100'>RETURN ON INVESTMENT</p>
+      <InfoTooltip text={tooltipText} />
+    </div>
   </div>
 )
 
@@ -65,7 +71,7 @@ const InfoTooltip: React.FC<{ text: string }> = ({ text }) => (
   <TooltipProvider>
     <Tooltip delayDuration={10}>
       <TooltipTrigger>
-        <InfoIcon className='text-green-genesis size-[18px]' />
+        <InfoIcon className='text-green-genesis size-[10px] md:size-[18px]' />
       </TooltipTrigger>
       <TooltipContent align='start' className='max-w-80' side='right'>
         {text}
