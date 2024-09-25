@@ -50,11 +50,15 @@ const config = {
         },
         yellow: {
           50: '#fffce3',
+          200: '#FFF387',
           400: '#fff174',
           500: '#fceb54', // main
           600: '#cabc41',
         },
         orange: {
+          100: '#FFBF78',
+          200: '#FC835D',
+          300: '#E15456',
           400: '#F2CA63',
           500: '#e9a860', //main
         },

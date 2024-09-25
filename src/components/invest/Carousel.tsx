@@ -1,7 +1,6 @@
 'use client'
 
 import { RoutePath } from '@/enums/routePath'
-import { cn } from '@/lib/utils'
 import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
 import Link from 'next/link'
@@ -9,6 +8,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Hourglass } from 'lucide-react'
 import { InvestSlide, SlideStats } from '@/app/lib/data/invest/carouselData'
+import { CarouselDots } from '../shared/CarouselDots'
 
 type Props = {
   slides: InvestSlide[]
@@ -32,22 +32,6 @@ export const InvestCarousel: React.FC<Props> = ({ slides }) => {
       emblaApi?.off('select', onSelect)
     }
   }, [emblaApi, onSelect])
-
-  const dots = (
-    <div className='flex justify-center items-center gap-4 px-4 md:px-6 max-h-4'>
-      {slides.map((_, dotIndex) => (
-        <button
-          key={dotIndex}
-          className={cn('transition-all duration-300 rounded-2xl w-full max-w-[90px] py-4')}
-          onClick={() => emblaApi && emblaApi.scrollTo(dotIndex)}
-        >
-          <span
-            className={cn('flex w-full', dotIndex === selectedIndex ? 'bg-yellow-500 h-[3px]' : 'bg-grey-200 h-[1px]')}
-          ></span>
-        </button>
-      ))}
-    </div>
-  )
 
   return (
     <div className='flex flex-col gap-4 md:gap-6 w-full max-w-screen-xl'>
@@ -87,7 +71,7 @@ export const InvestCarousel: React.FC<Props> = ({ slides }) => {
           })}
         </div>
       </div>
-      {dots}
+      {<CarouselDots emblaApi={emblaApi} slides={slides} selectedIndex={selectedIndex} />}
     </div>
   )
 }

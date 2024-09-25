@@ -3,6 +3,7 @@ import LegendaryRarityIcon from 'public/assets/vector-icons/legendary-rarity-ico
 import EpicRarityIcon from 'public/assets/vector-icons/epic-rarity-icon.svg'
 import CommonRarityIcon from 'public/assets/vector-icons/common-rarity-icon.svg'
 import UncommonRarityIcon from 'public/assets/vector-icons/uncommon-rarity-icon.svg'
+import { ComicRarity } from '@/enums/comicRarity'
 
 export const getRarityIcon = (rarity: string) => {
   switch (rarity.toLowerCase()) {
@@ -18,5 +19,36 @@ export const getRarityIcon = (rarity: string) => {
       return <LegendaryRarityIcon />
     default:
       return <CommonRarityIcon />
+  }
+}
+
+// had to split this in two functions so tailwind knows about color classes at build time
+export const getRarityColor = (rarity: ComicRarity) => {
+  switch (rarity) {
+    case ComicRarity.Common:
+      return 'bg-yellow-50'
+    case ComicRarity.Uncommon:
+      return 'bg-yellow-200'
+    case ComicRarity.Rare:
+      return 'bg-orange-100'
+    case ComicRarity.Epic:
+      return 'bg-orange-200'
+    case ComicRarity.Legendary:
+      return 'bg-orange-300'
+  }
+}
+
+export const getRarityTextColor = (rarity: ComicRarity) => {
+  switch (rarity) {
+    case ComicRarity.Common:
+      return 'text-yellow-50'
+    case ComicRarity.Uncommon:
+      return 'text-yellow-200'
+    case ComicRarity.Rare:
+      return 'text-orange-100'
+    case ComicRarity.Epic:
+      return 'text-orange-200'
+    case ComicRarity.Legendary:
+      return 'text-orange-300'
   }
 }
