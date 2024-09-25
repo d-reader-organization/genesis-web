@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Dialog, DialogContent } from '../ui/Dialog'
+import { Dialog, DialogContent, DialogTitle } from '../ui/Dialog'
 import { StatelessCover } from '@/models/comicIssue/statelessCover'
 import Image from 'next/image'
 import { hardcodedData, RarityChip } from '../shared/RarityChip'
@@ -22,13 +22,15 @@ export const CoverPreviewDialog: React.FC<Props> = ({ cover, open, onOpenChange,
         className='bg-transparent shadow-none p-4 flex gap-8 items-center sm:max-w-[520px]'
         overlayClassName='bg-grey-600 bg-opacity-60 backdrop-blur-[20px]'
         showCloseIcon={false}
+        aria-describedby={undefined}
       >
+        <DialogTitle className='sr-only'>Cover Preview</DialogTitle>
         <Arrow arrowOrientation='LEFT' className='bg-transparent' onClick={onPrevClick} />
         <div className='flex flex-col gap-[42px] rounded-2xl'>
           <Image
             src={cover.image}
             alt='Cover image'
-            className='shadow-[6px 6px 0px 0px #000] rounded-2xl w-full'
+            className='shadow-[6px_6px_0px_0px_#000] rounded-2xl w-full'
             height={520}
             width={520}
           />

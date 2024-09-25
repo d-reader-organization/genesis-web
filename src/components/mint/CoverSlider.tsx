@@ -40,11 +40,9 @@ export const CoverSlider: React.FC<Props> = ({ covers }) => {
         cover={covers[selectedIndex]}
         open={isCoverPreviewOpen}
         onPrevClick={() => {
-          setSelectedIndex((prev) => (prev - 1 + covers.length) % covers.length)
           emblaApi?.scrollPrev()
         }}
         onNextClick={() => {
-          setSelectedIndex((prev) => (prev + 1) % covers.length)
           emblaApi?.scrollNext()
         }}
         onOpenChange={() => toggleCoverPreview()}
