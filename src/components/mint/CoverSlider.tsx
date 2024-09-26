@@ -102,11 +102,15 @@ const SliderDots: React.FC<DotsProps> = ({ emblaApi, slides, selectedIndex }) =>
       {slides.map((_, dotIndex) => (
         <button
           key={dotIndex}
-          className={cn('transition-all duration-300 rounded-2xl w-full py-4 flex flex-col items-center gap-1')}
+          className={cn('transition-all duration-300 rounded-2xl w-full py-4 flex flex-col items-center gap-2')}
           onClick={() => emblaApi && emblaApi.scrollTo(dotIndex)}
         >
           <RarityIcon
-            className={cn(selectedIndex === dotIndex ? 'block' : 'invisible', getRarityTextColor(currentRarity))}
+            className={cn(
+              'w-4 h-3.5',
+              selectedIndex === dotIndex ? 'block' : 'invisible',
+              getRarityTextColor(currentRarity)
+            )}
           />
           <span
             className={cn(

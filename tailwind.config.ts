@@ -47,6 +47,7 @@ const config = {
           500: '#49c187', // main
           600: '#34a26d',
           genesis: '#08CC77',
+          accent: '#07BD74',
         },
         yellow: {
           50: '#fffce3',

@@ -39,6 +39,8 @@ export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticat
   const { data: supportedTokens } = useFetchSupportedTokens()
   useAuthorizeWallet(refetch)
 
+  // TODO SKELETON
+  // <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 border border-grey-200 mb-6 max-h-fit min-h-[320px] max-w-[800px] w-full'><Skeleton className='h-5'/></div>
   return (
     candyMachine && (
       <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 border border-grey-200 mb-6 max-h-fit'>
@@ -122,7 +124,7 @@ const UserDetails: React.FC<DetailsProps> = ({ candyMachine }) => {
 
 const ComicVault: React.FC = () => (
   <Expandable
-    className='bg-grey-400 border-transparent rounded-2xl'
+    className='bg-grey-400 border-transparent rounded-2xl max-w-[800px]'
     title='Comic Vault'
     titleComponent={
       <div className='flex gap-2 items-center text-sm sm:text-base font-medium leading-5 text-grey-100'>
