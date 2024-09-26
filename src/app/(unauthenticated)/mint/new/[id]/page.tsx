@@ -10,6 +10,7 @@ Rarity chip: border-radius 10px, border 2.593px, color black - background it dep
 import { fetchPublicComicIssue } from '@/app/lib/api/comicIssue/queries'
 import { BaseLayout } from '@/components/layout/BaseLayout'
 import { CoverSlider } from '@/components/mint/CoverSlider'
+import { CandyMachineDetails } from '@/components/shared/CandyMachineDetails'
 import { ComicIssuePageParams } from '@/models/common'
 
 export default async function NewMintPage({ params }: ComicIssuePageParams) {
@@ -18,7 +19,10 @@ export default async function NewMintPage({ params }: ComicIssuePageParams) {
 
   return (
     <BaseLayout>
-      <CoverSlider covers={comicIssue.statelessCovers ?? []} />
+      <div className='flex gap-6'>
+        <CoverSlider covers={comicIssue.statelessCovers ?? []} />
+        <CandyMachineDetails comicIssue={comicIssue} isAuthenticated />
+      </div>
     </BaseLayout>
   )
 }

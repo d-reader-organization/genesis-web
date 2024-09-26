@@ -1,19 +1,11 @@
-import { settingsKeys, SETTINGS_QUERY_KEYS } from '@/api/settings/settingsKeys'
-import { SplToken } from '@/models/settings/splToken'
+import { settingsKeys } from '@/api/settings/settingsKeys'
 import { useQuery } from '@tanstack/react-query'
-import { fetchWrapper } from '@/app/lib/fetchWrapper'
 import { onQueryError } from '@/components/ui/toast/use-toast'
-
-const { SETTINGS, SPL_TOKEN, GET } = SETTINGS_QUERY_KEYS
-
-const fetchSupportedTokens = async (): Promise<SplToken[]> => {
-  const response = await fetchWrapper<SplToken[]>({ path: `${SETTINGS}/${SPL_TOKEN}/${GET}` })
-  return response.data ?? []
-}
+import { fetchSupportedTokens } from '@/app/lib/api/settings/queries'
 
 export const useFetchSupportedTokens = () => {
   return useQuery({
-    queryFn: fetchSupportedTokens,
+    queryFn: () => fetchSupportedTokens(),
     queryKey: settingsKeys.getSupportedTokens,
     staleTime: 1000 * 60 * 60 * 12, // stale for 12 hours
     throwOnError: onQueryError,

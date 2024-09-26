@@ -77,7 +77,13 @@ type SlideProps = {
 const Slide: React.FC<SlideProps> = ({ cover, onClick }) => (
   <div className='flex-[0_0_100%] h-[520px]'>
     <button className='relative flex justify-center hover:brightness-110' onClick={onClick}>
-      <Image alt={`${cover.rarity} - cover`} src={cover.image} width={350} height={514} className='rounded-2xl' />
+      <Image
+        alt={`${cover.rarity} - cover`}
+        src={cover.image}
+        width={350}
+        height={514}
+        className='rounded-2xl min-h-96'
+      />
       <RarityChip className='absolute -bottom-[14px]' rarity={cover.rarity} />
     </button>
   </div>
