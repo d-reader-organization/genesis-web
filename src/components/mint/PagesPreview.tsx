@@ -19,9 +19,10 @@ export const PagesPreview: React.FC<Props> = ({ comicIssueId, pages }) => {
             alt={`page-${index}`}
             src={page.image}
             key={page.image}
-            width={107}
-            height={160}
-            className='max-w-[98px] max-h-[146px] sm:max-w-[102px] sm:max-h-[154px] md:max-w-[107px] md:max-h-40 object-cover rounded-lg opacity-50'
+            width='0'
+            height='0'
+            sizes='107px'
+            className='w-full max-h-40 object-cover rounded-lg opacity-50'
           />
         ))}
       </div>

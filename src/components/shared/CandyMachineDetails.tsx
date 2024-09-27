@@ -130,7 +130,7 @@ const CurrencyRow: React.FC<CurrencyRowProps> = ({ isSelected = false, price, to
         isSelected && 'border border-yellow-500 bg-yellow-500 bg-opacity-[0.08]'
       )}
     >
-      <div className='flex gap-2'>
+      <div className='flex items-center gap-2'>
         <Image alt='currency' src={token.icon} width={16} height={16} />
         <span className='text-base font-medium leading-[22.4px]'>{token.name}</span>
       </div>
