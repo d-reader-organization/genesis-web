@@ -30,9 +30,9 @@ export default async function NewMintPage({ params }: ComicIssuePageParams) {
           <Divider />
           <CouponsSection candyMachineAddress={comicIssue.activeCandyMachineAddress ?? ''} />
           <Divider />
-          <div className='flex gap-10'>
+          <div className='flex gap-10 justify-between'>
             <AboutIssueSection comicIssue={comicIssue} />
-            <PagesPreview pages={pages} />
+            <PagesPreview comicIssueId={comicIssue.id} pages={pages} />
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import { Divider } from '../shared/Divider'
 import { CreatorInfoLink } from '../creator/InfoLink'
 import React from 'react'
 import { AudienceType } from '@/enums/audienceType'
+import { RoutePath } from '@/enums/routePath'
 
 type Props = {
   comicIssue: ComicIssue
@@ -28,7 +29,7 @@ export const AboutIssueSection: React.FC<Props> = ({ comicIssue }) => (
       </div>
       <Link
         className='max-h-9 px-3 py-2 flex gap-2 justify-center items-center rounded-lg bg-grey-500'
-        href={`/comic/${comicIssue.comicSlug}`}
+        href={RoutePath.Comic(comicIssue.comicSlug)}
       >
         <ExternalLink className='text-grey-100' size={20} />
         <span className='text-base font-medium leading-[22.4px] text-grey-100'>Explore collection</span>
