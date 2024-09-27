@@ -9,13 +9,21 @@ import { Arrow } from '../shared/Arrow'
 
 type Props = {
   cover: StatelessCover
+  hideArrows: boolean
   open: boolean
   onOpenChange: (open: boolean) => void
   onPrevClick: () => void
   onNextClick: () => void
 }
 
-export const CoverPreviewDialog: React.FC<Props> = ({ cover, open, onOpenChange, onPrevClick, onNextClick }) => {
+export const CoverPreviewDialog: React.FC<Props> = ({
+  cover,
+  hideArrows,
+  open,
+  onOpenChange,
+  onPrevClick,
+  onNextClick,
+}) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
@@ -25,7 +33,7 @@ export const CoverPreviewDialog: React.FC<Props> = ({ cover, open, onOpenChange,
         aria-describedby={undefined}
       >
         <DialogTitle className='sr-only'>Cover Preview</DialogTitle>
-        <Arrow arrowOrientation='LEFT' className='bg-transparent' onClick={onPrevClick} />
+        {hideArrows ? null : <Arrow arrowOrientation='LEFT' className='bg-transparent' onClick={onPrevClick} />}
         <div className='flex flex-col gap-[42px] rounded-2xl'>
           <Image
             src={cover.image}
@@ -42,7 +50,7 @@ export const CoverPreviewDialog: React.FC<Props> = ({ cover, open, onOpenChange,
             <RarityChip rarity={cover.rarity} />
           </div>
         </div>
-        <Arrow arrowOrientation='RIGHT' className='bg-transparent' onClick={onNextClick} />
+        {hideArrows ? null : <Arrow arrowOrientation='RIGHT' className='bg-transparent' onClick={onNextClick} />}
       </DialogContent>
     </Dialog>
   )

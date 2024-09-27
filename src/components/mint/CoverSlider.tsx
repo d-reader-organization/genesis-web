@@ -38,6 +38,7 @@ export const CoverSlider: React.FC<Props> = ({ covers }) => {
       <SliderDots emblaApi={emblaApi} slides={covers} selectedIndex={selectedIndex} />
       <CoverPreviewDialog
         cover={covers[selectedIndex]}
+        hideArrows={covers.length < 2}
         open={isCoverPreviewOpen}
         onPrevClick={() => {
           emblaApi?.scrollPrev()
