@@ -13,7 +13,7 @@ import { ComicIssue } from '@/models/comicIssue'
 // import { NoWalletConnectedDialog } from './dialogs/NoWalletConnectedDialog'
 import { ConfirmingTransactionDialog } from '../dialogs/ConfirmingTransactionDialog'
 import { useToggle } from '@/hooks'
-import { toast } from '../../ui'
+import { Skeleton, toast } from '../../ui'
 import { fetchMintOneTransaction } from '@/app/lib/api/transaction/queries'
 import { useFetchCandyMachine } from '@/api/candyMachine'
 import { versionedTransactionFromBs64 } from '@/utils/transactions'
@@ -154,5 +154,7 @@ export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthen
       {/* <NoWalletConnectedDialog open={showWalletNotConnected} toggleDialog={toggleWalletNotConnected} /> */}
       <ConfirmingTransactionDialog open={showConfirmingTransaction} toggleDialog={toggleConfirmingTransaction} />
     </>
-  ) : null
+  ) : (
+    <Skeleton className='h-[52px] w-40' />
+  )
 }

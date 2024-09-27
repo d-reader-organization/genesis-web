@@ -18,6 +18,7 @@ import { CandyMachineCoupon } from '@/models/candyMachine/candyMachineCoupon'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { MinusIcon, PlusIcon } from 'lucide-react'
+import { Skeleton } from '../ui/Skeleton'
 
 const toSol = (lamports: number) => +(lamports / LAMPORTS_PER_SOL).toFixed(3)
 const normalise = (value: number, MAX: number): number => (value * 100) / MAX
@@ -32,16 +33,20 @@ type Props = { comicIssue: ComicIssue; isAuthenticated: boolean }
 
 export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticated }) => {
   const { publicKey } = useWallet()
-  const { data: candyMachine, refetch } = useFetchCandyMachine({
+  const {
+    data: candyMachine,
+    refetch,
+    isLoading,
+  } = useFetchCandyMachine({
     candyMachineAddress: comicIssue.activeCandyMachineAddress ?? '',
     walletAddress: publicKey?.toBase58() ?? '',
   })
   const { data: supportedTokens } = useFetchSupportedTokens()
   useAuthorizeWallet(refetch)
 
-  // TODO SKELETON
-  // <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 border border-grey-200 mb-6 max-h-fit min-h-[320px] max-w-[800px] w-full'><Skeleton className='h-5'/></div>
-  return (
+  return isLoading ? (
+    <LoadingSkeleton />
+  ) : (
     candyMachine && (
       <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 border border-grey-200 mb-6 max-h-fit'>
         <CouponDetails
@@ -60,6 +65,22 @@ export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticat
   )
 }
 
+const LoadingSkeleton: React.FC = () => (
+  <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 border border-grey-200 mb-6 max-h-fit max-w-[800px] w-full'>
+    <CouponSkeleton />
+    <div className='h-[22.4px] w-full flex items-center justify-between'>
+      <Skeleton className='h-[22.4px] w-32' />
+      <Skeleton className='h-[22.4px] w-10' />
+    </div>
+    <Skeleton className='h-2' />
+    <Skeleton className='h-[46px] w-11/12' />
+    <div className='h-[52px] flex gap-4 items-center'>
+      <Skeleton className='h-full w-40' />
+      <Skeleton className='h-full w-40' />
+    </div>
+  </div>
+)
+
 const CouponDetails: React.FC<DetailsProps & { isAuthenticated: boolean; supportedTokens: SplToken[] }> = ({
   candyMachine,
   isAuthenticated,
@@ -74,15 +95,24 @@ const CouponDetails: React.FC<DetailsProps & { isAuthenticated: boolean; support
   const { countdownString } = useCountdown({ expirationDate: startsAt.toString() })
   const highlightDiscount = isAuthenticated && candyMachine.discount
   const mintPrice = prices.at(0)?.mintPrice ?? 0
-  // couponslength
+
   return supportedTokens.length ? (
     <CurrencyExpandable supportedTokens={supportedTokens}>
       {supportedTokens.map((token) => (
         <CurrencyRow key={token.address} price={250} token={token} isSelected={token.id === 4} />
       ))}
     </CurrencyExpandable>
-  ) : null
+  ) : (
+    <CouponSkeleton />
+  )
 }
+
+const CouponSkeleton: React.FC = () => (
+  <div className='flex items-center justify-between h-10'>
+    <Skeleton className='h-10 w-20' />
+    <Skeleton className='h-10 w-28' />
+  </div>
+)
 
 type CurrencyRowProps = {
   isSelected?: boolean
