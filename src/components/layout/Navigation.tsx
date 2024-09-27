@@ -4,7 +4,7 @@ import React from 'react'
 import { RoutePath } from '@/enums/routePath'
 import { usePathname } from 'next/navigation'
 import { useIsMobile } from '@/hooks/useBreakpoints'
-import { BottomNavItem, BottomNavigation } from './BottomNavigation'
+import { BottomNavItem } from './BottomNavigation'
 import DReaderLogo from 'public/assets/vector-icons/full-logo.svg'
 import GenesisLogo from 'public/assets/vector-icons/genesis-logo.svg'
 import SearchIcon from 'public/assets/vector-icons/search-icon.svg'
@@ -41,8 +41,10 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
   const isMint = paramId ? pathname === RoutePath.Mint(paramId) || RoutePath.ComicIssue(paramId) : false
 
   return isMobile ? (
-    <BottomNavigation initialNavItem={initialMobileNavItem(pathname)} />
+    // TODO new nav
+    <></>
   ) : (
+    // <BottomNavigation initialNavItem={initialMobileNavItem(pathname)} />
     <>
       <div
         className={clsx(

@@ -33,7 +33,7 @@ export const CoverSlider: React.FC<Props> = ({ covers }) => {
   }, [emblaApi, onSelect])
 
   return (
-    <div className='flex flex-col gap-16'>
+    <div className='flex flex-col gap-14 md:gap-16'>
       <Slider covers={covers} emblaRef={emblaRef} onSlideClick={() => toggleCoverPreview()} />
       <SliderDots emblaApi={emblaApi} slides={covers} selectedIndex={selectedIndex} />
       <CoverPreviewDialog
@@ -59,7 +59,7 @@ type SliderProps = {
 }
 
 const Slider: React.FC<SliderProps> = ({ covers, emblaRef, onSlideClick }) => (
-  <div className='max-w-[354px] relative'>
+  <div className='max-w-64 md:max-w-[354px] relative'>
     <div className='overflow-hidden' ref={emblaRef}>
       <div className='flex'>
         {covers.map((cover, index) => (
@@ -76,7 +76,7 @@ type SlideProps = {
 }
 
 const Slide: React.FC<SlideProps> = ({ cover, onClick }) => (
-  <div className='flex-[0_0_100%] h-[520px]'>
+  <div className='flex-[0_0_100%] h-[400px] md:h-[520px]'>
     <button className='relative flex justify-center hover:brightness-110' onClick={onClick}>
       <Image
         alt={`${cover.rarity} - cover`}

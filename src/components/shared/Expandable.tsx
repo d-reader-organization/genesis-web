@@ -23,6 +23,7 @@ export const Expandable: React.FC<Props> = ({
   open = false,
   children,
   hideArrow = false,
+  className,
   ...props
 }) => {
   const [isExpanded, setIsExpanded] = useState(open)
@@ -46,7 +47,10 @@ export const Expandable: React.FC<Props> = ({
 
   return (
     <div
-      className='w-full max-w-[912px] bg-grey-600 border-t border-t-grey-300 border-b border-b-grey-300 sm:border-l sm:border-l-grey-300 sm:border-r sm:border-r-grey-300 sm:rounded-lg sm:mb-3'
+      className={cn(
+        'w-full max-w-[912px] bg-grey-600 border-t border-t-grey-300 border-b border-b-grey-300',
+        className
+      )}
       {...props}
     >
       <div
@@ -68,7 +72,7 @@ export const Expandable: React.FC<Props> = ({
         })}
         style={{ '--content-height': `${contentHeight}px` } as React.CSSProperties}
       >
-        <div ref={(contentRef) => setContentRef(contentRef)} className='border-t border-t-grey-400 p-3 pt-1'>
+        <div ref={(contentRef) => setContentRef(contentRef)} className='py-6 px-3'>
           {children}
         </div>
       </div>
@@ -110,15 +114,17 @@ export const CurrencyExpandable: React.FC<CurrencyExpandableProps> = ({ children
 
   return (
     <div className='flex flex-col w-full'>
-      <div className='flex items-center gap-2 justify-between max-h-10'>
-        <span className={cn('text-2xl leading-[24px] font-bold text-important-color')}>● Live</span>
+      <div className='flex items-center gap-2 justify-between max-h-9 md:max-h-10'>
+        <span className={cn('text-base md:text-2xl leading-[16px] md:leading-[24px] font-bold text-important-color')}>
+          ● Live
+        </span>
         <div className='flex gap-2 items-center'>
           {/* {discountWidget} */}
           <button
             className='flex gap-2 items-center w-fit rounded-xl border-none bg-grey-600 p-2'
             onClick={() => setIsExpanded((currentIsExpanded) => !currentIsExpanded)}
           >
-            <span className='text-2xl font-bold leading-[24px]'>0.25</span>
+            <span className='text-base md:text-2xl font-bold leading-[16px] md:leading-[24px]'>0.25</span>
             <Image alt='price' src={supportedTokens.at(0)?.icon ?? ''} width={20} height={20} />
             <ArrowDownIcon
               className={clsx('transition transform duration-150 ease-in-out', {

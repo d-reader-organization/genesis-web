@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import React from 'react'
 
 type Props = {
@@ -10,6 +11,8 @@ const DividerWithText: React.FC<Props> = ({ text }) => (
   </div>
 )
 
-const Divider: React.FC = () => <div className='h-[1px] flex w-full bg-grey-300' />
+const Divider: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className }) => (
+  <div className={cn('h-[1px] flex w-full bg-grey-300', className)} />
+)
 
 export { Divider, DividerWithText }

@@ -18,7 +18,7 @@ export const AboutIssueSection: React.FC<Props> = ({ comicIssue }) => (
   <div className='flex flex-col gap-6'>
     <h5 className='text-xl font-semibold leading-[20px] tracking-[0.04px]'>Description</h5>
     <GenreTags genres={comicIssue.genres ?? []} />
-    <ExpandableText className='max-w-[486px]' text={comicIssue.description} />
+    <ExpandableText className='max-w-[440px] lg:max-w-[486px]' text={comicIssue.description} />
     <div className='flex justify-between'>
       <div className='flex gap-4 items-center'>
         <div className='text-base font-medium leading-[22.4px]'>

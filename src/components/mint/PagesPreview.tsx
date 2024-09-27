@@ -12,8 +12,8 @@ type Props = {
 
 export const PagesPreview: React.FC<Props> = ({ comicIssueId, pages }) => {
   return (
-    <Link className='relative w-fit' href={RoutePath.ReadComicIssue(comicIssueId)}>
-      <div className='grid grid-cols-2 lg:grid-cols-3 gap-4 ml-auto self-end'>
+    <Link className='relative w-fit max-md:self-center' href={RoutePath.ReadComicIssue(comicIssueId)}>
+      <div className='grid grid-cols-3 gap-6 self-end'>
         {pages.slice(0, 6).map((page, index) => (
           <Image
             alt={`page-${index}`}
@@ -21,7 +21,7 @@ export const PagesPreview: React.FC<Props> = ({ comicIssueId, pages }) => {
             key={page.image}
             width={107}
             height={160}
-            className='max-w-[107px] max-h-40 object-cover rounded-lg opacity-50'
+            className='max-w-[98px] max-h-[146px] sm:max-w-[102px] sm:max-h-[154px] md:max-w-[107px] md:max-h-40 object-cover rounded-lg opacity-50'
           />
         ))}
       </div>

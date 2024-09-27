@@ -48,7 +48,7 @@ export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticat
     <LoadingSkeleton />
   ) : (
     candyMachine && (
-      <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 border border-grey-200 mb-6 max-h-fit max-w-[800px]'>
+      <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 max-h-fit max-w-[800px] shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]'>
         <CouponDetails
           candyMachine={candyMachine}
           supportedTokens={supportedTokens ?? []}
@@ -57,24 +57,26 @@ export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticat
         <UserDetails candyMachine={candyMachine} />
         <ProgressBar value={normalise(candyMachine.itemsMinted + 2, candyMachine.supply)} />
         <ComicVault />
-        <PurchaseRow>
-          <MintButton candyMachine={candyMachine} comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
-        </PurchaseRow>
+        <PurchaseRow
+          comicIssue={comicIssue}
+          isAuthenticated={isAuthenticated}
+          className='max-md:fixed max-md:bottom-0 max-md:z-50 max-md:bg-grey-600 max-md:backdrop-blur-[2px]'
+        />
       </div>
     )
   )
 }
 
 const LoadingSkeleton: React.FC = () => (
-  <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 border border-grey-200 mb-6 max-h-fit max-w-[800px] w-full'>
+  <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 max-h-fit max-w-[800px]'>
     <CouponSkeleton />
-    <div className='h-[22.4px] w-full flex items-center justify-between'>
-      <Skeleton className='h-[22.4px] w-32' />
-      <Skeleton className='h-[22.4px] w-10' />
+    <div className='h-[19.6px] md:h-[22.4px] w-full flex items-center justify-between'>
+      <Skeleton className='h-[19.6px] md:h-[22.4px] w-32' />
+      <Skeleton className='h-[19.6px] md:h-[22.4px] w-10' />
     </div>
     <Skeleton className='h-2' />
-    <Skeleton className='h-[46px] w-11/12' />
-    <div className='h-[52px] flex gap-4 items-center'>
+    <Skeleton className='h-12 w-11/12' />
+    <div className='max-md:hidden h-[52px] flex gap-4 items-center'>
       <Skeleton className='h-full w-40' />
       <Skeleton className='h-full w-40' />
     </div>
@@ -108,9 +110,9 @@ const CouponDetails: React.FC<DetailsProps & { isAuthenticated: boolean; support
 }
 
 const CouponSkeleton: React.FC = () => (
-  <div className='flex items-center justify-between h-10'>
-    <Skeleton className='h-10 w-20' />
-    <Skeleton className='h-10 w-28' />
+  <div className='flex items-center justify-between h-9 md:h-10'>
+    <Skeleton className='h-9 md:h-10 w-20' />
+    <Skeleton className='h-9 md:h-10 w-28' />
   </div>
 )
 
@@ -141,7 +143,7 @@ const UserDetails: React.FC<DetailsProps> = ({ candyMachine }) => {
   const itemsMintedPerUserOrWallet = getItemsMinted(candyMachine)
   const mintLimit = candyMachine.coupons.at(0)?.numberOfRedemptions
   return (
-    <div className='flex justify-between text-center text-grey-100 text-base font-medium leading-[22.4px]'>
+    <div className='flex justify-between text-center text-grey-100 text-sm md:text-base font-medium leading-[19.6px] md:leading-[22.4px]'>
       <span>
         You minted: {itemsMintedPerUserOrWallet}/{mintLimit ?? '∞'}
       </span>
@@ -154,7 +156,7 @@ const UserDetails: React.FC<DetailsProps> = ({ candyMachine }) => {
 
 const ComicVault: React.FC = () => (
   <Expandable
-    className='bg-grey-400 border-transparent rounded-2xl max-w-[800px]'
+    className='bg-grey-400 border-transparent rounded-2xl max-w-[800px] h-12'
     title='Comic Vault'
     titleComponent={
       <div className='flex gap-2 items-center text-sm sm:text-base font-medium leading-5 text-grey-100'>
@@ -171,11 +173,24 @@ const ComicVault: React.FC = () => (
   </Expandable>
 )
 
-const PurchaseRow: React.FC<React.PropsWithChildren> = ({ children }) => {
+type PurchaseRowProps = {
+  comicIssue: ComicIssue
+  isAuthenticated: boolean
+} & React.HTMLAttributes<HTMLDivElement>
+
+export const PurchaseRow: React.FC<PurchaseRowProps> = ({ comicIssue, className, isAuthenticated }) => {
+  const { publicKey } = useWallet()
+  const { data: candyMachine } = useFetchCandyMachine({
+    candyMachineAddress: comicIssue.activeCandyMachineAddress ?? '',
+    walletAddress: publicKey?.toBase58() ?? '',
+  })
+  if (!candyMachine) {
+    return null
+  }
   return (
-    <div className='flex gap-4 items-center max-h-[52px]'>
+    <div className={cn('flex gap-4 items-center max-h-[52px]', className)}>
       <NumberOfItemsWidget />
-      {children}
+      <MintButton candyMachine={candyMachine} comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
     </div>
   )
 }
@@ -185,11 +200,11 @@ const NumberOfItemsWidget: React.FC = () => {
   return (
     <div className='max-h-[52px] min-w-[150px] p-2.5 flex justify-between items-center rounded-xl bg-grey-400'>
       <IconWrapper>
-        <MinusIcon size={20} />
+        <MinusIcon className='size-4 md:size-5' />
       </IconWrapper>
-      <span className='text-base font-medium leading-[22.4px]'>5</span>
+      <span className='text-sm md:text-base font-medium leading-[19.6px] md:leading-[22.4px]'>5</span>
       <IconWrapper>
-        <PlusIcon size={20} />
+        <PlusIcon className='size-4 md:size-5' />
       </IconWrapper>
     </div>
   )
