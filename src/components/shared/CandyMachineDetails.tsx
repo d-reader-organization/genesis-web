@@ -150,6 +150,7 @@ const PurchaseRow: React.FC<React.PropsWithChildren> = ({ children }) => {
   )
 }
 
+// TODO design system mobile component
 const NumberOfItemsWidget: React.FC = () => {
   return (
     <div className='max-h-[52px] min-w-[150px] p-2.5 flex justify-between items-center rounded-xl bg-grey-400'>
