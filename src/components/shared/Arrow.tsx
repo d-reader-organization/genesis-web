@@ -2,6 +2,7 @@
 
 import React from 'react'
 import ChevronRight from 'public/assets/vector-icons/chevron-right.svg'
+import { cn } from '@/lib/utils'
 
 type ArrowOrientation = 'TOP' | 'RIGHT' | 'BOTTOM' | 'LEFT'
 
@@ -16,10 +17,13 @@ const orientationClasses: Record<ArrowOrientation, string> = {
   TOP: '-rotate-90',
 }
 
-export const Arrow: React.FC<Props> = ({ arrowOrientation, onClick }) => {
+export const Arrow: React.FC<Props> = ({ arrowOrientation, className, onClick }) => {
   return (
     <button
-      className='inline-flex justify-center items-center size-[42px] rounded-xl bg-grey-400 hover:brightness-125'
+      className={cn(
+        'inline-flex justify-center items-center size-[42px] rounded-xl bg-grey-400 hover:brightness-125',
+        className
+      )}
       onClick={onClick}
     >
       <ChevronRight className={orientationClasses[arrowOrientation]} />

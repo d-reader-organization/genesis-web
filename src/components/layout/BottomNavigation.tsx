@@ -58,7 +58,7 @@ export const BottomNavigation: React.FC<Props> = ({ initialNavItem }) => {
   )
 }
 
-const BottomNavigationItem: React.FC<BottomNavItemProps> = ({ href, icon, isSelected, title }) => (
+const BottomNavigationItem: React.FC<BottomNavItemProps> = ({ href, icon, isSelected }) => (
   <Link
     className={clsx(
       'inline-flex flex-col items-center justify-center font-medium px-5 group',

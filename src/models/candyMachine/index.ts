@@ -1,9 +1,9 @@
-import { CandyMachineGroupWithSource } from './candyMachineGroup'
+import { CandyMachineCoupon } from './candyMachineCoupon'
 
 export interface CandyMachine {
   address: string
   supply: number
   discount: number
   itemsMinted: number
-  groups: CandyMachineGroupWithSource[]
+  coupons: CandyMachineCoupon[]
 }

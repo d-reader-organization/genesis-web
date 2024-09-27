@@ -12,11 +12,13 @@
     @apply mb-16 md:mb-0;
     overflow-y: scroll;
   }
-  h1 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-obviously-narrow);
-  }
-  svg {
-    height: 24px;
   }
 
   /* Scroll bar stylings */

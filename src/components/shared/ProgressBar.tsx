@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+import { cn } from '@/lib/utils'
 import React from 'react'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
@@ -6,7 +6,7 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
 }
 
 export const ProgressBar: React.FC<Props> = ({ className, value }) => (
-  <div className={clsx('w-full bg-gray-400 rounded-full h-2.5', className)}>
-    <div className={`bg-yellow-500 h-2.5 rounded-full w-[${value}%]`}></div>
+  <div className={cn('w-full bg-grey-400 rounded-full h-2', className)}>
+    <div className='bg-yellow-500 h-2 rounded-full' style={{ width: `${value}%` }}></div>
   </div>
 )

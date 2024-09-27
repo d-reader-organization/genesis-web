@@ -18,3 +18,16 @@ export const GenresList: React.FC<Props> = ({ genres }) => (
     ))}
   </div>
 )
+
+export const GenreTags: React.FC<Props> = ({ genres }) => (
+  <div className='flex gap-2 items-center overflow-x-auto'>
+    {genres.map((genre, index) => (
+      <div
+        className='text-base font-medium leading-[22.4px] text-grey-100 p-2 flex justify-center items-center rounded-lg bg-grey-500'
+        key={`${genre.name}-${index}`}
+      >
+        {genre.name}
+      </div>
+    ))}
+  </div>
+)

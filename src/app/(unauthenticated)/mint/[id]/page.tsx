@@ -1,40 +1,49 @@
-import { fetchPublicComicIssue } from '@/app/lib/api/comicIssue/queries'
+import { fetchComicIssuePages, fetchPublicComicIssue } from '@/app/lib/api/comicIssue/queries'
 import { isAuthenticatedUser } from '@/app/lib/auth'
-import { Navigation } from '@/components/layout/Navigation'
-import { MintComicInfo } from '@/components/mint/ComicInfo'
-import { MintComicTitle } from '@/components/mint/ComicTitle'
-import { MintTabs } from '@/components/mint/tabs'
-import { BackgroundImageWithGradient } from '@/components/shared/BackgroundImageWithGradient'
-import { SignUpBanner } from '@/components/shared/SignUpBanner'
+import { BaseLayout } from '@/components/layout/BaseLayout'
+import { AboutIssueSection } from '@/components/mint/AboutIssueSection'
+import { CouponsSection } from '@/components/mint/CouponsSection'
+import { CoverCarousel } from '@/components/mint/CoverCarousel'
+import { PagesPreview } from '@/components/mint/PagesPreview'
+import { CandyMachineDetails, PurchaseRow } from '@/components/shared/CandyMachineDetails'
+import { Divider } from '@/components/shared/Divider'
 import { ComicIssuePageParams } from '@/models/common'
-import Image from 'next/image'
-import React from 'react'
 
-export default async function MintPage({ params }: ComicIssuePageParams) {
+export default async function NewMintPage({ params }: ComicIssuePageParams) {
   const comicIssue = await fetchPublicComicIssue(params.id)
   if (!comicIssue) return null
+  const pages = await fetchComicIssuePages(comicIssue.id)
   const isAuthenticated = isAuthenticatedUser()
+
   return (
-    <>
-      <Navigation paramId={params.id} />
-      <BackgroundImageWithGradient image={comicIssue.cover}>
-        <div className='px-4 md:px-8 max-w-screen-xl flex max-md:flex-col max-md:items-center justify-center items-start gap-8 mb-20'>
-          <Image
-            className='rounded-2xl shadow-issue-cover'
-            src={comicIssue.cover}
-            sizes='(max-width: 1080px) 250px'
-            width={354}
-            height={514}
-            alt='issue-cover'
-          />
-          <div className='flex flex-col gap-4 w-full max-w-sm md:max-w-2xl'>
-            <MintComicInfo comicIssue={comicIssue} />
-            <MintComicTitle title={comicIssue.title} />
-            <MintTabs comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
-            {isAuthenticated ? null : <SignUpBanner comicIssueId={params.id} />}
+    <BaseLayout>
+      <div className='flex flex-col max-md:items-center md:flex-row md:justify-center gap-6 md:gap-10 w-full'>
+        <CoverCarousel covers={comicIssue.statelessCovers ?? []} />
+        <div className='flex flex-col gap-6 w-full max-w-[800px]'>
+          <div className='flex flex-col max-md:self-center gap-4'>
+            <div className='flex gap-12 text-base md:text-lg font-medium leading-[22.4px] md:leading-[25.2px] text-grey-100'>
+              <span>{comicIssue.comic?.title}</span>
+              <span>EP {comicIssue.number}</span>
+            </div>
+            <h1 className='text-2xl md:text-[32px] leading-[24px] md:leading-[32px] font-semibold'>
+              {comicIssue.title}
+            </h1>
+          </div>
+          <CandyMachineDetails comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
+          <Divider className='max-md:hidden' />
+          <CouponsSection candyMachineAddress={comicIssue.activeCandyMachineAddress ?? ''} />
+          <Divider className='max-md:hidden' />
+          <div className='flex flex-col 1160:flex-row gap-10 justify-between'>
+            <AboutIssueSection comicIssue={comicIssue} />
+            <PagesPreview comicIssueId={comicIssue.id} pages={pages} />
           </div>
         </div>
-      </BackgroundImageWithGradient>
-    </>
+      </div>
+      <PurchaseRow
+        comicIssue={comicIssue}
+        isAuthenticated={isAuthenticated}
+        className='md:hidden max-h-[84px] p-4 flex items-center justify-center gap-4 w-full max-md:fixed max-md:bottom-0 max-md:z-50 max-md:bg-grey-600 max-md:backdrop-blur-[2px]'
+      />
+    </BaseLayout>
   )
 }

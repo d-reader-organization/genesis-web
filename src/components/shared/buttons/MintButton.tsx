@@ -1,8 +1,7 @@
 'use client'
 
 import { CandyMachine } from '@/models/candyMachine'
-import { CandyMachineGroupWithSource } from '@/models/candyMachine/candyMachineGroup'
-import { getActiveGroup, validateMintEligibilty } from '@/utils/mint'
+import { validateMintEligibilty } from '@/utils/mint'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import React, { useEffect, useState } from 'react'
 import { Button } from '../../ui/Button'
@@ -14,13 +13,14 @@ import { ComicIssue } from '@/models/comicIssue'
 // import { NoWalletConnectedDialog } from './dialogs/NoWalletConnectedDialog'
 import { ConfirmingTransactionDialog } from '../dialogs/ConfirmingTransactionDialog'
 import { useToggle } from '@/hooks'
-import { toast } from '../../ui'
+import { Skeleton, toast } from '../../ui'
 import { fetchMintOneTransaction } from '@/app/lib/api/transaction/queries'
 import { useFetchCandyMachine } from '@/api/candyMachine'
 import { versionedTransactionFromBs64 } from '@/utils/transactions'
 import { io } from 'socket.io-client'
 import { CandyMachineReceipt } from '@/models/candyMachine/candyMachineReceipt'
 import { useRouter } from 'next/navigation'
+import { CandyMachineCoupon } from '@/models/candyMachine/candyMachineCoupon'
 
 type Props = {
   candyMachine: CandyMachine
@@ -47,9 +47,9 @@ export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthen
   const walletAddress = publicKey?.toBase58()
   const hasWalletConnected = !!walletAddress
 
-  const { isEligible, error } = validateMintEligibilty(candyMachine?.groups.at(0))
-  const { startDate, endDate } = candyMachine?.groups.at(0) as CandyMachineGroupWithSource
-  const isLive = new Date(startDate) <= new Date() && new Date(endDate) > new Date()
+  const { isEligible } = validateMintEligibilty(candyMachine?.coupons, 5)
+  const { startsAt, expiresAt } = candyMachine?.coupons.at(0) as CandyMachineCoupon
+  const isLive = new Date(startsAt) <= new Date() && new Date(expiresAt) > new Date()
 
   const { refetch } = useFetchCandyMachine({
     candyMachineAddress: candyMachine.address,
@@ -78,15 +78,15 @@ export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthen
       return
     }
 
-    const updatedActiveGroup = getActiveGroup(updatedCandyMachine)
-    const isMintValid = validateMintEligibilty(updatedActiveGroup)
-    if (!isMintValid) {
+    if (!updatedCandyMachine) {
       return
     }
+    const selectedCouponId = updatedCandyMachine?.coupons.at(0)?.id // TODO
+    const isMintValid = validateMintEligibilty(updatedCandyMachine?.coupons, selectedCouponId)
     const mintTransactions = await fetchMintOneTransaction({
       candyMachineAddress: candyMachine.address,
       minterAddress: walletAddress ?? '',
-      label: getActiveGroup(candyMachine)?.label ?? '',
+      label: updatedCandyMachine?.coupons.find((coupon) => coupon.id === selectedCouponId)?.name ?? '', // TODO
     }).then((value) => value.map(versionedTransactionFromBs64))
     if (!signAllTransactions) {
       return toast({ description: 'Wallet does not support signing multiple transactions', variant: 'error' })
@@ -132,12 +132,12 @@ export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthen
     <>
       {hasWalletConnected ? (
         isEligible ? (
-          <Button className='bg-important-color min-h-[53px]' onClick={handleMint}>
-            {!isMintTransactionLoading ? 'Mint' : <Loader />}
+          <Button className='bg-important-color min-h-[52px]' onClick={handleMint}>
+            {!isMintTransactionLoading ? 'Purchase' : <Loader />}
           </Button>
         ) : (
           <>
-            <Button disabled>{error}</Button>
+            <Button disabled>Not eligible</Button>
           </>
         )
       ) : (
@@ -154,5 +154,7 @@ export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthen
       {/* <NoWalletConnectedDialog open={showWalletNotConnected} toggleDialog={toggleWalletNotConnected} /> */}
       <ConfirmingTransactionDialog open={showConfirmingTransaction} toggleDialog={toggleConfirmingTransaction} />
     </>
-  ) : null
+  ) : (
+    <Skeleton className='h-[52px] w-40' />
+  )
 }
