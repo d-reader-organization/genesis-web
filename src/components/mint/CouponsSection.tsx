@@ -5,18 +5,21 @@ import { CandyMachineCoupon } from '@/models/candyMachine/candyMachineCoupon'
 import { TicketIcon } from 'lucide-react'
 import { useFetchCandyMachine } from '@/api/candyMachine/queries'
 import { useWallet } from '@solana/wallet-adapter-react'
+import { cn } from '@/lib/utils'
 
 type Props = {
   candyMachineAddress: string
 }
 
 export const CouponsSection: React.FC<Props> = ({ candyMachineAddress }) => {
+  const [selectedCoupon, setSelectedCoupon] = React.useState<number>()
   const { publicKey } = useWallet()
-  const { data: candyMachine, refetch } = useFetchCandyMachine({
+  const { data: candyMachine } = useFetchCandyMachine({
     candyMachineAddress,
     walletAddress: publicKey?.toBase58() ?? '',
   })
   const coupons = candyMachine?.coupons ?? []
+
   return (
     <div className='flex flex-col gap-6'>
       <div className='flex gap-2 items-center'>
@@ -25,7 +28,12 @@ export const CouponsSection: React.FC<Props> = ({ candyMachineAddress }) => {
       </div>
       <div className='flex items-center gap-3'>
         {coupons.map((coupon) => (
-          <CouponCard coupon={coupon} key={coupon.name} />
+          <CouponCardButton
+            coupon={coupon}
+            key={coupon.name}
+            isSelected={selectedCoupon === coupon.id}
+            onClick={() => setSelectedCoupon(coupon.id)}
+          />
         ))}
       </div>
     </div>
@@ -34,11 +42,19 @@ export const CouponsSection: React.FC<Props> = ({ candyMachineAddress }) => {
 
 type CardProps = {
   coupon: CandyMachineCoupon
+  isSelected: boolean
+  onClick: () => void
 }
 
-const CouponCard: React.FC<CardProps> = ({ coupon }) => {
+const CouponCardButton: React.FC<CardProps> = ({ coupon, isSelected, onClick }) => {
   return (
-    <div className='flex flex-col justify-center items-start gap-3 p-4 rounded-xl bg-black bg-opacity-20 border border-dashed border-grey-200 w-full max-w-[212px]'>
+    <button
+      className={cn(
+        'flex flex-col justify-center items-start gap-3 p-4 rounded-xl bg-black bg-opacity-20 border border-dashed border-grey-200 w-full max-w-[212px]',
+        isSelected && 'border border-solid border-yellow-500 bg-yellow-500 bg-opacity-10'
+      )}
+      onClick={onClick}
+    >
       <div className='flex gap-3 items-center'>
         <div className='flex flex-col gap-1 pr-3 border-r border-dashed border-r-grey-200 text-2xl font-semibold leading-[24px] tracking-[0.048px]'>
           <h6>15%</h6>
@@ -51,6 +67,6 @@ const CouponCard: React.FC<CardProps> = ({ coupon }) => {
         <span className='text-base font-medium leading-[140%] text-grey-200'>&nbsp;/&nbsp;100</span>
         <p className='text-base font-normal leading-[20px] tracking-[0.04px] text-grey-100'></p>
       </div>
-    </div>
+    </button>
   )
 }
