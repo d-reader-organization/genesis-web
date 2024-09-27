@@ -8,7 +8,7 @@ type ExpandableTextProps = {
   maxLines?: number
 } & React.HTMLAttributes<HTMLDivElement>
 
-export default function ExpandableText({ className, text, maxLines = 2 }: ExpandableTextProps) {
+export const ExpandableText = ({ className, text, maxLines = 2 }: ExpandableTextProps) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [showToggle, setShowToggle] = useState(false)
   const textRef = useRef<HTMLParagraphElement>(null)

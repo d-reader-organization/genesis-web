@@ -1,6 +1,6 @@
 import { ComicIssue } from '@/models/comicIssue'
 import { GenreTags } from '../shared/GenresList'
-import ExpandableText from '../shared/ExpandableText'
+import { ExpandableText } from '../shared/ExpandableText'
 import { AudienceWidget } from '../shared/AudienceWidget'
 import Link from 'next/link'
 import { ExternalLink } from 'lucide-react'
