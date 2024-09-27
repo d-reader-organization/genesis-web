@@ -48,7 +48,7 @@ export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticat
     <LoadingSkeleton />
   ) : (
     candyMachine && (
-      <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 border border-grey-200 mb-6 max-h-fit'>
+      <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 border border-grey-200 mb-6 max-h-fit max-w-[800px]'>
         <CouponDetails
           candyMachine={candyMachine}
           supportedTokens={supportedTokens ?? []}
