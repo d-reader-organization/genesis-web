@@ -8,6 +8,8 @@ import useEventListener from '@/hooks/useEventListener'
 import { SplToken } from '@/models/settings/splToken'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import { CouponCurrencySetting } from '@/models/candyMachine/candyMachineCoupon'
+import { TokenDetail } from '@/utils/mint'
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   title: string
@@ -81,12 +83,12 @@ export const Expandable: React.FC<Props> = ({
 }
 
 type CurrencyExpandableProps = {
-  supportedTokens: SplToken[]
+  selectedCurrencySetting: TokenDetail
   open?: boolean
 } & React.PropsWithChildren &
   React.HTMLAttributes<HTMLDivElement>
 
-export const CurrencyExpandable: React.FC<CurrencyExpandableProps> = ({ children, open = false, supportedTokens }) => {
+export const CurrencyExpandable: React.FC<CurrencyExpandableProps> = ({ children, open = false, selectedCurrencySetting }) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(open)
   const [contentHeight, setContentHeight] = useState(0)
   const [contentRef, setContentRef] = useState<HTMLDivElement | null>(null)
@@ -124,8 +126,8 @@ export const CurrencyExpandable: React.FC<CurrencyExpandableProps> = ({ children
             className='flex gap-2 items-center w-fit rounded-xl border-none bg-grey-600 p-2'
             onClick={() => setIsExpanded((currentIsExpanded) => !currentIsExpanded)}
           >
-            <span className='text-base md:text-2xl font-bold leading-[16px] md:leading-[24px]'>0.25</span>
-            <Image alt='price' src={supportedTokens.at(0)?.icon ?? ''} width={20} height={20} />
+            <span className='text-base md:text-2xl font-bold leading-[16px] md:leading-[24px]'>{selectedCurrencySetting.price}</span>
+            <Image alt='price' src={selectedCurrencySetting.icon ?? selectedCurrencySetting.symbol} width={20} height={20} />
             <ArrowDownIcon
               className={clsx('transition transform duration-150 ease-in-out', {
                 'transform -rotate-180': isExpanded,
