@@ -7,18 +7,18 @@ import { CurrencyExpandable, Expandable } from './Expandable'
 import LockIcon from 'public/assets/vector-icons/lock.svg'
 import { MintButton } from './buttons/MintButton'
 import { ComicIssue } from '@/models/comicIssue'
-import { CandyMachineCoupon, CouponCurrencySetting } from '@/models/candyMachine/candyMachineCoupon'
+import { CouponCurrencySetting } from '@/models/candyMachine/candyMachineCoupon'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { MinusIcon, PlusIcon } from 'lucide-react'
 import { Skeleton } from '../ui/Skeleton'
-import { checkIfCouponIsActive, getTokenMap, TokenDetail } from '@/utils/mint'
+import { checkIfCouponIsActive, getTokenMap, getTotalItemsMintedByUser, TokenDetail } from '@/utils/mint'
 import { useCandyMachine } from '@/providers/CandyMachineProvider'
 import { Divider } from './Divider'
 import { CouponsSection, CouponsSectionLoading } from '../mint/CouponsSection'
 
 const normalise = (value: number, MAX: number): number => (value * 100) / MAX
-type DetailsProps = { candyMachine: CandyMachine; selectedCoupon: CandyMachineCoupon }
+type DetailsProps = { candyMachine: CandyMachine; }
 type Props = { comicIssue: ComicIssue; isAuthenticated: boolean }
 
 export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticated }) => {
@@ -32,7 +32,7 @@ export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticat
         {selectedCoupon && (
           <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 max-h-fit max-w-[800px] shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]'>
             <CouponDetails />
-            <UserDetails candyMachine={candyMachine} selectedCoupon={selectedCoupon} />
+            <UserDetails candyMachine={candyMachine} />
             <ProgressBar value={normalise(candyMachine.itemsMinted, candyMachine.supply)} />
             <ComicVault />
             <PurchaseRow comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
@@ -132,14 +132,13 @@ const CurrencyRow: React.FC<CurrencyRowProps> = ({ isSelected = false, token, se
   )
 }
 
-const UserDetails: React.FC<DetailsProps> = ({ candyMachine, selectedCoupon }) => {
-  const numberOfRedemptions = selectedCoupon.numberOfRedemptions ?? 0
-  const itemsMinted = selectedCoupon.stats.itemsMinted ?? 0
+const UserDetails: React.FC<DetailsProps> = ({ candyMachine }) => {
+  const totalItemsMintedByUser = getTotalItemsMintedByUser(candyMachine.coupons);
 
   return (
     <div className='flex justify-between text-center text-grey-100 text-sm md:text-base font-medium leading-[19.6px] md:leading-[22.4px]'>
       <span>
-        You minted: {itemsMinted}/{numberOfRedemptions ?? '∞'}
+        You minted: {totalItemsMintedByUser}
       </span>
       <span>
         {candyMachine.itemsMinted}/{candyMachine.supply}

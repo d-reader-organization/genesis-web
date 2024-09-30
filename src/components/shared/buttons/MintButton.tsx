@@ -36,7 +36,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
   const [showAssetMinted, toggleAssetMinted] = useToggle()
   // const [showEmailVerification, toggleEmailVerification] = useToggle()
   // const [showWalletNotConnected, toggleWalletNotConnected] = useToggle()
-  const [showConfirmingTransaction, toggleConfirmingTransaction] = useToggle()
+  const [showConfirmingTransaction, toggleConfirmingTransaction, closeConfirmingTransaction] = useToggle()
   const [isMintTransactionLoading, setIsMintTransactionLoading] = useState(false)
   const [assetAddress, setAssetAddress] = useState<string>()
 
@@ -95,30 +95,39 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
     if (!signAllTransactions) {
       return toast({ description: 'Wallet does not support signing multiple transactions', variant: 'error' })
     }
-    const signedTransactions = await signAllTransactions(mintTransactions)
-    setIsMintTransactionLoading(false)
-    toggleConfirmingTransaction()
 
-    const serializedTransactions: string[] = []
-    for (const transaction of signedTransactions) {
-      try {
-        const serializedTransaction = Buffer.from(transaction.serialize()).toString('base64')
-        serializedTransactions.push(serializedTransaction)
-      } catch (e) {
-        toast({
-          description: 'Something went wrong',
-          variant: 'error',
-        })
+    try{
+      const signedTransactions = await signAllTransactions(mintTransactions)
+      setIsMintTransactionLoading(false)
+      toggleConfirmingTransaction()
+  
+      const serializedTransactions: string[] = []
+      for (const transaction of signedTransactions) {
+        try {
+          const serializedTransaction = Buffer.from(transaction.serialize()).toString('base64')
+          serializedTransactions.push(serializedTransaction)
+        } catch (e) {
+          setIsMintTransactionLoading(false)
+          closeConfirmingTransaction()
+          toast({
+            description: 'Something went wrong',
+            variant: 'error',
+          })
+        }
       }
+      await sendMintTransaction(walletAddress, serializedTransactions)
+    }catch(e){
+      setIsMintTransactionLoading(false)
+      closeConfirmingTransaction();
     }
-    await sendMintTransaction(walletAddress, serializedTransactions)
+
   }
 
   return isLive ? (
     <>
       {hasWalletConnected ? (
         isEligible ? (
-          <Button className='bg-important-color min-h-[52px]' onClick={handleMint}>
+          <Button className='bg-important-color min-h-[52px] w-screen' onClick={handleMint}>
             {!isMintTransactionLoading ? 'Purchase' : <Loader />}
           </Button>
         ) : (

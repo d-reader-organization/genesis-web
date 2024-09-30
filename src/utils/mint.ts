@@ -5,7 +5,7 @@ export type TokenDetail = {
   label: string
   name: string
   address: string
-  price: string
+  price: number
   icon: string
   symbol: string
 }
@@ -72,7 +72,15 @@ export const getTokenMap = (currencySettings: CouponCurrencySetting[], splTokens
 
 export const getMintPrice = (basePrice: number, decimals: number) => {
   const denominator = Math.pow(10, decimals)
-  const price = (basePrice / denominator).toFixed(3)
+  const price = parseFloat((basePrice / denominator).toFixed(3));
 
   return price
+}
+
+export const getTotalItemsMintedByUser = (coupons: CandyMachineCoupon[]) => {
+  let itemsMinted = 0;
+  for(const coupon of coupons){
+    itemsMinted += (coupon.stats.itemsMinted || 0);
+  }
+  return itemsMinted;
 }
