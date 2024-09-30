@@ -127,12 +127,12 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
     <>
       {hasWalletConnected ? (
         isEligible ? (
-          <Button className='bg-important-color min-h-[52px] w-screen' onClick={handleMint}>
+          <Button className='bg-important-color min-h-[52px] w-[100%]' onClick={handleMint}>
             {!isMintTransactionLoading ? 'Purchase' : <Loader />}
           </Button>
         ) : (
           <>
-            <Button disabled>Not eligible</Button>
+            <Button className='min-h-[52px] w-[100%]' disabled>Not eligible</Button>
           </>
         )
       ) : (

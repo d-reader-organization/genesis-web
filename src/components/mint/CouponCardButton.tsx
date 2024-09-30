@@ -26,7 +26,7 @@ export const CouponCardButton: React.FC<CardProps> = ({ coupon, discount, isSele
       </div>
       <span className='text-base font-medium leading-[22.4px]'>{coupon.name}</span>
     </div>
-    <div className='flex max-md:flex-col justify-center items-center rounded-lg bg-black py-2 px-1 max-h-12 md:max-h-7'>
+    <div className='flex max-md:flex-col justify-center items-center rounded-lg bg-black py-2 px-1 max-h-12 md:max-h-7 xs:max-w-[100px] md:max-w-[180px] w-[100%]'>
       <span className='text-xs md:text-base font-medium leading-[22.4px] text-grey-50'>Used&nbsp;</span>
       <div className='flex items-center'>
         <span className='text-xs md:text-base font-medium leading-[22.4px] text-grey-200'>
