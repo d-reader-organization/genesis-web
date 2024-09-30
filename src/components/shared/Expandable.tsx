@@ -81,12 +81,18 @@ export const Expandable: React.FC<Props> = ({
 }
 
 type CurrencyExpandableProps = {
+  isLive: boolean
   selectedCurrencySetting: TokenDetail
   open?: boolean
 } & React.PropsWithChildren &
   React.HTMLAttributes<HTMLDivElement>
 
-export const CurrencyExpandable: React.FC<CurrencyExpandableProps> = ({ children, open = false, selectedCurrencySetting }) => {
+export const CurrencyExpandable: React.FC<CurrencyExpandableProps> = ({
+  children,
+  isLive = false,
+  open = false,
+  selectedCurrencySetting,
+}) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(open)
   const [contentHeight, setContentHeight] = useState(0)
   const [contentRef, setContentRef] = useState<HTMLDivElement | null>(null)
@@ -116,7 +122,7 @@ export const CurrencyExpandable: React.FC<CurrencyExpandableProps> = ({ children
     <div className='flex flex-col w-full'>
       <div className='flex items-center gap-2 justify-between max-h-9 md:max-h-10'>
         <span className={cn('text-base md:text-2xl leading-[16px] md:leading-[24px] font-bold text-important-color')}>
-          ● Live
+          {isLive ? '● Live' : '● Upcoming'}
         </span>
         <div className='flex gap-2 items-center'>
           {/* {discountWidget} */}
@@ -124,8 +130,15 @@ export const CurrencyExpandable: React.FC<CurrencyExpandableProps> = ({ children
             className='flex gap-2 items-center w-fit rounded-xl border-none bg-grey-600 p-2'
             onClick={() => setIsExpanded((currentIsExpanded) => !currentIsExpanded)}
           >
-            <span className='text-base md:text-2xl font-bold leading-[16px] md:leading-[24px]'>{selectedCurrencySetting.price}</span>
-            <Image alt='price' src={selectedCurrencySetting.icon ?? selectedCurrencySetting.symbol} width={20} height={20} />
+            <span className='text-base md:text-2xl font-bold leading-[16px] md:leading-[24px]'>
+              {selectedCurrencySetting.price}
+            </span>
+            <Image
+              alt='price'
+              src={selectedCurrencySetting.icon ?? selectedCurrencySetting.symbol}
+              width={20}
+              height={20}
+            />
             <ArrowDownIcon
               className={clsx('transition transform duration-150 ease-in-out', {
                 'transform -rotate-180': isExpanded,

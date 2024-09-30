@@ -12,7 +12,7 @@ import { useWallet } from '@solana/wallet-adapter-react'
 import { ComicIssue } from '@/models/comicIssue'
 import { useFetchCandyMachine } from '@/api/candyMachine'
 
-type Props = { covers: StatelessCover[], comicIssue: ComicIssue }
+type Props = { covers: StatelessCover[]; comicIssue: ComicIssue }
 
 export const CoverCarousel: React.FC<Props> = ({ covers, comicIssue }) => {
   const { publicKey } = useWallet()
@@ -20,9 +20,7 @@ export const CoverCarousel: React.FC<Props> = ({ covers, comicIssue }) => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
   const [isCoverPreviewOpen, toggleCoverPreview] = useToggle()
 
-  const {
-    data: candyMachine,
-  } = useFetchCandyMachine({
+  const { data: candyMachine } = useFetchCandyMachine({
     candyMachineAddress: comicIssue.activeCandyMachineAddress ?? '',
     walletAddress: publicKey?.toBase58() ?? '',
   })

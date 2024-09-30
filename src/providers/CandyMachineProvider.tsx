@@ -56,7 +56,12 @@ export const CandyMachineProvider: React.FC<Props> = ({ children, comicIssue }) 
   const [numberOfItems, setNumberOfItems] = useState<number>(1)
 
   const updateSelectedCoupon = (coupon: CandyMachineCoupon) => {
-    setSelectedCoupon(coupon)
+    if (selectedCoupon?.id === coupon.id) {
+      const publicCoupon = getPublicCoupon(candyMachine?.coupons ?? [])
+      setSelectedCoupon(publicCoupon)
+    } else {
+      setSelectedCoupon(coupon)
+    }
   }
 
   const updateSelectedCurrency = (currency?: CouponCurrencySetting) => {

@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { MinusIcon, PlusIcon } from 'lucide-react'
 import { Skeleton } from '../ui/Skeleton'
-import { getTokenMap, TokenDetail } from '@/utils/mint'
+import { checkIfCouponIsActive, getTokenMap, TokenDetail } from '@/utils/mint'
 import { useCandyMachine } from '@/providers/CandyMachineProvider'
 import { Divider } from './Divider'
 import { CouponsSection, CouponsSectionLoading } from '../mint/CouponsSection'
@@ -77,7 +77,10 @@ const CouponDetails: React.FC = () => {
   const tokenMap = getTokenMap(selectedCoupon.prices, supportedTokens)
   const selectedCurrencySetting = selectedCurrency ? tokenMap.get(selectedCurrency.label) : undefined
   return prices.length && selectedCurrencySetting ? (
-    <CurrencyExpandable selectedCurrencySetting={selectedCurrencySetting}>
+    <CurrencyExpandable
+      isLive={checkIfCouponIsActive(selectedCoupon)}
+      selectedCurrencySetting={selectedCurrencySetting}
+    >
       {prices.map((setting) => {
         const token = tokenMap.get(setting.label)
         if (!token) return null
