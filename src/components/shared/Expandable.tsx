@@ -5,10 +5,8 @@ import clsx from 'clsx'
 
 import ArrowDownIcon from 'public/assets/vector-icons/arrow-down-2.svg'
 import useEventListener from '@/hooks/useEventListener'
-import { SplToken } from '@/models/settings/splToken'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
-import { CouponCurrencySetting } from '@/models/candyMachine/candyMachineCoupon'
 import { TokenDetail } from '@/utils/mint'
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {

@@ -4,7 +4,6 @@ import React from 'react'
 import { RoutePath } from '@/enums/routePath'
 import { usePathname } from 'next/navigation'
 import { useIsMobile } from '@/hooks/useBreakpoints'
-import { BottomNavItem } from './BottomNavigation'
 import DReaderLogo from 'public/assets/vector-icons/full-logo.svg'
 import GenesisLogo from 'public/assets/vector-icons/genesis-logo.svg'
 import SearchIcon from 'public/assets/vector-icons/search-icon.svg'
@@ -19,17 +18,6 @@ import clsx from 'clsx'
 
 type Props = {
   paramId?: string | number
-}
-
-const initialMobileNavItem = (pathname: string) => {
-  if (pathname.startsWith(RoutePath.Discover)) {
-    return BottomNavItem.discover
-  } else if (pathname.startsWith(RoutePath.Library)) {
-    return BottomNavItem.library
-  } else if (pathname.startsWith(RoutePath.Invest)) {
-    return BottomNavItem.invest
-  }
-  return BottomNavItem.home
 }
 
 export const Navigation: React.FC<Props> = ({ paramId }) => {

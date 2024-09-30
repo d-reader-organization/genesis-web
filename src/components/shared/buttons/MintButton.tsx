@@ -46,15 +46,11 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
   const walletAddress = publicKey?.toBase58()
   const hasWalletConnected = !!walletAddress
 
-  if (!candyMachine || !selectedCoupon) {
-    return null
-  }
-
-  const { isEligible } = validateMintEligibilty(candyMachine.coupons ?? [], selectedCoupon?.id)
-  const isLive = checkIfCouponIsActive(selectedCoupon)
+  const { isEligible } = validateMintEligibilty(candyMachine?.coupons ?? [], selectedCoupon?.id)
+  const isLive = selectedCoupon ? checkIfCouponIsActive(selectedCoupon) : false
 
   const { refetch } = useFetchCandyMachine({
-    candyMachineAddress: candyMachine.address,
+    candyMachineAddress: candyMachine?.address ?? '',
     walletAddress,
   })
 
@@ -80,19 +76,16 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
     setIsMintTransactionLoading(true)
     // figure out what about this
     const { data: updatedCandyMachine } = await refetch()
-    if (!updatedCandyMachine) {
+    if (!updatedCandyMachine || !selectedCoupon) {
       return
     }
 
-    if (!updatedCandyMachine) {
-      return
-    }
     const isMintValid = validateMintEligibilty(updatedCandyMachine?.coupons, selectedCoupon.id)
     if (!isMintValid) {
       toast({ description: "You're not eligible for the mint", variant: 'error' })
     }
     const mintTransactions = await fetchMintTransaction({
-      candyMachineAddress: candyMachine.address,
+      candyMachineAddress: updatedCandyMachine.address,
       minterAddress: walletAddress,
       couponId: selectedCoupon.id,
       label: selectedCurrency.label,

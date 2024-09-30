@@ -1,7 +1,7 @@
 'use client'
 
 import { CandyMachine } from '@/models/candyMachine'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { ProgressBar } from './ProgressBar'
 import { CurrencyExpandable, Expandable } from './Expandable'
 import LockIcon from 'public/assets/vector-icons/lock.svg'
@@ -13,7 +13,6 @@ import Image from 'next/image'
 import { MinusIcon, PlusIcon } from 'lucide-react'
 import { Skeleton } from '../ui/Skeleton'
 import { getTokenMap, TokenDetail } from '@/utils/mint'
-import { WRAPPED_SOL_MINT } from '@metaplex-foundation/js'
 import { useCandyMachine } from '@/providers/CandyMachineProvider'
 import { Divider } from './Divider'
 import { CouponsSection, CouponsSectionLoading } from '../mint/CouponsSection'
@@ -68,16 +67,12 @@ const LoadingSkeleton: React.FC = () => (
 
 const CouponDetails: React.FC = () => {
   const { selectedCoupon, selectedCurrency, supportedTokens = [], updateSelectedCurrency } = useCandyMachine()
+
   if (!selectedCoupon) {
     return null
   }
-  const { prices } = selectedCoupon
-  // Initialize currencySetting state
-  const solCurrencySetting = prices.find((price) => price.splTokenAddress == WRAPPED_SOL_MINT.toString())
 
-  useEffect(() => {
-    updateSelectedCurrency(solCurrencySetting)
-  }, [selectedCoupon])
+  const prices = selectedCoupon.prices
 
   const tokenMap = getTokenMap(selectedCoupon.prices, supportedTokens)
   const selectedCurrencySetting = selectedCurrency ? tokenMap.get(selectedCurrency.label) : undefined

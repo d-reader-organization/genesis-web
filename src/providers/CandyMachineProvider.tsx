@@ -10,6 +10,7 @@ import { CandyMachineCoupon, CouponCurrencySetting, CouponType } from '@/models/
 import { getPublicCoupon } from '@/utils/mint'
 import { CandyMachine } from '@/models/candyMachine'
 import { SplToken } from '@/models/settings/splToken'
+import { WRAPPED_SOL_MINT } from '@metaplex-foundation/js'
 
 type ReturnType = {
   candyMachine?: CandyMachine | null
@@ -79,6 +80,13 @@ export const CandyMachineProvider: React.FC<Props> = ({ children, comicIssue }) 
       setSelectedCoupon(publicCoupon)
     }
   }, [candyMachine])
+
+  useEffect(() => {
+    if (!selectedCoupon) return
+    const prices = selectedCoupon.prices
+    const solCurrencySetting = prices.find((price) => price.splTokenAddress == WRAPPED_SOL_MINT.toString())
+    updateSelectedCurrency(solCurrencySetting)
+  }, [selectedCoupon])
 
   const value = {
     candyMachine,
