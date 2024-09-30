@@ -47,7 +47,7 @@ export const CoverPreviewDialog: React.FC<Props> = ({
           <Image
             src={cover.image}
             alt='Cover image'
-            className='shadow-[6px_6px_0px_0px_#000] rounded-2xl w-full'
+            className='shadow-[6px_6px_0px_0px_#000] rounded-2xl w-full max-h-[calc(100vh-200px)]'
             height={520}
             width={520}
           />
