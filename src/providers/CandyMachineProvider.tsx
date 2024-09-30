@@ -69,7 +69,8 @@ export const CandyMachineProvider: React.FC<Props> = ({ children, comicIssue }) 
   }
 
   const updateNumberOfItems = (value: number) => {
-    if (value > 0) {
+    const numberOfRedemptions = selectedCoupon?.numberOfRedemptions || 4;
+    if (value > 0 && value <= Math.min(numberOfRedemptions,4)) {
       setNumberOfItems(value)
     }
   }
