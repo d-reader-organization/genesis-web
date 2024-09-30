@@ -74,7 +74,7 @@ export const Expandable: React.FC<Props> = ({
         })}
         style={{ '--content-height': `${contentHeight}px` } as React.CSSProperties}
       >
-        <div ref={(contentRef) => setContentRef(contentRef)} className='py-6 px-3'>
+        <div ref={(contentRef) => setContentRef(contentRef)} className='py-2 px-3'>
           {children}
         </div>
       </div>

@@ -3,5 +3,5 @@ export type MintParams = {
 	candyMachineAddress: string;
 	minterAddress: string;
 	label: string;
-	numberOfItems?: string;
+	numberOfItems?: number;
 }

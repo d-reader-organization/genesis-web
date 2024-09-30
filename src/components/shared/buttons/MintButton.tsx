@@ -1,8 +1,7 @@
 'use client'
 
-import { CandyMachine } from '@/models/candyMachine'
 import { checkIfCouponIsActive, validateMintEligibilty } from '@/utils/mint'
-import { useConnection, useWallet } from '@solana/wallet-adapter-react'
+import { useWallet } from '@solana/wallet-adapter-react'
 import React, { useEffect, useState } from 'react'
 import { Button } from '../../ui/Button'
 import dynamic from 'next/dynamic'
@@ -20,15 +19,11 @@ import { versionedTransactionFromBs64 } from '@/utils/transactions'
 import { io } from 'socket.io-client'
 import { CandyMachineReceipt } from '@/models/candyMachine/candyMachineReceipt'
 import { useRouter } from 'next/navigation'
-import { CandyMachineCoupon, CouponCurrencySetting } from '@/models/candyMachine/candyMachineCoupon'
 import { sendMintTransaction } from '@/app/lib/api/transaction/mutations'
+import { useCandyMachine } from '@/providers/CandyMachineProvider'
 
 type Props = {
   comicIssue: ComicIssue
-  selectedCoupon: CandyMachineCoupon
-  selectedCurrency: CouponCurrencySetting | undefined
-  numberOfItems:string
-  candyMachine: CandyMachine
   isAuthenticated: boolean
 }
 
@@ -36,7 +31,8 @@ const BaseWalletMultiButtonDynamic = dynamic(
   async () => (await import('@/components/shared/buttons/SolanaBaseWalletButton')).SolanaBaseWalletButton
 )
 
-export const MintButton: React.FC<Props> = ({ candyMachine, selectedCoupon, comicIssue, isAuthenticated, numberOfItems, selectedCurrency }) => {
+export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => {
+  const { candyMachine, selectedCoupon, numberOfItems, selectedCurrency } = useCandyMachine()
   const [showAssetMinted, toggleAssetMinted] = useToggle()
   // const [showEmailVerification, toggleEmailVerification] = useToggle()
   // const [showWalletNotConnected, toggleWalletNotConnected] = useToggle()
@@ -45,16 +41,17 @@ export const MintButton: React.FC<Props> = ({ candyMachine, selectedCoupon, comi
   const [assetAddress, setAssetAddress] = useState<string>()
 
   const { publicKey, signAllTransactions } = useWallet()
-  const { connection } = useConnection()
   const { refresh } = useRouter()
 
   const walletAddress = publicKey?.toBase58()
   const hasWalletConnected = !!walletAddress
 
-  const { isEligible } = validateMintEligibilty(candyMachine?.coupons, selectedCoupon.id)
+  if (!candyMachine || !selectedCoupon) {
+    return null
+  }
+
+  const { isEligible } = validateMintEligibilty(candyMachine.coupons ?? [], selectedCoupon?.id)
   const isLive = checkIfCouponIsActive(selectedCoupon)
-  const {startsAt,expiresAt} = selectedCoupon
-  const isEnded = expiresAt ? new Date() > new Date(expiresAt) : false 
 
   const { refetch } = useFetchCandyMachine({
     candyMachineAddress: candyMachine.address,
@@ -79,7 +76,7 @@ export const MintButton: React.FC<Props> = ({ candyMachine, selectedCoupon, comi
   }, [walletAddress])
 
   const handleMint = async () => {
-    if(!walletAddress || !selectedCurrency)return;
+    if (!walletAddress || !selectedCurrency) return
     setIsMintTransactionLoading(true)
     // figure out what about this
     const { data: updatedCandyMachine } = await refetch()
@@ -91,29 +88,29 @@ export const MintButton: React.FC<Props> = ({ candyMachine, selectedCoupon, comi
       return
     }
     const isMintValid = validateMintEligibilty(updatedCandyMachine?.coupons, selectedCoupon.id)
-    if(!isMintValid){
-      toast({description:"You're not eligible for the mint", variant:'error'})
+    if (!isMintValid) {
+      toast({ description: "You're not eligible for the mint", variant: 'error' })
     }
     const mintTransactions = await fetchMintTransaction({
       candyMachineAddress: candyMachine.address,
       minterAddress: walletAddress,
       couponId: selectedCoupon.id,
       label: selectedCurrency.label,
-      numberOfItems: numberOfItems ?? 1
+      numberOfItems: numberOfItems ?? 1,
     }).then((value) => value.map(versionedTransactionFromBs64))
-    
+
     if (!signAllTransactions) {
       return toast({ description: 'Wallet does not support signing multiple transactions', variant: 'error' })
     }
     const signedTransactions = await signAllTransactions(mintTransactions)
     setIsMintTransactionLoading(false)
     toggleConfirmingTransaction()
-    
-    const serializedTransactions :string[] = [];
+
+    const serializedTransactions: string[] = []
     for (const transaction of signedTransactions) {
       try {
         const serializedTransaction = Buffer.from(transaction.serialize()).toString('base64')
-        serializedTransactions.push(serializedTransaction);
+        serializedTransactions.push(serializedTransaction)
       } catch (e) {
         toast({
           description: 'Something went wrong',
@@ -121,7 +118,7 @@ export const MintButton: React.FC<Props> = ({ candyMachine, selectedCoupon, comi
         })
       }
     }
-    await sendMintTransaction(walletAddress,serializedTransactions);
+    await sendMintTransaction(walletAddress, serializedTransactions)
   }
 
   return isLive ? (

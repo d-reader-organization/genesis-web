@@ -1,131 +1,100 @@
 'use client'
 
 import { CandyMachine } from '@/models/candyMachine'
-import React, { Dispatch, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { ProgressBar } from './ProgressBar'
 import { CurrencyExpandable, Expandable } from './Expandable'
 import LockIcon from 'public/assets/vector-icons/lock.svg'
 import { MintButton } from './buttons/MintButton'
 import { ComicIssue } from '@/models/comicIssue'
-import { useFetchCandyMachine } from '@/api/candyMachine/queries/useFetchCandyMachine'
-import { useWallet } from '@solana/wallet-adapter-react'
-import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
-import { useCountdown } from '@/hooks/useCountdown'
-import { useFetchSupportedTokens } from '@/api/settings'
-import { SplToken } from '@/models/settings/splToken'
 import { CandyMachineCoupon, CouponCurrencySetting } from '@/models/candyMachine/candyMachineCoupon'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { MinusIcon, PlusIcon } from 'lucide-react'
 import { Skeleton } from '../ui/Skeleton'
-import { Divider } from './Divider'
-import { CouponsSection } from '../mint/CouponsSection'
-import { getCouponDiscount, getTokenMap, TokenDetail } from '@/utils/mint'
+import { getTokenMap, TokenDetail } from '@/utils/mint'
 import { WRAPPED_SOL_MINT } from '@metaplex-foundation/js'
+import { useCandyMachine } from '@/providers/CandyMachineProvider'
+import { Divider } from './Divider'
+import { CouponsSection, CouponsSectionLoading } from '../mint/CouponsSection'
 
 const normalise = (value: number, MAX: number): number => (value * 100) / MAX
-type DetailsProps = { candyMachine: CandyMachine, selectedCoupon: CandyMachineCoupon }
+type DetailsProps = { candyMachine: CandyMachine; selectedCoupon: CandyMachineCoupon }
 type Props = { comicIssue: ComicIssue; isAuthenticated: boolean }
 
 export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticated }) => {
-  const { publicKey } = useWallet()
-  const {
-    data: candyMachine,
-    refetch,
-    isLoading,
-  } = useFetchCandyMachine({
-    candyMachineAddress: comicIssue.activeCandyMachineAddress ?? '',
-    walletAddress: publicKey?.toBase58() ?? '',
-  })
-  const { data: supportedTokens } = useFetchSupportedTokens()
- 
-  // for certain future, all candymachine must have a public coupon that will act as a default coupon
-  const [selectedCoupon,setCoupon] = useState<CandyMachineCoupon>()
-  const [selectedCurrency, setCurrency] = useState<CouponCurrencySetting>();
-  const [numberOfItems,setNumberOfItems] = useState('1');
-  
-  useAuthorizeWallet(refetch)
+  const { candyMachine, selectedCoupon, isLoading } = useCandyMachine()
 
   return isLoading ? (
     <LoadingSkeleton />
   ) : (
-    candyMachine &&  (
+    candyMachine && (
       <div className='flex flex-col gap-6'>
-        {selectedCoupon && <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 max-h-fit max-w-[800px] shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)] mb-2'>
-          <CouponDetails
-            candyMachine={candyMachine}
-            supportedTokens={supportedTokens ?? []}
-            isAuthenticated={isAuthenticated}
-            selectedCoupon={selectedCoupon}
-            setCurrency={setCurrency}
-            selectedCurrency={selectedCurrency}
-          />
-          <UserDetails candyMachine={candyMachine} selectedCoupon={selectedCoupon} />
-          <ProgressBar value={normalise(candyMachine.itemsMinted, candyMachine.supply)} />
-          <ComicVault />
-          <PurchaseRow
-            comicIssue={comicIssue}
-            candyMachine={candyMachine}
-            isAuthenticated={isAuthenticated}
-            numberOfItems={numberOfItems}
-            selectedCurrency={selectedCurrency}
-            selectedCoupon={selectedCoupon}
-            className='max-md:fixed max-md:bottom-0 max-md:z-50 max-md:bg-grey-600 max-md:backdrop-blur-[2px]'
-          />
-        </div>}
+        {selectedCoupon && (
+          <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 max-h-fit max-w-[800px] shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]'>
+            <CouponDetails />
+            <UserDetails candyMachine={candyMachine} selectedCoupon={selectedCoupon} />
+            <ProgressBar value={normalise(candyMachine.itemsMinted, candyMachine.supply)} />
+            <ComicVault />
+            <PurchaseRow comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
+          </div>
+        )}
         <Divider className='max-md:hidden' />
-        <CouponsSection candyMachine={candyMachine} setCoupon={setCoupon} selectedCoupon={selectedCoupon} />
+        <CouponsSection />
       </div>
     )
   )
 }
 
 const LoadingSkeleton: React.FC = () => (
-  <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 max-h-fit max-w-[800px]'>
-    <CouponSkeleton />
-    <div className='h-[19.6px] md:h-[22.4px] w-full flex items-center justify-between'>
-      <Skeleton className='h-[19.6px] md:h-[22.4px] w-32' />
-      <Skeleton className='h-[19.6px] md:h-[22.4px] w-10' />
+  <div className='flex flex-col gap-6'>
+    <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 max-h-fit max-w-[800px]'>
+      <CouponSkeleton />
+      <div className='h-[19.6px] md:h-[22.4px] w-full flex items-center justify-between'>
+        <Skeleton className='h-[19.6px] md:h-[22.4px] w-32' />
+        <Skeleton className='h-[19.6px] md:h-[22.4px] w-10' />
+      </div>
+      <Skeleton className='h-2' />
+      <Skeleton className='h-[48.5px] md:h-[47.5px] w-[95%]' />
+      <div className='max-md:hidden h-[52px] flex gap-4 items-center'>
+        <Skeleton className='h-full w-40' />
+        <Skeleton className='h-full w-40' />
+      </div>
     </div>
-    <Skeleton className='h-2' />
-    <Skeleton className='h-12 w-11/12' />
-    <div className='max-md:hidden h-[52px] flex gap-4 items-center'>
-      <Skeleton className='h-full w-40' />
-      <Skeleton className='h-full w-40' />
-    </div>
+    <Divider className='max-md:hidden' />
+    <CouponsSectionLoading />
   </div>
 )
 
-const CouponDetails: React.FC<DetailsProps & { isAuthenticated: boolean; supportedTokens: SplToken[]; selectedCurrency: CouponCurrencySetting | undefined; setCurrency: Dispatch<React.SetStateAction<CouponCurrencySetting | undefined>>}> = ({
-  candyMachine,
-  isAuthenticated,
-  selectedCurrency,
-  setCurrency,
-  supportedTokens,
-  selectedCoupon
-}) => {
-  const { startsAt, expiresAt, prices } = selectedCoupon
+const CouponDetails: React.FC = () => {
+  const { selectedCoupon, selectedCurrency, supportedTokens = [], updateSelectedCurrency } = useCandyMachine()
+  if (!selectedCoupon) {
+    return null
+  }
+  const { prices } = selectedCoupon
   // Initialize currencySetting state
-  const solCurrencySetting = prices.find(price => price.splTokenAddress == WRAPPED_SOL_MINT.toString());
+  const solCurrencySetting = prices.find((price) => price.splTokenAddress == WRAPPED_SOL_MINT.toString())
 
-  useEffect(()=>{
-    if(!selectedCurrency){
-      setCurrency(solCurrencySetting)
-    }
-  },[]);
+  useEffect(() => {
+    updateSelectedCurrency(solCurrencySetting)
+  }, [selectedCoupon])
 
-  const { countdownString } = useCountdown({ expirationDate: startsAt.toString() })
-  const highlightDiscount = getCouponDiscount(candyMachine.coupons,selectedCoupon)
-
-  const tokenMap = getTokenMap(selectedCoupon.prices,supportedTokens);
-  const selectedCurrencySetting = selectedCurrency ? tokenMap.get(selectedCurrency.label) : undefined;
-
+  const tokenMap = getTokenMap(selectedCoupon.prices, supportedTokens)
+  const selectedCurrencySetting = selectedCurrency ? tokenMap.get(selectedCurrency.label) : undefined
   return prices.length && selectedCurrencySetting ? (
     <CurrencyExpandable selectedCurrencySetting={selectedCurrencySetting}>
       {prices.map((setting) => {
-        const token = tokenMap.get(setting.label);
-        if(!token)return null;
-        return <CurrencyRow key={setting.label} isSelected={selectedCurrency?.label==setting.label} setCurrency={setCurrency} currencySetting={setting} token={token}/>
+        const token = tokenMap.get(setting.label)
+        if (!token) return null
+        return (
+          <CurrencyRow
+            key={setting.label}
+            isSelected={selectedCurrency?.label == setting.label}
+            setCurrency={updateSelectedCurrency}
+            currencySetting={setting}
+            token={token}
+          />
+        )
       })}
     </CurrencyExpandable>
   ) : (
@@ -142,7 +111,7 @@ const CouponSkeleton: React.FC = () => (
 
 type CurrencyRowProps = {
   isSelected?: boolean
-  setCurrency: Dispatch<React.SetStateAction<CouponCurrencySetting | undefined>>
+  setCurrency: (currency: CouponCurrencySetting) => void
   currencySetting: CouponCurrencySetting
   token: TokenDetail
 }
@@ -154,7 +123,7 @@ const CurrencyRow: React.FC<CurrencyRowProps> = ({ isSelected = false, token, se
         'flex justify-between items-center p-4 rounded-2xl border border-grey-300 bg-grey-600',
         isSelected && 'border border-yellow-500 bg-yellow-500 bg-opacity-[0.08]'
       )}
-      onClick={()=>setCurrency(currencySetting)}
+      onClick={() => setCurrency(currencySetting)}
     >
       <div className='flex items-center gap-2'>
         <Image alt='currency' src={token.icon} width={16} height={16} />
@@ -166,8 +135,8 @@ const CurrencyRow: React.FC<CurrencyRowProps> = ({ isSelected = false, token, se
 }
 
 const UserDetails: React.FC<DetailsProps> = ({ candyMachine, selectedCoupon }) => {
-  const numberOfRedemptions = selectedCoupon.numberOfRedemptions;
-  const itemsMinted = selectedCoupon.stats.itemsMinted;
+  const numberOfRedemptions = selectedCoupon.numberOfRedemptions ?? 0
+  const itemsMinted = selectedCoupon.stats.itemsMinted ?? 0
 
   return (
     <div className='flex justify-between text-center text-grey-100 text-sm md:text-base font-medium leading-[19.6px] md:leading-[22.4px]'>
@@ -183,7 +152,7 @@ const UserDetails: React.FC<DetailsProps> = ({ candyMachine, selectedCoupon }) =
 
 const ComicVault: React.FC = () => (
   <Expandable
-    className='bg-grey-400 border-transparent rounded-2xl max-w-[800px] h-12'
+    className='bg-grey-400 border-transparent rounded-2xl max-w-[800px]'
     title='Comic Vault'
     titleComponent={
       <div className='flex gap-2 items-center text-sm sm:text-base font-medium leading-5 text-grey-100'>
@@ -203,44 +172,43 @@ const ComicVault: React.FC = () => (
 type PurchaseRowProps = {
   comicIssue: ComicIssue
   isAuthenticated: boolean
-  candyMachine: CandyMachine
-  selectedCoupon: CandyMachineCoupon
-  selectedCurrency: CouponCurrencySetting | undefined
-  numberOfItems: string
 } & React.HTMLAttributes<HTMLDivElement>
 
-export const PurchaseRow: React.FC<PurchaseRowProps> = ({ comicIssue, className, isAuthenticated, selectedCoupon, candyMachine, selectedCurrency, numberOfItems }) => {
-  // const { publicKey } = useWallet()
-  // const { data: candyMachine } = useFetchCandyMachine({
-  //   candyMachineAddress: comicIssue.activeCandyMachineAddress ?? '',
-  //   walletAddress: publicKey?.toBase58() ?? '',
-  // })
-  // if (!candyMachine) {
-  //   return null
-  // }
+export const PurchaseRow: React.FC<PurchaseRowProps> = ({ comicIssue, className, isAuthenticated }) => {
   return (
-    <div className={cn('flex gap-4 items-center max-h-[52px]', className)}>
+    <div
+      className={cn(
+        'flex gap-4 max-md:w-full max-md:max-h-[84px] max-md:p-4 items-center w-full max-h-[84px] md:max-h-[52px] max-md:fixed max-md:bottom-0 max-md:z-50 max-md:bg-grey-600 max-md:backdrop-blur-[2px] max-md:-ml-8 max-md:justify-center',
+        className
+      )}
+    >
       <NumberOfItemsWidget />
-      <MintButton candyMachine={candyMachine} selectedCoupon={selectedCoupon} selectedCurrency={selectedCurrency} comicIssue={comicIssue} isAuthenticated={isAuthenticated} numberOfItems={numberOfItems}/>
+      <MintButton comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
     </div>
   )
 }
 
-// TODO design system mobile component
 const NumberOfItemsWidget: React.FC = () => {
+  const { updateNumberOfItems, numberOfItems } = useCandyMachine()
   return (
     <div className='max-h-[52px] min-w-[150px] p-2.5 flex justify-between items-center rounded-xl bg-grey-400'>
-      <IconWrapper>
+      <ButtonIconWrapper onClick={() => updateNumberOfItems(numberOfItems - 1)}>
         <MinusIcon className='size-4 md:size-5' />
-      </IconWrapper>
-      <span className='text-sm md:text-base font-medium leading-[19.6px] md:leading-[22.4px]'>5</span>
-      <IconWrapper>
+      </ButtonIconWrapper>
+      <span className='text-sm md:text-base font-medium leading-[19.6px] md:leading-[22.4px]'>{numberOfItems}</span>
+      <ButtonIconWrapper onClick={() => updateNumberOfItems(numberOfItems + 1)}>
         <PlusIcon className='size-4 md:size-5' />
-      </IconWrapper>
+      </ButtonIconWrapper>
     </div>
   )
 }
 
-const IconWrapper: React.FC<React.PropsWithChildren> = ({ children }) => {
-  return <button className='flex p-2 justify-center rounded-lg bg-grey-500 '>{children}</button>
+type ButtonIconWrapperProps = { onClick: () => void } & React.PropsWithChildren
+
+const ButtonIconWrapper: React.FC<ButtonIconWrapperProps> = ({ onClick, children }) => {
+  return (
+    <button className='flex p-2 justify-center rounded-lg bg-grey-500' onClick={onClick}>
+      {children}
+    </button>
+  )
 }
