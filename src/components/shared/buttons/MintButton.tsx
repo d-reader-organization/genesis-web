@@ -20,7 +20,7 @@ import { io } from 'socket.io-client'
 import { CandyMachineReceipt } from '@/models/candyMachine/candyMachineReceipt'
 import { useRouter } from 'next/navigation'
 import { sendMintTransaction } from '@/app/lib/api/transaction/mutations'
-import { useCandyMachine } from '@/providers/CandyMachineProvider'
+import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 
 type Props = {
   comicIssue: ComicIssue
@@ -32,7 +32,7 @@ const BaseWalletMultiButtonDynamic = dynamic(
 )
 
 export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => {
-  const { candyMachine, selectedCoupon, numberOfItems, selectedCurrency } = useCandyMachine()
+  const { candyMachine, selectedCoupon, numberOfItems, selectedCurrency } = useCandyMachineStore((state) => state)
   const [showAssetMinted, toggleAssetMinted] = useToggle()
   // const [showEmailVerification, toggleEmailVerification] = useToggle()
   // const [showWalletNotConnected, toggleWalletNotConnected] = useToggle()
@@ -96,11 +96,11 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
       return toast({ description: 'Wallet does not support signing multiple transactions', variant: 'error' })
     }
 
-    try{
+    try {
       const signedTransactions = await signAllTransactions(mintTransactions)
       setIsMintTransactionLoading(false)
       toggleConfirmingTransaction()
-  
+
       const serializedTransactions: string[] = []
       for (const transaction of signedTransactions) {
         try {
@@ -116,23 +116,24 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
         }
       }
       await sendMintTransaction(walletAddress, serializedTransactions)
-    }catch(e){
+    } catch (e) {
       setIsMintTransactionLoading(false)
-      closeConfirmingTransaction();
+      closeConfirmingTransaction()
     }
-
   }
 
   return isLive ? (
     <>
       {hasWalletConnected ? (
         isEligible ? (
-          <Button className='bg-important-color min-h-[52px] w-[100%]' onClick={handleMint}>
+          <Button className='bg-important-color min-h-[52px] w-full' onClick={handleMint}>
             {!isMintTransactionLoading ? 'Purchase' : <Loader />}
           </Button>
         ) : (
           <>
-            <Button className='min-h-[52px] w-[100%]' disabled>Not eligible</Button>
+            <Button className='min-h-[52px] w-full' disabled>
+              Not eligible
+            </Button>
           </>
         )
       ) : (
