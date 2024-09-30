@@ -50,31 +50,31 @@ export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticat
     <LoadingSkeleton />
   ) : (
     candyMachine &&  (
-      <div>
-      {selectedCoupon && <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 max-h-fit max-w-[800px] shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)] mb-2'>
-        <CouponDetails
-          candyMachine={candyMachine}
-          supportedTokens={supportedTokens ?? []}
-          isAuthenticated={isAuthenticated}
-          selectedCoupon={selectedCoupon}
-          setCurrency={setCurrency}
-          selectedCurrency={selectedCurrency}
-        />
-        <UserDetails candyMachine={candyMachine} selectedCoupon={selectedCoupon} />
-        <ProgressBar value={normalise(candyMachine.itemsMinted + 2, candyMachine.supply)} />
-        <ComicVault />
-        <PurchaseRow
-          comicIssue={comicIssue}
-          candyMachine={candyMachine}
-          isAuthenticated={isAuthenticated}
-          numberOfItems={numberOfItems}
-          selectedCurrency={selectedCurrency}
-          selectedCoupon={selectedCoupon}
-          className='max-md:fixed max-md:bottom-0 max-md:z-50 max-md:bg-grey-600 max-md:backdrop-blur-[2px]'
-        />
-      </div>}
-      <Divider className='max-md:hidden' />
-      <CouponsSection candyMachine={candyMachine} setCoupon={setCoupon} selectedCoupon={selectedCoupon} />
+      <div className='flex flex-col gap-6'>
+        {selectedCoupon && <div className='flex flex-col gap-6 rounded-2xl p-4 sm:p-6 bg-grey-500 max-h-fit max-w-[800px] shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)] mb-2'>
+          <CouponDetails
+            candyMachine={candyMachine}
+            supportedTokens={supportedTokens ?? []}
+            isAuthenticated={isAuthenticated}
+            selectedCoupon={selectedCoupon}
+            setCurrency={setCurrency}
+            selectedCurrency={selectedCurrency}
+          />
+          <UserDetails candyMachine={candyMachine} selectedCoupon={selectedCoupon} />
+          <ProgressBar value={normalise(candyMachine.itemsMinted, candyMachine.supply)} />
+          <ComicVault />
+          <PurchaseRow
+            comicIssue={comicIssue}
+            candyMachine={candyMachine}
+            isAuthenticated={isAuthenticated}
+            numberOfItems={numberOfItems}
+            selectedCurrency={selectedCurrency}
+            selectedCoupon={selectedCoupon}
+            className='max-md:fixed max-md:bottom-0 max-md:z-50 max-md:bg-grey-600 max-md:backdrop-blur-[2px]'
+          />
+        </div>}
+        <Divider className='max-md:hidden' />
+        <CouponsSection candyMachine={candyMachine} setCoupon={setCoupon} selectedCoupon={selectedCoupon} />
       </div>
     )
   )
