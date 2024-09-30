@@ -8,13 +8,22 @@ import useToggle from '@/hooks/useToggle'
 import { CoverPreviewDialog } from './CoverPreview'
 import { CoverSlide } from './CoverSlide'
 import { SliderDots } from './SliderDots'
+import { useWallet } from '@solana/wallet-adapter-react'
+import { ComicIssue } from '@/models/comicIssue'
+import { useFetchCandyMachine } from '@/api/candyMachine'
 
-type Props = { covers: StatelessCover[] }
+type Props = { covers: StatelessCover[]; comicIssue: ComicIssue }
 
-export const CoverCarousel: React.FC<Props> = ({ covers }) => {
+export const CoverCarousel: React.FC<Props> = ({ covers, comicIssue }) => {
+  const { publicKey } = useWallet()
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ stopOnMouseEnter: true })])
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
   const [isCoverPreviewOpen, toggleCoverPreview] = useToggle()
+
+  const { data: candyMachine } = useFetchCandyMachine({
+    candyMachineAddress: comicIssue.activeCandyMachineAddress ?? '',
+    walletAddress: publicKey?.toBase58() ?? '',
+  })
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return
@@ -48,6 +57,7 @@ export const CoverCarousel: React.FC<Props> = ({ covers }) => {
       <SliderDots emblaApi={emblaApi} slides={covers} selectedIndex={selectedIndex} />
       <CoverPreviewDialog
         cover={covers[selectedIndex]}
+        candyMachine={candyMachine}
         hideArrows={covers.length < 2}
         open={isCoverPreviewOpen}
         onPrevClick={() => {

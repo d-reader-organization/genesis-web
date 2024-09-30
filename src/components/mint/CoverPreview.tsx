@@ -4,11 +4,14 @@ import React from 'react'
 import { Dialog, DialogContent, DialogTitle } from '../ui/Dialog'
 import { StatelessCover } from '@/models/comicIssue/statelessCover'
 import Image from 'next/image'
-import { hardcodedData, RarityChip } from '../shared/RarityChip'
+import { RarityChip } from '../shared/RarityChip'
 import { Arrow } from '../shared/Arrow'
+import { CandyMachine } from '@/models/candyMachine'
+import { Nullable } from '@/models/common'
 
 type Props = {
   cover: StatelessCover
+  candyMachine: Nullable<CandyMachine> | undefined
   hideArrows: boolean
   open: boolean
   onOpenChange: (open: boolean) => void
@@ -20,10 +23,16 @@ export const CoverPreviewDialog: React.FC<Props> = ({
   cover,
   hideArrows,
   open,
+  candyMachine,
   onOpenChange,
   onPrevClick,
   onNextClick,
 }) => {
+  const getRaritySupply = (totalSupply: number, rarityShare: number) => {
+    const supply = Math.floor((totalSupply * rarityShare) / 100)
+    return supply
+  }
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
@@ -38,13 +47,17 @@ export const CoverPreviewDialog: React.FC<Props> = ({
           <Image
             src={cover.image}
             alt='Cover image'
-            className='shadow-[6px_6px_0px_0px_#000] rounded-2xl w-full'
+            className='shadow-[6px_6px_0px_0px_#000] rounded-2xl w-full max-h-[calc(100vh-200px)]'
             height={520}
             width={520}
           />
           <div className='flex justify-between'>
             <div className='flex gap-[42px]'>
-              <InfoStats title='Supply' value={hardcodedData[cover.rarity]} />
+              {candyMachine ? (
+                <InfoStats title='Supply' value={getRaritySupply(candyMachine.supply, cover.share)} />
+              ) : (
+                <InfoStats title='Supply' value={cover.share + ' %'} />
+              )}
               <InfoStats title='Cover author' value={cover.artist} />
             </div>
             <RarityChip rarity={cover.rarity} />

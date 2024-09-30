@@ -1,6 +1,7 @@
 export type MintParams = {
+  couponId: number
   candyMachineAddress: string
   minterAddress: string
-  mintCount: string
   label: string
+  numberOfItems?: number
 }

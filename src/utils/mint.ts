@@ -1,4 +1,14 @@
-import { CandyMachineCoupon, CouponType } from '@/models/candyMachine/candyMachineCoupon'
+import { CandyMachineCoupon, CouponCurrencySetting, CouponType } from '@/models/candyMachine/candyMachineCoupon'
+import { SplToken } from '@/models/settings/splToken'
+
+export type TokenDetail = {
+  label: string
+  name: string
+  address: string
+  price: number
+  icon: string
+  symbol: string
+}
 
 export const validateMintEligibilty = (coupons: CandyMachineCoupon[], couponId: number | undefined) => {
   if (!couponId) {
@@ -31,6 +41,8 @@ export const getPublicCoupon = (coupons: CandyMachineCoupon[]) => {
 
 export const getCouponDiscount = (coupons: CandyMachineCoupon[], currentCoupon: CandyMachineCoupon) => {
   const publicCoupon = getPublicCoupon(coupons)
+  if (!publicCoupon) return 0
+
   const publicCouponUsdcPrice = publicCoupon?.prices[0].usdcEquivalent
   const currentCouponUsdcPrice = currentCoupon.prices[0].usdcEquivalent
 
@@ -39,4 +51,36 @@ export const getCouponDiscount = (coupons: CandyMachineCoupon[], currentCoupon: 
   const difference = Math.abs(publicCouponUsdcPrice - currentCouponUsdcPrice) * 100
   const discount = Math.ceil(difference / publicCouponUsdcPrice)
   return discount
+}
+
+export const getTokenMap = (currencySettings: CouponCurrencySetting[], splTokens: SplToken[]) => {
+  const tokenMap = new Map<string, TokenDetail>()
+  for (const setting of currencySettings) {
+    const splToken = splTokens.find((token) => token.address == setting.splTokenAddress)
+    if (!splToken) continue
+    tokenMap.set(setting.label, {
+      label: setting.label,
+      name: splToken.name,
+      address: splToken.address,
+      price: getMintPrice(setting.mintPrice, splToken.decimals),
+      icon: splToken.icon,
+      symbol: splToken.symbol,
+    })
+  }
+  return tokenMap
+}
+
+export const getMintPrice = (basePrice: number, decimals: number) => {
+  const denominator = Math.pow(10, decimals)
+  const price = parseFloat((basePrice / denominator).toFixed(3))
+
+  return price
+}
+
+export const getTotalItemsMintedByUser = (coupons: CandyMachineCoupon[]) => {
+  let itemsMinted = 0
+  for (const coupon of coupons) {
+    itemsMinted += coupon.stats.itemsMinted || 0
+  }
+  return itemsMinted
 }

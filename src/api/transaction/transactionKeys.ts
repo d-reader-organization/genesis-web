@@ -3,7 +3,6 @@ import { CancelBidParams } from '@/models/transaction/cancelBid'
 import { CancelListingParams } from '@/models/transaction/cancelListing'
 import { InstantBuyParams } from '@/models/transaction/instantBuy'
 import { ListParams } from '@/models/transaction/list'
-import { MintOneParams } from '@/models/transaction/mintOne'
 import { MultipleBuyParams } from '@/models/transaction/multipleBuy'
 import { PrivateBidParams } from '@/models/transaction/privateBid'
 import { SignComicParams } from '@/models/transaction/signComic'
@@ -16,6 +15,7 @@ export const TRANSACTION_QUERY_KEYS = Object.freeze({
   MINT: 'mint',
   SIGN_COMIC: 'sign-comic',
   USE_COMIC_ISSUE_ASSET: 'use-comic-issue-asset',
+  SEND_MINT_TRANSACTION: 'send-mint-transaction',
   LIST: 'list',
   PRIVATE_BID: 'private-bid',
   INSTANT_BUY: 'instant-buy',
@@ -26,19 +26,13 @@ export const TRANSACTION_QUERY_KEYS = Object.freeze({
 })
 
 export const transactionKeys = Object.freeze({
-  mintOne: (params: MintOneParams) => [
-    TRANSACTION_QUERY_KEYS.TRANSACTION,
-    TRANSACTION_QUERY_KEYS.MINT_ONE,
-    params.candyMachineAddress,
-    params.label,
-    params.minterAddress,
-  ],
-
   mint: (params: MintParams) => [
     TRANSACTION_QUERY_KEYS.TRANSACTION,
     TRANSACTION_QUERY_KEYS.MINT_ONE,
     params.candyMachineAddress,
-    params.mintCount,
+    params.numberOfItems,
+    params.label,
+    params.couponId,
     params.minterAddress,
   ],
   signComic: (params: SignComicParams) => [

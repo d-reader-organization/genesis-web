@@ -1,8 +1,7 @@
 'use client'
 
-import { CandyMachine } from '@/models/candyMachine'
-import { validateMintEligibilty } from '@/utils/mint'
-import { useConnection, useWallet } from '@solana/wallet-adapter-react'
+import { checkIfCouponIsActive, validateMintEligibilty } from '@/utils/mint'
+import { useWallet } from '@solana/wallet-adapter-react'
 import React, { useEffect, useState } from 'react'
 import { Button } from '../../ui/Button'
 import dynamic from 'next/dynamic'
@@ -14,16 +13,16 @@ import { ComicIssue } from '@/models/comicIssue'
 import { ConfirmingTransactionDialog } from '../dialogs/ConfirmingTransactionDialog'
 import { useToggle } from '@/hooks'
 import { Skeleton, toast } from '../../ui'
-import { fetchMintOneTransaction } from '@/app/lib/api/transaction/queries'
+import { fetchMintTransaction } from '@/app/lib/api/transaction/queries'
 import { useFetchCandyMachine } from '@/api/candyMachine'
 import { versionedTransactionFromBs64 } from '@/utils/transactions'
 import { io } from 'socket.io-client'
 import { CandyMachineReceipt } from '@/models/candyMachine/candyMachineReceipt'
 import { useRouter } from 'next/navigation'
-import { CandyMachineCoupon } from '@/models/candyMachine/candyMachineCoupon'
+import { sendMintTransaction } from '@/app/lib/api/transaction/mutations'
+import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 
 type Props = {
-  candyMachine: CandyMachine
   comicIssue: ComicIssue
   isAuthenticated: boolean
 }
@@ -32,27 +31,26 @@ const BaseWalletMultiButtonDynamic = dynamic(
   async () => (await import('@/components/shared/buttons/SolanaBaseWalletButton')).SolanaBaseWalletButton
 )
 
-export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthenticated }) => {
+export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => {
+  const { candyMachine, selectedCoupon, numberOfItems, selectedCurrency } = useCandyMachineStore((state) => state)
   const [showAssetMinted, toggleAssetMinted] = useToggle()
   // const [showEmailVerification, toggleEmailVerification] = useToggle()
   // const [showWalletNotConnected, toggleWalletNotConnected] = useToggle()
-  const [showConfirmingTransaction, toggleConfirmingTransaction] = useToggle()
+  const [showConfirmingTransaction, toggleConfirmingTransaction, closeConfirmingTransaction] = useToggle()
   const [isMintTransactionLoading, setIsMintTransactionLoading] = useState(false)
   const [assetAddress, setAssetAddress] = useState<string>()
 
   const { publicKey, signAllTransactions } = useWallet()
-  const { connection } = useConnection()
   const { refresh } = useRouter()
 
   const walletAddress = publicKey?.toBase58()
   const hasWalletConnected = !!walletAddress
 
-  const { isEligible } = validateMintEligibilty(candyMachine?.coupons, 5)
-  const { startsAt, expiresAt } = candyMachine?.coupons.at(0) as CandyMachineCoupon
-  const isLive = new Date(startsAt) <= new Date() && new Date(expiresAt) > new Date()
+  const { isEligible } = validateMintEligibilty(candyMachine?.coupons ?? [], selectedCoupon?.id)
+  const isLive = selectedCoupon ? checkIfCouponIsActive(selectedCoupon) : false
 
   const { refetch } = useFetchCandyMachine({
-    candyMachineAddress: candyMachine.address,
+    candyMachineAddress: candyMachine?.address ?? '',
     walletAddress,
   })
 
@@ -63,6 +61,9 @@ export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthen
     const socket = io(process.env.NEXT_PUBLIC_API_ENDPOINT || '')
     socket.on(`wallet/${walletAddress}/item-minted`, async (data: CandyMachineReceipt): Promise<void> => {
       setAssetAddress(data.asset.address)
+      toggleConfirmingTransaction()
+      toggleAssetMinted()
+      toast({ description: 'Successfully minted the comic! Find the asset in your wallet', variant: 'success' })
       refresh
     })
     return () => {
@@ -71,60 +72,53 @@ export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthen
   }, [walletAddress])
 
   const handleMint = async () => {
+    if (!walletAddress || !selectedCurrency) return
     setIsMintTransactionLoading(true)
     // figure out what about this
     const { data: updatedCandyMachine } = await refetch()
-    if (!updatedCandyMachine) {
+    if (!updatedCandyMachine || !selectedCoupon) {
       return
     }
 
-    if (!updatedCandyMachine) {
-      return
+    const isMintValid = validateMintEligibilty(updatedCandyMachine?.coupons, selectedCoupon.id)
+    if (!isMintValid) {
+      toast({ description: "You're not eligible for the mint", variant: 'error' })
     }
-    const selectedCouponId = updatedCandyMachine?.coupons.at(0)?.id // TODO
-    const isMintValid = validateMintEligibilty(updatedCandyMachine?.coupons, selectedCouponId)
-    const mintTransactions = await fetchMintOneTransaction({
-      candyMachineAddress: candyMachine.address,
-      minterAddress: walletAddress ?? '',
-      label: updatedCandyMachine?.coupons.find((coupon) => coupon.id === selectedCouponId)?.name ?? '', // TODO
+    const mintTransactions = await fetchMintTransaction({
+      candyMachineAddress: updatedCandyMachine.address,
+      minterAddress: walletAddress,
+      couponId: selectedCoupon.id,
+      label: selectedCurrency.label,
+      numberOfItems: numberOfItems ?? 1,
     }).then((value) => value.map(versionedTransactionFromBs64))
+
     if (!signAllTransactions) {
       return toast({ description: 'Wallet does not support signing multiple transactions', variant: 'error' })
     }
-    const signedTransactions = await signAllTransactions(mintTransactions)
-    setIsMintTransactionLoading(false)
-    toggleConfirmingTransaction()
 
-    let i = 0
-    for (const transaction of signedTransactions) {
-      try {
-        const signature = await connection.sendTransaction(transaction, { skipPreflight: true })
+    try {
+      const signedTransactions = await signAllTransactions(mintTransactions)
+      setIsMintTransactionLoading(false)
+      toggleConfirmingTransaction()
 
-        const latestBlockhash = await connection.getLatestBlockhash()
-        const response = await connection.confirmTransaction({ signature, ...latestBlockhash }, 'confirmed')
-        toggleConfirmingTransaction()
-        if (!!response.value.err) {
-          console.log('Response error log: ', response.value.err)
-          throw new Error()
-        }
-        toggleAssetMinted()
-        toast({ description: 'Successfully minted the comic! Find the asset in your wallet', variant: 'success' })
-      } catch (e) {
-        toggleConfirmingTransaction()
-        console.log('error: ', e)
-        if (signedTransactions.length === 2 && i === 0) {
-          toast({
-            description: 'Wallet is not allowlisted to mint this comic',
-            variant: 'error',
-          })
-        } else {
+      const serializedTransactions: string[] = []
+      for (const transaction of signedTransactions) {
+        try {
+          const serializedTransaction = Buffer.from(transaction.serialize()).toString('base64')
+          serializedTransactions.push(serializedTransaction)
+        } catch (e) {
+          setIsMintTransactionLoading(false)
+          closeConfirmingTransaction()
           toast({
             description: 'Something went wrong',
             variant: 'error',
           })
         }
       }
-      i += 1
+      await sendMintTransaction(walletAddress, serializedTransactions)
+    } catch (e) {
+      setIsMintTransactionLoading(false)
+      closeConfirmingTransaction()
     }
   }
 
@@ -132,12 +126,14 @@ export const MintButton: React.FC<Props> = ({ candyMachine, comicIssue, isAuthen
     <>
       {hasWalletConnected ? (
         isEligible ? (
-          <Button className='bg-important-color min-h-[52px]' onClick={handleMint}>
+          <Button className='bg-important-color min-h-[52px] w-full' onClick={handleMint}>
             {!isMintTransactionLoading ? 'Purchase' : <Loader />}
           </Button>
         ) : (
           <>
-            <Button disabled>Not eligible</Button>
+            <Button className='min-h-[52px] w-full' disabled>
+              Not eligible
+            </Button>
           </>
         )
       ) : (

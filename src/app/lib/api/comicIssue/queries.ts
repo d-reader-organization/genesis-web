@@ -7,7 +7,7 @@ import { COMIC_ISSUE_QUERY_KEYS } from '@/api/comicIssue/comicIssueKeys'
 import { Nullable } from '@/models/common'
 import { ComicPage } from '@/models/comic/comicPage'
 
-const { COMIC_ISSUE, GET, GET_PUBLIC, PAGES } = COMIC_ISSUE_QUERY_KEYS
+const { COMIC_ISSUE, GET, GET_PUBLIC, PAGES, PREVIEW_PAGES } = COMIC_ISSUE_QUERY_KEYS
 
 export const fetchComicIssues = async (params: ComicIssueParams): Promise<ComicIssue[]> => {
   const { data } = await fetchWrapper<ComicIssue[]>({
@@ -32,5 +32,10 @@ export const fetchPublicComicIssue = async (id: string | number): Promise<Nullab
 
 export const fetchComicIssuePages = async (id: string | number): Promise<ComicPage[]> => {
   const response = await fetchWrapper<ComicPage[]>({ path: `${COMIC_ISSUE}/${GET}/${id}/${PAGES}` })
+  return response.data ?? []
+}
+
+export const fetchComicIssuePreviewPages = async (id: string | number): Promise<ComicPage[]> => {
+  const response = await fetchWrapper<ComicPage[]>({ path: `${COMIC_ISSUE}/${GET}/${id}/${PREVIEW_PAGES}` })
   return response.data ?? []
 }

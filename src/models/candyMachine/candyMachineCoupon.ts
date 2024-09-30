@@ -15,7 +15,7 @@ type CouponStats = {
   isEligible: boolean
 }
 
-type CouponCurrencySetting = {
+export type CouponCurrencySetting = {
   label: string
   mintPrice: number
   splTokenAddress: string

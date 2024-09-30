@@ -8,6 +8,7 @@ export const COMIC_ISSUE_QUERY_KEYS = Object.freeze({
   CREATE: 'create',
   BY_OWNER: 'by-owner',
   PAGES: 'pages',
+  PREVIEW_PAGES: 'preview-pages',
   UPDATE: 'update',
   FILES: 'files',
   PDF: 'pdf',
