@@ -7,7 +7,7 @@ import { PagesPreview } from '@/components/mint/PagesPreview'
 import { CandyMachineDetails } from '@/components/shared/CandyMachineDetails'
 import { Divider } from '@/components/shared/Divider'
 import { ComicIssuePageParams } from '@/models/common'
-import { CandyMachineProvider } from '@/providers/CandyMachineProvider'
+import { CandyMachineStoreProvider } from '@/providers/CandyMachineStoreProvider'
 
 export default async function NewMintPage({ params }: ComicIssuePageParams) {
   const comicIssue = await fetchPublicComicIssue(params.id)
@@ -29,9 +29,9 @@ export default async function NewMintPage({ params }: ComicIssuePageParams) {
               {comicIssue.title}
             </h1>
           </div>
-          <CandyMachineProvider comicIssue={comicIssue}>
+          <CandyMachineStoreProvider comicIssue={comicIssue}>
             <CandyMachineDetails comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
-          </CandyMachineProvider>
+          </CandyMachineStoreProvider>
           <Divider className='max-md:hidden' />
           <div className='flex flex-col 1160:flex-row gap-10 justify-between'>
             <AboutIssueSection comicIssue={comicIssue} />

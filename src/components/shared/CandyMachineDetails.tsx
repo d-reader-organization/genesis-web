@@ -13,16 +13,16 @@ import Image from 'next/image'
 import { MinusIcon, PlusIcon } from 'lucide-react'
 import { Skeleton } from '../ui/Skeleton'
 import { checkIfCouponIsActive, getTokenMap, getTotalItemsMintedByUser, TokenDetail } from '@/utils/mint'
-import { useCandyMachine } from '@/providers/CandyMachineProvider'
 import { Divider } from './Divider'
 import { CouponsSection, CouponsSectionLoading } from '../mint/CouponsSection'
+import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 
 const normalise = (value: number, MAX: number): number => (value * 100) / MAX
-type DetailsProps = { candyMachine: CandyMachine; }
+type DetailsProps = { candyMachine: CandyMachine }
 type Props = { comicIssue: ComicIssue; isAuthenticated: boolean }
 
 export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticated }) => {
-  const { candyMachine, selectedCoupon, isLoading } = useCandyMachine()
+  const { candyMachine, selectedCoupon, isLoading } = useCandyMachineStore((state) => state)
 
   return isLoading ? (
     <LoadingSkeleton />
@@ -66,7 +66,12 @@ const LoadingSkeleton: React.FC = () => (
 )
 
 const CouponDetails: React.FC = () => {
-  const { selectedCoupon, selectedCurrency, supportedTokens = [], updateSelectedCurrency } = useCandyMachine()
+  const {
+    selectedCoupon,
+    selectedCurrency,
+    supportedTokens = [],
+    updateSelectedCurrency,
+  } = useCandyMachineStore((state) => state)
 
   if (!selectedCoupon) {
     return null
@@ -133,13 +138,11 @@ const CurrencyRow: React.FC<CurrencyRowProps> = ({ isSelected = false, token, se
 }
 
 const UserDetails: React.FC<DetailsProps> = ({ candyMachine }) => {
-  const totalItemsMintedByUser = getTotalItemsMintedByUser(candyMachine.coupons);
+  const totalItemsMintedByUser = getTotalItemsMintedByUser(candyMachine.coupons)
 
   return (
     <div className='flex justify-between text-center text-grey-100 text-sm md:text-base font-medium leading-[19.6px] md:leading-[22.4px]'>
-      <span>
-        You minted: {totalItemsMintedByUser}
-      </span>
+      <span>You minted: {totalItemsMintedByUser}</span>
       <span>
         {candyMachine.itemsMinted}/{candyMachine.supply}
       </span>
@@ -186,7 +189,7 @@ export const PurchaseRow: React.FC<PurchaseRowProps> = ({ comicIssue, className,
 }
 
 const NumberOfItemsWidget: React.FC = () => {
-  const { updateNumberOfItems, numberOfItems } = useCandyMachine()
+  const { updateNumberOfItems, numberOfItems } = useCandyMachineStore((state) => state)
   return (
     <div className='max-h-[52px] min-w-[150px] p-2.5 flex justify-between items-center rounded-xl bg-grey-400'>
       <ButtonIconWrapper onClick={() => updateNumberOfItems(numberOfItems - 1)}>

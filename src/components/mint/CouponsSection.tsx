@@ -4,12 +4,12 @@ import React from 'react'
 import { TicketIcon } from 'lucide-react'
 import { Expandable } from '../shared/Expandable'
 import { getCouponDiscount } from '@/utils/mint'
-import { useCandyMachine } from '@/providers/CandyMachineProvider'
 import { CouponCardButton } from './CouponCardButton'
 import { Skeleton } from '../ui'
+import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 
 export const CouponsSection: React.FC = () => {
-  const { coupons, selectedCoupon, updateSelectedCoupon, candyMachine } = useCandyMachine()
+  const { coupons, selectedCoupon, updateSelectedCoupon, candyMachine } = useCandyMachineStore((state) => state)
   return (
     <>
       <div className='flex flex-col gap-6 max-md:hidden'>
