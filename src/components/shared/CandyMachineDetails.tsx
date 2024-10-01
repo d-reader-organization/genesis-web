@@ -16,6 +16,7 @@ import { checkIfCouponIsActive, getTokenMap, getTotalItemsMintedByUser, TokenDet
 import { Divider } from './Divider'
 import { CouponsSection, CouponsSectionLoading } from '../mint/CouponsSection'
 import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
+import { CouponDescriptionDialog } from './dialogs/CouponDescriptionDialog'
 
 const normalise = (value: number, MAX: number): number => (value * 100) / MAX
 type DetailsProps = { candyMachine: CandyMachine }
@@ -184,6 +185,7 @@ export const PurchaseRow: React.FC<PurchaseRowProps> = ({ comicIssue, className,
     >
       <NumberOfItemsWidget />
       <MintButton comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
+      <CouponDescriptionDialog open={true} toggleDialog={()=>console.log("Open")} />
     </div>
   )
 }
