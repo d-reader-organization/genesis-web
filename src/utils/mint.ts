@@ -84,3 +84,8 @@ export const getTotalItemsMintedByUser = (coupons: CandyMachineCoupon[]) => {
   }
   return itemsMinted
 }
+
+export const getRaritySupply = (totalSupply: number, rarityShare: number) => {
+  const supply = Math.floor((totalSupply * rarityShare) / 100)
+  return supply
+}

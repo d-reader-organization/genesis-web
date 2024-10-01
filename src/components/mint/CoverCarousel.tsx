@@ -47,6 +47,7 @@ export const CoverCarousel: React.FC<Props> = ({ covers, comicIssue }) => {
               <CoverSlide
                 cover={cover}
                 isPriority={index === 0}
+                totalSupply={candyMachine?.supply ?? 0}
                 key={`${cover.rarity}-${index}`}
                 onClick={() => toggleCoverPreview()}
               />
