@@ -110,6 +110,10 @@ const config = {
       transitionProperty: {
         height: 'height',
       },
+      fontFamily: {
+        satoshi: ['var(--font-satoshi)'],
+        obviouslyNarrow: ['var(--font-obviously-narrow)'],
+      },
     },
   },
   plugins: [require('tailwindcss-animate'), require('tailwind-scrollbar')],
