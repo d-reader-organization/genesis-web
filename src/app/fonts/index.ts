@@ -26,6 +26,8 @@ const obviouslyNarrow = localFont({
     { path: './obviously-narrow/ObviouslyNarrow-Italic.otf', weight: '400', style: 'italic' },
     { path: './obviously-narrow/ObviouslyNarrow-Medium.otf', weight: '500', style: 'normal' },
     { path: './obviously-narrow/ObviouslyNarrow-MediumItalic.otf', weight: '500', style: 'italic' },
+    { path: './obviously-narrow/ObviouslyNarrow-SemiBold.otf', weight: '600', style: 'normal' },
+    { path: './obviously-narrow/ObviouslyNarrow-SemBdIta.otf', weight: '600', style: 'italic' },
     { path: './obviously-narrow/ObviouslyNarrow-Bold.otf', weight: '700', style: 'normal' },
     { path: './obviously-narrow/ObviouslyNarrow-BoldItalic.otf', weight: '700', style: 'italic' },
     { path: './obviously-narrow/ObviouslyNarrow-Black.otf', weight: '900', style: 'normal' },

@@ -1,6 +1,6 @@
 'use client'
 
-import { checkIfCouponIsActive, validateMintEligibilty } from '@/utils/mint'
+import { checkIfCouponIsActive, getMintPrice, validateMintEligibilty } from '@/utils/mint'
 import { useWallet } from '@solana/wallet-adapter-react'
 import React, { useEffect, useState } from 'react'
 import { Button } from '../../ui/Button'
@@ -22,6 +22,7 @@ import { useRouter } from 'next/navigation'
 import { sendMintTransaction } from '@/app/lib/api/transaction/mutations'
 import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 import { VersionedTransaction } from '@solana/web3.js'
+import Image from 'next/image'
 
 type Props = {
   comicIssue: ComicIssue
@@ -33,7 +34,9 @@ const BaseWalletMultiButtonDynamic = dynamic(
 )
 
 export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => {
-  const { candyMachine, selectedCoupon, numberOfItems, selectedCurrency } = useCandyMachineStore((state) => state)
+  const { candyMachine, selectedCoupon, numberOfItems, selectedCurrency, supportedTokens } = useCandyMachineStore(
+    (state) => state
+  )
   const [showAssetMinted, toggleAssetMinted] = useToggle()
   // const [showEmailVerification, toggleEmailVerification] = useToggle()
   // const [showWalletNotConnected, toggleWalletNotConnected] = useToggle()
@@ -78,6 +81,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
     // figure out what about this
     const { data: updatedCandyMachine } = await refetch()
     if (!updatedCandyMachine || !selectedCoupon) {
+      setIsMintTransactionLoading(false)
       return
     }
 
@@ -85,10 +89,9 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
     if (!isMintValid) {
       toast({ description: "You're not eligible for the mint", variant: 'error' })
     }
-    console.log("No of items",numberOfItems)
-  
-    let mintTransactions : VersionedTransaction[] = [];
-    try{
+
+    let mintTransactions: VersionedTransaction[] = []
+    try {
       const transactions = await fetchMintTransaction({
         candyMachineAddress: updatedCandyMachine.address,
         minterAddress: walletAddress,
@@ -96,17 +99,17 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
         label: selectedCurrency.label,
         numberOfItems: numberOfItems ?? 1,
       })
-      if(!transactions || !transactions.length){
-        throw new Error();
+      if (!transactions || !transactions.length) {
+        throw new Error()
       }
       mintTransactions = transactions.map(versionedTransactionFromBs64)
-    }catch(e){
+    } catch (e) {
       console.log(e)
       setIsMintTransactionLoading(false)
-      toast({description:"Error while minting, try again", variant:'error'});
+      toast({ description: 'Error while minting, try again', variant: 'error' })
     }
 
-    if(!mintTransactions.length)return;
+    if (!mintTransactions.length) return
 
     if (!signAllTransactions) {
       return toast({ description: 'Wallet does not support signing multiple transactions', variant: 'error' })
@@ -139,12 +142,32 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
     }
   }
 
+  const mintPrice =
+    selectedCoupon?.prices.find((price) => {
+      return price.splTokenAddress === selectedCurrency?.splTokenAddress
+    })?.mintPrice ?? 0
+  const splToken = supportedTokens.find((token) => token.address === selectedCurrency?.splTokenAddress)
+
   return isLive ? (
     <>
       {hasWalletConnected ? (
         isEligible ? (
           <Button className='bg-important-color min-h-[52px] w-full' onClick={handleMint}>
-            {!isMintTransactionLoading ? 'Purchase' : <Loader />}
+            {!isMintTransactionLoading ? (
+              <div className='flex items-center gap-1.5 text-base font-bold leading-[22.4px]'>
+                <span>Purchase</span>
+                <Image
+                  alt='currency'
+                  src={splToken?.icon ?? splToken?.symbol ?? ''}
+                  width={14}
+                  height={14}
+                  className='h-3.5 w-3.5'
+                />
+                <span>{getMintPrice(mintPrice, splToken?.decimals ?? 1) * numberOfItems}</span>
+              </div>
+            ) : (
+              <Loader />
+            )}
           </Button>
         ) : (
           <>
