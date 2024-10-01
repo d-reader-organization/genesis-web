@@ -7,7 +7,7 @@ import { CurrencyExpandable, Expandable } from './Expandable'
 import LockIcon from 'public/assets/vector-icons/lock.svg'
 import { MintButton } from './buttons/MintButton'
 import { ComicIssue } from '@/models/comicIssue'
-import { CouponCurrencySetting } from '@/models/candyMachine/candyMachineCoupon'
+import { CandyMachineCoupon, CouponCurrencySetting } from '@/models/candyMachine/candyMachineCoupon'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { MinusIcon, PlusIcon } from 'lucide-react'
@@ -40,7 +40,7 @@ export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticat
           </div>
         )}
         <Divider className='max-md:hidden' />
-        <CouponsSection />
+        <CouponsSection comicIssue={comicIssue} />
       </div>
     )
   )
@@ -185,7 +185,6 @@ export const PurchaseRow: React.FC<PurchaseRowProps> = ({ comicIssue, className,
     >
       <NumberOfItemsWidget />
       <MintButton comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
-      <CouponDescriptionDialog open={true} toggleDialog={()=>console.log("Open")} />
     </div>
   )
 }
