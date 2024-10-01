@@ -21,6 +21,7 @@ import { CandyMachineReceipt } from '@/models/candyMachine/candyMachineReceipt'
 import { useRouter } from 'next/navigation'
 import { sendMintTransaction } from '@/app/lib/api/transaction/mutations'
 import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
+import { VersionedTransaction } from '@solana/web3.js'
 
 type Props = {
   comicIssue: ComicIssue
@@ -61,7 +62,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
     const socket = io(process.env.NEXT_PUBLIC_API_ENDPOINT || '')
     socket.on(`wallet/${walletAddress}/item-minted`, async (data: CandyMachineReceipt): Promise<void> => {
       setAssetAddress(data.asset.address)
-      toggleConfirmingTransaction()
+      closeConfirmingTransaction()
       toggleAssetMinted()
       toast({ description: 'Successfully minted the comic! Find the asset in your wallet', variant: 'success' })
       refresh
@@ -84,13 +85,28 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
     if (!isMintValid) {
       toast({ description: "You're not eligible for the mint", variant: 'error' })
     }
-    const mintTransactions = await fetchMintTransaction({
-      candyMachineAddress: updatedCandyMachine.address,
-      minterAddress: walletAddress,
-      couponId: selectedCoupon.id,
-      label: selectedCurrency.label,
-      numberOfItems: numberOfItems ?? 1,
-    }).then((value) => value.map(versionedTransactionFromBs64))
+    console.log("No of items",numberOfItems)
+  
+    let mintTransactions : VersionedTransaction[] = [];
+    try{
+      const transactions = await fetchMintTransaction({
+        candyMachineAddress: updatedCandyMachine.address,
+        minterAddress: walletAddress,
+        couponId: selectedCoupon.id,
+        label: selectedCurrency.label,
+        numberOfItems: numberOfItems ?? 1,
+      })
+      if(!transactions || !transactions.length){
+        throw new Error();
+      }
+      mintTransactions = transactions.map(versionedTransactionFromBs64)
+    }catch(e){
+      console.log(e)
+      setIsMintTransactionLoading(false)
+      toast({description:"Error while minting, try again", variant:'error'});
+    }
+
+    if(!mintTransactions.length)return;
 
     if (!signAllTransactions) {
       return toast({ description: 'Wallet does not support signing multiple transactions', variant: 'error' })
@@ -117,6 +133,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
       }
       await sendMintTransaction(walletAddress, serializedTransactions)
     } catch (e) {
+      console.log(e)
       setIsMintTransactionLoading(false)
       closeConfirmingTransaction()
     }
