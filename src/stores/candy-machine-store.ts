@@ -51,7 +51,7 @@ export const createCandyMachineStore = (initState: CandyMachineState = defaultIn
           selectedCurrency: solCurrencySetting,
         }
       }),
-    updateSelectedCurrency: (currency?: CouponCurrencySetting) => set((_) => ({ selectedCurrency: currency })),
+    updateSelectedCurrency: (currency?: CouponCurrencySetting) => set(() => ({ selectedCurrency: currency })),
     updateNumberOfItems: (value: number) =>
       set((state) => {
         const numberOfRedemptions = state.selectedCoupon?.numberOfRedemptions ?? 4

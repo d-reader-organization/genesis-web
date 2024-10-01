@@ -60,7 +60,7 @@ export const CoverPreviewDialog: React.FC<Props> = ({
               )}
               <InfoStats title='Cover author' value={cover.artist} />
             </div>
-            <RarityChip rarity={cover.rarity} />
+            <RarityChip rarity={cover.rarity} supply={candyMachine?.supply ?? 0} />
           </div>
         </div>
         {hideArrows ? null : <Arrow arrowOrientation='RIGHT' className='bg-transparent' onClick={onNextClick} />}
