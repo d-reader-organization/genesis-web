@@ -7,7 +7,7 @@ import DReaderLogo from 'public/assets/vector-icons/full-logo.svg'
 import DReaderSymbol from 'public/assets/vector-icons/logo.svg'
 import GenesisLogo from 'public/assets/vector-icons/genesis-logo.svg'
 import ArrowDownIcon from 'public/assets/vector-icons/arrow-down-2.svg'
-import { Button, ButtonLink, Input } from '../ui'
+import { Button, ButtonLink, Input, Skeleton } from '../ui'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { Menu, Search, X } from 'lucide-react'
@@ -25,7 +25,7 @@ type Props = {
 }
 
 export const Navigation: React.FC<Props> = ({ paramId }) => {
-  const { data: me } = useFetchMe()
+  const { data: me, isLoading } = useFetchMe()
   const pathname = usePathname()
   const isDiscover = pathname.startsWith(RoutePath.Discover)
   const isInvest = pathname.startsWith(RoutePath.Invest)
@@ -62,7 +62,9 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
               <MenuItem href={RoutePath.Invest} isActive={isInvest} title='Invest' />
             </div>
           </div>
-          {me ? (
+          {isLoading ? (
+            <Skeleton className='h-10 w-20' />
+          ) : me ? (
             <div className='flex items-center gap-8 cursor-pointer'>
               <MenuItem href={RoutePath.Library} isActive={isLibrary} title='My Library' />
               <div className='bg-white bg-opacity-15 rounded-xl flex items-center justify-center gap-1.5 px-2 max-h-10 h-full'>
@@ -115,7 +117,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ user }) => {
         isOpen ? 'max-h-full' : 'max-h-20'
       )}
     >
-      <div className={cn('flex justify-between items-center px-4 h-20',isOpen && 'hidden')}>
+      <div className={cn('flex justify-between items-center px-4 h-20', isOpen && 'hidden')}>
         <Search size={24} />
         <Link href={RoutePath.Home}>
           <DReaderSymbol className='size-6 fill-white' />
