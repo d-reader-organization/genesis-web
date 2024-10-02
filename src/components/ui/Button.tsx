@@ -4,7 +4,6 @@ import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 import Link, { LinkProps } from 'next/link'
-import clsx from 'clsx'
 
 const buttonVariants = cva(
   'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-slate-950 dark:focus-visible:ring-slate-300',
@@ -17,7 +16,7 @@ const buttonVariants = cva(
         outline: 'border border-grey-300 text-white bg-transparent w-full text-base font-semibold',
         secondary:
           'bg-slate-100 text-slate-900 hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80',
-        ghost: 'w-full bg-transparent text-base font-normal text-grey-100',
+        ghost: 'w-full bg-transparent text-base font-medium leading-[22.4px] text-white',
         link: 'text-base text-important-color bg-transparent font-normal',
       },
       size: {
@@ -70,7 +69,7 @@ const ButtonLink: React.FC<Props> = ({
 }) => {
   return (
     <Link
-      className={clsx(
+      className={cn(
         'flex justify-center items-center min-w-40 p-[14px] rounded-lg cursor-pointer text-base font-semibold hover:brightness-105',
         className,
         {
