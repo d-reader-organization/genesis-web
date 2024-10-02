@@ -43,7 +43,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
   const [showConfirmingTransaction, toggleConfirmingTransaction, closeConfirmingTransaction] = useToggle()
   const [isMintTransactionLoading, setIsMintTransactionLoading] = useState(false)
   const [assetAddress, setAssetAddress] = useState<string>()
-  const [timeoutId,setTimeoutId] = useState<NodeJS.Timeout>()
+  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>()
 
   const { publicKey, signAllTransactions } = useWallet()
   const { refresh } = useRouter()
@@ -68,7 +68,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
       setAssetAddress(data.asset.address)
       closeConfirmingTransaction()
       toggleAssetMinted()
-      clearTimeout(timeoutId);
+      clearTimeout(timeoutId)
       setTimeoutId(undefined)
       toast({ description: 'Successfully minted the comic! Find the asset in your wallet', variant: 'success' })
       refresh
@@ -92,9 +92,9 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
     if (!isMintValid) {
       toast({ description: "You're not eligible for the mint", variant: 'error' })
     }
-  
-    let mintTransactions : VersionedTransaction[] = [];
-    try{
+
+    let mintTransactions: VersionedTransaction[] = []
+    try {
       const transactions = await fetchMintTransaction({
         candyMachineAddress: updatedCandyMachine.address,
         minterAddress: walletAddress,
@@ -123,13 +123,16 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
       setIsMintTransactionLoading(false)
       toggleConfirmingTransaction()
 
-      clearTimeout(timeoutId);
-      const id = setTimeout(()=>{
-          closeConfirmingTransaction();
-          toast({description:"Network is congested, your transaction might have failed. Please check your wallet", variant:'error'})
-          setTimeoutId(undefined)
-      }, 20*1000);
-      setTimeoutId(id);
+      clearTimeout(timeoutId)
+      const id = setTimeout(() => {
+        closeConfirmingTransaction()
+        toast({
+          description: 'Network is congested, your transaction might have failed. Please check your wallet',
+          variant: 'error',
+        })
+        setTimeoutId(undefined)
+      }, 20 * 1000)
+      setTimeoutId(id)
 
       const serializedTransactions: string[] = []
       for (const transaction of signedTransactions) {
@@ -137,7 +140,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
           const serializedTransaction = Buffer.from(transaction.serialize()).toString('base64')
           serializedTransactions.push(serializedTransaction)
         } catch (e) {
-          clearTimeout(timeoutId);
+          clearTimeout(timeoutId)
           setIsMintTransactionLoading(false)
           closeConfirmingTransaction()
           toast({
@@ -149,7 +152,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
       await sendMintTransaction(walletAddress, serializedTransactions)
     } catch (e) {
       console.log(e)
-      clearTimeout(timeoutId);
+      clearTimeout(timeoutId)
       setIsMintTransactionLoading(false)
       closeConfirmingTransaction()
     }
@@ -159,7 +162,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
     selectedCoupon?.prices.find((price) => {
       return price.splTokenAddress === selectedCurrency?.splTokenAddress
     })?.mintPrice ?? 0
-  const splToken = supportedTokens.find((token) => token.address === selectedCurrency?.splTokenAddress)
+  const splToken = supportedTokens?.find((token) => token.address === selectedCurrency?.splTokenAddress)
 
   return isLive ? (
     <>

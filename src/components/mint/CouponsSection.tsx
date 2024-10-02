@@ -22,7 +22,7 @@ export const CouponsSection: React.FC = () => {
             <CouponCardButton
               coupon={coupon}
               discount={getCouponDiscount(candyMachine?.coupons || [], coupon)}
-              key={coupon.name}
+              key={`${coupon.name}-${coupon.id}`}
               isSelected={selectedCoupon ? selectedCoupon.id === coupon.id : false}
               onClick={() => updateSelectedCoupon(coupon)}
             />
@@ -44,7 +44,7 @@ export const CouponsSection: React.FC = () => {
             <CouponCardButton
               coupon={coupon}
               discount={getCouponDiscount(candyMachine?.coupons || [], coupon)}
-              key={`${coupon.name}-mobile`}
+              key={`${coupon.name}-${coupon.id}-mobile`}
               isSelected={selectedCoupon ? selectedCoupon.id === coupon.id : false}
               onClick={() => updateSelectedCoupon(coupon)}
             />

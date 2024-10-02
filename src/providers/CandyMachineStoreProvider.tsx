@@ -32,7 +32,7 @@ export const CandyMachineStoreProvider = ({ comicIssue, children }: CandyMachine
     candyMachineAddress: comicIssue.activeCandyMachineAddress ?? '',
     walletAddress: publicKey?.toBase58() ?? '',
   })
-  const { data: supportedTokens } = useFetchSupportedTokens()
+  const { data: supportedTokens = [] } = useFetchSupportedTokens()
   useAuthorizeWallet(refetch)
 
   const storeRef = useRef<CandyMachineStoreApi>()

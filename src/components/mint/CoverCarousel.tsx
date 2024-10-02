@@ -16,7 +16,7 @@ type Props = { covers: StatelessCover[]; comicIssue: ComicIssue }
 
 export const CoverCarousel: React.FC<Props> = ({ covers, comicIssue }) => {
   const { publicKey } = useWallet()
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ stopOnMouseEnter: true })])
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000, stopOnMouseEnter: true })])
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
   const [isCoverPreviewOpen, toggleCoverPreview] = useToggle()
 
