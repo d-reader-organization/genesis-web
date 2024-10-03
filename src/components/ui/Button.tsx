@@ -13,7 +13,8 @@ const buttonVariants = cva(
         default: 'bg-yellow-500 rounded-lg text-black py-8 px-4 font-semibold text-base',
         destructive:
           'bg-red-500 text-slate-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/90',
-        outline: 'border border-grey-300 text-white bg-transparent w-full text-base font-semibold',
+        outline:
+          'flex items-center border border-grey-200 rounded-xl text-white bg-transparent w-full text-base font-medium',
         secondary:
           'bg-slate-100 text-slate-900 hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80',
         ghost: 'w-full bg-transparent text-base font-medium leading-[22.4px] text-white',
@@ -21,6 +22,7 @@ const buttonVariants = cva(
       },
       size: {
         default: 'h-12 p-4',
+        normal: 'h-[52px] p-4',
         sm: 'h-9 rounded-md px-3',
         lg: 'h-11 rounded-md px-8',
         icon: 'h-10 w-10',

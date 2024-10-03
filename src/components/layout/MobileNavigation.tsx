@@ -1,17 +1,15 @@
 import { RoutePath } from '@/enums/routePath'
 import DReaderSymbol from 'public/assets/vector-icons/logo.svg'
-import { Button, ButtonLink } from '../ui'
+import { ButtonLink } from '../ui'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { Menu, Search, X } from 'lucide-react'
 import { Sheet, SheetContent, SheetTitle } from '../ui/sheet'
-import { logoutAction } from '@/app/lib/actions/logout'
-import TwitterIcon from 'public/assets/vector-icons/twitter-icon.svg'
-import InstagramIcon from 'public/assets/vector-icons/instagram-icon.svg'
-import DiscordIcon from 'public/assets/vector-icons/discord-icon.svg'
-import Image from 'next/image'
 import { User } from '@/models/user'
 import React from 'react'
+import { ProfileWidget } from '../shared/ProfileWidget'
+import { LogoutButton } from '../shared/buttons/LogoutButton'
+import { ProductSocials } from '../shared/ProductSocials'
 
 type Props = {
   user?: User | null
@@ -50,40 +48,18 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
               </div>
               {user ? (
                 <div className='flex flex-col gap-10 border-t border-t-grey-400'>
-                  <div className='flex gap-3 items-center mt-10'>
-                    <Image
-                      alt='avatar'
-                      width={48}
-                      height={48}
-                      src={user.avatar}
-                      className='size-12 object-cover rounded-full border border-black'
-                    />
-                    <Link href={RoutePath.Profile} className='flex flex-col justify-center gap-1 max-h-12'>
-                      <span className='text-lg font-bold leading-[25.2px] text-grey-100'>{user.name}</span>
-                      <span className='text-grey-200 text-sm font-medium leading-[19.6px]'>view profile</span>
-                    </Link>
-                  </div>
+                  <ProfileWidget user={user} />
                   <div className='flex flex-col gap-8'>
                     <Link href={RoutePath.Library}>My Library</Link>
                     <Link href={RoutePath.Profile}>Settings</Link>
                   </div>
-                  <Button
-                    className='rounded-xl border border-grey-200 bg-grey-600'
-                    onClick={() => logoutAction()}
-                    variant='outline'
-                  >
-                    Log out
-                  </Button>
-                  <div className='flex justify-between items-center'>
-                    <TwitterIcon className='size-4' />
-                    <InstagramIcon className='size-4' />
-                    <DiscordIcon className='size-4' />
-                  </div>
+                  <LogoutButton />
+                  <ProductSocials />
                 </div>
               ) : (
                 <ButtonLink
                   href={RoutePath.Login}
-                  className='h-full max-h-[52px] bg-white rounded-xl flex justify-center items-center py-5 text-base font-bold laeding-[22.4px] text-grey-600'
+                  className='h-full max-h-[52px] bg-white rounded-xl flex justify-center items-center py-5 text-base font-bold leading-[22.4px] text-grey-600'
                 >
                   Connect
                 </ButtonLink>

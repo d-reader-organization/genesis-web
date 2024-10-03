@@ -3,22 +3,21 @@
 import { WalletName } from '@solana/wallet-adapter-base'
 import { useWalletMultiButton } from '@solana/wallet-adapter-base-ui'
 import { Wallet } from '@solana/wallet-adapter-react'
-import { useCallback, useEffect, useMemo, useState } from 'react'
-
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { usePreviousValue } from '@/hooks/usePreviousValue'
 import { Button, ButtonProps } from '../../ui/Button'
 import { WalletListItem } from '../WalletListItem'
 
-interface Props extends ButtonProps {
+type Props = {
   text?: string
   onClick: () => Promise<void>
-}
+} & ButtonProps
 
 /**
  * Making custom wallet buttons sucks af on Solana...
  * Why can't we have wallet sessions like on Mobile Wallet Adapter?
  * https://github.com/solana-labs/wallet-adapter/tree/master/packages/core/react */
-const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...props }) => {
+export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...props }) => {
   const [buttonClicked, setButtonClicked] = useState(false)
   const [actionTriggered, setActionTriggered] = useState(false)
 
@@ -150,4 +149,10 @@ const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...props }) =
   )
 }
 
-export default ConnectButton
+export const ConnectButtonV2: React.FC<Props> = ({ onClick }) => {
+  return (
+    <Button className='py-5' variant='outline' size='normal' onClick={onClick}>
+      <span className='leading-[22.4px]'>Connect Wallet</span>
+    </Button>
+  )
+}
