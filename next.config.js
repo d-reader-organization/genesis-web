@@ -40,7 +40,6 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
       },
-      { protocol: 'https', hostname: 's3-alpha-sig.figma.com' }, // for testing purpose
     ],
   },
   webpack(config) {
