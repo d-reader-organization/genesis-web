@@ -17,7 +17,7 @@ export const ProjectsSection: React.FC<Props> = ({ projects, title }) => {
       <h1 className='text-xl md:text-[32px] font-semibold leading-[20px] md:leading-8 tracking-[0.04px] md:tracking-[0.064px]'>
         {title}
       </h1>
-      <div className='flex overflow-x-auto max-md:py-2 md:overflow-x-visible md:flex-wrap gap-5 md:gap-8 lg:gap-10'>
+      <div className='max-md:py-2 flex 1160::grid overflow-x-auto 1160:overflow-x-visible grid-cols-4 gap-4 md:gap-6 lg:gap-10'>
         {projects.map((project) => (
           <Card project={project} key={project.slug} />
         ))}
@@ -32,13 +32,15 @@ type CardProps = {
 
 const Card: React.FC<CardProps> = ({ project }) => (
   <div className='bg-grey-500 flex flex-col items-center gap-4 md:gap-[30px] p-4 md:p-6 pt-4 rounded-xl max-w-[242px] md:max-w-[354px]'>
-    <Image
-      alt={`logo-${project.logo}`}
-      src={project.logo}
-      className='max-w-[180px] max-h-[84px] object-cover p-4'
-      width={180}
-      height={180}
-    />
+    <div className='flex items-center max-h-[84px] h-full'>
+      <Image
+        alt={`logo-${project.logo}`}
+        src={project.logo}
+        className='max-w-[180px] max-h-[84px] object-cover p-1'
+        width={180}
+        height={84}
+      />
+    </div>
     <RoiWidget roi={project.roi} tooltipText={project.tooltipText} />
     <div className='flex max-md:flex-col justify-center gap-4 md:gap-12  lg:gap-16 xl:gap-20 items-center'>
       <InvestmentStatsBox title='RAISED' value={project.raised} />

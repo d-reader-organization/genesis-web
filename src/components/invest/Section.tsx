@@ -16,7 +16,7 @@ type Props = {
 export const InvestSection: React.FC<Props> = ({ actionHref, data, title }) => {
   return (
     <Section actionHref={actionHref} title={title}>
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-10 '>
+      <div className='grid grid-cols-1 660:grid-cols-3 gap-4 sm:gap-6 md:gap-10 '>
         {data.map((project) => (
           <Link
             href={RoutePath.InvestDetails(project.slug)}
@@ -30,7 +30,7 @@ export const InvestSection: React.FC<Props> = ({ actionHref, data, title }) => {
               fill
             />
             <div className='absolute inset-0 bg-gradient-to-b from-transparent to-black rounded-xl'></div>
-            <div className='relative z-10 p-6 flex flex-col gap-2 justify-end h-full'>
+            <div className='relative z-10 p-4 md:p-6 flex flex-col gap-2 justify-end h-full'>
               <h2 className='text-xl md:text-2xl font-semibold md:font-bold leading-[20px] md:leading-[24px] max-md:tracking-[0.04px]'>
                 {project.title}
               </h2>
