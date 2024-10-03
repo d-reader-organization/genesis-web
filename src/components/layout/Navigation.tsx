@@ -3,40 +3,37 @@
 import React from 'react'
 import { RoutePath } from '@/enums/routePath'
 import { usePathname } from 'next/navigation'
-import { useIsMobile } from '@/hooks/useBreakpoints'
 import DReaderLogo from 'public/assets/vector-icons/full-logo.svg'
 import GenesisLogo from 'public/assets/vector-icons/genesis-logo.svg'
-import SearchIcon from 'public/assets/vector-icons/search-icon.svg'
-import DiscoverIcon from 'public/assets/vector-icons/discover-icon.svg'
-import MarketplaceIcon from 'public/assets/vector-icons/marketplace.svg'
-import InvestIcon from 'public/assets/vector-icons/invest-icon.svg'
-import InvestIconFill from 'public/assets/vector-icons/invest-icon-fill.svg'
-import SparklesIcon from 'public/assets/vector-icons/sparkles-icon.svg'
-import { Button, Input } from '../ui'
+import ArrowDownIcon from 'public/assets/vector-icons/arrow-down-2.svg'
+import { Button, Input, Skeleton } from '../ui'
 import Link from 'next/link'
-import clsx from 'clsx'
+import { cn } from '@/lib/utils'
+import { Search } from 'lucide-react'
+import Image from 'next/image'
+import { useFetchMe } from '@/api/user'
+import { MobileNav } from './MobileNavigation'
+import { ProfileSheet } from '../shared/sheets/profile/ProfileSheet'
 
 type Props = {
   paramId?: string | number
 }
 
 export const Navigation: React.FC<Props> = ({ paramId }) => {
+  const [isProfileSheetOpen, setOpenProfileSheet] = React.useState<boolean>(false)
+  const { data: me, isLoading } = useFetchMe()
   const pathname = usePathname()
-  const isMobile = useIsMobile()
-
   const isDiscover = pathname.startsWith(RoutePath.Discover)
   const isInvest = pathname.startsWith(RoutePath.Invest)
+  const isLibrary = pathname.startsWith(RoutePath.Library)
   const isMint = paramId ? pathname === RoutePath.Mint(paramId) || RoutePath.ComicIssue(paramId) : false
 
-  return isMobile ? (
-    // TODO new nav
-    <></>
-  ) : (
-    // <BottomNavigation initialNavItem={initialMobileNavItem(pathname)} />
+  return (
     <>
+      <MobileNav user={me} />
       <div
-        className={clsx(
-          'max-h-20 bg-grey-600 bg-opacity-80 backdrop-blur-[25px] w-full flex justify-center',
+        className={cn(
+          'max-md:hidden max-h-20 bg-grey-600 bg-opacity-85 backdrop-blur-[25px] w-full flex justify-center',
           'fixed top-0 z-10'
         )}
       >
@@ -51,60 +48,63 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
             </Link>
             {!isMint && (
               <Input
-                className='inline-flex justify-center items-center max-w-64 lg:max-w-80 w-full'
+                className='inline-flex justify-center items-center max-h-10 max-w-64 lg:max-w-80 w-full'
                 placeholder='Search comics or creators'
-                prefixIcon={<SearchIcon />}
+                prefixIcon={<Search className='size-3.5' />}
               />
             )}
-            <MenuItem href={RoutePath.DiscoverComics} icon={<DiscoverIcon />} isActive={isDiscover} title='Discover' />
-            <MenuItem comingSoon href='' isActive={false} icon={<MarketplaceIcon />} title='Marketplace' />
-            <MenuItem
-              href={RoutePath.Invest}
-              isActive={isInvest}
-              icon={isInvest ? <InvestIconFill /> : <InvestIcon />}
-              title='Invest'
-            />
-          </div>
-
-          <div className='flex gap-4 items-center max-h-14'>
-            <div className='flex py-4 px-2 size-10 items-center justify-center rounded-xl bg-yellow-500 cursor-pointer'>
-              <SparklesIcon />
+            <div className='flex items-center gap-10'>
+              <MenuItem href={RoutePath.DiscoverComics} isActive={isDiscover} title='Discover' />
+              <MenuItem href={RoutePath.Invest} isActive={isInvest} title='Invest' />
             </div>
-            {isInvest ? (
-              <Button className='rounded-xl min-w-[88px] size-10 p-4 bg-white'>Connect</Button>
-            ) : (
-              <Button className='rounded-xl min-w-28'>Hop in</Button>
-            )}
           </div>
+          {isLoading ? (
+            <Skeleton className='h-10 w-20' />
+          ) : me ? (
+            <button
+              className='flex items-center gap-8 cursor-pointer'
+              onClick={() => setOpenProfileSheet(!isProfileSheetOpen)}
+            >
+              <MenuItem href={RoutePath.Library} isActive={isLibrary} title='My Library' />
+              <div className='bg-white bg-opacity-15 rounded-xl flex items-center justify-center gap-1.5 px-2 h-10'>
+                <Image
+                  alt='avatar'
+                  src={me.avatar || 'https://d323dls9ny69nf.cloudfront.net/users/5256/avatar-1713526462785.png'}
+                  width={28}
+                  height={28}
+                  className='size-7 object-cover rounded-full border border-black'
+                />
+                <ArrowDownIcon className='flex justify-center items-center' />
+              </div>
+            </button>
+          ) : (
+            <Button
+              className='max-h-10 p-4 flex justify-center items-center text-sm font-bold leading-[19.6px] text-black rounded-xl bg-white w-fit'
+              variant='ghost'
+              onClick={() => setOpenProfileSheet(!isProfileSheetOpen)}
+            >
+              Connect
+            </Button>
+          )}
         </div>
       </div>
+      <ProfileSheet
+        isOpen={isProfileSheetOpen}
+        user={me}
+        triggerOpenChange={(open: boolean) => setOpenProfileSheet(open)}
+      />
     </>
   )
 }
 
 type MenuItemProps = {
-  comingSoon?: boolean
   href: string
-  icon: React.ReactNode
   isActive: boolean
   title: string
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ comingSoon, href, icon, isActive, title }) => (
-  <Link
-    className={clsx(
-      'flex gap-2 items-center text-grey-100',
-      comingSoon && 'cursor-default',
-      isActive && 'text-yellow-500'
-    )}
-    href={href}
-  >
-    {icon}
-    <span className='text-sm font-bold max-lg:hidden'>{title}</span>
-    {/* {comingSoon && (
-      <div className='bg-grey-200 rounded-xl p-1.5 flex justify-center items-center text-text-black text-[10px] font-bold'>
-        SOON
-      </div>
-    )} */}
+const MenuItem: React.FC<MenuItemProps> = ({ href, isActive, title }) => (
+  <Link className={cn('text-base font-bold leading-[22.4px] text-grey-100', isActive && 'text-yellow-500')} href={href}>
+    {title}
   </Link>
 )

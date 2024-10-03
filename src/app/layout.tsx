@@ -41,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en'>
+    <html className='max-md:scrollbar-none' lang='en'>
       <body className={`${satoshi.className} ${obviouslyNarrow.variable}`}>
         <ClientContextProvider>
           {children}
