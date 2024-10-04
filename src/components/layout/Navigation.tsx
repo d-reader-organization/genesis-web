@@ -6,14 +6,14 @@ import { usePathname } from 'next/navigation'
 import DReaderLogo from 'public/assets/vector-icons/full-logo.svg'
 import GenesisLogo from 'public/assets/vector-icons/genesis-logo.svg'
 import ArrowDownIcon from 'public/assets/vector-icons/arrow-down-2.svg'
-import { Button, Input, Skeleton } from '../ui'
+import { Button, Skeleton } from '../ui'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { Search } from 'lucide-react'
 import Image from 'next/image'
 import { useFetchMe } from '@/api/user'
 import { MobileNav } from './MobileNavigation'
 import { ProfileSheet } from '../shared/sheets/profile/ProfileSheet'
+import { SearchInput } from '../shared/SearchInput'
 
 type Props = {
   paramId?: string | number
@@ -46,13 +46,7 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
                 <DReaderLogo className='h-8 min-w-fit fill-white ml-4' />
               )}
             </Link>
-            {!isMint && (
-              <Input
-                className='inline-flex justify-center items-center max-h-10 max-w-64 lg:max-w-80 w-full'
-                placeholder='Search comics or creators'
-                prefixIcon={<Search className='size-3.5' />}
-              />
-            )}
+            <SearchInput />
             <div className='flex items-center gap-10'>
               <MenuItem href={RoutePath.DiscoverComics} isActive={isDiscover} title='Discover' />
               <MenuItem href={RoutePath.Invest} isActive={isInvest} title='Invest' />
