@@ -1,3 +1,5 @@
+'use server'
+
 import { Creator } from '@/models/creator'
 import { CreatorParams } from '@/models/creator/creatorParams'
 import { fetchWrapper } from '../../fetchWrapper'

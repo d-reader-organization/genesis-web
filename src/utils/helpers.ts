@@ -118,3 +118,5 @@ export function isBrave() {
 export function genresToSlugs(genres: PartialGenre[]): string[] {
   return genres.map((genre) => genre.slug)
 }
+
+export const pluralizeString = (count: number, value: string) => (count > 1 ? `${value}s` : value)
