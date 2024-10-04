@@ -120,3 +120,6 @@ export function genresToSlugs(genres: PartialGenre[]): string[] {
 }
 
 export const pluralizeString = (count: number, value: string) => (count > 1 ? `${value}s` : value)
+
+export const formatWalletAddress = (address: string, slice = 4) =>
+  address.slice(0, slice) + '...' + address.slice(-slice)
