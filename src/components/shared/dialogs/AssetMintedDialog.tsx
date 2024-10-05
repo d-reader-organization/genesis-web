@@ -16,8 +16,15 @@ import { AssetEventData } from '@/models/asset/assetMintEvent'
 import { Arrow } from '../Arrow'
 import useEmblaCarousel from 'embla-carousel-react'
 import { fetchUseComicIssueAssetTransaction } from '@/app/lib/api/transaction/queries'
-import { useWallet } from '@solana/wallet-adapter-react'
+import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { toast } from '@/components/ui'
+import { sleep } from '@/utils/helpers'
+import { useQueryClient } from '@tanstack/react-query'
+import { comicIssueKeys } from '@/api/comicIssue'
+import { useRouter } from 'next/navigation'
+import { assetKeys } from '@/api/asset'
+import { useFetchMe } from '@/api/user'
+import { Loader } from 'lucide-react'
 
 type Props = {
   comicIssue: ComicIssue
@@ -25,7 +32,7 @@ type Props = {
 } & CommonDialogProps
 
 export const AssetMintedDetails: React.FC<{ asset: AssetEventData }> = ({ asset }) => {
-  const { data: twitterIntentComicMinted } = useFetchTwitterIntentComicMinted({
+  const {data:twitterIntentComicMinted}  = useFetchTwitterIntentComicMinted({
     comicAddress: asset.address ?? '',
     utmSource: UtmSource.WEB,
   })
@@ -60,19 +67,55 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
   const [unwrapWarningDialog, toggleUnwrapDialog] = useToggle(false)
   const [isUnwrapWarningRead] = useLocalStorage(unwrapWarningKey, false)
 
-  const { publicKey } = useWallet()
+  const [isUnwrapTransactionLoading,setUnwrapTransactionLoading] = useState<boolean>(false);
+  const { publicKey, signTransaction } = useWallet();
+
+  const { push } = useRouter()
+  const {connection} = useConnection();
+  const queryClient = useQueryClient()
+
+  const { data: me } = useFetchMe()
+	const myId = me?.id || 0
+
   const handleUnwrap = async (selectedAsset: AssetEventData) => {
     if(!publicKey){
       toast({description:"Please connect wallet before unwrapping",variant:'error'});
       return;
     }
     try{
-      await fetchUseComicIssueAssetTransaction({assetAddress:selectedAsset.address,ownerAddress:publicKey.toString()})
+			setUnwrapTransactionLoading(true)
+
+      const unwrapTransaction = await fetchUseComicIssueAssetTransaction({assetAddress:selectedAsset.address,ownerAddress:publicKey.toString()})
+      if (unwrapTransaction) {
+				if (!signTransaction) return
+				const latestBlockhash = await connection.getLatestBlockhash()
+				const signedTransaction = await signTransaction(unwrapTransaction)
+
+				const signature = await connection.sendRawTransaction(signedTransaction.serialize())
+				const response = await connection.confirmTransaction({ signature, ...latestBlockhash })
+				if (!!response.value.err) {
+					console.log('Response error log: ', response.value.err)
+					toast({description:'Error while unwrapping the comic', variant:'error'})
+					throw Error()
+				}
+				await sleep(1000)
+			}
+
+			queryClient.invalidateQueries({queryKey:comicIssueKeys.get(comicIssue.id)})
+			queryClient.invalidateQueries({queryKey:comicIssueKeys.getByOwner(myId)})
+			queryClient.invalidateQueries({queryKey:assetKeys.getMany({ comicIssueId: comicIssue.id })})
+      queryClient.invalidateQueries({queryKey:comicIssueKeys.getPages(comicIssue.id)})
+
+      push(RoutePath.ReadComicIssue(comicIssue.id), { scroll: false })
+			toast({description:'Comic unwrapped! Lets get to reading 🎉', variant:'success'})
     }catch(e){
+      console.log(e)
       toast({description:"Failed to unwrap, please try again!",variant:'error'});
+      setUnwrapTransactionLoading(false);
     }
   }
 
+  const hideArrows = (assets.length <= 1);
   const onSelect = useCallback(() => {
     if (!emblaApi) return
     setSelectedIndex(emblaApi.selectedScrollSnap())
@@ -95,9 +138,10 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
               <source src='/assets/animations/mint-loop.mp4' type='video/mp4' />
             </video>
           </div>
-          <div className='relative flex mx-auto items-center sm:gap-[24px] w-full xs:gap-[4px] xs:max-w-[268px] sm:max-w-[480px]'>
-            <Arrow
+          <div className='relative flex mx-auto items-center sm:gap-[24px] w-full xs:gap-[4px] xs:max-w-[330px] sm:max-w-[480px] mx-auto'>
+           <Arrow
               arrowOrientation='LEFT'
+              className={hideArrows ? 'invisible' : ''}
               onClick={() => {
                 emblaApi?.scrollPrev()
               }}
@@ -125,7 +169,7 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
                       await handleUnwrap(assets[selectedIndex])
                     }}
                   >
-                    Unwrap & Read
+                    {isUnwrapTransactionLoading ? <Loader /> : "Unwrap & Read"}
                   </Button>
                 ) : (
                   <ButtonLink
@@ -145,21 +189,21 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
                 </Button>
               </div>
             </div>
-
             <Arrow
               arrowOrientation='RIGHT'
+              className={hideArrows ? 'invisible' : ''}
               onClick={() => {
                 emblaApi?.scrollNext()
               }}
-            />
+            /> 
           </div>
         </DialogContent>
       </Dialog>
       <UnwrapWarningDialog
         open={unwrapWarningDialog}
         toggleDialog={toggleUnwrapDialog}
+        isLoading={isUnwrapTransactionLoading}
         handleUnwrap={()=>handleUnwrap(assets[selectedIndex])}
-        isLoading={false}
       />
     </>
   )
