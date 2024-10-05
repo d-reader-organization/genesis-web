@@ -38,6 +38,10 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'gateway.irys.xyz',
+      },
+      {
+        protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
       },
     ],

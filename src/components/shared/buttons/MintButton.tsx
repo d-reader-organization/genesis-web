@@ -17,12 +17,12 @@ import { fetchMintTransaction } from '@/app/lib/api/transaction/queries'
 import { useFetchCandyMachine } from '@/api/candyMachine'
 import { versionedTransactionFromBs64 } from '@/utils/transactions'
 import { io } from 'socket.io-client'
-import { CandyMachineReceipt } from '@/models/candyMachine/candyMachineReceipt'
 import { useRouter } from 'next/navigation'
 import { sendMintTransaction } from '@/app/lib/api/transaction/mutations'
 import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 import { VersionedTransaction } from '@solana/web3.js'
 import Image from 'next/image'
+import { AssetMintEvent } from '@/models/asset/assetMintEvent'
 
 type Props = {
   comicIssue: ComicIssue
@@ -42,7 +42,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
   // const [showWalletNotConnected, toggleWalletNotConnected] = useToggle()
   const [showConfirmingTransaction, toggleConfirmingTransaction, closeConfirmingTransaction] = useToggle()
   const [isMintTransactionLoading, setIsMintTransactionLoading] = useState(false)
-  const [assetAddress, setAssetAddress] = useState<string>()
+  const [assetMintEventData, setAssetMintEventData] = useState<AssetMintEvent>()
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>()
 
   const { publicKey, signAllTransactions } = useWallet()
@@ -64,8 +64,8 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
       return
     }
     const socket = io(process.env.NEXT_PUBLIC_API_ENDPOINT || '')
-    socket.on(`wallet/${walletAddress}/item-minted`, async (data: CandyMachineReceipt): Promise<void> => {
-      setAssetAddress(data.asset.address)
+    socket.on(`wallet/${walletAddress}/item-minted`, async (assetEventData: AssetMintEvent): Promise<void> => {
+      setAssetMintEventData(assetEventData)
       closeConfirmingTransaction()
       toggleAssetMinted()
       clearTimeout(timeoutId)
@@ -195,13 +195,13 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
       ) : (
         <BaseWalletMultiButtonDynamic style={{ width: '100%' }} />
       )}
-      <AssetMintedDialog
-        assetAddress={assetAddress}
+      {assetMintEventData ? <AssetMintedDialog
+        assets={assetMintEventData.assets}
         comicIssue={comicIssue}
         isAuthenticated={isAuthenticated}
         open={showAssetMinted}
         toggleDialog={toggleAssetMinted}
-      />
+      /> : null}
       {/* <EmailVerificationDialog open={showEmailVerification} toggleDialog={toggleEmailVerification} /> */}
       {/* <NoWalletConnectedDialog open={showWalletNotConnected} toggleDialog={toggleWalletNotConnected} /> */}
       <ConfirmingTransactionDialog open={showConfirmingTransaction} toggleDialog={toggleConfirmingTransaction} />

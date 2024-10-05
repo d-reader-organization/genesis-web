@@ -1,11 +1,7 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Dialog, DialogContent } from '@/components/ui/Dialog'
-import { ComicRarity } from '@/enums/comicRarity'
-import { Loader } from '../Loader'
 import { ComicIssue } from '@/models/comicIssue'
-import { getRarityIcon } from '@/utils/rarity'
 import Image from 'next/image'
-import clsx from 'clsx'
 import Link from 'next/link'
 import { Button, ButtonLink } from '@/components/ui/Button'
 import useToggle from '@/hooks/useToggle'
@@ -13,117 +9,156 @@ import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { RoutePath } from '@/enums/routePath'
 import { UnwrapWarningDialog, unwrapWarningKey } from './UnwrapWarningDialog'
 import { CommonDialogProps } from '@/models/common'
-import { useFetchAsset } from '@/api/asset/queries'
 import { useFetchTwitterIntentComicMinted } from '@/api/twitter/queries/useFetchIntentComicMinted'
 import { UtmSource } from '@/models/twitter/twitterIntentComicMintedParams'
+import { RarityChip } from '../RarityChip'
+import { AssetEventData } from '@/models/asset/assetMintEvent'
+import { Arrow } from '../Arrow'
+import useEmblaCarousel from 'embla-carousel-react'
+import { fetchUseComicIssueAssetTransaction } from '@/app/lib/api/transaction/queries'
+import { useWallet } from '@solana/wallet-adapter-react'
+import { toast } from '@/components/ui'
 
 type Props = {
-  assetAddress?: string
   comicIssue: ComicIssue
   isAuthenticated: boolean
 } & CommonDialogProps
 
-export const AssetMintedDialog: React.FC<Props> = ({
-  assetAddress,
+export const AssetMintedDetails: React.FC<{ asset: AssetEventData }> = ({ asset }) => {
+  const { data: twitterIntentComicMinted } = useFetchTwitterIntentComicMinted({
+    comicAddress: asset.address ?? '',
+    utmSource: UtmSource.WEB,
+  })
+
+  return (
+    <div className='flex flex-col items-center gap-6 relative min-w-full min-h-full justify-between mx-auto overflow-y-scroll'>
+      <p className='text-white sm:text-[32px] xs:text-[26px] font-obviouslyNarrow font-semibold leading-8'>
+        Congrats! You got #{asset.name.split('#')[1]}
+      </p>
+      <RarityChip className='-mt-3.5' rarity={asset.rarity} />
+      <Image src={asset.image} width={690} height={1000} alt='Comic' className='max-w-[330px] w-full h-auto' />
+      <Link
+        href={twitterIntentComicMinted ?? ''}
+        target='_blank'
+        className='w-max self-center box-border py-1 px-3 border-2 border-white bg-black text-white rounded-lg font-medium cursor-pointer'
+      >
+        Share on &#120143;
+      </Link>
+    </div>
+  )
+}
+
+export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> = ({
+  assets,
   comicIssue,
   isAuthenticated,
   open,
   toggleDialog,
 }) => {
-  const { data: asset } = useFetchAsset(assetAddress || '')
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [])
+  const [selectedIndex, setSelectedIndex] = useState<number>(0)
   const [unwrapWarningDialog, toggleUnwrapDialog] = useToggle(false)
   const [isUnwrapWarningRead] = useLocalStorage(unwrapWarningKey, false)
 
-  const { data: twitterIntentComicMinted } = useFetchTwitterIntentComicMinted({
-    comicAddress: assetAddress ?? '',
-    utmSource: UtmSource.WEB,
-  })
+  const { publicKey } = useWallet()
+  const handleUnwrap = async (selectedAsset: AssetEventData) => {
+    if(!publicKey){
+      toast({description:"Please connect wallet before unwrapping",variant:'error'});
+      return;
+    }
+    try{
+      await fetchUseComicIssueAssetTransaction({assetAddress:selectedAsset.address,ownerAddress:publicKey.toString()})
+    }catch(e){
+      toast({description:"Failed to unwrap, please try again!",variant:'error'});
+    }
+  }
 
-  const handleUnwrap = async () => {}
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return
+    setSelectedIndex(emblaApi.selectedScrollSnap())
+  }, [emblaApi, setSelectedIndex])
+
+  useEffect(() => {
+    onSelect()
+    emblaApi?.on('select', onSelect)
+    return () => {
+      emblaApi?.off('select', onSelect)
+    }
+  }, [emblaApi, onSelect])
 
   return (
     <>
       <Dialog open={open} onOpenChange={toggleDialog}>
-        <DialogContent className='h-screen max-h-full max-w-screen p-6' showCloseIcon={false}>
+        <DialogContent className='w-full h-full' showCloseIcon={false}>
           <div className='fixed top-0 left-0 w-full h-full -z-[1]'>
             <video autoPlay className='w-full h-full object-cover' loop muted>
               <source src='/assets/animations/mint-loop.mp4' type='video/mp4' />
             </video>
           </div>
-          <div className='flex flex-col items-center gap-6 relative w-full h-full min-h-16 mx-auto max-w-[444px] overflow-y-scroll p-6'>
-            {asset ? (
-              <>
-                <span className='text-grey-100 text-base font-medium leading-5'>
-                  {comicIssue.title} - EP&nbsp;{comicIssue.number}
-                </span>
-                <span className='text-white text-2xl font-bold leading-7'>
-                  Congrats! You got #{asset.name.split('#')[1]}
-                </span>
-                <div
-                  className={clsx(
-                    'flex items-center gap-1 rounded-[4px] border border-white py-0.5 px-1.5 text-lg',
-                    asset.rarity === ComicRarity.Common && 'text-white',
-                    asset.rarity === ComicRarity.Uncommon && 'text-yellow-50',
-                    asset.rarity === ComicRarity.Rare && 'text-blue-500',
-                    asset.rarity === ComicRarity.Epic && 'text-pink-500',
-                    asset.rarity === ComicRarity.Legendary && 'text-purple-500'
-                  )}
-                >
-                  {getRarityIcon(asset.rarity)} {asset.rarity}
+          <div className='relative flex mx-auto items-center sm:gap-[24px] w-full xs:gap-[4px] xs:max-w-[268px] sm:max-w-[480px]'>
+            <Arrow
+              arrowOrientation='LEFT'
+              onClick={() => {
+                emblaApi?.scrollPrev()
+              }}
+            />
+            <div className='xs:max-w-[210px] sm:max-w-[350px]'>
+              <p className='text-grey-100 text-base sm:text-[16px] xs:text-[14px] leading-5 text-center'>
+                {comicIssue.title} &nbsp;&bull;&nbsp; EP&nbsp;{comicIssue.number}
+              </p>
+              <div className='overflow-hidden w-full' ref={emblaRef}>
+                <div className='flex flex-row items-center gap-4 min-w-full'>
+                  {assets.map((asset, index) => (
+                    <AssetMintedDetails asset={asset} key={index} />
+                  ))}
                 </div>
-                <Image
-                  src={asset.image}
-                  width={690}
-                  height={1000}
-                  alt='Comic'
-                  className='w-[400px] max-w-full h-auto'
-                />
-
-                <Link
-                  href={twitterIntentComicMinted ?? ''}
-                  target='_blank'
-                  className='w-max self-center mt-4 box-border py-1 px-3 border-2 border-white bg-black text-white rounded-lg font-medium cursor-pointer'
-                >
-                  Share on &#120143;
-                </Link>
-
-                <div className='flex flex-col gap-4 w-full'>
-                  {isAuthenticated ? (
-                    <Button
-                      onClick={async () => {
-                        if (!isUnwrapWarningRead) {
-                          toggleUnwrapDialog()
-                          return
-                        }
-                        await handleUnwrap()
-                      }}
-                    >
-                      Unwrap & Read
-                    </Button>
-                  ) : (
-                    <ButtonLink
-                      className='text-grey-600'
-                      href={`${RoutePath.Login}?redirectTo=/comic-issue/${comicIssue.id}/read`}
-                      backgroundColor='important'
-                    >
-                      Login to Read
-                    </ButtonLink>
-                  )}
-                  <Button className='text-grey-50 border border-grey-50' onClick={toggleDialog} variant='ghost'>
-                    Close
+              </div>
+              <div className='flex flex-col w-full max-w-[330px] mt-10 gap-4'>
+                {isAuthenticated ? (
+                  <Button
+                    className='rounded-[12px]'
+                    onClick={async () => {
+                      if (!isUnwrapWarningRead) {
+                        toggleUnwrapDialog()
+                        return
+                      }
+                      await handleUnwrap(assets[selectedIndex])
+                    }}
+                  >
+                    Unwrap & Read
                   </Button>
-                </div>
-              </>
-            ) : (
-              <Loader />
-            )}
+                ) : (
+                  <ButtonLink
+                    className='text-grey-600 rounded-[12px]'
+                    href={`${RoutePath.Login}?redirectTo=/comic-issue/${comicIssue.id}/read`}
+                    backgroundColor='important'
+                  >
+                    Login to Read
+                  </ButtonLink>
+                )}
+                <Button
+                  className='text-grey-50 border border-grey-50 rounded-[12px]'
+                  onClick={toggleDialog}
+                  variant='ghost'
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
+
+            <Arrow
+              arrowOrientation='RIGHT'
+              onClick={() => {
+                emblaApi?.scrollNext()
+              }}
+            />
           </div>
         </DialogContent>
       </Dialog>
       <UnwrapWarningDialog
         open={unwrapWarningDialog}
         toggleDialog={toggleUnwrapDialog}
-        handleUnwrap={async () => {}}
+        handleUnwrap={()=>handleUnwrap(assets[selectedIndex])}
         isLoading={false}
       />
     </>

@@ -7,7 +7,7 @@ export const ConfirmingTransactionDialog: React.FC<CommonDialogProps> = ({ open 
     <Dialog open={open}>
       <DialogContent
         aria-describedby=''
-        className='bg-grey-600 rounded:[32px] sm:rounded-[64px] flex flex-col items-center'
+        className='bg-grey-600 rounded:[32px] sm:rounded-[64px] flex flex-col items-center max-w-[400px]'
         overlayClassName='bg-grey-500'
         showCloseIcon={false}
       >

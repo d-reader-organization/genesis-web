@@ -6,7 +6,7 @@ import { fetchWrapper } from '../../fetchWrapper'
 
 const { TWITTER, INTENT, COMIC_MINTED } = TWITTER_QUERY_KEYS
 
-export const fetchTwitterIntentComicMinted = async (params: TwitterIntentComicMintedParams): Promise<string> => {
+export const fetchTwitterIntentComicMinted = async (params: TwitterIntentComicMintedParams): Promise<string | null> => {
   const response = await fetchWrapper<string>({ path: `${TWITTER}/${INTENT}/${COMIC_MINTED}`, params })
-  return response.data ?? ''
+  return response.data
 }

@@ -16,7 +16,7 @@ export const UnwrapWarningDialog: React.FC<Props> = ({ handleUnwrap, isLoading, 
   const [isUnwrapWarningRead, setIsUnwrapWarningRead] = useLocalStorage(unwrapWarningKey, false)
   return (
     <Dialog open={open} onOpenChange={toggleDialog}>
-      <DialogContent aria-describedby='' className='flex flex-col justify-between gap-8 bg-grey-400 p-5 rounded-lg'>
+      <DialogContent aria-describedby='' className='flex flex-col justify-between gap-8 bg-grey-400 p-5 rounded-lg w-[95%] max-w-[400px]'>
         <div className='flex flex-col items-center gap-2'>
           <DialogTitle>Comic unwrapping</DialogTitle>
           <Text className='text-center' as='p'>
