@@ -32,25 +32,11 @@ type Props = {
 } & CommonDialogProps
 
 export const AssetMintedDetails: React.FC<{ asset: AssetEventData }> = ({ asset }) => {
-  const {data:twitterIntentComicMinted}  = useFetchTwitterIntentComicMinted({
-    comicAddress: asset.address ?? '',
-    utmSource: UtmSource.WEB,
-  })
+
 
   return (
-    <div className='flex flex-col items-center gap-6 relative min-w-full min-h-full justify-between mx-auto overflow-y-scroll'>
-      <p className='text-white sm:text-[32px] xs:text-[26px] font-obviouslyNarrow font-semibold leading-8'>
-        Congrats! You got #{asset.name.split('#')[1]}
-      </p>
-      <RarityChip className='-mt-3.5' rarity={asset.rarity} />
-      <Image src={asset.image} width={690} height={1000} alt='Comic' className='max-w-[330px] w-full h-auto' />
-      <Link
-        href={twitterIntentComicMinted ?? ''}
-        target='_blank'
-        className='w-max self-center box-border py-1 px-3 border-2 border-white bg-black text-white rounded-lg font-medium cursor-pointer'
-      >
-        Share on &#120143;
-      </Link>
+    <div className='flex flex-col items-center relative min-w-full min-h-full justify-between mx-auto overflow-y-scroll'>
+      <Image src={asset.image} width={690} height={1000} alt='Comic' className='max-w-[300px] w-full h-auto' />
     </div>
   )
 }
@@ -76,6 +62,11 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
 
   const { data: me } = useFetchMe()
 	const myId = me?.id || 0
+
+  const {data:twitterIntentComicMinted}  = useFetchTwitterIntentComicMinted({
+    comicAddress: assets[selectedIndex].address ?? '',
+    utmSource: UtmSource.WEB,
+  })
 
   const handleUnwrap = async (selectedAsset: AssetEventData) => {
     if(!publicKey){
@@ -146,10 +137,15 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
                 emblaApi?.scrollPrev()
               }}
             />
-            <div className='xs:max-w-[210px] sm:max-w-[350px]'>
+            <div className='xs:max-w-[250px] sm:max-w-[350px] 2 flex flex-col items-center gap-6 relative justify-between mx-auto overflow-y-scroll'>
               <p className='text-grey-100 text-base sm:text-[16px] xs:text-[14px] leading-5 text-center'>
                 {comicIssue.title} &nbsp;&bull;&nbsp; EP&nbsp;{comicIssue.number}
               </p>
+              <p className='text-white sm:text-[32px] xs:text-[26px] font-obviouslyNarrow font-semibold leading-8'>
+                Congrats! You got #{assets[selectedIndex].name.split('#')[1]}
+              </p>
+              <RarityChip className='-mt-3.5' rarity={assets[selectedIndex].rarity} />
+              <p className='text-grey-100 text-base sm:text-[16px] xs:text-[14px] leading-5 text-center'>{selectedIndex+1}/{assets.length}</p>
               <div className='overflow-hidden w-full' ref={emblaRef}>
                 <div className='flex flex-row items-center gap-4 min-w-full'>
                   {assets.map((asset, index) => (
@@ -157,7 +153,14 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
                   ))}
                 </div>
               </div>
-              <div className='flex flex-col w-full max-w-[330px] mt-10 gap-4'>
+              <Link
+                href={twitterIntentComicMinted ?? ''}
+                target='_blank'
+                className='w-max self-center box-border py-1 px-3 border-2 border-white bg-black text-white rounded-lg font-medium cursor-pointer'
+              >
+                Share on &#120143;
+              </Link>
+              <div className='flex flex-col w-full max-w-[300px] gap-4'>
                 {isAuthenticated ? (
                   <Button
                     className='rounded-[12px]'
