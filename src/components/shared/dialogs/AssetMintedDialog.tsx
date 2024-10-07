@@ -32,8 +32,6 @@ type Props = {
 } & CommonDialogProps
 
 export const AssetMintedDetails: React.FC<{ asset: AssetEventData }> = ({ asset }) => {
-
-
   return (
     <div className='flex flex-col items-center relative min-w-full min-h-full justify-between mx-auto overflow-y-scroll'>
       <Image src={asset.image} width={690} height={1000} alt='Comic' className='max-w-[300px] w-full h-auto' />
@@ -53,60 +51,63 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
   const [unwrapWarningDialog, toggleUnwrapDialog] = useToggle(false)
   const [isUnwrapWarningRead] = useLocalStorage(unwrapWarningKey, false)
 
-  const [isUnwrapTransactionLoading,setUnwrapTransactionLoading] = useState<boolean>(false);
-  const { publicKey, signTransaction } = useWallet();
+  const [isUnwrapTransactionLoading, setUnwrapTransactionLoading] = useState<boolean>(false)
+  const { publicKey, signTransaction } = useWallet()
 
   const { push } = useRouter()
-  const {connection} = useConnection();
+  const { connection } = useConnection()
   const queryClient = useQueryClient()
 
   const { data: me } = useFetchMe()
-	const myId = me?.id || 0
+  const myId = me?.id || 0
 
-  const {data:twitterIntentComicMinted}  = useFetchTwitterIntentComicMinted({
+  const { data: twitterIntentComicMinted } = useFetchTwitterIntentComicMinted({
     comicAddress: assets[selectedIndex].address ?? '',
     utmSource: UtmSource.WEB,
   })
 
   const handleUnwrap = async (selectedAsset: AssetEventData) => {
-    if(!publicKey){
-      toast({description:"Please connect wallet before unwrapping",variant:'error'});
-      return;
+    if (!publicKey) {
+      toast({ description: 'Please connect wallet before unwrapping', variant: 'error' })
+      return
     }
-    try{
-			setUnwrapTransactionLoading(true)
+    try {
+      setUnwrapTransactionLoading(true)
 
-      const unwrapTransaction = await fetchUseComicIssueAssetTransaction({assetAddress:selectedAsset.address,ownerAddress:publicKey.toString()})
+      const unwrapTransaction = await fetchUseComicIssueAssetTransaction({
+        assetAddress: selectedAsset.address,
+        ownerAddress: publicKey.toString(),
+      })
       if (unwrapTransaction) {
-				if (!signTransaction) return
-				const latestBlockhash = await connection.getLatestBlockhash()
-				const signedTransaction = await signTransaction(unwrapTransaction)
+        if (!signTransaction) return
+        const latestBlockhash = await connection.getLatestBlockhash()
+        const signedTransaction = await signTransaction(unwrapTransaction)
 
-				const signature = await connection.sendRawTransaction(signedTransaction.serialize())
-				const response = await connection.confirmTransaction({ signature, ...latestBlockhash })
-				if (!!response.value.err) {
-					console.log('Response error log: ', response.value.err)
-					toast({description:'Error while unwrapping the comic', variant:'error'})
-					throw Error()
-				}
-				await sleep(1000)
-			}
+        const signature = await connection.sendRawTransaction(signedTransaction.serialize())
+        const response = await connection.confirmTransaction({ signature, ...latestBlockhash })
+        if (!!response.value.err) {
+          console.log('Response error log: ', response.value.err)
+          toast({ description: 'Error while unwrapping the comic', variant: 'error' })
+          throw Error()
+        }
+        await sleep(1000)
+      }
 
-			queryClient.invalidateQueries({queryKey:comicIssueKeys.get(comicIssue.id)})
-			queryClient.invalidateQueries({queryKey:comicIssueKeys.getByOwner(myId)})
-			queryClient.invalidateQueries({queryKey:assetKeys.getMany({ comicIssueId: comicIssue.id })})
-      queryClient.invalidateQueries({queryKey:comicIssueKeys.getPages(comicIssue.id)})
+      queryClient.invalidateQueries({ queryKey: comicIssueKeys.get(comicIssue.id) })
+      queryClient.invalidateQueries({ queryKey: comicIssueKeys.getByOwner(myId) })
+      queryClient.invalidateQueries({ queryKey: assetKeys.getMany({ comicIssueId: comicIssue.id }) })
+      queryClient.invalidateQueries({ queryKey: comicIssueKeys.getPages(comicIssue.id) })
 
       push(RoutePath.ReadComicIssue(comicIssue.id), { scroll: false })
-			toast({description:'Comic unwrapped! Lets get to reading 🎉', variant:'success'})
-    }catch(e){
+      toast({ description: 'Comic unwrapped! Lets get to reading 🎉', variant: 'success' })
+    } catch (e) {
       console.log(e)
-      toast({description:"Failed to unwrap, please try again!",variant:'error'});
-      setUnwrapTransactionLoading(false);
+      toast({ description: 'Failed to unwrap, please try again!', variant: 'error' })
+      setUnwrapTransactionLoading(false)
     }
   }
 
-  const hideArrows = (assets.length <= 1);
+  const hideArrows = assets.length <= 1
   const onSelect = useCallback(() => {
     if (!emblaApi) return
     setSelectedIndex(emblaApi.selectedScrollSnap())
@@ -129,8 +130,8 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
               <source src='/assets/animations/mint-loop.mp4' type='video/mp4' />
             </video>
           </div>
-          <div className='relative flex mx-auto items-center sm:gap-[24px] w-full xs:gap-[4px] xs:max-w-[330px] sm:max-w-[480px] mx-auto'>
-           <Arrow
+          <div className='relative flex items-center sm:gap-[24px] w-full xs:gap-[4px] xs:max-w-[330px] sm:max-w-[480px] mx-auto'>
+            <Arrow
               arrowOrientation='LEFT'
               className={hideArrows ? 'invisible' : ''}
               onClick={() => {
@@ -145,7 +146,9 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
                 Congrats! You got #{assets[selectedIndex].name.split('#')[1]}
               </p>
               <RarityChip className='-mt-3.5' rarity={assets[selectedIndex].rarity} />
-              <p className='text-grey-100 text-base sm:text-[16px] xs:text-[14px] leading-5 text-center'>{selectedIndex+1}/{assets.length}</p>
+              <p className='text-grey-100 text-base sm:text-[16px] xs:text-[14px] leading-5 text-center'>
+                {selectedIndex + 1}/{assets.length}
+              </p>
               <div className='overflow-hidden w-full' ref={emblaRef}>
                 <div className='flex flex-row items-center gap-4 min-w-full'>
                   {assets.map((asset, index) => (
@@ -172,7 +175,7 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
                       await handleUnwrap(assets[selectedIndex])
                     }}
                   >
-                    {isUnwrapTransactionLoading ? <Loader /> : "Unwrap & Read"}
+                    {isUnwrapTransactionLoading ? <Loader /> : 'Unwrap & Read'}
                   </Button>
                 ) : (
                   <ButtonLink
@@ -198,7 +201,7 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
               onClick={() => {
                 emblaApi?.scrollNext()
               }}
-            /> 
+            />
           </div>
         </DialogContent>
       </Dialog>
@@ -206,7 +209,7 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
         open={unwrapWarningDialog}
         toggleDialog={toggleUnwrapDialog}
         isLoading={isUnwrapTransactionLoading}
-        handleUnwrap={()=>handleUnwrap(assets[selectedIndex])}
+        handleUnwrap={() => handleUnwrap(assets[selectedIndex])}
       />
     </>
   )

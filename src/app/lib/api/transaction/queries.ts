@@ -27,7 +27,9 @@ export const fetchMultipleBuyTransaction = async (params: MultipleBuyParams): Pr
   return decodeTransaction(response.data ?? '', 'base64')
 }
 
-export const fetchUseComicIssueAssetTransaction = async (params: UseComicIssueAssetParams): Promise<Transaction | null> => {
+export const fetchUseComicIssueAssetTransaction = async (
+  params: UseComicIssueAssetParams
+): Promise<Transaction | null> => {
   const response = await fetchWrapper<string | null>({ path: `${TRANSACTION}/${USE_COMIC_ISSUE_ASSET}`, params })
-  return response.data ? decodeTransaction(response.data, 'base64') : null;
+  return response.data ? decodeTransaction(response.data, 'base64') : null
 }

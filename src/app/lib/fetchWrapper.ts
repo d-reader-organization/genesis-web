@@ -26,12 +26,14 @@ export async function fetchWrapper<T>({
   method = 'GET',
   path = '',
   params,
+  isTextResponse = false,
 }: {
   body?: unknown
   headers?: HeadersInit
   method?: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTIONS'
   path?: string
   params?: ParamsType
+  isTextResponse?: boolean
 }): Promise<{
   data: T | null
   errorMessage?: string
@@ -54,7 +56,7 @@ export async function fetchWrapper<T>({
   }
   try {
     const response = await fetch(url, options)
-    const parsed = await response.json()
+    const parsed = isTextResponse ? await response.text() : await response.json()
 
     if (!SUCC_RESPONSE_STATUS_CODES.includes(response.status)) {
       const error: { message: string } = parsed

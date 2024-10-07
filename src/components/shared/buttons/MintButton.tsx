@@ -195,14 +195,15 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
       ) : (
         <BaseWalletMultiButtonDynamic style={{ width: '100%' }} />
       )}
-      {assetMintEventData ?
+      {assetMintEventData ? (
         <AssetMintedDialog
           assets={assetMintEventData.assets}
           comicIssue={comicIssue}
           isAuthenticated={isAuthenticated}
           open={showAssetMinted}
           toggleDialog={toggleAssetMinted}
-        /> : null}
+        />
+      ) : null}
       {/* <EmailVerificationDialog open={showEmailVerification} toggleDialog={toggleEmailVerification} /> */}
       {/* <NoWalletConnectedDialog open={showWalletNotConnected} toggleDialog={toggleWalletNotConnected} /> */}
       <ConfirmingTransactionDialog open={showConfirmingTransaction} toggleDialog={toggleConfirmingTransaction} />
