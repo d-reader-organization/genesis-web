@@ -108,18 +108,18 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
       <Input
         placeholder='Search comics or creators'
         value={searchTerm}
-        className='pl-10 pr-10'
+        className='pl-10 pr-10 max-md:w-full'
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <Loader2
         className={cn('size-[18px] animate-spin absolute top-3 right-3 text-grey-200', isLoading ? '' : 'hidden')}
       />
       {showResults ? (
-        <div className='max-w-80 md:max-w-[400px] flex flex-col gap-6 p-4 rounded-xl bg-grey-500 absolute top-16 w-full'>
+        <div className='max-w-80 md:max-w-[400px] flex flex-col gap-6 p-4 rounded-xl bg-grey-500 absolute top-14 md:top-16 w-full'>
           {creatorsResults.length || comicsResults.length ? (
             <>
-              {creatorsResults.length && <SearchResultsContainer results={creatorsResults} title='CREATORS' />}
-              {comicsResults.length && <SearchResultsContainer results={comicsResults} title='COMIC SERIES' />}
+              {creatorsResults.length ? <SearchResultsContainer results={creatorsResults} title='CREATORS' /> : null}
+              {comicsResults.length ? <SearchResultsContainer results={comicsResults} title='COMIC SERIES' /> : null}
             </>
           ) : (
             <span className='text-base font-medium text-center'>No results found</span>
