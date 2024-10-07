@@ -23,6 +23,6 @@ export const disconnectUserWallet = async (address: string): Promise<void> => {
 }
 
 export const requestWalletPassword = async (address: string): Promise<string> => {
-  const response = await fetchWrapper<string>({ path: `${AUTH}/${WALLET}/${REQUEST_PASSWORD}/${address}` })
+  const response = await fetchWrapper<string>({ path: `${AUTH}/${WALLET}/${REQUEST_PASSWORD}/${address}`, method:'PATCH', isTextResponse:true })
   return response.data ?? ''
 }
