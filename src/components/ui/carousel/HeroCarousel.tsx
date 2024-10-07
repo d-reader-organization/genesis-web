@@ -3,20 +3,13 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { CarouselSlide, CarouselTag } from '@/models/carousel/carouselSlide'
-import { RoutePath } from '@/enums/routePath'
 import { useIsMobile } from '@/hooks/useBreakpoints'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/shared/Badge'
 import Link from 'next/link'
-
-const getSlideUrl = (slide: CarouselSlide) => {
-  if (slide.comicIssueId) return RoutePath.ComicIssue(slide.comicIssueId)
-  else if (slide.creatorSlug) return RoutePath.Creator(slide.creatorSlug)
-  else if (slide.comicSlug) return RoutePath.Comic(slide.comicSlug)
-  else return slide.externalLink
-}
+import { getSlideUrl } from '@/utils/helpers'
 
 type Props = {
   slides: CarouselSlide[]
@@ -60,7 +53,7 @@ export const HeroCarousel: React.FC<Props> = ({ slides }) => {
     <div>
       <div className='relative max-w-full md:max-w-[748px] carousel-height rounded-2xl shadow-[4px_4px_0px_0px_#000] max-md:rounded-t-none select-none'>
         <div className='overflow-hidden' ref={emblaRef}>
-          <div className='flex'>
+          <div className='flex hover:brightness-110'>
             {slides.map((slide, index) => {
               const visitUrl = getSlideUrl(slide)
               return (

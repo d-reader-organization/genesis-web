@@ -1,3 +1,5 @@
+import { RoutePath } from '@/enums/routePath'
+import { CarouselSlide } from '@/models/carousel/carouselSlide'
 import { PartialGenre } from '@/models/genre'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 
@@ -123,3 +125,10 @@ export const pluralizeString = (count: number, value: string) => (count > 1 ? `$
 
 export const formatWalletAddress = (address: string, slice = 4) =>
   address.slice(0, slice) + '...' + address.slice(-slice)
+
+export const getSlideUrl = (slide: CarouselSlide) => {
+  if (slide.comicIssueId) return RoutePath.ComicIssue(slide.comicIssueId)
+  else if (slide.creatorSlug) return RoutePath.Creator(slide.creatorSlug)
+  else if (slide.comicSlug) return RoutePath.Comic(slide.comicSlug)
+  else return slide.externalLink
+}

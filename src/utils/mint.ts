@@ -10,7 +10,7 @@ export type TokenDetail = {
   icon: string
   symbol: string
 }
-const COMIC_VAULT_LABEL = "dAuth";
+const COMIC_VAULT_LABEL = 'dAuth'
 
 export const validateMintEligibilty = (coupons: CandyMachineCoupon[], couponId: number | undefined) => {
   if (!couponId) {
@@ -43,18 +43,19 @@ export const getPublicCoupon = (coupons: CandyMachineCoupon[]) => {
 
 /** Currently assume that all coupon will contain sol as currency */
 export const getCouponDiscount = (coupons: CandyMachineCoupon[], currentCoupon: CandyMachineCoupon) => {
-  const publicCoupon = getPublicCoupon(coupons);
-  if (!publicCoupon) return 0;
+  const publicCoupon = getPublicCoupon(coupons)
+  if (!publicCoupon) return 0
 
-  const getSolPrice = (coupon: CandyMachineCoupon) => coupon.prices.find(price => price.splTokenAddress === WRAPPED_SOL_MINT.toString())?.mintPrice || 0;
-  const publicCouponPrice = getSolPrice(publicCoupon);
-  const currentCouponPrice = getSolPrice(currentCoupon);
+  const getSolPrice = (coupon: CandyMachineCoupon) =>
+    coupon.prices.find((price) => price.splTokenAddress === WRAPPED_SOL_MINT.toString())?.mintPrice || 0
+  const publicCouponPrice = getSolPrice(publicCoupon)
+  const currentCouponPrice = getSolPrice(currentCoupon)
 
-  if (!publicCouponPrice) return 0;
+  if (!publicCouponPrice) return 0
 
-  const difference = Math.abs(publicCouponPrice - currentCouponPrice) * 100;
-  const discount = Math.ceil(difference / publicCouponPrice);
-  return discount;
+  const difference = Math.abs(publicCouponPrice - currentCouponPrice) * 100
+  const discount = Math.ceil(difference / publicCouponPrice)
+  return discount
 }
 
 export const getTokenMap = (currencySettings: CouponCurrencySetting[], splTokens: SplToken[]) => {
@@ -94,6 +95,6 @@ export const getRaritySupply = (totalSupply: number, rarityShare: number) => {
   return supply
 }
 
-export const isComicVaultCoupon = (coupon: CandyMachineCoupon)=>{
-  return coupon.prices.some(currency=>currency.label == COMIC_VAULT_LABEL);
+export const isComicVaultCoupon = (coupon: CandyMachineCoupon) => {
+  return coupon.prices.some((currency) => currency.label == COMIC_VAULT_LABEL)
 }

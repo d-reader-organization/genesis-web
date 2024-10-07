@@ -1,3 +1,4 @@
 export enum CarouselLocation {
-  Home = 'Home',
+  HomePrimary = 'HomePrimary',
+  HomeSecondary = 'HomeSecondary',
 }
