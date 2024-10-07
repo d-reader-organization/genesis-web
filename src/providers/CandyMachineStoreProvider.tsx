@@ -7,8 +7,8 @@ import { useFetchCandyMachine } from '@/api/candyMachine/queries/useFetchCandyMa
 import { ComicIssue } from '@/models/comicIssue'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { useFetchSupportedTokens } from '@/api/settings/queries/useFetchSupportedTokens'
-import { CouponType } from '@/models/candyMachine/candyMachineCoupon'
-import { getPublicCoupon } from '@/utils/mint'
+import { CandyMachineCoupon, CouponType } from '@/models/candyMachine/candyMachineCoupon'
+import { getPublicCoupon, isComicVaultCoupon } from '@/utils/mint'
 import { WRAPPED_SOL_MINT } from '@metaplex-foundation/js'
 import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
 import React from 'react'
@@ -63,7 +63,7 @@ export const CandyMachineStoreProvider = ({ comicIssue, children }: CandyMachine
       )
       storeRef.current?.setState({
         coupons: (candyMachine?.coupons ?? []).filter(
-          (coupon) => !(coupon.type === CouponType.PublicUser || coupon.name === 'dAuth')
+          (coupon) => !(coupon.type === CouponType.PublicUser || isComicVaultCoupon(coupon))
         ),
         selectedCoupon: publicCoupon,
         selectedCurrency: solCurrencySetting,
@@ -73,6 +73,8 @@ export const CandyMachineStoreProvider = ({ comicIssue, children }: CandyMachine
 
   return <CandyMachineStoreContext.Provider value={storeRef.current}>{children}</CandyMachineStoreContext.Provider>
 }
+
+
 
 export const useCandyMachineStore = <T,>(selector: (store: CandyMachineStore) => T): T => {
   const counterStoreContext = useContext(CandyMachineStoreContext)
