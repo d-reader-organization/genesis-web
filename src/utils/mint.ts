@@ -1,5 +1,6 @@
 import { CandyMachineCoupon, CouponCurrencySetting, CouponType } from '@/models/candyMachine/candyMachineCoupon'
 import { SplToken } from '@/models/settings/splToken'
+import { WRAPPED_SOL_MINT } from '@metaplex-foundation/js'
 
 export type TokenDetail = {
   label: string
@@ -9,6 +10,7 @@ export type TokenDetail = {
   icon: string
   symbol: string
 }
+const COMIC_VAULT_LABEL = "dAuth";
 
 export const validateMintEligibilty = (coupons: CandyMachineCoupon[], couponId: number | undefined) => {
   if (!couponId) {
@@ -39,18 +41,20 @@ export const getPublicCoupon = (coupons: CandyMachineCoupon[]) => {
   return coupons.find((coupon) => coupon.type == CouponType.PublicUser)
 }
 
+/** Currently assume that all coupon will contain sol as currency */
 export const getCouponDiscount = (coupons: CandyMachineCoupon[], currentCoupon: CandyMachineCoupon) => {
-  const publicCoupon = getPublicCoupon(coupons)
-  if (!publicCoupon) return 0
+  const publicCoupon = getPublicCoupon(coupons);
+  if (!publicCoupon) return 0;
 
-  const publicCouponUsdcPrice = publicCoupon?.prices[0].usdcEquivalent
-  const currentCouponUsdcPrice = currentCoupon.prices[0].usdcEquivalent
+  const getSolPrice = (coupon: CandyMachineCoupon) => coupon.prices.find(price => price.splTokenAddress === WRAPPED_SOL_MINT.toString())?.mintPrice || 0;
+  const publicCouponPrice = getSolPrice(publicCoupon);
+  const currentCouponPrice = getSolPrice(currentCoupon);
 
-  if (!publicCouponUsdcPrice) return 0
+  if (!publicCouponPrice) return 0;
 
-  const difference = Math.abs(publicCouponUsdcPrice - currentCouponUsdcPrice) * 100
-  const discount = Math.ceil(difference / publicCouponUsdcPrice)
-  return discount
+  const difference = Math.abs(publicCouponPrice - currentCouponPrice) * 100;
+  const discount = Math.ceil(difference / publicCouponPrice);
+  return discount;
 }
 
 export const getTokenMap = (currencySettings: CouponCurrencySetting[], splTokens: SplToken[]) => {
@@ -88,4 +92,8 @@ export const getTotalItemsMintedByUser = (coupons: CandyMachineCoupon[]) => {
 export const getRaritySupply = (totalSupply: number, rarityShare: number) => {
   const supply = Math.floor((totalSupply * rarityShare) / 100)
   return supply
+}
+
+export const isComicVaultCoupon = (coupon: CandyMachineCoupon)=>{
+  return coupon.prices.some(currency=>currency.label == COMIC_VAULT_LABEL);
 }
