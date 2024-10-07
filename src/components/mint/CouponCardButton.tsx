@@ -33,7 +33,7 @@ export const CouponCardButton: React.FC<CardProps> = ({ coupon, discount, isSele
           {coupon.stats.itemsMinted ?? 0}&nbsp;
         </span>
         <span className='text-xs md:text-base font-medium leading-[140%] text-grey-200'>
-          &nbsp;/&nbsp;{coupon.numberOfRedemptions}
+          &nbsp;/&nbsp;{coupon.numberOfRedemptions ?? '∞'}
         </span>
       </div>
     </div>

@@ -4,7 +4,7 @@ import React from 'react'
 import { Copy, MoreHorizontal, Power, Wallet } from 'lucide-react'
 import { toast } from '@/components/ui/toast/use-toast'
 import { useWallet } from '@solana/wallet-adapter-react'
-import { ConnectButtonV2 } from '../../buttons/ConnectButton'
+import { ConnectButton } from '../../buttons/ConnectButton'
 import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
 import { formatWalletAddress } from '@/utils/helpers'
 import PhantomIcon from 'public/assets/vector-icons/phantom.svg'
@@ -28,7 +28,7 @@ export const WalletSection: React.FC = () => {
         <div className='flex gap-1.5'>
           <ButtonIconWrapper
             onClick={() => {
-              navigator.clipboard.writeText('0x1a3312321fd71')
+              navigator.clipboard.writeText(publicKey.toBase58())
               toast({ description: 'Copied to clipboard' })
             }}
           >
@@ -63,7 +63,7 @@ export const WalletSection: React.FC = () => {
           <MoreHorizontal className='size-6' />
         </WalletBox>
       </div>
-      <ConnectButtonV2 onClick={async () => {}} />
+      <ConnectButton onClick={async () => {}} />
     </div>
   )
 }
