@@ -54,7 +54,9 @@ export const useAuthorizeWallet: AuthorizeWalletHook = (callback) => {
 
       const signedTransaction = await signTransaction(transaction)
       encoding = bs58.encode(signedTransaction.serialize())
-    } else throw new Error('Wallet does not support message or transaction signing!')
+    } else {
+      throw new Error('Wallet does not support message or transaction signing!')
+    }
 
     await connectUserWallet({ address, encoding })
     if (typeof callback === 'function') callback()

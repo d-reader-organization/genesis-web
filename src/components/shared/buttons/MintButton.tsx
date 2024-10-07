@@ -73,12 +73,12 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
       toast({ description: 'Successfully minted the comic! Find the asset in your wallet', variant: 'success' })
       refresh
     })
-    
+
     return () => {
       socket.off(`wallet/${walletAddress}/item-minted`)
       socket.disconnect()
     }
-  }, [walletAddress,isMintTransactionLoading])
+  }, [walletAddress, isMintTransactionLoading])
 
   const handleMint = async () => {
     if (!walletAddress || !selectedCurrency) return
@@ -125,7 +125,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
       setIsMintTransactionLoading(false)
       toggleConfirmingTransaction()
 
-      if(timeoutId){
+      if (timeoutId) {
         clearTimeout(timeoutId)
       }
 
