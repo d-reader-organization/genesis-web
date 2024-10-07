@@ -60,23 +60,25 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
   })
 
   useEffect(() => {
-    if (!walletAddress) {
+    if (!walletAddress && !isMintTransactionLoading) {
       return
     }
     const socket = io(process.env.NEXT_PUBLIC_API_ENDPOINT || '')
     socket.on(`wallet/${walletAddress}/item-minted`, async (assetEventData: AssetMintEvent): Promise<void> => {
+      clearTimeout(timeoutId)
       setAssetMintEventData(assetEventData)
       closeConfirmingTransaction()
-      toggleAssetMinted()
-      clearTimeout(timeoutId)
       setTimeoutId(undefined)
+      toggleAssetMinted()
       toast({ description: 'Successfully minted the comic! Find the asset in your wallet', variant: 'success' })
       refresh
     })
+    
     return () => {
+      socket.off(`wallet/${walletAddress}/item-minted`)
       socket.disconnect()
     }
-  }, [walletAddress])
+  }, [walletAddress,isMintTransactionLoading])
 
   const handleMint = async () => {
     if (!walletAddress || !selectedCurrency) return
@@ -123,7 +125,10 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
       setIsMintTransactionLoading(false)
       toggleConfirmingTransaction()
 
-      clearTimeout(timeoutId)
+      if(timeoutId){
+        clearTimeout(timeoutId)
+      }
+
       const id = setTimeout(() => {
         closeConfirmingTransaction()
         toast({
