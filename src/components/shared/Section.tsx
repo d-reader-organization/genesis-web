@@ -1,6 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
-import ChevronRight from 'public/assets/vector-icons/chevron-right.svg'
 import { ControlledArrows } from './ControlledArrows'
 
 type Props = {
@@ -16,13 +14,13 @@ export const Section: React.FC<Props> = ({ actionHref, children, title }) => {
           <h1 className='text-xl md:text-[32px] font-semibold leading-[20px] md:leading-8 tracking-[0.04px] md:tracking-[0.064px]'>
             {title}
           </h1>
-          <Link
+          {/* <Link
             className='max-h-9 md:max-h-[42px] bg-grey-400 pl-4 py-3 pr-2 rounded-xl flex gap-1 items-center hover:brightness-125'
             href={actionHref}
           >
             <p className='text-xs leading-normal md:text-base font-medium text-[#AFB3BC]'>See all</p>
             <ChevronRight />
-          </Link>
+          </Link> */}
         </div>
         <ControlledArrows />
       </div>
