@@ -4,9 +4,9 @@ import { WalletName } from '@solana/wallet-adapter-base'
 import { useWalletMultiButton } from '@solana/wallet-adapter-base-ui'
 import { Wallet } from '@solana/wallet-adapter-react'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { usePreviousValue } from '@/hooks/usePreviousValue'
 import { Button, ButtonProps } from '../../ui/Button'
 import { WalletListItem } from '../WalletListItem'
+require('@solana/wallet-adapter-react-ui/styles.css')
 
 type Props = {
   text?: string
@@ -18,7 +18,6 @@ type Props = {
  * Why can't we have wallet sessions like on Mobile Wallet Adapter?
  * https://github.com/solana-labs/wallet-adapter/tree/master/packages/core/react */
 export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...props }) => {
-  const [buttonClicked, setButtonClicked] = useState(false)
   const [actionTriggered, setActionTriggered] = useState(false)
 
   const [walletModalConfig, setWalletModalConfig] = useState<Readonly<{
@@ -29,7 +28,6 @@ export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...pro
   const { buttonState, onConnect, onSelectWallet } = useWalletMultiButton({
     onSelectWallet: setWalletModalConfig,
   })
-  const prevButtonState = usePreviousValue(buttonState)
 
   const label = useMemo(() => {
     if (text) return text
@@ -50,21 +48,11 @@ export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...pro
   }, [buttonState, text])
 
   const handleClick = useCallback(async () => {
-    setButtonClicked(true)
     switch (buttonState) {
       case 'connected':
         try {
           await onClick()
         } finally {
-          setButtonClicked(false)
-        }
-        break
-      case 'connecting':
-      case 'disconnecting':
-        try {
-          setButtonClicked(false)
-        } finally {
-          setButtonClicked(false)
         }
         break
       case 'has-wallet':
@@ -84,7 +72,6 @@ export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...pro
       await onClick()
     } finally {
       setActionTriggered(false)
-      setButtonClicked(false)
     }
   }, [onClick])
 
@@ -94,20 +81,10 @@ export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...pro
     }
   }, [actionTriggered, buttonState, handleAsyncAction])
 
-  useEffect(() => {
-    if (prevButtonState === 'connecting' && buttonState === 'no-wallet') {
-      setButtonClicked(false)
-    }
-  }, [buttonState, prevButtonState])
-
   return (
     <>
-      <Button
-        disabled={buttonClicked || buttonState === 'connecting' || buttonState === 'disconnecting'}
-        onClick={handleClick}
-        {...props}
-      >
-        {children || label}
+      <Button className='py-5' variant='outline' size='normal' onClick={handleClick} {...props}>
+        {children || <span className='leading-[22.4px]'>{label}</span>}
       </Button>
       {/* This dialog will break af if the user clicks the "close" icon on the wallet selection menu
 			This is due to the fact that wallet-adapter has a few poorly exported states/components and we can't do anything about it */}
@@ -120,7 +97,6 @@ export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...pro
               <button
                 onClick={() => {
                   setWalletModalConfig(null)
-                  setButtonClicked(false)
                 }}
                 className='wallet-adapter-modal-button-close'
               >

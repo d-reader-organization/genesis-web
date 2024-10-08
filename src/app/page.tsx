@@ -8,6 +8,7 @@ import { fetchComics } from './lib/api/comic/queries'
 import { fetchCarouselSlides } from './lib/api/carousel/queries'
 import { CarouselCard } from '@/components/ui/carousel/CarouselCard'
 import { BaseLayout } from '@/components/layout/BaseLayout'
+import { CarouselLocation } from '@/enums/carouselLocation'
 
 const TAKE_COMICS = 18
 
@@ -18,15 +19,19 @@ export default async function HomePage() {
     fetchComics({ skip: 0, take: TAKE_COMICS, filterTag: ComicFilterTag.Popular }),
     fetchComics({ skip: 0, take: TAKE_COMICS, sortTag: ComicSortTag.Published }),
   ])
-
+  const primarySlides = carouselSlides.filter((slide) => slide.location === CarouselLocation.HomePrimary).slice(0, 5)
+  const secondarySlides = carouselSlides
+    .filter((slide) => slide.location === CarouselLocation.HomeSecondary)
+    .slice(0, 2)
   return (
     <BaseLayout>
       <div className='max-w-screen-xl w-full flex flex-col md:mb-10 md:p-4'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6 carousel-height mb-52 md:mb-10'>
-          <HeroCarousel slides={carouselSlides} />
+          <HeroCarousel slides={primarySlides} />
           <div className='grid grid-cols-2 gap-4 max-md:p-4'>
-            <CarouselCard />
-            <CarouselCard />
+            {secondarySlides.map((slide) => (
+              <CarouselCard key={slide.id} slide={slide} />
+            ))}
           </div>
         </div>
         <div className='mx-4 flex flex-col gap-8'>
