@@ -50,16 +50,16 @@ export const CouponDescriptionDialog: React.FC<CommonDialogProps & {comicIssue:C
               <div className='inline-block rounded-[12px] sm:rounded-[12px] bg-grey-500 p-[16px] gap-[16px] flex flex-row  max-w-[437px]' key={index}>
                 <div className='w-[20px] h-[20px]'>{isEligible ? <CHECK_CIRCLE_ICON />: <CROSS_CIRCLE_ICON/>}</div>
                 <div className='inline-block gap-[8px] w-[100%] max-w-[369px]'>
-                    <p className='xs:text-sm sm:text-base font-bold leading-[22.4px]'>{coupon.name} { discount ? `-${discount}% off` : null}</p>
-                    <p className='xs:text-sm sm:text-base font-medium text-grey-100 leading-[22.4px] text-ellipsis overflow-auto'>{coupon.description}</p>
-                    {!isEligible ? <p className='xs:text-xs sm:text-sm text-end text-grey-100 leading-[19.6px] decoration-1 cursor-pointer'>{getCouponAction(coupon.type)}</p>: null}
+                    <p className='xs:text-[12px]] sm:text-[16px] font-bold leading-[19.6px]'>{coupon.name} { discount ? `-${discount}% off` : null}</p>
+                    <p className='xs:text-[12px] sm:text-[16px] font-medium text-grey-100 leading-[22.4px] text-ellipsis overflow-auto'>{coupon.description}</p>
+                    {!isEligible ? <p className='xs:text-[12px] sm:text-[14px] text-end text-grey-100 leading-[19.6px] decoration-1 cursor-pointer'>{getCouponAction(coupon.type)}</p>: null}
                 </div>
               </div>
               )
             })
           }
-          <Button variant='secondary' className='rounded-[16px] font-bold text-base' onClick={toggleDialog}>Got it!</Button>
         </div>
+        <Button variant='secondary' className='rounded-[16px] font-bold text-base w-full' onClick={toggleDialog}>Got it!</Button>
         </div>
         
       </DialogContent>
