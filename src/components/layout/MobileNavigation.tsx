@@ -24,7 +24,7 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
     <>
       <div
         className={cn(
-          'fixed top-0 z-10 w-full md:hidden h-full bg-grey-600 bg-opacity-85 backdrop-blur-[25px]',
+          'fixed top-0 z-50 w-full md:hidden h-full bg-grey-600 bg-opacity-85 backdrop-blur-[25px]',
           isOpen ? 'max-h-full' : 'max-h-20'
         )}
       >
