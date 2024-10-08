@@ -15,11 +15,7 @@ import { MobileNav } from './MobileNavigation'
 import { ProfileSheet } from '../shared/sheets/profile/ProfileSheet'
 import { SearchInput } from '../shared/SearchInput'
 
-type Props = {
-  paramId?: string | number
-}
-
-export const Navigation: React.FC<Props> = ({ paramId }) => {
+export const Navigation: React.FC = () => {
   const [isProfileSheetOpen, setOpenProfileSheet] = React.useState<boolean>(false)
   const { data: me, isLoading } = useFetchMe()
   const pathname = usePathname()

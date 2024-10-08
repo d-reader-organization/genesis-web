@@ -41,7 +41,7 @@
   height: 320px;
 
   @media (min-width: 900px) {
-    height: 510px;
+    height: 511px;
   }
 }
 

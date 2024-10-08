@@ -6,7 +6,7 @@ type Props = {
   title: string
 } & React.PropsWithChildren
 
-export const Section: React.FC<Props> = ({ actionHref, children, title }) => {
+export const Section: React.FC<Props> = ({ children, title }) => {
   return (
     <div className='flex flex-col gap-4 md:gap-10'>
       <div className='flex justify-between'>

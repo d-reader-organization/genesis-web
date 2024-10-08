@@ -23,7 +23,11 @@ export type CandyMachineStoreProviderProps = {
   children: ReactNode
 }
 
-export const CandyMachineStoreProvider = ({ comicIssue, isAuthenticated, children }: CandyMachineStoreProviderProps) => {
+export const CandyMachineStoreProvider = ({
+  comicIssue,
+  isAuthenticated,
+  children,
+}: CandyMachineStoreProviderProps) => {
   const { publicKey } = useWallet()
   const {
     data: candyMachine,
@@ -38,7 +42,7 @@ export const CandyMachineStoreProvider = ({ comicIssue, isAuthenticated, childre
 
   const storeRef = useRef<CandyMachineStoreApi>()
   if (!storeRef.current) {
-    const defaultCoupon = getDefaultCoupon(candyMachine?.coupons ?? [], isAuthenticated);
+    const defaultCoupon = getDefaultCoupon(candyMachine?.coupons ?? [], isAuthenticated)
 
     const prices = defaultCoupon?.prices ?? []
     const solCurrencySetting = prices.find((price) => price.splTokenAddress == WRAPPED_SOL_MINT.toString())
@@ -59,7 +63,7 @@ export const CandyMachineStoreProvider = ({ comicIssue, isAuthenticated, childre
 
   useEffect(() => {
     if (candyMachine) {
-      const defaultCoupon = getDefaultCoupon(candyMachine?.coupons ?? [], isAuthenticated);
+      const defaultCoupon = getDefaultCoupon(candyMachine?.coupons ?? [], isAuthenticated)
 
       const solCurrencySetting = defaultCoupon?.prices.find(
         (price) => price.splTokenAddress == WRAPPED_SOL_MINT.toString()
