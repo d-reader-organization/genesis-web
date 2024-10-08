@@ -41,6 +41,12 @@ export const getPublicCoupon = (coupons: CandyMachineCoupon[]) => {
   return coupons.find((coupon) => coupon.type == CouponType.PublicUser)
 }
 
+export const getUserCoupon = (coupons: CandyMachineCoupon[]) => {
+  return coupons.find((coupon) => coupon.type == CouponType.RegisteredUser)
+}
+export const getDefaultCoupon = (coupons: CandyMachineCoupon[], isAuthenticatedUser?: boolean) =>
+  isAuthenticatedUser ? getUserCoupon(coupons) ?? getPublicCoupon(coupons) : getPublicCoupon(coupons)
+
 /** Currently assume that all coupon will contain sol as currency */
 export const getCouponDiscount = (coupons: CandyMachineCoupon[], currentCoupon: CandyMachineCoupon) => {
   const publicCoupon = getPublicCoupon(coupons)
@@ -55,7 +61,7 @@ export const getCouponDiscount = (coupons: CandyMachineCoupon[], currentCoupon: 
 
   const difference = Math.abs(publicCouponPrice - currentCouponPrice) * 100
   const discount = Math.ceil(difference / publicCouponPrice)
-  return discount
+  return Math.min(discount,100);
 }
 
 export const getTokenMap = (currencySettings: CouponCurrencySetting[], splTokens: SplToken[]) => {

@@ -7,8 +7,8 @@ import { useFetchCandyMachine } from '@/api/candyMachine/queries/useFetchCandyMa
 import { ComicIssue } from '@/models/comicIssue'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { useFetchSupportedTokens } from '@/api/settings/queries/useFetchSupportedTokens'
-import { CandyMachineCoupon, CouponType } from '@/models/candyMachine/candyMachineCoupon'
-import { getPublicCoupon, isComicVaultCoupon } from '@/utils/mint'
+import { CouponType } from '@/models/candyMachine/candyMachineCoupon'
+import { getDefaultCoupon, isComicVaultCoupon } from '@/utils/mint'
 import { WRAPPED_SOL_MINT } from '@metaplex-foundation/js'
 import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
 import React from 'react'
@@ -19,10 +19,15 @@ export const CandyMachineStoreContext = createContext<CandyMachineStoreApi | und
 
 export type CandyMachineStoreProviderProps = {
   comicIssue: ComicIssue
+  isAuthenticated: boolean
   children: ReactNode
 }
 
-export const CandyMachineStoreProvider = ({ comicIssue, children }: CandyMachineStoreProviderProps) => {
+export const CandyMachineStoreProvider = ({
+  comicIssue,
+  isAuthenticated,
+  children,
+}: CandyMachineStoreProviderProps) => {
   const { publicKey } = useWallet()
   const {
     data: candyMachine,
@@ -37,8 +42,9 @@ export const CandyMachineStoreProvider = ({ comicIssue, children }: CandyMachine
 
   const storeRef = useRef<CandyMachineStoreApi>()
   if (!storeRef.current) {
-    const publicCoupon = getPublicCoupon(candyMachine?.coupons ?? [])
-    const prices = publicCoupon?.prices ?? []
+    const defaultCoupon = getDefaultCoupon(candyMachine?.coupons ?? [], isAuthenticated)
+
+    const prices = defaultCoupon?.prices ?? []
     const solCurrencySetting = prices.find((price) => price.splTokenAddress == WRAPPED_SOL_MINT.toString())
     storeRef.current = createCandyMachineStore({
       coupons: [],
@@ -46,7 +52,7 @@ export const CandyMachineStoreProvider = ({ comicIssue, children }: CandyMachine
       numberOfItems: 1,
       supportedTokens: supportedTokens ?? [],
       candyMachine: candyMachine ?? undefined,
-      selectedCoupon: getPublicCoupon(candyMachine?.coupons ?? []),
+      selectedCoupon: defaultCoupon,
       selectedCurrency: solCurrencySetting,
     })
   }
@@ -57,15 +63,16 @@ export const CandyMachineStoreProvider = ({ comicIssue, children }: CandyMachine
 
   useEffect(() => {
     if (candyMachine) {
-      const publicCoupon = getPublicCoupon(candyMachine.coupons ?? [])
-      const solCurrencySetting = publicCoupon?.prices.find(
+      const defaultCoupon = getDefaultCoupon(candyMachine?.coupons ?? [], isAuthenticated)
+
+      const solCurrencySetting = defaultCoupon?.prices.find(
         (price) => price.splTokenAddress == WRAPPED_SOL_MINT.toString()
       )
       storeRef.current?.setState({
         coupons: (candyMachine?.coupons ?? []).filter(
           (coupon) => !(coupon.type === CouponType.PublicUser || isComicVaultCoupon(coupon))
         ),
-        selectedCoupon: publicCoupon,
+        selectedCoupon: defaultCoupon,
         selectedCurrency: solCurrencySetting,
       })
     }

@@ -17,7 +17,7 @@ export const GuestProfileContent: React.FC = () => (
 )
 
 const BannerWidget: React.FC = () => (
-  <ContentWithGradientImageBg image={BunbunBanner.src}>
+  <ContentWithGradientImageBg className='p-4' image={BunbunBanner.src}>
     <div className='flex flex-col justify-between h-full'>
       <div className='text-2xl leading-[28.8px] font-medium'>
         <span className='font-bold'>Registered & logged&nbsp;</span>

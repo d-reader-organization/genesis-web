@@ -68,6 +68,7 @@ export const HeroCarousel: React.FC<Props> = ({ slides }) => {
                           quality={isMobile ? 90 : 100}
                           priority={index === 0}
                           className='object-cover'
+                          sizes='auto'
                         />
                       )}
                       <div className='absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-90' />

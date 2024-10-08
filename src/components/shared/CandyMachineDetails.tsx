@@ -39,7 +39,7 @@ export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticat
           </div>
         )}
         <Divider className='max-md:hidden' />
-        <CouponsSection />
+        <CouponsSection comicIssue={comicIssue} />
       </div>
     )
   )

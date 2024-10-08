@@ -15,11 +15,7 @@ import { MobileNav } from './MobileNavigation'
 import { ProfileSheet } from '../shared/sheets/profile/ProfileSheet'
 import { SearchInput } from '../shared/SearchInput'
 
-type Props = {
-  paramId?: string | number
-}
-
-export const Navigation: React.FC<Props> = ({ paramId }) => {
+export const Navigation: React.FC = () => {
   const [isProfileSheetOpen, setOpenProfileSheet] = React.useState<boolean>(false)
   const { data: me, isLoading } = useFetchMe()
   const pathname = usePathname()
@@ -32,7 +28,7 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
       <div
         className={cn(
           'max-md:hidden max-h-20 bg-grey-600 bg-opacity-85 backdrop-blur-[25px] w-full flex justify-center',
-          'fixed top-0 z-10'
+          'fixed top-0 z-50'
         )}
       >
         <div className='flex items-center justify-between p-4 max-w-screen-xl w-full'>

@@ -10,7 +10,7 @@ require('@solana/wallet-adapter-react-ui/styles.css')
 
 type Props = {
   text?: string
-  onClick: () => Promise<void>
+  onClick?: () => Promise<void>
 } & ButtonProps
 
 /**
@@ -25,7 +25,7 @@ export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...pro
     wallets: Wallet[]
   }> | null>(null)
 
-  const { buttonState, onConnect, onSelectWallet } = useWalletMultiButton({
+  const { buttonState, onConnect, onSelectWallet, onDisconnect } = useWalletMultiButton({
     onSelectWallet: setWalletModalConfig,
   })
 
@@ -51,7 +51,13 @@ export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...pro
     switch (buttonState) {
       case 'connected':
         try {
-          await onClick()
+          if (onClick) {
+            await onClick()
+          } else {
+            if (onDisconnect) {
+              onDisconnect()
+            }
+          }
         } finally {
         }
         break
@@ -69,7 +75,7 @@ export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...pro
 
   const handleAsyncAction = useCallback(async () => {
     try {
-      await onClick()
+      if(onClick)await onClick()
     } finally {
       setActionTriggered(false)
     }
