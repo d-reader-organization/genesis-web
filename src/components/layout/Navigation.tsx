@@ -23,10 +23,8 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
   const [isProfileSheetOpen, setOpenProfileSheet] = React.useState<boolean>(false)
   const { data: me, isLoading } = useFetchMe()
   const pathname = usePathname()
-  const isDiscover = pathname.startsWith(RoutePath.Discover)
   const isInvest = pathname.startsWith(RoutePath.Invest)
   const isLibrary = pathname.startsWith(RoutePath.Library)
-  const isMint = paramId ? pathname === RoutePath.Mint(paramId) || RoutePath.ComicIssue(paramId) : false
 
   return (
     <>
@@ -48,7 +46,6 @@ export const Navigation: React.FC<Props> = ({ paramId }) => {
             </Link>
             <SearchInput />
             <div className='flex items-center gap-10'>
-              <MenuItem href={RoutePath.DiscoverComics} isActive={isDiscover} title='Discover' />
               <MenuItem href={RoutePath.Invest} isActive={isInvest} title='Invest' />
             </div>
           </div>

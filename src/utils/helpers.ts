@@ -127,7 +127,7 @@ export const formatWalletAddress = (address: string, slice = 4) =>
   address.slice(0, slice) + '...' + address.slice(-slice)
 
 export const getSlideUrl = (slide: CarouselSlide) => {
-  if (slide.comicIssueId) return RoutePath.ComicIssue(slide.comicIssueId)
+  if (slide.comicIssueId) return RoutePath.Mint(slide.comicIssueId)
   else if (slide.creatorSlug) return RoutePath.Creator(slide.creatorSlug)
   else if (slide.comicSlug) return RoutePath.Comic(slide.comicSlug)
   else return slide.externalLink

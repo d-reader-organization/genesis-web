@@ -38,7 +38,7 @@ export const FaqSection: React.FC = () => {
       <h1 className='text-xl md:text-[32px] font-semibold leading-[20px] md:leading-[32px] tracking-[0.04px] md:tracking-[0.064px]'>
         Frequently Asked Questions
       </h1>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-x-4 md:gap-x-10'>
         {faqs.map((faq, index) => (
           <FAQItem key={index} item={faq} />
         ))}
@@ -52,7 +52,7 @@ const FAQItem: React.FC<{ item: FAQItem }> = ({ item }) => {
   const contentRef = useRef<HTMLDivElement>(null)
 
   return (
-    <div className={cn('border-y border-grey-300', isExpanded && 'border-b-0')}>
+    <div className={cn('border-t border-grey-300', isExpanded && 'border-b-0')}>
       <button
         className='flex justify-between items-center w-full text-left py-8 focus:outline-none'
         onClick={() => setIsExpanded(!isExpanded)}
@@ -73,7 +73,7 @@ const FAQItem: React.FC<{ item: FAQItem }> = ({ item }) => {
           opacity: isExpanded ? 1 : 0,
         }}
       >
-        <div className='text-sm md:text-base font-medium leading-[140%]'>{item.answer}</div>
+        <div className='text-sm md:text-base font-medium leading-[140%] pb-4'>{item.answer}</div>
       </div>
     </div>
   )
