@@ -16,7 +16,7 @@ export default async function ComicIssuePage({ params: { id } }: ComicIssuePageP
     <BaseLayout>
       <ComicIssueBanner cover={comicIssue.cover} />
       <ComicIssueHeader>
-        <CandyMachineStoreProvider comicIssue={comicIssue}>
+        <CandyMachineStoreProvider comicIssue={comicIssue} isAuthenticated={true}>
           <ComicIssueInfoSection comicIssue={comicIssue} />
         </CandyMachineStoreProvider>
         <ComicIssueBottomSection comicIssue={comicIssue} />

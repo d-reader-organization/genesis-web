@@ -29,7 +29,7 @@ export default async function NewMintPage({ params }: ComicIssuePageParams) {
               {comicIssue.title}
             </h1>
           </div>
-          <CandyMachineStoreProvider comicIssue={comicIssue}>
+          <CandyMachineStoreProvider comicIssue={comicIssue} isAuthenticated={isAuthenticated}>
             <CandyMachineDetails comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
           </CandyMachineStoreProvider>
           <Divider className='max-md:hidden' />
