@@ -7,7 +7,7 @@ import { CurrencyExpandable, Expandable } from './Expandable'
 import LockIcon from 'public/assets/vector-icons/lock.svg'
 import { MintButton } from './buttons/MintButton'
 import { ComicIssue } from '@/models/comicIssue'
-import { CandyMachineCoupon, CouponCurrencySetting } from '@/models/candyMachine/candyMachineCoupon'
+import { CouponCurrencySetting } from '@/models/candyMachine/candyMachineCoupon'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { MinusIcon, PlusIcon } from 'lucide-react'
@@ -16,7 +16,6 @@ import { checkIfCouponIsActive, getTokenMap, getTotalItemsMintedByUser, TokenDet
 import { Divider } from './Divider'
 import { CouponsSection, CouponsSectionLoading } from '../mint/CouponsSection'
 import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
-import { CouponDescriptionDialog } from './dialogs/CouponDescriptionDialog'
 
 const normalise = (value: number, MAX: number): number => (value * 100) / MAX
 type DetailsProps = { candyMachine: CandyMachine }
