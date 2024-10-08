@@ -11,11 +11,12 @@ import { BaseLayout } from '@/components/layout/BaseLayout'
 import { CarouselLocation } from '@/enums/carouselLocation'
 
 const TAKE_COMICS = 18
+const TAKE_TOP_PICKS = 10
 
 export default async function HomePage() {
   const carouselSlides: CarouselSlide[] = await fetchCarouselSlides()
-  const [promotedComics, popularComics, newComics] = await Promise.all([
-    fetchComics({ skip: 0, take: TAKE_COMICS, sortTag: ComicSortTag.Rating }),
+  const [topPickComics, popularComics, newComics] = await Promise.all([
+    fetchComics({ skip: 0, take: TAKE_TOP_PICKS, sortTag: ComicSortTag.Rating }),
     fetchComics({ skip: 0, take: TAKE_COMICS, filterTag: ComicFilterTag.Popular }),
     fetchComics({ skip: 0, take: TAKE_COMICS, sortTag: ComicSortTag.Published }),
   ])
@@ -35,8 +36,8 @@ export default async function HomePage() {
           </div>
         </div>
         <div className='mx-4 flex flex-col gap-8'>
-          <Section actionHref={RoutePath.DiscoverComics} title='Top 10 trending'>
-            <ComicList comics={promotedComics} />
+          <Section actionHref={RoutePath.DiscoverComics} title='Top 10 picks'>
+            <ComicList comics={topPickComics} />
           </Section>
 
           <Section actionHref={RoutePath.DiscoverComics} title='Popular comics'>
