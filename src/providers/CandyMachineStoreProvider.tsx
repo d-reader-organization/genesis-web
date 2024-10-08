@@ -74,8 +74,6 @@ export const CandyMachineStoreProvider = ({ comicIssue, children }: CandyMachine
   return <CandyMachineStoreContext.Provider value={storeRef.current}>{children}</CandyMachineStoreContext.Provider>
 }
 
-
-
 export const useCandyMachineStore = <T,>(selector: (store: CandyMachineStore) => T): T => {
   const counterStoreContext = useContext(CandyMachineStoreContext)
 
