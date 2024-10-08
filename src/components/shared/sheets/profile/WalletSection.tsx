@@ -63,7 +63,7 @@ export const WalletSection: React.FC = () => {
           <MoreHorizontal className='size-6' />
         </WalletBox>
       </div>
-      <ConnectButton onClick={async () => {}} />
+      <ConnectButton />
     </div>
   )
 }

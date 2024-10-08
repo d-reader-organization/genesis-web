@@ -25,7 +25,7 @@ export const CouponDescriptionDialog: React.FC<CommonDialogProps & {comicIssue:C
       )
       case CouponType.WhitelistedWallet || CouponType.PublicUser: return (
         <div className='underline'>
-          <ConnectButton className='[all:unset]' onClick={async()=>{}} />
+          <ConnectButton className='[all:unset]' />
         </div>
       )
       default: return ""
