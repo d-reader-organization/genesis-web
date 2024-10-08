@@ -18,7 +18,7 @@ export const ComicCardV2: React.FC<Props> = ({ cardSize, comic, className, index
     <ContentWithGradientImageBg
       image={comic.cover}
       className={cn(
-        'h-[229px] max-w-[278px] md:max-w-[338px] md:h-[279px] hover:brightness-110 shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]',
+        'h-[229px] md:h-[279px] hover:brightness-110 shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]',
         className
       )}
       gradientDirectionClassName='bg-gradient-to-t'
@@ -41,15 +41,21 @@ export const ComicCardV2: React.FC<Props> = ({ cardSize, comic, className, index
         className
       )}
     >
-      <Image alt='card cover' src={comic.cover} fill sizes='auto' className='object-cover rounded-xl' />
+      <Image
+        alt='card cover'
+        src={comic.cover}
+        fill
+        sizes='(max-width: 1200px) 500px, 320px'
+        className='object-cover rounded-xl'
+      />
       <div className='absolute inset-0 bg-gradient-to-t from-black to-transparent' />
       <div className='relative z-10 h-full flex flex-col justify-end'>
         <Image
           alt='comic logo'
           src={comic.logo}
-          width={155}
+          width={120}
           height={120}
-          className='object-cover h-120 max-w-[155px] w-full absolute m-auto top-0 bottom-0 left-0 right-0 pointer-events-none'
+          className='object-cover h-120 w-auto absolute m-auto top-0 bottom-0 left-0 right-0 pointer-events-none'
         />
         <div className='flex flex-col gap-0.5 p-4 pt-0'>
           <span className='text-base font-bold leading-[22.4px] line-clamp-1 overflow-ellipsis'>{comic.title}</span>

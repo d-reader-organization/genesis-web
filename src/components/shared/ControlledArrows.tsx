@@ -4,14 +4,15 @@ import React from 'react'
 import { Arrow } from './Arrow'
 
 type Props = {
-  some?: string
+  onLeftClick?: () => void
+  onRightClick?: () => void
 }
 
-export const ControlledArrows: React.FC<Props> = () => {
+export const ControlledArrows: React.FC<Props> = ({ onLeftClick, onRightClick }) => {
   return (
     <div className='flex gap-2 items-center max-md:hidden'>
-      <Arrow arrowOrientation='LEFT' onClick={() => {}} />
-      <Arrow arrowOrientation='RIGHT' onClick={() => {}} />
+      <Arrow arrowOrientation='LEFT' onClick={onLeftClick} />
+      <Arrow arrowOrientation='RIGHT' onClick={onRightClick} />
     </div>
   )
 }
