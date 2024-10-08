@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { PlusIcon, MinusIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -29,6 +29,27 @@ export const FaqSection: React.FC<FAQSectionProps> = ({ faqs }) => {
 const FAQItem: React.FC<{ item: FAQItemProps; isLast?: boolean }> = ({ item, isLast }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
+  const [maxHeight, setMaxHeight] = useState('0px')
+  const [isCollapsing, setIsCollapsing] = useState(false)
+
+  useEffect(() => {
+    if (isExpanded) {
+      setMaxHeight(contentRef.current?.scrollHeight + 'px')
+    } else {
+      setIsCollapsing(true)
+      setMaxHeight(contentRef.current?.scrollHeight + 'px')
+      setTimeout(() => {
+        setMaxHeight('0px')
+      }, 10)
+    }
+  }, [isExpanded])
+
+  const handleTransitionEnd = () => {
+    if (!isExpanded) {
+      setIsCollapsing(false)
+      setMaxHeight('0px')
+    }
+  }
 
   return (
     <div className={cn('border-t border-grey-300', isLast && 'border-b', isExpanded && 'border-b-0')}>
@@ -40,32 +61,33 @@ const FAQItem: React.FC<{ item: FAQItemProps; isLast?: boolean }> = ({ item, isL
         <div className="w-[85px] text-white text-xl font-semibold font-['Obviously Narrow'] leading-tight tracking-tight self-start">
           {item.section}
         </div>
-        {isExpanded ? (
-          <>
-            <div className='flex justfiy-center align-center w-[600px] transition-all duration-200 ease-in-out'>
-              <div className='text-sm md:text-base font-medium leading-[140%]'>
-                {item.answer}
-                {item.image && (
-                  <div className='mt-4'>
-                    <img src={item.image} alt={`${item.section} image`} className='w-full h-auto' />
-                  </div>
-                )}
+
+        <div className='flex justify-center align-center w-[600px]'>
+          <div
+            ref={contentRef}
+            className='transition-all duration-600 ease-in-out text-sm md:text-base font-medium leading-[140%]'
+            style={{
+              maxHeight: maxHeight,
+              overflow: 'hidden',
+              opacity: isExpanded || isCollapsing ? 1 : 0,
+              transition: 'max-height 0.6s ease, opacity 0.3s ease',
+            }}
+            onTransitionEnd={handleTransitionEnd}
+          >
+            {item.answer}
+            {item.image && (
+              <div className='mt-4'>
+                <img src={item.image} alt={`${item.section} image`} className='w-full h-auto' />
               </div>
-            </div>
-            <MinusIcon className='size-6 text-gray-200 transition-transform duration-200 self-start' />
-          </>
+            )}
+          </div>
+        </div>
+        {isExpanded ? (
+          <MinusIcon className='size-6 text-gray-200 transition-transform duration-200 self-start' />
         ) : (
           <PlusIcon className='size-6 text-gray-200 transition-transform duration-200 self-start' />
         )}
       </button>
-      <div
-        ref={contentRef}
-        className='overflow-hidden transition-all duration-200 ease-in-out flex flex-col w-[60%] h-[450px] justify-center align-center'
-        style={{
-          maxHeight: isExpanded ? contentRef.current?.scrollHeight + 'px' : '0px',
-          opacity: isExpanded ? 1 : 0,
-        }}
-      ></div>
     </div>
   )
 }
