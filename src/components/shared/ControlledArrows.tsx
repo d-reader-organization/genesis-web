@@ -10,7 +10,7 @@ type Props = {
 
 export const ControlledArrows: React.FC<Props> = ({ onLeftClick, onRightClick }) => {
   return (
-    <div className='flex gap-2 items-center max-md:hidden'>
+    <div className='flex gap-2 items-center'>
       <Arrow arrowOrientation='LEFT' onClick={onLeftClick} />
       <Arrow arrowOrientation='RIGHT' onClick={onRightClick} />
     </div>

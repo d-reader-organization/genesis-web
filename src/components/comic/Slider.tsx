@@ -15,7 +15,10 @@ export const ComicSectionSlider: React.FC<Props> = ({ cardType, comics, title })
       {comics.map((comic, index) => (
         <div
           key={`${cardType}_${comic.slug}`}
-          className={cn('flex flex-[0_0_25%] min-w-0 pl-6', cardType === 'normal' ? 'lg:flex-[0_0_16.67%]' : '')}
+          className={cn(
+            'flex flex-[0_0_50%] md:flex-[0_0_25%] min-w-0 pr-4 md:pr-6',
+            cardType === 'normal' ? 'sm:flex-[0_0_25%] lg:flex-[0_0_16.67%]' : ''
+          )}
         >
           <ComicCardV2 cardSize={cardType} comic={comic} index={index} />
         </div>

@@ -50,15 +50,10 @@ export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...pro
   const handleClick = useCallback(async () => {
     switch (buttonState) {
       case 'connected':
-        try {
-          if (onClick) {
-            await onClick()
-          } else {
-            if (onDisconnect) {
-              onDisconnect()
-            }
-          }
-        } finally {
+        if (onClick) {
+          await onClick()
+        } else if (onDisconnect) {
+          onDisconnect()
         }
         break
       case 'has-wallet':
@@ -75,7 +70,7 @@ export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...pro
 
   const handleAsyncAction = useCallback(async () => {
     try {
-      if(onClick)await onClick()
+      if (onClick) await onClick()
     } finally {
       setActionTriggered(false)
     }

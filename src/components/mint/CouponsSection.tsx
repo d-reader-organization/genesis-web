@@ -11,18 +11,20 @@ import { CouponDescriptionDialog } from '../shared/dialogs/CouponDescriptionDial
 import { useToggle } from '@/hooks'
 import { ComicIssue } from '@/models/comicIssue'
 
-export const CouponsSection: React.FC<{comicIssue: ComicIssue}> = ({comicIssue}) => {
-  const { coupons, selectedCoupon, updateSelectedCoupon, candyMachine } = useCandyMachineStore((state) => state);
-  const [showCouponDescriptionDialog,toggleCouponDescriptionDialog] = useToggle(false);
+export const CouponsSection: React.FC<{ comicIssue: ComicIssue }> = ({ comicIssue }) => {
+  const { coupons, selectedCoupon, updateSelectedCoupon, candyMachine } = useCandyMachineStore((state) => state)
+  const [showCouponDescriptionDialog, toggleCouponDescriptionDialog] = useToggle(false)
   return (
     <>
       <div className='flex flex-col gap-6 max-md:hidden'>
         <div className='flex justify-between'>
           <div className='flex gap-3 items-center'>
-              <TicketIcon size={24} />
-              <h5 className='text-xl font-semibold leading-[20px] tracking-[0.04px] mt-1'>Discount coupons</h5>
+            <TicketIcon size={24} />
+            <h5 className='text-xl font-semibold leading-[20px] tracking-[0.04px] mt-1'>Discount coupons</h5>
           </div>
-          <Button className='self-end' onClick={toggleCouponDescriptionDialog}>Check Eligibility</Button>
+          <Button className='self-end' onClick={toggleCouponDescriptionDialog}>
+            Check Eligibility
+          </Button>
         </div>
         <div className='flex items-center gap-3 flex-wrap'>
           {coupons.map((coupon) => (
@@ -58,7 +60,11 @@ export const CouponsSection: React.FC<{comicIssue: ComicIssue}> = ({comicIssue})
           ))}
         </div>
       </Expandable>
-      <CouponDescriptionDialog open={showCouponDescriptionDialog} toggleDialog={toggleCouponDescriptionDialog} comicIssue={comicIssue} />
+      <CouponDescriptionDialog
+        open={showCouponDescriptionDialog}
+        toggleDialog={toggleCouponDescriptionDialog}
+        comicIssue={comicIssue}
+      />
     </>
   )
 }
