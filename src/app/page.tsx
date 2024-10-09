@@ -25,10 +25,10 @@ export default async function HomePage() {
 
   return (
     <BaseLayout>
-      <div className='max-w-screen-xl w-full flex flex-col md:mb-10 md:p-4'>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-6 carousel-height mb-52 md:mb-10'>
+      <div className='max-w-screen-xl w-full flex flex-col gap-10 md:p-4'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
           <HeroCarousel slides={primarySlides} />
-          <div className='grid grid-cols-2 gap-4 max-md:p-4'>
+          <div className='max-sm:hidden grid grid-cols-2 gap-4 max-md:p-4 max-h-80 md:max-h-[511px] h-full overflow-hidden'>
             {secondarySlides.map((slide) => (
               <CarouselCard key={slide.id} slide={slide} />
             ))}

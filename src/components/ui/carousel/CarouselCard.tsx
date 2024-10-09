@@ -13,12 +13,13 @@ export const CarouselCard: React.FC<Props> = ({ slide }) => (
   <Link
     href={getSlideUrl(slide) ?? ''}
     target='_blank'
-    className='relative overflow-hidden max-w-[354px] max-h-[511px] rounded-xl shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)] hover:brightness-110'
+    className='relative overflow-hidden max-w-[354px] max-h-[511px] max-md:h-80 rounded-xl shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)] hover:brightness-110'
   >
     <Image
       src={slide.image}
       alt='slide image'
       fill
+      priority
       sizes='(max-width: 1024) 220px, auto'
       className='object-cover rounded-xl max-w-[354px] max-h-[511px]'
     />
