@@ -34,9 +34,9 @@ export const WalletSection: React.FC = () => {
           >
             <Copy className='size-5' />
           </ButtonIconWrapper>
-          <ButtonIconWrapper onClick={() => {}}>
+          <ConnectButton>
             <Power className='size-5' />
-          </ButtonIconWrapper>
+          </ConnectButton>
         </div>
       </div>
     </div>
