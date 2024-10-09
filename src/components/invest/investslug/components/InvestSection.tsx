@@ -52,7 +52,7 @@ export const InvestSection: React.FC<Props> = ({ project }) => {
 
       <Link
         href={'placeholder'}
-        className='flex justify-center items-center gap-2 self-stretch text-[#15171c] rounded-xl bg-[#fceb54] py-3 pr-2 pl-4 hover:brightness-125 max-h-[36px] md:max-h-[42px]'
+        className='flex justify-center items-center gap-2 self-stretch text-[#15171c] rounded-xl bg-[#fceb54] py-3 pr-2 pl-4 hover:brightness-125 max-h-[60px]'
       >
         <div className="text-[#15171c] text-base font-bold font-['Satoshi'] leading-snug">Back this project</div>
       </Link>

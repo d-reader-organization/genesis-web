@@ -17,7 +17,7 @@ type Props = {
 export default async function InvestPage({ params }: Props) {
   return (
     <BaseLayout>
-      <div className='flex flex-col justify-center items-center w-full h-full max-w-screen-xl min-w-[768px]'>
+      <div className='flex flex-col justify-center items-center max-w-screen-xl w-full'>
         <Header title={ProjectHeaderData.title} subtitle={ProjectHeaderData.subtitle} />
         <div className='flex flex-row w-full h-full gap-6'>
           <div className='flex flex-col w-[72%] justify-between h-full'>
