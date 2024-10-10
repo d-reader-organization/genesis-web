@@ -1,17 +1,17 @@
 import React from 'react'
 
-interface HeaderProps {
+type HeaderProps = {
   title: string
   subtitle: string
 }
 
 const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
   return (
-    <div className='flex flex-col justify-center items-center gap-8 lg:gap-8 lg:-mt-7 lg:mb-10'>
-      <h2 className="flex justify-center text-center text-white font-semibold md:h-6 md:h3 md:leading-10 md:tracking-tight">
+    <div className='flex flex-col justify-center items-center md:gap-8 md:pb-12'>
+      <h1 className="text-white font-semibold tracking-tight leading-10 md:h-6 md:text-[40px]">
         {title}
-      </h2>
-      <p className="flex justify-center text-center text-white text-base font-medium leading-snug">
+      </h1>
+      <p className="text-white text-base font-medium leading-snug">
         {subtitle}
       </p>
     </div>
