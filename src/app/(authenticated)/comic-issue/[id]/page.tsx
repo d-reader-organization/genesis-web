@@ -21,7 +21,6 @@ export default async function ComicIssuePage({ params: { id } }: ComicIssuePageP
         </CandyMachineStoreProvider>
         <ComicIssueBottomSection comicIssue={comicIssue} />
       </ComicIssueHeader>
-      {comicIssue.isSecondarySaleActive && <p>secondary market</p>}
     </BaseLayout>
   )
 }
