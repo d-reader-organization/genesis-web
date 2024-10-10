@@ -1,11 +1,10 @@
 'use client'
 
 import React from 'react'
-import { TicketIcon } from 'lucide-react'
-import { Expandable } from '../shared/Expandable'
+import { Info, TicketIcon } from 'lucide-react'
 import { getCouponDiscount } from '@/utils/mint'
 import { CouponCardButton } from './CouponCardButton'
-import { Button, Skeleton } from '../ui'
+import { Skeleton } from '../ui'
 import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 import { CouponDescriptionDialog } from '../shared/dialogs/CouponDescriptionDialog'
 import { useToggle } from '@/hooks'
@@ -16,15 +15,17 @@ export const CouponsSection: React.FC<{ comicIssue: ComicIssue }> = ({ comicIssu
   const [showCouponDescriptionDialog, toggleCouponDescriptionDialog] = useToggle(false)
   return (
     <>
-      <div className='flex flex-col gap-6 max-md:hidden'>
-        <div className='flex justify-between'>
-          <div className='flex gap-3 items-center'>
-            <TicketIcon size={24} />
-            <h5 className='text-xl font-semibold leading-[20px] tracking-[0.04px] mt-1'>Discount coupons</h5>
-          </div>
-          <Button className='self-end' onClick={toggleCouponDescriptionDialog}>
+      <div className='flex flex-col gap-6'>
+        <div className='flex gap-3 items-center xs:gap-3'>
+          <TicketIcon size={24} />
+          <h5 className='text-xl font-semibold leading-[20px] tracking-[0.04px] mt-1'>Discount coupons</h5>
+          <Info
+            className='h-[18px] w-[18px] hover:cursor-pointer'
+            color='#c2c5ce'
+            onClick={toggleCouponDescriptionDialog}
+          >
             Check Eligibility
-          </Button>
+          </Info>
         </div>
         <div className='flex items-center gap-3 flex-wrap'>
           {coupons.map((coupon) => (
@@ -38,28 +39,6 @@ export const CouponsSection: React.FC<{ comicIssue: ComicIssue }> = ({ comicIssu
           ))}
         </div>
       </div>
-      <Expandable
-        className='md:hidden'
-        title=''
-        titleComponent={
-          <div className='flex gap-2 items-center'>
-            <TicketIcon size={24} />
-            <h5 className='text-xl font-semibold leading-[20px] tracking-[0.04px] mt-1'>Discount coupons</h5>
-          </div>
-        }
-      >
-        <div className='flex flex-col md:flex-row items-center gap-3'>
-          {coupons.map((coupon) => (
-            <CouponCardButton
-              coupon={coupon}
-              discount={getCouponDiscount(candyMachine?.coupons || [], coupon)}
-              key={`${coupon.name}-${coupon.id}-mobile`}
-              isSelected={selectedCoupon ? selectedCoupon.id === coupon.id : false}
-              onClick={() => updateSelectedCoupon(coupon)}
-            />
-          ))}
-        </div>
-      </Expandable>
       <CouponDescriptionDialog
         open={showCouponDescriptionDialog}
         toggleDialog={toggleCouponDescriptionDialog}
