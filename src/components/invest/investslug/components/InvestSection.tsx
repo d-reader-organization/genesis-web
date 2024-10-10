@@ -14,9 +14,9 @@ type Props = {
 
 export const InvestSection: React.FC<Props> = ({ project }) => {
   return (
-    <div className='flex flex-col md:p-5 md:gap-6 md:sticky md:top-[100px] md:max-w-[485px] md:max-h-[550px] min-w-[280px] bg-grey-500 justify-start items-between rounded-xl'>
+    <div className='flex flex-col md:p-5 md:gap-6 md:sticky md:top-[100px] md:max-w-[485px] md:max-h-[550px] bg-grey-500 justify-start items-between rounded-xl'>
       <div className='flex flex-col gap-4'>
-        <p className="text-white text-base font-bold leading-snug">Overall project fund goal:</p>
+        <p className='text-white text-base font-bold leading-snug'>Overall project fund goal:</p>
         <div className='relative max-h-[8px] rounded-[27px] w-full bg-[#44464d] mb-5'>
           <div
             className='max-h-[8px] bg-[#fceb54] rounded-[27px] absolute top-0 left-0'
@@ -24,38 +24,38 @@ export const InvestSection: React.FC<Props> = ({ project }) => {
           />
         </div>
       </div>
+
       {/*section2 */}
       <div className='flex flex-col'>
-        <div className="text-[#fceb54] text-3xl font-semibold font-['Obviously Narrow'] tracking-tighter">
+        <h2 className='text-[#fceb54] text-3xl font-semibold leading-loose tracking-tight'>
           ${formatNumberWithCommas(project.current)}
-          <div className="text-[#c2c5ce] text-xl font-medium font-['Satoshi'] leading-snug tracking-wide ">
-            pledged of ${formatNumberWithCommas(project.goal)}
-          </div>
-        </div>
+        </h2>
+        <p className='text-[#c2c5ce] text-xl font-medium leading-snug'>
+          pledged of ${formatNumberWithCommas(project.goal)}
+        </p>
       </div>
 
       {/*section3 */}
       <div className='flex flex-col'>
-        <div className="text-white text-3xl font-semibold font-['Obviously Narrow'] tracking-tighter">
+        <h2 className='text-white text-3xl font-semibold tracking-tighter'>
           {formatNumberWithCommas(project.backers)}
-        </div>
-        <div className="text-[#c2c5ce] text-xl font-medium font-['Satoshi'] tracking-wide">backers</div>
+        </h2>
+        <p className='text-[#c2c5ce] text-xl font-medium tracking-wide'>backers</p>
       </div>
 
       {/*section4 */}
       <div className='flex flex-col'>
-        <div className="text-white text-3xl font-semibold font-['Obviously Narrow'] tracking-tighter">
-          {project.daysLeft}
-        </div>
-        <div className="text-[#c2c5ce] text-xl font-medium font-['Satoshi'] tracking-wide">days left</div>
+        <h2 className='text-white text-3xl font-semibold tracking-tighter'>{project.daysLeft}</h2>
+        <p className='text-[#c2c5ce] text-xl font-medium tracking-wide'>days left</p>
       </div>
 
       <Link
         href={'placeholder'}
         className='flex flex-col justify-center items-center gap-2 self-stretch text-[#15171c] rounded-xl bg-[#fceb54] py-3 pr-2 pl-4 hover:brightness-125 max-h-[60px]'
       >
-        <div className="text-[#15171c] text-base font-bold font-['Satoshi'] leading-snug">Back this project</div>
+        <p className='text-[#15171c] text-base font-bold leading-snug'>Back this project</p>
       </Link>
+
       <div className='flex flex-row max-h-[86px] p-4 bg-gradient-to-br from-[#4a4e53] to-[#1f222a] rounded-xl justify-start items-center gap-[23px] inline-flex'>
         <div
           className='max-h-[54px] max-w-[54px] p-2.5 bg-white rounded-xl shadow border border-[#56a05e] justify-start items-center gap-2.5 flex'
@@ -64,9 +64,9 @@ export const InvestSection: React.FC<Props> = ({ project }) => {
           <img src='/assets/images/invest/slug/Arrow.svg' alt='placeholder' />
         </div>
 
-        <div className="text-[#aeaeae] text-base font-medium font-['Satoshi'] leading-snug">
+        <p className='text-[#aeaeae] text-base font-medium leading-snug'>
           Estimated <span className='text-white font-bold'>200% return*</span> of investment within 1 year
-        </div>
+        </p>
       </div>
     </div>
   )
