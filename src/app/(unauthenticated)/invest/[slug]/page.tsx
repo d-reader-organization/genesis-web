@@ -22,10 +22,10 @@ export default async function InvestPage({ params }: Props) {
         <div className='flex flex-col md:flex-row w-full h-full gap-6 md:gap-10'>
           <div className='flex flex-col w-full'>
             <ProjectImage image={ProjectImageData.url} />
-            <div className='md:hidden w-full'>
+            {/**    <div className='md:hidden'>
               <InvestSection project={ProjectInvestData} />
-            </div>
-            <div className='w-full min-w-[400px]'>
+            </div> */}
+            <div className='w-full'>
               <AuthorSection
                 author={ProjectAuthorData.author}
                 image={ProjectAuthorData.image}
@@ -34,7 +34,7 @@ export default async function InvestPage({ params }: Props) {
               <ProjectFactsSection facts={ProjectFactsData} />
             </div>
           </div>
-          <div className='flex flex-col max-md:hidden w-full'>
+          <div className='flex flex-col max-md:hidden'>
             <InvestSection project={ProjectInvestData} />
           </div>
         </div>

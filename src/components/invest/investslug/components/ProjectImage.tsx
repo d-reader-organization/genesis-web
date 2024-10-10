@@ -8,7 +8,7 @@ type ProjectImageProps = {
 
 export const ProjectImage: React.FC<ProjectImageProps> = ({ image }) => {
   return (
-    <div className='flex flex-col w-full h-[550px] gap-4 md:gap-6 rounded-xl shadow'>
+    <div className='flex flex-col w-full h-[550px] gap-4 md:gap-6'>
       <div className='relative w-full h-full'>
         <Image
           src={image}
