@@ -7,7 +7,7 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
   return (
-    <div className='flex flex-col justify-center items-center md:gap-8 md:pb-12'>
+    <div className='flex flex-col justify-center items-center md:gap-8 md:pb-[70px]'>
       <h1 className="text-white font-semibold tracking-tight leading-10 md:h-6 md:text-[40px]">
         {title}
       </h1>
