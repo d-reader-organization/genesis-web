@@ -2,18 +2,18 @@
 import { cn } from '@/lib/utils'
 import { AvatarImage } from '@/components/shared/AvatarImage'
 
-interface AuthorSectionProps {
+type AuthorSectionProps = {
   author: string
-  imageURL: string
+  image: string
   tags: string[]
 }
 
-export const AuthorSection: React.FC<AuthorSectionProps> = ({ author, imageURL, tags }) => {
+export const AuthorSection: React.FC<AuthorSectionProps> = ({ author, image, tags }) => {
   return (
     <section className='w-full py-2 md:py-8 flex flex-row gap-4 md:gap-10 justify-between items-center'>
       <div className='flex items-center gap-2'>
-        <AvatarImage src={imageURL} size={42} alt='Author Avatar' className='' />
-        <div className="text-white text-base font-bold font-['Satoshi'] leading-snug">{author}</div>
+        <AvatarImage src={image} size={42} alt='Author Avatar' className='' />
+        <span className="text-white text-base font-bold leading-snug">{author}</span>
       </div>
       <div className='flex flex-wrap gap-2'>
         {tags.map((tag, index) => (

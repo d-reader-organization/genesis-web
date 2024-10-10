@@ -1,10 +1,10 @@
-export type FAQItem = {
+export type FactItem = {
   section: string
   answer: string
   image?: string
 }
 
-export const ProjectFAQData: FAQItem[] = [
+export const ProjectFactsData: FactItem[] = [
   {
     section: 'Overview',
     answer:

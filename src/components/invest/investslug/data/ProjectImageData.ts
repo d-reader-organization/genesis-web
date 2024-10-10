@@ -3,5 +3,5 @@ export type ProjectImageData = {
 }
 
 export const ProjectImageData: ProjectImageData = {
-  url: '/assets/images/invest/slug/apes.png',
+  url: '/assets/images/invest/slug/apes.jpg',
 }

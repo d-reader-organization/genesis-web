@@ -1,21 +1,29 @@
 import React from 'react'
-import TransparentPlayButton from './TransparentPlayButton'
+import { PlayIcon } from 'lucide-react'
+import Image from 'next/image'
 
 type ProjectImageProps = {
-  backgroundImageUrl: string
+  image: string
 }
 
-export const ProjectImage: React.FC<ProjectImageProps> = ({ backgroundImageUrl }) => {
+export const ProjectImage: React.FC<ProjectImageProps> = ({ image }) => {
   return (
-    <div
-      className='flex flex-col h-[550px] gap-4 md:gap-6 bg-cover bg-center bg-no-repeat rounded-xl shadow justify-center items-center'
-      style={{
-        backgroundImage: `url("${backgroundImageUrl}")`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'top',
-      }}
-    >
-      <TransparentPlayButton />
+    <div className='flex flex-col w-full h-[550px] gap-4 md:gap-6 rounded-xl shadow justify-center items-center'>
+      <div className='relative w-full h-full'>
+        <Image
+          src={image}
+          alt='Project Background'
+          layout='fill'
+          objectFit='cover'
+          objectPosition='top'
+          className='rounded-xl shadow-lg'
+        />
+        <div className='absolute top-0 left-0 flex justify-center items-center w-full h-full'>
+          <div className='flex justify-center items-center p-7 bg-black bg-opacity-30 rounded-full shadow-lg backdrop-blur-lg'>
+            <PlayIcon fill='white' className='size-16 cursor-pointer' />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

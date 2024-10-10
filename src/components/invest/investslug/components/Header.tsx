@@ -7,13 +7,13 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
   return (
-    <div className='flex flex-col gap-10 h-[150px]'>
-      <div className="flex flex-row justify-center self-stretch h-6 text-center text-white text-[40px] font-semibold font-['Obviously Narrow'] leading-10 tracking-tight">
+    <div className='flex flex-col justify-center items-center gap-8 lg:gap-8 lg:-mt-7 lg:mb-10'>
+      <h2 className="flex justify-center text-center text-white font-semibold md:h-6 md:h3 md:leading-10 md:tracking-tight">
         {title}
-      </div>
-      <div className="flex flex-row justify-center self-stretch text-center text-white text-base font-medium font-['Satoshi'] leading-snug">
+      </h2>
+      <p className="flex justify-center text-center text-white text-base font-medium leading-snug">
         {subtitle}
-      </div>
+      </p>
     </div>
   )
 }
