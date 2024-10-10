@@ -19,7 +19,13 @@ export const CouponsSection: React.FC<{ comicIssue: ComicIssue }> = ({ comicIssu
         <div className='flex gap-3 items-center xs:gap-3'>
           <TicketIcon size={24} />
           <h5 className='text-xl font-semibold leading-[20px] tracking-[0.04px] mt-1'>Discount coupons</h5>
-          <Info className='h-[18px] w-[18px] hover:cursor-pointer' color='#c2c5ce' onClick={toggleCouponDescriptionDialog}>Check Eligibility</Info>
+          <Info
+            className='h-[18px] w-[18px] hover:cursor-pointer'
+            color='#c2c5ce'
+            onClick={toggleCouponDescriptionDialog}
+          >
+            Check Eligibility
+          </Info>
         </div>
         <div className='flex items-center gap-3 flex-wrap'>
           {coupons.map((coupon) => (
@@ -33,7 +39,11 @@ export const CouponsSection: React.FC<{ comicIssue: ComicIssue }> = ({ comicIssu
           ))}
         </div>
       </div>
-      <CouponDescriptionDialog open={showCouponDescriptionDialog} toggleDialog={toggleCouponDescriptionDialog} comicIssue={comicIssue} />
+      <CouponDescriptionDialog
+        open={showCouponDescriptionDialog}
+        toggleDialog={toggleCouponDescriptionDialog}
+        comicIssue={comicIssue}
+      />
     </>
   )
 }
