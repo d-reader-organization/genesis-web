@@ -14,12 +14,12 @@ type Props = {
 
 export const InvestSection: React.FC<Props> = ({ project }) => {
   return (
-    <div className='flex flex-col md:p-5 md:gap-6 md:sticky md:top-[100px] md:max-w-[485px] md:max-h-[550px] bg-grey-500 justify-start items-between rounded-xl'>
-      <div className='flex flex-col gap-4'>
+    <div className='flex flex-col md:p-6 md:gap-8 md:sticky md:top-[100px] md:max-w-[485px] md:max-h-[550px] bg-grey-500 justify-start items-between rounded-xl'>
+      <div className='flex flex-col gap-4 w-full'>
         <p className='text-white text-base font-bold leading-snug'>Overall project fund goal:</p>
-        <div className='relative max-h-[8px] rounded-[27px] w-full bg-[#44464d] mb-5'>
+        <div className='relative h-[8px] rounded-[27px] w-full bg-[#44464d]'>
           <div
-            className='max-h-[8px] bg-[#fceb54] rounded-[27px] absolute top-0 left-0'
+            className='h-[8px] bg-[#fceb54] rounded-[27px] absolute top-0 left-0'
             style={{ width: `${(project.current / project.goal) * 100}%` }}
           />
         </div>
@@ -27,26 +27,26 @@ export const InvestSection: React.FC<Props> = ({ project }) => {
 
       {/*section2 */}
       <div className='flex flex-col'>
-        <h2 className='text-[#fceb54] text-3xl font-semibold leading-loose tracking-tight'>
+        <h2 className='text-[#fceb54] text-[32px] font-semibold leading-none tracking-tight'>
           ${formatNumberWithCommas(project.current)}
         </h2>
-        <p className='text-[#c2c5ce] text-xl font-medium leading-snug'>
+        <p className='text-[#c2c5ce] text-base font-medium leading-loose'>
           pledged of ${formatNumberWithCommas(project.goal)}
         </p>
       </div>
 
       {/*section3 */}
       <div className='flex flex-col'>
-        <h2 className='text-white text-3xl font-semibold tracking-tighter'>
+        <h2 className='text-white text-[32px] font-semibold leading-none tracking-tight'>
           {formatNumberWithCommas(project.backers)}
         </h2>
-        <p className='text-[#c2c5ce] text-xl font-medium tracking-wide'>backers</p>
+        <p className='text-[#c2c5ce] text-base font-medium leading-snug'>backers</p>
       </div>
 
       {/*section4 */}
       <div className='flex flex-col'>
-        <h2 className='text-white text-3xl font-semibold tracking-tighter'>{project.daysLeft}</h2>
-        <p className='text-[#c2c5ce] text-xl font-medium tracking-wide'>days left</p>
+        <h2 className='text-white text-[32px] font-semibold tracking-tight leading-none'>{project.daysLeft}</h2>
+        <p className='text-[#c2c5ce] text-base font-medium leading-snug'>days left</p>
       </div>
 
       <Link
