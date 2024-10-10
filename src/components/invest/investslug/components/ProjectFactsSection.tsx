@@ -59,14 +59,14 @@ const FactItem: React.FC<{ item: FactItemProps; isLast?: boolean }> = ({ item, i
         onClick={() => setIsExpanded(!isExpanded)}
         aria-expanded={isExpanded}
       >
-        <div className="w-[85px] text-white text-xl font-semibold font-['Obviously Narrow'] leading-tight tracking-tight self-start">
+        <h2 className='flex items-start min-w-[100px] self-start text-white text-xl font-semibold leading-tight tracking-tight'>
           {item.section}
-        </div>
+        </h2>
 
-        <div className='flex justify-center align-center w-[600px]'>
+        <div className='flex flex-col min-w-[300px] max-w-[600px] justify-center align-center w-full'>
           <div
             ref={contentRef}
-            className='gap-4 transition-all duration-600 ease-in-out text-sm md:text-base font-medium leading-[140%]'
+            className='transition-all duration-600 ease-in-out text-sm md:text-base font-medium leading-[140%]'
             style={{
               maxHeight: maxHeight,
               overflow: 'hidden',
@@ -75,25 +75,31 @@ const FactItem: React.FC<{ item: FactItemProps; isLast?: boolean }> = ({ item, i
             }}
             onTransitionEnd={handleTransitionEnd}
           >
-            <p> {item.answer} </p>
-            {item.image && (
-              <Image
-                src={item.image}
-                alt={`${item.section} image`}
-                width={500}
-                height={300}
-                layout='responsive'
-                objectFit='cover'
-                className='w-full h-auto'
-              />
-            )}
+            <div className='flex flex-col justify-center items-center gap-4 relative w-full'>
+              <p> {item.answer} </p>
+              {item.image && (
+                <Image
+                  src={item.image}
+                  alt={`${item.section} image`}
+                  width={600}
+                  height={400}
+                  layout='responsive'
+                  objectFit='cover'
+                  className='w-full h-auto'
+                />
+              )}
+            </div>
           </div>
         </div>
-        {isExpanded ? (
-          <MinusIcon className='size-6 text-gray-200 transition-transform duration-200 self-start' />
-        ) : (
-          <PlusIcon className='size-6 text-gray-200 transition-transform duration-200 self-start' />
-        )}
+        <div className='flex h-auto min-w-[50px] self-start justify-end'>
+          {isExpanded ? (
+            <div className='flex flex-col'>
+              <MinusIcon className='size-6 text-gray-200 transition-transform duration-200 self-end' />
+            </div>
+          ) : (
+            <PlusIcon className='size-6 text-gray-200 transition-transform duration-200 self-end' />
+          )}
+        </div>
       </button>
     </div>
   )
