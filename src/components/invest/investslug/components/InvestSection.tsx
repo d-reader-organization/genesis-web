@@ -14,7 +14,7 @@ type Props = {
 
 export const InvestSection: React.FC<Props> = ({ project }) => {
   return (
-    <div className='flex flex-col md:p-6 md:gap-8 md:sticky md:top-[100px] md:max-w-[485px] md:max-h-[550px] bg-grey-500 justify-start items-between rounded-xl'>
+    <div className='flex flex-col md:p-6 md:gap-8 md:sticky md:top-[100px] md:max-w-[485px] md:max-h-[550px] bg-grey-500 justify-between items-start rounded-xl shadow'>
       <div className='flex flex-col gap-4 w-full'>
         <p className='text-white text-base font-bold leading-snug'>Overall project fund goal:</p>
         <div className='relative h-[8px] rounded-[27px] w-full bg-[#44464d]'>
