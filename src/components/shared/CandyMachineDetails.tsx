@@ -83,6 +83,7 @@ const CouponDetails: React.FC = () => {
   const selectedCurrencySetting = selectedCurrency ? tokenMap.get(selectedCurrency.label) : undefined
   return prices.length && selectedCurrencySetting ? (
     <CurrencyExpandable
+      disableExpand={prices.length === 1}
       isLive={checkIfCouponIsActive(selectedCoupon)}
       selectedCurrencySetting={selectedCurrencySetting}
     >

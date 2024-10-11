@@ -28,7 +28,7 @@ export default async function HomePage() {
       <div className='max-w-screen-xl w-full flex flex-col gap-10 md:p-4'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
           <HeroCarousel slides={primarySlides} />
-          <div className='max-sm:hidden grid grid-cols-2 gap-4 max-md:p-4 max-h-80 md:max-h-[511px] h-full overflow-hidden'>
+          <div className='max-sm:hidden flex flex-row md:flex-col xl:flex-row gap-4 max-md:p-4 max-h-80 md:max-h-[511px] h-full overflow-hidden'>
             {secondarySlides.map((slide) => (
               <CarouselCard key={slide.id} slide={slide} />
             ))}

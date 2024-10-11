@@ -1,5 +1,4 @@
-import { accessTokenKey, googleAccessTokenKey, refreshTokenKey } from '@/constants/general'
-import { RoutePath } from '@/enums/routePath'
+import { accessTokenKey, googleAccessTokenKey, redirectToKey, refreshTokenKey } from '@/constants/general'
 import { Authorization } from '@/models/auth'
 import GoogleProvider from 'next-auth/providers/google'
 import { cookies } from 'next/headers'
@@ -21,6 +20,11 @@ const handler = NextAuth({
   ],
   session: { strategy: 'jwt' },
   callbacks: {
+    redirect: async (params) => {
+      const url = new URL(params.url)
+      const redirectTo = url.searchParams.get(redirectToKey) ?? ''
+      return redirectTo ? `${params.baseUrl}${redirectTo}` : params.url
+    },
     signIn: async ({ account }) => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/login-with-google`, {
         method: 'PATCH',
@@ -37,7 +41,7 @@ const handler = NextAuth({
 
       requestCookies.set(accessTokenKey, parsed.accessToken)
       requestCookies.set(refreshTokenKey, parsed.refreshToken)
-      return RoutePath.Home
+      return true
     },
   },
 })

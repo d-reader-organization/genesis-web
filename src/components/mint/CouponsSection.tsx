@@ -41,7 +41,7 @@ export const CouponsSection: React.FC<{ comicIssue: ComicIssue }> = ({ comicIssu
       </div>
       <CouponDescriptionDialog
         open={showCouponDescriptionDialog}
-        toggleDialog={toggleCouponDescriptionDialog}
+        toggleDialog={() => toggleCouponDescriptionDialog()}
         comicIssue={comicIssue}
       />
     </>

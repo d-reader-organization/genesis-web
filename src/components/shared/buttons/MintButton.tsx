@@ -23,6 +23,7 @@ import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 import { VersionedTransaction } from '@solana/web3.js'
 import Image from 'next/image'
 import { AssetMintEvent } from '@/models/asset/assetMintEvent'
+import { ConnectButton } from './ConnectButton'
 
 type Props = {
   comicIssue: ComicIssue
@@ -198,7 +199,10 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
           </>
         )
       ) : (
-        <BaseWalletMultiButtonDynamic style={{ width: '100%' }} />
+        <ConnectButton
+          className='bg-yellow-500 text-grey-600  text-base font-bold leading-[22.4px] w-full max-md:w-[150px]'
+          text='Connect'
+        />
       )}
       {assetMintEventData ? (
         <AssetMintedDialog
