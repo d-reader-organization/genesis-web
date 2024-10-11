@@ -5,7 +5,7 @@ import Image from 'next/image'
 type ProjectImageProps = {
   image: string
 }
-
+//TODO: hardcoded alt
 export const ProjectImage: React.FC<ProjectImageProps> = ({ image }) => {
   return (
     <div className='flex flex-col w-full h-[550px] gap-4 md:gap-6'>

@@ -55,18 +55,26 @@ const FactItem: React.FC<{ item: FactItemProps; isLast?: boolean }> = ({ item, i
   return (
     <div className={cn('border-t border-grey-300', isLast && 'border-b', isExpanded && 'border-b-0')}>
       <button
-        className='flex justify-between items-center w-full text-left py-8 focus:outline-none'
+        className={cn(
+          'flex justify-between items-center py-4 md:flex-row w-full text-left md:py-8 focus:outline-none',
+          isExpanded ? 'flex-col' : ''
+        )}
         onClick={() => setIsExpanded(!isExpanded)}
         aria-expanded={isExpanded}
       >
-        <h2 className='flex items-start min-w-[100px] self-start text-white text-xl font-semibold leading-tight tracking-tight'>
+        <h2
+          className={cn(
+            'flex items-start min-w-[90px] self-start text-white text-xl font-semibold leading-tight tracking-tight',
+            isExpanded ? 'pb-2' : ''
+          )}
+        >
           {item.section}
         </h2>
 
-        <div className='flex flex-col min-w-[300px] max-w-[600px] justify-center align-center w-full'>
+        <div className='flex flex-col md:min-w-[300px] md:max-w-[600px] justify-center align-center w-full'>
           <div
             ref={contentRef}
-            className='transition-all duration-600 ease-in-out text-sm md:text-base font-medium leading-[140%]'
+            className='transition-all duration-200 ease-in-out text-sm md:text-base font-medium leading-[140%]'
             style={{
               maxHeight: maxHeight,
               overflow: 'hidden',
@@ -91,9 +99,9 @@ const FactItem: React.FC<{ item: FactItemProps; isLast?: boolean }> = ({ item, i
             </div>
           </div>
         </div>
-        <div className='flex h-auto min-w-[50px] self-start justify-end'>
+        <div className='flex h-auto min-w-[40px] md:min-w-[50px] self-start justify-end'>
           {isExpanded ? (
-            <div className='flex flex-col'>
+            <div className='flex flex-col max-md:hidden'>
               <MinusIcon className='size-6 text-gray-200 transition-transform duration-200 self-end' />
             </div>
           ) : (
