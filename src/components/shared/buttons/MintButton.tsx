@@ -200,7 +200,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
         )
       ) : (
         <ConnectButton
-          className='bg-yellow-500 text-grey-600  text-base font-bold leading-[22.4px] w-full'
+          className='bg-yellow-500 text-grey-600  text-base font-bold leading-[22.4px] w-full max-md:w-[150px]'
           text='Connect'
         />
       )}
