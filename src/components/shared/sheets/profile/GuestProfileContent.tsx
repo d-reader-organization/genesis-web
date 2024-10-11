@@ -20,7 +20,7 @@ const BannerWidget: React.FC = () => (
   <ContentWithGradientImageBg className='p-4' image={BunbunBanner.src}>
     <div className='flex flex-col justify-between h-full'>
       <div className='text-2xl leading-[28.8px] font-medium'>
-        <span className='font-bold'>Registered & logged&nbsp;</span>
+        <span className='font-bold'>Signed in&nbsp;</span>
         <span>users get&nbsp;</span>
         <span className='font-bold'>15% OFF&nbsp;</span>
         <span>on all new comic mints!</span>

@@ -13,6 +13,14 @@
     -webkit-font-smoothing: antialiased;
     overflow-y: scroll;
   }
+
+  body * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body *::selection {
+    background-color: #fceb54;
+  }
+
   h1,
   h2,
   h3,
@@ -20,6 +28,13 @@
   h5,
   h6 {
     font-family: var(--font-obviously-narrow);
+  }
+
+  img {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
   }
 
   /* Scroll bar stylings */

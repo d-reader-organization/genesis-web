@@ -28,7 +28,8 @@ export const Navigation: React.FC = () => {
       <div
         className={cn(
           'max-md:hidden max-h-20 bg-grey-600 bg-opacity-85 backdrop-blur-[25px] w-full flex justify-center',
-          'fixed top-0 z-50'
+          'fixed top-0 z-50',
+          isProfileSheetOpen ? 'z-10' : ''
         )}
       >
         <div className='flex items-center justify-between p-4 max-w-screen-xl w-full'>
@@ -103,7 +104,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ href, isActive, isComingSoon = fals
         </div>
       </>
     ) : (
-      <Link className={cn(' text-grey-100', isActive && 'text-yellow-500')} href={href}>
+      <Link className={cn('text-grey-100', isActive && 'text-yellow-500')} href={href}>
         {title}
       </Link>
     )}
