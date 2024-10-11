@@ -51,7 +51,7 @@ export async function fetchWrapper<T>({
     headers: {
       ...defaultHeaders,
       ...headers,
-      authorization: token,
+      ...(token && { authorization: token }),
     },
   }
   try {
