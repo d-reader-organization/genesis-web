@@ -44,7 +44,7 @@ export const WalletSection: React.FC = () => {
     <div className='rounded-xl bg-grey-500 flex flex-col items-center gap-6 p-4'>
       <div className='text-2xl font-normal leading-[28.8px]'>
         <span className='font-bold'>Quick connect&nbsp;</span>
-        <span>your wallet without Signing in.</span>
+        <span>your wallet.</span>
       </div>
       <div className='flex items-center gap-1.5'>
         <WalletBox>
