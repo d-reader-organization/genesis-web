@@ -81,7 +81,7 @@ export const investProjects: investProject[] = [
     author: {
       author: 'Mad Lad Studios',
       image: '',
-      tags: ['Adventure', 'Comedy', 'Fantasy'],
+      tags: ['Comic Series', 'Action', 'Superhero'],
     },
     facts: [
       {
@@ -125,7 +125,7 @@ export const investProjects: investProject[] = [
     author: {
       author: 'Bonkers Inc.',
       image: '',
-      tags: ['Sci-Fi', 'Comedy', 'Action'],
+      tags: ['Animated Series', 'Adventure', 'Sci-fi', 'Comedy'],
     },
     facts: [
       {
@@ -169,7 +169,7 @@ export const investProjects: investProject[] = [
     author: {
       author: 'Gecko Studios',
       image: '',
-      tags: ['Sci-Fi', 'Action', 'Adventure'],
+      tags: ['Comic Series','Adventure','Sci-fi','Superhero'],
     },
     facts: [
       {

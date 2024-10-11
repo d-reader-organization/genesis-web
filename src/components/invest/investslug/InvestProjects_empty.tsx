@@ -81,7 +81,7 @@ export const investProjects: investProject[] = [
     author: {
       author: '',
       image: '',
-      tags: [],
+      tags: ['Comic Series', 'Action', 'Superhero'],
     },
     facts: [],
     invest: {
@@ -103,7 +103,7 @@ export const investProjects: investProject[] = [
     author: {
       author: '',
       image: '',
-      tags: [],
+      tags: ['Animated Series', 'Adventure', 'Sci-fi', 'Comedy'],
     },
     facts: [],
     invest: {
@@ -125,7 +125,7 @@ export const investProjects: investProject[] = [
     author: {
       author: '',
       image: '',
-      tags: [],
+      tags: ['Comic Series','Adventure','Sci-fi','Superhero'],
     },
     facts: [],
     invest: {
