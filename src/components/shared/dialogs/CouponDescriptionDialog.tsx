@@ -10,6 +10,7 @@ import { Button } from '@/components/ui'
 import { RoutePath } from '@/enums/routePath'
 import { ComicIssue } from '@/models/comicIssue'
 import { ConnectButton } from '../buttons/ConnectButton'
+import Link from 'next/link'
 
 export const CouponDescriptionDialog: React.FC<CommonDialogProps & { comicIssue: ComicIssue }> = ({
   open,
@@ -22,64 +23,57 @@ export const CouponDescriptionDialog: React.FC<CommonDialogProps & { comicIssue:
     switch (couponType) {
       case CouponType.RegisteredUser || CouponType.WhitelistedUser:
         return (
-          <div>
-            <a className='underline' href={`${RoutePath.Register}?redirectTo=/mint/${comicIssue.id}`}>
+          <>
+            <Link className='underline' href={`${RoutePath.Register}?redirectTo=/mint/${comicIssue.id}`}>
               Register
-            </a>{' '}
-            /{' '}
-            <a className='underline' href={`${RoutePath.Login}?redirectTo=/mint/${comicIssue.id}`}>
+            </Link>
+            &nbsp;/&nbsp;
+            <Link className='underline' href={`${RoutePath.Login}?redirectTo=/mint/${comicIssue.id}`}>
               Login →
-            </a>
-          </div>
+            </Link>
+          </>
         )
       case CouponType.WhitelistedWallet || CouponType.PublicUser:
-        return (
-          <div className='underline'>
-            <ConnectButton className='[all:unset]' />
-          </div>
-        )
+        return <ConnectButton className='[all:unset] underline' />
       default:
         return ''
     }
   }
   return (
-    <Dialog open={open}>
+    <Dialog open={open} onOpenChange={toggleDialog}>
       <DialogContent
         aria-describedby=''
-        className='rounded-[12px] flex flex-col items-center shadow-none w-full h-full bg-transparent p-[32px 24px 24px 24px] gap-[32px] overflow-hidden'
-        overlayClassName='bg-transparent'
+        className='max-w-[485px] rounded-2xl flex flex-col items-center bg-grey-400 shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)] p-6 pt-8 gap-8'
         showCloseIcon={false}
       >
-        <div className='bg-grey-400 rounded-[12px] flex flex-col items-center sm:max-w-[485px] p-6 gap-[32px] overflow-hidden m-auto'>
-          <DialogTitle className='font-satoshi leading-[24px] text-xl'>Check eligibilty</DialogTitle>
-          <div className='flex flex-col gap-[8px] w-full'>
-            {coupons.map((coupon, index) => {
-              const discount = getCouponDiscount(candyMachine?.coupons ?? [], coupon)
-              const isEligible = coupon.stats.isEligible
-              return (
-                <div className='rounded-xl bg-grey-500 p-4 gap-4 flex max-w-[437px]' key={index}>
-                  <div className='w-[20px] h-[20px]'>{isEligible ? <CHECK_CIRCLE_ICON /> : <CROSS_CIRCLE_ICON />}</div>
-                  <div className='inline-block gap-[8px] w-[100%] max-w-[369px]'>
-                    <p className='xs:text-[12px]] sm:text-[16px] font-bold leading-[19.6px]'>
-                      {coupon.name} {discount ? `-${discount}% off` : null}
+        <DialogTitle className='font-satoshi leading-[24px] text-xl'>Check eligibilty</DialogTitle>
+        <div className='flex flex-col gap-2 w-full'>
+          {coupons.map((coupon, index) => {
+            const discount = getCouponDiscount(candyMachine?.coupons ?? [], coupon)
+            const isEligible = coupon.stats.isEligible
+            return (
+              <div className='rounded-xl bg-grey-500 p-4 gap-4 flex max-w-[437px]' key={index}>
+                <div className='size-5'>{isEligible ? <CHECK_CIRCLE_ICON /> : <CROSS_CIRCLE_ICON />}</div>
+                <div className='inline-block gap-2 w-full max-w-[369px]'>
+                  <p className='xs:text-xs sm:text-base font-bold leading-[19.6px]'>
+                    {coupon.name} {discount ? `-${discount}% off` : null}
+                  </p>
+                  <p className='xs:text-xs sm:text-base font-medium text-grey-100 leading-[22.4px] text-ellipsis overflow-auto'>
+                    {coupon.description}
+                  </p>
+                  {!isEligible ? (
+                    <p className='xs:text-xs sm:text-sm text-end text-grey-100 leading-[19.6px] decoration-1 cursor-pointer'>
+                      {getCouponAction(coupon.type)}
                     </p>
-                    <p className='xs:text-[12px] sm:text-[16px] font-medium text-grey-100 leading-[22.4px] text-ellipsis overflow-auto'>
-                      {coupon.description}
-                    </p>
-                    {!isEligible ? (
-                      <p className='xs:text-[12px] sm:text-[14px] text-end text-grey-100 leading-[19.6px] decoration-1 cursor-pointer'>
-                        {getCouponAction(coupon.type)}
-                      </p>
-                    ) : null}
-                  </div>
+                  ) : null}
                 </div>
-              )
-            })}
-          </div>
-          <Button variant='secondary' className='rounded-[16px] font-bold text-base w-full' onClick={toggleDialog}>
-            Got it!
-          </Button>
+              </div>
+            )
+          })}
         </div>
+        <Button variant='secondary' className='rounded-[16px] font-bold text-base w-full' onClick={toggleDialog}>
+          Got it!
+        </Button>
       </DialogContent>
     </Dialog>
   )

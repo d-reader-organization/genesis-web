@@ -12,7 +12,7 @@ export default async function LoginPage() {
   return (
     <>
       <UnauthenticatedNavigation />
-      <main className='container sm:p-0 flex flex-col max-w-xs gap-2'>
+      <main className='container sm:p-0 flex flex-col max-w-md gap-2'>
         <Text as='h1' className='text-center pt-8 mb-4 sm:mb-8 font-semibold'>
           Welcome back
         </Text>

@@ -15,8 +15,12 @@ export const AuthProfileContent: React.FC<AuthProfileContentProps> = ({ user }) 
     <div className='flex flex-col'>
       <ProfileWidget className='mb-[29px]' user={user} />
       <div className='flex flex-col gap-8 text-2xl font-bold leading-[28.8px] text-grey-100'>
-        <Link href={RoutePath.Library}>My Library</Link>
-        <Link href='/'>Help center</Link>
+        <Link className='hover:text-white' href={RoutePath.Library}>
+          My Library
+        </Link>
+        <Link className='hover:text-white' href='/'>
+          Help center
+        </Link>
       </div>
     </div>
     <div className='flex flex-col gap-6'>

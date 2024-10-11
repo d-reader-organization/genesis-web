@@ -5,6 +5,7 @@ import { User } from '@/models/user'
 import React from 'react'
 import { AuthProfileContent } from './AuthProfileContent'
 import { GuestProfileContent } from './GuestProfileContent'
+import { cn } from '@/lib/utils'
 
 type ProfileSheetProps = {
   isOpen: boolean
@@ -28,6 +29,14 @@ export const ProfileSheet: React.FC<ProfileSheetProps> = ({ isOpen, user, trigge
         {!!user ? <AuthProfileContent user={user} /> : <GuestProfileContent />}
       </SheetContent>
     </Sheet>
-    {isOpen && <div className='fixed inset-0 bg-transparent  backdrop-blur-[25px] z-40' aria-hidden='true' />}
+    {
+      <div
+        className={cn(
+          'fixed inset-0 bg-transparent  backdrop-blur-[25px] z-40 transition-all duration-300',
+          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        )}
+        aria-hidden='true'
+      />
+    }
   </div>
 )
