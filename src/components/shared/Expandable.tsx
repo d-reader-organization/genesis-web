@@ -81,6 +81,7 @@ export const Expandable: React.FC<Props> = ({
 }
 
 type CurrencyExpandableProps = {
+  disableExpand?: boolean
   isLive: boolean
   selectedCurrencySetting: TokenDetail
   open?: boolean
@@ -89,6 +90,7 @@ type CurrencyExpandableProps = {
 
 export const CurrencyExpandable: React.FC<CurrencyExpandableProps> = ({
   children,
+  disableExpand = false,
   isLive = false,
   open = false,
   selectedCurrencySetting,
@@ -128,7 +130,7 @@ export const CurrencyExpandable: React.FC<CurrencyExpandableProps> = ({
           {/* {discountWidget} */}
           <button
             className='flex gap-2 items-center w-fit rounded-xl border-none bg-grey-600 p-2'
-            onClick={() => setIsExpanded((currentIsExpanded) => !currentIsExpanded)}
+            onClick={disableExpand ? () => {} : () => setIsExpanded((currentIsExpanded) => !currentIsExpanded)}
           >
             <span className='text-base md:text-2xl font-bold leading-[16px] md:leading-[24px]'>
               {selectedCurrencySetting.price}
@@ -139,11 +141,13 @@ export const CurrencyExpandable: React.FC<CurrencyExpandableProps> = ({
               width={20}
               height={20}
             />
-            <ArrowDownIcon
-              className={clsx('transition transform duration-150 ease-in-out', {
-                'transform -rotate-180': isExpanded,
-              })}
-            />
+            {disableExpand ? null : (
+              <ArrowDownIcon
+                className={clsx('transition transform duration-150 ease-in-out', {
+                  'transform -rotate-180': isExpanded,
+                })}
+              />
+            )}
           </button>
         </div>
       </div>
