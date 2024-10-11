@@ -1,4 +1,5 @@
 type investProject = {
+  slug?: string
   header: {
     title: string
     subtitle: string
@@ -27,6 +28,7 @@ type investProject = {
 
 export const investProjects: investProject[] = [
   {
+    slug: 'the_recruits_3',
     header: {
       title: 'The Recruits – comic series',
       subtitle: 'Celebrating the Degenerate Apes community',

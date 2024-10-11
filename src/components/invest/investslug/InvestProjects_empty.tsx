@@ -1,4 +1,5 @@
 type investProject = {
+  slug?: string
   header: {
     title: string
     subtitle: string
