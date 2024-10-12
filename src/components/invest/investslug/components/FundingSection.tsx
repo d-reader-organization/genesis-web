@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import React from 'react'
-import { ProjectInvestData } from '../data/ProjectInvestData'
 import Image from 'next/image'
 
 function formatNumberWithCommas(num: number): string {
@@ -26,7 +25,6 @@ export const InvestSection: React.FC<Props> = ({ project }) => {
         </div>
       </div>
 
-      {/*section2 */}
       <div className='flex flex-col'>
         <h2 className='text-[#fceb54] text-[32px] font-semibold leading-none tracking-tight'>
           ${formatNumberWithCommas(project.current)}
@@ -36,7 +34,6 @@ export const InvestSection: React.FC<Props> = ({ project }) => {
         </p>
       </div>
 
-      {/*section3 */}
       <div className='flex flex-col'>
         <h2 className='text-white text-[32px] font-semibold leading-none tracking-tight'>
           {formatNumberWithCommas(project.backers)}
@@ -44,7 +41,6 @@ export const InvestSection: React.FC<Props> = ({ project }) => {
         <p className='text-[#c2c5ce] text-base font-medium leading-relaxed'>backers</p>
       </div>
 
-      {/*section4 */}
       <div className='flex flex-col'>
         <h2 className='text-white text-[32px] font-semibold tracking-tight leading-none'>{project.daysLeft}</h2>
         <p className='text-[#c2c5ce] text-base font-medium leading-relaxed'>days left</p>

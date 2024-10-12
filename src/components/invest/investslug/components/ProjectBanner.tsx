@@ -2,11 +2,11 @@ import React from 'react'
 import { PlayIcon } from 'lucide-react'
 import Image from 'next/image'
 
-type ProjectImageProps = {
-  image: string
+type ProjectBannerProps = {
+  banner: string
 }
 //TODO: hardcoded alt
-export const ProjectImage: React.FC<ProjectImageProps> = ({ image }) => {
+export const ProjectBanner: React.FC<ProjectBannerProps> = ({ banner: image }) => {
   return (
     <div className='flex flex-col w-full h-[550px] gap-4 md:gap-6'>
       <div className='relative w-full h-full'>
