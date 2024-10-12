@@ -8,7 +8,6 @@ type Project = {
   creator: {
     name: string
     avatar: string
-
   }
 
   facts: {
@@ -170,7 +169,7 @@ export const investProjects: Project[] = [
     creator: {
       name: 'Gecko Studios',
       avatar: '',
-      tags: ['Comic Series','Adventure','Sci-fi','Superhero'],
+      tags: ['Comic Series', 'Adventure', 'Sci-fi', 'Superhero'],
     },
     facts: [
       {
