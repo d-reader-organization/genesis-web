@@ -43,26 +43,29 @@ export const investSlides: InvestSlide[] = [
     ],
   },
   {
-    slug: 'the-recruits-2',
+    slug: 'geckos',
     image: '/assets/images/invest-carousel.jpeg',
-    title: 'Slide 2',
-    subtitle: 'Subtitle for Slide 2',
-    status: 'LIVE',
+    title: 'Galactic Geckos',
+    subtitle: 'Lord of the Ring meets geckos - in space',
+    status: 'LIVE SOON',
     logo: 'https://d323dls9ny69nf.cloudfront.net/comics/the-recruits-1714399610806/logo-1714399886123.png',
     infos: [
       {
-        text: 'by Degen Apes2',
+        text: 'by GGSG',
       },
       {
-        text: '1 day left',
+        text: 'in 14 days',
       },
       {
-        text: '97% funded',
+        text: '0% funded',
       },
     ],
     tags: [
       {
-        title: 'Crime',
+        title: 'Action',
+      },
+      {
+        title: 'Sci-fi',
       },
       {
         title: 'Comedy',
@@ -70,21 +73,21 @@ export const investSlides: InvestSlide[] = [
     ],
   },
   {
-    slug: 'the-recruits-3',
-    title: 'Slide 3',
-    subtitle: 'subtitle 3',
+    slug: 'mad-lads',
+    title: 'Mad Lads',
+    subtitle: 'The Mad King has focking risen!',
     image: '/assets/images/invest-carousel.jpeg',
-    status: 'LIVE',
+    status: 'LIVE SOON',
     logo: 'https://d323dls9ny69nf.cloudfront.net/comics/the-recruits-1714399610806/logo-1714399886123.png',
     infos: [
       {
-        text: 'by Degen Apes',
+        text: 'by Mad King',
       },
       {
-        text: '5 days left',
+        text: 'in 28 days',
       },
       {
-        text: '85% funded',
+        text: '0% funded',
       },
     ],
     tags: [
@@ -92,7 +95,10 @@ export const investSlides: InvestSlide[] = [
         title: 'Adventure',
       },
       {
-        title: 'Drama',
+        title: 'Comedy',
+      },
+      {
+        title: 'Manga',
       },
     ],
   },

@@ -11,24 +11,33 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: 'What is your return policy?',
-    answer:
-      'We offer a 30-day return policy for all unused items in their original packaging. Please contact our customer service team to initiate a return.',
+    question: 'Are dReader and Genesis the same company?',
+    answer: `Genesis is a crowdfunding portal which helps indie creators tokenize their Intellectual Property and distribute it to their desired audience. They primarily work with comic creators, game developers, and book writers that want to raise money to pursue their projects. 
+
+Decentralized Reader LLC works with many of the same indie creators to distribute their comics once they have been produced. dReader is the platform responsible for distributing shows like The Recruits, Tensorians, The Embers etc.`,
   },
   {
-    question: 'How long does shipping take?',
+    question: 'Can I invest more than once?',
     answer:
-      'Shipping times vary depending on your location. Typically, domestic orders are delivered within 3-5 business days, while international orders may take 7-14 business days.',
+      'You may invest as many times as you would like until you reach your investment limit under the crowdfunding regulations.',
   },
   {
-    question: 'Do you offer international shipping?',
-    answer:
-      'Yes, we ship to most countries worldwide. Shipping costs and delivery times may vary depending on the destination.',
+    question: "Can I invest if I'm not a U.S. citizen?",
+    answer: 'TODO. Currently drafting up this answer with our lawyer office',
   },
   {
-    question: 'How can I track my order?',
-    answer:
-      "Once your order is shipped, you will receive a confirmation email with a tracking number. You can use this number to track your package on our website or the carrier's site.",
+    question: 'Is the content on this website real?',
+    answer: `No, this is just a dummy demo app. Nothing shown on this web does not imply partnership with entities used as a mock reference.
+    
+    Legal framework off the app will be resolved in the coming weeks & months. Final approach to adding "IP investment" features is yet to be determined.`,
+  },
+  {
+    question: 'What does contributing to the fundraise campaign imply?',
+    answer: 'TODO. Currently drafting up this answer with our lawyer office',
+  },
+  {
+    question: 'Where can I learn more?',
+    answer: 'TODO. Add a linktree',
   },
 ]
 
@@ -73,7 +82,9 @@ const FAQItem: React.FC<{ item: FAQItem }> = ({ item }) => {
           opacity: isExpanded ? 1 : 0,
         }}
       >
-        <div className='text-sm md:text-base font-medium leading-[140%] pb-4'>{item.answer}</div>
+        <div className='text-sm md:text-base font-medium leading-[140%] pb-4' style={{ whiteSpace: 'pre-wrap' }}>
+          {item.answer}
+        </div>
       </div>
     </div>
   )
