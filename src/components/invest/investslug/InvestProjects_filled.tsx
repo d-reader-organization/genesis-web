@@ -1,17 +1,16 @@
-type investProject = {
+type Project = {
   slug?: string
-  header: {
-    title: string
-    subtitle: string
+  title: string
+  subtitle: string
+  tags: string[]
+  banner: string
+
+  creator: {
+    name: string
+    avatar: string
+
   }
-  image: {
-    url: string
-  }
-  author: {
-    author: string
-    image: string
-    tags: string[]
-  }
+
   facts: {
     section: string
     answer: string
@@ -26,19 +25,19 @@ type investProject = {
   }
 }
 
-export const investProjects: investProject[] = [
+export const investProjects: Project[] = [
   {
     slug: 'the_recruits_3',
     header: {
       title: 'The Recruits – comic series',
       subtitle: 'Celebrating the Degenerate Apes community',
     },
-    image: {
+    banner: {
       url: '',
     },
-    author: {
-      author: 'Degen Apes',
-      image: '',
+    creator: {
+      name: 'Degen Apes',
+      avatar: '',
       tags: ['Comic Series', 'Action', 'Comedy'],
     },
     facts: [
@@ -77,12 +76,12 @@ export const investProjects: investProject[] = [
       title: 'Mad Lads',
       subtitle: 'A tale of chaos and mischief',
     },
-    image: {
+    banner: {
       url: '',
     },
-    author: {
-      author: 'Mad Lad Studios',
-      image: '',
+    creator: {
+      name: 'Mad Lad Studios',
+      avatar: '',
       tags: ['Comic Series', 'Action', 'Superhero'],
     },
     facts: [
@@ -121,12 +120,12 @@ export const investProjects: investProject[] = [
       title: 'Bonk',
       subtitle: 'The wildest ride in the galaxy',
     },
-    image: {
+    banner: {
       url: '',
     },
-    author: {
-      author: 'Bonkers Inc.',
-      image: '',
+    creator: {
+      name: 'Bonkers Inc.',
+      avatar: '',
       tags: ['Animated Series', 'Adventure', 'Sci-fi', 'Comedy'],
     },
     facts: [
@@ -165,12 +164,12 @@ export const investProjects: investProject[] = [
       title: 'Galactic Geckos',
       subtitle: 'A space odyssey of epic proportions',
     },
-    image: {
+    banner: {
       url: '',
     },
-    author: {
-      author: 'Gecko Studios',
-      image: '',
+    creator: {
+      name: 'Gecko Studios',
+      avatar: '',
       tags: ['Comic Series','Adventure','Sci-fi','Superhero'],
     },
     facts: [

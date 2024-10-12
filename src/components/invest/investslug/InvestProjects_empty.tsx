@@ -1,12 +1,10 @@
-type investProject = {
+type InvestProject = {
   slug?: string
-  header: {
-    title: string
-    subtitle: string
-  }
-  image: {
-    url: string
-  }
+  title: string
+  subtitle: string
+
+  image: string
+
   author: {
     author: string
     image: string
@@ -26,7 +24,7 @@ type investProject = {
   }
 }
 
-export const investProjects: investProject[] = [
+export const investProjects: InvestProject[] = [
   {
     header: {
       title: 'The Recruits – comic series',
@@ -126,7 +124,7 @@ export const investProjects: investProject[] = [
     author: {
       author: '',
       image: '',
-      tags: ['Comic Series','Adventure','Sci-fi','Superhero'],
+      tags: ['Comic Series', 'Adventure', 'Sci-fi', 'Superhero'],
     },
     facts: [],
     invest: {

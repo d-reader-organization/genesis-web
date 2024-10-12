@@ -20,7 +20,7 @@ export default async function InvestPage({ params }: Props) {
   return (
     <BaseLayout>
       <div className='flex flex-col max-w-screen-xl w-full'>
-        {/*<Header title={PROJECTHEADER_DATA.title} subtitle={PROJECTHEADERDATA.subtitle className="max-md:hidden"} /> **/}
+        <Header title={PROJECTHEADER_DATA.title} subtitle={PROJECTHEADERDATA.subtitle className="max-md:hidden"} />
         <div className='flex flex-col md:flex-row w-full h-full gap-6 md:gap-10'>
           <div className='flex flex-col w-full'>
             <ProjectImage image={ProjectImageData.url} />
