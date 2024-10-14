@@ -97,7 +97,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
   }, [])
 
   return (
-    <div className={cn('relative -z-10', className)} ref={searchRef}>
+    <div className={cn('relative z-10', className)} ref={searchRef}>
       {searchTerm ? (
         <button className='absolute top-3 left-3' onClick={clearInput}>
           <X className='size-[18px] text-white' />

@@ -1,12 +1,7 @@
-import { Navigation } from '@/components/layout/Navigation'
+import { BaseLayout } from '@/components/layout/BaseLayout'
 
 function ProfilePage() {
-  return (
-    <>
-      <Navigation />
-      <div>Profile</div>
-    </>
-  )
+  return <BaseLayout>Profile page</BaseLayout>
 }
 
 export default ProfilePage

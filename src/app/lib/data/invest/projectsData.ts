@@ -81,7 +81,7 @@ export const highInterestProjects: InterestProject[] = [
     title: 'Bonk',
   },
   {
-    image: '/assets/images/invest/mad-lads.png',
+    image: '/assets/images/invest/galactic-geckos.png',
     slug: 'galactic-geckos',
     stats: {
       likes: 820,

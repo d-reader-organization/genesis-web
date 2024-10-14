@@ -5,7 +5,7 @@ import { RoutePath } from '@/enums/routePath'
 import { AuthFormState, Authorization } from '@/models/auth'
 import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
+import { redirect, RedirectType } from 'next/navigation'
 import { fetchWrapper } from '../fetchWrapper'
 import { accessTokenKey, jwtCookieProps, refreshTokenKey } from '@/constants/general'
 import { loginSchema } from '@/constants/schemas'
@@ -58,7 +58,7 @@ export const loginAction = async (
     }
   }
 
-  redirect(redirectTo ?? RoutePath.Home)
+  redirect(redirectTo ?? RoutePath.Home, RedirectType.replace)
 }
 
 export const parseAndSetCookieAfterAuth = (data: Authorization): void => {

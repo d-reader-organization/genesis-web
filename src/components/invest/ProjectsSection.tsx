@@ -60,7 +60,7 @@ const Card: React.FC<CardProps> = ({ project }) => (
 )
 
 const RoiWidget: React.FC<{ roi: number; tooltipText: string }> = ({ roi, tooltipText }) => (
-  <div className='flex max-md:flex-col justify-center items-center p-3 gap-2 md:gap-3 bg-grey-600 rounded-xl max-h-[60px] md:max-h-12'>
+  <div className='flex max-md:flex-col justify-center items-center p-3 gap-2 md:gap-3 bg-grey-600 rounded-xl max-h-[60px] md:max-h-12 max-w-[240px]'>
     <p className='text-base md:text-[32px] font-bold leading:[22.4px] md:leading-8'>{roi}%</p>
     <div className='flex items-center gap-2 md:gap-3'>
       <p className='text-[10px] md:text-xs font-bold leading-normal text-grey-100'>RETURN ON INVESTMENT</p>

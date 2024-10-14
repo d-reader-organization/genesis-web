@@ -1,8 +1,9 @@
-import { accessTokenKey, googleAccessTokenKey, redirectToKey, refreshTokenKey } from '@/constants/general'
+import { googleAccessTokenKey, redirectToKey } from '@/constants/general'
 import { Authorization } from '@/models/auth'
 import GoogleProvider from 'next-auth/providers/google'
 import { cookies } from 'next/headers'
 import NextAuth from 'next-auth'
+import { parseAndSetCookieAfterAuth } from '@/app/lib/actions/login'
 
 const handler = NextAuth({
   providers: [
@@ -33,14 +34,12 @@ const handler = NextAuth({
         },
       })
       const parsed: Authorization | string = await response.json()
-      const requestCookies = cookies()
       if (typeof parsed === 'string') {
-        requestCookies.set(googleAccessTokenKey, account?.access_token ?? '')
+        cookies().set(googleAccessTokenKey, account?.access_token ?? '')
         return parsed
       }
 
-      requestCookies.set(accessTokenKey, parsed.accessToken)
-      requestCookies.set(refreshTokenKey, parsed.refreshToken)
+      parseAndSetCookieAfterAuth(parsed)
       return true
     },
   },
