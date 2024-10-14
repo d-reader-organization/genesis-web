@@ -92,6 +92,14 @@
 .wallet-adapter-modal-list .wallet-adapter-button:hover {
   background-color: #1f222a !important;
 }
+.wallet-adapter-modal-container {
+  display: flex;
+  margin: 1rem !important;
+  min-height: fit-content !important;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
 .connect-wallet-dialog .wallet-adapter-dropdown {
   width: min-content;
 }

@@ -54,12 +54,12 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
                   <nav className='flex flex-col justify-between size-full text-grey-100 text-2xl font-bold leading-[28.8px]'>
                     <div className='flex flex-col gap-8'>
                       <div className='flex justify-between w-full'>
-                        <Link href={RoutePath.Discover}>Discover</Link>
+                        {/* <Link href={RoutePath.Discover}>Discover</Link> */}
+                        <Link href={RoutePath.Invest}>Invest</Link>
                         <button onClick={() => setIsOpen(false)}>
                           <X className='size-6 text-grey-100' />
                         </button>
                       </div>
-                      <Link href={RoutePath.Invest}>Invest</Link>
                     </div>
                     {user ? (
                       <div className='flex flex-col gap-10 border-t border-t-grey-400'>

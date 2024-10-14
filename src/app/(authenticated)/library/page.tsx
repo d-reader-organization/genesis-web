@@ -1,13 +1,8 @@
-import { Navigation } from '@/components/layout/Navigation'
+import { BaseLayout } from '@/components/layout/BaseLayout'
 import React from 'react'
 
 async function LibraryPage() {
-  return (
-    <>
-      <Navigation />
-      <div>Library Page</div>
-    </>
-  )
+  return <BaseLayout>Library Page</BaseLayout>
 }
 
 export default LibraryPage

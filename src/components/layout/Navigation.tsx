@@ -6,18 +6,21 @@ import { usePathname } from 'next/navigation'
 import DReaderLogo from 'public/assets/vector-icons/full-logo.svg'
 import GenesisLogo from 'public/assets/vector-icons/genesis-logo.svg'
 import ArrowDownIcon from 'public/assets/vector-icons/arrow-down-2.svg'
-import { Button, Skeleton } from '../ui'
+import { Button } from '../ui'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
-import { useFetchMe } from '@/api/user'
 import { MobileNav } from './MobileNavigation'
 import { ProfileSheet } from '../shared/sheets/profile/ProfileSheet'
 import { SearchInput } from '../shared/SearchInput'
+import { User } from '@/models/user'
 
-export const Navigation: React.FC = () => {
+type Props = {
+  me: User | null
+}
+
+export const Navigation: React.FC<Props> = ({ me }) => {
   const [isProfileSheetOpen, setOpenProfileSheet] = React.useState<boolean>(false)
-  const { data: me, isLoading } = useFetchMe()
   const pathname = usePathname()
   const isInvest = pathname.startsWith(RoutePath.Invest)
   const isLibrary = pathname.startsWith(RoutePath.Library)
@@ -46,9 +49,7 @@ export const Navigation: React.FC = () => {
               <MenuItem href={RoutePath.Invest} isActive={isInvest} isComingSoon title='Invest' />
             </div>
           </div>
-          {isLoading ? (
-            <Skeleton className='h-10 w-20' />
-          ) : me ? (
+          {me ? (
             <div className='flex items-center gap-8'>
               <MenuItem href={RoutePath.Library} isActive={isLibrary} title='My Library' />
               <button

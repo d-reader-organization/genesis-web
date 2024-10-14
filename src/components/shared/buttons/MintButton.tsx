@@ -4,7 +4,6 @@ import { checkIfCouponIsActive, getMintPrice, validateMintEligibilty } from '@/u
 import { useWallet } from '@solana/wallet-adapter-react'
 import React, { useEffect, useState } from 'react'
 import { Button } from '../../ui/Button'
-import dynamic from 'next/dynamic'
 import { Loader } from '../Loader'
 import { AssetMintedDialog } from '../dialogs/AssetMintedDialog'
 import { ComicIssue } from '@/models/comicIssue'
@@ -29,10 +28,6 @@ type Props = {
   comicIssue: ComicIssue
   isAuthenticated: boolean
 }
-
-const BaseWalletMultiButtonDynamic = dynamic(
-  async () => (await import('@/components/shared/buttons/SolanaBaseWalletButton')).SolanaBaseWalletButton
-)
 
 export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => {
   const { candyMachine, selectedCoupon, numberOfItems, selectedCurrency, supportedTokens } = useCandyMachineStore(
