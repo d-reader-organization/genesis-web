@@ -42,7 +42,7 @@ const Card: React.FC<CardProps> = ({ project }) => (
       />
     </div>
     <RoiWidget roi={project.roi} tooltipText={project.tooltipText} />
-    <div className='flex max-md:flex-col justify-center gap-4 md:gap-12  lg:gap-16 xl:gap-20 items-center'>
+    <div className='flex max-md:flex-col justify-center gap-4 md:gap-12 lg:gap-16 xl:gap-20 items-center'>
       <InvestmentStatsBox title='RAISED' value={project.raised} />
       <InvestmentStatsBox title='BACKERS' value={project.backers} />
     </div>

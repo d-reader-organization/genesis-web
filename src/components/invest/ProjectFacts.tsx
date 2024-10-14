@@ -5,19 +5,19 @@ import { PlusIcon, MinusIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 
-type FactItemProps = {
-  section: string
-  answer: string
-  image?: string
-}
-
-type ProjectFactsSectionProps = {
+type ProjectFactsProps = {
   facts: FactItemProps[]
 }
 
-export const ProjectFactsSection: React.FC<ProjectFactsSectionProps> = ({ facts }) => {
+type FactItemProps = {
+  section: string
+  summary: string
+  image?: string
+}
+
+export const ProjectFacts: React.FC<ProjectFactsProps> = ({ facts }) => {
   return (
-    <section className='w-full flex flex-col justify-center align-center '>
+    <section className='w-full flex flex-col justify-center align-center'>
       <div className='flex flex-col'>
         {facts.map((fact, index) => (
           <FactItem key={index} item={fact} isLast={index === facts.length - 1} />
@@ -71,7 +71,7 @@ const FactItem: React.FC<{ item: FactItemProps; isLast?: boolean }> = ({ item, i
           {item.section}
         </h2>
 
-        <div className='flex flex-col md:min-w-[300px] md:max-w-[600px] justify-center align-center w-full'>
+        <div className='flex flex-col justify-center align-center w-full md:min-w-[300px] md:max-w-[600px]'>
           <div
             ref={contentRef}
             className='transition-all duration-200 ease-in-out text-sm md:text-base font-medium leading-[140%]'
@@ -84,15 +84,14 @@ const FactItem: React.FC<{ item: FactItemProps; isLast?: boolean }> = ({ item, i
             onTransitionEnd={handleTransitionEnd}
           >
             <div className='flex flex-col justify-center items-center gap-4 relative w-full'>
-              <p> {item.answer} </p>
+              <p> {item.summary} </p>
               {item.image && (
                 <Image
                   src={item.image}
-                  alt={`${item.section} image`}
+                  alt={item.section + ' image'}
                   width={600}
                   height={400}
-                  layout='responsive'
-                  objectFit='cover'
+                  style={{ objectFit: 'cover' }}
                   className='w-full h-auto'
                 />
               )}

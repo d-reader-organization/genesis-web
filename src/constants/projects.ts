@@ -1,5 +1,5 @@
-type Project = {
-  slug?: string
+export type Project = {
+  slug: string
   title: string
   subtitle: string
   tags: string[]
@@ -23,13 +23,13 @@ type Project = {
 
 export const PROJECTS: Project[] = [
   {
-    slug: 'the_recruits_3',
+    slug: 'the-recruits',
     title: 'The Recruits – comic series',
     subtitle: 'Celebrating the Degenerate Apes community',
-    banner: '',
+    banner: '/assets/images/invest/the-recruits.png',
     creator: {
       name: 'Degen Apes',
-      avatar: '',
+      avatar: '/assets/images/invest/the-recruits-avatar.png',
     },
     tags: ['Comic Series', 'Action', 'Comedy'],
     facts: [
@@ -37,7 +37,7 @@ export const PROJECTS: Project[] = [
         section: 'Overview',
         summary:
           'After a heist to capture the all powerful Matrix Opal goes badly wrong, Roach gets landed with a batch of naive new recruits & must hunt down the bastards that double-crossed her. From Emmy award-winning creators at StudioNX.',
-        image: '',
+        image: '/assets/images/invest/the-recruits-facts-overview.png',
       },
       {
         section: 'Team',
@@ -63,12 +63,13 @@ export const PROJECTS: Project[] = [
     },
   },
   {
+    slug: 'mad-lads',
     title: 'Mad Lads',
     subtitle: 'A tale of chaos and mischief',
-    banner: '',
+    banner: '/assets/images/invest/mad-lads.png',
     creator: {
       name: 'Mad Lad Studios',
-      avatar: '',
+      avatar: '/assets/images/invest/the-recruits-avatar.png',
     },
     tags: ['Comic Series', 'Action', 'Superhero'],
     facts: [
@@ -102,12 +103,13 @@ export const PROJECTS: Project[] = [
     },
   },
   {
+    slug: 'bonk',
     title: 'Bonk',
     subtitle: 'The wildest ride in the galaxy',
-    banner: '',
+    banner: '/assets/images/invest/bonk.png',
     creator: {
       name: 'Bonkers Inc.',
-      avatar: '',
+      avatar: '/assets/images/invest/the-recruits-avatar.png',
     },
     tags: ['Animated Series', 'Adventure', 'Sci-fi', 'Comedy'],
     facts: [
@@ -141,12 +143,13 @@ export const PROJECTS: Project[] = [
     },
   },
   {
+    slug: 'galactic-geckos',
     title: 'Galactic Geckos',
     subtitle: 'A space odyssey of epic proportions',
-    banner: '',
+    banner: '/assets/images/invest/galactic-geckos.png',
     creator: {
       name: 'Gecko Studios',
-      avatar: '',
+      avatar: '/assets/images/invest/the-recruits-avatar.png',
     },
     tags: ['Comic Series', 'Adventure', 'Sci-fi', 'Superhero'],
     facts: [
