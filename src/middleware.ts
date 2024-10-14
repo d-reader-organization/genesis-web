@@ -60,7 +60,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/:path*', '/api/:path*'],
+  matcher: ['/:path*', '/((?!api|_next/static|_next/image|favicon.ico).*)'],
 }
 
 const authRoutesRegex = /^\/(comic|comic-issue|library|profile)(\/.*)?$/
