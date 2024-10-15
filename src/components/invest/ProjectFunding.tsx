@@ -53,7 +53,7 @@ export const ProjectFunding: React.FC<FundingProps> = ({ fundingDetails, classNa
 
         <div className='flex flex-col gap-2 w-[65px] items-center md:w-full md:items-start'>
           <h2 className='text-white font-semibold text-xl leading-tight tracking-tight md:text-[32px] md:leading-none md:tracking-tight'>
-            {fundingDetails.numberOfBackers}
+            {formatNumberWithCommas(fundingDetails.numberOfBackers)}
           </h2>
           <p className='text-[#c2c5ce] text-xs font-medium leading-normal tracking-normal md:text-base md:leading-relaxed'>
             backers
