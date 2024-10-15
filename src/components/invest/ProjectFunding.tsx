@@ -38,8 +38,8 @@ export const ProjectFunding: React.FC<FundingProps> = ({ fundingDetails, classNa
         </div>
       </div>
 
-      <div className='flex flex-row w-full items-center justify-between md:flex-col md:justify-center md:items-start md:gap-[1.6rem] md:py-3'>
-        <div className='flex flex-col gap-2 min-w-[95px] items-start md:w-full md:gap-1'>
+      <div className='flex flex-row w-full py-1 items-center justify-between md:flex-col md:justify-center md:items-start md:gap-[1.6rem] md:py-3'>
+        <div className='flex flex-col min-w-[95px] items-start md:w-full md:gap-1'>
           <h2 className='text-[#fceb54] font-semibold text-xl leading-tight tracking-tight md:text-[32px] md:leading-none md:tracking-tight'>
             ${formatNumberWithCommas(fundingDetails.pledgedAmount)}
           </h2>
@@ -51,7 +51,7 @@ export const ProjectFunding: React.FC<FundingProps> = ({ fundingDetails, classNa
           </p>
         </div>
 
-        <div className='flex flex-col gap-2 min-w-[65px] items-center md:w-full md:gap-1 md:items-start'>
+        <div className='flex flex-col min-w-[65px] items-center md:w-full md:gap-1 md:items-start'>
           <h2 className='text-white font-semibold text-xl leading-tight tracking-tight md:text-[32px] md:leading-none md:tracking-tight'>
             {formatNumberWithCommas(fundingDetails.numberOfBackers)}
           </h2>
@@ -60,7 +60,7 @@ export const ProjectFunding: React.FC<FundingProps> = ({ fundingDetails, classNa
           </p>
         </div>
 
-        <div className='flex flex-col gap-2 min-w-[95px] items-start px-6 md:w-full md:gap-1 md:px-0'>
+        <div className='flex flex-col min-w-[95px] items-start px-6 md:w-full md:gap-1 md:px-0'>
           <h2 className='text-white font-semibold text-xl leading-tight tracking-tight md:text-[32px] md:leading-none md:tracking-tight'>
             {fundingDetails.daysLeft}
           </h2>
