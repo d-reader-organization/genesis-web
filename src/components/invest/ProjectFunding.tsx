@@ -24,7 +24,7 @@ export const ProjectFunding: React.FC<FundingProps> = ({ fundingDetails, classNa
   return (
     <div
       className={
-        `flex flex-col p-2 gap-4 md:p-6 md:gap-[1.4rem] md:sticky md:top-[100px] md:max-w-[485px] md:min-w-[300px] md:h-[550px] bg-grey-500 justify-between items-start rounded-xl shadow ` +
+        'flex flex-col p-2 gap-4 bg-grey-500 justify-between items-start shadow md:rounded-xl md:p-6 md:sticky md:top-[100px] md:max-w-[485px] md:min-w-[300px] md:h-[550px] ' +
         className
       }
     >
@@ -38,8 +38,8 @@ export const ProjectFunding: React.FC<FundingProps> = ({ fundingDetails, classNa
         </div>
       </div>
 
-      <div className='flex flex-row w-full items-center justify-between md:flex-col md:justify-center md:items-start md:gap-[1.6rem]'>
-        <div className='flex flex-col gap-2 min-w-[95px] items-start md:w-full md:items-start'>
+      <div className='flex flex-row w-full items-center justify-between md:flex-col md:justify-center md:items-start md:gap-[1.6rem] md:py-3'>
+        <div className='flex flex-col gap-2 min-w-[95px] items-start md:w-full md:gap-1'>
           <h2 className='text-[#fceb54] font-semibold text-xl leading-tight tracking-tight md:text-[32px] md:leading-none md:tracking-tight'>
             ${formatNumberWithCommas(fundingDetails.pledgedAmount)}
           </h2>
@@ -51,7 +51,7 @@ export const ProjectFunding: React.FC<FundingProps> = ({ fundingDetails, classNa
           </p>
         </div>
 
-        <div className='flex flex-col gap-2 w-[65px] items-center md:w-full md:items-start'>
+        <div className='flex flex-col gap-2 min-w-[65px] items-center md:w-full md:gap-1 md:items-start'>
           <h2 className='text-white font-semibold text-xl leading-tight tracking-tight md:text-[32px] md:leading-none md:tracking-tight'>
             {formatNumberWithCommas(fundingDetails.numberOfBackers)}
           </h2>
@@ -60,7 +60,7 @@ export const ProjectFunding: React.FC<FundingProps> = ({ fundingDetails, classNa
           </p>
         </div>
 
-        <div className='flex flex-col gap-2 w-[95px] items-start px-6 md:w-full md:items-start md:px-0'>
+        <div className='flex flex-col gap-2 min-w-[95px] items-start px-6 md:w-full md:gap-1 md:px-0'>
           <h2 className='text-white font-semibold text-xl leading-tight tracking-tight md:text-[32px] md:leading-none md:tracking-tight'>
             {fundingDetails.daysLeft}
           </h2>
@@ -72,12 +72,12 @@ export const ProjectFunding: React.FC<FundingProps> = ({ fundingDetails, classNa
 
       <Link
         href={'placeholder'}
-        className='flex flex-col w-full max-h-[52px] p-4 justify-center items-center self-stretch text-[#15171c] rounded-xl bg-[#fceb54] hover:brightness-100'
+        className='flex flex-col w-full h-full max-h-[52px] p-4 justify-center items-center self-stretch text-[#15171c] rounded-xl bg-[#fceb54] hover:brightness-100'
       >
         <p className='text-[#15171c] text-base font-bold leading-snug'>Back this project</p>
       </Link>
 
-      <div className='flex flex-row w-full justify-center items-center p-[12px] bg-gradient-to-br from-[#4a4e53] to-[#1f222a] rounded-xl gap-[14px]'>
+      <div className='flex flex-row w-full h-full justify-center items-center p-[12px] bg-gradient-to-br from-[#4a4e53] to-[#1f222a] rounded-xl gap-[14px] md:max-h-[104px]'>
         <div
           className='flex max-h-[54px] max-w-[54px] p-[10px] bg-white rounded-xl shadow border border-[#56a05e]'
           style={{ boxShadow: '0 0 15px rgba(86, 160, 94, 0.8)' }}

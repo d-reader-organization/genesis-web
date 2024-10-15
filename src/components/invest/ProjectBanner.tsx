@@ -18,11 +18,11 @@ export const ProjectBanner: React.FC<ProjectBannerProps> = ({ title, banner }) =
           alt={title + ' Project Banner'}
           fill
           style={{ objectFit: 'cover', objectPosition: 'top' }}
-          className='rounded-xl shadow-lg'
+          className='md:rounded-xl shadow-lg'
         />
         <div className='absolute top-0 left-0 flex justify-center items-center w-full h-full'>
           <div className='flex p-8 bg-black bg-opacity-30 rounded-full shadow-lg backdrop-blur-lg'>
-            <PlayIcon fill='white' className='size-18 cursor-pointer' />
+            <PlayIcon fill='white' className='cursor-pointer h-8 w-8' />
           </div>
         </div>
       </div>
