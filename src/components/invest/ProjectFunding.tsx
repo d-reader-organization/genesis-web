@@ -24,11 +24,11 @@ export const ProjectFunding: React.FC<FundingProps> = ({ fundingDetails, classNa
   return (
     <div
       className={
-        'flex flex-col md:p-6 md:gap-[1.8rem] md:sticky md:top-[100px] md:max-w-[485px] md:min-w-[300px] md:h-[550px] bg-grey-500 justify-between items-start rounded-xl shadow ' +
+        `flex flex-col p-2 gap-4 md:p-6 md:gap-[1.4rem] md:sticky md:top-[100px] md:max-w-[485px] md:min-w-[300px] md:h-[550px] bg-grey-500 justify-between items-start rounded-xl shadow ` +
         className
       }
     >
-      <div className='flex flex-col gap-4 w-full'>
+      <div className='flex flex-col gap-4 w-full md:pb-2'>
         <p className='text-white text-base font-bold leading-snug'>Overall project fund goal:</p>
         <div className='relative h-[8px] rounded-[27px] w-full bg-[#44464d]'>
           <div
@@ -38,25 +38,36 @@ export const ProjectFunding: React.FC<FundingProps> = ({ fundingDetails, classNa
         </div>
       </div>
 
-      <div className='flex flex-col'>
-        <h2 className='text-[#fceb54] text-[32px] font-semibold leading-none tracking-tight'>
-          ${formatNumberWithCommas(fundingDetails.pledgedAmount)}
-        </h2>
-        <p className='text-[#c2c5ce] text-base font-medium leading-relaxed'>
-          pledged of ${formatNumberWithCommas(fundingDetails.raiseGoal)}
-        </p>
-      </div>
+      <div className='flex flex-row w-full items-center justify-between md:flex-col md:justify-center md:items-start md:gap-[1.6rem]'>
+        <div className='flex flex-col gap-2 min-w-[95px] items-start md:w-full md:items-start'>
+          <h2 className='text-[#fceb54] font-semibold text-xl leading-tight tracking-tight md:text-[32px] md:leading-none md:tracking-tight'>
+            ${formatNumberWithCommas(fundingDetails.pledgedAmount)}
+          </h2>
+          <p className='max-md:hidden text-[#c2c5ce] text-xs font-medium md:text-base md:leading-relaxed'>
+            pledged of ${formatNumberWithCommas(fundingDetails.raiseGoal)}
+          </p>
+          <p className='md:hidden text-[#c2c5ce] text-xs font-medium md:text-base md:leading-relaxed'>
+            of ${formatNumberWithCommas(fundingDetails.raiseGoal)}
+          </p>
+        </div>
 
-      <div className='flex flex-col'>
-        <h2 className='text-white text-[32px] font-semibold leading-none tracking-tight'>
-          {fundingDetails.numberOfBackers}
-        </h2>
-        <p className='text-[#c2c5ce] text-base font-medium leading-relaxed'>backers</p>
-      </div>
+        <div className='flex flex-col gap-2 w-[65px] items-center md:w-full md:items-start'>
+          <h2 className='text-white font-semibold text-xl leading-tight tracking-tight md:text-[32px] md:leading-none md:tracking-tight'>
+            {fundingDetails.numberOfBackers}
+          </h2>
+          <p className='text-[#c2c5ce] text-xs font-medium leading-normal tracking-normal md:text-base md:leading-relaxed'>
+            backers
+          </p>
+        </div>
 
-      <div className='flex flex-col'>
-        <h2 className='text-white text-[32px] font-semibold tracking-tight leading-none'>{fundingDetails.daysLeft}</h2>
-        <p className='text-[#c2c5ce] text-base font-medium leading-relaxed'>days left</p>
+        <div className='flex flex-col gap-2 w-[95px] items-start px-6 md:w-full md:items-start md:px-0'>
+          <h2 className='text-white font-semibold text-xl leading-tight tracking-tight md:text-[32px] md:leading-none md:tracking-tight'>
+            {fundingDetails.daysLeft}
+          </h2>
+          <p className='text-[#c2c5ce] text-xs font-medium leading-normal tracking-normal md:text-base md:leading-relaxed'>
+            days left
+          </p>
+        </div>
       </div>
 
       <Link
@@ -68,7 +79,7 @@ export const ProjectFunding: React.FC<FundingProps> = ({ fundingDetails, classNa
 
       <div className='flex flex-row w-full justify-center items-center p-[12px] bg-gradient-to-br from-[#4a4e53] to-[#1f222a] rounded-xl gap-[14px]'>
         <div
-          className='flex max-h-[54px] max-w-[54px] p-[10px] bg-white rounded-xl shadow border border-[#56a05e] justify-start items-center gap-2'
+          className='flex max-h-[54px] max-w-[54px] p-[10px] bg-white rounded-xl shadow border border-[#56a05e]'
           style={{ boxShadow: '0 0 15px rgba(86, 160, 94, 0.8)' }}
         >
           <Image src='/assets/images/invest/Arrow.svg' alt='Upwards Arrow' width={45} height={50} />

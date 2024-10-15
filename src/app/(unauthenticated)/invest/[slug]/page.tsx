@@ -1,7 +1,7 @@
 import { BaseLayout } from '@/components/layout/BaseLayout'
 import { ProjectHeader } from '@/components/invest/ProjectHeader'
 import { ProjectFacts } from '@/components/invest/ProjectFacts'
-import { ProjectCreator } from '@/components/invest/ProjectCreatorSection'
+import { ProjectCreatorSection } from '@/components/invest/ProjectCreatorSection'
 import { ProjectFunding } from '@/components/invest/ProjectFunding'
 import { ProjectBanner } from '@/components/invest/ProjectBanner'
 import { PROJECTS, Project } from '@/constants/projects'
@@ -32,10 +32,8 @@ export default async function InvestPage({ params }: Props) {
             <ProjectBanner title={PROJECT.title} banner={PROJECT.banner} />
             <ProjectHeader title={PROJECT.title} subtitle={PROJECT.subtitle} className='md:hidden' />
             <ProjectFunding fundingDetails={PROJECT.fundingDetails} className='md:hidden' />
-            <div className='w-full'>
-              <ProjectCreator creator={PROJECT.creator} tags={PROJECT.tags} />
-              <ProjectFacts facts={PROJECT.facts} />
-            </div>
+            <ProjectCreatorSection creator={PROJECT.creator} tags={PROJECT.tags} />
+            <ProjectFacts facts={PROJECT.facts} />
           </div>
           <div className='flex flex-col'>
             <ProjectFunding fundingDetails={PROJECT.fundingDetails} className='max-md:hidden' />

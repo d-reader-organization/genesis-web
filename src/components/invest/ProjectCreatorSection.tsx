@@ -9,14 +9,14 @@ type ProjectCreatorProps = {
   tags: string[]
 }
 
-export const ProjectCreator: React.FC<ProjectCreatorProps> = ({ creator, tags }) => {
+export const ProjectCreatorSection: React.FC<ProjectCreatorProps> = ({ creator, tags }) => {
   return (
-    <section className='flex flex-col w-full justify-between md:items-center md:flex-row gap-3 py-4 md:py-8 md:gap-10'>
+    <section className='flex flex-col w-full justify-between gap-3 py-4 md:items-center md:flex-row md:py-8 md:gap-10'>
       <div className='flex items-center gap-2'>
         <AvatarImage src={creator.avatar} size={42} alt={creator + ' Avatar'} className='' />
         <span className='text-white text-base font-bold leading-snug'>{creator.name}</span>
       </div>
-      <div className='flex flex-wrap md:gap-2'>
+      <div className='flex flex-wrap gap-2'>
         {tags.map((tag, index) => (
           <div
             className={cn(

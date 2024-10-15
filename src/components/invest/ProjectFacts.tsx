@@ -83,7 +83,7 @@ const FactItem: React.FC<{ item: FactItemProps; isLast?: boolean }> = ({ item, i
             }}
             onTransitionEnd={handleTransitionEnd}
           >
-            <div className='flex flex-col justify-center items-center gap-4 relative w-full'>
+            <div className='flex flex-col justify-center items-start gap-4 relative w-full'>
               <p> {item.summary} </p>
               {item.image && (
                 <Image
