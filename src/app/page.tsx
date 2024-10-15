@@ -34,7 +34,7 @@ export default async function HomePage() {
             ))}
           </div>
         </div>
-        <div className='mx-4 flex flex-col gap-8'>
+        <div className='flex flex-col gap-8'>
           <ComicSectionSlider cardType='large' comics={topPickComics} title='Top 10 picks' />
           <ComicSectionSlider cardType='normal' comics={popularComics} title='Featured Comic Serials' />
         </div>
