@@ -83,7 +83,7 @@ const DetailsSection: React.FC<{ slide: InvestSlide }> = ({ slide }) => (
       src={slide.logo}
       width={290}
       height={130}
-      className='md: self-center md:self-start mb-4 w-40 md:w-[290px]'
+      className='md:self-center md:self-start mb-4 w-40 md:w-[290px]'
     />
     <div className='flex flex-col justify-end gap-4 md:gap-6 max-w-[550px]'>
       <h1 className='text-xl md:text-[40px] leading-[20px] md:leading-[40px] font-semibold tracking-[0.08px] md:mb-4'>
