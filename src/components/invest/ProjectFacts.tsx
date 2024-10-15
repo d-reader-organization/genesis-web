@@ -34,6 +34,8 @@ const FactItem: React.FC<{ item: FactItemProps; isLast?: boolean }> = ({ item, i
   const [isCollapsing, setIsCollapsing] = useState(false)
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout | undefined
+
     if (isExpanded) {
       setMaxHeight(contentRef.current?.scrollHeight + 'px')
     } else {
@@ -42,6 +44,12 @@ const FactItem: React.FC<{ item: FactItemProps; isLast?: boolean }> = ({ item, i
       setTimeout(() => {
         setMaxHeight('0px')
       }, 10)
+    }
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId)
+      }
     }
   }, [isExpanded])
 
