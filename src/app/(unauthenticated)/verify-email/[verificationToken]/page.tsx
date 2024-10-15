@@ -1,0 +1,51 @@
+import LogoWithTextIcon from 'public/assets/vector-icons/logo-with-text.svg'
+import { RoutePath } from '@/enums/routePath'
+import { ButtonLink } from '@/components/ui/Button'
+import { verifyUserEmail } from '@/app/lib/api/user/mutations'
+import { ArrowRight } from 'lucide-react'
+
+type Params = {
+  verificationToken: string
+}
+
+export default async function VerifyEmailPage({ params }: { params: Params }) {
+  const verificationToken = params?.verificationToken
+  const user = !verificationToken ? await verifyUserEmail(verificationToken) : null
+  const name = user?.name ?? ''
+
+  return (
+    <main className='flex flex-col w-full justify-center items-center mt-20 md:mt-16 p-4 md:p-6 lg:p-8'>
+      <div className='flex flex-col items-center gap-4 max-w-[480px]'>
+        <h1 className='text-[48px] font-bold leading-none tracking-[0.096px]'>
+          Welcome
+          <br />
+          <span className='text-xl font-medium leading-none tracking-[0.096px]'>{name}</span>
+        </h1>
+        {!name ? (
+          <p className='text-xl font-medium leading-none tracking-[0.096px] text-center'>
+            Something went wrong while while verifying your email
+          </p>
+        ) : (
+          <p className='text-xl font-medium leading-none tracking-[0.096px] text-center'>
+            Your email has been <span className='description--highlighted'>successfully verified</span>, you can now
+            browse the app while enjoying full features!
+          </p>
+        )}
+        <ButtonLink backgroundColor='important' href={RoutePath.Home} className='text-grey-600 w-fit'>
+          Start exploring <ArrowRight className='size-6' />
+        </ButtonLink>
+      </div>
+      <div className='absolute bottom-4 left-4 text-left max-w-[420px] flex flex-col items-start gap-5'>
+        <LogoWithTextIcon className='h-6 w-auto' />
+        <div className='flex flex-col'>
+          <p className='text-xl font-medium'>
+            dReader is a platform for discovering, reading, collecting, and trading digital comics.
+          </p>
+          <p className='text-xl font-medium'>
+            Sign in & <span className='text-yellow-500'>start collecting</span>!
+          </p>
+        </div>
+      </div>
+    </main>
+  )
+}
