@@ -9,7 +9,7 @@ export type Project = {
     name: string
     avatar: string
   }
-  facts: {
+  details: {
     section: string
     summary: string
     image?: string
@@ -33,7 +33,7 @@ export const PROJECTS: Project[] = [
       avatar: '/assets/images/invest/the-recruits-avatar.png',
     },
     tags: ['Comic Series', 'Action', 'Comedy'],
-    facts: [
+    details: [
       {
         section: 'Overview',
         summary:
@@ -73,7 +73,7 @@ export const PROJECTS: Project[] = [
       avatar: '/assets/images/invest/the-recruits-avatar.png',
     },
     tags: ['Comic Series', 'Action', 'Superhero'],
-    facts: [
+    details: [
       {
         section: 'Overview',
         summary:
@@ -113,7 +113,7 @@ export const PROJECTS: Project[] = [
       avatar: '/assets/images/invest/the-recruits-avatar.png',
     },
     tags: ['Animated Series', 'Adventure', 'Sci-fi', 'Comedy'],
-    facts: [
+    details: [
       {
         section: 'Overview',
         summary:
@@ -153,7 +153,7 @@ export const PROJECTS: Project[] = [
       avatar: '/assets/images/invest/the-recruits-avatar.png',
     },
     tags: ['Comic Series', 'Adventure', 'Sci-fi', 'Superhero'],
-    facts: [
+    details: [
       {
         section: 'Overview',
         summary:

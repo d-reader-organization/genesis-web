@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 
 type ProjectInfoProps = {
-  info: InfoItemProps[]
+  details: InfoItemProps[]
 }
 
 type InfoItemProps = {
@@ -15,12 +15,12 @@ type InfoItemProps = {
   image?: string
 }
 
-export const ProjectInfo: React.FC<ProjectInfoProps> = ({ info: facts }) => {
+export const ProjectInfo: React.FC<ProjectInfoProps> = ({ details }) => {
   return (
     <section className='w-full flex flex-col justify-center align-center'>
       <div className='flex flex-col'>
-        {facts.map((fact, index) => (
-          <InfoItem key={index} item={fact} isLast={index === facts.length - 1} />
+        {details.map((item, index) => (
+          <InfoItem key={index} item={item} isLast={index === details.length - 1} />
         ))}
       </div>
     </section>
