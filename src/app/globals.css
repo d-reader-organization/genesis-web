@@ -21,15 +21,6 @@
     background-color: #fceb54;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-obviously-narrow);
-  }
-
   img {
     -webkit-user-select: none !important;
     -moz-user-select: none !important;

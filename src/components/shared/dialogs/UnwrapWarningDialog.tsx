@@ -22,7 +22,7 @@ export const UnwrapWarningDialog: React.FC<Props> = ({ handleUnwrap, isLoading, 
       >
         <div className='flex flex-col items-center gap-2'>
           <DialogTitle>Comic unwrapping</DialogTitle>
-          <Text className='text-center' as='p'>
+          <Text className='text-center' as='p' styleVariant='body-normal'>
             By unwrapping the comic, you&quot;ll be able to read it. This action is irreversible and will make the comic
             lose the mint condition.
           </Text>

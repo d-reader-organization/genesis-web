@@ -31,11 +31,15 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, className, ...prop
 
       <div className='w-full py-2 px-4 absolute bottom-0 left-0'>
         {comicIssue.comic && (
-          <Text className='w-full text-grey-100 text-ellipsis overflow-hidden whitespace-nowrap' as='p'>
+          <Text
+            className='w-full text-grey-100 text-ellipsis overflow-hidden whitespace-nowrap'
+            as='p'
+            styleVariant='body-normal'
+          >
             {comicIssue.comic.title}
           </Text>
         )}
-        <Text className='w-full font-bold overflow-hidden whitespace-nowrap' as='p'>
+        <Text className='w-full font-bold overflow-hidden whitespace-nowrap' as='p' styleVariant='body-normal'>
           {comicIssue.title}
         </Text>
 

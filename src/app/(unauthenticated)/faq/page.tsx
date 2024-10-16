@@ -8,7 +8,7 @@ export default function FaqPage() {
       <main className='faq-page'>
         <h1 className='title'>FAQ</h1>
         <p className='subtitle'>Find answers to your questions! For any details contact us at </p>
-        <Text as='p' className='text-important-color'>
+        <Text as='p' styleVariant='body-xlarge' className='text-important-color'>
           support@dreader.io
         </Text>
         <br />
