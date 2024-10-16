@@ -21,7 +21,7 @@ type Props = { isGoogleSignUp?: boolean; onSuccess: () => void }
 
 const CreateAccountContent: React.FC<Props> = ({ isGoogleSignUp = false, onSuccess }) => (
   <main className='container mb-4 md:mb-8 sm:p-0 flex flex-col max-w-sm gap-2'>
-    <Text as='h1' className='text-center pt-8 mb-4 sm:mb-8 font-semibold'>
+    <Text as='h2' styleVariant='primary' className='text-center mt-8 mb-4 sm:mb-8'>
       {isGoogleSignUp ? 'Set your details' : 'Welcome!'}
     </Text>
     {isGoogleSignUp ? null : (
@@ -32,10 +32,10 @@ const CreateAccountContent: React.FC<Props> = ({ isGoogleSignUp = false, onSucce
     )}
     <RegisterForm isGoogleSignUp={isGoogleSignUp} onSuccess={onSuccess} />
     <Link className='flex justify-center hover:brightness-150 font-semibold mb-4 mt-4 md:mt-2' href={RoutePath.Login}>
-      <Text as='p' className='text-grey-100'>
+      <Text as='p' styleVariant='body-normal' className='text-grey-100'>
         Already have account?&nbsp;
       </Text>
-      <Text as='p' className='text-important-color'>
+      <Text as='p' styleVariant='body-normal' className='text-important-color'>
         Log In
       </Text>
     </Link>

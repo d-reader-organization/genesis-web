@@ -32,7 +32,7 @@ const Form: React.FC = () => {
   }, [state?.error, toast])
 
   return (
-    <form action={action} className='space-y-8'>
+    <form action={action} className='space-y-4'>
       <div className='space-y-6'>
         <div className='flex flex-col w-full space-y-2'>
           <Label>Email or username</Label>

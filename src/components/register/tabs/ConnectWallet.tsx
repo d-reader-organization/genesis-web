@@ -25,10 +25,10 @@ const ConnectWalletContent: React.FC<Props> = ({ isGoogleSignUp, onSkip }) => {
 
   return (
     <main className='container mb-4 md:mb-8 sm:p-0 flex flex-col max-w-sm gap-4'>
-      <Text as='h1' className='text-center pt-8 mb-4 sm:mb-8 font-semibold'>
+      <Text as='h1' styleVariant='primary' fontWeight='semibold' className='text-center pt-8 mb-4 sm:mb-8'>
         Connect wallet
       </Text>
-      <Text as='p' className='text-center text-base md:text-lg leading-normal'>
+      <Text as='p' styleVariant='body-large' className='text-center text-base md:text-lg leading-normal'>
         Connect with your favorite Solana wallet to store digital comics & other collectibles.
       </Text>
       <div className='flex justify-center gap-4 mt-2'>

@@ -37,6 +37,7 @@ export const PriceTag: React.FC<Props> = ({
     return (
       <Text
         as='p'
+        styleVariant='body-normal'
         className={clsx(
           inline ? 'inline-flex' : 'flex',
           reverse ? 'flex-row-reverse' : 'flex-row',

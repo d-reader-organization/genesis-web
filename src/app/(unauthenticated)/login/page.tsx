@@ -12,8 +12,8 @@ export default async function LoginPage() {
   return (
     <>
       <UnauthenticatedNavigation />
-      <main className='container sm:p-0 flex flex-col max-w-md gap-2'>
-        <Text as='h1' className='text-center pt-8 mb-4 sm:mb-8 font-semibold'>
+      <main className='container sm:p-0 flex flex-col max-w-md gap-2 mt-8'>
+        <Text as='h2' styleVariant='primary' className='text-center mb-8'>
           Welcome back
         </Text>
         <GoogleSignInButton />
@@ -21,10 +21,10 @@ export default async function LoginPage() {
         <LoginForm />
         <ForgotPasswordDialog />
         <Link className='flex hover:brightness-150' href={RoutePath.Register}>
-          <Text as='p' className='text-grey-100'>
+          <Text as='p' styleVariant='body-normal' className='text-grey-100'>
             Don&apos;t have an account?&nbsp;
           </Text>
-          <Text as='p' className='text-important-color'>
+          <Text as='p' styleVariant='body-normal' className='text-important-color'>
             Register here
           </Text>
         </Link>

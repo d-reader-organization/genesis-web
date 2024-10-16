@@ -11,7 +11,7 @@ export const ComicIssueInfoSection: React.FC<ComicIssueInfoProps> = ({ comicIssu
   const { description, flavorText, genres, title } = comicIssue
   return (
     <div className='flex flex-col gap-2 max-w-[680px]'>
-      <Text className='font-normal' as='h1'>
+      <Text className='font-normal' as='h1' styleVariant='primary'>
         {title}
       </Text>
       <InfoListActions
@@ -25,7 +25,7 @@ export const ComicIssueInfoSection: React.FC<ComicIssueInfoProps> = ({ comicIssu
       />
       {genres && <GenresList genres={genres} />}
       <FlavorText text={flavorText} />
-      <Text className='text-lg' as='p'>
+      <Text as='p' styleVariant='body-large'>
         {description}
       </Text>
       <CreatorInfoLink className='my-8' creator={comicIssue.creator} />

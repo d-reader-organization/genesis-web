@@ -13,13 +13,13 @@ const EmailVerificationContent: React.FC<Props> = ({ redirectTo }) => {
   const { mutateAsync: requestUserEmailVerification } = useRequestUserEmailVerification()
   return (
     <main className='container mb-4 md:mb-8 sm:p-0 flex flex-col max-w-md gap-4'>
-      <Text as='h1' className='text-center pt-8 sm:mb-8 font-semibold'>
+      <Text as='h3' styleVariant='primary' fontWeight='semibold' className='text-center pt-8 sm:mb-8'>
         Check your mail
       </Text>
       <div className='flex justify-center'>
         <MailIcon className='h-auto w-10 md:w-14' />
       </div>
-      <Text as='p' className='text-center tracking-wider'>
+      <Text as='p' styleVariant='body-normal' className='text-center'>
         Follow the simple instructions within the email to verify and become eligible for rewards. It might take up to 5
         minutes to receive the mail
       </Text>

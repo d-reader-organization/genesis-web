@@ -11,7 +11,7 @@ export const GenresList: React.FC<Props> = ({ genres }) => (
     {genres.map((genre) => (
       <div className='flex items-center gap-1 md:gap-2 whitespace-nowrap' key={genre.slug}>
         <img src={genre.icon} alt='' className='size-6 rounded-[4px]' />
-        <Text className='text-lg' as='p'>
+        <Text styleVariant='body-large' as='p'>
           {genre.name}
         </Text>
       </div>
