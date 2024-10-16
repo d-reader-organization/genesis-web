@@ -35,7 +35,12 @@ export default async function HomePage() {
           </div>
         </div>
         <div className='flex flex-col gap-8'>
-          <ComicSectionSlider cardType='large' comics={topPickComics} title='Top 10 picks' />
+          <div className='flex flex-col'>
+            <h1 className='text-32 md:text-64 lg:text-[120px] text-white md:text-grey-400 font-obviouslyNarrow font-semibold leading-1/2 tracking-024 uppercase relative top-8 md:top-[66px] lg:top-[68px] w-fit'>
+              Top 10 picks
+            </h1>
+            <ComicSectionSlider cardType='large' comics={topPickComics} title='' />
+          </div>
           <ComicSectionSlider cardType='normal' comics={popularComics} title='Featured Comic Serials' />
         </div>
       </div>
