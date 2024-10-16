@@ -13,5 +13,7 @@ export const jwtCookieProps: Partial<ResponseCookie> = {
   maxAge: 100 * 24 * 60 * 60,
 }
 
+export const passwordDescriptionText = '8 characters minimum. At least 1 lowercase, 1 uppercase and 1 number'
+
 export const blurDataUrl =
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOUV9LaBAAB8gEfSTtbmAAAAABJRU5ErkJggg=='

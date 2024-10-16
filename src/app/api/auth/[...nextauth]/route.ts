@@ -3,7 +3,7 @@ import { Authorization } from '@/models/auth'
 import GoogleProvider from 'next-auth/providers/google'
 import { cookies } from 'next/headers'
 import NextAuth from 'next-auth'
-import { parseAndSetCookieAfterAuth } from '@/app/lib/actions/login'
+import { parseAndSetCookieAfterAuth } from '@/app/lib/actions/auth/login'
 
 const handler = NextAuth({
   providers: [

@@ -16,8 +16,13 @@ const registerWithGoogleSchema = z.object({
   name: z.string().min(3, generateMinLengthErrorMessage('name', 3)),
 })
 
-const resetPasswordSchema = z.object({
+const forgotPasswordSchema = z.object({
   nameOrEmail: z.string().email('Must be an email address'),
 })
 
-export { loginSchema, registerSchema, registerWithGoogleSchema, resetPasswordSchema }
+const resetPasswordSchema = z.object({
+  newPassword: z.string(),
+  verificationToken: z.string(),
+})
+
+export { loginSchema, registerSchema, registerWithGoogleSchema, forgotPasswordSchema, resetPasswordSchema }

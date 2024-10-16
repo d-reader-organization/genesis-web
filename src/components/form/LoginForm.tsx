@@ -2,7 +2,7 @@
 
 import { Button, Input, Label, toast } from '@/components/ui'
 import React, { Suspense } from 'react'
-import { loginAction } from '@/app/lib/actions/login'
+import { loginAction } from '@/app/lib/actions/auth/login'
 import { useFormState, useFormStatus } from 'react-dom'
 import { useSearchParams } from 'next/navigation'
 import { redirectToKey } from '@/constants/general'

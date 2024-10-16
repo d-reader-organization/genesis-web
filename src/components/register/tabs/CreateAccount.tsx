@@ -1,6 +1,6 @@
 'use client'
 
-import { registerAction, registerWithGoogleAction } from '@/app/lib/actions/register'
+import { registerAction, registerWithGoogleAction } from '@/app/lib/actions/auth/register'
 import React, { useEffect } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
 import { Label } from '../../ui/Label'
@@ -15,6 +15,7 @@ import { RoutePath } from '@/enums/routePath'
 import { TermsOfServiceAndPrivacyPolicy } from '../../shared/TermsOfServiceAndPrivacyText'
 import { useToast } from '../../ui/toast/use-toast'
 import { Loader } from '@/components/shared/Loader'
+import { passwordDescriptionText } from '@/constants/general'
 
 type Props = { isGoogleSignUp?: boolean; onSuccess: () => void }
 
@@ -97,7 +98,7 @@ const RegularForm: React.FC<RegularFormProps> = ({ action, error }) => (
       </div>
       <div className='flex flex-col w-full space-y-2'>
         <Label>Password</Label>
-        <DescriptionText text='8 characters minimum. At least 1 lowercase, 1 uppercase and 1 number' />
+        <DescriptionText text={passwordDescriptionText} />
         <Input placeholder='********' type='password' name='password' />
       </div>
       {!!error && <p className='text-red-600'>{error}</p>}

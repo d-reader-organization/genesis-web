@@ -6,7 +6,7 @@ import { AuthFormState, Authorization } from '@/models/auth'
 import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { redirect, RedirectType } from 'next/navigation'
-import { fetchWrapper } from '../fetchWrapper'
+import { fetchWrapper } from '../../fetchWrapper'
 import { accessTokenKey, jwtCookieProps, refreshTokenKey } from '@/constants/general'
 import { loginSchema } from '@/constants/schemas'
 
