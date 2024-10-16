@@ -1,16 +1,13 @@
 'use client'
 
 import React from 'react'
-import { Copy, MoreHorizontal, Power, Wallet } from 'lucide-react'
+import { Copy, Power, Wallet } from 'lucide-react'
 import { toast } from '@/components/ui/toast/use-toast'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { ConnectButton } from '../../buttons/ConnectButton'
 import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
 import { formatWalletAddress } from '@/utils/helpers'
-import PhantomIcon from 'public/assets/vector-icons/phantom.svg'
-import SolflareIcon from 'public/assets/vector-icons/solflare.svg'
-import UltimateIcon from 'public/assets/vector-icons/ultimate.svg'
-import EspressoIcon from 'public/assets/vector-icons/espresso.svg'
+import ConnectWalletIcons from 'public/assets/vector-icons/connect-wallet-sidebar.svg'
 
 export const WalletSection: React.FC = () => {
   const { publicKey } = useWallet()
@@ -46,31 +43,11 @@ export const WalletSection: React.FC = () => {
         <span className='font-bold'>Quick connect&nbsp;</span>
         <span>your wallet.</span>
       </div>
-      <div className='flex items-center gap-1.5'>
-        <WalletBox>
-          <PhantomIcon />
-        </WalletBox>
-        <WalletBox>
-          <SolflareIcon />
-        </WalletBox>
-        <WalletBox>
-          <UltimateIcon />
-        </WalletBox>
-        <WalletBox>
-          <EspressoIcon />
-        </WalletBox>
-        <WalletBox>
-          <MoreHorizontal className='size-6' />
-        </WalletBox>
-      </div>
+      <ConnectWalletIcons />
       <ConnectButton />
     </div>
   )
 }
-
-const WalletBox: React.FC<React.PropsWithChildren> = ({ children }) => (
-  <div className='rounded-lg bg-grey-400 flex flex-col justify-center items-center size-14 p-1'>{children}</div>
-)
 
 type ButtonIconWrapperProps = {
   onClick: () => void
