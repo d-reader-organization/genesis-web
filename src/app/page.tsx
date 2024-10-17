@@ -24,7 +24,7 @@ export default async function HomePage() {
     .slice(0, 2)
 
   return (
-    <BaseLayout>
+    <BaseLayout showFooter>
       <div className='max-w-screen-xl w-full flex flex-col gap-10 md:p-4'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
           <HeroCarousel slides={primarySlides} />
