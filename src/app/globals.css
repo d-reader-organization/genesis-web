@@ -9,7 +9,7 @@
   body {
     @apply text-white;
     @apply bg-grey-600;
-    @apply mb-16 md:mb-0;
+    @apply mb-0;
     -webkit-font-smoothing: antialiased;
     overflow-y: scroll;
   }
@@ -19,15 +19,6 @@
   }
   body *::selection {
     background-color: #fceb54;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-obviously-narrow);
   }
 
   img {

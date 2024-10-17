@@ -24,7 +24,7 @@ export default async function HomePage() {
     .slice(0, 2)
 
   return (
-    <BaseLayout>
+    <BaseLayout showFooter>
       <div className='max-w-screen-xl w-full flex flex-col gap-10 md:p-4'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
           <HeroCarousel slides={primarySlides} />
@@ -35,7 +35,12 @@ export default async function HomePage() {
           </div>
         </div>
         <div className='flex flex-col gap-8'>
-          <ComicSectionSlider cardType='large' comics={topPickComics} title='Top 10 picks' />
+          <div className='flex flex-col'>
+            <h1 className='text-32 md:text-64 lg:text-[120px] text-white md:text-grey-400 font-obviouslyNarrow font-semibold leading-1/2 tracking-024 uppercase relative top-8 md:top-[66px] lg:top-[68px] w-fit'>
+              Top 10 picks
+            </h1>
+            <ComicSectionSlider cardType='large' comics={topPickComics} title='' />
+          </div>
           <ComicSectionSlider cardType='normal' comics={popularComics} title='Featured Comic Serials' />
         </div>
       </div>

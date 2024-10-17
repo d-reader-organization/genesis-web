@@ -7,10 +7,10 @@ type Props = {
 
 export const TotalPagesText: React.FC<Props> = ({ count }) => (
   <div className='flex gap-1'>
-    <Text className='text-lg font-medium' as='p'>
+    <Text as='p' styleVariant='body-large' fontWeight='medium'>
       {count}
     </Text>
-    <Text className='text-lg font-medium text-grey-100' as='p'>
+    <Text className='text-grey-100' as='p' styleVariant='body-large' fontWeight='medium'>
       pages
     </Text>
   </div>

@@ -29,8 +29,10 @@ export const UnwrapIssueDialog: React.FC<Props> = ({ assets, comicIssue, showUnw
         className='flex flex-col justify-between items-center gap-8 bg-grey-400 p-5 rounded-lg'
       >
         <DialogTitle className='sr-only'>Unwrap issue dialog</DialogTitle>
-        <Text as='h3'>Choose to open</Text>
-        <Text as='p' className='text-lg text-center'>
+        <Text as='h3' styleVariant='primary'>
+          Choose to open
+        </Text>
+        <Text as='p' styleVariant='body-large' className='text-center'>
           In order to read the full comic issue, at least one Asset should be unwrapped.
         </Text>
         {unusedAssets.map((asset) => (

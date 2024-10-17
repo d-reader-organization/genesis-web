@@ -4,11 +4,11 @@ import { AUTH_QUERY_KEYS } from '@/api/auth/authKeys'
 import { RoutePath } from '@/enums/routePath'
 import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
-import { fetchWrapper } from '../fetchWrapper'
+import { fetchWrapper } from '../../fetchWrapper'
 import { googleAccessTokenKey } from '@/constants/general'
 import { AuthFormState, Authorization } from '@/models/auth/'
-import { parseAndSetCookieAfterAuth } from './login'
 import { registerSchema, registerWithGoogleSchema } from '@/constants/schemas'
+import { parseAndSetCookieAfterAuth } from './login'
 
 const { AUTH, USER, REGISTER, REGISTER_WITH_GOOGLE } = AUTH_QUERY_KEYS
 

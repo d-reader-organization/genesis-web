@@ -29,12 +29,12 @@ const LeftSection: React.FC<Props> = ({ comic }) => {
   const { description, flavorText, genres, title } = comic
   return (
     <div className='flex flex-col gap-2 max-w-[680px]'>
-      <Text className='font-normal' as='h1'>
+      <Text className='font-normal' as='h2' styleVariant='primary'>
         {title}
       </Text>
       {genres && <GenresList genres={genres} />}
       <FlavorText text={flavorText} />
-      <Text className='text-lg' as='p'>
+      <Text as='p' styleVariant='body-large'>
         {description}
       </Text>
       <CreatorInfoLink creator={comic.creator} />

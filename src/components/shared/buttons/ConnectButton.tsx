@@ -93,7 +93,10 @@ export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...pro
 
       {walletModalConfig ? (
         <div className='wallet-adapter-modal wallet-adapter-modal-fade-in wallet-dialog'>
-          <div className='wallet-adapter-modal-container' onClick={(e) => e.currentTarget === e.target && setWalletModalConfig(null)}>
+          <div
+            className='wallet-adapter-modal-container'
+            onClick={(e) => e.currentTarget === e.target && setWalletModalConfig(null)}
+          >
             <div className='wallet-adapter-modal-wrapper'>
               <button
                 onClick={() => {

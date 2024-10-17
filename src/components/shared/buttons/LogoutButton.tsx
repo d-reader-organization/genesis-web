@@ -1,6 +1,6 @@
 'use client'
 
-import { logoutAction } from '@/app/lib/actions/logout'
+import { logoutAction } from '@/app/lib/actions/auth/logout'
 import { Button } from '@/components/ui'
 import React from 'react'
 

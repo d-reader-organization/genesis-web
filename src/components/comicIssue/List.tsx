@@ -56,11 +56,11 @@ export const ComicIssueList: React.FC<Props> = ({
   }
   return (
     <>
-      {issuesCount && (
-        <Text className='leading-normal font-normal border-b border-grey-100 py-8 my-8 md:mt-8' as='h3'>
+      {issuesCount ? (
+        <Text className='border-b border-grey-100 py-6 my-6' as='h4' styleVariant='primary' fontWeight='normal'>
           Issues ( {`${issuesCount}`} )
         </Text>
-      )}
+      ) : null}
       <div className='flex flex-wrap gap-4'>
         {comicIssues.map((issue) => (
           <ComicIssueCard

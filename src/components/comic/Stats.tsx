@@ -3,7 +3,6 @@ import { InfoList } from '../shared/InfoList'
 import { Comic } from '@/models/comic'
 import { CollectionStatusItem } from '../shared/CollectionStatusItem'
 import { InfoListActions } from '../shared/InfoListActions'
-import { PriceTag } from '../shared/tags/PriceTag'
 
 type Props = { comic: Comic }
 
@@ -11,10 +10,6 @@ export const ComicStats: React.FC<Props> = ({ comic }) => {
   return (
     <div className='flex justify-start gap-4 md:flex-row-reverse md:justify-end'>
       <InfoList orientation='vertical'>
-        <CollectionStatusItem
-          label='volume'
-          value={<PriceTag maxDecimals={0} price={1030220000000} bold symbol reverse />}
-        />
         <CollectionStatusItem label='issues' value={comic.stats?.issuesCount} />
         <CollectionStatusItem label='readers' value={comic.stats?.viewersCount} />
         <CollectionStatusItem label='ongoing' value={comic.isCompleted ? 'no ' : 'yes'} />

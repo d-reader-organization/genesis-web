@@ -21,8 +21,8 @@ const {
   VERIFY_EMAIL,
 } = USER_QUERY_KEYS
 
-export const requestUserPasswordReset = async (params: RequestPasswordResetParams): Promise<void> => {
-  await fetchWrapper<void>({ method: 'PATCH', params, path: `${USER}/${REQUEST_PASSWORD_RESET}` })
+export const requestUserPasswordReset = async (body: RequestPasswordResetParams): Promise<void> => {
+  await fetchWrapper<void>({ method: 'PATCH', body, isTextResponse: true, path: `${USER}/${REQUEST_PASSWORD_RESET}` })
 }
 
 export const deleteUser = async (slug: string): Promise<void> => {
@@ -34,7 +34,12 @@ export const requestUserEmailChange = async (data: RequestEmailChangeParams): Pr
 }
 
 export const resetUserPassword = async (resetPasswordData: ResetPasswordData): Promise<void> => {
-  await fetchWrapper({ path: `${USER}/${RESET_PASSWORD}`, body: resetPasswordData, method: 'PATCH' })
+  await fetchWrapper({
+    path: `${USER}/${RESET_PASSWORD}`,
+    isTextResponse: true,
+    body: resetPasswordData,
+    method: 'PATCH',
+  })
 }
 
 export const updateUser = async (id: string | number, request: UpdateUserData): Promise<Nullable<User>> => {

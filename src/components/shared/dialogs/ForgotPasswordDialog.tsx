@@ -1,6 +1,6 @@
 'use client'
 
-import { ResetPasswordForm } from '@/components/form/ResetPasswordForm'
+import { ForgotPasswordForm } from '@/components/form/ForgotPasswordForm'
 import { Button } from '@/components/ui/Button'
 import {
   Dialog,
@@ -29,7 +29,7 @@ export const ForgotPasswordDialog: React.FC = () => {
             spam folder!
           </DialogDescription>
         </DialogHeader>
-        <ResetPasswordForm onClose={togglePasswordDialog} />
+        <ForgotPasswordForm onClose={togglePasswordDialog} />
       </DialogContent>
     </Dialog>
   )

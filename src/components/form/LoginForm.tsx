@@ -2,7 +2,7 @@
 
 import { Button, Input, Label, toast } from '@/components/ui'
 import React, { Suspense } from 'react'
-import { loginAction } from '@/app/lib/actions/login'
+import { loginAction } from '@/app/lib/actions/auth/login'
 import { useFormState, useFormStatus } from 'react-dom'
 import { useSearchParams } from 'next/navigation'
 import { redirectToKey } from '@/constants/general'
@@ -32,7 +32,7 @@ const Form: React.FC = () => {
   }, [state?.error, toast])
 
   return (
-    <form action={action} className='space-y-8'>
+    <form action={action} className='space-y-4'>
       <div className='space-y-6'>
         <div className='flex flex-col w-full space-y-2'>
           <Label>Email or username</Label>

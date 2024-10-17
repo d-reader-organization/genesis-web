@@ -1,6 +1,6 @@
 'use client'
 
-import { registerAction, registerWithGoogleAction } from '@/app/lib/actions/register'
+import { registerAction, registerWithGoogleAction } from '@/app/lib/actions/auth/register'
 import React, { useEffect } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
 import { Label } from '../../ui/Label'
@@ -15,12 +15,13 @@ import { RoutePath } from '@/enums/routePath'
 import { TermsOfServiceAndPrivacyPolicy } from '../../shared/TermsOfServiceAndPrivacyText'
 import { useToast } from '../../ui/toast/use-toast'
 import { Loader } from '@/components/shared/Loader'
+import { passwordDescriptionText } from '@/constants/general'
 
 type Props = { isGoogleSignUp?: boolean; onSuccess: () => void }
 
 const CreateAccountContent: React.FC<Props> = ({ isGoogleSignUp = false, onSuccess }) => (
   <main className='container mb-4 md:mb-8 sm:p-0 flex flex-col max-w-sm gap-2'>
-    <Text as='h1' className='text-center pt-8 mb-4 sm:mb-8 font-semibold'>
+    <Text as='h2' styleVariant='primary' className='text-center mt-8 mb-4 sm:mb-8'>
       {isGoogleSignUp ? 'Set your details' : 'Welcome!'}
     </Text>
     {isGoogleSignUp ? null : (
@@ -31,10 +32,10 @@ const CreateAccountContent: React.FC<Props> = ({ isGoogleSignUp = false, onSucce
     )}
     <RegisterForm isGoogleSignUp={isGoogleSignUp} onSuccess={onSuccess} />
     <Link className='flex justify-center hover:brightness-150 font-semibold mb-4 mt-4 md:mt-2' href={RoutePath.Login}>
-      <Text as='p' className='text-grey-100'>
+      <Text as='p' styleVariant='body-normal' className='text-grey-100'>
         Already have account?&nbsp;
       </Text>
-      <Text as='p' className='text-important-color'>
+      <Text as='p' styleVariant='body-normal' className='text-important-color'>
         Log In
       </Text>
     </Link>
@@ -97,7 +98,7 @@ const RegularForm: React.FC<RegularFormProps> = ({ action, error }) => (
       </div>
       <div className='flex flex-col w-full space-y-2'>
         <Label>Password</Label>
-        <DescriptionText text='8 characters minimum. At least 1 lowercase, 1 uppercase and 1 number' />
+        <DescriptionText text={passwordDescriptionText} />
         <Input placeholder='********' type='password' name='password' />
       </div>
       {!!error && <p className='text-red-600'>{error}</p>}
