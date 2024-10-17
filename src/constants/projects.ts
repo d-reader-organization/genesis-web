@@ -4,16 +4,17 @@ export type Project = {
   subtitle: string
   tags: string[]
   banner: string
+  thumbnail?: string
   creator: {
     name: string
     avatar: string
   }
-  facts: {
+  details: {
     section: string
     summary: string
     image?: string
   }[]
-  fundingDetails: {
+  fundingInfo: {
     pledgedAmount: number
     raiseGoal: number
     numberOfBackers: number
@@ -32,7 +33,7 @@ export const PROJECTS: Project[] = [
       avatar: '/assets/images/invest/the-recruits-avatar.png',
     },
     tags: ['Comic Series', 'Action', 'Comedy'],
-    facts: [
+    details: [
       {
         section: 'Overview',
         summary:
@@ -55,7 +56,7 @@ export const PROJECTS: Project[] = [
           'Phase 1: Catch the bad guys. Phase 2: Get better snacks. Phase 3: Maybe save the world, or at least not destroy it.',
       },
     ],
-    fundingDetails: {
+    fundingInfo: {
       pledgedAmount: 2565170,
       raiseGoal: 3000000,
       numberOfBackers: 10213,
@@ -66,13 +67,13 @@ export const PROJECTS: Project[] = [
     slug: 'mad-lads',
     title: 'Mad Lads',
     subtitle: 'A tale of chaos and mischief',
-    banner: '/assets/images/invest/mad-lads.png',
+    banner: '/assets/images/invest/mad-lads-banner.png',
     creator: {
       name: 'Mad Lad Studios',
       avatar: '/assets/images/invest/the-recruits-avatar.png',
     },
     tags: ['Comic Series', 'Action', 'Superhero'],
-    facts: [
+    details: [
       {
         section: 'Overview',
         summary:
@@ -95,7 +96,7 @@ export const PROJECTS: Project[] = [
           'Phase 1: Survive the next quest. Phase 2: Steal something valuable. Phase 3: Run for your life... again.',
       },
     ],
-    fundingDetails: {
+    fundingInfo: {
       pledgedAmount: 1840000,
       raiseGoal: 2500000,
       numberOfBackers: 8670,
@@ -112,7 +113,7 @@ export const PROJECTS: Project[] = [
       avatar: '/assets/images/invest/the-recruits-avatar.png',
     },
     tags: ['Animated Series', 'Adventure', 'Sci-fi', 'Comedy'],
-    facts: [
+    details: [
       {
         section: 'Overview',
         summary:
@@ -135,7 +136,7 @@ export const PROJECTS: Project[] = [
           'Phase 1: Find a treasure map. Phase 2: Accidentally blow something up. Phase 3: Make a daring escape while laughing at danger.',
       },
     ],
-    fundingDetails: {
+    fundingInfo: {
       pledgedAmount: 2200000,
       raiseGoal: 3500000,
       numberOfBackers: 9354,
@@ -152,7 +153,7 @@ export const PROJECTS: Project[] = [
       avatar: '/assets/images/invest/the-recruits-avatar.png',
     },
     tags: ['Comic Series', 'Adventure', 'Sci-fi', 'Superhero'],
-    facts: [
+    details: [
       {
         section: 'Overview',
         summary:
@@ -175,7 +176,7 @@ export const PROJECTS: Project[] = [
           'Phase 1: Accept a dangerous mission. Phase 2: Fight off space pirates. Phase 3: Save the galaxy... and collect a huge bounty.',
       },
     ],
-    fundingDetails: {
+    fundingInfo: {
       pledgedAmount: 3000000,
       raiseGoal: 5000000,
       numberOfBackers: 12000,

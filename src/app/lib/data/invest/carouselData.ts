@@ -43,12 +43,12 @@ export const investSlides: InvestSlide[] = [
     ],
   },
   {
-    slug: 'geckos',
-    image: '/assets/images/invest-carousel.jpeg',
+    slug: 'galactic-geckos',
+    image: '/assets/images/invest/galactic-geckos.png',
     title: 'Galactic Geckos',
     subtitle: 'Lord of the Ring meets geckos - in space',
     status: 'LIVE SOON',
-    logo: 'https://d323dls9ny69nf.cloudfront.net/comics/the-recruits-1714399610806/logo-1714399886123.png',
+    logo: '/assets/images/invest/transparent_800x450.png',
     infos: [
       {
         text: 'by GGSG',
@@ -62,23 +62,26 @@ export const investSlides: InvestSlide[] = [
     ],
     tags: [
       {
-        title: 'Action',
+        title: 'Comic Series',
+      },
+      {
+        title: 'Adventure',
       },
       {
         title: 'Sci-fi',
       },
       {
-        title: 'Comedy',
-      },
+        title: 'Superhero'
+      }
     ],
   },
   {
     slug: 'mad-lads',
     title: 'Mad Lads',
     subtitle: 'The Mad King has focking risen!',
-    image: '/assets/images/invest-carousel.jpeg',
+    image: '/assets/images/invest/mad-lads-banner.png',
     status: 'LIVE SOON',
-    logo: 'https://d323dls9ny69nf.cloudfront.net/comics/the-recruits-1714399610806/logo-1714399886123.png',
+    logo: '/assets/images/invest/transparent_800x450.png',
     infos: [
       {
         text: 'by Mad King',
@@ -92,13 +95,13 @@ export const investSlides: InvestSlide[] = [
     ],
     tags: [
       {
-        title: 'Adventure',
+        title: 'Comic Series',
       },
       {
-        title: 'Comedy',
+        title: 'Action',
       },
       {
-        title: 'Manga',
+        title: 'Superhero',
       },
     ],
   },

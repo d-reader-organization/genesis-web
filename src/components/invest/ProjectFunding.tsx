@@ -3,13 +3,14 @@
 import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
+import { TrendingUp } from 'lucide-react'
 
 function formatNumberWithCommas(num: number): string {
   return num.toLocaleString()
 }
 
-type FundingProps = {
-  fundingDetails: FundingDetails
+type ProjectFundingProps = {
+  info: FundingDetails
   className: string
 }
 
@@ -20,7 +21,7 @@ type FundingDetails = {
   daysLeft: number
 }
 
-export const ProjectFunding: React.FC<FundingProps> = ({ fundingDetails, className }) => {
+export const ProjectFunding: React.FC<ProjectFundingProps> = ({ info, className }) => {
   return (
     <div
       className={
@@ -33,7 +34,7 @@ export const ProjectFunding: React.FC<FundingProps> = ({ fundingDetails, classNa
         <div className='relative h-[8px] rounded-[27px] w-full bg-[#44464d]'>
           <div
             className='h-[8px] bg-[#fceb54] rounded-[27px] absolute top-0 left-0'
-            style={{ width: `${(fundingDetails.pledgedAmount / fundingDetails.raiseGoal) * 100}%` }}
+            style={{ width: `${(info.pledgedAmount / info.raiseGoal) * 100}%` }}
           />
         </div>
       </div>
@@ -41,19 +42,19 @@ export const ProjectFunding: React.FC<FundingProps> = ({ fundingDetails, classNa
       <div className='flex flex-row w-full py-1 items-center justify-between md:flex-col md:justify-center md:items-start md:gap-[1.6rem] md:py-3'>
         <div className='flex flex-col min-w-[95px] items-start md:w-full md:gap-1'>
           <h2 className='text-[#fceb54] font-semibold text-xl leading-tight tracking-tight md:text-[32px] md:leading-none md:tracking-tight'>
-            ${formatNumberWithCommas(fundingDetails.pledgedAmount)}
+            ${formatNumberWithCommas(info.pledgedAmount)}
           </h2>
           <p className='max-md:hidden text-[#c2c5ce] text-xs font-medium md:text-base md:leading-relaxed'>
-            pledged of ${formatNumberWithCommas(fundingDetails.raiseGoal)}
+            pledged of ${formatNumberWithCommas(info.raiseGoal)}
           </p>
           <p className='md:hidden text-[#c2c5ce] text-xs font-medium md:text-base md:leading-relaxed'>
-            of ${formatNumberWithCommas(fundingDetails.raiseGoal)}
+            of ${formatNumberWithCommas(info.raiseGoal)}
           </p>
         </div>
 
         <div className='flex flex-col min-w-[65px] items-center md:w-full md:gap-1 md:items-start'>
           <h2 className='text-white font-semibold text-xl leading-tight tracking-tight md:text-[32px] md:leading-none md:tracking-tight'>
-            {formatNumberWithCommas(fundingDetails.numberOfBackers)}
+            {formatNumberWithCommas(info.numberOfBackers)}
           </h2>
           <p className='text-[#c2c5ce] text-xs font-medium leading-normal tracking-normal md:text-base md:leading-relaxed'>
             backers
@@ -62,7 +63,7 @@ export const ProjectFunding: React.FC<FundingProps> = ({ fundingDetails, classNa
 
         <div className='flex flex-col min-w-[95px] items-start px-6 md:w-full md:gap-1 md:px-0'>
           <h2 className='text-white font-semibold text-xl leading-tight tracking-tight md:text-[32px] md:leading-none md:tracking-tight'>
-            {fundingDetails.daysLeft}
+            {info.daysLeft}
           </h2>
           <p className='text-[#c2c5ce] text-xs font-medium leading-normal tracking-normal md:text-base md:leading-relaxed'>
             days left
@@ -82,7 +83,7 @@ export const ProjectFunding: React.FC<FundingProps> = ({ fundingDetails, classNa
           className='flex max-h-[54px] max-w-[54px] p-[10px] bg-white rounded-xl shadow border border-[#56a05e]'
           style={{ boxShadow: '0 0 15px rgba(86, 160, 94, 0.8)' }}
         >
-          <Image src='/assets/images/invest/Arrow.svg' alt='Upwards Arrow' width={45} height={50} />
+          <TrendingUp color='green' size={20} />
         </div>
         <p className='text-[#aeaeae] text-base font-medium leading-snug'>
           Rewards will be distributed as creator completes milestones
