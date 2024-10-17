@@ -22,7 +22,7 @@ type DetailsProps = { candyMachine: CandyMachine }
 type Props = { comicIssue: ComicIssue; isAuthenticated: boolean }
 
 export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticated }) => {
-  const { candyMachine, selectedCoupon, isLoading } = useCandyMachineStore((state) => state)
+  const { candyMachine, selectedCoupon, isLoading, coupons } = useCandyMachineStore((state) => state)
 
   return isLoading ? (
     <LoadingSkeleton />
@@ -38,8 +38,12 @@ export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticat
             <PurchaseRow comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
           </div>
         )}
-        <Divider className='max-md:hidden' />
-        <CouponsSection comicIssue={comicIssue} />
+        {coupons.length > 0 && 
+          <>
+            <Divider className='max-md:hidden' />
+            <CouponsSection comicIssue={comicIssue} />
+          </>
+        }
       </div>
     )
   )
