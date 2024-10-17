@@ -9,7 +9,7 @@
   body {
     @apply text-white;
     @apply bg-grey-600;
-    @apply mb-16 md:mb-0;
+    @apply mb-0;
     -webkit-font-smoothing: antialiased;
     overflow-y: scroll;
   }
