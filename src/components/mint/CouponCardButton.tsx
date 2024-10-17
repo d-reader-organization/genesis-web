@@ -11,6 +11,8 @@ type CardProps = {
   onClick: () => void
 }
 
+const registeredUserCoupon = 'RegisteredUser'
+
 export const CouponCardButton: React.FC<CardProps> = ({ coupon, discount, isSelected, onClick }) => (
   <button
     disabled={!coupon.stats.isEligible}
@@ -26,7 +28,9 @@ export const CouponCardButton: React.FC<CardProps> = ({ coupon, discount, isSele
         <h6>{discount}%</h6>
         <h6 className={!coupon.stats.isEligible ? 'text-grey-200' : 'text-green-accent'}>OFF</h6>
       </div>
-      <span className='text-base font-medium leading-[22.4px]'>{coupon.name}</span>
+      <span className='text-base font-medium leading-[22.4px] text-start'>
+        {coupon.name === registeredUserCoupon ? 'Registered user' : coupon.name}
+      </span>
     </div>
     <div className='flex max-md:flex-col justify-center items-center rounded-lg bg-black p-2 md:p-1 max-h-12 w-fit md:max-h-7 md:w-full'>
       <span className='text-xs md:text-base font-medium leading-[22.4px] text-grey-50'>Used&nbsp;</span>
