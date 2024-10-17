@@ -23,9 +23,7 @@ export const CouponsSection: React.FC<{ comicIssue: ComicIssue }> = ({ comicIssu
             className='h-[18px] w-[18px] hover:cursor-pointer'
             color='#c2c5ce'
             onClick={toggleCouponDescriptionDialog}
-          >
-            Check Eligibility
-          </Info>
+          />
         </div>
         <div className='flex items-center gap-3 flex-wrap'>
           {coupons.map((coupon) => (
