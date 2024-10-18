@@ -2,32 +2,20 @@ import React from 'react'
 import Image from 'next/image'
 import { InfoIcon } from 'lucide-react'
 import { payoutDetails } from '@/constants/tooltips'
-import { formatNumberWithCommas } from '@/utils/numbers'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/Tooltip'
+import { Project, ProjectFunding, ProjectPayout } from '@/models/project'
+import { formatUSD } from '@/utils/numbers'
 
-type ProjectFundingProps = {
-  title: string
-  payoutInfo: PayoutDetails
-  logo: string
-  raiseGoal: number
-  numberOfBackers: number
+type Props = {
+  title: Project['title']
+  payout: ProjectPayout
+  logo: Project['logo']
+  raiseGoal: ProjectFunding['raiseGoal']
+  numberOfBackers: ProjectFunding['numberOfBackers']
   className: string
 }
 
-type PayoutDetails = {
-  roiPercentage: number
-  daysForRoi: number
-  description: string
-}
-
-export const ProjectPayoutCard: React.FC<ProjectFundingProps> = ({
-  title,
-  payoutInfo,
-  logo,
-  raiseGoal,
-  numberOfBackers,
-  className,
-}) => {
+export const ProjectPayoutCard: React.FC<Props> = ({ title, payout, logo, raiseGoal, numberOfBackers, className }) => {
   const tooltipText: string = 'text'
 
   return (
@@ -54,11 +42,11 @@ export const ProjectPayoutCard: React.FC<ProjectFundingProps> = ({
       </div>
 
       <div className='flex flex-col gap-5 w-full'>
-        <RoiWidget roi={payoutInfo.roiPercentage} tooltipText={tooltipText} />
+        <RoiWidget roi={payout.roiPercent} tooltipText={tooltipText} />
         <div className='flex w-full justify-center items-center'>
-          <InvestmentStatsBox title='RAISED' value={raiseGoal} currency={true} />
-          <InvestmentStatsBox title='DAYS FOR ROI' value={payoutInfo.daysForRoi} currency={false} />
-          <InvestmentStatsBox title='BACKERS' value={numberOfBackers} currency={false} />
+          <InvestmentStatsBox title='RAISED' value={formatUSD(raiseGoal)} />
+          <InvestmentStatsBox title='DAYS FOR ROI' value={payout.daysForRoi} />
+          <InvestmentStatsBox title='BACKERS' value={numberOfBackers} />
         </div>
       </div>
       <div className='flex flex-col pt-1'>
@@ -104,15 +92,12 @@ const InfoTooltip: React.FC<{ text: string }> = ({ text }) => (
 
 type InvestmentStatsBoxProps = {
   title: string
-  value: number
-  currency: boolean
+  value: number | string
 }
 
-const InvestmentStatsBox: React.FC<InvestmentStatsBoxProps> = ({ title, value, currency }) => (
+const InvestmentStatsBox: React.FC<InvestmentStatsBoxProps> = ({ title, value }) => (
   <div className='flex w-1/3 flex-col justify-center items-center gap-2'>
     <p className='text-sm font-bold text-grey-100'>{title}</p>
-    <p className='text-2xl font-bold leading-[22.4px]'>
-      {currency ? '$' + formatNumberWithCommas(value) : formatNumberWithCommas(value)}
-    </p>
+    <p className='text-2xl font-bold leading-[22.4px]'>{value}</p>
   </div>
 )

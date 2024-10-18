@@ -1,13 +1,15 @@
-import { Project } from '@/app/lib/data/invest/projectsData'
+import { SuccessfulProject } from '@/models/project'
 import { RoutePath } from '@/enums/routePath'
 import { ChevronRightIcon, InfoIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/Tooltip'
+import { roiTooltip } from '@/constants/tooltips'
+import { formatUSD } from '@/utils/numbers'
 
 type Props = {
-  projects: Project[]
+  projects: SuccessfulProject[]
   title: string
 }
 
@@ -27,7 +29,7 @@ export const ProjectsSection: React.FC<Props> = ({ projects, title }) => {
 }
 
 type CardProps = {
-  project: Project
+  project: SuccessfulProject
 }
 
 const Card: React.FC<CardProps> = ({ project }) => (
@@ -41,13 +43,13 @@ const Card: React.FC<CardProps> = ({ project }) => (
         height={84}
       />
     </div>
-    <RoiWidget roi={project.roi} tooltipText={project.tooltipText} />
+    <RoiWidget roi={project.payout.roiPercent} tooltipText={roiTooltip(project.payout.roiPercent)} />
     <div className='flex max-md:flex-col justify-center gap-4 md:gap-12 lg:gap-16 xl:gap-20 items-center'>
-      <InvestmentStatsBox title='RAISED' value={project.raised} />
-      <InvestmentStatsBox title='BACKERS' value={project.backers} />
+      <InvestmentStatsBox title='RAISED' value={formatUSD(project.funding.raiseGoal)} />
+      <InvestmentStatsBox title='BACKERS' value={project.funding.numberOfBackers} />
     </div>
     <p className='text-xs md:text-base font-bold leading-normal md:leading-[22.4px] text-center'>
-      {project.description}
+      Payout processed {project.payout?.daysForRoi} days after the offering closed.
     </p>
     <Link
       href={RoutePath.Payout(project.slug)}
