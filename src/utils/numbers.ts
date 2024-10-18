@@ -19,3 +19,7 @@ export const roundNumber = (number: number | null, maxDecimals = 1) => {
   const decimalUnits = Math.pow(10, maxDecimals)
   return Math.round(number * decimalUnits) / decimalUnits
 }
+
+export const formatNumberWithCommas = (num: number): string => {
+  return num.toLocaleString()
+}
