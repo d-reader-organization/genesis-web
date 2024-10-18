@@ -44,11 +44,11 @@ export const investSlides: InvestSlide[] = [
   },
   {
     slug: 'galactic-geckos',
-    image: '/assets/images/invest/galactic-geckos.png',
+    image: '/assets/images/invest/galactic-geckos-cover.png',
     title: 'Galactic Geckos',
     subtitle: 'Lord of the Ring meets geckos - in space',
     status: 'LIVE SOON',
-    logo: '/assets/images/invest/transparent_800x450.png',
+    logo: '/assets/images/invest/galactic-geckos-logo.png',
     infos: [
       {
         text: 'by GGSG',
@@ -81,7 +81,7 @@ export const investSlides: InvestSlide[] = [
     subtitle: 'The Mad King has focking risen!',
     image: '/assets/images/invest/mad-lads-banner.png',
     status: 'LIVE SOON',
-    logo: '/assets/images/invest/transparent_800x450.png',
+    logo: '/assets/images/invest/mad-king-logo.png',
     infos: [
       {
         text: 'by Mad King',

@@ -6,21 +6,21 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 
 type ProjectInfoProps = {
-  details: InfoItemProps[]
+  info: InfoItemProps[]
 }
 
 type InfoItemProps = {
   section: string
-  summary: string
+  text: string
   image?: string
 }
 
-export const ProjectInfo: React.FC<ProjectInfoProps> = ({ details }) => {
+export const ProjectInfo: React.FC<ProjectInfoProps> = ({ info }) => {
   return (
     <section className='w-full flex flex-col justify-center align-center'>
       <div className='flex flex-col'>
-        {details.map((item, index) => (
-          <InfoItem key={index} item={item} isLast={index === details.length - 1} />
+        {info.map((item, index) => (
+          <InfoItem key={index} item={item} isLast={index === info.length - 1} />
         ))}
       </div>
     </section>
@@ -92,7 +92,7 @@ const InfoItem: React.FC<{ item: InfoItemProps; isLast?: boolean }> = ({ item, i
             onTransitionEnd={handleTransitionEnd}
           >
             <div className='flex flex-col justify-center items-start gap-4 relative w-full'>
-              <p> {item.summary} </p>
+              <p> {item.text} </p>
               {item.image && (
                 <Image
                   src={item.image}
