@@ -5,29 +5,29 @@ import { PlusIcon, MinusIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 
-type ProjectFactsProps = {
-  facts: FactItemProps[]
+type ProjectInfoProps = {
+  info: InfoItemProps[]
 }
 
-type FactItemProps = {
+type InfoItemProps = {
   section: string
-  summary: string
+  text: string
   image?: string
 }
 
-export const ProjectFacts: React.FC<ProjectFactsProps> = ({ facts }) => {
+export const ProjectInfo: React.FC<ProjectInfoProps> = ({ info }) => {
   return (
     <section className='w-full flex flex-col justify-center align-center'>
       <div className='flex flex-col'>
-        {facts.map((fact, index) => (
-          <FactItem key={index} item={fact} isLast={index === facts.length - 1} />
+        {info.map((item, index) => (
+          <InfoItem key={index} item={item} isLast={index === info.length - 1} />
         ))}
       </div>
     </section>
   )
 }
 
-const FactItem: React.FC<{ item: FactItemProps; isLast?: boolean }> = ({ item, isLast }) => {
+const InfoItem: React.FC<{ item: InfoItemProps; isLast?: boolean }> = ({ item, isLast }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
   const [maxHeight, setMaxHeight] = useState('0px')
@@ -41,7 +41,7 @@ const FactItem: React.FC<{ item: FactItemProps; isLast?: boolean }> = ({ item, i
     } else {
       setIsCollapsing(true)
       setMaxHeight(contentRef.current?.scrollHeight + 'px')
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         setMaxHeight('0px')
       }, 10)
     }
@@ -92,7 +92,7 @@ const FactItem: React.FC<{ item: FactItemProps; isLast?: boolean }> = ({ item, i
             onTransitionEnd={handleTransitionEnd}
           >
             <div className='flex flex-col justify-center items-start gap-4 relative w-full'>
-              <p> {item.summary} </p>
+              <p> {item.text} </p>
               {item.image && (
                 <Image
                   src={item.image}

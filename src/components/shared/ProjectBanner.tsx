@@ -7,9 +7,10 @@ import Image from 'next/image'
 type ProjectBannerProps = {
   title: string
   banner: string
+  cover: string
 }
 
-export const ProjectBanner: React.FC<ProjectBannerProps> = ({ title, banner }) => {
+export const ProjectBanner: React.FC<ProjectBannerProps> = ({ title, banner, cover }) => {
   return (
     <div className='flex flex-col w-full h-[300px] md:h-[550px]'>
       <div className='relative w-full h-full'>
@@ -18,7 +19,14 @@ export const ProjectBanner: React.FC<ProjectBannerProps> = ({ title, banner }) =
           alt={title + ' Project Banner'}
           fill
           style={{ objectFit: 'cover', objectPosition: 'top' }}
-          className='md:rounded-xl shadow-lg'
+          className='max-sm:hidden md:rounded-xl shadow-lg'
+        />
+        <Image
+          src={cover}
+          alt={title + ' Project Banner'}
+          fill
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+          className='sm:hidden shadow-lg'
         />
         <div className='absolute top-0 left-0 flex justify-center items-center w-full h-full'>
           <div className='flex p-8 bg-black bg-opacity-30 rounded-full shadow-lg backdrop-blur-lg'>

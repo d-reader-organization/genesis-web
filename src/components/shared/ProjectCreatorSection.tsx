@@ -11,7 +11,7 @@ type ProjectCreatorSectionProps = {
 
 export const ProjectCreatorSection: React.FC<ProjectCreatorSectionProps> = ({ creator, tags }) => {
   return (
-    <section className='flex flex-col w-full justify-between gap-3 py-4 md:items-center md:flex-row md:py-8 md:gap-10'>
+    <section className='flex flex-col w-full justify-between gap-3 py-4 md:items-center md:flex-row md:py-6 md:gap-10'>
       <div className='flex items-center gap-2'>
         <AvatarImage src={creator.avatar} size={42} alt={creator + ' Avatar'} className='' />
         <span className='text-white text-base font-bold leading-snug'>{creator.name}</span>
