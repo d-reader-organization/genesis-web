@@ -5,6 +5,8 @@ import { ContentWithGradientImageBg } from '../../ContentWithGradientImageBg'
 import { SignInOrRegisterLinkButton } from '../../buttons/SignInOrRegisterLinkButton'
 import BunbunBanner from 'public/assets/images/bunbun_yg4h.jpg'
 import { WalletSection } from './WalletSection'
+import { usePathname } from 'next/navigation'
+import { redirectToKey } from '@/constants/general'
 
 export const GuestProfileContent: React.FC = () => (
   <div className='flex flex-col justify-between gap-6 h-full'>
@@ -16,16 +18,20 @@ export const GuestProfileContent: React.FC = () => (
   </div>
 )
 
-const BannerWidget: React.FC = () => (
-  <ContentWithGradientImageBg className='p-4' image={BunbunBanner.src}>
-    <div className='flex flex-col justify-between h-full'>
-      <div className='text-2xl leading-[28.8px] font-medium'>
-        <span className='font-bold'>Signed in&nbsp;</span>
-        <span>users get&nbsp;</span>
-        <span className='font-bold'>15% OFF&nbsp;</span>
-        <span>on all new comic mints!</span>
+const BannerWidget: React.FC = () => {
+  const pathname = usePathname()
+  const redirectTo = pathname !== '/' ? `?${redirectToKey}=${pathname}` : ''
+  return (
+    <ContentWithGradientImageBg className='p-4' image={BunbunBanner.src}>
+      <div className='flex flex-col justify-between h-full'>
+        <div className='text-2xl leading-[28.8px] font-medium'>
+          <span className='font-bold'>Signed in&nbsp;</span>
+          <span>users get&nbsp;</span>
+          <span className='font-bold'>15% OFF&nbsp;</span>
+          <span>on all new comic mints!</span>
+        </div>
+        <SignInOrRegisterLinkButton href={`${RoutePath.Login}${redirectTo}`} />
       </div>
-      <SignInOrRegisterLinkButton href={RoutePath.Login} />
-    </div>
-  </ContentWithGradientImageBg>
-)
+    </ContentWithGradientImageBg>
+  )
+}
