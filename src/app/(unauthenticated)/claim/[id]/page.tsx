@@ -42,3 +42,12 @@ export default async function ClaimPage({ params }: ComicIssuePageParams) {
     </BaseLayout>
   )
 }
+
+/*
+
+- show a sign up/ login pop up
+- then show create wallet by tiplink
+- optional educational video
+- purchase
+
+*/
