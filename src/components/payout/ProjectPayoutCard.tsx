@@ -1,11 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
-import { InfoIcon } from 'lucide-react'
+import { InfoIcon } from 'lucide-react' 
+import { payoutDetails } from '@/constants/tooltips'
+import { formatNumberWithCommas } from '@/utils/numbers'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/Tooltip'
-
-function formatNumberWithCommas(num: number): string {
-  return num.toLocaleString()
-}
 
 type ProjectFundingProps = {
   title: string
@@ -21,9 +19,6 @@ type PayoutDetails = {
   daysForRoi: number
   description: string
 }
-
-const payoutDetails: string =
-  '*Previous payouts are not indicative of future results, and no representation is made that any investment will or is likely to achieve profits or losses similar to those discussed on this website. All investments involve risks, and the value of investments may fluctuate over time.'
 
 export const ProjectPayoutCard: React.FC<ProjectFundingProps> = ({
   title,
@@ -61,9 +56,9 @@ export const ProjectPayoutCard: React.FC<ProjectFundingProps> = ({
       <div className='flex flex-col gap-5 w-full'>
         <RoiWidget roi={payoutInfo.roiPercentage} tooltipText={tooltipText} />
         <div className='flex w-full justify-center items-center'>
-          <InvestmentStatsBox title='RAISED' value={raiseGoal} currency={true}/>
-          <InvestmentStatsBox title='DAYS FOR ROI' value={payoutInfo.daysForRoi} currency={false}/>
-          <InvestmentStatsBox title='BACKERS' value={numberOfBackers} currency={false}/>
+          <InvestmentStatsBox title='RAISED' value={raiseGoal} currency={true} />
+          <InvestmentStatsBox title='DAYS FOR ROI' value={payoutInfo.daysForRoi} currency={false} />
+          <InvestmentStatsBox title='BACKERS' value={numberOfBackers} currency={false} />
         </div>
       </div>
       <div className='flex flex-col pt-1'>

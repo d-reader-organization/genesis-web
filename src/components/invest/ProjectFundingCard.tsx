@@ -2,11 +2,8 @@
 
 import Link from 'next/link'
 import React from 'react'
+import { formatNumberWithCommas } from '@/utils/numbers'
 import { TrendingUp } from 'lucide-react'
-
-function formatNumberWithCommas(num: number): string {
-  return num.toLocaleString()
-}
 
 type ProjectFundingCardProps = {
   funding: FundingDetails
