@@ -2,13 +2,20 @@
 
 import { initiateUserControlledWalletsClient } from '@circle-fin/user-controlled-wallets'
 import {
-  CreateEndUserWalletData,
-  DeviceTokenSocialData,
-  PinData,
-  SignTransactionResponseData,
-  UserData,
-  WalletsData,
+  type CreateEndUserWalletData,
+  type DeviceTokenSocialData,
+  type PinData,
+  type UserData,
+  type WalletsData,
 } from '@circle-fin/user-controlled-wallets/dist/types/clients/user-controlled-wallets'
+
+export type SignMessagePayload = {
+  message: string
+  userToken: string
+  walletId: string
+}
+
+export type SignTransactionPayload = { transaction: string; userToken: string; walletAddress: string; walletId: string }
 
 const circleClient = initiateUserControlledWalletsClient({
   apiKey: process.env.CIRCLE_API_KEY ?? '',
@@ -44,24 +51,13 @@ export const signMessage = async ({
   message,
   userToken,
   walletId,
-}: {
-  message: string
-  userToken: string
-  walletId: string
-}): Promise<PinData | undefined> => {
+}: SignMessagePayload): Promise<PinData | undefined> => {
   const response = await circleClient.signMessage({ message, userToken, walletId })
   return response.data
 }
 
-export const signTransaction = async ({
-  transaction,
-  userToken,
-  walletId,
-}: {
-  transaction: string
-  userToken: string
-  walletId: string
-}): Promise<SignTransactionResponseData | undefined> => {
-  const response = await circleClient.signTransaction({ transaction, userToken, walletId })
+export const signTransaction = async (payload: SignTransactionPayload): Promise<PinData | undefined> => {
+  const response = await circleClient.signTransaction(payload)
+  // @ts-ignore this should go away with circle fix
   return response.data
 }

@@ -11,7 +11,7 @@ import { createContext, useContext } from 'react'
 // import { IMPORTANT_NOTICE } from '@/constants/staticText'
 // import CloseIcon from 'public/assets/vector-icons/close.svg'
 // import Dialog from '@mui/material/Dialog'
-import { SdkProvider } from '@/contexts/Sdk'
+import { CircleSdkProvider } from '@/providers/CircleSdkProvider'
 import { useWalletAdapter } from '@/hooks/useWalletAdapter'
 
 export const ClientContext = createContext(null)
@@ -36,7 +36,7 @@ const ClientContextProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const wallets = useWalletAdapter()
 
   return (
-    <SdkProvider>
+    <CircleSdkProvider>
       <QueryClientProvider client={queryClient}>
         <ConnectionProvider endpoint={endpoint}>
           <WalletProvider wallets={wallets} autoConnect={autoConnect}>
@@ -58,7 +58,7 @@ const ClientContextProvider: React.FC<{ children: React.ReactNode }> = ({ childr
           </WalletProvider>
         </ConnectionProvider>
       </QueryClientProvider>
-    </SdkProvider>
+    </CircleSdkProvider>
   )
 }
 
