@@ -1,13 +1,11 @@
-type ProjectInfoProps = {
+type ProjectDescriptionProps = {
   description: string
 }
 
-export const ProjectDescription: React.FC<ProjectInfoProps> = ({ description }) => {
+export const ProjectDescription: React.FC<ProjectDescriptionProps> = ({ description }) => {
   return (
-    <section className='w-full flex flex-col justify-start items-start'>
-      <div className='flex flex-col'>
+    <div className='w-full flex flex-col justify-start items-start'>
         {description}
-      </div>
-    </section>
+    </div>
   )
 }
