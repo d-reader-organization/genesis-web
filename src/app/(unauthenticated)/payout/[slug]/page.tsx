@@ -46,8 +46,8 @@ export default async function PayoutPage({ params }: Props) {
             <ProjectHeader title={project.metadata.title} subtitle={project.metadata.subtitle} className='md:hidden' />
             <ProjectPayoutCard
               title={project.metadata.title}
-              payoutInfo={project.payoutInfo}
               logo={project.metadata.images.logo}
+              payoutInfo={project.payoutInfo}
               raiseGoal={project.fundingInfo.raiseGoal}
               numberOfBackers={project.fundingInfo.numberOfBackers}
               className='md:hidden'
@@ -58,8 +58,8 @@ export default async function PayoutPage({ params }: Props) {
           <div className='flex flex-col'>
             <ProjectPayoutCard
               title={project.metadata.title}
-              payoutInfo={project.payoutInfo}
               logo={project.metadata.images.logo}
+              payoutInfo={project.payoutInfo}
               raiseGoal={project.fundingInfo.raiseGoal}
               numberOfBackers={project.fundingInfo.numberOfBackers}
               className='max-md:hidden'
