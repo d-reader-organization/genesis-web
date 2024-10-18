@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { InfoIcon } from 'lucide-react' 
+import { InfoIcon } from 'lucide-react'
 import { payoutDetails } from '@/constants/tooltips'
 import { formatNumberWithCommas } from '@/utils/numbers'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/Tooltip'
