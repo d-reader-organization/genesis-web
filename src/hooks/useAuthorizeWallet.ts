@@ -1,9 +1,10 @@
 import { useCallback, useEffect } from 'react'
 import { useConnectUserWallet, useRequestWalletPassword } from '@/api/auth'
-import { useFetchMe, useFetchUserWallets } from '@/api/user'
+import { useFetchMe, useFetchUserWallets, userKeys } from '@/api/user'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { Transaction, PublicKey } from '@solana/web3.js'
 import bs58 from 'bs58'
+import { useQueryClient } from '@tanstack/react-query'
 
 declare global {
   interface Window {
@@ -23,6 +24,7 @@ export const useAuthorizeWallet: AuthorizeWalletHook = (callback) => {
 
   const { mutateAsync: requestWalletPassword } = useRequestWalletPassword()
   const { mutateAsync: connectUserWallet } = useConnectUserWallet()
+  const queryClient = useQueryClient()
 
   // const solanaKey = window.solana?.publicKey
   const walletAddress = publicKey?.toBase58()
@@ -59,6 +61,7 @@ export const useAuthorizeWallet: AuthorizeWalletHook = (callback) => {
     }
 
     await connectUserWallet({ address, encoding })
+    queryClient.invalidateQueries({ queryKey: userKeys.getWallets(me?.id || 0) })
     if (typeof callback === 'function') callback()
   }, [
     publicKey,
