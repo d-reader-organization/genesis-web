@@ -10,7 +10,7 @@ export type InterestProject = {
 
 export const highInterestProjects: InterestProject[] = [
   {
-    image: '/assets/images/invest/mad-lads.png',
+    image: '/assets/images/invest/mad-lads-cover.png',
     slug: 'mad-lads',
     stats: {
       likes: 1023,
@@ -19,7 +19,7 @@ export const highInterestProjects: InterestProject[] = [
     title: 'Mad Lads',
   },
   {
-    image: '/assets/images/invest/bonk.png',
+    image: '/assets/images/invest/bonk-cover.png',
     slug: 'bonk',
     stats: {
       likes: 2278,
@@ -28,7 +28,7 @@ export const highInterestProjects: InterestProject[] = [
     title: 'Bonk',
   },
   {
-    image: '/assets/images/invest/galactic-geckos.png',
+    image: '/assets/images/invest/galactic-geckos-cover.png',
     slug: 'galactic-geckos',
     stats: {
       likes: 820,
