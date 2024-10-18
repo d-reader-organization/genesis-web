@@ -1,0 +1,6 @@
+export const deviceIdKey = 'deviceId'
+export const deviceTokenKey = 'deviceToken'
+export const deviceTokenEncryptionKey = 'deviceEncryptionKey'
+export const otpTokenKey = 'otpToken'
+export const userTokenKey = 'userToken'
+export const userEncryptionKey = 'encryptionKey'
