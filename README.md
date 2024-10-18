@@ -1,4 +1,4 @@
-<h1 align="center"><img alt="🥚" src="https://i.ibb.co/4ZLv0Xj/genesis-logo.png" width="auto" height="32px" style="border-radius:2px;margin-bottom:-6px;"/>&nbsp;Genesis</h1>
+<h1 align="center"><img alt="🥚" src="https://i.ibb.co/4ZLv0Xj/genesis-logo.png" width="auto" height="26px" style="border-radius:2px;margin-bottom:-6px;"/>&nbsp;Genesis</h1>
 
 > Fractional & tokenized IP investing on Solana
 

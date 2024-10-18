@@ -17,7 +17,7 @@ export const investSlides: InvestSlide[] = [
   {
     slug: 'the-recruits',
     image: '/assets/images/invest-carousel.jpeg',
-    title: 'The Recruits - comic series',
+    title: '', // 'The Recruits - comic series',
     subtitle:
       'After a heist to capture the all powerful Matrix Opal goes badly wrong, Roach gets landed with a batch...',
     status: 'LIVE',
@@ -35,6 +35,9 @@ export const investSlides: InvestSlide[] = [
     ],
     tags: [
       {
+        title: 'Animated comic',
+      },
+      {
         title: 'Action',
       },
       {
@@ -44,8 +47,8 @@ export const investSlides: InvestSlide[] = [
   },
   {
     slug: 'galactic-geckos',
-    image: '/assets/images/invest/galactic-geckos-cover.png',
-    title: 'Galactic Geckos',
+    image: '/assets/images/invest/galactic-geckos-banner.png',
+    title: '', // 'Galactic Geckos - comic series',
     subtitle: 'Lord of the Ring meets geckos - in space',
     status: 'LIVE SOON',
     logo: '/assets/images/invest/galactic-geckos-logo.png',
@@ -71,15 +74,15 @@ export const investSlides: InvestSlide[] = [
         title: 'Sci-fi',
       },
       {
-        title: 'Superhero'
-      }
+        title: 'Superhero',
+      },
     ],
   },
   {
     slug: 'mad-lads',
-    title: 'Mad Lads',
+    title: '', // 'Mad Lads',
     subtitle: 'The Mad King has focking risen!',
-    image: '/assets/images/invest/mad-lads-banner.png',
+    image: '/assets/images/invest/mad-lads-banner.jpg',
     status: 'LIVE SOON',
     logo: '/assets/images/invest/mad-king-logo.png',
     infos: [

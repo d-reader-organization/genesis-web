@@ -57,7 +57,7 @@ export const InvestCarousel: React.FC<Props> = ({ slides }) => {
                       />
                     )}
                     <div className='absolute inset-0 bg-gradient-to-l from-transparent to-black'></div>
-                    <div className='flex justify-between relative max-sm:h-full'>
+                    <div className='flex justify-between relative h-full'>
                       <DetailsSection slide={slide} />
                       <div className='absolute right-0 max-h-9 bg-black bg-opacity-20 p-2 flex justify-center items-center gap-1 rounded-lg backdrop-blur-[25px] m-4'>
                         <span className='size-3 rounded-lg bg-white' />
@@ -77,13 +77,13 @@ export const InvestCarousel: React.FC<Props> = ({ slides }) => {
 }
 
 const DetailsSection: React.FC<{ slide: InvestSlide }> = ({ slide }) => (
-  <div className='h-full flex flex-col justify-end md:justify-between p-4 md:p-16'>
+  <div className='h-full flex flex-col justify-end p-4 md:p-16'>
     <Image
       alt='logo'
       src={slide.logo}
       width={290}
       height={130}
-      className='md:self-center md:self-start mb-4 w-40 md:w-[290px]'
+      className='self-center sm:self-start w-40 md:w-[290px]'
     />
     <div className='flex flex-col justify-end gap-4 md:gap-6 max-w-[550px]'>
       <h1 className='text-xl md:text-[40px] leading-[20px] md:leading-[40px] font-semibold tracking-[0.08px] md:mb-4'>

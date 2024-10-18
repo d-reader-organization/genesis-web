@@ -4,64 +4,51 @@ import { ProjectBanner } from '@/components/shared/ProjectBanner'
 import { ProjectCreatorSection } from '@/components/shared/ProjectCreatorSection'
 import { ProjectPayoutCard } from '@/components/payout/ProjectPayoutCard'
 import { ProjectDescription } from '@/components/payout/ProjectDescription'
-import { PROJECTS, Project, PayoutInfo } from '@/constants/projects'
+import { PROJECTS } from '@/constants/projects'
+import { SuccessfulProject } from '@/models/project'
 
 type Props = {
   params: { slug: string }
 }
 
-type PayoutProject = Omit<Project, 'payoutInfo'> & { payoutInfo: PayoutInfo }
-
-function fetchProjectBySlug(slug: string): PayoutProject {
-  const project = PROJECTS.find((project) => project.metadata.slug === slug)
-
-  if (!project) {
-    throw new Error('Project with slug ' + slug + ' not found')
-  }
-
-  return {
-    ...project,
-    payoutInfo: project.payoutInfo || {
-      roiPercentage: 0,
-      days: 0,
-      description: '',
-    },
-  } as PayoutProject
+function fetchProjectBySlug(slug: string): SuccessfulProject | undefined {
+  // TODO: remove as
+  return PROJECTS.find((project) => project.slug === slug) as SuccessfulProject
 }
 
 export default async function PayoutPage({ params }: Props) {
-  const project: PayoutProject = fetchProjectBySlug(params.slug)
+  const project = fetchProjectBySlug(params.slug)
+
+  if (!project) {
+    return 'Project not found'
+  }
 
   return (
     <BaseLayout>
       <div className='flex flex-col max-w-screen-xl w-full'>
-        <ProjectHeader title={project.metadata.title} subtitle={project.metadata.subtitle} className='max-md:hidden' />
+        <ProjectHeader title={project.title} subtitle={project.subtitle} className='max-md:hidden' />
         <div className='flex flex-col md:flex-row w-full h-full gap-6 md:gap-8'>
           <div className='flex flex-col w-full '>
-            <ProjectBanner
-              title={project.metadata.title}
-              banner={project.metadata.images.banner}
-              cover={project.metadata.images.cover}
-            />
-            <ProjectHeader title={project.metadata.title} subtitle={project.metadata.subtitle} className='md:hidden' />
+            <ProjectBanner title={project.title} banner={project.banner} cover={project.cover} />
+            <ProjectHeader title={project.title} subtitle={project.subtitle} className='md:hidden' />
             <ProjectPayoutCard
-              title={project.metadata.title}
-              logo={project.metadata.images.logo}
-              payoutInfo={project.payoutInfo}
-              raiseGoal={project.fundingInfo.raiseGoal}
-              numberOfBackers={project.fundingInfo.numberOfBackers}
+              title={project.title}
+              logo={project.logo}
+              payout={project.payout}
+              raiseGoal={project.funding.raiseGoal}
+              numberOfBackers={project.funding.numberOfBackers}
               className='md:hidden'
             />
-            <ProjectCreatorSection creator={project.creator} tags={project.metadata.tags} />
-            <ProjectDescription description={project.payoutInfo.description} />
+            <ProjectCreatorSection creator={project.creator} tags={project.tags} />
+            <ProjectDescription description={project.payout.summary} />
           </div>
           <div className='flex flex-col'>
             <ProjectPayoutCard
-              title={project.metadata.title}
-              logo={project.metadata.images.logo}
-              payoutInfo={project.payoutInfo}
-              raiseGoal={project.fundingInfo.raiseGoal}
-              numberOfBackers={project.fundingInfo.numberOfBackers}
+              title={project.title}
+              logo={project.logo}
+              payout={project.payout}
+              raiseGoal={project.funding.raiseGoal}
+              numberOfBackers={project.funding.numberOfBackers}
               className='max-md:hidden'
             />
           </div>

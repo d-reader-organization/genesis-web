@@ -1,10 +1,12 @@
 import { investSlides } from '@/app/lib/data/invest/carouselData'
-import { highInterestProjects, successfulProjects } from '@/app/lib/data/invest/projectsData'
+import { highInterestProjects } from '@/app/lib/data/invest/projectsData'
 import { InvestCarousel } from '@/components/invest/Carousel'
 import { FaqSection } from '@/components/invest/Faq'
 import { ProjectsSection } from '@/components/invest/ProjectsSection'
 import { InvestSection } from '@/components/invest/Section'
 import { BaseLayout } from '@/components/layout/BaseLayout'
+import { PROJECTS } from '@/constants/projects'
+import { SuccessfulProject } from '@/models/project'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -38,7 +40,14 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
 }
 
+function fetchSuccessfulProjects(): SuccessfulProject[] {
+  // TODO: remove as
+  return PROJECTS.filter((project) => !!project.payout) as SuccessfulProject[]
+}
+
 export default async function InvestPage() {
+  const successfulProjects = fetchSuccessfulProjects()
+
   return (
     <BaseLayout>
       <div className='flex flex-col gap-10 max-w-screen-xl w-full'>
