@@ -19,7 +19,7 @@ import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 
 const normalise = (value: number, MAX: number): number => (value * 100) / MAX
 type DetailsProps = { candyMachine: CandyMachine }
-type Props = { comicIssue: ComicIssue; isAuthenticated: boolean }
+type Props = { comicIssue: ComicIssue; isAuthenticated: boolean}
 
 export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticated }) => {
   const { candyMachine, selectedCoupon, isLoading, coupons } = useCandyMachineStore((state) => state)
@@ -35,7 +35,7 @@ export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticat
             <UserDetails candyMachine={candyMachine} />
             <ProgressBar value={normalise(candyMachine.itemsMinted, candyMachine.supply)} />
             <ComicVault />
-            <PurchaseRow comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
+            <PurchaseRow comicIssue={comicIssue} isAuthenticated={isAuthenticated}/>
           </div>
         )}
         {coupons.length > 0 && 

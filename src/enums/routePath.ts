@@ -12,6 +12,7 @@ export const RoutePath = Object.freeze({
   DiscoverCreators: '/discover/creators',
   Library: '/library',
   Mint: (id: string | number) => `/mint/${id}`,
+  Claim: (id: string | number) => `/claim/${id}`,
   Comic: (comicSlug: string) => `/comic/${comicSlug}`,
   ComicIssue: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}`,
   ReadComicIssue: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/read`,

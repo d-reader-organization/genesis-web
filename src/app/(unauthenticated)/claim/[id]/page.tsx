@@ -13,7 +13,7 @@ export default async function ClaimPage({ params }: ComicIssuePageParams) {
   const comicIssue = await fetchPublicComicIssue(params.id)
   if (!comicIssue) return null
   const pages = await fetchComicIssuePreviewPages(comicIssue.id)
-  const isAuthenticated = isAuthenticatedUser()
+  const isAuthenticated = isAuthenticatedUser()  
 
   return (
     <BaseLayout>
