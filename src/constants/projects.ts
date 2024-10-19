@@ -87,7 +87,7 @@ export const PROJECTS: Project[] = [
     logo: '/assets/images/invest/transparent_800x450.png',
     creator: {
       name: 'Bonkers Inc.',
-      avatar: '/assets/images/invest/the-recruits-avatar.png',
+      avatar: 'https://d323dls9ny69nf.cloudfront.net/creators/degen-apes-1714396919823/avatar-1714397500055.jpg',
     },
     info: [
       {
