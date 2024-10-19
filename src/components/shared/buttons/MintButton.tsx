@@ -25,6 +25,7 @@ import { AssetMintEvent } from '@/models/asset/assetMintEvent'
 import { ConnectButton } from './ConnectButton'
 import { EducationalVideoDialog } from '../dialogs/EducationalVideoDialog'
 import { RoutePath } from '@/enums/routePath'
+import { GoogleViaTipLinkWalletName } from '@tiplink/wallet-adapter'
 
 type Props = {
   comicIssue: ComicIssue
@@ -46,12 +47,13 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
   // const [showWalletNotConnected, toggleWalletNotConnected] = useToggle()
   const [showConfirmingTransaction, toggleConfirmingTransaction, closeConfirmingTransaction] = useToggle()
   const [showAppWalkthrough, toggleAppWalkthrough] = useToggle(!hasWatchedWalkthrough)
+  const [showBouncingPurchaseButton, , closeBouncingPurchaseButton] = useToggle(!hasWatchedWalkthrough)
 
   const [isMintTransactionLoading, setIsMintTransactionLoading] = useState(false)
   const [assetMintEventData, setAssetMintEventData] = useState<AssetMintEvent>()
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>()
 
-  const { publicKey, signAllTransactions } = useWallet()
+  const { publicKey, signAllTransactions, wallet, connect, select } = useWallet()
 
   const walletAddress = publicKey?.toBase58()
   const hasWalletConnected = !!walletAddress
@@ -63,6 +65,16 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
     candyMachineAddress: candyMachine?.address ?? '',
     walletAddress,
   })
+
+  /* 
+    For easy onboarding, select and connect tiplink wallet by default on claim page.
+  */
+  useEffect(() => {
+    const isTiplinkSelected = wallet?.adapter.name == GoogleViaTipLinkWalletName
+
+    if (!isTiplinkSelected && isClaimPage) select(GoogleViaTipLinkWalletName)
+    if (isTiplinkSelected && isClaimPage) connect()
+  }, [pathname])
 
   useEffect(() => {
     if (!walletAddress && !isMintTransactionLoading) {
@@ -86,6 +98,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
   }, [walletAddress, isMintTransactionLoading])
 
   const handleMint = async () => {
+    closeBouncingPurchaseButton()
     if (!walletAddress || !selectedCurrency) return
     setIsMintTransactionLoading(true)
     // figure out what about this
@@ -187,7 +200,10 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
     <>
       {hasWalletConnected ? (
         isEligible ? (
-          <Button className='bg-important-color min-h-[52px] w-full' onClick={handleMint}>
+          <Button
+            className={`bg-important-color min-h-[52px] w-full ${showBouncingPurchaseButton && !showAppWalkthrough ? 'animate-bounce' : ''}`}
+            onClick={handleMint}
+          >
             {!isMintTransactionLoading ? (
               <div className='flex items-center gap-1.5 text-base font-bold leading-[22.4px]'>
                 <span>Purchase</span>

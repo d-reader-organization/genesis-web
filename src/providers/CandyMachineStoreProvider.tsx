@@ -12,9 +12,6 @@ import { getDefaultCoupon, isComicVaultCoupon } from '@/utils/mint'
 import { WRAPPED_SOL_MINT } from '@metaplex-foundation/js'
 import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
 import React from 'react'
-import { usePathname } from 'next/navigation'
-import { RoutePath } from '@/enums/routePath'
-import { GoogleViaTipLinkWalletName } from '@tiplink/wallet-adapter'
 
 export type CandyMachineStoreApi = ReturnType<typeof createCandyMachineStore>
 
@@ -31,7 +28,7 @@ export const CandyMachineStoreProvider = ({
   isAuthenticated,
   children,
 }: CandyMachineStoreProviderProps) => {
-  const { publicKey, connect, select, wallet } = useWallet()
+  const { publicKey } = useWallet()
   
   const {
     data: candyMachine,
@@ -42,21 +39,6 @@ export const CandyMachineStoreProvider = ({
     walletAddress: publicKey?.toBase58() ?? '',
   })
   const { data: supportedTokens = [] } = useFetchSupportedTokens()
-  
-  const pathname = usePathname()
-
-  /* 
-    For easy onboarding, select and connect tiplink wallet by default on claim page.
-  */
-  useEffect(()=>{
-    const isClaimPage = pathname.toLocaleLowerCase().startsWith(RoutePath.Claim(''));
-    const isTiplinkSelected = wallet?.adapter.name == GoogleViaTipLinkWalletName;
-
-    if(!isTiplinkSelected && isClaimPage)select(GoogleViaTipLinkWalletName);
-    if(isTiplinkSelected && isClaimPage)connect()
-
-  },[pathname])
-  
   useAuthorizeWallet(refetch)
   const storeRef = useRef<CandyMachineStoreApi>()
   if (!storeRef.current) {
