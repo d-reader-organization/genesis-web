@@ -3,12 +3,12 @@
 import { endpoint } from '@/constants/solanaEnv'
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
-import { createContext, useContext } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 // import { usePathname } from 'next/navigation'
 // import { RoutePath } from '@/enums/routePath'
 import { useWalletAdapter } from '@/hooks/useWalletAdapter'
 import { AuthorizeWalletProvider } from './AuthorizeWalletContextProvider'
+import { createContext, useContext } from 'react'
 import { CircleSdkProvider } from './CircleSdkProvider'
 
 export const ClientContext = createContext(null)
