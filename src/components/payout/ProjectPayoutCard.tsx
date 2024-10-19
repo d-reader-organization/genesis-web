@@ -1,23 +1,18 @@
 import React from 'react'
-import Image from 'next/image'
-import { InfoIcon } from 'lucide-react'
+import { ReceiptText } from 'lucide-react'
 import { payoutDetails } from '@/constants/tooltips'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/Tooltip'
-import { Project, ProjectFunding, ProjectPayout } from '@/models/project'
-import { formatUSD } from '@/utils/numbers'
+import { ProjectFunding, ProjectPayout } from '@/models/project'
+import { formatPercentage, formatUSD } from '@/utils/numbers'
+import { formatNumberWithCommas } from '@/utils/numbers'
 
 type Props = {
-  title: Project['title']
   payout: ProjectPayout
-  logo: Project['logo']
   raiseGoal: ProjectFunding['raiseGoal']
   numberOfBackers: ProjectFunding['numberOfBackers']
   className: string
 }
 
-export const ProjectPayoutCard: React.FC<Props> = ({ title, payout, logo, raiseGoal, numberOfBackers, className }) => {
-  const tooltipText: string = 'text'
-
+export const ProjectPayoutCard: React.FC<Props> = ({ payout, raiseGoal, numberOfBackers, className }) => {
   return (
     <div
       className={
@@ -25,79 +20,55 @@ export const ProjectPayoutCard: React.FC<Props> = ({ title, payout, logo, raiseG
         className
       }
     >
-      <div className='flex flex-col w-full items-start md:items-center gap-4'>
-        <h2 className='flex justify-center text-2xl md:text-3xl font-semibold max-md:pl-1'>
-          Payout Details
-          <span className='text-sm font-semibold align-top ml-1'>*</span>
-        </h2>
-        <div className='flex max-md:hidden items-center max-h-[101.05px] h-full md:pt-2'>
-          <Image
-            alt={title + ' Logo'}
-            src={logo}
-            className='max-w-[210px] max-h-[101.05px] object-cover'
-            width={215}
-            height={101.05}
-          />
-        </div>
+      <div className='flex flex-col gap-4 w-full'>
+        <p className='text-white text-base font-bold leading-snug'>Payout details:</p>
+        <div className='h-[8px] rounded-[27px] w-full bg-[#08cc77]'></div>
       </div>
 
-      <div className='flex flex-col gap-5 w-full'>
-        <RoiWidget roi={payout.roiPercent} tooltipText={tooltipText} />
-        <div className='flex w-full justify-center items-center'>
-          <InvestmentStatsBox title='RAISED' value={formatUSD(raiseGoal)} />
-          <InvestmentStatsBox title='DAYS FOR ROI' value={payout.daysForRoi} />
-          <InvestmentStatsBox title='BACKERS' value={numberOfBackers} />
-        </div>
-      </div>
-      <div className='flex flex-col pt-1'>
-        <div className='flex w-full flex-col justify-center items-center text-[#AFB3BC] rounded-xl bg-grey-400 py-3 max-h-[36px] md:max-h-[42px]'>
-          <p className='text-xs md:text-base font-medium leading-normal md:leading-[22.4px]'>
-            Licencing Participation Agreement
+      <div className='flex flex-row w-full py-1 items-center justify-between md:flex-col md:justify-center md:items-start md:gap-[12px] md:py-3'>
+        <div className='flex flex-col min-w-[95px] items-start md:w-full md:gap-1'>
+          <h2 className='text-[#08cc77] font-semibold text-xl leading-tight tracking-tight md:text-[32px] md:leading-none md:tracking-tight'>
+            ${formatNumberWithCommas(raiseGoal)}
+          </h2>
+          <p className='max-md:hidden text-[#c2c5ce] text-xs font-medium md:text-base md:leading-relaxed'>
+            pledged of ${formatNumberWithCommas(raiseGoal)}
           </p>
         </div>
-        <p className='text-xs md:text-[14px] pt-1 font-base leading-normal md:leading-[22.4px] md:pt-2 md:px-2'>
-          {payoutDetails}
+        <PayoutStats text='backers' value={numberOfBackers} />
+        <PayoutStats text='Return on Investment' value={formatPercentage(payout.roiPercent)} />
+        <PayoutStats text='Days for ROI' value={payout.daysForRoi} />
+      </div>
+
+      <div className='flex flex-row w-full h-full justify-center items-center p-[12px] bg-gradient-to-br from-[#4a4e53] to-[#1f222a] rounded-xl gap-[14px] md:max-h-[104px]'>
+        {/**   <div
+          className='flex max-h-[54px] max-w-[54px] p-[10px] bg-white rounded-xl shadow border border-[#56a05e]'
+          style={{ boxShadow: '0 0 15px rgba(86, 160, 94, 0.8)' }}
+        > */}
+        <ReceiptText color='green' size={20} />
+
+        <p className='text-[#aeaeae] text-center text-[12px] font-medium leading-snug'>
+          Licencing Participation Agreement
         </p>
       </div>
+      <p className='text-[10px] font-[cursive] md:text-[10px] pt-1 font-base leading-normal md:leading-[22.4px] md:px-2'>
+        {payoutDetails}
+      </p>
     </div>
   )
 }
 
-const RoiWidget: React.FC<{ roi: number; tooltipText: string }> = ({ roi, tooltipText }) => (
-  <div className='flex w-full md:justify-around items-center py-3 bg-grey-600 rounded-xl max-h-[60px] md:max-h-[56px]'>
-    <p className='flex w-1/3 items-center justify-center text-base md:text-[28px] font-bold leading:[22.4px] md:leading-8'>
-      {roi}%
-    </p>
-    <p className='flex w-1/3 text-center items-center justify-center text-[10px] md:text-[12px] font-bold leading-normal text-grey-100'>
-      RETURN ON INVESTMENT
-    </p>
-    <div className='flex w-1/3 items-center justify-center'>
-      <InfoTooltip text={tooltipText} />
-    </div>
-  </div>
-)
-
-const InfoTooltip: React.FC<{ text: string }> = ({ text }) => (
-  <TooltipProvider>
-    <Tooltip delayDuration={10}>
-      <TooltipTrigger>
-        <InfoIcon className='text-green-genesis size-[12px] md:size-[18px]' />
-      </TooltipTrigger>
-      <TooltipContent align='start' className='max-w-80' side='right'>
-        {text}
-      </TooltipContent>
-    </Tooltip>
-  </TooltipProvider>
-)
-
-type InvestmentStatsBoxProps = {
-  title: string
+type BoxProps = {
+  text: string
   value: number | string
 }
 
-const InvestmentStatsBox: React.FC<InvestmentStatsBoxProps> = ({ title, value }) => (
-  <div className='flex w-1/3 flex-col justify-center items-center gap-2'>
-    <p className='text-sm font-bold text-grey-100'>{title}</p>
-    <p className='text-2xl font-bold leading-[22.4px]'>{value}</p>
-  </div>
-)
+const PayoutStats: React.FC<BoxProps> = ({ text, value }) => {
+  return (
+    <div className='flex flex-col min-w-[65px] items-center md:w-full md:gap-0 md:items-start'>
+      <h2 className='text-white font-semibold text-xl leading-tight tracking-tight md:text-[28px] md:leading-none'>
+        {value}
+      </h2>
+      <p className='text-[#c2c5ce] text-xs font-medium leading-normal md:text-[12px] md:leading-relaxed'>{text}</p>
+    </div>
+  )
+}

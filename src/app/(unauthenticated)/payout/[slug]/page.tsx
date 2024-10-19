@@ -5,15 +5,20 @@ import { ProjectCreatorSection } from '@/components/shared/ProjectCreatorSection
 import { ProjectPayoutCard } from '@/components/payout/ProjectPayoutCard'
 import { ProjectDescription } from '@/components/payout/ProjectDescription'
 import { PROJECTS } from '@/constants/projects'
-import { SuccessfulProject } from '@/models/project'
+import { Project, SuccessfulProject } from '@/models/project'
 
 type Props = {
   params: { slug: string }
 }
 
+function isSuccessfulProject(project: Project | undefined): project is SuccessfulProject {
+  return project !== undefined && typeof project.slug === 'string'
+}
+
 function fetchProjectBySlug(slug: string): SuccessfulProject | undefined {
-  // TODO: remove as
-  return PROJECTS.find((project) => project.slug === slug) as SuccessfulProject
+  const project = PROJECTS.find((project) => project.slug === slug)
+
+  return isSuccessfulProject(project) ? project : undefined
 }
 
 export default async function PayoutPage({ params }: Props) {
