@@ -29,6 +29,7 @@ export const CandyMachineStoreProvider = ({
   children,
 }: CandyMachineStoreProviderProps) => {
   const { publicKey } = useWallet()
+  
   const {
     data: candyMachine,
     refetch,
@@ -39,7 +40,6 @@ export const CandyMachineStoreProvider = ({
   })
   const { data: supportedTokens = [] } = useFetchSupportedTokens()
   useAuthorizeWallet(refetch)
-
   const storeRef = useRef<CandyMachineStoreApi>()
   if (!storeRef.current) {
     const defaultCoupon = getDefaultCoupon(candyMachine?.coupons ?? [], isAuthenticated)

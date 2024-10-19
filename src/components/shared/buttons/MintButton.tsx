@@ -10,19 +10,22 @@ import { ComicIssue } from '@/models/comicIssue'
 // import { EmailVerificationDialog } from './dialogs/EmailVerificationDialog'
 // import { NoWalletConnectedDialog } from './dialogs/NoWalletConnectedDialog'
 import { ConfirmingTransactionDialog } from '../dialogs/ConfirmingTransactionDialog'
-import { useToggle } from '@/hooks'
+import { useLocalStorage, useToggle } from '@/hooks'
 import { Skeleton, toast } from '../../ui'
 import { fetchMintTransaction } from '@/app/lib/api/transaction/queries'
 import { useFetchCandyMachine } from '@/api/candyMachine'
 import { versionedTransactionFromBs64 } from '@/utils/transactions'
 import { io } from 'socket.io-client'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { sendMintTransaction } from '@/app/lib/api/transaction/mutations'
 import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 import { VersionedTransaction } from '@solana/web3.js'
 import Image from 'next/image'
 import { AssetMintEvent } from '@/models/asset/assetMintEvent'
 import { ConnectButton } from './ConnectButton'
+import { EducationalVideoDialog } from '../dialogs/EducationalVideoDialog'
+import { RoutePath } from '@/enums/routePath'
+import { GoogleViaTipLinkWalletName } from '@tiplink/wallet-adapter'
 
 type Props = {
   comicIssue: ComicIssue
@@ -33,15 +36,24 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
   const { candyMachine, selectedCoupon, numberOfItems, selectedCurrency, supportedTokens } = useCandyMachineStore(
     (state) => state
   )
+
+  const pathname = usePathname();
+  const isClaimPage = pathname.toLocaleLowerCase().startsWith(RoutePath.Claim(''));
+
   const [showAssetMinted, toggleAssetMinted] = useToggle()
+  const [hasWatchedWalkthrough,setHasWatchedWalkthrough] = useLocalStorage('hasWatchedWalkthrough', false)
+
   // const [showEmailVerification, toggleEmailVerification] = useToggle()
   // const [showWalletNotConnected, toggleWalletNotConnected] = useToggle()
   const [showConfirmingTransaction, toggleConfirmingTransaction, closeConfirmingTransaction] = useToggle()
+  const [showAppWalkthrough, toggleAppWalkthrough] = useToggle(!hasWatchedWalkthrough)
+  const [showBouncingPurchaseButton, , closeBouncingPurchaseButton] = useToggle(!hasWatchedWalkthrough)
+
   const [isMintTransactionLoading, setIsMintTransactionLoading] = useState(false)
   const [assetMintEventData, setAssetMintEventData] = useState<AssetMintEvent>()
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>()
 
-  const { publicKey, signAllTransactions } = useWallet()
+  const { publicKey, signAllTransactions, wallet, connect, select } = useWallet()
   const { refresh } = useRouter()
 
   const walletAddress = publicKey?.toBase58()
@@ -54,6 +66,17 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
     candyMachineAddress: candyMachine?.address ?? '',
     walletAddress,
   })
+
+  /* 
+    For easy onboarding, select and connect tiplink wallet by default on claim page.
+  */
+  useEffect(()=>{
+    const isTiplinkSelected = wallet?.adapter.name == GoogleViaTipLinkWalletName;
+
+    if(!isTiplinkSelected && isClaimPage)select(GoogleViaTipLinkWalletName);
+    if(isTiplinkSelected && isClaimPage)connect()
+
+  },[pathname])
 
   useEffect(() => {
     if (!walletAddress && !isMintTransactionLoading) {
@@ -77,6 +100,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
   }, [walletAddress, isMintTransactionLoading])
 
   const handleMint = async () => {
+    closeBouncingPurchaseButton()
     if (!walletAddress || !selectedCurrency) return
     setIsMintTransactionLoading(true)
     // figure out what about this
@@ -169,7 +193,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
     <>
       {hasWalletConnected ? (
         isEligible ? (
-          <Button className='bg-important-color min-h-[52px] w-full' onClick={handleMint}>
+          <Button className={`bg-important-color min-h-[52px] w-full ${(showBouncingPurchaseButton && !showAppWalkthrough) ? 'animate-bounce' : ''}`} onClick={handleMint}>
             {!isMintTransactionLoading ? (
               <div className='flex items-center gap-1.5 text-base font-bold leading-[22.4px]'>
                 <span>Purchase</span>
@@ -211,6 +235,10 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
       {/* <EmailVerificationDialog open={showEmailVerification} toggleDialog={toggleEmailVerification} /> */}
       {/* <NoWalletConnectedDialog open={showWalletNotConnected} toggleDialog={toggleWalletNotConnected} /> */}
       <ConfirmingTransactionDialog open={showConfirmingTransaction} toggleDialog={toggleConfirmingTransaction} />
+      {isClaimPage && publicKey ? <EducationalVideoDialog open={showAppWalkthrough} toggleDialog={() => {
+        toggleAppWalkthrough();
+        setHasWatchedWalkthrough(true)
+        }} /> : null}
     </>
   ) : (
     <Skeleton className='h-[52px] w-40' />
