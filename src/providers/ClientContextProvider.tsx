@@ -1,16 +1,17 @@
 'use client'
 
 import { endpoint } from '@/constants/environment'
+import { RoutePath } from '@/enums/routePath'
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
-import { createContext, useContext } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { usePathname } from 'next/navigation'
-import { RoutePath } from '@/enums/routePath'
+import { createContext, useContext } from 'react'
 // import { useLocalStorage } from '@/hooks/useLocalStorage'
 // import { IMPORTANT_NOTICE } from '@/constants/staticText'
 // import CloseIcon from 'public/assets/vector-icons/close.svg'
 // import Dialog from '@mui/material/Dialog'
+import { CircleSdkProvider } from '@/providers/CircleSdkProvider'
 import { useWalletAdapter } from '@/hooks/useWalletAdapter'
 
 export const ClientContext = createContext(null)
@@ -35,12 +36,13 @@ const ClientContextProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const wallets = useWalletAdapter()
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ConnectionProvider endpoint={endpoint}>
-        <WalletProvider wallets={wallets} autoConnect={autoConnect}>
-          <WalletModalProvider className='wallet-dialog'>
-            {children}
-            {/* <Dialog
+    <CircleSdkProvider>
+      <QueryClientProvider client={queryClient}>
+        <ConnectionProvider endpoint={endpoint}>
+          <WalletProvider wallets={wallets} autoConnect={autoConnect}>
+            <WalletModalProvider className='wallet-dialog'>
+              {children}
+              {/* <Dialog
 								style={{ backdropFilter: 'blur(4px)' }}
 								PaperProps={{ className: 'text-dialog' }}
 								onClose={() => setIsFirstTimeVisitor(false)}
@@ -52,10 +54,11 @@ const ClientContextProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 								<strong>🚧 IMPORTANT NOTICE! 🚧</strong>
 								<p>{IMPORTANT_NOTICE}</p>
 							</Dialog> */}
-          </WalletModalProvider>
-        </WalletProvider>
-      </ConnectionProvider>
-    </QueryClientProvider>
+            </WalletModalProvider>
+          </WalletProvider>
+        </ConnectionProvider>
+      </QueryClientProvider>
+    </CircleSdkProvider>
   )
 }
 
