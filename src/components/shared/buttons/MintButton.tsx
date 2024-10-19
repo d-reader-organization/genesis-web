@@ -10,18 +10,21 @@ import { ComicIssue } from '@/models/comicIssue'
 // import { EmailVerificationDialog } from './dialogs/EmailVerificationDialog'
 // import { NoWalletConnectedDialog } from './dialogs/NoWalletConnectedDialog'
 import { ConfirmingTransactionDialog } from '../dialogs/ConfirmingTransactionDialog'
-import { useToggle } from '@/hooks'
+import { useLocalStorage, useToggle } from '@/hooks'
 import { Skeleton, toast } from '../../ui'
 import { fetchMintTransaction } from '@/app/lib/api/transaction/queries'
 import { useFetchCandyMachine } from '@/api/candyMachine'
 import { versionedTransactionFromBs64 } from '@/utils/transactions'
 import { io } from 'socket.io-client'
+import { usePathname } from 'next/navigation'
 import { sendMintTransaction } from '@/app/lib/api/transaction/mutations'
 import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 import { VersionedTransaction } from '@solana/web3.js'
 import Image from 'next/image'
 import { AssetMintEvent } from '@/models/asset/assetMintEvent'
 import { ConnectButton } from './ConnectButton'
+import { EducationalVideoDialog } from '../dialogs/EducationalVideoDialog'
+import { RoutePath } from '@/enums/routePath'
 
 type Props = {
   comicIssue: ComicIssue
@@ -32,10 +35,18 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
   const { candyMachine, selectedCoupon, numberOfItems, selectedCurrency, supportedTokens } = useCandyMachineStore(
     (state) => state
   )
+
+  const pathname = usePathname()
+  const isClaimPage = pathname.toLocaleLowerCase().startsWith(RoutePath.Claim(''))
+
   const [showAssetMinted, toggleAssetMinted] = useToggle()
+  const [hasWatchedWalkthrough, setHasWatchedWalkthrough] = useLocalStorage('hasWatchedWalkthrough', false)
+
   // const [showEmailVerification, toggleEmailVerification] = useToggle()
   // const [showWalletNotConnected, toggleWalletNotConnected] = useToggle()
   const [showConfirmingTransaction, toggleConfirmingTransaction, closeConfirmingTransaction] = useToggle()
+  const [showAppWalkthrough, toggleAppWalkthrough] = useToggle(!hasWatchedWalkthrough)
+
   const [isMintTransactionLoading, setIsMintTransactionLoading] = useState(false)
   const [assetMintEventData, setAssetMintEventData] = useState<AssetMintEvent>()
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>()
@@ -218,6 +229,15 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
       {/* <EmailVerificationDialog open={showEmailVerification} toggleDialog={toggleEmailVerification} /> */}
       {/* <NoWalletConnectedDialog open={showWalletNotConnected} toggleDialog={toggleWalletNotConnected} /> */}
       <ConfirmingTransactionDialog open={showConfirmingTransaction} toggleDialog={toggleConfirmingTransaction} />
+      {isClaimPage && publicKey ? (
+        <EducationalVideoDialog
+          open={showAppWalkthrough}
+          toggleDialog={() => {
+            toggleAppWalkthrough()
+            setHasWatchedWalkthrough(true)
+          }}
+        />
+      ) : null}
     </>
   ) : (
     <Skeleton className='h-[52px] w-40' />
