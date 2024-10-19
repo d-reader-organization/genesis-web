@@ -14,7 +14,7 @@ import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
 import React from 'react'
 import { usePathname } from 'next/navigation'
 import { RoutePath } from '@/enums/routePath'
-import { tiplinkWalletAdpater } from '@/constants/tiplinkAdapter'
+import { GoogleViaTipLinkWalletName } from '@tiplink/wallet-adapter'
 
 export type CandyMachineStoreApi = ReturnType<typeof createCandyMachineStore>
 
@@ -31,7 +31,8 @@ export const CandyMachineStoreProvider = ({
   isAuthenticated,
   children,
 }: CandyMachineStoreProviderProps) => {
-  const { publicKey } = useWallet()
+  const { publicKey, connect, select, wallet } = useWallet()
+  
   const {
     data: candyMachine,
     refetch,
@@ -43,14 +44,20 @@ export const CandyMachineStoreProvider = ({
   const { data: supportedTokens = [] } = useFetchSupportedTokens()
   
   const pathname = usePathname()
+
+  /* 
+    For easy onboarding, select and connect tiplink wallet by default on claim page.
+  */
   useEffect(()=>{
-    if(pathname.toLocaleLowerCase().startsWith(RoutePath.Claim(''))){
-      tiplinkWalletAdpater.connect();
-    }
-  },[pathname,tiplinkWalletAdpater])
+    const isClaimPage = pathname.toLocaleLowerCase().startsWith(RoutePath.Claim(''));
+    const isTiplinkSelected = wallet?.adapter.name == GoogleViaTipLinkWalletName;
+
+    if(!isTiplinkSelected && isClaimPage)select(GoogleViaTipLinkWalletName);
+    if(isTiplinkSelected && isClaimPage)connect()
+
+  },[pathname])
   
   useAuthorizeWallet(refetch)
-
   const storeRef = useRef<CandyMachineStoreApi>()
   if (!storeRef.current) {
     const defaultCoupon = getDefaultCoupon(candyMachine?.coupons ?? [], isAuthenticated)

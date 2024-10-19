@@ -45,9 +45,8 @@ export default async function ClaimPage({ params }: ComicIssuePageParams) {
 
 /*
 
-- show a sign up/ login pop up
-- then show create wallet by tiplink
-- optional educational video
+- show a sign up/ login pop up - maybe not and make it easy onboarding ?
+- then show create wallet by tiplink - done
+- optional educational video - done
 - purchase
-
 */
