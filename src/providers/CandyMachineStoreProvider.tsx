@@ -12,6 +12,9 @@ import { getDefaultCoupon, isComicVaultCoupon } from '@/utils/mint'
 import { WRAPPED_SOL_MINT } from '@metaplex-foundation/js'
 import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
 import React from 'react'
+import { usePathname } from 'next/navigation'
+import { RoutePath } from '@/enums/routePath'
+import { tiplinkWalletAdpater } from '@/constants/tiplinkAdapter'
 
 export type CandyMachineStoreApi = ReturnType<typeof createCandyMachineStore>
 
@@ -38,6 +41,14 @@ export const CandyMachineStoreProvider = ({
     walletAddress: publicKey?.toBase58() ?? '',
   })
   const { data: supportedTokens = [] } = useFetchSupportedTokens()
+  
+  const pathname = usePathname()
+  useEffect(()=>{
+    if(pathname.toLocaleLowerCase().startsWith(RoutePath.Claim(''))){
+      tiplinkWalletAdpater.connect();
+    }
+  },[pathname,tiplinkWalletAdpater])
+  
   useAuthorizeWallet(refetch)
 
   const storeRef = useRef<CandyMachineStoreApi>()
