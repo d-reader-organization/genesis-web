@@ -19,6 +19,7 @@ export default async function ReadComicIssuePage({ params }: ComicIssuePageParam
     comicIssueId: params.id,
     userId: me?.id,
   })
+
   const hasUnusedAssets = assets.some((asset) => !asset.isUsed)
   return (
     <>

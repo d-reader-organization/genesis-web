@@ -15,28 +15,29 @@ type Props = {
 }
 
 export const UnwrapIssueDialog: React.FC<Props> = ({ assets, comicIssue, showUnwrapButton = true }) => {
-  const [unwrapIssueDialog, toggleDialog] = useToggle()
+  const [unwrapIssueDialog, toggleDialog, closeDialog] = useToggle()
   const unusedAssets = assets.filter((asset) => !asset.isUsed)
   return (
     <Dialog open={unwrapIssueDialog} onOpenChange={toggleDialog}>
-      {!showUnwrapButton && (
+      {showUnwrapButton && (
         <DialogTrigger className='bg-yellow-500 rounded-lg text-black p-2 font-semibold text-base min-w-28 w-min mx-auto'>
           Unwrap
         </DialogTrigger>
       )}
       <DialogContent
         aria-describedby=''
-        className='flex flex-col justify-between items-center gap-8 bg-grey-400 p-5 rounded-lg'
+        className='flex flex-col justify-between items-center gap-8 bg-grey-400 p-5 rounded-lg max-w-[500px] max-h-[600px] overflow-y-scroll'
       >
         <DialogTitle className='sr-only'>Unwrap issue dialog</DialogTitle>
         <Text as='h3' styleVariant='primary'>
           Choose to open
         </Text>
         <Text as='p' styleVariant='body-large' className='text-center'>
-          In order to read the full comic issue, at least one Asset should be unwrapped.
+          This episode is a digital collectible, In order to read the full episode you need to &quot;unwrap&quot; at least one copy. This action is irreversible and will make the selected copy
+          lose the mint condition.
         </Text>
         {unusedAssets.map((asset) => (
-          <UnwrapIssueDialogItem key={asset.address} asset={asset} comicIssue={comicIssue} />
+          <UnwrapIssueDialogItem key={asset.address} asset={asset} comicIssue={comicIssue} closeDialog={closeDialog}/>
         ))}
       </DialogContent>
     </Dialog>

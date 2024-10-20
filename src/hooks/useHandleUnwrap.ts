@@ -8,6 +8,9 @@ import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { sleep } from '@/utils/helpers'
 import { confirmingTransaction, toast } from '@/components/ui/toast/use-toast'
 import { RoutePath } from '@/enums/routePath'
+import { useQueryClient } from '@tanstack/react-query'
+import { comicIssueKeys } from '@/api/comicIssue'
+import { assetKeys } from '@/api/asset'
 
 type ReturnType = {
   handleUnwrap: () => Promise<void>
@@ -37,7 +40,8 @@ export const useHandleUnwrap = ({
     false
   )
 
-  // TODO test this
+  const queryClient = useQueryClient();
+
   const handleUnwrap = async () => {
     try {
       setIsLoading(true)
@@ -60,10 +64,10 @@ export const useHandleUnwrap = ({
         await sleep(1000)
       }
       refresh()
-      // TODO: make sure comic pages are also invalidated
-      //   queryClient.invalidateQueries(comicIssueKeys.get(comicIssue.id))
-      //   queryClient.invalidateQueries(comicIssueKeys.getByOwner(myId))
-      //   queryClient.invalidateQueries(assetKeys.getMany({ comicIssueId: comicIssue.id }))
+
+      queryClient.invalidateQueries({queryKey:comicIssueKeys.get(comicIssueId)})
+      queryClient.invalidateQueries({queryKey:assetKeys.getMany({ comicIssueId })})
+      queryClient.invalidateQueries({queryKey:comicIssueKeys.getPages(comicIssueId)})
       toast({
         description: 'Comic unwrapped! Lets get to reading 🎉',
         variant: 'success',

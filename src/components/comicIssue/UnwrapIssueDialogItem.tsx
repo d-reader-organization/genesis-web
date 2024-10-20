@@ -20,14 +20,17 @@ const BaseWalletMultiButtonDynamic = dynamic(
   async () => (await import('@/components/shared/buttons/SolanaBaseWalletButton')).SolanaBaseWalletButton
 )
 
-export const UnwrapIssueDialogItem: React.FC<{ asset: Asset; comicIssue: ComicIssue }> = ({ asset, comicIssue }) => {
+export const UnwrapIssueDialogItem: React.FC<{ asset: Asset; comicIssue: ComicIssue; closeDialog: VoidFunction }> = ({ asset, comicIssue, closeDialog }) => {
   const [isUnwrapWarningRead] = useLocalStorage('unwrapWarning', false)
   const [unwrapWarningDialog, toggleUnwrapWarningDialog] = useToggle(false)
 
   const { handleUnwrap, isUnwrapLoading } = useHandleUnwrap({
     asset,
     comicIssueId: comicIssue.id,
-    onSuccess: () => toggleUnwrapWarningDialog(),
+    onSuccess: () => {
+      toggleUnwrapWarningDialog()
+      closeDialog()
+    },
   })
 
   const traitLabelStyle = `bg-transparent rounded-[4px] border border-solid text-xs flex items-center gap-0.5 [&>svg]:size-3 p-1`

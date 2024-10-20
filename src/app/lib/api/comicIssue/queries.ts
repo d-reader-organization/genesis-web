@@ -17,7 +17,7 @@ export const fetchComicIssues = async (params: ComicIssueParams): Promise<ComicI
   return data ?? []
 }
 
-export const fetchComicIssue = async (id: string): Promise<Nullable<ComicIssue>> => {
+export const fetchComicIssue = async (id: string | number): Promise<Nullable<ComicIssue>> => {
   const { data } = await fetchWrapper<ComicIssue>({
     path: `${COMIC_ISSUE}/${GET}/${id}`,
   })
