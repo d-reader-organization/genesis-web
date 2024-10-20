@@ -10,7 +10,7 @@ type Params = {
 
 export default async function VerifyEmailPage({ params }: { params: Params }) {
   const verificationToken = params?.verificationToken
-  const user = !verificationToken ? await verifyUserEmail(verificationToken) : null
+  const user = verificationToken ? await verifyUserEmail(verificationToken) : null
   const name = user?.name ?? ''
 
   return (
