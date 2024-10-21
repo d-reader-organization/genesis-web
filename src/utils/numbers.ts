@@ -24,6 +24,10 @@ export const formatUSD = (value: number) => {
   return usdFormatter.format(value)
 }
 
+export const formatPercentage = (value: number): string => {
+  return value.toString() + '%'
+}
+
 export const roundNumber = (number: number | null, maxDecimals = 1) => {
   if (!number) return number
   const decimalUnits = Math.pow(10, maxDecimals)
