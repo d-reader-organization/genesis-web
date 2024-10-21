@@ -6,7 +6,7 @@ import { ProjectsSection } from '@/components/invest/ProjectsSection'
 import { InvestSection } from '@/components/invest/Section'
 import { BaseLayout } from '@/components/layout/BaseLayout'
 import { PROJECTS } from '@/constants/projects'
-import { SuccessfulProject } from '@/models/project'
+import { SuccessfulProject, isSuccessfulProject } from '@/models/project'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -41,12 +41,15 @@ export const metadata: Metadata = {
 }
 
 function fetchSuccessfulProjects(): SuccessfulProject[] {
-  // TODO: remove as
-  return PROJECTS.filter((project) => !!project.payout) as SuccessfulProject[]
+  return PROJECTS.filter(isSuccessfulProject)
 }
 
 export default async function InvestPage() {
   const successfulProjects = fetchSuccessfulProjects()
+
+  if (successfulProjects.length === 0) {
+    return 'Projects not found'
+  }
 
   return (
     <BaseLayout>

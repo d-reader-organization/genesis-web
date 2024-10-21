@@ -5,19 +5,20 @@ import { ProjectCreatorSection } from '@/components/shared/ProjectCreatorSection
 import { ProjectPayoutCard } from '@/components/payout/ProjectPayoutCard'
 import { ProjectDescription } from '@/components/payout/ProjectDescription'
 import { PROJECTS } from '@/constants/projects'
-import { SuccessfulProject } from '@/models/project'
+import { SuccessfulProject, isSuccessfulProject } from '@/models/project'
 
 type Props = {
   params: { slug: string }
 }
 
-function fetchProjectBySlug(slug: string): SuccessfulProject | undefined {
-  // TODO: remove as
-  return PROJECTS.find((project) => project.slug === slug) as SuccessfulProject
+function fetchSuccessfulProject(slug: string): SuccessfulProject | undefined {
+  const project = PROJECTS.find((project) => project.slug === slug)
+
+  return isSuccessfulProject(project) ? project : undefined
 }
 
 export default async function PayoutPage({ params }: Props) {
-  const project = fetchProjectBySlug(params.slug)
+  const project = fetchSuccessfulProject(params.slug)
 
   if (!project) {
     return 'Project not found'
@@ -32,20 +33,16 @@ export default async function PayoutPage({ params }: Props) {
             <ProjectBanner title={project.title} banner={project.banner} cover={project.cover} />
             <ProjectHeader title={project.title} subtitle={project.subtitle} className='md:hidden' />
             <ProjectPayoutCard
-              title={project.title}
-              logo={project.logo}
               payout={project.payout}
               raiseGoal={project.funding.raiseGoal}
               numberOfBackers={project.funding.numberOfBackers}
               className='md:hidden'
             />
             <ProjectCreatorSection creator={project.creator} tags={project.tags} />
-            <ProjectDescription description={project.payout.summary} />
+            <ProjectDescription summary={project.payout.summary} />
           </div>
           <div className='flex flex-col'>
             <ProjectPayoutCard
-              title={project.title}
-              logo={project.logo}
               payout={project.payout}
               raiseGoal={project.funding.raiseGoal}
               numberOfBackers={project.funding.numberOfBackers}
