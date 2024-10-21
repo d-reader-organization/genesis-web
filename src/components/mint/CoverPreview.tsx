@@ -58,9 +58,13 @@ export const CoverPreviewDialog: React.FC<Props> = ({
               ) : (
                 <InfoStats title='Supply' value={cover.share + ' %'} />
               )}
-              <InfoStats title='Cover author' value={cover.artist} />
+              <InfoStats title='Cover artist' value={cover.artist} />
             </div>
-            <RarityChip rarity={cover.rarity} supply={getRaritySupply(candyMachine?.supply ?? 0, cover.share)} />
+            <RarityChip
+              vertical
+              rarity={cover.rarity}
+              supply={getRaritySupply(candyMachine?.supply ?? 0, cover.share)}
+            />
           </div>
         </div>
         {hideArrows ? null : <Arrow arrowOrientation='RIGHT' className='bg-transparent' onClick={onNextClick} />}
@@ -78,7 +82,7 @@ const InfoStats: React.FC<InfoProps> = ({ title, value }) => {
   return (
     <div className='flex flex-col items-center gap-2'>
       <span className='text-base font-medium leading-[22.4px] text-grey-100'>{title}</span>
-      <h6 className='text-lg font-semibold leading-[18px] tracking-[0.036px]'>{value}</h6>
+      <h6 className='text-lg font-semibold leading-[18px] tracking-[0.036px] text-center'>{value}</h6>
     </div>
   )
 }
