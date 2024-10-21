@@ -3,7 +3,6 @@
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import useToggle from '@/hooks/useToggle'
 import { Asset } from '@/models/asset'
-import { ComicIssue } from '@/models/comicIssue'
 import React from 'react'
 import { useHandleUnwrap } from '@/hooks/useHandleUnwrap'
 import { getRarityIcon } from '@/utils/rarity'
@@ -20,13 +19,15 @@ const BaseWalletMultiButtonDynamic = dynamic(
   async () => (await import('@/components/shared/buttons/SolanaBaseWalletButton')).SolanaBaseWalletButton
 )
 
-export const UnwrapIssueDialogItem: React.FC<{ asset: Asset; comicIssue: ComicIssue; closeDialog: VoidFunction }> = ({ asset, comicIssue, closeDialog }) => {
+export const UnwrapIssueDialogItem: React.FC<{ asset: Asset; closeDialog: VoidFunction }> = ({
+  asset,
+  closeDialog,
+}) => {
   const [isUnwrapWarningRead] = useLocalStorage('unwrapWarning', false)
   const [unwrapWarningDialog, toggleUnwrapWarningDialog] = useToggle(false)
 
   const { handleUnwrap, isUnwrapLoading } = useHandleUnwrap({
     asset,
-    comicIssueId: comicIssue.id,
     onSuccess: () => {
       toggleUnwrapWarningDialog()
       closeDialog()

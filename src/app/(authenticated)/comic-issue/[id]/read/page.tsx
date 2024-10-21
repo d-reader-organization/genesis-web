@@ -36,11 +36,7 @@ export default async function ReadComicIssuePage({ params }: ComicIssuePageParam
                   To view all pages you need to own at least one <strong>opened</strong> comic issue asset.
                 </p>
               )}
-              <UnwrapIssueDialog
-                assets={assets}
-                comicIssue={comicIssue}
-                showUnwrapButton={hasUnusedAssets && !comicIssue.myStats?.canRead}
-              />
+              <UnwrapIssueDialog assets={assets} showUnwrapButton={hasUnusedAssets && !comicIssue.myStats?.canRead} />
               {!comicIssue.isFullyUploaded && (
                 <p className='preview-message-text'>
                   This comic is not yet fully uploaded. New chapters/pages might be added weekly or the comic is still

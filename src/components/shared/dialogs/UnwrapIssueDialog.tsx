@@ -2,7 +2,6 @@
 
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/Dialog'
 import { Asset } from '@/models/asset'
-import { ComicIssue } from '@/models/comicIssue'
 import { UnwrapIssueDialogItem } from '@/components/comicIssue/UnwrapIssueDialogItem'
 import { useToggle } from '@/hooks/useToggle'
 import { DialogTrigger } from '@radix-ui/react-dialog'
@@ -10,11 +9,10 @@ import { Text } from '@/components/ui'
 
 type Props = {
   assets: Asset[]
-  comicIssue: ComicIssue
   showUnwrapButton?: boolean
 }
 
-export const UnwrapIssueDialog: React.FC<Props> = ({ assets, comicIssue, showUnwrapButton = true }) => {
+export const UnwrapIssueDialog: React.FC<Props> = ({ assets, showUnwrapButton = true }) => {
   const [unwrapIssueDialog, toggleDialog, closeDialog] = useToggle()
   const unusedAssets = assets.filter((asset) => !asset.isUsed)
   return (
@@ -33,11 +31,11 @@ export const UnwrapIssueDialog: React.FC<Props> = ({ assets, comicIssue, showUnw
           Choose to open
         </Text>
         <Text as='p' styleVariant='body-large' className='text-center'>
-          This episode is a digital collectible, In order to read the full episode you need to &quot;unwrap&quot; at least one copy. This action is irreversible and will make the selected copy
-          lose the mint condition.
+          This episode is a digital collectible, In order to read the full episode you need to &quot;unwrap&quot; at
+          least one copy. This action is irreversible and will make the selected copy lose the mint condition.
         </Text>
         {unusedAssets.map((asset) => (
-          <UnwrapIssueDialogItem key={asset.address} asset={asset} comicIssue={comicIssue} closeDialog={closeDialog}/>
+          <UnwrapIssueDialogItem key={asset.address} asset={asset} closeDialog={closeDialog} />
         ))}
       </DialogContent>
     </Dialog>

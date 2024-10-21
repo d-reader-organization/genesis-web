@@ -58,7 +58,14 @@ export const CandyMachineStoreProvider = ({
   }
 
   useEffect(() => {
-    storeRef.current?.setState({ candyMachine: candyMachine ?? undefined, isLoading, supportedTokens })
+    storeRef.current?.setState({
+      candyMachine: candyMachine ?? undefined,
+      isLoading,
+      supportedTokens,
+      coupons: (candyMachine?.coupons ?? []).filter(
+        (coupon) => !(coupon.type === CouponType.PublicUser || isComicVaultCoupon(coupon))
+      ),
+    })
   }, [candyMachine, isLoading, supportedTokens])
 
   useEffect(() => {
@@ -69,14 +76,11 @@ export const CandyMachineStoreProvider = ({
         (price) => price.splTokenAddress == WRAPPED_SOL_MINT.toString()
       )
       storeRef.current?.setState({
-        coupons: (candyMachine?.coupons ?? []).filter(
-          (coupon) => !(coupon.type === CouponType.PublicUser || isComicVaultCoupon(coupon))
-        ),
         selectedCoupon: defaultCoupon,
         selectedCurrency: solCurrencySetting,
       })
     }
-  }, [candyMachine])
+  }, [candyMachine?.coupons.length])
 
   return <CandyMachineStoreContext.Provider value={storeRef.current}>{children}</CandyMachineStoreContext.Provider>
 }
