@@ -7,6 +7,7 @@ import React from 'react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/Tooltip'
 import { roiTooltip } from '@/constants/tooltips'
 import { formatUSD } from '@/utils/numbers'
+import { Text } from '../ui'
 
 type Props = {
   projects: SuccessfulProject[]
@@ -16,9 +17,9 @@ type Props = {
 export const ProjectsSection: React.FC<Props> = ({ projects, title }) => {
   return (
     <div className='flex flex-col gap-4 md:gap-10 md:my-10'>
-      <h1 className='text-xl md:text-[32px] font-semibold leading-[20px] md:leading-8 tracking-[0.04px] md:tracking-[0.064px]'>
+      <Text as='h3' styleVariant='primary'>
         {title}
-      </h1>
+      </Text>
       <div className='max-md:py-2 flex 1160::grid overflow-x-auto 1160:overflow-x-visible grid-cols-4 gap-4 md:gap-6 lg:gap-10'>
         {projects.map((project) => (
           <Card project={project} key={project.slug} />

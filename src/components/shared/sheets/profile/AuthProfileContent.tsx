@@ -18,7 +18,7 @@ export const AuthProfileContent: React.FC<AuthProfileContentProps> = ({ user }) 
         <Link className='hover:text-white' href={RoutePath.Library}>
           My Library
         </Link>
-        <Link className='hover:text-white' href='/'>
+        <Link className='hover:text-white' href='mailto:support@dreader.io'>
           Help center
         </Link>
       </div>

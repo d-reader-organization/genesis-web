@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react'
 import { PlusIcon, MinusIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { Text } from '../ui'
 
 interface FAQItem {
   question: string
@@ -44,9 +45,9 @@ Decentralized Reader LLC works with many of the same indie creators to distribut
 export const FaqSection: React.FC = () => {
   return (
     <section className='w-full py-4 md:py-12 flex flex-col gap-4 md:gap-10 justify-start'>
-      <h1 className='text-xl md:text-[32px] font-semibold leading-[20px] md:leading-[32px] tracking-[0.04px] md:tracking-[0.064px]'>
+      <Text as='h3' styleVariant='primary'>
         Frequently Asked Questions
-      </h1>
+      </Text>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-x-4 md:gap-x-10'>
         {faqs.map((faq, index) => (
           <FAQItem key={index} item={faq} />

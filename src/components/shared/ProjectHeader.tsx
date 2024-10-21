@@ -15,7 +15,7 @@ export const ProjectHeader: React.FC<ProjectHeaderProps> = ({ title, subtitle, c
         className
       )}
     >
-      <h1 className='text-white text-2xl font-semibold leading-normal tracking-tight md:tracking-tight md:leading-none md:text-[40px]'>
+      <h1 className='text-white text-2xl font-semibold leading-normal tracking-tight md:tracking-tight md:leading-none md:text-[40px] font-obviouslyNarrow'>
         {title}
       </h1>
       <p className='text-white text-sm font-medium leading-tight md:leading-snug md:text-base'>{subtitle}</p>

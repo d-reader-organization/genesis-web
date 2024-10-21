@@ -11,7 +11,7 @@ export const Section: React.FC<Props> = ({ children, title }) => {
     <div className='flex flex-col gap-4 md:gap-10'>
       <div className='flex justify-between'>
         <div className='flex items-center gap-8'>
-          <h1 className='text-xl md:text-[32px] font-semibold leading-[20px] md:leading-8 tracking-[0.04px] md:tracking-[0.064px]'>
+          <h1 className='text-xl md:text-[32px] font-semibold leading-[20px] md:leading-8 tracking-[0.04px] md:tracking-[0.064px] font-obviouslyNarrow'>
             {title}
           </h1>
           {/* <Link

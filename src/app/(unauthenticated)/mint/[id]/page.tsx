@@ -6,6 +6,7 @@ import { CoverCarousel } from '@/components/mint/CoverCarousel'
 import { PagesPreview } from '@/components/mint/PagesPreview'
 import { CandyMachineDetails } from '@/components/shared/CandyMachineDetails'
 import { Divider } from '@/components/shared/Divider'
+import { Text } from '@/components/ui'
 import { ComicIssuePageParams } from '@/models/common'
 import { CandyMachineStoreProvider } from '@/providers/CandyMachineStoreProvider'
 
@@ -25,9 +26,9 @@ export default async function NewMintPage({ params }: ComicIssuePageParams) {
               <span>{comicIssue.comic?.title}</span>
               <span>EP {comicIssue.number}</span>
             </div>
-            <h1 className='text-2xl md:text-[32px] leading-[24px] md:leading-[32px] font-semibold'>
+            <Text as='h3' styleVariant='primary'>
               {comicIssue.title}
-            </h1>
+            </Text>
           </div>
           <CandyMachineStoreProvider comicIssue={comicIssue} isAuthenticated={isAuthenticated}>
             <CandyMachineDetails comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
