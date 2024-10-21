@@ -3,6 +3,7 @@ import { RoutePath } from '@/enums/routePath'
 import { ButtonLink } from '@/components/ui/Button'
 import { verifyUserEmail } from '@/app/lib/api/user/mutations'
 import { ArrowRight } from 'lucide-react'
+import { Text } from '@/components/ui'
 
 type Params = {
   verificationToken: string
@@ -16,11 +17,12 @@ export default async function VerifyEmailPage({ params }: { params: Params }) {
   return (
     <main className='flex flex-col w-full justify-center items-center mt-20 md:mt-16 p-4 md:p-6 lg:p-8'>
       <div className='flex flex-col items-center gap-4 max-w-[480px]'>
-        <h1 className='text-[48px] font-bold leading-none tracking-[0.096px]'>
+        <Text as='h1' styleVariant='primary'>
           Welcome
-          <br />
-          <span className='text-xl font-medium leading-none tracking-[0.096px]'>{name}</span>
-        </h1>
+        </Text>
+        <Text as='span' styleVariant='body-xlarge' fontWeight='medium'>
+          {name}
+        </Text>
         {!name ? (
           <p className='text-xl font-medium leading-none tracking-[0.096px] text-center'>
             Something went wrong while while verifying your email

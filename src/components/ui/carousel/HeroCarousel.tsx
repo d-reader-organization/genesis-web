@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils'
 import { Badge } from '@/components/shared/Badge'
 import Link from 'next/link'
 import { getSlideUrl } from '@/utils/helpers'
+import { Text } from '../Text'
 
 type Props = {
   slides: CarouselSlide[]
@@ -75,9 +76,9 @@ export const HeroCarousel: React.FC<Props> = ({ slides }) => {
                       <div className='h-full flex flex-col justify-between p-4 md:p-6'>
                         <TopSection tags={slide.tags ?? []} />
                         <div className='flex flex-col gap-4 relative mb-8'>
-                          <h1 className='text-white line-clamp-1 text-ellipsis text-2xl md:text-3xl lg:text-5xl font-semibold'>
-                            {slide.title}
-                          </h1>
+                          <Text as='h1' className='line-clamp-1 text-ellipsis' styleVariant='primary'>
+                            {slide.title} + {slide.title}
+                          </Text>
                           <p className='text-base md:text-xl lg:text-[22px] font-medium leading-normal md:leading-5 lg:leading-7 tracking-[0.2px] line-clamp-2 text-ellipsis'>
                             {slide.subtitle}
                           </p>
