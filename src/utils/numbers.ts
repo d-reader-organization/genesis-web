@@ -25,8 +25,8 @@ export const formatUSD = (value: number) => {
 }
 
 export const formatPercentage = (value: number): string => {
-  return value.toString() + '%';
-};
+  return value.toString() + '%'
+}
 
 export const roundNumber = (number: number | null, maxDecimals = 1) => {
   if (!number) return number

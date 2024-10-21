@@ -37,3 +37,7 @@ export type Project = {
 }
 
 export type SuccessfulProject = Project & { payout: ProjectPayout }
+
+export function isSuccessfulProject(project: Project | undefined): project is SuccessfulProject {
+  return project !== undefined && 'payout' in project
+}

@@ -1,29 +1,30 @@
 'use client'
 
 import React from 'react'
-import { PlayIcon } from 'lucide-react'
 import Image from 'next/image'
+import { PlayIcon } from 'lucide-react'
+import { Project } from '@/models/project'
 
-type ProjectBannerProps = {
-  title: string
-  banner: string
-  cover: string
+type Props = {
+  title: Project['title']
+  banner: Project['banner']
+  cover: Project['cover']
 }
 
-export const ProjectBanner: React.FC<ProjectBannerProps> = ({ banner, cover }) => {
+export const ProjectBanner: React.FC<Props> = ({ title, banner, cover }) => {
   return (
     <div className='flex flex-col w-full h-[300px] md:h-[550px]'>
       <div className='relative w-full h-full'>
         <Image
           src={banner}
-          alt=''
+          alt={title + ' Banner'}
           fill
           style={{ objectFit: 'cover', objectPosition: 'top' }}
           className='max-sm:hidden md:rounded-xl shadow-lg'
         />
         <Image
           src={cover}
-          alt=''
+          alt={title + ' Cover'}
           fill
           style={{ objectFit: 'cover', objectPosition: 'center' }}
           className='sm:hidden shadow-lg'

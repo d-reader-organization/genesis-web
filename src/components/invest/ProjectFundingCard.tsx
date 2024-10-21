@@ -1,20 +1,14 @@
 'use client'
 
-import Link from 'next/link'
 import React from 'react'
-import { formatNumberWithCommas } from '@/utils/numbers'
+import Link from 'next/link'
 import { TrendingUp } from 'lucide-react'
+import { ProjectFunding } from '@/models/project'
+import { formatNumberWithCommas } from '@/utils/numbers'
 
 type ProjectFundingCardProps = {
-  funding: FundingDetails
+  funding: ProjectFunding
   className: string
-}
-
-type FundingDetails = {
-  pledgedAmount: number
-  raiseGoal: number
-  numberOfBackers: number
-  daysLeft: number
 }
 
 export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({ funding, className }) => {

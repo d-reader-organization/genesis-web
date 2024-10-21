@@ -1,12 +1,13 @@
 import React from 'react'
+import { Project } from '@/models/project'
 
-type ProjectHeaderProps = {
-  title: string
-  subtitle: string
+type Props = {
+  title: Project['title']
+  subtitle: Project['subtitle']
   className?: string
 }
 
-export const ProjectHeader: React.FC<ProjectHeaderProps> = ({ title, subtitle, className }) => {
+export const ProjectHeader: React.FC<Props> = ({ title, subtitle, className }) => {
   return (
     <div
       className={

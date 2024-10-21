@@ -1,15 +1,13 @@
 import { cn } from '@/lib/utils'
+import { Project, ProjectCreator } from '@/models/project'
 import { AvatarImage } from '@/components/shared/AvatarImage'
 
-type ProjectCreatorSectionProps = {
-  creator: {
-    name: string
-    avatar: string
-  }
-  tags: string[]
+type Props = {
+  creator: ProjectCreator
+  tags: Project['tags']
 }
 
-export const ProjectCreatorSection: React.FC<ProjectCreatorSectionProps> = ({ creator, tags }) => {
+export const ProjectCreatorSection: React.FC<Props> = ({ creator, tags }) => {
   return (
     <section className='flex flex-col w-full justify-between gap-3 py-4 md:items-center md:flex-row md:py-6 md:gap-10'>
       <div className='flex items-center gap-2'>
