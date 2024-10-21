@@ -22,24 +22,15 @@ export const ProjectPayoutCard: React.FC<Props> = ({ payout, raiseGoal, numberOf
     >
       <div className='flex flex-col gap-[14px] w-full'>
         <p className='text-white text-base font-bold leading-snug'>Payout details*</p>
-        <div className='h-[8px] rounded-[27px] w-full bg-[#08cc77]'></div>
       </div>
 
-      <div className='flex flex-row md:flex-col w-full max-md:py-1 items-center md:items-start md:gap-1 max-md:hidden md:pt-1'>
-        <h2 className='text-[#08cc77] font-semibold text-xl leading-tight tracking-tight md:text-[32px] md:leading-none md:tracking-tight'>
-          ${formatNumberWithCommas(raiseGoal)}
-        </h2>
-        <p className='text-[#c2c5ce] text-xs font-medium md:text-base md:leading-relaxed max-md:hidden'>
-          pledged of ${formatNumberWithCommas(raiseGoal)}
-        </p>
-      </div>
-
-      <div className='flex w-full md:flex-col items-start gap-3'>
+      <div className='flex w-full md:flex-col items-start gap-5'>
         <PayoutStats
-          text='pledged'
+          text='total raised'
           value={formatUSD(raiseGoal)}
-          upperTextColor='text-[#08cc77]'
-          className='md:hidden'
+          valueColor='text-[#fceb54] '
+          valueSizeMd='md:text-3xl '
+          textSizeMd='md:text-xl '
         />
         <PayoutStats text='backers' value={formatNumberWithCommas(numberOfBackers)} />
         <PayoutStats
@@ -61,9 +52,7 @@ export const ProjectPayoutCard: React.FC<Props> = ({ payout, raiseGoal, numberOf
           </div>
           <p className='text-[#aeaeae] text-[14px] font-medium leading-snug'>Licencing Participation Agreement</p>
         </div>
-        <p className='text-[10px] font-[cursive] md:text-[10px] pt-1 font-base leading-normal md:leading-[22.4px] max-md:pl-1 md:px-2'>
-          {payoutDetails}
-        </p>
+        <p className='text-[10px] italic md:text-[10px] pt-1 leading-normal max-md:pl-1 md:px-2'>{payoutDetails}</p>
       </div>
     </div>
   )
@@ -72,21 +61,32 @@ export const ProjectPayoutCard: React.FC<Props> = ({ payout, raiseGoal, numberOf
 type PayoutStatsProps = {
   text: string
   value: number | string
-  upperTextColor?: string
+  valueColor?: string
+  valueSizeMd?: string
+  textSizeMd?: string
   className?: string
 }
 
-const PayoutStats: React.FC<PayoutStatsProps> = ({ text, value, upperTextColor = '', className = '' }) => {
+const PayoutStats: React.FC<PayoutStatsProps> = ({
+  text,
+  value,
+  valueSizeMd = 'md:text-3xl ',
+  textSizeMd = 'md:text-lg ',
+  valueColor = 'text-white ',
+  className = '',
+}) => {
   return (
     <div className={'flex w-1/4 flex-col items-center md:w-full md:items-start ' + className}>
       <h2
         className={
-          'font-semibold text-xl leading-tight tracking-tight md:text-[29px] md:leading-none ' + upperTextColor
+          'font-semibold text-xl leading-tight tracking-tight md:leading-none ' + valueSizeMd + valueColor
         }
       >
         {value}
       </h2>
-      <p className='text-[#c2c5ce] text-xs font-medium leading-normal md:text-[13px] md:leading-relaxed'>{text}</p>
+      <p className={'text-[#c2c5ce] text-xs font-medium leading-normal md:leading-relaxed ' + textSizeMd}>
+        {text}
+      </p>
     </div>
   )
 }

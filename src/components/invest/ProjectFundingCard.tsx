@@ -37,7 +37,7 @@ export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({ funding,
           <p className='max-md:hidden text-[#c2c5ce] text-xs font-medium md:text-base md:leading-relaxed'>
             pledged of ${formatNumberWithCommas(funding.raiseGoal)}
           </p>
-          <p className='md:hidden text-[#c2c5ce] text-xs font-medium md:text-base md:leading-relaxed'>
+          <p className='md:hidden text-[#c2c5ce] text-xs font-medium leading-normal tracking-normal md:text-base md:leading-relaxed'>
             of ${formatNumberWithCommas(funding.raiseGoal)}
           </p>
         </div>
