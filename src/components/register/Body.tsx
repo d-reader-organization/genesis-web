@@ -7,6 +7,7 @@ import { CreateAccountContent } from './tabs/CreateAccount'
 import { ConnectWalletContent } from './tabs/ConnectWallet'
 import { EmailVerificationContent } from './tabs/EmailVerification'
 import { redirectToKey } from '@/constants/general'
+import { cn } from '@/lib/utils'
 
 enum TabValue {
   createAccount = 'createAccount',
@@ -34,10 +35,17 @@ const InnerRegisterBody: React.FC = () => {
 
   return (
     <Tabs defaultValue={defaultTabs.at(0)?.value} className='w-full' activationMode='manual' value={activeTab}>
-      <TabsList className={`grid w-full grid-cols-${tabs.length}`}>
-        {tabs.map((tab) => {
+      <TabsList className={`grid w-full grid-cols-${tabs.length} bg-transparent`}>
+        {tabs.map((tab, index) => {
           return (
-            <TabsTrigger className='cursor-default' key={tab.value} value={tab.value}>
+            <TabsTrigger
+              className={cn(
+                'cursor-default data-[state=active]:bg-transparent p-2 md:p-6 text-xs sm:text-base min-h-8 border-b border-b-grey-300',
+                index !== tabs.length - 1 ? 'border-r border-r-grey-300' : ''
+              )}
+              key={tab.value}
+              value={tab.value}
+            >
               <span className={activeTab !== tab.value ? 'opacity-20' : ''}>{tab.label}</span>
             </TabsTrigger>
           )

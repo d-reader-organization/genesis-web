@@ -6,7 +6,9 @@ export default function FaqPage() {
   return (
     <>
       <main className='flex flex-col gap-1 justify-center items-center mt-20'>
-        <h1 className='title'>FAQ</h1>
+        <Text as='h1' styleVariant='primary'>
+          FAQ
+        </Text>
         <p className='text-center'>Find answers to your questions! For any details contact us at </p>
         <Text as='p' styleVariant='body-xlarge' className='text-important-color'>
           support@dreader.io
