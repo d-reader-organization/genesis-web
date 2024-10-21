@@ -16,15 +16,15 @@ export const ProjectPayoutCard: React.FC<Props> = ({ payout, raiseGoal, numberOf
   return (
     <div
       className={
-        'flex flex-col p-2 gap-4 bg-grey-500 justify-between items-center shadow md:rounded-xl md:p-5 md:sticky md:top-[100px] md:max-w-[485px] md:min-w-[350px] md:h-[550px] md:gap-1 md:pb-4 ' +
+        'flex flex-col p-2 gap-3 bg-grey-500 justify-between items-center shadow md:rounded-xl md:p-5 md:sticky md:top-[100px] md:max-w-[485px] md:min-w-[350px] md:h-[550px] md:gap-1 md:pb-4 ' +
         className
       }
     >
-      <div className='flex flex-col gap-[14px] w-full'>
+      <div className='flex flex-col max-md:pl-1 gap-[14px] w-full'>
         <p className='text-white text-base font-bold leading-snug'>Payout details*</p>
       </div>
 
-      <div className='flex w-full md:flex-col items-start gap-5'>
+      <div className='flex w-full md:flex-col items-start md:gap-5'>
         <PayoutStats
           text='total raised'
           value={formatUSD(raiseGoal)}
@@ -77,16 +77,10 @@ const PayoutStats: React.FC<PayoutStatsProps> = ({
 }) => {
   return (
     <div className={'flex w-1/4 flex-col items-center md:w-full md:items-start ' + className}>
-      <h2
-        className={
-          'font-semibold text-xl leading-tight tracking-tight md:leading-none ' + valueSizeMd + valueColor
-        }
-      >
+      <h2 className={'font-semibold text-xl leading-tight tracking-tight md:leading-none ' + valueSizeMd + valueColor}>
         {value}
       </h2>
-      <p className={'text-[#c2c5ce] text-xs font-medium leading-normal md:leading-relaxed ' + textSizeMd}>
-        {text}
-      </p>
+      <p className={'text-[#c2c5ce] text-xs font-medium leading-normal md:leading-relaxed ' + textSizeMd}>{text}</p>
     </div>
   )
 }
