@@ -27,7 +27,7 @@ export const UnwrapWarningDialog: React.FC<Props> = ({ handleUnwrap, isLoading, 
             lose the mint condition.
           </Text>
         </div>
-        <ConnectButton className='self-center w-full bg-important-color my-5' onClick={handleUnwrap}>
+        <ConnectButton className='self-center w-full bg-important-color my-5 text-black' onClick={handleUnwrap}>
           {isLoading ? <Loader /> : 'Unwrap'}
         </ConnectButton>
         <div className='flex items-center justify-center space-x-2'>

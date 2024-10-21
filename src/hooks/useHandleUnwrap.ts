@@ -7,25 +7,16 @@ import { useRouter } from 'next/navigation'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { sleep } from '@/utils/helpers'
 import { confirmingTransaction, toast } from '@/components/ui/toast/use-toast'
-import { RoutePath } from '@/enums/routePath'
 
 type ReturnType = {
   handleUnwrap: () => Promise<void>
   isUnwrapLoading: boolean
 }
 
-export const useHandleUnwrap = ({
-  asset,
-  comicIssueId,
-  onSuccess,
-}: {
-  asset: Asset
-  comicIssueId: string | number
-  onSuccess: () => void
-}): ReturnType => {
+export const useHandleUnwrap = ({ asset, onSuccess }: { asset: Asset; onSuccess: () => void }): ReturnType => {
   const [isLoading, setIsLoading] = React.useState(false)
 
-  const { push, refresh } = useRouter()
+  const { refresh } = useRouter()
   const { signTransaction } = useWallet()
   const { connection } = useConnection()
 
@@ -37,7 +28,6 @@ export const useHandleUnwrap = ({
     false
   )
 
-  // TODO test this
   const handleUnwrap = async () => {
     try {
       setIsLoading(true)
@@ -59,22 +49,17 @@ export const useHandleUnwrap = ({
         }
         await sleep(1000)
       }
-      refresh()
-      // TODO: make sure comic pages are also invalidated
-      //   queryClient.invalidateQueries(comicIssueKeys.get(comicIssue.id))
-      //   queryClient.invalidateQueries(comicIssueKeys.getByOwner(myId))
-      //   queryClient.invalidateQueries(assetKeys.getMany({ comicIssueId: comicIssue.id }))
+
       toast({
         description: 'Comic unwrapped! Lets get to reading 🎉',
         variant: 'success',
       })
-      push(RoutePath.ReadComicIssue(comicIssueId), { scroll: false })
+      refresh()
     } catch (e) {
       console.error('Error while unwrapping the comic', e)
     } finally {
       setIsLoading(false)
       onSuccess()
-      //   onClose()
     }
   }
 

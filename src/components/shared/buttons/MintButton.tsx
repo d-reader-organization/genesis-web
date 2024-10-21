@@ -16,7 +16,6 @@ import { fetchMintTransaction } from '@/app/lib/api/transaction/queries'
 import { useFetchCandyMachine } from '@/api/candyMachine'
 import { versionedTransactionFromBs64 } from '@/utils/transactions'
 import { io } from 'socket.io-client'
-import { useRouter } from 'next/navigation'
 import { sendMintTransaction } from '@/app/lib/api/transaction/mutations'
 import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 import { VersionedTransaction } from '@solana/web3.js'
@@ -42,7 +41,6 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>()
 
   const { publicKey, signAllTransactions } = useWallet()
-  const { refresh } = useRouter()
 
   const walletAddress = publicKey?.toBase58()
   const hasWalletConnected = !!walletAddress
@@ -67,7 +65,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
       setTimeoutId(undefined)
       toggleAssetMinted()
       toast({ description: 'Successfully minted the comic! Find the asset in your wallet', variant: 'success' })
-      refresh
+      await refetch()
     })
 
     return () => {
