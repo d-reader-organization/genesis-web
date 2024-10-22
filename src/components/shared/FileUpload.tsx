@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import CloseIcon from 'public/assets/vector-icons/close.svg'
 import Image from 'next/image'
 
-type UploadedFile = { url: string; file: File }
+type UploadedFile = { url: string; file: File | undefined }
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   id: string
@@ -22,7 +22,7 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(function FileUpload(
   ref
 ) {
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>(
-    previewUrl ? [{ url: previewUrl, file: undefined as any }] : []
+    previewUrl ? [{ url: previewUrl, file: undefined }] : []
   )
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +31,7 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(function FileUpload(
       const uploads: UploadedFile[] = []
       for (let i = 0; i < files.length; i++) {
         const file = files[i]
+        if (!file) continue
         const url = URL.createObjectURL(file)
         uploads.push({ url, file })
       }
