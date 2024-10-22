@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 const { CREATOR, FOLLOW } = CREATOR_QUERY_KEYS
 
 const followCreator = async (slug: string): Promise<void> => {
-  await fetchWrapper<void>({ path: `${CREATOR}/${FOLLOW}/${slug}`, method: 'PATCH' })
+  await fetchWrapper<void>({ path: `${CREATOR}/${FOLLOW}/${slug}`, method: 'PATCH', isTextResponse: true })
 }
 
 export const useFollowCreator = (slug: string) => {

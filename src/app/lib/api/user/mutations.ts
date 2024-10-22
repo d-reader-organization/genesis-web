@@ -26,11 +26,16 @@ export const requestUserPasswordReset = async (body: RequestPasswordResetParams)
 }
 
 export const deleteUser = async (slug: string): Promise<void> => {
-  await fetchWrapper<void>({ path: `${USER}/${DELETE}/${slug}`, method: 'PATCH' })
+  await fetchWrapper<void>({ path: `${USER}/${DELETE}/${slug}`, method: 'PATCH', isTextResponse: true })
 }
 
 export const requestUserEmailChange = async (data: RequestEmailChangeParams): Promise<void> => {
-  await fetchWrapper<void>({ method: 'PATCH', path: `${USER}/${REQUEST_EMAIL_CHANGE}`, body: data })
+  await fetchWrapper<void>({
+    method: 'PATCH',
+    path: `${USER}/${REQUEST_EMAIL_CHANGE}`,
+    body: data,
+    isTextResponse: true,
+  })
 }
 
 export const resetUserPassword = async (resetPasswordData: ResetPasswordData): Promise<void> => {
@@ -61,6 +66,7 @@ export const updateUserPassword = async (id: string | number, request: UpdatePas
     method: 'PATCH',
     path: `${USER}/${UPDATE_PASSWORD}/${id}`,
     body: request,
+    isTextResponse: true,
   })
 }
 
