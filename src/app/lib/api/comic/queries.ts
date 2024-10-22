@@ -5,7 +5,7 @@ import { Comic } from '@/models/comic'
 import { ComicParams } from '@/models/comic/comicParams'
 import { fetchWrapper } from '../../fetchWrapper'
 
-const { COMIC, GET } = COMIC_QUERY_KEYS
+const { BY_OWNER, COMIC, FAVORITES, GET } = COMIC_QUERY_KEYS
 
 export const fetchComics = async (params: ComicParams): Promise<Comic[]> => {
   const { data } = await fetchWrapper<Comic[]>({
@@ -21,4 +21,28 @@ export const fetchComic = async (slug: string): Promise<Comic | null> => {
   })
 
   return data
+}
+
+export const fetchComicsByOwner = async ({
+  params,
+  userId,
+}: {
+  params: ComicParams
+  userId: number
+}): Promise<Comic[]> => {
+  const { data } = await fetchWrapper<Comic[]>({
+    params,
+    path: `${COMIC}/${GET}/${BY_OWNER}/${userId}`,
+  })
+
+  return data ?? []
+}
+
+export const fetchFavoriteComics = async ({ params, userId }: { params: ComicParams; userId: number }) => {
+  const response = await fetchWrapper<Comic[]>({
+    params,
+    path: `${COMIC}/${GET}/${FAVORITES}/${userId}`,
+  })
+
+  return response.data ?? []
 }
