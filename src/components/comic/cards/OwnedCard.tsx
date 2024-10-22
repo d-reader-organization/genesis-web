@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui'
+import { Button, Text } from '@/components/ui'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comic: Comic
@@ -27,12 +27,17 @@ export const OwnedCard: React.FC<Props> = ({ className, comic, href }) => (
     />
     <div className='absolute inset-0 bg-gradient-to-t from-black to-transparent' />
     <div className='relative z-10 h-full flex flex-col justify-end'>
+      <div className='flex size-8 px-2 justify-center items-center rounded-xl backdrop-blur-md bg-white bg-opacity-20 absolute top-2 right-2'>
+        <Text as='span' styleVariant='body-small' fontWeight='bold' className='leading-140'>
+          {comic.stats?.issuesCount}
+        </Text>
+      </div>
       <Image
         alt='comic logo'
         src={comic.logo}
         width={120}
         height={120}
-        className='object-cover h-120 w-auto absolute m-auto top-0 bottom-0 left-0 right-0 pointer-events-none'
+        className='object-cover h-120 w-auto absolute m-auto -top-6 bottom-0 left-0 right-0 pointer-events-none'
       />
       <div className='flex flex-col gap-4 p-4 pt-0'>
         <div className='flex flex-col gap-0.5'>

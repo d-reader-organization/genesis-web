@@ -1,4 +1,4 @@
-import { fetchComicsByOwner, fetchFavoriteComics } from '@/app/lib/api/comic/queries'
+import { fetchComicsByOwner } from '@/app/lib/api/comic/queries'
 import { fetchMe } from '@/app/lib/api/user/queries'
 import { BaseLayout } from '@/components/layout/BaseLayout'
 import { LibraryTabs } from '@/components/library/Tabs'
@@ -11,20 +11,14 @@ export default async function LibraryPage() {
   if (!me) {
     return null
   }
-  const [favoriteComics, ownedComics] = await Promise.all([
-    fetchFavoriteComics({
-      params: { skip: 0, take: 20, sortTag: ComicSortTag.Title, sortOrder: SortOrder.DESC },
-      userId: me.id,
-    }),
-    fetchComicsByOwner({
-      params: { skip: 0, take: 20, sortTag: ComicSortTag.Title, sortOrder: SortOrder.DESC },
-      userId: me.id,
-    }),
-  ])
+  const ownedComics = await fetchComicsByOwner({
+    params: { skip: 0, take: 20, sortTag: ComicSortTag.Title, sortOrder: SortOrder.DESC },
+    userId: me.id,
+  })
 
   return (
     <BaseLayout showFooter>
-      <LibraryTabs comics={favoriteComics} />
+      <LibraryTabs comics={ownedComics} />
     </BaseLayout>
   )
 }
