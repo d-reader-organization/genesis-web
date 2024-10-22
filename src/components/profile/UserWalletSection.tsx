@@ -17,7 +17,7 @@ type Props = {
 export const UserWalletSection: React.FC<Props> = ({ id }) => {
   const { publicKey } = useWallet()
   const { mutateAsync: disconnectWallet } = useDisconnectUserWallet()
-  const { data: connectedWallets = [] } = useFetchUserWallets(id)
+  const { data: connectedWallets = [], refetch } = useFetchUserWallets(id)
   useAuthorizeWallet()
 
   return (
@@ -42,6 +42,7 @@ export const UserWalletSection: React.FC<Props> = ({ id }) => {
             <Button
               onClick={async () => {
                 await disconnectWallet(wallet.address)
+                await refetch()
               }}
               variant='ghost'
               className='bg-transparent p-0 w-4 h-fit self-center'
