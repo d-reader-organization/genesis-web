@@ -22,7 +22,7 @@ export default async function ComicPage({ params: { slug } }: Props) {
   return (
     <BaseLayout>
       <ComicBanner banner={comic.banner} cover={comic.cover} logo={comic.logo} />
-      <div className='px-4 md:px-8 max-w-screen-xl my-0 mx-auto'>
+      <div className='px-4 md:px-8 w-full max-w-screen-xl my-0 mx-auto'>
         <ComicHeader comic={comic} />
         <ComicIssueList
           enabled
