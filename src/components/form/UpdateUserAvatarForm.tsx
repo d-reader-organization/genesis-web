@@ -49,12 +49,7 @@ export const UpdateUserAvatarForm: React.FC<Props> = ({ id, avatar }) => {
             </Button>
           </div>
           <FormControl>
-            <FileUpload
-              id='avatar'
-              onUpload={(file) => form.setValue('avatar', file)}
-              label='avatar'
-              previewUrl={avatar ?? null}
-            />
+            <FileUpload id='avatar' onUpload={(file) => form.setValue('avatar', file)} previewUrl={avatar ?? null} />
           </FormControl>
         </div>
       </form>
