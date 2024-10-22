@@ -126,7 +126,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
       const id = setTimeout(() => {
         closeConfirmingTransaction()
         toast({
-          description: 'Network is congested, your transaction might have failed. Please check your wallet',
+          description: 'Network might be congested, your transaction might have failed. Please check your wallet',
           variant: 'error',
         })
         setTimeoutId(undefined)
