@@ -14,7 +14,7 @@ async function ProfilePage() {
     <BaseLayout>
       <main className='w-full max-w-[1200px] mx-auto'>
         <Tabs defaultValue='1'>
-          <TabsList className='border-b-2 border-grey-300'>
+          <TabsList className='border-b-2 border-grey-300 w-full flex justify-start'>
             <TabsTrigger value='1' className='tab-button text-white font-bold text-sm sm:text-base'>
               Account
             </TabsTrigger>
@@ -34,7 +34,7 @@ async function ProfilePage() {
             <div className='px-2'>
               <div className='py-8'>
                 <h2 className='text-2xl font-bold'>Security & Privacy</h2>
-                <Text as='p' styleVariant='body-normal' className='text-gray-400'>
+                <Text as='p' styleVariant='body-normal' className='text-gray-400 italic'>
                   Change your security settings and review the privacy policy{' '}
                   <Link target='_' href={'/privacy-policy'} className='text-important-color underline font-bold'>
                     here
