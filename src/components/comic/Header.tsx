@@ -34,7 +34,7 @@ const LeftSection: React.FC<Props> = ({ comic }) => {
       </Text>
       {genres?.length ? <GenresList genres={genres} /> : null}
       <FlavorText text={flavorText} />
-      <Text as='p' styleVariant='body-large'>
+      <Text as='p' className='whitespace-pre-wrap mb-2' styleVariant='body-large'>
         {description}
       </Text>
       <CreatorInfoLink creator={comic.creator} />
