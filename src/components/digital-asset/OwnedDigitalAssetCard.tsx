@@ -15,7 +15,7 @@ export const OwnedAssetCard: React.FC<Props> = ({ asset }) => (
     <Image
       alt={`owned ${asset.name} cover`}
       width={223}
-      height={324}
+      height={322}
       src={asset.image}
       className='max-w-[223px] max-h-[322px] h-full'
     />
