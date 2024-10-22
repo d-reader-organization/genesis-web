@@ -11,6 +11,7 @@ import { RoutePath } from '@/enums/routePath'
 import { ComicIssue } from '@/models/comicIssue'
 import { ConnectButton } from '../buttons/ConnectButton'
 import Link from 'next/link'
+import { Text } from '@/components/ui'
 
 export const CouponDescriptionDialog: React.FC<CommonDialogProps & { comicIssue: ComicIssue }> = ({
   open,
@@ -55,16 +56,25 @@ export const CouponDescriptionDialog: React.FC<CommonDialogProps & { comicIssue:
               <div className='rounded-xl bg-grey-500 p-4 gap-4 flex max-w-[437px]' key={index}>
                 <div className='size-5'>{isEligible ? <CHECK_CIRCLE_ICON /> : <CROSS_CIRCLE_ICON />}</div>
                 <div className='inline-block gap-2 w-full max-w-[369px]'>
-                  <p className='xs:text-xs sm:text-base font-bold leading-[19.6px]'>
+                  <Text as='p' styleVariant='body-normal' fontWeight='bold' className='max-sm:text-xs'>
                     {coupon.name} {discount ? `-${discount}% off` : null}
-                  </p>
-                  <p className='xs:text-xs sm:text-base font-medium text-grey-100 leading-[22.4px] text-ellipsis overflow-auto'>
+                  </Text>
+                  <Text
+                    as='p'
+                    styleVariant='body-small'
+                    fontWeight='medium'
+                    className=' text-grey-100 text-ellipsis overflow-auto'
+                  >
                     {coupon.description}
-                  </p>
+                  </Text>
                   {!isEligible ? (
-                    <p className='xs:text-xs sm:text-sm text-end text-grey-100 leading-[19.6px] decoration-1 cursor-pointer'>
+                    <Text
+                      as='p'
+                      styleVariant='body-small'
+                      className='max-sm:text-xs text-end text-grey-100 decoration-1 cursor-pointer'
+                    >
                       {getCouponAction(coupon.type)}
-                    </p>
+                    </Text>
                   ) : null}
                 </div>
               </div>

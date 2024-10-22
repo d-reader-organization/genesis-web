@@ -32,8 +32,8 @@ const variantStyles: Record<Variant, string> = {
 }
 
 const styleVariants: Record<StyleVariant, string> = {
-  primary: 'font-semibold leading-none font-obviouslyNarrow',
-  secondary: 'font-bold leading-120 font-satoshi tracking-normal',
+  primary: 'font-semibold leading-tight font-obviouslyNarrow',
+  secondary: 'font-bold leading-tight font-satoshi tracking-normal',
   'body-xlarge': 'text-xl',
   'body-large': 'text-lg',
   'body-normal': 'text-base',
