@@ -13,9 +13,14 @@ export const rateComicIssue = async ({
   id: string | number
   request: RateComicIssue
 }): Promise<void> => {
-  await fetchWrapper<void>({ path: `${COMIC_ISSUE}/${RATE}/${id}`, body: request, method: 'PATCH' })
+  await fetchWrapper<void>({
+    path: `${COMIC_ISSUE}/${RATE}/${id}`,
+    body: request,
+    method: 'PATCH',
+    isTextResponse: true,
+  })
 }
 
 export const favouritiseComicIssue = async (id: string | number): Promise<void> => {
-  await fetchWrapper<void>({ path: `${COMIC_ISSUE}/${FAVOURITISE}/${id}`, method: 'PATCH' })
+  await fetchWrapper<void>({ path: `${COMIC_ISSUE}/${FAVOURITISE}/${id}`, method: 'PATCH', isTextResponse: true })
 }
