@@ -14,7 +14,7 @@ export const OwnedCard: React.FC<Props> = ({ className, comic, href }) => (
   <Link
     href={href}
     className={cn(
-      'relative overflow-hidden h-[242px] md:h-[295px] w-full max-w-[223px] rounded-xl hover:brightness-110 shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]',
+      'relative overflow-hidden h-[242px] md:h-[330px] w-full max-w-[178px] md:max-w-[223px] rounded-xl hover:brightness-110 shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]',
       className
     )}
   >
@@ -37,7 +37,7 @@ export const OwnedCard: React.FC<Props> = ({ className, comic, href }) => (
         src={comic.logo}
         width={120}
         height={120}
-        className='object-cover h-120 w-auto absolute m-auto -top-6 bottom-0 left-0 right-0 pointer-events-none'
+        className='object-cover h-120 w-auto absolute m-auto -top-16 md:-top-6 bottom-0 left-0 right-0 pointer-events-none'
       />
       <div className='flex flex-col gap-4 p-4 pt-0'>
         <div className='flex flex-col gap-0.5'>
