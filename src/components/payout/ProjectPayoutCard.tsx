@@ -43,16 +43,17 @@ export const ProjectPayoutCard: React.FC<Props> = ({ payout, raiseGoal, numberOf
       </div>
 
       <div>
-        <div className='flex flex-row w-full justify-center items-center p-[12px] bg-gradient-to-br from-[#4a4e53] to-[#1f222a] rounded-xl gap-[14px] md:max-h-[104px]'>
+        <div className='flex flex-row w-full justify-center items-center p-[10px] bg-gradient-to-br from-[#4a4e53] to-[#1f222a] rounded-xl gap-[14px] md:max-h-[104px] md:p-[12px]'>
           <div
-            className='flex max-h-[54px] max-w-[54px] p-[8px] bg-white rounded-xl shadow border border-[#56a05e]'
+            className='flex max-h-[36px] max-w-[36px] md:max-h-[54px] md:max-w-[54px] p-[8px] bg-white rounded-xl shadow border border-[#56a05e]'
             style={{ boxShadow: '0 0 15px rgba(86, 160, 94, 0.8)' }}
           >
-            <ReceiptText color='green' size={20} />
+            <ReceiptText color='green' size={20} className='max-md:hidden' />
+            <ReceiptText color='green' size={16} className='md:hidden' />
           </div>
           <p className='text-[#aeaeae] text-[14px] font-medium leading-snug'>Licencing Participation Agreement</p>
         </div>
-        <p className='text-[10px] italic md:text-[10px] pt-1 leading-normal max-md:pl-1 md:px-2'>{payoutDetails}</p>
+        <p className='text-[10px] italic pt-1 leading-normal max-md:pl-1 md:px-2'>{payoutDetails}</p>
       </div>
     </div>
   )
