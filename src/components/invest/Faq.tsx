@@ -28,7 +28,7 @@ Decentralized Reader LLC works with many of the same indie creators to distribut
   },
   {
     question: 'Is the content on this website real?',
-    answer: `No, this is just a dummy demo app. Nothing shown on this web does not imply partnership with entities used as a mock reference.
+    answer: `No, this is just a dummy demo app. Nothing shown on this web version implies partnership with entities used as a mock reference.
     
     Legal framework off the app will be resolved in the coming weeks & months. Final approach to adding "IP investment" features is yet to be determined.`,
   },
