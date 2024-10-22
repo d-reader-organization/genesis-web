@@ -8,6 +8,7 @@ import { useWallet } from '@solana/wallet-adapter-react'
 import { useDisconnectUserWallet } from '@/api/auth'
 import CloseIcon from 'public/assets/vector-icons/close.svg'
 import { ConnectButton } from '../shared/buttons/ConnectButton'
+import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
 
 type Props = {
   id: number | string
@@ -17,6 +18,7 @@ export const UserWalletSection: React.FC<Props> = ({ id }) => {
   const { publicKey } = useWallet()
   const { mutateAsync: disconnectWallet } = useDisconnectUserWallet()
   const { data: connectedWallets = [] } = useFetchUserWallets(id)
+  useAuthorizeWallet()
 
   return (
     <div className='max-w-[580px] px-2'>
@@ -32,7 +34,7 @@ export const UserWalletSection: React.FC<Props> = ({ id }) => {
         {connectedWallets.map((wallet) => (
           <li
             key={wallet.address}
-            className={`wallet-item flex justify-between p-4 border-b ${wallet.address === publicKey?.toBase58() ? 'bg-gray-200' : ''}`}
+            className={`wallet-item flex justify-between p-4 rounded-md ${wallet.address === publicKey?.toBase58() ? 'bg-gray-500' : ''}`}
           >
             <Text as='p' styleVariant='body-normal'>
               {shortenString(wallet.address)}

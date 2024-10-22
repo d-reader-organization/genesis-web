@@ -1,10 +1,8 @@
 'use client'
 
 import React from 'react'
-import { Button } from '../ui'
 import { UpdateUserAvatarForm } from '../form/UpdateUserAvatarForm'
 import { UpdatePasswordForm } from '../form/UpdatePasswordForm'
-import { useUserAuth } from '@/providers/UserAuthProvider'
 import { UpdateUserDetailsForm } from '../form/UpdateUserDetailsForm'
 import { User } from '@/models/user'
 
@@ -13,7 +11,6 @@ type Props = {
 }
 
 export const AccountSettingSection: React.FC<Props> = ({ user }) => {
-  const { logout } = useUserAuth()
   const { id, name, email, avatar } = user
 
   return (
@@ -26,11 +23,6 @@ export const AccountSettingSection: React.FC<Props> = ({ user }) => {
       <UpdateUserAvatarForm id={id} avatar={avatar} />
       <UpdateUserDetailsForm id={id} name={name} email={email} />
       <UpdatePasswordForm id={id} />
-
-      <div className='text-gray-400 border-b border-gray-400 text-sm font-bold uppercase mb-4 pb-1'>Other</div>
-      <Button onClick={logout} variant='destructive' className='text-white w-fit'>
-        Logout
-      </Button>
     </div>
   )
 }
