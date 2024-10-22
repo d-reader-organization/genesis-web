@@ -34,9 +34,9 @@ const config = {
         'creator-logo-aspect-ratio': '800/450',
       },
       fontSize: {
-        xxs: ['10px', '1'],
-        xs: ['12px', '1'],
-        sm: ['14px', '1'],
+        xxs: ['10px', '1.25'],
+        xs: ['12px', '1.25'],
+        sm: ['14px', '1.25'],
         base: ['16px', '1.4'],
         lg: ['18px', '1.4'],
         xl: ['20px', '1.4'],
@@ -59,8 +59,6 @@ const config = {
       },
       lineHeight: {
         '1/2': '0.5',
-        120: '1.2',
-        140: '1.4',
       },
       colors: {
         grey: {

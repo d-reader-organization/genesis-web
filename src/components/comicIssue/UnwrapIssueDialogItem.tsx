@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils'
 import { ComicRarity } from '@/enums/comicRarity'
 import { UnwrapButtonListItem } from '../shared/buttons/UnwrapButtonListItem'
 import dynamic from 'next/dynamic'
+import { LOCAL_STORAGE } from '@/constants/localStorage'
 
 const BaseWalletMultiButtonDynamic = dynamic(
   async () => (await import('@/components/shared/buttons/SolanaBaseWalletButton')).SolanaBaseWalletButton
@@ -23,7 +24,7 @@ export const UnwrapIssueDialogItem: React.FC<{ asset: Asset; closeDialog: VoidFu
   asset,
   closeDialog,
 }) => {
-  const [isUnwrapWarningRead] = useLocalStorage('unwrapWarning', false)
+  const [isUnwrapWarningRead] = useLocalStorage(LOCAL_STORAGE.IS_UNWRAP_HINT_READ, false)
   const [unwrapWarningDialog, toggleUnwrapWarningDialog] = useToggle(false)
 
   const { handleUnwrap, isUnwrapLoading } = useHandleUnwrap({

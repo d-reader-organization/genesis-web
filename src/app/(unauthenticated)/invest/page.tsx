@@ -5,6 +5,7 @@ import { FaqSection } from '@/components/invest/Faq'
 import { ProjectsSection } from '@/components/invest/ProjectsSection'
 import { InvestSection } from '@/components/invest/Section'
 import { BaseLayout } from '@/components/layout/BaseLayout'
+import { InvestScreenWelcomeDialog } from '@/components/shared/dialogs/InvestScreenWelcomeDialog'
 import { PROJECTS } from '@/constants/projects'
 import { SuccessfulProject, isSuccessfulProject } from '@/models/project'
 import { Metadata } from 'next'
@@ -58,6 +59,7 @@ export default async function InvestPage() {
         <ProjectsSection projects={successfulProjects} title='Recent Successful Projects' />
         <InvestSection actionHref='/invest' data={highInterestProjects} title='Gauging Interest' />
         <FaqSection />
+        <InvestScreenWelcomeDialog />
       </div>
     </BaseLayout>
   )
