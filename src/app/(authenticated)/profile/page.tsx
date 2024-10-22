@@ -5,6 +5,7 @@ import { BaseLayout } from '@/components/layout/BaseLayout'
 import { AccountSettingSection } from '@/components/profile/AccountSettingSection'
 import FAQ from '@/components/profile/FAQ'
 import { Text } from '@/components/ui'
+import Link from 'next/link'
 
 async function ProfilePage() {
   const me = await fetchMe()
@@ -34,7 +35,10 @@ async function ProfilePage() {
               <div className='py-8'>
                 <h2 className='text-2xl font-bold'>Security & Privacy</h2>
                 <Text as='p' styleVariant='body-normal' className='text-gray-400'>
-                  Change your security settings and review the privacy policy here
+                  Change your security settings and review the privacy policy{' '}
+                  <Link target='_' href={'/privacy-policy'} className='text-important-color underline font-bold'>
+                    here
+                  </Link>
                 </Text>
               </div>
             </div>
