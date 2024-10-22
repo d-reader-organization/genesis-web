@@ -7,7 +7,7 @@ import { Button, ButtonLink } from '@/components/ui/Button'
 import useToggle from '@/hooks/useToggle'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { RoutePath } from '@/enums/routePath'
-import { UnwrapWarningDialog, unwrapWarningKey } from './UnwrapWarningDialog'
+import { UnwrapWarningDialog } from './UnwrapWarningDialog'
 import { CommonDialogProps } from '@/models/common'
 import { useFetchTwitterIntentComicMinted } from '@/api/twitter/queries/useFetchIntentComicMinted'
 import { UtmSource } from '@/models/twitter/twitterIntentComicMintedParams'
@@ -25,6 +25,7 @@ import { useRouter } from 'next/navigation'
 import { assetKeys } from '@/api/asset'
 import { useFetchMe } from '@/api/user'
 import { Loader } from 'lucide-react'
+import { LOCAL_STORAGE } from '@/constants/localStorage'
 
 type Props = {
   comicIssue: ComicIssue
@@ -49,7 +50,7 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [])
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
   const [unwrapWarningDialog, toggleUnwrapDialog] = useToggle(false)
-  const [isUnwrapWarningRead] = useLocalStorage(unwrapWarningKey, false)
+  const [isUnwrapWarningRead] = useLocalStorage(LOCAL_STORAGE.IS_UNWRAP_HINT_READ, false)
 
   const [isUnwrapTransactionLoading, setUnwrapTransactionLoading] = useState<boolean>(false)
   const { publicKey, signTransaction } = useWallet()
@@ -99,7 +100,7 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
       queryClient.invalidateQueries({ queryKey: comicIssueKeys.getPages(comicIssue.id) })
 
       push(RoutePath.ReadComicIssue(comicIssue.id), { scroll: false })
-      toast({ description: 'Comic unwrapped! Lets get to reading 🎉', variant: 'success' })
+      toast({ description: 'Comic unwrapped, time to read! 🎉', variant: 'success' })
     } catch (e) {
       console.log(e)
       toast({ description: 'Failed to unwrap, please try again!', variant: 'error' })

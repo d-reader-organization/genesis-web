@@ -41,7 +41,7 @@ export default async function HomePage() {
             </h1>
             <ComicSectionSlider cardType='large' comics={topPickComics} title='' />
           </div>
-          <ComicSectionSlider cardType='normal' comics={popularComics} title='Featured Comic Serials' />
+          <ComicSectionSlider cardType='normal' comics={popularComics} title='Featured Comic Series' />
         </div>
       </div>
     </BaseLayout>

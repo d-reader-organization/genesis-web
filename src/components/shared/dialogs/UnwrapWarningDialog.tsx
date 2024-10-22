@@ -7,13 +7,12 @@ import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { CommonDialogProps } from '@/models/common'
 import { ConnectButton } from '../buttons/ConnectButton'
 import { Loader } from '../Loader'
-
-export const unwrapWarningKey = 'unwrapWarning'
+import { LOCAL_STORAGE } from '@/constants/localStorage'
 
 type Props = { handleUnwrap: () => Promise<void>; isLoading: boolean } & CommonDialogProps
 
 export const UnwrapWarningDialog: React.FC<Props> = ({ handleUnwrap, isLoading, open, toggleDialog }) => {
-  const [isUnwrapWarningRead, setIsUnwrapWarningRead] = useLocalStorage(unwrapWarningKey, false)
+  const [isUnwrapWarningRead, setIsUnwrapWarningRead] = useLocalStorage(LOCAL_STORAGE.IS_UNWRAP_HINT_READ, false)
   return (
     <Dialog open={open} onOpenChange={toggleDialog}>
       <DialogContent

@@ -20,7 +20,7 @@ export const ProjectPayoutCard: React.FC<Props> = ({ payout, raiseGoal, numberOf
         className
       }
     >
-      <div className='flex flex-col max-md:pl-1 gap-[14px] w-full'>
+      <div className='flex flex-col gap-[14px] w-full'>
         <p className='text-white text-base font-bold leading-snug'>Payout details*</p>
       </div>
 
