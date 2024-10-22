@@ -12,6 +12,8 @@ import { LogoutButton } from '../shared/buttons/LogoutButton'
 import { ProductSocials } from '../shared/ProductSocials'
 import { SearchInput } from '../shared/SearchInput'
 import { usePathname } from 'next/navigation'
+import { ConnectButton } from '../shared/buttons/ConnectButton'
+import { useWallet } from '@solana/wallet-adapter-react'
 
 type Props = {
   user?: User | null
@@ -20,7 +22,7 @@ type Props = {
 export const MobileNav: React.FC<Props> = ({ user }) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false)
   const [isSearchOpen, setIsSearchOpen] = React.useState<boolean>(false)
-
+  const { publicKey } = useWallet()
   const pathname = usePathname()
   const isInvest = pathname.startsWith(RoutePath.Invest)
   const isLibrary = pathname.startsWith(RoutePath.Library)
@@ -66,6 +68,7 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
                           <X className='size-6 text-grey-100' />
                         </button>
                       </div>
+                      {!publicKey ? <ConnectButton /> : null}
                     </div>
                     {user ? (
                       <div className='flex flex-col gap-10 border-t border-t-grey-400'>
