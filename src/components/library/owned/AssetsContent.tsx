@@ -24,7 +24,7 @@ export const OwnedAssetsContent: React.FC<Props> = ({ ownedAssets }) => {
       <Button className='flex items-center gap-3 w-fit px-0 py-10' variant='ghost' onClick={back}>
         <ArrowLeft className='size-8' />
         <Text as='h3' styleVariant='secondary'>
-          Title
+          {ownedAssets.at(0)?.comicName}
         </Text>
       </Button>
 

@@ -53,7 +53,7 @@ export const OwnedCard: React.FC<Props> = ({ className, comic, href }) => {
             </span>
           </div>
           <Button
-            className='max-h-[42px] min-w-40 py-3 px-6 flex justify-center items-center rounded-xl backdrop-blur-md bg-white bg-opacity-10 w-4/5 self-center'
+            className='max-h-[42px] w-full py-3 px-6 flex justify-center items-center rounded-xl backdrop-blur-md bg-white bg-opacity-10 self-center'
             onClick={(event) => {
               event?.preventDefault()
               push(RoutePath.OwnedAssets(comic.slug))

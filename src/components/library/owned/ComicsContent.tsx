@@ -42,7 +42,7 @@ export const OwnedComicsContent: React.FC<Props> = ({ comics }) => {
 
     return (
       <div key={`${letter}-${index}`} className='flex justify-between gap-8 md:gap-16 py-10 border-b border-b-grey-300'>
-        <Text className='w-fit' as='h3' styleVariant='secondary'>
+        <Text className='w-fit' as='h4' styleVariant='secondary'>
           {letter}
         </Text>
         <div className='flex flex-wrap gap-6 md:gap-10 w-full'>
