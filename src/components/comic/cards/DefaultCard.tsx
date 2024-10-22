@@ -22,7 +22,7 @@ export const DefaultComicCard: React.FC<Props> = ({ className, href, comic }) =>
       src={comic.cover}
       fill
       sizes='(max-width: 1200px) 500px, 320px'
-      className='object-cover rounded-xl'
+      className='object-cover rounded-xl w-auto'
     />
     <div className='absolute inset-0 bg-gradient-to-t from-black to-transparent' />
     <div className='relative z-10 h-full flex flex-col justify-end'>

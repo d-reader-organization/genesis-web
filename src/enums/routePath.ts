@@ -11,6 +11,7 @@ export const RoutePath = Object.freeze({
   DiscoverComicIssues: '/discover/comic-issues',
   DiscoverCreators: '/discover/creators',
   Library: '/library',
+  OwnedAssets: (slug: string) => `/library/${slug}`,
   Mint: (id: string | number) => `/mint/${id}`,
   Comic: (comicSlug: string) => `/comic/${comicSlug}`,
   ComicRead: (comicSlug: string) => `/comic/${comicSlug}/read`,

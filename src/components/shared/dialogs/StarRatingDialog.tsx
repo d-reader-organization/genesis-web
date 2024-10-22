@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dialog, DialogContent } from '@/components/ui/Dialog'
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/Dialog'
 import { StarIcon } from '../icons/StarIcon'
 import { Button, toast } from '@/components/ui'
 import { useRouter } from 'next/navigation'
@@ -49,7 +49,8 @@ export const StarRatingDialog: React.FC<Props> = ({ comicIssueId, comicSlug, tog
 
   return (
     <Dialog open={open} onOpenChange={toggleDialog}>
-      <DialogContent className='sm:max-w-xs p-0 overflow-hidden'>
+      <DialogContent className='sm:max-w-xs p-0 overflow-hidden' aria-describedby={undefined}>
+        <DialogTitle className='sr-only'>Star rating dialog</DialogTitle>
         <div className='flex flex-col items-center justify-center text-center py-8 px-4 text-base md:text-lg'>
           <strong>Rate the episode</strong>
           Tap a star to give a rating!
