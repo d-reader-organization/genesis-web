@@ -4,7 +4,7 @@ import React from 'react'
 import { Dialog, DialogContent, DialogTitle } from '../ui/Dialog'
 import { StatelessCover } from '@/models/comicIssue/statelessCover'
 import Image from 'next/image'
-import { RarityChip } from '../shared/RarityChip'
+import { RarityChip } from '../shared/chips/Rarity'
 import { Arrow } from '../shared/Arrow'
 import { CandyMachine } from '@/models/candyMachine'
 import { Nullable } from '@/models/common'
@@ -61,7 +61,7 @@ export const CoverPreviewDialog: React.FC<Props> = ({
               <InfoStats title='Cover artist' value={cover.artist} />
             </div>
             <RarityChip
-              vertical
+              isVertical
               rarity={cover.rarity}
               supply={getRaritySupply(candyMachine?.supply ?? 0, cover.share)}
             />

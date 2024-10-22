@@ -21,12 +21,12 @@ type TextProps = {
 }
 
 const variantStyles: Record<Variant, string> = {
-  h1: 'text-48 tracking-0096',
-  h2: 'text-40 tracking-008',
-  h3: 'text-32 tracking-0064',
-  h4: 'text-24 tracking-0048',
-  h5: 'text-20 tracking-004',
-  h6: 'text-16 tracking-0032',
+  h1: 'text-40 sm:text-48 tracking-0096',
+  h2: 'text-32 sm:text-40 tracking-008',
+  h3: 'text-24 sm:text-32 tracking-0064',
+  h4: 'text-20 sm:text-24 tracking-0048',
+  h5: 'text-16 sm:text-20 tracking-004',
+  h6: 'text-14 sm:text-16 tracking-0032',
   p: 'text-base font-normal font-satoshi',
   span: 'text-base font-normal font-satoshi',
 }

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { StatelessCover } from '@/models/comicIssue/statelessCover'
-import { RarityChip } from '../shared/RarityChip'
+import { RarityChip } from '../shared/chips/Rarity'
 import { getRaritySupply } from '@/utils/mint'
 
 type Props = {

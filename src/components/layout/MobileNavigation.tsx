@@ -11,6 +11,7 @@ import { ProfileWidget } from '../shared/ProfileWidget'
 import { LogoutButton } from '../shared/buttons/LogoutButton'
 import { ProductSocials } from '../shared/ProductSocials'
 import { SearchInput } from '../shared/SearchInput'
+import { usePathname } from 'next/navigation'
 
 type Props = {
   user?: User | null
@@ -20,6 +21,9 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false)
   const [isSearchOpen, setIsSearchOpen] = React.useState<boolean>(false)
 
+  const pathname = usePathname()
+  const isInvest = pathname.startsWith(RoutePath.Invest)
+  const isLibrary = pathname.startsWith(RoutePath.Library)
   return (
     <>
       <div
@@ -55,7 +59,9 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
                     <div className='flex flex-col gap-8'>
                       <div className='flex justify-between w-full'>
                         {/* <Link href={RoutePath.Discover}>Discover</Link> */}
-                        <Link href={RoutePath.Invest}>Invest</Link>
+                        <Link className={cn(isInvest ? 'text-yellow-500' : '')} href={RoutePath.Invest}>
+                          Invest
+                        </Link>
                         <button onClick={() => setIsOpen(false)}>
                           <X className='size-6 text-grey-100' />
                         </button>
@@ -65,7 +71,9 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
                       <div className='flex flex-col gap-10 border-t border-t-grey-400'>
                         <ProfileWidget user={user} />
                         <div className='flex flex-col gap-8'>
-                          <Link href={RoutePath.Library}>My Library</Link>
+                          <Link className={cn(isLibrary ? 'text-yellow-500' : '')} href={RoutePath.Library}>
+                            My Library
+                          </Link>
                           <Link href={RoutePath.Profile}>Settings</Link>
                         </div>
                         <LogoutButton />

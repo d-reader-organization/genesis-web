@@ -1,4 +1,4 @@
-import { ProjectPayout } from "@/models/project"
+import { ProjectPayout } from '@/models/project'
 
 type Props = {
   summary: ProjectPayout['summary']

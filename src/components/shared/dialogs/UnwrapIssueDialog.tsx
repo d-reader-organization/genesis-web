@@ -1,10 +1,9 @@
 'use client'
 
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/Dialog'
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from '@/components/ui/Dialog'
 import { Asset } from '@/models/asset'
 import { UnwrapIssueDialogItem } from '@/components/comicIssue/UnwrapIssueDialogItem'
 import { useToggle } from '@/hooks/useToggle'
-import { DialogTrigger } from '@radix-ui/react-dialog'
 import { Text } from '@/components/ui'
 
 type Props = {

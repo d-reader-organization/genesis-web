@@ -7,17 +7,16 @@ import React from 'react'
 type Props = {
   rarity: ComicRarity
   supply?: number
-  vertical?: boolean
+  isVertical?: boolean
 } & React.HTMLAttributes<HTMLDivElement>
 
-export const RarityChip: React.FC<Props> = ({ className, rarity, supply, vertical = false }) => (
+export const RarityChip: React.FC<Props> = ({ className, rarity, supply, isVertical = false }) => (
   <div
     className={cn(
       'p-2 flex items-center justify-center gap-1 rounded-lg border-2 border-black text-black',
-      className,
-      vertical ? 'flex-col' : 'flex-row',
-      vertical ? 'max-h-10' : 'max-h-7',
-      getRarityColor(rarity)
+      isVertical ? 'flex-col max-h-10' : 'flex-row max-h-7',
+      getRarityColor(rarity),
+      className
     )}
   >
     <div className='flex justify-center'>
