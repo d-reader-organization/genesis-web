@@ -22,11 +22,15 @@ const FAQ: React.FC = () => {
             GET STARTED
           </Text>
           <Expandable title='📚 I love comics! Where do I start?' id='get-started'>
-            <ExpandableText text='First make sure to register to the app!' />
-            <ExpandableText text="If you're on Android mobile, download dReader on Google Play." />
-            <ExpandableText text="If you're using our web app, go to this dReader register link." />
+            <ExpandableText text='1. First make sure to register to the app!' />
+            <ExpandableText text="2. If you're on Android mobile, download dReader on Google Play." />
+            <ExpandableText text="3. If you're using our web app, go to this dReader register link." />
             <span className='text-grey-100 italic'>
-              Visit our <Link href='https://dreader.io/links'>linkree</Link> to learn more about what we do.
+              Visit our{' '}
+              <Link href='https://dreader.io/links' className='text-important-color font-bold underline'>
+                linkree
+              </Link>{' '}
+              to learn more about what we do.
             </span>
           </Expandable>
 
@@ -39,14 +43,14 @@ const FAQ: React.FC = () => {
             <ol className='list-decimal list-inside pl-5'>
               <li>Go to the mobile app.</li>
               <li>
-                <span className='text-important-color'>Make sure your email is verified</span> by going to{' '}
+                <span className='text-important-color'>Make sure your email is verified</span> by going to&nbsp;
                 <em>settings -&gt; profile</em>.
               </li>
               <li>Find the comic you&apos;d like to buy (usually promoted on the homepage banner).</li>
               <li>Go to the comic details and hit the buy button.</li>
             </ol>
             <span className='text-grey-100 italic'>
-              * It&apos;s important to note that you&apos;ll need at least{' '}
+              * It&apos;s important to note that you&apos;ll need at least&nbsp;
               <span className='text-important-color'>0.0033 SOL</span> in your wallet to pay for protocol & on-chain
               fees, even if the comic is listed as free.
             </span>
