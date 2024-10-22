@@ -36,7 +36,7 @@ export default async function NewMintPage({ params }: ComicIssuePageParams) {
           <Divider className='max-md:hidden' />
           <div className='flex flex-col 1160:flex-row gap-10 justify-between'>
             <AboutIssueSection comicIssue={comicIssue} />
-            {pages.length && <PagesPreview comicIssueId={comicIssue.id} pages={pages} />}
+            {pages.length ? <PagesPreview comicIssueId={comicIssue.id} pages={pages} /> : null}
           </div>
         </div>
       </div>
