@@ -11,6 +11,7 @@ import { UpdateUserAvatarData } from '@/models/user'
 import { updateUserAvatar } from '@/app/lib/api/user/mutations'
 import { Text } from '../ui'
 import FileUpload from '../shared/FileUpload'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   id: string | number
@@ -25,10 +26,14 @@ export const UpdateUserAvatarForm: React.FC<Props> = ({ id, avatar }) => {
     },
   })
 
+  const { refresh } = useRouter()
   const handleAvatarUpdateFormSubmit = async (data: UpdateUserAvatarData) => {
-    const formData = new FormData()
-    if (data.avatar) formData.append('avatar', data.avatar)
-    await updateUserAvatar(id, formData)
+    if (data.avatar) {
+      const formData = new FormData()
+      formData.append('avatar', data.avatar)
+      await updateUserAvatar(id, formData)
+      refresh()
+    }
   }
 
   return (
