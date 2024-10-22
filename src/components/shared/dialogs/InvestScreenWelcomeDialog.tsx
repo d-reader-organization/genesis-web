@@ -62,8 +62,8 @@ export const InvestScreenWelcomeDialog: React.FC = () => {
                 fontWeight='medium'
                 className='max-sm:text-xs text-grey-100 text-ellipsis overflow-auto'
               >
-                Visuals in the app don&apos;t equal partnership. Read the details of each campaign to understand if the
-                story is fan-made or endorsed by some web3 brand.
+                Visuals in the app don&apos;t equal to partnership. Read the details of each campaign to understand if
+                the story is fan-made or endorsed by some brand.
               </Text>
             </div>
           </div>
@@ -81,8 +81,8 @@ export const InvestScreenWelcomeDialog: React.FC = () => {
                 fontWeight='medium'
                 className='max-sm:text-xs text-grey-100 text-ellipsis overflow-auto'
               >
-                Legal foundation for Genesis isn&apos;t yet been fully laid out. You can express interest to invest into
-                stories (IPs) but investing is disabled at the moment.
+                Legal foundation for Genesis isn&apos;t yet fully laid out. You can express interest to invest into
+                stories (IPs) but investing and token issuing is disabled at the moment.
               </Text>
             </div>
           </div>
