@@ -3,7 +3,7 @@ import { ProjectHeader } from '@/components/shared/ProjectHeader'
 import { ProjectBanner } from '@/components/shared/ProjectBanner'
 import { ProjectCreatorSection } from '@/components/shared/ProjectCreatorSection'
 import { ProjectPayoutCard } from '@/components/payout/ProjectPayoutCard'
-import { ProjectDescription } from '@/components/payout/ProjectDescription'
+import { ProjectSummary } from '@/components/payout/ProjectSummary'
 import { PROJECTS } from '@/constants/projects'
 import { SuccessfulProject, isSuccessfulProject } from '@/models/project'
 
@@ -39,7 +39,7 @@ export default async function PayoutPage({ params }: Props) {
               className='md:hidden'
             />
             <ProjectCreatorSection creator={project.creator} tags={project.tags} />
-            <ProjectDescription summary={project.payout.summary} />
+            <ProjectSummary summary={project.payout.summary} />
           </div>
           <div className='flex flex-col'>
             <ProjectPayoutCard
