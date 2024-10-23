@@ -147,9 +147,9 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
                 Congrats! You got #{assets[selectedIndex].name.split('#')[1]}
               </p>
               <RarityChip className='-mt-3.5' rarity={assets[selectedIndex].rarity} />
-              <p className='text-grey-100 text-base sm:text-[16px] xs:text-[14px] leading-5 text-center'>
+              {/* <p className='text-grey-100 text-base sm:text-[16px] xs:text-[14px] leading-5 text-center'>
                 {selectedIndex + 1}/{assets.length}
-              </p>
+              </p> */}
               <div className='overflow-hidden w-full' ref={emblaRef}>
                 <div className='flex flex-row items-center gap-4 min-w-full'>
                   {assets.map((asset, index) => (
