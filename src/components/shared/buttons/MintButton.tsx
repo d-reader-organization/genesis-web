@@ -123,14 +123,15 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
         clearTimeout(timeoutId)
       }
 
-      const id = setTimeout(() => {
+      const id = setTimeout(async () => {
         closeConfirmingTransaction()
         toast({
           description: 'Network might be congested, your transaction might have failed. Please check your wallet',
           variant: 'error',
         })
         setTimeoutId(undefined)
-      }, 20 * 1000)
+        await refetch()
+      }, 30 * 1000)
       setTimeoutId(id)
 
       const serializedTransactions: string[] = []
