@@ -3,13 +3,14 @@ import clsx from 'clsx'
 
 type Props = LinkProps &
   Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps> & {
-    Icon?: React.FC
+    Icon?: React.FC<React.SVGProps<SVGSVGElement>>
     blank?: boolean
     clickableEffect?: boolean
   }
 
 export const IconLink: React.FC<Props> = ({
   Icon,
+  color = '#c2c5ce',
   href,
   blank = false,
   clickableEffect = false,
@@ -28,7 +29,7 @@ export const IconLink: React.FC<Props> = ({
       href={href || '#'}
       {...props}
     >
-      {children || (Icon && <Icon />)}
+      {children || (Icon && <Icon style={{ fill: color }} />)}
     </Link>
   )
 }
