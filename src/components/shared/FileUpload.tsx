@@ -1,9 +1,7 @@
 'use client'
 
 import React, { forwardRef, InputHTMLAttributes, useEffect, useState } from 'react'
-import { cloneDeep, remove } from 'lodash'
 import clsx from 'clsx'
-import CloseIcon from 'public/assets/vector-icons/close.svg'
 import Image from 'next/image'
 
 type UploadedFile = { url: string; file: File | undefined }
@@ -41,14 +39,6 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(function FileUpload(
     }
   }
 
-  const handleRemoveFile = (uploadedFile: UploadedFile) => {
-    const deepClonedUploadedFiles = cloneDeep(uploadedFiles)
-    remove(deepClonedUploadedFiles, (file) => file.url === uploadedFile.url)
-    setUploadedFiles(deepClonedUploadedFiles)
-    onUpload(deepClonedUploadedFiles)
-    URL.revokeObjectURL(uploadedFile.url)
-  }
-
   useEffect(() => {
     if (previewUrl) {
       const previewFile = [{ url: previewUrl, file: undefined as unknown as File }]
@@ -59,24 +49,27 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(function FileUpload(
 
   return (
     <div className={clsx('flex flex-col justify-center', className)}>
-      {uploadedFiles.length > 0 && (
-        <div>
-          {uploadedFiles.map((uploadedFile) => (
-            <div key={uploadedFile.url}>
-              {uploadedFile.file?.type.includes('pdf') ? (
-                <embed src={uploadedFile.url} width='100%' height='100%' />
-              ) : (
-                <div className='w-[100px] h-[100px] z-1 overflow-hidden rounded-[50%]'>
-                  <Image src={uploadedFile.url} className='preview-image' width={500} height={500} alt='' />
-                </div>
-              )}
-              <button className='close-button' onClick={() => handleRemoveFile(uploadedFile)}>
-                <CloseIcon className='close-icon' />
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
+      <div className='mb-2'>
+        {uploadedFiles.length > 0 ? (
+          <div>
+            {uploadedFiles.map((uploadedFile) => (
+              <div key={uploadedFile.url}>
+                {uploadedFile.file?.type.includes('pdf') ? (
+                  <embed src={uploadedFile.url} width='100%' height='100%' />
+                ) : (
+                  <div className='w-[100px] h-[100px] z-1 overflow-hidden rounded-[50%]'>
+                    <Image src={uploadedFile.url} width={500} height={500} alt='' />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className='w-[100px] h-[100px] z-1 overflow-hidden rounded-[50%]'>
+            <Image src={previewUrl} width={500} height={500} alt='' />
+          </div>
+        )}
+      </div>
 
       <input
         id={id}
