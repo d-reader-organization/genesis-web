@@ -16,6 +16,9 @@ export const fetchMintTransaction = async (params: MintParams): Promise<string[]
     path: `${TRANSACTION}/${MINT}`,
     params,
   })
+  if (response.errorMessage) {
+    throw new Error(response.errorMessage)
+  }
   return JSON.parse(JSON.stringify(response.data ?? []))
 }
 
