@@ -5,6 +5,7 @@ import { AboutIssueSection } from '@/components/mint/AboutIssueSection'
 import { CoverCarousel } from '@/components/mint/CoverCarousel'
 import { PagesPreview } from '@/components/mint/PagesPreview'
 import { CandyMachineDetails } from '@/components/shared/CandyMachineDetails'
+import { MintPageWelcomeDialog } from '@/components/shared/dialogs/MintPageWelcomeDialog'
 import { Divider } from '@/components/shared/Divider'
 import { Text } from '@/components/ui'
 import { ComicIssuePageParams } from '@/models/common'
@@ -18,6 +19,7 @@ export default async function NewMintPage({ params }: ComicIssuePageParams) {
 
   return (
     <BaseLayout>
+      <MintPageWelcomeDialog />
       <div className='flex flex-col max-md:items-center md:flex-row md:justify-center gap-6 md:gap-10 w-full mb-2'>
         <CoverCarousel comicIssue={comicIssue} covers={comicIssue.statelessCovers ?? []} />
         <div className='flex flex-col gap-6 w-full max-w-[800px]'>
