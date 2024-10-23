@@ -140,6 +140,7 @@ export const CurrencyExpandable: React.FC<CurrencyExpandableProps> = ({
               src={selectedCurrencySetting.icon ?? selectedCurrencySetting.symbol}
               width={20}
               height={20}
+              className='w-6 h-6'
             />
             {disableExpand ? null : (
               <ArrowDownIcon

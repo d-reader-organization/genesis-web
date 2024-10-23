@@ -145,7 +145,7 @@ const UserDetails: React.FC<DetailsProps> = ({ candyMachine }) => {
     <div className='flex justify-between text-center text-grey-100 text-sm md:text-base font-medium leading-[19.6px] md:leading-[22.4px]'>
       <span>You minted: {totalItemsMintedByUser}</span>
       <span>
-        {candyMachine.itemsMinted}/{candyMachine.supply}
+        Total minted: {candyMachine.itemsMinted}/{candyMachine.supply}
       </span>
     </div>
   )
