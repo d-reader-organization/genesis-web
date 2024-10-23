@@ -85,6 +85,7 @@ const CouponDetails: React.FC = () => {
     <CurrencyExpandable
       disableExpand={prices.length === 1}
       isLive={checkIfCouponIsActive(selectedCoupon)}
+      startsAt={selectedCoupon.startsAt}
       selectedCurrencySetting={selectedCurrencySetting}
     >
       {prices.map((setting) => {
