@@ -91,16 +91,24 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
 
     let mintTransactions: VersionedTransaction[] = []
     try {
-      const transactions = await fetchMintTransaction({
+      const {data:transactions,error} = await fetchMintTransaction({
         candyMachineAddress: updatedCandyMachine.address,
         minterAddress: walletAddress,
         couponId: selectedCoupon.id,
         label: selectedCurrency.label,
         numberOfItems: numberOfItems ?? 1,
       })
+
+      if(error){
+        setIsMintTransactionLoading(false)
+        toast({ description: error , variant: 'error' })
+        return;
+      }
+
       if (!transactions || !transactions.length) {
         throw new Error()
       }
+      
       mintTransactions = transactions.map(versionedTransactionFromBs64)
     } catch (error) {
       console.error(error)
