@@ -9,7 +9,7 @@ import { LOCAL_STORAGE } from '@/constants/localStorage'
 
 export const MintPageWelcomeDialog: React.FC = () => {
   const [isMintPageVisited, setIsMintPageVisited] = useLocalStorage(LOCAL_STORAGE.IS_MINT_PAGE_VISITED, false)
-  const [mintPageWelcomeDialog, toggleMintPageWelcomeDialog] = useToggle(!isMintPageVisited)
+  const [mintPageWelcomeDialog, toggleMintPageWelcomeDialog] = useToggle(isMintPageVisited)
 
   const onClick = () => {
     toggleMintPageWelcomeDialog()
@@ -56,6 +56,22 @@ export const MintPageWelcomeDialog: React.FC = () => {
               >
                 Buying a collectible on Solana can incur fees on top of the price you pay. In our case that&apos;s
                 ~0.0033 SOL (50 cents)
+              </Text>
+            </div>
+          </div>
+          <div className='rounded-xl bg-grey-500 p-4 gap-4 flex max-w-[437px]'>
+            <div className='size-5'>🎁</div>
+            <div className='inline-block gap-2 w-full max-w-[369px]'>
+              <Text as='p' styleVariant='body-normal' fontWeight='bold' className='max-sm:text-xs'>
+                Use discounts!
+              </Text>
+              <Text
+                as='p'
+                styleVariant='body-small'
+                fontWeight='medium'
+                className='max-sm:text-xs text-grey-100 text-ellipsis overflow-auto'
+              >
+                Registered users and digital collectors sometimes get discounts! Check your eligibility before buying.
               </Text>
             </div>
           </div>

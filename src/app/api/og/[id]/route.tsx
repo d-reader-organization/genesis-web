@@ -31,11 +31,11 @@ export async function GET(request: Request, { params }: { params: { id: string }
   )
   const cover = statelessCover?.image || comicIssue.cover
 
-  //   const { generateImage } = await import(`@/app/(unauthenticated)/mint/[id]/opengraph-image`)
+  // const { generateImage } = await import(`@/app/(unauthenticated)/mint/[id]/opengraph-image`)
   return generateImage(comicIssue, cover)
 }
 
-export function generateImage(comicIssue: ComicIssue, coverImage: string) {
+function generateImage(comicIssue: ComicIssue, coverImage: string) {
   return new ImageResponse(
     (
       <div
