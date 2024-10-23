@@ -102,10 +102,10 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
         throw new Error()
       }
       mintTransactions = transactions.map(versionedTransactionFromBs64)
-    } catch (e) {
-      console.log(e)
+    } catch (error) {
+      console.error(error)
       setIsMintTransactionLoading(false)
-      toast({ description: 'Error while minting, try again', variant: 'error' })
+      toast({ description: error instanceof Error ? error.message : 'An unknown error occurred', variant: 'error' })
     }
 
     if (!mintTransactions.length) return
