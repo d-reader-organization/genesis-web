@@ -15,11 +15,12 @@ export const connectUserWallet = async ({
   await fetchWrapper<void>({
     path: `${AUTH}/${WALLET}/${CONNECT}/${address}/${encoding}`,
     method: 'PATCH',
+    isTextResponse: true,
   })
 }
 
 export const disconnectUserWallet = async (address: string): Promise<void> => {
-  await fetchWrapper<void>({ path: `${AUTH}/${WALLET}/${DISCONNECT}/${address}`, method: 'PATCH' })
+  await fetchWrapper<void>({ path: `${AUTH}/${WALLET}/${DISCONNECT}/${address}`, isTextResponse: true })
 }
 
 export const requestWalletPassword = async (address: string): Promise<string> => {

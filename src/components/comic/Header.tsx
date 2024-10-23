@@ -28,13 +28,13 @@ export const ComicHeader: React.FC<Props> = ({ comic }) => (
 const LeftSection: React.FC<Props> = ({ comic }) => {
   const { description, flavorText, genres, title } = comic
   return (
-    <div className='flex flex-col gap-2 max-w-[680px]'>
+    <div className='flex flex-col gap-2 w-full md:max-w-[680px]'>
       <Text className='font-normal' as='h2' styleVariant='primary'>
         {title}
       </Text>
-      {genres && <GenresList genres={genres} />}
+      {genres?.length ? <GenresList genres={genres} /> : null}
       <FlavorText text={flavorText} />
-      <Text as='p' styleVariant='body-large'>
+      <Text as='p' className='whitespace-pre-wrap mb-2' styleVariant='body-large'>
         {description}
       </Text>
       <CreatorInfoLink creator={comic.creator} />

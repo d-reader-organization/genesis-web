@@ -7,9 +7,9 @@ import { RateComic } from '@/models/comic/rateComic'
 const { COMIC, FAVOURITISE, RATE } = COMIC_QUERY_KEYS
 
 export const rateComic = async ({ slug, request }: { slug: string; request: RateComic }): Promise<void> => {
-  await fetchWrapper<void>({ path: `${COMIC}/${RATE}/${slug}`, body: request, method: 'PATCH' })
+  await fetchWrapper<void>({ path: `${COMIC}/${RATE}/${slug}`, body: request, method: 'PATCH', isTextResponse: true })
 }
 
 export const favouritiseComic = async (slug: string): Promise<void> => {
-  await fetchWrapper<void>({ path: `${COMIC}/${FAVOURITISE}/${slug}`, method: 'PATCH' })
+  await fetchWrapper<void>({ path: `${COMIC}/${FAVOURITISE}/${slug}`, method: 'PATCH', isTextResponse: true })
 }

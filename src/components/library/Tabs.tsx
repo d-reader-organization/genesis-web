@@ -31,9 +31,9 @@ type Props = {
 } & React.HTMLAttributes<HTMLDivElement>
 
 export const LibraryTabs: React.FC<Props> = ({ comics, ownedAssets }) => (
-  <Tabs defaultValue={tabs.at(0)?.title.toLowerCase()} className='w-full max-w-screen-xl p-4'>
+  <Tabs defaultValue={tabs.at(0)?.title.toLowerCase()} className='w-full max-w-screen-xl md:p-4'>
     <TabsList className='w-full justify-between items-start'>
-      <div className='flex gap-4 w-full max-md:justify-center'>
+      <div className='flex gap-4 w-full max-md:justify-between'>
         {tabs.map((tab) => (
           <TabTrigger key={tab.title} title={tab.title} value={tab.value} isComingSoon={tab.isComingSoon} />
         ))}

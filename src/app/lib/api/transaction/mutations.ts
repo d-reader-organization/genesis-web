@@ -10,5 +10,6 @@ export const sendMintTransaction = async (walletAddress: string, transactions: s
     path: `${TRANSACTION}/${SEND_MINT_TRANSACTION}/${walletAddress}`,
     method: 'POST',
     body: { transactions },
+    isTextResponse: true,
   })
 }

@@ -30,9 +30,10 @@ export const AboutIssueSection: React.FC<Props> = ({ comicIssue }) => (
       <Link
         className='max-h-9 px-3 py-2 flex gap-2 justify-center items-center rounded-lg bg-grey-500'
         href={RoutePath.Comic(comicIssue.comicSlug)}
+        target='_blank'
       >
         <ExternalLink className='text-grey-100' size={20} />
-        <span className='text-base font-medium leading-[22.4px] text-grey-100'>Explore collection</span>
+        <span className='text-base font-medium leading-[22.4px] text-grey-100'>Explore series</span>
       </Link>
     </div>
     <Divider />
