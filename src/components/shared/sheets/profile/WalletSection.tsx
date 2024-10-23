@@ -11,7 +11,9 @@ import ConnectWalletIcons from 'public/assets/vector-icons/connect-wallet-sideba
 
 export const WalletSection: React.FC = () => {
   const { publicKey } = useWallet()
+
   useAuthorizeWallet()
+
   return publicKey ? (
     <div className='bg-grey-500 rounded-xl p-4 flex flex-col gap-2'>
       <span className='text-grey-200 text-base font-medium leading-[22.4px]'>Connected wallet</span>
