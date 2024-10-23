@@ -9,7 +9,7 @@ import { LOCAL_STORAGE } from '@/constants/localStorage'
 
 export const MintPageWelcomeDialog: React.FC = () => {
   const [isMintPageVisited, setIsMintPageVisited] = useLocalStorage(LOCAL_STORAGE.IS_MINT_PAGE_VISITED, false)
-  const [mintPageWelcomeDialog, toggleMintPageWelcomeDialog] = useToggle(isMintPageVisited)
+  const [mintPageWelcomeDialog, toggleMintPageWelcomeDialog] = useToggle(!isMintPageVisited)
 
   const onClick = () => {
     toggleMintPageWelcomeDialog()
