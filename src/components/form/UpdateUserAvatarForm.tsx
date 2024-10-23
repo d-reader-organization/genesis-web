@@ -30,6 +30,7 @@ export const UpdateUserAvatarForm: React.FC<Props> = ({ id, avatar }) => {
   const handleAvatarUpdateFormSubmit = async (data: UpdateUserAvatarData) => {
     if (data.avatar) {
       const formData = new FormData()
+      console.log(data.avatar)
       formData.append('avatar', data.avatar)
       await updateUserAvatar(id, formData)
       refresh()
@@ -54,7 +55,11 @@ export const UpdateUserAvatarForm: React.FC<Props> = ({ id, avatar }) => {
             </Button>
           </div>
           <FormControl>
-            <FileUpload id='avatar' onUpload={(file) => form.setValue('avatar', file)} previewUrl={avatar ?? null} />
+            <FileUpload
+              id='avatar'
+              onUpload={(files) => form.setValue('avatar', files[0]?.file)}
+              previewUrl={avatar ?? null}
+            />
           </FormControl>
         </div>
       </form>
