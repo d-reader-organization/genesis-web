@@ -13,7 +13,7 @@ export const AvatarImage: React.FC<Props> = ({ size = 40, className, alt = '', .
       alt={alt}
       width={size}
       height={size}
-      className={clsx('border-2 border-grey-500 bg-grey-600 rounded-full', className)}
+      className={clsx('border-2 border-grey-500 bg-grey-600 rounded-full w-12 h-12', className)}
       {...props}
     />
   )

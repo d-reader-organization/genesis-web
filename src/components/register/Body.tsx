@@ -46,7 +46,9 @@ const InnerRegisterBody: React.FC = () => {
               key={tab.value}
               value={tab.value}
             >
-              <span className={activeTab !== tab.value ? 'opacity-20' : ''}>{tab.label}</span>
+              <span className={activeTab !== tab.value ? 'opacity-20 text-center w-full' : 'text-center w-full'}>
+                {tab.label}
+              </span>
             </TabsTrigger>
           )
         })}
