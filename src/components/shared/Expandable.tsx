@@ -8,6 +8,7 @@ import useEventListener from '@/hooks/useEventListener'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { TokenDetail } from '@/utils/mint'
+import { useCountdown } from '@/hooks/useCountdown'
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   title: string
@@ -82,7 +83,8 @@ export const Expandable: React.FC<Props> = ({
 
 type CurrencyExpandableProps = {
   disableExpand?: boolean
-  isLive: boolean
+  isLive?: boolean
+  startsAt: string
   selectedCurrencySetting: TokenDetail
   open?: boolean
 } & React.PropsWithChildren &
@@ -92,12 +94,14 @@ export const CurrencyExpandable: React.FC<CurrencyExpandableProps> = ({
   children,
   disableExpand = false,
   isLive = false,
+  startsAt,
   open = false,
   selectedCurrencySetting,
 }) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(open)
   const [contentHeight, setContentHeight] = useState(0)
   const [contentRef, setContentRef] = useState<HTMLDivElement | null>(null)
+  const { countdownString } = useCountdown({ expirationDate: startsAt })
 
   const handleContentHeightChange = useCallback(() => {
     if (!contentRef) return 0
@@ -124,7 +128,7 @@ export const CurrencyExpandable: React.FC<CurrencyExpandableProps> = ({
     <div className='flex flex-col w-full'>
       <div className='flex items-center gap-2 justify-between max-h-9 md:max-h-10'>
         <span className={cn('text-base md:text-2xl leading-[16px] md:leading-[24px] font-bold text-important-color')}>
-          {isLive ? '● Live' : '● Upcoming'}
+          {isLive ? '● Live' : '● Live in ' + countdownString}
         </span>
         <div className='flex gap-2 items-center'>
           {/* {discountWidget} */}
