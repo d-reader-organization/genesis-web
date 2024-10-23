@@ -26,9 +26,9 @@ const BannerWidget: React.FC = () => {
       <div className='flex flex-col justify-between h-full'>
         <div className='text-2xl leading-[28.8px] font-medium'>
           <span className='font-bold'>Signed in&nbsp;</span>
-          <span>users get&nbsp;</span>
-          <span className='font-bold'>15% OFF&nbsp;</span>
-          <span>on all new comic mints!</span>
+          <span>users get up to &nbsp;</span>
+          <span className='font-bold'>30% OFF&nbsp;</span>
+          <span>on all comic mints!</span>
         </div>
         <SignInOrRegisterLinkButton href={`${RoutePath.Login}${redirectTo}`} />
       </div>
