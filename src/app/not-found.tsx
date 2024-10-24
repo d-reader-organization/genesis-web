@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { MoveLeft } from 'lucide-react'
 import { IconLink } from '@/components/shared/IconLink'
-import { backgroundText, text, textSm } from '@/constants/error'
+import { backgroundText, text, textSm } from '@/constants/error404'
 import { BaseLayout } from '@/components/layout/BaseLayout'
 import { DISCORD_LINK, INSTAGRAM_LINK, TWITTER_LINK } from '@/constants/links'
 import DiscordIcon from 'public/assets/vector-icons/discord-icon.svg'
@@ -48,7 +48,7 @@ export default function NotFound() {
         </div>
         <div className='flex flex-col justify-center items-center'>
           <Link
-            className='flex flex-row items-center justify-center gap-1 pt-10 sm:gap-2 border-b-2 border-[#c2c5ce]'
+            className='flex flex-row items-center justify-center gap-1 pt-9 sm:pt-10 sm:gap-2 border-b-2 border-[#c2c5ce]'
             href='https://www.dreader.app/'
           >
             <MoveLeft size={19}  className='max-sm:hidden'/>
