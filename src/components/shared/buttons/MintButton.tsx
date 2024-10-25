@@ -91,21 +91,29 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
 
     let mintTransactions: VersionedTransaction[] = []
     try {
-      const transactions = await fetchMintTransaction({
+      const { data: transactions, error } = await fetchMintTransaction({
         candyMachineAddress: updatedCandyMachine.address,
         minterAddress: walletAddress,
         couponId: selectedCoupon.id,
         label: selectedCurrency.label,
         numberOfItems: numberOfItems ?? 1,
       })
+
+      if (error) {
+        setIsMintTransactionLoading(false)
+        toast({ description: error, variant: 'error' })
+        return
+      }
+
       if (!transactions || !transactions.length) {
         throw new Error()
       }
+
       mintTransactions = transactions.map(versionedTransactionFromBs64)
-    } catch (e) {
-      console.log(e)
+    } catch (error) {
+      console.error(error)
       setIsMintTransactionLoading(false)
-      toast({ description: 'Error while minting, try again', variant: 'error' })
+      toast({ description: error instanceof Error ? error.message : 'An unknown error occurred', variant: 'error' })
     }
 
     if (!mintTransactions.length) return
@@ -123,14 +131,15 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
         clearTimeout(timeoutId)
       }
 
-      const id = setTimeout(() => {
+      const id = setTimeout(async () => {
         closeConfirmingTransaction()
         toast({
           description: 'Network might be congested, your transaction might have failed. Please check your wallet',
           variant: 'error',
         })
         setTimeoutId(undefined)
-      }, 20 * 1000)
+        await refetch()
+      }, 30 * 1000)
       setTimeoutId(id)
 
       const serializedTransactions: string[] = []
@@ -178,7 +187,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
                   height={14}
                   className='h-3.5 w-3.5'
                 />
-                <span>{getMintPrice(mintPrice, splToken?.decimals ?? 1) * numberOfItems}</span>
+                <span>{getMintPrice(mintPrice * numberOfItems, splToken?.decimals ?? 1)}</span>
               </div>
             ) : (
               <Loader />

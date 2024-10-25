@@ -5,6 +5,7 @@ export const COMIC_ISSUE_QUERY_KEYS = Object.freeze({
   GET: 'get',
   GET_RAW: 'get-raw',
   GET_PUBLIC: 'get-public',
+  GET_COVER: 'get-cover',
   CREATE: 'create',
   BY_OWNER: 'by-owner',
   PAGES: 'pages',

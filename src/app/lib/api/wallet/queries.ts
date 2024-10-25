@@ -22,5 +22,5 @@ export const fetchWalletAssets = async (address: string): Promise<WalletAsset[]>
 }
 
 export const syncWallet = async (address: string): Promise<void> => {
-  await fetchWrapper<void>({ path: `${WALLET}/${SYNC}/${address}` })
+  await fetchWrapper<void>({ path: `${WALLET}/${SYNC}/${address}`, isTextResponse: true })
 }

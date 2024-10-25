@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
 import { ComicIssue } from '@/models/comicIssue'
 import { COMIC_ISSUE_QUERY_KEYS } from '@/api/comicIssue/comicIssueKeys'
 import { METADATA_IMAGE_SIZE } from '@/constants/metadata'
-// import fontSrc from '../../../fonts/Satoshi-Regular.woff2'
+
 const { COMIC_ISSUE, GET_PUBLIC } = COMIC_ISSUE_QUERY_KEYS
 
 const defaultTextStyles: React.CSSProperties = {
@@ -18,30 +18,24 @@ const defaultTextStyles: React.CSSProperties = {
   whiteSpace: 'nowrap',
 }
 
-export const runtime = 'edge'
+export async function GET(request: Request, { params }: { params: { id: string } }) {
+  const url = new URL(request.url)
+  const rarity = url.searchParams.get('rarity')
 
-// const fetchAsset = (url: URL) => fetch(url).then((res) => res.arrayBuffer())
-
-// const fetchSatoshiFont = fetchAsset(new URL('../../../fonts/Satoshi-Regular.woff2', import.meta.url))
-export async function generateImageMetadata({ params }: { params: { id: string } }) {
   const comicIssue: ComicIssue = await (
     await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/${COMIC_ISSUE}/${GET_PUBLIC}/${params.id}`)
   ).json()
-  return [
-    {
-      id: 'large',
-      size: METADATA_IMAGE_SIZE,
-      alt: `Read '${comicIssue.comic?.title}' Episode ${comicIssue.number} on dReader`,
-      contentType: 'image/png', // what if it isn't image/png?
-    },
-  ]
+
+  const statelessCover = comicIssue.statelessCovers?.find(
+    (cover) => cover.rarity.toLowerCase() === rarity?.toLowerCase()
+  )
+  const cover = statelessCover?.image || comicIssue.cover
+
+  // const { generateImage } = await import(`@/app/(unauthenticated)/mint/[id]/opengraph-image`)
+  return generateImage(comicIssue, cover)
 }
-export default async function GET({ params }: { params: { id: string }; id: number }) {
-  const comicIssue: ComicIssue = await (
-    await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/${COMIC_ISSUE}/${GET_PUBLIC}/${params.id}`)
-  ).json()
-  // const comicIssueImage = process.env.NEXT_PUBLIC_SITE_URL + '/' + comicIssueImageSrc.src
-  // const [satoshiFont] = await Promise.all([fetchSatoshiFont])
+
+function generateImage(comicIssue: ComicIssue, coverImage: string) {
   return new ImageResponse(
     (
       <div
@@ -55,11 +49,11 @@ export default async function GET({ params }: { params: { id: string }; id: numb
           alignItems: 'center',
         }}
       >
-        <img width='100%' src={comicIssue.cover} alt='' style={{ position: 'absolute', opacity: 0.05 }} />
+        <img width='100%' src={coverImage} alt='' style={{ position: 'absolute', opacity: 0.05 }} />
         <img
           width='351px'
           height='507px'
-          src={comicIssue.cover}
+          src={coverImage}
           alt=''
           style={{ position: 'absolute', top: 60, left: 60, borderRadius: 8 }}
         />
@@ -130,7 +124,6 @@ export default async function GET({ params }: { params: { id: string }; id: numb
     ),
     {
       ...METADATA_IMAGE_SIZE,
-      // fonts: [{ name: 'var(--font-sans)', data: satoshiFont, style: 'normal' }],
     }
   )
 }

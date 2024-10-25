@@ -43,8 +43,16 @@ export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({ funding,
           valueColor='text-[#fceb54] '
           className='md:hidden items-center'
         />
-        <FundingStats text='backers' value={formatNumberWithCommas(funding.numberOfBackers)} className='max-md:items-center'/>
-        <FundingStats text='days left' value={formatNumberWithCommas(funding.daysLeft)} className='max-md:items-center'/>
+        <FundingStats
+          text='backers'
+          value={formatNumberWithCommas(funding.numberOfBackers)}
+          className='max-md:items-center'
+        />
+        <FundingStats
+          text='days left'
+          value={formatNumberWithCommas(funding.daysLeft)}
+          className='max-md:items-center'
+        />
       </div>
 
       <div className='flex flex-col w-full gap-2 md:gap-4'>

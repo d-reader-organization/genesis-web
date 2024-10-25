@@ -15,7 +15,7 @@ import {
 } from '@/constants/links'
 import GooglePlayIcon from 'public/assets/vector-icons/footer/google.svg'
 import AppStoreIcon from 'public/assets/vector-icons/footer/app-store.svg'
-import { cn } from '@/lib/utils'
+import { SoonTag } from '../shared/Tags'
 
 export const Footer: React.FC = () => (
   <div className='bg-black min-h-[220px] h-full flex justify-center items-center'>
@@ -121,15 +121,9 @@ const MobileAppsColumn: React.FC = () => (
         <GooglePlayIcon />
       </Link>
       <div className='flex flex-col items-center relative'>
-        <SoonTag className='absolute z-10 -top-3.5' />
+        <SoonTag className='absolute z-10 -top-3.5 bg-grey-100' />
         <AppStoreIcon className='flex opacity-40 h-10' />
       </div>
     </div>
-  </div>
-)
-
-const SoonTag: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className }) => (
-  <div className={cn('h-5 flex justify-center items-center rounded-lg bg-grey-100 w-fit px-2', className)}>
-    <span className='text-xxs font-bold text-grey-600'>SOON</span>
   </div>
 )

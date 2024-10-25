@@ -20,7 +20,7 @@ export const ProjectsSection: React.FC<Props> = ({ projects, title }) => {
       <Text as='h3' styleVariant='primary'>
         {title}
       </Text>
-      <div className='max-md:py-2 flex 1160::grid overflow-x-auto 1160:overflow-x-visible grid-cols-4 gap-4 md:gap-6 lg:gap-10'>
+      <div className='max-md:py-2 flex 1160:grid overflow-x-auto 1160:overflow-x-visible grid-cols-4 gap-4 md:gap-6 lg:gap-10'>
         {projects.map((project) => (
           <Card project={project} key={project.slug} />
         ))}
@@ -39,8 +39,8 @@ const Card: React.FC<CardProps> = ({ project }) => (
       <Image
         alt={`logo-${project.logo}`}
         src={project.logo}
-        className='max-w-[180px] max-h-[84px] object-cover p-1'
-        width={180}
+        className='max-h-[84px] h-full object-cover p-1 w-auto'
+        width={306}
         height={84}
       />
     </div>

@@ -85,6 +85,7 @@ const CouponDetails: React.FC = () => {
     <CurrencyExpandable
       disableExpand={prices.length === 1}
       isLive={checkIfCouponIsActive(selectedCoupon)}
+      startsAt={selectedCoupon.startsAt}
       selectedCurrencySetting={selectedCurrencySetting}
     >
       {prices.map((setting) => {
@@ -130,7 +131,7 @@ const CurrencyRow: React.FC<CurrencyRowProps> = ({ isSelected = false, token, se
       onClick={() => setCurrency(currencySetting)}
     >
       <div className='flex items-center gap-2'>
-        <Image alt='currency' src={token.icon} width={16} height={16} />
+        <Image alt='currency' src={token.icon} width={16} height={16} className='w-5 h-5' />
         <span className='text-base font-medium leading-[22.4px]'>{token.name}</span>
       </div>
       <span className='text-base font-medium leading-[22.4px]'>{token.price}</span>
@@ -145,7 +146,7 @@ const UserDetails: React.FC<DetailsProps> = ({ candyMachine }) => {
     <div className='flex justify-between text-center text-grey-100 text-sm md:text-base font-medium leading-[19.6px] md:leading-[22.4px]'>
       <span>You minted: {totalItemsMintedByUser}</span>
       <span>
-        {candyMachine.itemsMinted}/{candyMachine.supply}
+        Total minted: {candyMachine.itemsMinted}/{candyMachine.supply}
       </span>
     </div>
   )
@@ -179,7 +180,7 @@ export const PurchaseRow: React.FC<PurchaseRowProps> = ({ comicIssue, className,
   return (
     <div
       className={cn(
-        'flex gap-4 max-md:w-full max-md:max-h-[84px] max-md:p-4 items-center w-full max-h-[84px] md:max-h-[52px] max-md:fixed max-md:bottom-0 max-md:z-50 max-md:bg-grey-600 max-md:backdrop-blur-[2px] max-md:-ml-8 max-md:justify-center',
+        'flex gap-4 max-md:w-full max-md:max-h-[84px] max-md:p-4 items-center w-full max-h-[84px] md:max-h-[52px] max-md:fixed max-md:bottom-0 max-md:z-50 max-md:bg-grey-600 max-md:-ml-8 max-md:justify-center',
         className
       )}
     >

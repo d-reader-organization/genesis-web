@@ -58,6 +58,10 @@ export const CandyMachineStoreProvider = ({
   }
 
   useEffect(() => {
+    refetch()
+  }, [isAuthenticated])
+
+  useEffect(() => {
     storeRef.current?.setState({
       candyMachine: candyMachine ?? undefined,
       isLoading,
@@ -80,7 +84,7 @@ export const CandyMachineStoreProvider = ({
         selectedCurrency: solCurrencySetting,
       })
     }
-  }, [candyMachine?.coupons.length])
+  }, [candyMachine?.coupons.length, storeRef.current.getState().selectedCoupon?.stats.isEligible])
 
   return <CandyMachineStoreContext.Provider value={storeRef.current}>{children}</CandyMachineStoreContext.Provider>
 }
