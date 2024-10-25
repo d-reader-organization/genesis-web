@@ -125,9 +125,9 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
   return (
     <>
       <Dialog open={open} onOpenChange={toggleDialog}>
-        <DialogContent className='w-full h-full' showCloseIcon={false}>
-          <div className='fixed top-0 left-0 w-full h-full -z-[1]'>
-            <video autoPlay className='w-full h-full object-cover' loop muted>
+        <DialogContent className='w-full h-full overflow-y-auto' showCloseIcon={false}>
+          <div className='fixed top-0 left-0 w-full h-full min-h-[850px] -z-[1]'>
+            <video autoPlay className='w-full h-full min-h-[850px] object-cover' loop muted>
               <source src='/assets/animations/mint-loop.mp4' type='video/mp4' />
             </video>
           </div>
@@ -139,7 +139,7 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
                 emblaApi?.scrollPrev()
               }}
             />
-            <div className='xs:max-w-[250px] sm:max-w-[350px] 2 flex flex-col items-center gap-6 relative justify-between mx-auto overflow-y-scroll'>
+            <div className='xs:max-w-[250px] sm:max-w-[350px] flex flex-col items-center gap-6 relative justify-between mx-auto overflow-y-scroll'>
               <p className='text-grey-100 text-base sm:text-[16px] xs:text-[14px] leading-5 text-center'>
                 {comicIssue.title} &nbsp;&bull;&nbsp; EP&nbsp;{comicIssue.number}
               </p>
