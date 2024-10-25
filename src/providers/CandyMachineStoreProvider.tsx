@@ -58,6 +58,10 @@ export const CandyMachineStoreProvider = ({
   }
 
   useEffect(() => {
+    refetch()
+  }, [isAuthenticated])
+
+  useEffect(() => {
     storeRef.current?.setState({
       candyMachine: candyMachine ?? undefined,
       isLoading,
