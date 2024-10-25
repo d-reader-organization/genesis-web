@@ -53,7 +53,7 @@ const RightSection: React.FC<Props> = ({ comic }) => (
 )
 
 const Socials: React.FC<Props> = ({ comic }) => (
-  <div className='flex gap-2 LINKS'>
+  <div className='flex gap-2 text-gray-100 LINKS'>
     <IconLink className='bg-grey-300 rounded-lg' href={comic.website} Icon={WebsiteIcon} blank />
     <IconLink className='bg-grey-300 rounded-lg' href={comic.twitter} Icon={TwitterIcon} blank />
     <IconLink className='bg-grey-300 rounded-lg' href={comic.discord} Icon={DiscordIcon} blank />

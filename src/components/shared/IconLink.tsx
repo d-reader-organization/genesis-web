@@ -6,15 +6,16 @@ type Props = LinkProps &
     Icon?: React.FC<React.SVGProps<SVGSVGElement>>
     blank?: boolean
     clickableEffect?: boolean
+    iconClassName?: string
   }
 
 export const IconLink: React.FC<Props> = ({
   Icon,
-  color = '#c2c5ce',
   href,
   blank = false,
   clickableEffect = false,
   className,
+  iconClassName,
   children,
   ...props
 }) => {
@@ -22,14 +23,14 @@ export const IconLink: React.FC<Props> = ({
 
   return (
     <Link
-      className={clsx(className, 'flex justify-center items-center size-8 leading-[0] hover:brightness-110', {
+      className={clsx(className, 'flex justify-center items-center leading-[0] hover:brightness-110 p-1 px-2 sm:p-2 sm:px-3', {
         'cursor-pointer pointer-events-[all]': clickableEffect,
       })}
       target={blank ? '_blank' : undefined}
       href={href || '#'}
       {...props}
     >
-      {children || (Icon && <Icon style={{ fill: color }} />)}
+      {children || (Icon && <Icon className={iconClassName} />)}
     </Link>
   )
 }

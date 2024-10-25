@@ -84,7 +84,7 @@ type FooterLink = {
 
 const FooterColumn: React.FC<ColumnProps> = ({ links, title }) => (
   <div className='flex flex-col gap-6'>
-    <Text as='h4' styleVariant='secondary'>
+    <Text as='h4' styleVariant='body-small'>
       {title}
     </Text>
     <div className='flex flex-col gap-4'>
@@ -113,7 +113,7 @@ const FooterColumn: React.FC<ColumnProps> = ({ links, title }) => (
 
 const MobileAppsColumn: React.FC = () => (
   <div className='flex flex-col gap-8 max-w-80'>
-    <Text as='h4' styleVariant='secondary'>
+    <Text as='h4' styleVariant='body-small'>
       Get the most of dReader with a mobile app!
     </Text>
     <div className='flex items-center gap-4'>

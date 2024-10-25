@@ -5,6 +5,7 @@ type Variant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span'
 type StyleVariant =
   | 'primary'
   | 'secondary'
+  | 'body-small'
   | 'body-xlarge'
   | 'body-large'
   | 'body-normal'
