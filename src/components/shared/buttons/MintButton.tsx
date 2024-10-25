@@ -187,7 +187,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
                   height={14}
                   className='h-3.5 w-3.5'
                 />
-                <span>{getMintPrice(mintPrice, splToken?.decimals ?? 1) * numberOfItems}</span>
+                <span>{getMintPrice(mintPrice*numberOfItems, splToken?.decimals ?? 1)}</span>
               </div>
             ) : (
               <Loader />
