@@ -13,7 +13,7 @@ import { SUPPORT_LINK, DISCORD_LINK, INSTAGRAM_LINK, TWITTER_LINK } from '@/cons
 export default function NotFound() {
   return (
     <BaseLayout>
-      <div className='flex flex-col w-full sm:w-[660px] justify-center items-center sm:pt-[20px] md:pt-[40px]'>
+      <div className='flex flex-col sm:w-[660px] justify-center items-center sm:pt-[20px] md:pt-[40px]'>
         <Text
           as='h1'
           styleVariant='primary'
@@ -30,18 +30,10 @@ export default function NotFound() {
         <Image
           src='/assets/images/rabbit-hole.png'
           alt='dReader Page not found'
-          className='max-sm:hidden -mt-[87px]'
+          className='w-[214px] sm:w-[400px] -mt-[47px] sm:-mt-[87px]'
           width={400}
           height={1}
-          style={{ height: '100%' }}
-        />
-        <Image
-          src='/assets/images/rabbit-hole.png'
-          alt='dReader Page not found'
-          className='sm:hidden -mt-[47px]'
-          width={214}
-          height={1}
-          style={{ height: '100%' }}
+          style={{ height: 'auto' }}
         />
         <Text
           as='p'
