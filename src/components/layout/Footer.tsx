@@ -4,50 +4,20 @@ import Link from 'next/link'
 import { Divider } from '../shared/Divider'
 import DReaderSymbol from 'public/assets/vector-icons/logo-symbol.svg'
 import { RoutePath } from '@/enums/routePath'
-import {
-  DISCORD_LINK,
-  DPUBLISHER_LINK,
-  GOOGLE_PLAY_APP_LINK,
-  INSTAGRAM_LINK,
-  LINKTREE_LINK,
-  TENSOR_LINK,
-  TWITTER_LINK,
-} from '@/constants/general'
+import { GOOGLE_PLAY_APP_LINK } from '@/constants/general'
 import GooglePlayIcon from 'public/assets/vector-icons/footer/google.svg'
 import AppStoreIcon from 'public/assets/vector-icons/footer/app-store.svg'
 import { SoonTag } from '../shared/Tags'
+import { cn } from '@/lib/utils'
+import { ESSENTIAL_LINKS, MAIN_LINKS, NavigationLink, SOCIAL_LINKS } from '@/constants/navigationLinks'
 
 export const Footer: React.FC = () => (
   <div className='bg-black min-h-[220px] h-full flex justify-center items-center'>
     <div className='flex flex-col justify-end gap-6 md:gap-8 max-w-screen-xl w-full p-4'>
       <div className='flex max-md:flex-wrap max-md:gap-8 items-start justify-between w-full mt-8'>
-        <FooterColumn
-          links={[
-            { isComingSoon: true, href: '/', name: 'Discover' },
-            { isComingSoon: true, href: '/', name: 'Marketplace' },
-            { isComingSoon: true, href: '/invest', name: 'Invest' },
-            { isComingSoon: true, href: '/', name: 'Launchpad' },
-          ]}
-          title='Essentials'
-        />
-        <FooterColumn
-          links={[
-            { href: 'mailto:support@dreader.io', name: 'Help center' },
-            { href: '/faq', name: 'FAQ' },
-            { href: LINKTREE_LINK, name: 'Linktree' },
-            { href: DPUBLISHER_LINK, name: 'Publish a comic' },
-          ]}
-          title='Links'
-        />
-        <FooterColumn
-          links={[
-            { href: TWITTER_LINK, name: '𝕏 / Twitter' },
-            { href: DISCORD_LINK, name: 'Discord' },
-            { href: INSTAGRAM_LINK, name: 'Instagram' },
-            { href: TENSOR_LINK, name: 'Trade on Tensor' },
-          ]}
-          title='Rabbithole'
-        />
+        <FooterColumn links={ESSENTIAL_LINKS} title='Essentials' />
+        <FooterColumn links={MAIN_LINKS} title='Links' />
+        <FooterColumn links={SOCIAL_LINKS} title='Rabbithole' />
         <MobileAppsColumn />
       </div>
       <Divider className='md:mt-8 bg-grey-400' />
@@ -72,14 +42,8 @@ export const Footer: React.FC = () => (
 )
 
 type ColumnProps = {
-  links: FooterLink[]
+  links: NavigationLink[]
   title: string
-}
-
-type FooterLink = {
-  isComingSoon?: boolean
-  href: string
-  name: string
 }
 
 const FooterColumn: React.FC<ColumnProps> = ({ links, title }) => (
@@ -88,25 +52,26 @@ const FooterColumn: React.FC<ColumnProps> = ({ links, title }) => (
       {title}
     </Text>
     <div className='flex flex-col gap-4'>
-      {links.map((link, index) =>
-        link.isComingSoon ? (
-          <div key={`${link.name}-${index}`} className='flex items-end gap-1 relative'>
-            <Text as='span' styleVariant='body-normal' className='text-grey-300'>
-              {link.name}
-            </Text>
-            <SoonTag className='bg-grey-300' />
-          </div>
-        ) : (
+      {links.map((link, index) => {
+        return (
           <Link
-            className='text-base font-medium text-grey-100'
+            className={cn('flex gap-1', link.disabled ? 'pointer-events-none text-grey-300' : 'text-grey-100')}
             href={link.href}
             key={`${link.name}-${index}`}
-            target='_blank'
+            target={link.targetBlank ? '_blank' : undefined}
           >
-            {link.name}
+            <Text
+              as='span'
+              styleVariant='body-normal'
+              fontWeight='medium'
+              className={link.disabled ? '' : 'font-normal'}
+            >
+              {link.name}
+            </Text>
+            {link.isComingSoon && <SoonTag className='bg-grey-300' />}
           </Link>
         )
-      )}
+      })}
     </div>
   </div>
 )

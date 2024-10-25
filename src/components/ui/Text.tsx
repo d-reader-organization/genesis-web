@@ -1,7 +1,7 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
 
-type Variant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span'
+export type Variant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span'
 type StyleVariant =
   | 'primary-heading'
   | 'secondary-heading'
@@ -18,6 +18,7 @@ type TextProps = {
   className?: string
   children: React.ReactNode
   fontWeight?: FontWeight
+  italic?: boolean
 }
 
 const variantStyles: Record<Variant, string> = {
@@ -48,13 +49,21 @@ const fontWeightVariants: Record<FontWeight, string> = {
   normal: 'font-normal',
 }
 
-export const Text: React.FC<TextProps> = ({ as: Component, styleVariant, className, children, fontWeight }) => {
+export const Text: React.FC<TextProps> = ({
+  as: Component,
+  styleVariant,
+  className,
+  children,
+  fontWeight,
+  italic = false,
+}) => {
   return (
     <Component
       className={cn(
         variantStyles[Component],
         styleVariants[styleVariant],
         fontWeight && fontWeightVariants[fontWeight],
+        italic && 'italic',
         className
       )}
     >
