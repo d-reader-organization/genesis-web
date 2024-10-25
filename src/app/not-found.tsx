@@ -8,7 +8,7 @@ import DiscordIcon from 'public/assets/vector-icons/discord-icon.svg'
 import TwitterIcon from 'public/assets/vector-icons/twitter-icon.svg'
 import InstagramIcon from 'public/assets/vector-icons/instagram-icon.svg'
 import MailIconInverse from 'public/assets/vector-icons/mail-icon-inverse.svg'
-import { DISCORD_LINK, INSTAGRAM_LINK, TWITTER_LINK } from '@/constants/links'
+import { SUPPORT_LINK, DISCORD_LINK, INSTAGRAM_LINK, TWITTER_LINK } from '@/constants/links'
 
 export default function NotFound() {
   return (
@@ -70,24 +70,17 @@ export default function NotFound() {
           In the meantime, feel free to reach out to us:
           <br /> <br />
         </Text>
-        <div className='flex w-full justify-center gap-1 sm:gap-2 text-gray-100 pt-[2px] sm:pt-1'>
+        <div className='flex w-full justify-center gap-1 sm:gap-2 text-grey-100 pt-[2px] sm:pt-1'>
           <IconLink
             className='bg-grey-500 rounded-lg sm:rounded-xl gap-2'
-            href='mailto:support@dreader.io'
+            href={'mailto:' + SUPPORT_LINK}
             Icon={MailIconInverse}
             blank
           >
-            <div className='flex gap-2'>
-              <MailIconInverse className='w-[13.67px] sm:w-[16.67px]' />
-              <Text
-                as='p'
-                styleVariant='body-normal'
-                fontWeight='medium'
-                className='text-base leading-snug max-sm:text-xs'
-              >
-                support@dreader.io
-              </Text>
-            </div>
+            <MailIconInverse className='w-[13.67px] sm:w-[16.67px]' />
+            <Text as='p' styleVariant='body-normal' fontWeight='medium' className='leading-snug max-sm:text-xs'>
+              {SUPPORT_LINK}
+            </Text>
           </IconLink>
           <IconLink
             className='bg-grey-500 rounded-lg sm:rounded-xl'
@@ -112,7 +105,7 @@ export default function NotFound() {
           />
         </div>
         <Link
-          className='flex items-center gap-1 pt-8 sm:pt-10 sm:gap-2 border-b-2 border-grey-100'
+          className='flex items-center gap-1 pt-8 sm:pt-10 sm:gap-2 border-b-2 text-grey-100 border-grey-100'
           href='https://www.dreader.app/'
         >
           <MoveLeft size={19} className='max-sm:hidden' />
@@ -121,7 +114,7 @@ export default function NotFound() {
             as='p'
             styleVariant='body-normal'
             fontWeight='medium'
-            className='text-gray-100 leading-none max-sm:text-xs sm:leading-snug'
+            className='leading-none max-sm:text-xs sm:leading-snug'
           >
             Go back
           </Text>
