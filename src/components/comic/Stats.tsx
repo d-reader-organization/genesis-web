@@ -11,7 +11,7 @@ export const ComicStats: React.FC<Props> = ({ comic }) => {
     <div className='flex justify-start gap-4 md:flex-row-reverse md:justify-end'>
       <InfoList orientation='vertical'>
         <CollectionStatusItem label='issues' value={comic.stats?.issuesCount} />
-        <CollectionStatusItem label='readers' value={comic.stats?.viewersCount} />
+        <CollectionStatusItem label='readers' value={comic.stats?.readersCount} />
         <CollectionStatusItem label='ongoing' value={comic.isCompleted ? 'no ' : 'yes'} />
       </InfoList>
 
