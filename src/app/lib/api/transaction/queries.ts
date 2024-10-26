@@ -11,15 +11,15 @@ import { MintParams } from '@/models/transaction/mint'
 
 const { TRANSACTION, MINT, MULTIPLE_BUY, USE_COMIC_ISSUE_ASSET } = TRANSACTION_QUERY_KEYS
 
-export const fetchMintTransaction = async (params: MintParams): Promise<string[]> => {
+export const fetchMintTransaction = async (params: MintParams): Promise<{ data: string[]; error?: string }> => {
   const response = await fetchWrapper<string[]>({
     path: `${TRANSACTION}/${MINT}`,
     params,
   })
   if (response.errorMessage) {
-    throw new Error(response.errorMessage)
+    return { data: [], error: response.errorMessage }
   }
-  return JSON.parse(JSON.stringify(response.data ?? []))
+  return { data: JSON.parse(JSON.stringify(response.data ?? [])) }
 }
 
 export const fetchMultipleBuyTransaction = async (params: MultipleBuyParams): Promise<Transaction> => {
