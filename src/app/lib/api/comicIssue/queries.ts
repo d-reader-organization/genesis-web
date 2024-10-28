@@ -1,13 +1,13 @@
 'use server'
 
-import { ComicIssue } from '@/models/comicIssue'
+import { ComicIssue, OwnedComicIssue } from '@/models/comicIssue'
 import { ComicIssueParams } from '@/models/comicIssue/comicIssueParams'
 import { fetchWrapper } from '../../fetchWrapper'
 import { COMIC_ISSUE_QUERY_KEYS } from '@/api/comicIssue/comicIssueKeys'
 import { Nullable } from '@/models/common'
 import { ComicPage } from '@/models/comic/comicPage'
 
-const { COMIC_ISSUE, GET, GET_PUBLIC, PAGES, PREVIEW_PAGES } = COMIC_ISSUE_QUERY_KEYS
+const { BY_OWNER, COMIC_ISSUE, GET, GET_PUBLIC, PAGES, PREVIEW_PAGES } = COMIC_ISSUE_QUERY_KEYS
 
 export const fetchComicIssues = async (params: ComicIssueParams): Promise<ComicIssue[]> => {
   const { data } = await fetchWrapper<ComicIssue[]>({
@@ -37,5 +37,19 @@ export const fetchComicIssuePages = async (id: string | number): Promise<ComicPa
 
 export const fetchComicIssuePreviewPages = async (id: string | number): Promise<ComicPage[]> => {
   const response = await fetchWrapper<ComicPage[]>({ path: `${COMIC_ISSUE}/${GET}/${id}/${PREVIEW_PAGES}` })
+  return response.data ?? []
+}
+
+export const fetchOwnedComicIssues = async ({
+  params,
+  userId,
+}: {
+  params: ComicIssueParams
+  userId: number
+}): Promise<OwnedComicIssue[]> => {
+  const response = await fetchWrapper<OwnedComicIssue[]>({
+    path: `${COMIC_ISSUE}/${GET}/${BY_OWNER}/${userId}`,
+    params,
+  })
   return response.data ?? []
 }

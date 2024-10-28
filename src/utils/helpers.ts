@@ -123,8 +123,14 @@ export function genresToSlugs(genres: PartialGenre[]): string[] {
 
 export const pluralizeString = (count: number, value: string) => (count > 1 ? `${value}s` : value)
 
-export const formatWalletAddress = (address: string, slice = 4) =>
+export const shortenSolanaAddress = ({ address, slice = 4 }: { address: string; slice?: number }) =>
   address.slice(0, slice) + '...' + address.slice(-slice)
+
+export const shortenAssetName = (name: string): string => {
+  const splitted = name.split('#')
+  const last = splitted.at(splitted.length - 1)
+  return `#${last}`
+}
 
 export const getSlideUrl = (slide: CarouselSlide) => {
   if (slide.comicIssueId) return RoutePath.Mint(slide.comicIssueId)
