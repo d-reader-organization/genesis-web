@@ -10,13 +10,17 @@ import { Form, FormControl, FormItem, FormLabel } from '../ui/Form'
 import { updateUserPasswordValidationSchema } from '@/constants/schemas'
 import { UpdateUserPassword } from '@/models/user'
 import { updateUserPassword } from '@/app/lib/api/user/mutations'
-import { Text } from '../ui'
+import { Text, toast } from '../ui'
+import { useToggle } from '@/hooks'
+import { Loader } from '../shared/Loader'
 
 type Props = {
   id: string | number
 }
 
 export const UpdatePasswordForm: React.FC<Props> = ({ id }) => {
+  const [showLoader, toggleLoader] = useToggle()
+
   const form = useForm<z.infer<typeof updateUserPasswordValidationSchema>>({
     resolver: zodResolver(updateUserPasswordValidationSchema),
     defaultValues: {
@@ -25,7 +29,17 @@ export const UpdatePasswordForm: React.FC<Props> = ({ id }) => {
     },
   })
 
-  const handleUpdatePassword = async (data: UpdateUserPassword) => await updateUserPassword(id, data)
+  const handleUpdatePassword = async (data: UpdateUserPassword) => {
+    toggleLoader()
+    const { errorMessage } = await updateUserPassword(id, data)
+
+    if (errorMessage) {
+      toast({ description: errorMessage, variant: 'error' })
+    } else {
+      toast({ description: 'Password changed successfully !', variant: 'success' })
+    }
+    toggleLoader()
+  }
 
   return (
     <Form {...form}>
@@ -59,7 +73,7 @@ export const UpdatePasswordForm: React.FC<Props> = ({ id }) => {
           </Text>
         </FormItem>
         <Button type='submit' variant='default' className='bg-grey-300 text-white w-fit'>
-          Submit
+          {showLoader ? <Loader /> : 'Submit'}
         </Button>
       </form>
     </Form>

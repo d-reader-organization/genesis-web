@@ -9,9 +9,11 @@ import { Form, FormControl, FormLabel } from '../ui/Form'
 import { updateUserAvatarValidationSchema } from '@/constants/schemas'
 import { UpdateUserAvatarData } from '@/models/user'
 import { updateUserAvatar } from '@/app/lib/api/user/mutations'
-import { Text } from '../ui'
+import { Text, toast } from '../ui'
 import FileUpload from '../shared/FileUpload'
 import { useRouter } from 'next/navigation'
+import { useToggle } from '@/hooks'
+import { Loader } from '../shared/Loader'
 
 type Props = {
   id: string | number
@@ -19,6 +21,7 @@ type Props = {
 }
 
 export const UpdateUserAvatarForm: React.FC<Props> = ({ id, avatar }) => {
+  const [showLoader, toggleLoader] = useToggle()
   const form = useForm<z.infer<typeof updateUserAvatarValidationSchema>>({
     resolver: zodResolver(updateUserAvatarValidationSchema),
     defaultValues: {
@@ -28,13 +31,22 @@ export const UpdateUserAvatarForm: React.FC<Props> = ({ id, avatar }) => {
 
   const { refresh } = useRouter()
   const handleAvatarUpdateFormSubmit = async (data: UpdateUserAvatarData) => {
+    toggleLoader()
+
     if (data.avatar) {
       const formData = new FormData()
-      console.log(data.avatar)
       formData.append('avatar', data.avatar)
-      await updateUserAvatar(id, formData)
-      refresh()
+
+      const { errorMessage } = await updateUserAvatar(id, formData)
+
+      if (errorMessage) {
+        toast({ description: errorMessage, variant: 'error' })
+      } else {
+        toast({ description: 'Avatar updated !', variant: 'success' })
+        refresh()
+      }
     }
+    toggleLoader()
   }
 
   return (
@@ -51,7 +63,7 @@ export const UpdateUserAvatarForm: React.FC<Props> = ({ id, avatar }) => {
             </div>
 
             <Button type='submit' className='bg-grey-300 text-white w-fit'>
-              Update Avatar
+              {showLoader ? <Loader /> : 'Update Avatar'}
             </Button>
           </div>
           <FormControl>

@@ -47,27 +47,31 @@ export const resetUserPassword = async (resetPasswordData: ResetPasswordData): P
   })
 }
 
-export const updateUser = async (id: string | number, request: UpdateUserData): Promise<Nullable<User>> => {
+export const updateUser = async (id: string | number, request: UpdateUserData): Promise<{ errorMessage?: string }> => {
   const response = await fetchWrapper<User>({ path: `${USER}/${UPDATE}/${id}`, body: request, method: 'PATCH' })
-  return response.data
+  return response
 }
 
-export const updateUserAvatar = async (id: string | number, request: FormData): Promise<Nullable<User>> => {
+export const updateUserAvatar = async (id: string | number, request: FormData): Promise<{ errorMessage?: string }> => {
   const response = await fetchWrapper<User>({
     path: `${USER}/${UPDATE}/${id}/${AVATAR}`,
     body: request,
     method: 'PATCH',
   })
-  return response.data
+
+  return response
 }
 
-export const updateUserPassword = async (id: string | number, request: UpdatePasswordData): Promise<void> => {
-  await fetchWrapper<void>({
+export const updateUserPassword = async (
+  id: string | number,
+  request: UpdatePasswordData
+): Promise<{ errorMessage?: string }> => {
+  const response = await fetchWrapper<void>({
     method: 'PATCH',
     path: `${USER}/${UPDATE_PASSWORD}/${id}`,
     body: request,
-    isTextResponse: true,
   })
+  return response
 }
 
 export const verifyUserEmail = async (verificationToken: string): Promise<Nullable<User>> => {
