@@ -113,7 +113,7 @@ const FundingStats: React.FC<FundingStatsProps> = ({ text, value, valueColor = '
     <div className={cn('flex flex-col w-1/3 max-md:pt-[2px] md:w-full md:gap-1', className)}>
       <Text
         as='h3'
-        styleVariant='primary'
+        styleVariant='primary-heading'
         className={cn(
           'sm:text-20 max-md:text-20 max-md:leading-tight max-md:tracking-normal md:text-32 md:leading-8',
           valueColor
