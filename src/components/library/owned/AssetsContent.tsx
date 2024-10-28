@@ -20,14 +20,14 @@ export const OwnedIssuesContent: React.FC<Props> = ({ ownedIssues }) => {
     <div className='flex flex-col items-start'>
       <Button className='flex items-center gap-3 w-fit px-0 py-10' variant='ghost' onClick={back}>
         <ArrowLeft className='size-8' />
-        <Text as='h3' styleVariant='secondary'>
+        <Text as='h3' styleVariant='secondary-heading'>
           {ownedIssues.at(0)?.collectibles.at(0)?.comicName}
         </Text>
       </Button>
 
       {!ownedIssues.length ? (
         <div className='flex flex-col justify-center items-center h-full self-center'>
-          <Text as='h5' styleVariant='primary'>
+          <Text as='h5' styleVariant='primary-heading'>
             No owned assets for given comic series
           </Text>
         </div>
@@ -39,7 +39,7 @@ export const OwnedIssuesContent: React.FC<Props> = ({ ownedIssues }) => {
               className='flex w-full justify-between gap-8 md:gap-16 py-10 border-t border-t-grey-300 border-b border-b-grey-300'
             >
               <div className='flex flex-col gap-2 max-w-[180px] w-full'>
-                <Text as='h5' styleVariant='secondary'>
+                <Text as='h5' styleVariant='secondary-heading'>
                   EP {ownedIssue.number}
                 </Text>
                 <Text

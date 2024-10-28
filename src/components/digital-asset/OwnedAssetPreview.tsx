@@ -71,7 +71,7 @@ export const OwnedAssetPreview: React.FC<Props> = ({ asset }) => {
             </Text>
           </div>
           <div className='flex flex-col gap-6'>
-            <Text as='h3' styleVariant='primary' className='line-clamp-1 text-ellipsis'>
+            <Text as='h3' styleVariant='primary-heading' className='line-clamp-1 text-ellipsis'>
               {asset.comicIssueName}
             </Text>
             <GenreTags className='bg-grey-400' genres={comicIssue?.genres ?? []} />

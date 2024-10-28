@@ -36,7 +36,7 @@ export const OwnedComicsContent: React.FC<Props> = ({ comics }) => {
   if (!comics.length) {
     return (
       <div className='flex justify-center items-center h-full mt-6 md:mt-10'>
-        <Text as='h5' styleVariant='primary'>
+        <Text as='h5' styleVariant='primary-heading'>
           Buy a comic episode first
         </Text>
       </div>
@@ -52,7 +52,7 @@ export const OwnedComicsContent: React.FC<Props> = ({ comics }) => {
 
     return (
       <div key={`${letter}-${index}`} className='flex justify-between gap-8 md:gap-16 py-10 border-b border-b-grey-300'>
-        <Text className='w-fit' as='h4' styleVariant='secondary'>
+        <Text className='w-fit' as='h4' styleVariant='secondary-heading'>
           {letter}
         </Text>
         <div className='flex flex-wrap gap-6 md:gap-10 w-full'>

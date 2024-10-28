@@ -6,7 +6,7 @@ export default function FaqPage() {
   return (
     <>
       <main className='flex flex-col gap-1 justify-center items-center mt-20'>
-        <Text as='h1' styleVariant='primary'>
+        <Text as='h1' styleVariant='primary-heading'>
           FAQ
         </Text>
         <p className='text-center'>Find answers to your questions! For any details contact us at </p>

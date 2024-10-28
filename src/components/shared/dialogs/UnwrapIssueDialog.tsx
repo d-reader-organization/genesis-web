@@ -26,7 +26,7 @@ export const UnwrapIssueDialog: React.FC<Props> = ({ assets, showUnwrapButton = 
         className='flex flex-col justify-between items-center gap-8 bg-grey-400 p-5 rounded-lg max-w-[500px] max-h-[600px] overflow-y-scroll'
       >
         <DialogTitle className='sr-only'>Unwrap issue dialog</DialogTitle>
-        <Text as='h3' styleVariant='primary'>
+        <Text as='h3' styleVariant='primary-heading'>
           Choose to open
         </Text>
         <Text as='p' styleVariant='body-large' className='text-center'>

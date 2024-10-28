@@ -52,7 +52,7 @@ export default async function NewMintPage({ params }: ComicIssuePageParams) {
               <span>{comicIssue.comic?.title}</span>
               <span>EP {comicIssue.number}</span>
             </div>
-            <Text as='h3' styleVariant='primary'>
+            <Text as='h3' styleVariant='primary-heading'>
               {comicIssue.title}
             </Text>
           </div>

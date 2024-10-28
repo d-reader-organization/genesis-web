@@ -3,8 +3,8 @@ import { cn } from '@/lib/utils'
 
 type Variant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span'
 type StyleVariant =
-  | 'primary'
-  | 'secondary'
+  | 'primary-heading'
+  | 'secondary-heading'
   | 'body-xlarge'
   | 'body-large'
   | 'body-normal'
@@ -32,8 +32,8 @@ const variantStyles: Record<Variant, string> = {
 }
 
 const styleVariants: Record<StyleVariant, string> = {
-  primary: 'font-semibold leading-tight font-obviouslyNarrow',
-  secondary: 'font-bold leading-tight font-satoshi tracking-normal',
+  'primary-heading': 'font-semibold leading-tight font-obviouslyNarrow',
+  'secondary-heading': 'font-bold leading-tight font-satoshi tracking-normal',
   'body-xlarge': 'text-xl',
   'body-large': 'text-lg',
   'body-normal': 'text-base',

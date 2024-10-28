@@ -57,7 +57,7 @@ export const ComicIssueList: React.FC<Props> = ({
   return (
     <>
       {issuesCount ? (
-        <Text className='border-b border-grey-100 py-6 my-6' as='h4' styleVariant='primary' fontWeight='normal'>
+        <Text className='border-b border-grey-100 py-6 my-6' as='h4' styleVariant='primary-heading' fontWeight='normal'>
           Issues ( {`${issuesCount}`} )
         </Text>
       ) : null}

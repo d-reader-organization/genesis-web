@@ -17,7 +17,7 @@ type Props = {
 export const ProjectsSection: React.FC<Props> = ({ projects, title }) => {
   return (
     <div className='flex flex-col gap-4 md:gap-10 md:my-10'>
-      <Text as='h3' styleVariant='primary'>
+      <Text as='h3' styleVariant='primary-heading'>
         {title}
       </Text>
       <div className='max-md:py-2 flex 1160:grid overflow-x-auto 1160:overflow-x-visible grid-cols-4 gap-4 md:gap-6 lg:gap-10'>
