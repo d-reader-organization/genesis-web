@@ -49,7 +49,7 @@ export default async function ComicIssuePage({ params: { id } }: ComicIssuePageP
               <span>{comicIssue.comic?.title}</span>
               <span>EP {comicIssue.number}</span>
             </div>
-            <Text as='h3' styleVariant='primary'>
+            <Text as='h3' styleVariant='primary-heading'>
               {comicIssue.title}
             </Text>
           </div>

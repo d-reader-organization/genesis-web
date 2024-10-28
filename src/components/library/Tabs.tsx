@@ -5,8 +5,8 @@ import { SoonTag } from '../shared/Tags'
 import { cn } from '@/lib/utils'
 import { Comic } from '@/models/comic'
 import { OwnedComicsContent } from './owned/ComicsContent'
-import { OwnedAssetsContent } from './owned/AssetsContent'
-import { Asset } from '@/models/asset'
+import { OwnedIssuesContent } from './owned/AssetsContent'
+import { OwnedComicIssue } from '@/models/comicIssue'
 
 const tabs: { title: string; value: string; isComingSoon?: boolean }[] = [
   {
@@ -27,10 +27,10 @@ const tabs: { title: string; value: string; isComingSoon?: boolean }[] = [
 
 type Props = {
   comics?: Comic[]
-  ownedAssets?: Asset[]
+  ownedIssues?: OwnedComicIssue[]
 } & React.HTMLAttributes<HTMLDivElement>
 
-export const LibraryTabs: React.FC<Props> = ({ comics, ownedAssets }) => (
+export const LibraryTabs: React.FC<Props> = ({ comics, ownedIssues }) => (
   <Tabs defaultValue={tabs.at(0)?.title.toLowerCase()} className='w-full max-w-screen-xl md:p-4'>
     <TabsList className='w-full justify-between items-start'>
       <div className='flex gap-4 w-full max-md:justify-between'>
@@ -42,8 +42,8 @@ export const LibraryTabs: React.FC<Props> = ({ comics, ownedAssets }) => (
     <TabsContent className='mt-0 border-t border-grey-300 w-full' value='owned'>
       {comics ? (
         <OwnedComicsContent comics={comics} />
-      ) : ownedAssets ? (
-        <OwnedAssetsContent ownedAssets={ownedAssets} />
+      ) : ownedIssues ? (
+        <OwnedIssuesContent ownedIssues={ownedIssues} />
       ) : null}
     </TabsContent>
     <TabsContent className='mt-0 pt-4 border-t border-grey-300' value='favorites'></TabsContent>
@@ -65,7 +65,7 @@ const TabTrigger: React.FC<TabTriggerProps> = ({ isComingSoon, title, value }) =
     )}
     value={value}
   >
-    <Text as='h4' styleVariant='secondary'>
+    <Text as='h4' styleVariant='secondary-heading'>
       {title}
     </Text>
     {isComingSoon ? <SoonTag /> : null}

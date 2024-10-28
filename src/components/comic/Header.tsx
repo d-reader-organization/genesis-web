@@ -30,7 +30,7 @@ const LeftSection: React.FC<Props> = ({ comic }) => {
   const { description, flavorText, genres, title } = comic
   return (
     <div className='flex flex-col gap-2 w-full md:max-w-[680px]'>
-      <Text className='font-normal' as='h2' styleVariant='primary'>
+      <Text className='font-normal' as='h2' styleVariant='primary-heading'>
         {title}
       </Text>
       {genres?.length ? <GenresList genres={genres} /> : null}

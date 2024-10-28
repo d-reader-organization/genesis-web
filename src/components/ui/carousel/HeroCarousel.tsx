@@ -81,7 +81,7 @@ export const HeroCarousel: React.FC<Props> = ({ slides }) => {
                       <div className='h-full flex flex-col justify-between p-4 md:p-6'>
                         <TopSection tags={slide.tags ?? []} />
                         <div className='flex flex-col gap-4 relative mb-8'>
-                          <Text as='h1' className='line-clamp-1 text-ellipsis' styleVariant='primary'>
+                          <Text as='h1' className='line-clamp-1 text-ellipsis' styleVariant='primary-heading'>
                             {slide.title}
                           </Text>
                           <p className='text-base md:text-xl lg:text-[22px] font-medium leading-normal md:leading-5 lg:leading-7 tracking-[0.2px] line-clamp-2 text-ellipsis'>

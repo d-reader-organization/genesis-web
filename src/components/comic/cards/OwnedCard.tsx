@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 import { Button, Text } from '@/components/ui'
 import { RoutePath } from '@/enums/routePath'
 import { useRouter } from 'next/navigation'
+import { CopiesCount } from '@/components/shared/CopiesCount'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comic: Comic
@@ -34,9 +35,7 @@ export const OwnedCard: React.FC<Props> = ({ className, comic, href }) => {
       <div className='absolute inset-0 bg-gradient-to-t from-black to-transparent' />
       <div className='relative z-10 h-full flex flex-col justify-end'>
         <div className='flex size-8 px-2 justify-center items-center rounded-xl backdrop-blur-md bg-white bg-opacity-20 absolute top-2 right-2'>
-          <Text as='span' styleVariant='body-small' fontWeight='bold' className='leading-140'>
-            {comic.stats?.issuesCount}
-          </Text>
+          <CopiesCount count={comic.myStats?.collectiblesCount ?? 0} />
         </div>
         <Image
           alt='comic logo'

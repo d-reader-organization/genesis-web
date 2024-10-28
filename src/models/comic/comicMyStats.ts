@@ -3,4 +3,5 @@ export interface ComicMyStats {
   // isSubscribed: boolean
   isBookmarked: boolean
   isFavourite: boolean
+  collectiblesCount?: number
 }
