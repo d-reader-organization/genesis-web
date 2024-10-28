@@ -41,7 +41,7 @@ export const LibraryTabs: React.FC<Props> = ({ comics, ownedIssues }) => (
     </TabsList>
     <TabsContent className='mt-0 border-t border-grey-300 w-full' value='owned'>
       {comics ? (
-        <OwnedComicsContent comics={comics} />
+        <OwnedComicsContent comics={[]} />
       ) : ownedIssues ? (
         <OwnedIssuesContent ownedIssues={ownedIssues} />
       ) : null}

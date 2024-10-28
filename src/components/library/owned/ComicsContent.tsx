@@ -33,6 +33,16 @@ const getSublistBoundaries = (
 }
 
 export const OwnedComicsContent: React.FC<Props> = ({ comics }) => {
+  if (!comics.length) {
+    return (
+      <div className='flex justify-center items-center h-full mt-6 md:mt-10'>
+        <Text as='h5' styleVariant='primary'>
+          Buy a comic episode first
+        </Text>
+      </div>
+    )
+  }
+
   // TODO think about better handling of this
   const sortedLetters = sortAndGetLetterOccurrences(comics)
   const sortedLettersEntries = Object.keys(sortedLetters)
