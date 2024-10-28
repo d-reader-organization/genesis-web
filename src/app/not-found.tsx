@@ -16,7 +16,7 @@ export default function NotFound() {
       <div className='flex flex-col sm:w-[660px] justify-center items-center sm:pt-[20px] md:pt-[40px]'>
         <Text
           as='h1'
-          styleVariant='primary'
+          styleVariant='primary-heading'
           className='text-grey-400 uppercase text-center text-7xl leading-[62px] sm:text-9xl sm:leading-[111.36px] tracking-tight'
         >
           WE&apos;RE
