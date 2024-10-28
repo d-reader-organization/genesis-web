@@ -20,7 +20,7 @@ export const RarityChip: React.FC<Props> = ({ className, rarity, supply, isVerti
       className
     )}
   >
-    <div className='flex items-center justify-center'>
+    <div className='flex items-center justify-center gap-1'>
       <RarityIcon className='h-3 -mb-0.5 mr-0.5' />
       <Text as='span' styleVariant='body-small' fontWeight='semibold' className='font-obviouslyNarrow mt-1'>
         {rarity.toUpperCase()}
