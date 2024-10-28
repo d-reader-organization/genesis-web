@@ -24,6 +24,8 @@ const FileUpload = forwardRef<HTMLInputElement, Props>(function FileUpload(
   )
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault()
+
     const files = event.target.files
     if (files) {
       const uploads: UploadedFile[] = []
