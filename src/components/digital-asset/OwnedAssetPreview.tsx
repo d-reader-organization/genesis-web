@@ -56,21 +56,21 @@ export const OwnedAssetPreview: React.FC<Props> = ({ asset }) => {
             </Link>
           </div>
         </div>
-        <div className='flex flex-col gap-4 w-full max-w-fit'>
+        <div className='flex flex-col gap-2 w-full max-w-fit'>
           <div className='flex items-center gap-4 flex-wrap'>
             <Text as='p' styleVariant='body-normal' fontWeight='medium' className='text-grey-100'>
               {asset.comicName}
             </Text>
-            <Circle className='size-2 mt-1.5' fill='#D9D9D9' />
+            <Circle className='size-2' fill='#D9D9D9' />
             <Text as='p' styleVariant='body-normal' fontWeight='medium' className='text-grey-100'>
               {asset.comicIssueName}
             </Text>
-            <Circle className='size-2 mt-1.5' fill='#D9D9D9' />
+            <Circle className='size-2' fill='#D9D9D9' />
             <Text as='p' styleVariant='body-normal' fontWeight='medium' className='text-grey-100'>
               {shortenAssetName(asset.name)}
             </Text>
           </div>
-          <div className='flex flex-col gap-6'>
+          <div className='flex flex-col gap-3'>
             <Text as='h3' styleVariant='primary-heading' className='line-clamp-1 text-ellipsis'>
               {asset.comicIssueName}
             </Text>
