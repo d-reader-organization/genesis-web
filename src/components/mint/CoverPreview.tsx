@@ -8,6 +8,7 @@ import { RarityChip } from '../shared/chips/Rarity'
 import { Arrow } from '../shared/Arrow'
 import { CandyMachine } from '@/models/candyMachine'
 import { Nullable } from '@/models/common'
+import { InfoStats } from '../shared/InfoStats'
 
 type Props = {
   cover: StatelessCover
@@ -70,19 +71,5 @@ export const CoverPreviewDialog: React.FC<Props> = ({
         {hideArrows ? null : <Arrow arrowOrientation='RIGHT' className='bg-transparent' onClick={onNextClick} />}
       </DialogContent>
     </Dialog>
-  )
-}
-
-type InfoProps = {
-  title: string
-  value: string | number
-}
-
-const InfoStats: React.FC<InfoProps> = ({ title, value }) => {
-  return (
-    <div className='flex flex-col items-center gap-2'>
-      <span className='text-base font-medium leading-[22.4px] text-grey-100'>{title}</span>
-      <h6 className='text-lg font-semibold leading-[18px] tracking-[0.036px] text-center'>{value}</h6>
-    </div>
   )
 }

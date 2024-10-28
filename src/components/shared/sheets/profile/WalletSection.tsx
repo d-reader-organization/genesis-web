@@ -6,8 +6,9 @@ import { toast } from '@/components/ui/toast/use-toast'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { ConnectButton } from '../../buttons/ConnectButton'
 import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
-import { formatWalletAddress } from '@/utils/helpers'
+import { shortenSolanaAddress } from '@/utils/helpers'
 import ConnectWalletIcons from 'public/assets/vector-icons/connect-wallet-sidebar.svg'
+import { ButtonIconWrapper } from '../../buttons/IconWrapper'
 
 export const WalletSection: React.FC = () => {
   const { publicKey } = useWallet()
@@ -21,7 +22,7 @@ export const WalletSection: React.FC = () => {
         <div className='flex gap-2'>
           <Wallet size={24} />
           <span className='text-base font-medium leading-[22.4px] text-white'>
-            {formatWalletAddress(publicKey.toBase58())}
+            {shortenSolanaAddress({ address: publicKey.toBase58() })}
           </span>
         </div>
         <div className='flex gap-1.5'>
@@ -50,13 +51,3 @@ export const WalletSection: React.FC = () => {
     </div>
   )
 }
-
-type ButtonIconWrapperProps = {
-  onClick: () => void
-} & React.PropsWithChildren
-
-const ButtonIconWrapper: React.FC<ButtonIconWrapperProps> = ({ onClick, children }) => (
-  <button className='rounded-xl bg-grey-300 p-4 flex items-center' onClick={onClick}>
-    {children}
-  </button>
-)

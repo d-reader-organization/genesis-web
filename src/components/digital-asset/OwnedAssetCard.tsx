@@ -2,9 +2,7 @@ import { RarityChip } from '@/components/shared/chips/Rarity'
 import { Asset } from '@/models/asset'
 import Image from 'next/image'
 import React from 'react'
-import { MintChip } from '../shared/chips/Mint'
-import { UsedChip } from '../shared/chips/Used'
-import { SignedChip } from '../shared/chips/Signed'
+import { StateChip } from '../shared/chips/State'
 
 type Props = {
   asset: Asset
@@ -17,12 +15,12 @@ export const OwnedAssetCard: React.FC<Props> = ({ asset }) => (
       width={223}
       height={322}
       src={asset.image}
-      className='max-w-[223px] max-h-[322px] h-full'
+      className='w-auto max-h-[322px] h-full'
     />
     <div className='flex items-center -mt-3.5'>
       <RarityChip rarity={asset.rarity} />
-      {asset.isUsed ? <UsedChip /> : <MintChip />}
-      {asset.isSigned ? <SignedChip /> : null}
+      {asset.isUsed ? <StateChip state='used' /> : <StateChip state='mint' />}
+      {asset.isSigned ? <StateChip state='signed' /> : null}
     </div>
   </div>
 )
