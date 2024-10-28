@@ -10,8 +10,7 @@ type Props = {
   payout: ProjectPayout
   raiseGoal: ProjectFunding['raiseGoal']
   numberOfBackers: ProjectFunding['numberOfBackers']
-  className: string
-}
+} & React.HTMLAttributes<HTMLDivElement>
 
 export const ProjectPayoutCard: React.FC<Props> = ({ payout, raiseGoal, numberOfBackers, className }) => {
   return (
@@ -25,13 +24,13 @@ export const ProjectPayoutCard: React.FC<Props> = ({ payout, raiseGoal, numberOf
         <p className='text-white text-base font-bold leading-snug'>Payout details*</p>
       </div>
 
-      <div className='flex w-full md:flex-col items-start md:gap-5'>
+      <div className='flex w-full md:flex-col items-start md:gap-5 md:pb-[6px]'>
         <PayoutStats
           text='total raised'
           value={formatUSD(raiseGoal)}
           valueColor='text-[#fceb54] '
-          valueSizeMd='md:text-3xl '
-          textSizeMd='md:text-xl '
+          valueSizeMd='md:text-3xl'
+          textSizeMd='md:text-xl'
         />
         <PayoutStats text='backers' value={formatNumberWithCommas(numberOfBackers)} />
         <PayoutStats
@@ -81,7 +80,7 @@ const PayoutStats: React.FC<PayoutStatsProps> = ({
       <p className={cn('font-semibold text-xl leading-tight tracking-tight md:leading-none', valueSizeMd, valueColor)}>
         {value}
       </p>
-      <p className={'text-[#c2c5ce] text-xs font-medium leading-normal md:leading-relaxed ' + textSizeMd}>{text}</p>
+      <p className={cn('text-[#c2c5ce] text-xs font-medium leading-normal md:leading-relaxed', textSizeMd)}>{text}</p>
     </div>
   )
 }
