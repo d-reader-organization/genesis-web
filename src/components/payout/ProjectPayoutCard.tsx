@@ -4,6 +4,7 @@ import { payoutDetails } from '@/constants/tooltips'
 import { formatNumberWithCommas } from '@/utils/numbers'
 import { formatPercentage, formatUSD } from '@/utils/numbers'
 import { ProjectFunding, ProjectPayout } from '@/models/project'
+import { cn } from '@/lib/utils'
 
 type Props = {
   payout: ProjectPayout
@@ -15,10 +16,10 @@ type Props = {
 export const ProjectPayoutCard: React.FC<Props> = ({ payout, raiseGoal, numberOfBackers, className }) => {
   return (
     <div
-      className={
-        'flex flex-col p-2 gap-3 bg-grey-500 justify-between items-center shadow md:rounded-xl md:p-5 md:sticky md:top-[100px] md:max-w-[485px] md:min-w-[350px] md:h-[550px] md:gap-1 md:pb-4 ' +
+      className={cn(
+        'flex flex-col p-2 gap-3 bg-grey-500 justify-between items-center shadow md:rounded-xl md:p-5 md:sticky md:top-[100px] md:max-w-[485px] md:min-w-[350px] md:h-[550px] md:gap-1 md:pb-4',
         className
-      }
+      )}
     >
       <div className='flex flex-col gap-[14px] w-full'>
         <p className='text-white text-base font-bold leading-snug'>Payout details*</p>
@@ -65,22 +66,21 @@ type PayoutStatsProps = {
   valueColor?: string
   valueSizeMd?: string
   textSizeMd?: string
-  className?: string
-}
+} & React.HTMLAttributes<HTMLDivElement>
 
 const PayoutStats: React.FC<PayoutStatsProps> = ({
   text,
   value,
-  valueSizeMd = 'md:text-3xl ',
-  textSizeMd = 'md:text-lg ',
-  valueColor = 'text-white ',
-  className = '',
+  valueSizeMd = 'md:text-3xl',
+  textSizeMd = 'md:text-lg',
+  valueColor = 'text-white',
+  className,
 }) => {
   return (
-    <div className={'flex w-1/4 flex-col items-center md:w-full md:items-start ' + className}>
-      <h2 className={'font-semibold text-xl leading-tight tracking-tight md:leading-none ' + valueSizeMd + valueColor}>
+    <div className={cn('flex w-1/4 flex-col items-center md:w-full md:items-start', className)}>
+      <p className={cn('font-semibold text-xl leading-tight tracking-tight md:leading-none', valueSizeMd, valueColor)}>
         {value}
-      </h2>
+      </p>
       <p className={'text-[#c2c5ce] text-xs font-medium leading-normal md:leading-relaxed ' + textSizeMd}>{text}</p>
     </div>
   )
