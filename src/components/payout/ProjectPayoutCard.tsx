@@ -24,7 +24,7 @@ export const ProjectPayoutCard: React.FC<Props> = ({ payout, raiseGoal, numberOf
         <p className='text-white text-base font-bold leading-snug'>Payout details*</p>
       </div>
 
-      <div className='flex w-full md:flex-col items-start md:gap-5 md:pb-[6px]'>
+      <div className='flex w-full md:flex-col items-start pb-[2px] md:gap-5 md:pb-[6px]'>
         <PayoutStats
           text='total raised'
           value={formatUSD(raiseGoal)}
