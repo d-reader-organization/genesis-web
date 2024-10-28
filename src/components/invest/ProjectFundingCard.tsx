@@ -125,7 +125,7 @@ const FundingStats: React.FC<FundingStatsProps> = ({ text, value, valueColor = '
         as='p'
         styleVariant='body-normal'
         fontWeight='medium'
-        className={'text-grey-100 leading-none max-md:text-xs md:leading-snug'}
+        className='text-grey-100 leading-none max-md:text-xs md:leading-snug'
       >
         {text}
       </Text>
