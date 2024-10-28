@@ -65,7 +65,7 @@ const TabTrigger: React.FC<TabTriggerProps> = ({ isComingSoon, title, value }) =
     )}
     value={value}
   >
-    <Text as='h4' styleVariant='secondary'>
+    <Text as='h4' styleVariant='secondary-heading'>
       {title}
     </Text>
     {isComingSoon ? <SoonTag /> : null}

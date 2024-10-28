@@ -21,7 +21,7 @@ type Props = { isGoogleSignUp?: boolean; onSuccess: () => void }
 
 const CreateAccountContent: React.FC<Props> = ({ isGoogleSignUp = false, onSuccess }) => (
   <main className='container mb-4 md:mb-8 sm:p-0 flex flex-col max-w-sm gap-2'>
-    <Text as='h2' styleVariant='primary' className='text-center mt-8 mb-4 sm:mb-8'>
+    <Text as='h2' styleVariant='primary-heading' className='text-center mt-8 mb-4 sm:mb-8'>
       {isGoogleSignUp ? 'Set your details' : 'Welcome!'}
     </Text>
     {isGoogleSignUp ? null : (

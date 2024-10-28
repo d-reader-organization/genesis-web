@@ -17,7 +17,7 @@ export default async function VerifyEmailPage({ params }: { params: Params }) {
   return (
     <main className='flex flex-col w-full justify-center items-center mt-20 md:mt-16 p-4 md:p-6 lg:p-8'>
       <div className='flex flex-col items-center gap-4 max-w-[480px]'>
-        <Text as='h1' styleVariant='primary'>
+        <Text as='h1' styleVariant='primary-heading'>
           Welcome
         </Text>
         <Text as='span' styleVariant='body-xlarge' fontWeight='medium'>

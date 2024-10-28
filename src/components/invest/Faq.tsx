@@ -45,7 +45,7 @@ Decentralized Reader LLC works with many of the same indie creators to distribut
 export const FaqSection: React.FC = () => {
   return (
     <section className='w-full py-4 md:py-12 flex flex-col gap-4 md:gap-10 justify-start'>
-      <Text as='h3' styleVariant='primary'>
+      <Text as='h3' styleVariant='primary-heading'>
         Frequently Asked Questions
       </Text>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-x-4 md:gap-x-10'>

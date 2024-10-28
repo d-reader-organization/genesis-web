@@ -13,7 +13,7 @@ export default async function LoginPage() {
     <>
       <UnauthenticatedNavigation />
       <main className='container sm:p-0 flex flex-col max-w-md gap-2 mt-8'>
-        <Text as='h2' styleVariant='primary' className='text-center mb-8'>
+        <Text as='h2' styleVariant='primary-heading' className='text-center mb-8'>
           Welcome back
         </Text>
         <GoogleSignInButton />
