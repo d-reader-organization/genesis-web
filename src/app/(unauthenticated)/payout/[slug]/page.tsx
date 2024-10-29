@@ -22,7 +22,7 @@ export default async function PayoutPage({ params }: Props) {
   const project = fetchSuccessfulProject(params.slug)
 
   if (!project) {
-    return notFound
+    return notFound()
   }
 
   return (
