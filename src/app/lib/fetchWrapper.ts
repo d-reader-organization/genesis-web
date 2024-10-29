@@ -8,6 +8,9 @@ const defaultHeaders = {
 }
 
 type ParamsType = Record<string, unknown>
+type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTIONS'
+
+const defaultRevalidateCacheInSeconds = (method: RequestMethod) => (method === 'GET' ? 60 * 60 * 24 : 0)
 
 const generateQueryParams = (params: ParamsType) =>
   Object.entries(params).reduce((prev, [key, value]) => {
@@ -31,7 +34,7 @@ export async function fetchWrapper<T>({
 }: {
   body?: unknown
   headers?: HeadersInit
-  method?: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTIONS'
+  method?: RequestMethod
   path?: string
   params?: ParamsType
   revalidateCacheInSeconds?: number
@@ -50,7 +53,9 @@ export async function fetchWrapper<T>({
   const options: RequestInit = {
     body: JSON.stringify(body),
     method,
-    ...(revalidateCacheInSeconds && { next: { revalidate: revalidateCacheInSeconds } }),
+    next: {
+      revalidate: revalidateCacheInSeconds ?? defaultRevalidateCacheInSeconds(method),
+    },
     headers: {
       ...defaultHeaders,
       ...headers,
