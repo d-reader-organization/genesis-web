@@ -27,6 +27,7 @@ export async function fetchWrapper<T>({
   method = 'GET',
   path = '',
   params,
+  revalidateCacheInSeconds,
   isTextResponse = false,
 }: {
   body?: unknown
@@ -35,6 +36,7 @@ export async function fetchWrapper<T>({
   method?: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTIONS'
   path?: string
   params?: ParamsType
+  revalidateCacheInSeconds?: number
   isTextResponse?: boolean
 }): Promise<{
   data: T | null
@@ -51,6 +53,7 @@ export async function fetchWrapper<T>({
     body: JSON.stringify(body),
     cache,
     method,
+    ...(revalidateCacheInSeconds && { next: { revalidate: revalidateCacheInSeconds } }),
     headers: {
       ...defaultHeaders,
       ...headers,
