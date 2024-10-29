@@ -1,5 +1,6 @@
 import { ResponseCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 import { WalletName } from '@solana/wallet-adapter-base'
+import { PublicKey } from '@solana/web3.js'
 
 export const baseApiUrl = `${process.env.NEXT_PUBLIC_API_ENDPOINT}`
 export const accessTokenKey = 'access_token'
@@ -60,3 +61,5 @@ export const LEDGER_ADAPTERS = {
     URL: 'https://help.phantom.app/hc/en-us/articles/4406388670483-How-to-use-your-Ledger-Nano-hardware-wallet',
   },
 } as const
+
+export const MEMO_PROGRAM_ID = new PublicKey('MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr')

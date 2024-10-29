@@ -6,7 +6,7 @@ import { Transaction, PublicKey, TransactionInstruction, Keypair } from '@solana
 import bs58 from 'bs58'
 import { useQueryClient } from '@tanstack/react-query'
 import { LEDGER_ADAPTERS } from '@/constants/general'
-import { MEMO_PROGRAM_ID } from '@/constants/programId'
+import { MEMO_PROGRAM_ID } from '@/constants/general'
 import { SignedDataType } from '@/models/wallet/connectWallet'
 import { toast } from '@/components/ui'
 
