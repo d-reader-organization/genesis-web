@@ -10,7 +10,10 @@ import { Form, FormItem, FormLabel } from '../ui/Form'
 import { updateUserValidationSchema } from '@/constants/schemas'
 import { updateUser } from '@/app/lib/api/user/mutations'
 import { UpdateUserData } from '@/models/user'
-import { Text } from '../ui'
+import { Text, toast } from '../ui'
+import { Loader } from '../shared/Loader'
+import { useToggle } from '@/hooks'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   id: number | string
@@ -19,12 +22,26 @@ type Props = {
 }
 
 export const UpdateUserDetailsForm: React.FC<Props> = ({ id, name, email }) => {
+  const [showLoader, toggleLoader] = useToggle()
+  const { refresh } = useRouter()
+
   const form = useForm<z.infer<typeof updateUserValidationSchema>>({
     resolver: zodResolver(updateUserValidationSchema),
     defaultValues: { email, name },
   })
 
-  const handleProfileUpdate = async (data: UpdateUserData) => await updateUser(id, data)
+  const handleProfileUpdate = async (data: UpdateUserData) => {
+    toggleLoader()
+    const { errorMessage } = await updateUser(id, data)
+
+    if (errorMessage) {
+      toast({ description: errorMessage, variant: 'error' })
+    } else {
+      toast({ description: 'Profile details updated !', variant: 'success' })
+      refresh()
+    }
+    toggleLoader()
+  }
 
   return (
     <Form {...form}>
@@ -55,7 +72,7 @@ export const UpdateUserDetailsForm: React.FC<Props> = ({ id, name, email }) => {
         </FormItem>
 
         <Button type='submit' className='bg-grey-300 w-fit text-white'>
-          Save
+          {showLoader ? <Loader /> : 'Save'}
         </Button>
       </form>
     </Form>

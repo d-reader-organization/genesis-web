@@ -56,20 +56,21 @@ export async function fetchWrapper<T>({
   }
   try {
     const response = await fetch(url, options)
-    const parsed = isTextResponse ? await response.text() : await response.json()
+    const responseStatus = response.status
+    const parsed = isTextResponse ? await response.text() : await response.json().catch(() => null)
 
-    if (!SUCC_RESPONSE_STATUS_CODES.includes(response.status)) {
+    if (!SUCC_RESPONSE_STATUS_CODES.includes(responseStatus)) {
       const error: { message: string } = parsed
       return {
         data: null,
         errorMessage: error.message,
-        status: response.status,
+        status: responseStatus,
       }
     }
 
     return {
       data: parsed,
-      status: response.status,
+      status: responseStatus,
     }
   } catch (error) {
     return {
