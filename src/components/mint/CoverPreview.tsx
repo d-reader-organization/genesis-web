@@ -37,7 +37,7 @@ export const CoverPreviewDialog: React.FC<Props> = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
-        className='bg-transparent shadow-none p-4 flex gap-8 items-center sm:max-w-[520px]'
+        className='bg-transparent shadow-none p-4 flex gap-4 items-center sm:max-w-[520px]'
         overlayClassName='bg-grey-600 bg-opacity-60 backdrop-blur-[20px]'
         showCloseIcon={false}
         aria-describedby={undefined}

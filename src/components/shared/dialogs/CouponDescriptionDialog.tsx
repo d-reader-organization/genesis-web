@@ -35,7 +35,7 @@ export const CouponDescriptionDialog: React.FC<CommonDialogProps & { comicIssue:
           </>
         )
       case CouponType.WhitelistedWallet || CouponType.PublicUser:
-        return <ConnectButton className='[all:unset] underline' />
+        return <ConnectButton className='[all:unset] h-fit p-0 xs:underline  sm:h-fit sm:p-0 sm:underline' />
       default:
         return ''
     }
@@ -44,10 +44,10 @@ export const CouponDescriptionDialog: React.FC<CommonDialogProps & { comicIssue:
     <Dialog open={open} onOpenChange={toggleDialog}>
       <DialogContent
         aria-describedby=''
-        className='max-w-[485px] rounded-2xl flex flex-col items-center bg-grey-400 shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)] p-6 pt-8 gap-8'
+        className='max-w-[485px] rounded-2xl flex flex-col items-center bg-grey-400 shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)] p-6 pt-8 gap-4'
         showCloseIcon={false}
       >
-        <DialogTitle className='font-satoshi leading-[24px] text-xl'>Check eligibilty</DialogTitle>
+        <DialogTitle className='font-satoshi leading-[24px] text-xl'>Available discounts</DialogTitle>
         <div className='flex flex-col gap-2 w-full'>
           {coupons.map((coupon, index) => {
             const discount = getCouponDiscount(candyMachine?.coupons ?? [], coupon)
