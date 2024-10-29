@@ -66,7 +66,6 @@ export const useAuthorizeWallet: AuthorizeWalletHook = (callback) => {
       const message = new TextEncoder().encode(otp)
       const signedMessage = await signMessage(message)
       encoding = bs58.encode(signedMessage)
-      console.log('signed: ', encoding)
 
       type = SignedDataType.Message
     } else {

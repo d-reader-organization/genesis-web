@@ -70,6 +70,13 @@ export const ConnectButton: React.FC<Props> = ({ onClick, text, children, classN
     }
   }, [buttonState, onClick, onConnect, onSelectWallet])
 
+  useEffect(() => {
+    if (buttonState == 'has-wallet' && onConnect) {
+      onConnect()
+      setActionTriggered(true)
+    }
+  }, [buttonState, onConnect])
+
   const handleAsyncAction = useCallback(async () => {
     try {
       if (onClick) await onClick()
