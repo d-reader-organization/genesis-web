@@ -15,8 +15,7 @@ const generateQueryParams = (params: ParamsType) =>
     return { ...prev, [key]: `${value}` }
   }, {})
 
-const defaultCacheSetting = (method: RequestMethod): RequestCache =>
-  method === 'GET' || method === 'OPTIONS' ? 'force-cache' : 'no-store'
+const defaultCacheSetting = (method: RequestMethod): RequestCache => (method === 'GET' ? 'force-cache' : 'no-store')
 
 /**
  * if params is an array, you should use `generateQueryParamsArray` util
