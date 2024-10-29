@@ -6,7 +6,7 @@ import CHECK_CIRCLE_ICON from 'public/assets/vector-icons/check-circle.svg'
 import { Button } from '@/components/ui'
 import { useLocalStorage, useToggle } from '@/hooks'
 import { Text } from '@/components/ui'
-import { LOCAL_STORAGE } from '@/constants/localStorage'
+import { LOCAL_STORAGE } from '@/constants/general'
 
 export const InvestScreenWelcomeDialog: React.FC = () => {
   const [isInvestmentDisclaimerRead, setIsInvestmentDisclaimerRead] = useLocalStorage(

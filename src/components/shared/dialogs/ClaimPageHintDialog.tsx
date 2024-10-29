@@ -5,7 +5,7 @@ import React from 'react'
 import { Button } from '@/components/ui'
 import { useLocalStorage, useToggle } from '@/hooks'
 import { Text } from '@/components/ui'
-import { LOCAL_STORAGE } from '@/constants/localStorage'
+import { LOCAL_STORAGE } from '@/constants/general'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { GoogleViaTipLinkWalletName } from '@tiplink/wallet-adapter'
 

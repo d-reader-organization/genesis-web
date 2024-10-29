@@ -7,7 +7,7 @@ import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { CommonDialogProps } from '@/models/common'
 import { ConnectButton } from '../buttons/ConnectButton'
 import { Loader } from '../Loader'
-import { LOCAL_STORAGE } from '@/constants/localStorage'
+import { LOCAL_STORAGE } from '@/constants/general'
 
 type Props = { handleUnwrap: () => Promise<void>; isLoading: boolean } & CommonDialogProps
 

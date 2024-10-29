@@ -6,7 +6,7 @@ import { useFormState, useFormStatus } from 'react-dom'
 import { Loader } from '../shared/Loader'
 import { resetPasswordAction } from '@/app/lib/actions/auth/reset-password'
 import { DescriptionText } from '../shared/DescriptionText'
-import { passwordDescriptionText } from '@/constants/general'
+import { passwordDescriptionText } from '@/constants/staticText'
 
 type Props = {
   verificationToken: string
