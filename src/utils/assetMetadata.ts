@@ -1,5 +1,5 @@
 import { JsonMetadata } from '@metaplex-foundation/js'
-import { RARITY_TRAIT, SIGNED_TRAIT, USED_TRAIT } from '../constants/metadata'
+import { RARITY_TRAIT, SIGNED_TRAIT, USED_TRAIT } from '../constants/general'
 import { ComicRarity } from '@/enums/comicRarity'
 import { isNil } from 'lodash'
 

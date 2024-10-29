@@ -12,7 +12,7 @@ import {
   LINKTREE_LINK,
   TENSOR_LINK,
   TWITTER_LINK,
-} from '@/constants/links'
+} from '@/constants/general'
 import GooglePlayIcon from 'public/assets/vector-icons/footer/google.svg'
 import AppStoreIcon from 'public/assets/vector-icons/footer/app-store.svg'
 import { SoonTag } from '../shared/Tags'

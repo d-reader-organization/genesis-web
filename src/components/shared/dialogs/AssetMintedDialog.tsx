@@ -25,7 +25,7 @@ import { useRouter } from 'next/navigation'
 import { assetKeys } from '@/api/asset/assetKeys'
 import { useFetchMe } from '@/api/user'
 import { Loader } from 'lucide-react'
-import { LOCAL_STORAGE } from '@/constants/localStorage'
+import { LOCAL_STORAGE } from '@/constants/general'
 
 type Props = {
   comicIssue: ComicIssue

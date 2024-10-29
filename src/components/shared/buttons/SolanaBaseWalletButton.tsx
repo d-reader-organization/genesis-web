@@ -1,6 +1,6 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import { WALLET_LABELS } from '@/constants/wallets'
+import { WALLET_LABELS } from '@/constants/general'
 require('@solana/wallet-adapter-react-ui/styles.css')
 
 const BaseWalletMultiButtonDynamic = dynamic(
