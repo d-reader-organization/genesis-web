@@ -8,11 +8,15 @@ const defaultHeaders = {
 }
 
 type ParamsType = Record<string, unknown>
+type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTIONS'
 
 const generateQueryParams = (params: ParamsType) =>
   Object.entries(params).reduce((prev, [key, value]) => {
     return { ...prev, [key]: `${value}` }
   }, {})
+
+const defaultCacheSetting = (method: RequestMethod): RequestCache =>
+  method === 'GET' || method === 'OPTIONS' ? 'force-cache' : 'no-store'
 
 /**
  * if params is an array, you should use `generateQueryParamsArray` util
@@ -22,7 +26,7 @@ const generateQueryParams = (params: ParamsType) =>
  */
 export async function fetchWrapper<T>({
   body,
-  cache = 'no-store',
+  cache,
   headers,
   method = 'GET',
   path = '',
@@ -33,7 +37,7 @@ export async function fetchWrapper<T>({
   body?: unknown
   cache?: RequestCache
   headers?: HeadersInit
-  method?: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTIONS'
+  method?: RequestMethod
   path?: string
   params?: ParamsType
   revalidateCacheInSeconds?: number
@@ -49,7 +53,9 @@ export async function fetchWrapper<T>({
   const search = !!queryParams ? new URLSearchParams(queryParams) : null
   url.search = search?.toString() ?? ''
 
-  const cacheSettings = revalidateCacheInSeconds ? { next: { revalidate: revalidateCacheInSeconds } } : { cache }
+  const cacheSettings = revalidateCacheInSeconds
+    ? { next: { revalidate: revalidateCacheInSeconds } }
+    : { cache: cache ?? defaultCacheSetting(method) }
   const options: RequestInit = {
     body: JSON.stringify(body),
     method,
