@@ -19,9 +19,13 @@ import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 
 const normalise = (value: number, MAX: number): number => (value * 100) / MAX
 type DetailsProps = { candyMachine: CandyMachine }
-type CandyMachineDetailsProps = { comicIssue: ComicIssue; isAuthenticated: boolean, bounce?: boolean }
+type CandyMachineDetailsProps = { comicIssue: ComicIssue; isAuthenticated: boolean; bounce?: boolean }
 
-export const CandyMachineDetails: React.FC<CandyMachineDetailsProps> = ({ comicIssue, isAuthenticated, bounce = false }) => {
+export const CandyMachineDetails: React.FC<CandyMachineDetailsProps> = ({
+  comicIssue,
+  isAuthenticated,
+  bounce = false,
+}) => {
   const { candyMachine, selectedCoupon, isLoading, coupons } = useCandyMachineStore((state) => state)
 
   return isLoading ? (
@@ -38,12 +42,12 @@ export const CandyMachineDetails: React.FC<CandyMachineDetailsProps> = ({ comicI
             <PurchaseRow comicIssue={comicIssue} isAuthenticated={isAuthenticated} bounce={bounce} />
           </div>
         )}
-        {coupons.length > 0 &&
+        {coupons.length ? (
           <>
             <Divider className='max-md:hidden' />
             <CouponsSection comicIssue={comicIssue} />
           </>
-        }
+        ) : null}
       </div>
     )
   )

@@ -22,17 +22,21 @@ const generateQueryParams = (params: ParamsType) =>
  */
 export async function fetchWrapper<T>({
   body,
+  cache = 'force-cache',
   headers,
   method = 'GET',
   path = '',
   params,
+  revalidateCacheInSeconds,
   isTextResponse = false,
 }: {
   body?: unknown
+  cache?: RequestCache
   headers?: HeadersInit
   method?: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTIONS'
   path?: string
   params?: ParamsType
+  revalidateCacheInSeconds?: number
   isTextResponse?: boolean
 }): Promise<{
   data: T | null
@@ -47,7 +51,9 @@ export async function fetchWrapper<T>({
 
   const options: RequestInit = {
     body: JSON.stringify(body),
+    cache,
     method,
+    ...(revalidateCacheInSeconds && { next: { revalidate: revalidateCacheInSeconds } }),
     headers: {
       ...defaultHeaders,
       ...headers,

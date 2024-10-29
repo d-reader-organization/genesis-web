@@ -16,30 +16,7 @@ export const WalletSection: React.FC = () => {
   useAuthorizeWallet()
 
   return publicKey ? (
-    <div className='bg-grey-500 rounded-xl p-4 flex flex-col gap-2'>
-      <span className='text-grey-200 text-base font-medium leading-[22.4px]'>Connected wallet</span>
-      <div className='h-[52px] flex items-center justify-between'>
-        <div className='flex gap-2'>
-          <Wallet size={24} />
-          <span className='text-base font-medium leading-[22.4px] text-white'>
-            {shortenSolanaAddress({ address: publicKey.toBase58() })}
-          </span>
-        </div>
-        <div className='flex gap-1.5'>
-          <ButtonIconWrapper
-            onClick={() => {
-              navigator.clipboard.writeText(publicKey.toBase58())
-              toast({ description: 'Copied to clipboard' })
-            }}
-          >
-            <Copy className='size-5' />
-          </ButtonIconWrapper>
-          <ConnectButton>
-            <Power className='size-5' />
-          </ConnectButton>
-        </div>
-      </div>
-    </div>
+    <ConnectedWalletBox address={publicKey.toBase58()} />
   ) : (
     <div className='rounded-xl bg-grey-500 flex flex-col items-center gap-6 p-4'>
       <div className='text-2xl font-normal leading-[28.8px]'>
@@ -51,3 +28,31 @@ export const WalletSection: React.FC = () => {
     </div>
   )
 }
+
+type ConnectedWalletBoxProps = { address: string }
+
+export const ConnectedWalletBox: React.FC<ConnectedWalletBoxProps> = ({ address }) => (
+  <div className='bg-grey-500 rounded-xl p-4 flex flex-col gap-2'>
+    <span className='text-grey-200 text-base font-medium leading-[22.4px]'>Connected wallet</span>
+    <div className='h-10 sm:h-[52px] flex items-center justify-between'>
+      <div className='flex gap-2'>
+        <Wallet size={24} />
+        <span className='text-base font-medium leading-[22.4px] text-white'>{shortenSolanaAddress({ address })}</span>
+      </div>
+      <div className='flex gap-1.5'>
+        <ButtonIconWrapper
+          className='p-2 sm:p-4'
+          onClick={() => {
+            navigator.clipboard.writeText(address)
+            toast({ description: 'Copied to clipboard' })
+          }}
+        >
+          <Copy className='sm:size-5' />
+        </ButtonIconWrapper>
+        <ConnectButton className='py-0 max-sm:size-10'>
+          <Power className='size-5' />
+        </ConnectButton>
+      </div>
+    </div>
+  </div>
+)

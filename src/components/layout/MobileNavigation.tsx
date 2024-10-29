@@ -1,6 +1,6 @@
 import { RoutePath } from '@/enums/routePath'
 import DReaderSymbol from 'public/assets/vector-icons/logo.svg'
-import { ButtonLink } from '../ui'
+import { ButtonLink } from '../ui/Button'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { Menu, Search, X } from 'lucide-react'
@@ -12,8 +12,10 @@ import { LogoutButton } from '../shared/buttons/LogoutButton'
 import { ProductSocials } from '../shared/ProductSocials'
 import { SearchInput } from '../shared/SearchInput'
 import { usePathname } from 'next/navigation'
-import { ConnectButton } from '../shared/buttons/ConnectButton'
+import { NavConnectButton } from '../shared/buttons/ConnectButton'
 import { useWallet } from '@solana/wallet-adapter-react'
+import { NavItemLink } from './NavItemLink'
+import { ConnectedWalletBox } from '../shared/sheets/profile/WalletSection'
 
 type Props = {
   user?: User | null
@@ -26,6 +28,8 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
   const pathname = usePathname()
   const isHome = pathname === '/'
   const isLibrary = pathname.startsWith(RoutePath.Library)
+  const isProfile = pathname.startsWith(RoutePath.Profile)
+
   return (
     <>
       <div
@@ -58,37 +62,40 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
                 <SheetTitle className='sr-only'>Open menu</SheetTitle>
                 <SheetContent aria-describedby={undefined} side='right' className='w-full bg-grey-600 p-4 border-l-0'>
                   <nav className='flex flex-col justify-between size-full text-grey-100 text-2xl font-bold leading-[28.8px]'>
-                    <div className='flex flex-col gap-8'>
+                    <div className='flex flex-col gap-3'>
                       <div className='flex justify-between w-full'>
                         {/* <Link href={RoutePath.Discover}>Discover</Link> */}
-                        <Link className={cn(isHome ? 'text-yellow-500' : '')} href={RoutePath.Home}>
-                          Home
-                        </Link>
+                        <NavItemLink href={RoutePath.Home} isActive={isHome} title='Home' />
                         <button onClick={() => setIsOpen(false)}>
                           <X className='size-6 text-grey-100' />
                         </button>
                       </div>
-                      {!publicKey ? <ConnectButton /> : null}
+                      <NavItemLink href={RoutePath.Discover} isActive={false} isComingSoon title='Discover' />
+                      <NavItemLink href={RoutePath.Invest} isActive={false} isComingSoon title='Invest' />
+                      {!publicKey ? <NavConnectButton /> : null}
                     </div>
                     {user ? (
-                      <div className='flex flex-col gap-10 border-t border-t-grey-400'>
+                      <div className='flex flex-col gap-6 border-t border-t-grey-400'>
                         <ProfileWidget user={user} />
-                        <div className='flex flex-col gap-8'>
-                          <Link className={cn(isLibrary ? 'text-yellow-500' : '')} href={RoutePath.Library}>
-                            My Library
-                          </Link>
-                          <Link href={RoutePath.Profile}>Settings</Link>
+                        <div className='flex flex-col gap-4'>
+                          <NavItemLink href={RoutePath.Library} isActive={isLibrary} title='Library' />
+                          <NavItemLink href={RoutePath.Profile} isActive={isProfile} title='Settings' />
                         </div>
+                        {publicKey ? <ConnectedWalletBox address={publicKey.toBase58()} /> : null}
                         <LogoutButton />
                         <ProductSocials />
                       </div>
                     ) : (
-                      <ButtonLink
-                        href={RoutePath.Login}
-                        className='h-full max-h-[52px] bg-white rounded-xl flex justify-center items-center py-5 text-base font-bold leading-[22.4px] text-grey-600'
-                      >
-                        Connect
-                      </ButtonLink>
+                      <div className='flex flex-col gap-4'>
+                        {publicKey ? <ConnectedWalletBox address={publicKey.toBase58()} /> : null}
+
+                        <ButtonLink
+                          href={RoutePath.Login}
+                          className='h-full max-h-[52px] bg-white rounded-xl flex justify-center items-center py-5 text-base font-bold leading-[22.4px] text-grey-600'
+                        >
+                          Sign in
+                        </ButtonLink>
+                      </div>
                     )}
                   </nav>
                 </SheetContent>
