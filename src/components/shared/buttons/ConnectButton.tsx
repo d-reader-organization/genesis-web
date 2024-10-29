@@ -6,6 +6,8 @@ import { Wallet } from '@solana/wallet-adapter-react'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Button, ButtonProps } from '../../ui/Button'
 import { WalletListItem } from '../WalletListItem'
+import { cn } from '@/lib/utils'
+import { Text } from '../../ui/Text'
 require('@solana/wallet-adapter-react-ui/styles.css')
 
 type Props = {
@@ -84,7 +86,7 @@ export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...pro
 
   return (
     <>
-      <Button className='py-5' variant='outline' size='normal' onClick={handleClick} {...props}>
+      <Button className={cn('py-5', className)} variant='outline' size='normal' onClick={handleClick} {...props}>
         {children || <span className='leading-[22.4px]'>{label}</span>}
       </Button>
       {/* This dialog will break af if the user clicks the "close" icon on the wallet selection menu
@@ -129,10 +131,13 @@ export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...pro
   )
 }
 
-export const ConnectButtonV2: React.FC<Props> = ({ onClick }) => {
-  return (
-    <Button className='py-5' variant='outline' size='normal' onClick={onClick}>
-      <span className='leading-[22.4px]'>Connect Wallet</span>
-    </Button>
-  )
-}
+export const NavConnectButton: React.FC = () => (
+  <ConnectButton
+    className='p-0 sm:p-0 justify-start border-none text-20 sm:text-24 font-bold leading-tight font-satoshi tracking-normal h-7 sm:h-7 py-0 sm:py-0'
+    text='Connect wallet'
+  >
+    <Text as='h4' styleVariant='secondary-heading'>
+      Connect wallet
+    </Text>
+  </ConnectButton>
+)

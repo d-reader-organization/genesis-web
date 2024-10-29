@@ -10,7 +10,7 @@ type Props = {
 } & React.HTMLAttributes<HTMLDivElement>
 
 export const ProfileWidget: React.FC<Props> = ({ className, user }) => (
-  <div className={cn('flex gap-3 items-center max-md:mt-10', className)}>
+  <div className={cn('flex gap-3 items-center max-md:mt-6', className)}>
     <Image
       alt='avatar'
       width={48}
