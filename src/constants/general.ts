@@ -1,4 +1,5 @@
 import { ResponseCookie } from 'next/dist/compiled/@edge-runtime/cookies'
+import { WalletName } from '@solana/wallet-adapter-base'
 
 export const baseApiUrl = `${process.env.NEXT_PUBLIC_API_ENDPOINT}`
 export const accessTokenKey = 'access_token'
@@ -47,4 +48,15 @@ export const WALLET_LABELS = {
   disconnect: 'Disconnect',
   'has-wallet': 'Connect',
   'no-wallet': 'Connect',
+} as const
+
+export const LEDGER_ADAPTERS = {
+  SOLFLARE: {
+    NAME: 'Solflare-Ledger' as WalletName<'Solflare'>,
+    URL: 'https://docs.solflare.com/solflare/onboarding/mobile/connect-a-ledger-wallet',
+  },
+  PHANTOM: {
+    NAME: 'Phantom-Ledger' as WalletName<'Phantom'>,
+    URL: 'https://help.phantom.app/hc/en-us/articles/4406388670483-How-to-use-your-Ledger-Nano-hardware-wallet',
+  },
 } as const

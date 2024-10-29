@@ -17,7 +17,7 @@ import { Loader } from '../shared/Loader'
 
 type Props = {
   id: string | number
-  avatar: string
+  avatar: string | Blob
 }
 
 export const UpdateUserAvatarForm: React.FC<Props> = ({ id, avatar }) => {
@@ -70,7 +70,7 @@ export const UpdateUserAvatarForm: React.FC<Props> = ({ id, avatar }) => {
             <FileUpload
               id='avatar'
               onUpload={(files) => form.setValue('avatar', files[0]?.file)}
-              previewUrl={avatar ?? null}
+              // previewUrl={avatar ?? null}
             />
           </FormControl>
         </div>
