@@ -1,5 +1,7 @@
 import Link, { LinkProps } from 'next/link'
-import clsx from 'clsx'
+import { cn } from '@/lib/utils'
+
+const DEFAULT_ICON_CLASSNAME = 'w-4 sm:w-5'
 
 type Props = LinkProps &
   Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps> & {
@@ -23,14 +25,16 @@ export const IconLink: React.FC<Props> = ({
 
   return (
     <Link
-      className={clsx(className, 'flex justify-center items-center leading-[0] hover:brightness-110 p-1 px-2 sm:p-2 sm:px-3', {
-        'cursor-pointer pointer-events-[all]': clickableEffect,
-      })}
+      className={cn(
+        'flex justify-center items-center leading-[0] hover:brightness-110 p-1 px-2 sm:p-2 sm:px-3',
+        clickableEffect ? 'cursor-pointer pointer-events-[all]' : '',
+        className
+      )}
       target={blank ? '_blank' : undefined}
       href={href || '#'}
       {...props}
     >
-      {children || (Icon && <Icon className={iconClassName} />)}
+      {children || (Icon && <Icon className={cn(DEFAULT_ICON_CLASSNAME, iconClassName)} />)}
     </Link>
   )
 }

@@ -28,6 +28,7 @@ export const TENSOR_LINK = 'https://www.tensor.trade/creator/dreader'
 export const GOOGLE_PLAY_APP_LINK = 'https://play.google.com/store/apps/details?id=io.app.dreader'
 export const LINKTREE_LINK = 'https://dreader.io/links'
 export const DPUBLISHER_LINK = 'https://dpublisher.app'
+export const SUPPORT_LINK = 'support@dreader.io'
 
 // metadata
 export const USED_TRAIT = 'used'
