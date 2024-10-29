@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils'
 import { ComicRarity } from '@/enums/comicRarity'
 import { UnwrapButtonListItem } from '../shared/buttons/UnwrapButtonListItem'
 import dynamic from 'next/dynamic'
-import { LOCAL_STORAGE } from '@/constants/localStorage'
+import { LOCAL_STORAGE } from '@/constants/general'
 
 const BaseWalletMultiButtonDynamic = dynamic(
   async () => (await import('@/components/shared/buttons/SolanaBaseWalletButton')).SolanaBaseWalletButton

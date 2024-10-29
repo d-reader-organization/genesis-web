@@ -1,6 +1,6 @@
 'use client'
 
-import { endpoint } from '@/constants/environment'
+import { endpoint } from '@/constants/solanaEnv'
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 import { createContext, useContext } from 'react'

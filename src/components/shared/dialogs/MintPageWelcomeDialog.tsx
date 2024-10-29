@@ -5,7 +5,7 @@ import React from 'react'
 import { Button } from '@/components/ui'
 import { useLocalStorage, useToggle } from '@/hooks'
 import { Text } from '@/components/ui'
-import { LOCAL_STORAGE } from '@/constants/localStorage'
+import { LOCAL_STORAGE } from '@/constants/general'
 
 export const MintPageWelcomeDialog: React.FC = () => {
   const [isMintPageVisited, setIsMintPageVisited] = useLocalStorage(LOCAL_STORAGE.IS_MINT_PAGE_VISITED, false)

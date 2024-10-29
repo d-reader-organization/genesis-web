@@ -13,7 +13,37 @@ export const jwtCookieProps: Partial<ResponseCookie> = {
   maxAge: 100 * 24 * 60 * 60,
 }
 
-export const passwordDescriptionText = '8 characters minimum. At least 1 lowercase, 1 uppercase and 1 number'
+export const LOCAL_STORAGE = {
+  IS_UNWRAP_HINT_READ: 'is-unwrap-hint-read',
+  IS_INVESTMENT_DISCLAIMER_READ: 'is-investment-disclaimer-read',
+  IS_MINT_PAGE_VISITED: 'is-mint-page-visited',
+}
 
-export const blurDataUrl =
-  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOUV9LaBAAB8gEfSTtbmAAAAABJRU5ErkJggg=='
+// links
+export const TWITTER_LINK = 'https://x.com/dReaderApp'
+export const DISCORD_LINK = 'https://discord.gg/PBW84NaEE2'
+export const GOOGLE_PLAY_LINK = 'https://play.google.com/store/apps/details?id=io.app.dreader'
+export const INSTAGRAM_LINK = 'https://www.instagram.com/d_reader_app'
+export const TENSOR_LINK = 'https://www.tensor.trade/creator/dreader'
+export const GOOGLE_PLAY_APP_LINK = 'https://play.google.com/store/apps/details?id=io.app.dreader'
+export const LINKTREE_LINK = 'https://dreader.io/links'
+export const DPUBLISHER_LINK = 'https://dpublisher.app'
+
+// metadata
+export const USED_TRAIT = 'used'
+export const SIGNED_TRAIT = 'signed'
+export const DEFAULT_COMIC_ISSUE_USED = 'false'
+export const DEFAULT_COMIC_ISSUE_IS_SIGNED = 'false'
+export const RARITY_TRAIT = 'rarity'
+export const METADATA_IMAGE_SIZE = { width: 1200, height: 630 }
+
+// wallet
+export const WALLET_LABELS = {
+  'change-wallet': 'Change wallet',
+  connecting: 'Connecting',
+  'copy-address': 'Copy address',
+  copied: 'Copied',
+  disconnect: 'Disconnect',
+  'has-wallet': 'Connect',
+  'no-wallet': 'Connect',
+} as const

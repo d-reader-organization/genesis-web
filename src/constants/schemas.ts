@@ -25,18 +25,27 @@ const resetPasswordSchema = z.object({
   verificationToken: z.string(),
 })
 
-export const updateUserAvatarValidationSchema = z.object({
+const updateUserAvatarValidationSchema = z.object({
   avatar: z.any(),
 })
 
-export const updateUserValidationSchema = z.object({
+const updateUserValidationSchema = z.object({
   email: z.string().email(),
   name: z.string().min(2, generateMinLengthErrorMessage('name', 2)).max(20, generateMaxLengthErrorMessage('name', 20)),
 })
 
-export const updateUserPasswordValidationSchema = z.object({
+const updateUserPasswordValidationSchema = z.object({
   oldPassword: z.string(),
   newPassword: z.string(),
 })
 
-export { loginSchema, registerSchema, registerWithGoogleSchema, forgotPasswordSchema, resetPasswordSchema }
+export {
+  loginSchema,
+  registerSchema,
+  registerWithGoogleSchema,
+  forgotPasswordSchema,
+  resetPasswordSchema,
+  updateUserAvatarValidationSchema,
+  updateUserValidationSchema,
+  updateUserPasswordValidationSchema,
+}
