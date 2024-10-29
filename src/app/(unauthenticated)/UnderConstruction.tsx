@@ -9,9 +9,9 @@ import TwitterIcon from 'public/assets/vector-icons/twitter-icon.svg'
 import InstagramIcon from 'public/assets/vector-icons/instagram-icon.svg'
 import MailIconInverse from 'public/assets/vector-icons/mail-icon-inverse.svg'
 import { SUPPORT_LINK, DISCORD_LINK, INSTAGRAM_LINK, TWITTER_LINK } from '@/constants/general'
-import RabbitHole from 'public/assets/images/rabbit-hole.png'
+import BunBunUnderConstruction from 'public/assets/images/under-construction.png'
 
-export default function NotFound() {
+export default function UnderConstruction() {
   return (
     <BaseLayout>
       <div className='flex flex-col sm:w-[660px] justify-center items-center sm:pt-[20px] md:pt-[40px]'>
@@ -20,18 +20,18 @@ export default function NotFound() {
           styleVariant='primary-heading'
           className='text-grey-400 uppercase text-center text-7xl leading-[62px] sm:text-9xl sm:leading-[111.36px] tracking-tight'
         >
-          YOU&apos;VE
+          WE&apos;RE
           <br />
-          FOUND THE
+          BUILDING
           <br />
-          RABBIT
+          SOMETHING
           <br />
-          HOLE
+          GREAT!
         </Text>
         <Image
-          src={RabbitHole.src}
+          src={BunBunUnderConstruction.src}
           alt='dReader Page not found'
-          className='w-[214px] sm:w-[360px] -mt-[47px] sm:-mt-[87px] h-auto'
+          className='w-[214px] sm:w-[400px] mr-[16px] -mt-[67px] sm:-mt-[126px] sm:mr-[32px] h-auto'
           width={400}
           height={1}
         />
@@ -39,13 +39,27 @@ export default function NotFound() {
           as='p'
           styleVariant='body-normal'
           fontWeight='medium'
-          className='text-grey-100 max-sm:text-xs text-center pt-[25px]'
+          className='text-grey-100 max-sm:hidden text-center pt-[30px]'
         >
-          You&apos;ve dug too deep and fell into a rabbit hole.
+          This page is currently under construction, and we can&apos;t wait to <br />
+          show you what we&apos;ve been working on.
           <br />
-          There is nothing significant inside
+          Please check back soon!
+          <br /> <br />
+          In the meantime, feel free to reach out to us:
+          <br /> <br />
+        </Text>
+        <Text
+          as='p'
+          styleVariant='body-xsmall'
+          fontWeight='medium'
+          className='text-grey-100 sm:hidden text-center pt-[12px]'
+        >
+          This page is currently under construction, and we can&apos;t wait to show you what we&apos;ve been working on.
           <br />
-          but at least it&apos;s cozy.
+          Please check back soon!
+          <br /> <br />
+          In the meantime, feel free to reach out to us:
           <br /> <br />
         </Text>
         <div className='flex w-full justify-center gap-1 sm:gap-2 text-grey-100 pt-[2px] sm:pt-1'>

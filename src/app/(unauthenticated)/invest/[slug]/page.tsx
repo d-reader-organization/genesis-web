@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation'
 import { Project } from '@/models/project'
 import { PROJECTS } from '@/constants/projects'
 import { BaseLayout } from '@/components/layout/BaseLayout'
@@ -7,6 +6,7 @@ import { ProjectBanner } from '@/components/shared/ProjectBanner'
 import { ProjectCreatorSection } from '@/components/shared/ProjectCreatorSection'
 import { ProjectInfo } from '@/components/invest/ProjectInfo'
 import { ProjectFundingCard } from '@/components/invest/ProjectFundingCard'
+import { notFound } from 'next/navigation'
 
 type Props = {
   params: { slug: string }
