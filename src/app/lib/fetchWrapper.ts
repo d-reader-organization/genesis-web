@@ -22,7 +22,7 @@ const generateQueryParams = (params: ParamsType) =>
  */
 export async function fetchWrapper<T>({
   body,
-  cache = 'force-cache',
+  cache = 'no-store',
   headers,
   method = 'GET',
   path = '',
@@ -49,11 +49,11 @@ export async function fetchWrapper<T>({
   const search = !!queryParams ? new URLSearchParams(queryParams) : null
   url.search = search?.toString() ?? ''
 
+  const cacheSettings = revalidateCacheInSeconds ? { next: { revalidate: revalidateCacheInSeconds } } : { cache }
   const options: RequestInit = {
     body: JSON.stringify(body),
-    cache,
     method,
-    ...(revalidateCacheInSeconds && { next: { revalidate: revalidateCacheInSeconds } }),
+    ...cacheSettings,
     headers: {
       ...defaultHeaders,
       ...headers,

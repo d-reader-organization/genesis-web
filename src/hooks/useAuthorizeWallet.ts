@@ -5,7 +5,7 @@ import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { Transaction, PublicKey, TransactionInstruction } from '@solana/web3.js'
 import bs58 from 'bs58'
 import { useQueryClient } from '@tanstack/react-query'
-import { LEDGER_ADAPTERS } from '@/constants/wallets'
+import { LEDGER_ADAPTERS } from '@/constants/general'
 import { MEMO_PROGRAM_ID } from '@/constants/programId'
 import { SignedDataType } from '@/models/wallet/connectWallet'
 import { toast } from '@/components/ui'
@@ -73,7 +73,6 @@ export const useAuthorizeWallet: AuthorizeWalletHook = (callback) => {
       throw new Error('Wallet does not support message or transaction signing!')
     }
 
-    console.log(encoding)
     const { errorMessage } = await connectUserWallet({ address, encoding, signedDataType: type })
 
     if (errorMessage) {
