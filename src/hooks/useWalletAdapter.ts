@@ -1,4 +1,4 @@
-import { ledger } from '@/constants/ledgerAdapter'
+import { phantomLedgerAdapter, solflareLedgerAdapter } from '@/constants/ledgerAdapter'
 import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets'
 import { useMemo } from 'react'
 import { network } from '@/constants/solanaEnv'
@@ -18,7 +18,8 @@ export const useWalletAdapter: WalletAdapterHook = () => {
           clientId: process.env.TIPLINK_CLIENT_ID ?? '',
           theme: 'dark',
         }),
-        ledger,
+        phantomLedgerAdapter,
+        solflareLedgerAdapter,
       ]
   }, [])
 }
