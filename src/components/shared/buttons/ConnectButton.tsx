@@ -6,6 +6,7 @@ import { Wallet } from '@solana/wallet-adapter-react'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Button, ButtonProps } from '../../ui/Button'
 import { WalletListItem } from '../WalletListItem'
+import { cn } from '@/lib/utils'
 require('@solana/wallet-adapter-react-ui/styles.css')
 
 type Props = {
@@ -17,7 +18,7 @@ type Props = {
  * Making custom wallet buttons sucks af on Solana...
  * Why can't we have wallet sessions like on Mobile Wallet Adapter?
  * https://github.com/solana-labs/wallet-adapter/tree/master/packages/core/react */
-export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...props }) => {
+export const ConnectButton: React.FC<Props> = ({ onClick, text, children, className, ...props }) => {
   const [actionTriggered, setActionTriggered] = useState(false)
 
   const [walletModalConfig, setWalletModalConfig] = useState<Readonly<{
@@ -84,7 +85,7 @@ export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...pro
 
   return (
     <>
-      <Button className='py-5' variant='outline' size='normal' onClick={handleClick} {...props}>
+      <Button className={cn(className, 'py-5')} variant='outline' size='normal' onClick={handleClick} {...props}>
         {children || <span className='leading-[22.4px]'>{label}</span>}
       </Button>
       {/* This dialog will break af if the user clicks the "close" icon on the wallet selection menu

@@ -24,9 +24,11 @@ const queryClient = new QueryClient({
 
 const ClientContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const pathname = usePathname()
-  // only autoconnect on /comic-issue and /mint screens
-  const autoConnect =
-    pathname.toLowerCase().startsWith(RoutePath.ComicIssue('')) || pathname.toLowerCase().startsWith(RoutePath.Mint(''))
+  // only autoconnect on /comic-issue, /mint and /claim screens
+  const isComicIssueScreen = pathname.toLowerCase().startsWith(RoutePath.ComicIssue(''))
+  const isMintScreen = pathname.toLowerCase().startsWith(RoutePath.Mint(''))
+  const isClaimScreen = pathname.toLowerCase().startsWith(RoutePath.Claim(''))
+  const autoConnect = isComicIssueScreen || isMintScreen || isClaimScreen
   const wallets = useWalletAdapter()
 
   return (

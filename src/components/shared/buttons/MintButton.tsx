@@ -22,13 +22,16 @@ import { VersionedTransaction } from '@solana/web3.js'
 import Image from 'next/image'
 import { AssetMintEvent } from '@/models/asset/assetMintEvent'
 import { ConnectButton } from './ConnectButton'
+import { cn } from '@/lib/utils'
 
 type Props = {
   comicIssue: ComicIssue
   isAuthenticated: boolean
+  bounce?: boolean
+  onMint?: VoidFunction
 }
 
-export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => {
+export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounce = false, onMint }) => {
   const { candyMachine, selectedCoupon, numberOfItems, selectedCurrency, supportedTokens } = useCandyMachineStore(
     (state) => state
   )
@@ -75,6 +78,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
   }, [walletAddress, isMintTransactionLoading])
 
   const handleMint = async () => {
+    if (typeof onMint === "function") onMint()
     if (!walletAddress || !selectedCurrency) return
     setIsMintTransactionLoading(true)
     // figure out what about this
@@ -176,7 +180,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated }) => 
     <>
       {hasWalletConnected ? (
         isEligible ? (
-          <Button className='bg-important-color min-h-[52px] w-full' onClick={handleMint}>
+          <Button className={cn("bg-important-color min-h-[52px] w-full", bounce && 'animate-bounce')} onClick={handleMint}>
             {!isMintTransactionLoading ? (
               <div className='flex items-center gap-1.5 text-base font-bold leading-[22.4px]'>
                 <span>Purchase</span>

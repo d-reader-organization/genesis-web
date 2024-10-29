@@ -17,7 +17,7 @@ export const UnwrapWarningDialog: React.FC<Props> = ({ handleUnwrap, isLoading, 
     <Dialog open={open} onOpenChange={toggleDialog}>
       <DialogContent
         aria-describedby=''
-        className='flex flex-col justify-between gap-8 bg-grey-400 p-5 rounded-lg w-[95%] max-w-[400px]'
+        className='flex flex-col justify-between gap-4 bg-grey-400 p-5 rounded-lg w-[95%] max-w-[400px]'
       >
         <div className='flex flex-col items-center gap-2'>
           <DialogTitle>Comic unwrapping</DialogTitle>

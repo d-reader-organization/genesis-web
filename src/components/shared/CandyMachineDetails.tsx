@@ -19,10 +19,10 @@ import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 
 const normalise = (value: number, MAX: number): number => (value * 100) / MAX
 type DetailsProps = { candyMachine: CandyMachine }
-type Props = { comicIssue: ComicIssue; isAuthenticated: boolean }
+type CandyMachineDetailsProps = { comicIssue: ComicIssue; isAuthenticated: boolean, bounce?: boolean }
 
-export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticated }) => {
-  const { candyMachine, selectedCoupon, isLoading } = useCandyMachineStore((state) => state)
+export const CandyMachineDetails: React.FC<CandyMachineDetailsProps> = ({ comicIssue, isAuthenticated, bounce = false }) => {
+  const { candyMachine, selectedCoupon, isLoading, coupons } = useCandyMachineStore((state) => state)
 
   return isLoading ? (
     <LoadingSkeleton />
@@ -35,11 +35,15 @@ export const CandyMachineDetails: React.FC<Props> = ({ comicIssue, isAuthenticat
             <UserDetails candyMachine={candyMachine} />
             <ProgressBar value={normalise(candyMachine.itemsMinted, candyMachine.supply)} />
             <ComicVault />
-            <PurchaseRow comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
+            <PurchaseRow comicIssue={comicIssue} isAuthenticated={isAuthenticated} bounce={bounce} />
           </div>
         )}
-        <Divider className='max-md:hidden' />
-        <CouponsSection comicIssue={comicIssue} />
+        {coupons.length > 0 &&
+          <>
+            <Divider className='max-md:hidden' />
+            <CouponsSection comicIssue={comicIssue} />
+          </>
+        }
       </div>
     )
   )
@@ -174,9 +178,10 @@ const ComicVault: React.FC = () => (
 type PurchaseRowProps = {
   comicIssue: ComicIssue
   isAuthenticated: boolean
+  bounce?: boolean
 } & React.HTMLAttributes<HTMLDivElement>
 
-export const PurchaseRow: React.FC<PurchaseRowProps> = ({ comicIssue, className, isAuthenticated }) => {
+export const PurchaseRow: React.FC<PurchaseRowProps> = ({ comicIssue, className, isAuthenticated, bounce = false }) => {
   return (
     <div
       className={cn(
@@ -185,7 +190,7 @@ export const PurchaseRow: React.FC<PurchaseRowProps> = ({ comicIssue, className,
       )}
     >
       <NumberOfItemsWidget />
-      <MintButton comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
+      <MintButton comicIssue={comicIssue} isAuthenticated={isAuthenticated} bounce={bounce} />
     </div>
   )
 }
