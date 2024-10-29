@@ -1,7 +1,6 @@
 'use client'
 
-import { endpoint } from '@/constants/environment'
-import { RoutePath } from '@/enums/routePath'
+import { endpoint } from '@/constants/solanaEnv'
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -13,6 +12,7 @@ import { createContext, useContext } from 'react'
 // import Dialog from '@mui/material/Dialog'
 import { CircleSdkProvider } from '@/providers/CircleSdkProvider'
 import { useWalletAdapter } from '@/hooks/useWalletAdapter'
+import { RoutePath } from '@/enums/routePath'
 
 export const ClientContext = createContext(null)
 
@@ -31,7 +31,9 @@ const ClientContextProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const pathname = usePathname()
   // only autoconnect on /comic-issue , /mint and /claim screens
   const autoConnect =
-    pathname.toLowerCase().startsWith(RoutePath.ComicIssue('')) || pathname.toLowerCase().startsWith(RoutePath.Mint('')) || pathname.toLocaleLowerCase().startsWith(RoutePath.Claim(''))
+    pathname.toLowerCase().startsWith(RoutePath.ComicIssue('')) ||
+    pathname.toLowerCase().startsWith(RoutePath.Mint('')) ||
+    pathname.toLocaleLowerCase().startsWith(RoutePath.Claim(''))
   // const [isFirstTimeVisitor, setIsFirstTimeVisitor] = useLocalStorage('firstTimeVisitor', true)
   const wallets = useWalletAdapter()
 

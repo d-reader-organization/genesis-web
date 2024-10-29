@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 import { ComicIssue } from '@/models/comicIssue'
 import { COMIC_ISSUE_QUERY_KEYS } from '@/api/comicIssue/comicIssueKeys'
-import { METADATA_IMAGE_SIZE } from '@/constants/metadata'
+import { METADATA_IMAGE_SIZE } from '@/constants/general'
 // import fontSrc from '../../../fonts/Satoshi-Regular.woff2'
 const { COMIC_ISSUE, GET_PUBLIC } = COMIC_ISSUE_QUERY_KEYS
 

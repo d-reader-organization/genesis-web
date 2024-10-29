@@ -15,7 +15,7 @@ import { RoutePath } from '@/enums/routePath'
 import { TermsOfServiceAndPrivacyPolicy } from '../../shared/TermsOfServiceAndPrivacyText'
 import { useToast } from '../../ui/toast/use-toast'
 import { Loader } from '@/components/shared/Loader'
-import { passwordDescriptionText } from '@/constants/general'
+import { passwordDescriptionText } from '@/constants/staticText'
 
 type Props = { isGoogleSignUp?: boolean; onSuccess: () => void }
 
