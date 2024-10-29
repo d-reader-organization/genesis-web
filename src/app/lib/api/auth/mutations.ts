@@ -1,29 +1,23 @@
 'use server'
 
+import { ConnectWalletData } from '@/models/wallet/connectWallet'
 import { fetchWrapper } from '../../fetchWrapper'
 import { AUTH_QUERY_KEYS } from '@/api/auth/authKeys'
 
 const { AUTH, WALLET, CONNECT, DISCONNECT, REQUEST_PASSWORD } = AUTH_QUERY_KEYS
 
-export const connectUserWallet = async ({
-  address,
-  encoding,
-}: {
-  address: string
-  encoding: string
-}): Promise<void> => {
-  await fetchWrapper<void>({
-    path: `${AUTH}/${WALLET}/${CONNECT}/${address}/${encoding}`,
+export const connectUserWallet = async (data: ConnectWalletData): Promise<{ errorMessage?: string }> => {
+  return await fetchWrapper<void>({
+    path: `${AUTH}/${WALLET}/${CONNECT}`,
     method: 'PATCH',
-    isTextResponse: true,
+    body: data,
   })
 }
 
-export const disconnectUserWallet = async (address: string): Promise<void> => {
-  await fetchWrapper<void>({
+export const disconnectUserWallet = async (address: string): Promise<{ errorMessage?: string }> => {
+  return await fetchWrapper<void>({
     path: `${AUTH}/${WALLET}/${DISCONNECT}/${address}`,
     method: 'PATCH',
-    isTextResponse: true,
   })
 }
 
@@ -31,6 +25,7 @@ export const requestWalletPassword = async (address: string): Promise<string> =>
   const response = await fetchWrapper<string>({
     path: `${AUTH}/${WALLET}/${REQUEST_PASSWORD}/${address}`,
     method: 'PATCH',
+    revalidateCacheInSeconds: 60 * 60 * 24,
     isTextResponse: true,
   })
   return response.data ?? ''
