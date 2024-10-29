@@ -30,16 +30,15 @@ export default function NotFound() {
         <Image
           src='/assets/images/rabbit-hole.png'
           alt='dReader Page not found'
-          className='w-[214px] sm:w-[400px] -mt-[47px] sm:-mt-[87px]'
+          className='w-[214px] sm:w-[400px] -mt-[47px] sm:-mt-[87px] h-auto'
           width={400}
           height={1}
-          style={{ height: 'auto' }}
         />
         <Text
           as='p'
           styleVariant='body-normal'
           fontWeight='medium'
-          className='text-grey-100 max-sm:hidden text-center leading-snug pt-[38px]'
+          className='text-grey-100 max-sm:hidden text-center pt-[38px]'
         >
           This page is currently under construction, and we can&apos;t wait to <br />
           show you what we&apos;ve been working on.
@@ -53,7 +52,7 @@ export default function NotFound() {
           as='p'
           styleVariant='body-xsmall'
           fontWeight='medium'
-          className='text-grey-100 sm:hidden text-center leading-snug pt-[25px]'
+          className='text-grey-100 sm:hidden text-center pt-[25px]'
         >
           This page is currently under construction, and we can&apos;t wait to show you what we&apos;ve been working on.
           <br />
@@ -69,8 +68,8 @@ export default function NotFound() {
             Icon={MailIconInverse}
             blank
           >
-            <MailIconInverse className='w-[13.67px] sm:w-[16.67px]' />
-            <Text as='p' styleVariant='body-normal' fontWeight='medium' className='leading-snug max-sm:text-xs'>
+            <MailIconInverse className='w-[16.67px]' />
+            <Text as='p' styleVariant='body-normal' fontWeight='medium' className='max-sm:text-xs'>
               {SUPPORT_LINK}
             </Text>
           </IconLink>
@@ -78,26 +77,26 @@ export default function NotFound() {
             className='bg-grey-500 rounded-lg sm:rounded-xl'
             href={TWITTER_LINK}
             Icon={TwitterIcon}
-            iconClassName='w-[10.09px] sm:w-[13.09px]'
+            iconClassName='w-[13.09px]'
             blank
           />
           <IconLink
             className='bg-grey-500 rounded-lg sm:rounded-xl'
             href={INSTAGRAM_LINK}
             Icon={InstagramIcon}
-            iconClassName='w-[11px] sm:w-[14px]'
+            iconClassName='w-[14px]'
             blank
           />
           <IconLink
             className='bg-grey-500 rounded-lg sm:rounded-xl'
             href={DISCORD_LINK}
             Icon={DiscordIcon}
-            iconClassName='w-[13px] sm:w-[16px]'
+            iconClassName='w-[16px]'
             blank
           />
         </div>
         <Link
-          className='flex items-center gap-1 pt-8 sm:pt-10 sm:gap-2 border-b-2 text-grey-100 border-grey-100'
+          className='flex items-center gap-1 pt-7 sm:pt-9 sm:gap-2 border-b-2 text-grey-100 border-grey-100'
           href='https://www.dreader.app/'
         >
           <MoveLeft size={19} className='max-sm:hidden' />
@@ -106,7 +105,7 @@ export default function NotFound() {
             as='p'
             styleVariant='body-normal'
             fontWeight='medium'
-            className='leading-none max-sm:text-xs sm:leading-snug'
+            className='max-sm:text-xs'
           >
             Go back
           </Text>
