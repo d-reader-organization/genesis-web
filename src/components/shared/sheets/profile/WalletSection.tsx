@@ -5,7 +5,6 @@ import { Copy, Power, Wallet } from 'lucide-react'
 import { toast } from '@/components/ui/toast/use-toast'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { ConnectButton } from '../../buttons/ConnectButton'
-import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
 import { shortenSolanaAddress } from '@/utils/helpers'
 import ConnectWalletIcons from 'public/assets/vector-icons/connect-wallet-sidebar.svg'
 import { ButtonIconWrapper } from '../../buttons/IconWrapper'
@@ -30,8 +29,6 @@ export const WalletSection: React.FC = () => {
 type ConnectedWalletBoxProps = { address: string }
 
 export const ConnectedWalletBox: React.FC<ConnectedWalletBoxProps> = ({ address }) => {
-  useAuthorizeWallet()
-
   return (
     <div className='bg-grey-500 rounded-xl p-4 flex flex-col gap-2'>
       <span className='text-grey-200 text-base font-medium leading-[22.4px]'>Connected wallet</span>

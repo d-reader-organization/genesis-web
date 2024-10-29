@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react'
 import { useConnectUserWallet, useRequestWalletPassword } from '@/api/auth'
 import { useFetchMe, useFetchUserWallets, userKeys } from '@/api/user'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
-import { Transaction, PublicKey, TransactionInstruction } from '@solana/web3.js'
+import { Transaction, PublicKey, TransactionInstruction, Keypair } from '@solana/web3.js'
 import bs58 from 'bs58'
 import { useQueryClient } from '@tanstack/react-query'
 import { LEDGER_ADAPTERS } from '@/constants/general'
@@ -47,9 +47,13 @@ export const useAuthorizeWallet: AuthorizeWalletHook = (callback) => {
       signTransaction &&
       (walletName === LEDGER_ADAPTERS.PHANTOM.NAME || walletName === LEDGER_ADAPTERS.SOLFLARE.NAME)
     ) {
+      // Use random keypair signing to avoid compute instruction added on default by wallets
+      const keypair = Keypair.generate()
+
       const instruction = new TransactionInstruction({
         keys: [
           { isSigner: true, isWritable: false, pubkey: publicKey },
+          { isSigner: true, isWritable: false, pubkey: keypair.publicKey },
           { isSigner: true, isWritable: false, pubkey: PublicKey.default },
         ],
         programId: MEMO_PROGRAM_ID,
@@ -58,6 +62,7 @@ export const useAuthorizeWallet: AuthorizeWalletHook = (callback) => {
 
       const latestBlockHash = await connection.getLatestBlockhash()
       const transaction = new Transaction({ feePayer: publicKey, ...latestBlockHash }).add(instruction)
+      transaction.partialSign(keypair)
 
       const signedTransaction = await signTransaction(transaction)
       encoding = signedTransaction.serialize({ requireAllSignatures: false }).toString('base64')
