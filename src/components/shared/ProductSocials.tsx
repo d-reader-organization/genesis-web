@@ -7,7 +7,7 @@ import { DISCORD_LINK, INSTAGRAM_LINK, TWITTER_LINK } from '@/constants/links'
 import { DEFAULT_ICON_CLASSNAME } from '@/constants/defaultClassName'
 
 export const ProductSocials: React.FC = () => (
-  <div className='flex justify-between items-center text-[#767C8B]'>
+  <div className='flex justify-between items-center text-grey-200'>
     <IconLink
       href={TWITTER_LINK}
       Icon={TwitterIcon}
