@@ -78,7 +78,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounc
   }, [walletAddress, isMintTransactionLoading])
 
   const handleMint = async () => {
-    if (typeof onMint === "function") onMint()
+    if (typeof onMint === 'function') onMint()
     if (!walletAddress || !selectedCurrency) return
     setIsMintTransactionLoading(true)
     // figure out what about this
@@ -180,7 +180,10 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounc
     <>
       {hasWalletConnected ? (
         isEligible ? (
-          <Button className={cn("bg-important-color min-h-[52px] w-full", bounce && 'animate-bounce')} onClick={handleMint}>
+          <Button
+            className={cn('bg-important-color min-h-[52px] w-full', bounce && 'animate-bounce')}
+            onClick={handleMint}
+          >
             {!isMintTransactionLoading ? (
               <div className='flex items-center gap-1.5 text-base font-bold leading-[22.4px]'>
                 <span>Purchase</span>

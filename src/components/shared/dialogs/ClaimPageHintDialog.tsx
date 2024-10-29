@@ -11,10 +11,7 @@ import { GoogleViaTipLinkWalletName } from '@tiplink/wallet-adapter'
 
 export const ClaimPageHintDialog: React.FC = () => {
   const { select, connect } = useWallet()
-  const [isClaimHintRead, setIsClaimHintRead] = useLocalStorage(
-    LOCAL_STORAGE.IS_CLAIM_HINT_READ,
-    false
-  )
+  const [isClaimHintRead, setIsClaimHintRead] = useLocalStorage(LOCAL_STORAGE.IS_CLAIM_HINT_READ, false)
   const [claimHintDialog, toggleClaimHintDialog] = useToggle(!isClaimHintRead)
 
   const onClick = async () => {
@@ -23,10 +20,9 @@ export const ClaimPageHintDialog: React.FC = () => {
       await connect()
       toggleClaimHintDialog()
       setIsClaimHintRead(true)
-    }
-    catch (e) {
+    } catch (e) {
       // TODO: toast AND actually catch the error
-      console.log("TOAST: failed to connect tiplink")
+      console.log('TOAST: failed to connect tiplink')
     }
   }
 
@@ -43,9 +39,8 @@ export const ClaimPageHintDialog: React.FC = () => {
         <DialogTitle className='font-satoshi leading-[24px] text-xl'>Welcome to dReader!</DialogTitle>
         <div className='flex flex-col gap-2 w-full'>
           <div className='rounded-xl bg-grey-500 flex flex-col max-w-[437px]'>
-            <div className="p-4 gap-4 flex"><div className='size-5'>
-              ▶️
-            </div>
+            <div className='p-4 gap-4 flex'>
+              <div className='size-5'>▶️</div>
               <div className='inline-block gap-2 w-full max-w-[369px]'>
                 <Text as='p' styleVariant='body-normal' fontWeight='bold' className='max-sm:text-xs'>
                   Watch the video!
@@ -58,16 +53,17 @@ export const ClaimPageHintDialog: React.FC = () => {
                 >
                   This brief video explains the features we offer
                 </Text>
-              </div></div>
-            <div className='pl-4 pr-4 pb-4'><iframe
-              src="https://www.youtube.com/embed/og1LPg7bt7o"
-              className='w-full h-auto aspect-video rounded-md'
-            /></div>
+              </div>
+            </div>
+            <div className='pl-4 pr-4 pb-4'>
+              <iframe
+                src='https://www.youtube.com/embed/og1LPg7bt7o'
+                className='w-full h-auto aspect-video rounded-md'
+              />
+            </div>
           </div>
           <div className='rounded-xl bg-grey-500 p-4 gap-4 flex max-w-[437px]'>
-            <div className='size-5'>
-              📚
-            </div>
+            <div className='size-5'>📚</div>
             <div className='inline-block gap-2 w-full max-w-[369px]'>
               <Text as='p' styleVariant='body-normal' fontWeight='bold' className='max-sm:text-xs'>
                 Digital collectible comics
@@ -78,14 +74,13 @@ export const ClaimPageHintDialog: React.FC = () => {
                 fontWeight='medium'
                 className='max-sm:text-xs text-grey-100 text-ellipsis overflow-auto'
               >
-                All comics you collect are stored in your Digital Comic Vault. To generate a vault you&apos;ll need to connect your gmail via TipLink service in the next step!
+                All comics you collect are stored in your Digital Comic Vault. To generate a vault you&apos;ll need to
+                connect your gmail via TipLink service in the next step!
               </Text>
             </div>
           </div>
           <div className='rounded-xl bg-grey-500 p-4 gap-4 flex max-w-[437px]'>
-            <div className='size-5'>
-              🤝
-            </div>
+            <div className='size-5'>🤝</div>
             <div className='inline-block gap-2 w-full max-w-[369px]'>
               <Text as='p' styleVariant='body-normal' fontWeight='bold' className='max-sm:text-xs'>
                 Connect with us
@@ -96,7 +91,8 @@ export const ClaimPageHintDialog: React.FC = () => {
                 fontWeight='medium'
                 className='max-sm:text-xs text-grey-100 text-ellipsis overflow-auto'
               >
-                If you have any questions or would like to connect with our community of comic enthusiasts, drop us a message on any social channel.
+                If you have any questions or would like to connect with our community of comic enthusiasts, drop us a
+                message on any social channel.
               </Text>
             </div>
           </div>
