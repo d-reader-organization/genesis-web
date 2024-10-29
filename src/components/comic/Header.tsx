@@ -13,7 +13,6 @@ import { ComicStats } from './Stats'
 import { FlavorText } from '../shared/FlavorText'
 import { CreatorInfoLink } from '../creator/InfoLink'
 import { GenresList } from '../shared/GenresList'
-import { DEFAULT_ICON_CLASSNAME } from '@/constants/defaultClassName'
 
 type Props = {
   comic: Comic
@@ -55,12 +54,12 @@ const RightSection: React.FC<Props> = ({ comic }) => (
 
 const Socials: React.FC<Props> = ({ comic }) => (
   <div className='flex gap-2 text-gray-100 LINKS'>
-    <IconLink className='bg-grey-300 rounded-lg' href={comic.website} Icon={WebsiteIcon} iconClassName={DEFAULT_ICON_CLASSNAME} blank />
-    <IconLink className='bg-grey-300 rounded-lg' href={comic.twitter} Icon={TwitterIcon} iconClassName={DEFAULT_ICON_CLASSNAME} blank />
-    <IconLink className='bg-grey-300 rounded-lg' href={comic.discord} Icon={DiscordIcon} iconClassName={DEFAULT_ICON_CLASSNAME} blank />
-    <IconLink className='bg-grey-300 rounded-lg' href={comic.telegram} Icon={TelegramIcon} iconClassName={DEFAULT_ICON_CLASSNAME} blank />
-    <IconLink className='bg-grey-300 rounded-lg' href={comic.instagram} Icon={InstagramIcon} iconClassName={DEFAULT_ICON_CLASSNAME} blank />
-    <IconLink className='bg-grey-300 rounded-lg' href={comic.tikTok} Icon={TikTokIcon} iconClassName={DEFAULT_ICON_CLASSNAME} blank />
-    <IconLink className='bg-grey-300 rounded-lg' href={comic.youTube} Icon={YouTubeIcon} iconClassName={DEFAULT_ICON_CLASSNAME} blank />
+    <IconLink className='bg-grey-300 rounded-lg' href={comic.website} Icon={WebsiteIcon} blank />
+    <IconLink className='bg-grey-300 rounded-lg' href={comic.twitter} Icon={TwitterIcon} blank />
+    <IconLink className='bg-grey-300 rounded-lg' href={comic.discord} Icon={DiscordIcon} blank />
+    <IconLink className='bg-grey-300 rounded-lg' href={comic.telegram} Icon={TelegramIcon} blank />
+    <IconLink className='bg-grey-300 rounded-lg' href={comic.instagram} Icon={InstagramIcon} blank />
+    <IconLink className='bg-grey-300 rounded-lg' href={comic.tikTok} Icon={TikTokIcon} blank />
+    <IconLink className='bg-grey-300 rounded-lg' href={comic.youTube} Icon={YouTubeIcon} blank />
   </div>
 )
