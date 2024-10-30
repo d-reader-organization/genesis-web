@@ -14,11 +14,11 @@ import RabbitHole from 'public/assets/images/rabbit-hole.png'
 export default function NotFound() {
   return (
     <BaseLayout>
-      <div className='flex flex-col sm:w-[660px] justify-center items-center sm:pt-[20px] md:pt-[40px]'>
+      <div className='flex flex-col sm:w-[660px] justify-center items-center sm:pt-5 md:pt-10'>
         <Text
           as='h1'
           styleVariant='primary-heading'
-          className='text-grey-400 uppercase text-center text-7xl leading-[62px] sm:text-9xl sm:leading-[111.36px] tracking-tight'
+          className='text-grey-400 uppercase text-center text-6xl leading-[52px] sm:text-9xl sm:leading-[111.36px] tracking-tight'
         >
           YOU&apos;VE
           <br />
@@ -31,15 +31,15 @@ export default function NotFound() {
         <Image
           src={RabbitHole.src}
           alt='dReader Page not found'
-          className='w-[214px] sm:w-[360px] -mt-[47px] sm:-mt-[87px] h-auto'
+          className='w-[200px] sm:w-[360px] -mt-[46px] sm:-mt-[86px] h-auto'
           width={400}
-          height={1}
+          height={254}
         />
         <Text
           as='p'
           styleVariant='body-normal'
           fontWeight='medium'
-          className='text-grey-100 max-sm:text-xs text-center pt-[25px]'
+          className='text-grey-100 max-sm:text-xs text-center pt-4 sm:pt-6'
         >
           You&apos;ve dug too deep and fell into a rabbit hole.
           <br />
@@ -48,7 +48,7 @@ export default function NotFound() {
           but at least it&apos;s cozy.
           <br /> <br />
         </Text>
-        <div className='flex w-full justify-center gap-1 sm:gap-2 text-grey-100 pt-[2px] sm:pt-1'>
+        <div className='flex w-full justify-center gap-1 pt-1 sm:gap-2 text-grey-100'>
           <IconLink
             className='bg-grey-500 rounded-lg sm:rounded-xl gap-2'
             href={'mailto:' + SUPPORT_LINK}

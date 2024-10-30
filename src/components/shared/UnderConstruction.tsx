@@ -14,7 +14,7 @@ import BunBunUnderConstruction from 'public/assets/images/under-construction.png
 export default function UnderConstruction() {
   return (
     <BaseLayout>
-      <div className='flex flex-col sm:w-[660px] justify-center items-center sm:pt-[20px] md:pt-[40px]'>
+      <div className='flex flex-col sm:w-[660px] justify-center items-center sm:pt-5 md:pt-10'>
         <Text
           as='h1'
           styleVariant='primary-heading'
@@ -31,38 +31,24 @@ export default function UnderConstruction() {
         <Image
           src={BunBunUnderConstruction.src}
           alt='dReader Page not found'
-          className='w-[214px] sm:w-[400px] mr-[16px] -mt-[67px] sm:-mt-[126px] sm:mr-[32px] h-auto'
+          className='w-[214px] sm:w-[400px] mr-4 -mt-16 sm:-mt-[124px] sm:mr-8 h-auto'
           width={400}
-          height={1}
+          height={430}
         />
-        <Text
+       <Text
           as='p'
           styleVariant='body-normal'
           fontWeight='medium'
-          className='text-grey-100 max-sm:hidden text-center pt-[30px]'
-        >
-          This page is currently under construction, and we can&apos;t wait to <br />
-          show you what we&apos;ve been working on.
-          <br />
-          Please check back soon!
-          <br /> <br />
-          In the meantime, feel free to reach out to us:
-          <br /> <br />
-        </Text>
-        <Text
-          as='p'
-          styleVariant='body-xsmall'
-          fontWeight='medium'
-          className='text-grey-100 sm:hidden text-center pt-[12px]'
+          className='text-grey-100 text-center px-1 pt-3 sm:px-14 max-sm:text-xs sm:pt-8 md:px-20'
         >
           This page is currently under construction, and we can&apos;t wait to show you what we&apos;ve been working on.
           <br />
-          Please check back soon!
+          Please check back later!
           <br /> <br />
           In the meantime, feel free to reach out to us:
           <br /> <br />
         </Text>
-        <div className='flex w-full justify-center gap-1 sm:gap-2 text-grey-100 pt-[2px] sm:pt-1'>
+        <div className='flex w-full justify-center gap-1 sm:gap-2 text-grey-100 pt-1'>
           <IconLink
             className='bg-grey-500 rounded-lg sm:rounded-xl gap-2'
             href={'mailto:' + SUPPORT_LINK}
@@ -92,7 +78,7 @@ export default function UnderConstruction() {
             className='bg-grey-500 rounded-lg sm:rounded-xl'
             href={DISCORD_LINK}
             Icon={DiscordIcon}
-            iconClassName='w-[16px]'
+            iconClassName='w-4'
             blank
           />
         </div>
