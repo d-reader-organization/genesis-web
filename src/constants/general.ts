@@ -7,7 +7,7 @@ export const accessTokenKey = 'access_token'
 export const refreshTokenKey = 'refresh_token'
 export const googleAccessTokenKey = 'google_access_token'
 export const SUCC_RESPONSE_STATUS_CODES = [200, 201]
-export const redirectToKey = 'redirectTo'
+export const REDIRECT_TO_KEY = 'redirectTo'
 
 export const jwtCookieProps: Partial<ResponseCookie> = {
   httpOnly: true,
@@ -18,7 +18,11 @@ export const jwtCookieProps: Partial<ResponseCookie> = {
 export const LOCAL_STORAGE = {
   IS_UNWRAP_HINT_READ: 'is-unwrap-hint-read',
   IS_INVESTMENT_DISCLAIMER_READ: 'is-investment-disclaimer-read',
+  IS_PROJECT_INVEST_DISCLAIMER_READ: 'is-project-invest-disclaimer-read',
+  IS_PROJECT_PAYOUT_DISCLAIMER_READ: 'is-project-payout-disclaimer-read',
   IS_MINT_PAGE_VISITED: 'is-mint-page-visited',
+  IS_CLAIM_HINT_READ: 'is-claim-hint-read',
+  IS_CLAIM_WALKTHROUGH_COMPELETE: 'is-claim-walkthrough-compelete',
 }
 
 // links
@@ -29,7 +33,10 @@ export const INSTAGRAM_LINK = 'https://www.instagram.com/d_reader_app'
 export const TENSOR_LINK = 'https://www.tensor.trade/creator/dreader'
 export const GOOGLE_PLAY_APP_LINK = 'https://play.google.com/store/apps/details?id=io.app.dreader'
 export const LINKTREE_LINK = 'https://dreader.io/links'
-export const DPUBLISHER_LINK = 'https://dpublisher.app'
+export const D_PUBLISHER_LINK = 'https://www.dpublisher.app'
+export const D_READER_LINK = 'https://www.dreader.app'
+export const SUPPORT_EMAIL = 'support@dreader.io'
+export const SUPPORT_LINK = 'mailto:' + SUPPORT_EMAIL
 
 // metadata
 export const USED_TRAIT = 'used'
@@ -62,3 +69,5 @@ export const LEDGER_ADAPTERS = {
 } as const
 
 export const MEMO_PROGRAM_ID = new PublicKey('MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr')
+
+export const MONSTER_CLAIM_QR_SLUG = 'mark-spears-monsters'
