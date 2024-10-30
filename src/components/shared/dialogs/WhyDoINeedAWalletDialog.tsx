@@ -10,7 +10,7 @@ export const WhyDoINeedAWalletDialog: React.FC = () => {
           Why do I need a wallet?
         </Button>
       </DialogTrigger>
-      <DialogContent className='sm:max-w-[444px] p-2'>
+      <DialogContent className='sm:max-w-[444px] p-2 h-full'>
         <strong className='mt-2'>What is a wallet?</strong>
         {WHAT_IS_A_WALLET}
         <p />

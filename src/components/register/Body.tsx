@@ -40,7 +40,7 @@ const InnerRegisterBody: React.FC = () => {
           return (
             <TabsTrigger
               className={cn(
-                'cursor-default data-[state=active]:bg-transparent p-2 md:p-6 text-xs sm:text-base min-h-8 border-b border-b-grey-300',
+                'cursor-default data-[state=active]:bg-transparent p-2 md:p-6 text-xs sm:text-base min-h-8 border-b border-b-grey-300 data-[state=active]:border-b data-[state=active]:border-b-grey-300',
                 index !== tabs.length - 1 ? 'border-r border-r-grey-300' : ''
               )}
               key={tab.value}

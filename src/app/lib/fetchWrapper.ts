@@ -1,4 +1,4 @@
-import { accessTokenKey, baseApiUrl, SUCC_RESPONSE_STATUS_CODES } from '@/constants/general'
+import { accessTokenKey, baseApiUrl, defaultCacheTtl, SUCC_RESPONSE_STATUS_CODES } from '@/constants/general'
 import { cookies } from 'next/headers'
 
 const defaultHeaders = {
@@ -10,7 +10,7 @@ const defaultHeaders = {
 type ParamsType = Record<string, unknown>
 type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTIONS'
 
-const defaultRevalidateCacheInSeconds = (method: RequestMethod) => (method === 'GET' ? 60 * 60 * 24 : 0)
+const defaultRevalidateCacheInSeconds = (method: RequestMethod) => (method === 'GET' ? defaultCacheTtl : 0)
 
 const generateQueryParams = (params: ParamsType) =>
   Object.entries(params).reduce((prev, [key, value]) => {

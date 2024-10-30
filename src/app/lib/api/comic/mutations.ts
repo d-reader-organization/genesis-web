@@ -9,7 +9,7 @@ import { RoutePath } from '@/enums/routePath'
 const { COMIC, FAVOURITISE, RATE } = COMIC_QUERY_KEYS
 
 export const rateComic = async ({ slug, request }: { slug: string; request: RateComic }): Promise<void> => {
-  await fetchWrapper<void>({ path: `${COMIC}/${RATE}/${slug}`, body: request, method: 'PATCH', isTextResponse: true })
+  await fetchWrapper<void>({ path: `${COMIC}/${RATE}/${slug}`, body: request, method: 'PATCH' })
   revalidatePath(RoutePath.Comic(slug))
 }
 
