@@ -20,6 +20,7 @@ export const LOCAL_STORAGE = {
   IS_INVESTMENT_DISCLAIMER_READ: 'is-investment-disclaimer-read',
   IS_MINT_PAGE_VISITED: 'is-mint-page-visited',
   IS_CLAIM_HINT_READ: 'is-claim-hint-read',
+  IS_CLAIM_WALKTHROUGH_COMPELETE: 'is-claim-walkthrough-compelete',
 }
 
 // links
@@ -54,11 +55,11 @@ export const WALLET_LABELS = {
 
 export const LEDGER_ADAPTERS = {
   SOLFLARE: {
-    NAME: 'Solflare-Ledger' as WalletName<'Solflare'>,
+    NAME: 'Solflare Ledger' as WalletName<'Solflare'>,
     URL: 'https://docs.solflare.com/solflare/onboarding/mobile/connect-a-ledger-wallet',
   },
   PHANTOM: {
-    NAME: 'Phantom-Ledger' as WalletName<'Phantom'>,
+    NAME: 'Phantom Ledger' as WalletName<'Phantom'>,
     URL: 'https://help.phantom.app/hc/en-us/articles/4406388670483-How-to-use-your-Ledger-Nano-hardware-wallet',
   },
 } as const

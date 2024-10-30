@@ -35,6 +35,7 @@ export interface BasicComicIssue {
 
 export interface ComicIssue extends BasicComicIssue {
   activeCandyMachineAddress?: string
+  collectionAddress?: string
   creator?: Pick<Creator, 'name' | 'slug' | 'isVerified' | 'avatar'>
   comic?: Pick<Comic, 'title' | 'slug' | 'audienceType'>
   genres?: PartialGenre[]
