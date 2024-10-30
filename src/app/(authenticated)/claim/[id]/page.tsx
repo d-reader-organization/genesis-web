@@ -1,16 +1,15 @@
 import { fetchComicIssuePreviewPages, fetchPublicComicIssue } from '@/app/lib/api/comicIssue/queries'
 import { isAuthenticatedUser } from '@/app/lib/auth'
+import { CandyMachineClaimDetails } from '@/components/claim/CandyMachineClaimDetails'
 import { BaseLayout } from '@/components/layout/BaseLayout'
 import { AboutIssueSection } from '@/components/mint/AboutIssueSection'
 import { CoverCarousel } from '@/components/mint/CoverCarousel'
 import { PagesPreview } from '@/components/mint/PagesPreview'
-import { CandyMachineDetails } from '@/components/shared/CandyMachineDetails'
 import { ClaimPageHintDialog } from '@/components/shared/dialogs/ClaimPageHintDialog'
 import { Divider } from '@/components/shared/Divider'
 import { Text } from '@/components/ui'
 import { ComicRarity } from '@/enums/comicRarity'
 import { ComicIssuePageParams } from '@/models/common'
-import { CandyMachineStoreProvider } from '@/providers/CandyMachineStoreProvider'
 import { Metadata } from 'next'
 
 export async function generateMetadata({
@@ -35,7 +34,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function NewMintPage({ params }: ComicIssuePageParams) {
+export default async function ClaimPage({ params }: ComicIssuePageParams) {
   const comicIssue = await fetchPublicComicIssue(params.id)
   if (!comicIssue) return null
   const pages = await fetchComicIssuePreviewPages(comicIssue.id)
@@ -56,9 +55,7 @@ export default async function NewMintPage({ params }: ComicIssuePageParams) {
               {comicIssue.title}
             </Text>
           </div>
-          <CandyMachineStoreProvider comicIssue={comicIssue} isAuthenticated={isAuthenticated}>
-            <CandyMachineDetails comicIssue={comicIssue} isAuthenticated={isAuthenticated} bounce />
-          </CandyMachineStoreProvider>
+          <CandyMachineClaimDetails comicIssue={comicIssue} isAuthenticated={isAuthenticated} />
           <Divider className='max-md:hidden' />
           <div className='flex flex-col 1160:flex-row gap-10 justify-between'>
             <AboutIssueSection comicIssue={comicIssue} />
