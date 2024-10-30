@@ -12,18 +12,18 @@ type Props = {
   params: { slug: string }
 }
 
-function fetchProjectBySlug(slug: string): Project {
+function fetchProjectBySlug(slug: string): Project | undefined {
   const project = PROJECTS.find((project) => project.slug === slug)
-
-  if (!project) {
-    notFound()
-  }
 
   return project
 }
 
 export default async function InvestPage({ params }: Props) {
   const project = fetchProjectBySlug(params.slug)
+
+  if (!project) {
+    return notFound()
+  }
 
   return (
     <BaseLayout>
