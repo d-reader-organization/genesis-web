@@ -26,7 +26,9 @@ export const dynamic = 'force-dynamic'
 // const fetchSatoshiFont = fetchAsset(new URL('../../../fonts/Satoshi-Regular.woff2', import.meta.url))
 export async function generateImageMetadata({ params }: { params: { id: string } }) {
   const comicIssue: ComicIssue = await (
-    await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/${COMIC_ISSUE}/${GET_PUBLIC}/${params.id}`)
+    await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/${COMIC_ISSUE}/${GET_PUBLIC}/${params.id}`, {
+      next: { revalidate: 3600 },
+    })
   ).json()
   return [
     {
@@ -39,7 +41,9 @@ export async function generateImageMetadata({ params }: { params: { id: string }
 }
 export default async function GET({ params }: { params: { id: string }; id: number }) {
   const comicIssue: ComicIssue = await (
-    await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/${COMIC_ISSUE}/${GET_PUBLIC}/${params.id}`)
+    await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/${COMIC_ISSUE}/${GET_PUBLIC}/${params.id}`, {
+      next: { revalidate: 3600 },
+    })
   ).json()
   // const comicIssueImage = process.env.NEXT_PUBLIC_SITE_URL + '/' + comicIssueImageSrc.src
   // const [satoshiFont] = await Promise.all([fetchSatoshiFont])

@@ -2,7 +2,7 @@
 
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/Dialog'
 import React from 'react'
-import { Button } from '@/components/ui'
+import { Button, toast } from '@/components/ui'
 import { useLocalStorage, useToggle } from '@/hooks'
 import { Text } from '@/components/ui'
 import { LOCAL_STORAGE } from '@/constants/general'
@@ -10,19 +10,17 @@ import { useWallet } from '@solana/wallet-adapter-react'
 import { GoogleViaTipLinkWalletName } from '@tiplink/wallet-adapter'
 
 export const ClaimPageHintDialog: React.FC = () => {
-  const { select, connect } = useWallet()
+  const { select } = useWallet()
   const [isClaimHintRead, setIsClaimHintRead] = useLocalStorage(LOCAL_STORAGE.IS_CLAIM_HINT_READ, false)
   const [claimHintDialog, toggleClaimHintDialog] = useToggle(!isClaimHintRead)
 
   const onClick = async () => {
     select(GoogleViaTipLinkWalletName)
     try {
-      await connect()
       toggleClaimHintDialog()
       setIsClaimHintRead(true)
     } catch (e) {
-      // TODO: toast AND actually catch the error
-      console.log('TOAST: failed to connect tiplink')
+      toast({ description: 'failed to connect wallet, try again!', variant: 'error' })
     }
   }
 

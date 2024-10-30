@@ -22,7 +22,7 @@ const generateQueryParams = (params: ParamsType) =>
  */
 export async function fetchWrapper<T>({
   body,
-  cache = 'force-cache',
+  formData,
   headers,
   method = 'GET',
   path = '',
@@ -31,7 +31,7 @@ export async function fetchWrapper<T>({
   isTextResponse = false,
 }: {
   body?: unknown
-  cache?: RequestCache
+  formData?: FormData
   headers?: HeadersInit
   method?: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTIONS'
   path?: string
@@ -50,12 +50,11 @@ export async function fetchWrapper<T>({
   url.search = search?.toString() ?? ''
 
   const options: RequestInit = {
-    body: JSON.stringify(body),
-    cache,
+    body: formData ?? JSON.stringify(body),
     method,
     ...(revalidateCacheInSeconds && { next: { revalidate: revalidateCacheInSeconds } }),
     headers: {
-      ...defaultHeaders,
+      ...(!formData && { ...defaultHeaders }), // qucik fix: file upload - server will figure out proper content type
       ...headers,
       ...(token && { authorization: token }),
     },

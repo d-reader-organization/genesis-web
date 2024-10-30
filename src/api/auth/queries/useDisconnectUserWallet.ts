@@ -7,12 +7,16 @@ export const useDisconnectUserWallet = () => {
   const { refresh } = useRouter()
   return useMutation({
     mutationFn: (address: string) => disconnectUserWallet(address),
-    onSuccess: () => {
-      toast({
-        description: 'Wallet disconnected!',
-        variant: 'success',
-      })
-      refresh()
+    onSuccess: (data) => {
+      if (data.errorMessage) {
+        toast({ description: `Failed to disconnect wallet: ${data.errorMessage}`, variant: 'error' })
+      } else {
+        toast({
+          description: 'Wallet disconnected!',
+          variant: 'success',
+        })
+        refresh()
+      }
     },
   })
 }

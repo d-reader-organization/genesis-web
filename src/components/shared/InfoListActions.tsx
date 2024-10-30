@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useOptimistic } from 'react'
+import React, { useOptimistic, useTransition } from 'react'
 import { InfoList } from './InfoList'
 import { Button } from '../ui/Button'
 import { StarIcon } from './icons/StarIcon'
@@ -67,6 +67,7 @@ type HeartIconButtonProps = {
 }
 
 const HeartIconButton: React.FC<HeartIconButtonProps> = ({ comicIssueId, comicSlug, count, isFavourite }) => {
+  const [, startTransition] = useTransition()
   const [state, setNewState] = useOptimistic(
     {
       count,
@@ -82,7 +83,7 @@ const HeartIconButton: React.FC<HeartIconButtonProps> = ({ comicIssueId, comicSl
   const { refresh } = useRouter()
 
   const handleSubmit = async () => {
-    setNewState(null)
+    startTransition(() => setNewState(null))
     if (comicSlug) {
       await favouritiseComic(comicSlug)
     } else if (comicIssueId) {

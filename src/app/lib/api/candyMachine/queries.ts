@@ -9,6 +9,9 @@ import { Nullable } from '@/models/common'
 const { CANDY_MACHINE, GET } = CANDY_MACHINE_QUERY_KEYS
 
 export const fetchCandyMachine = async (params: CandyMachineParams): Promise<Nullable<CandyMachine>> => {
-  const response = await fetchWrapper<CandyMachine>({ path: `${CANDY_MACHINE}/${GET}`, params })
+  const response = await fetchWrapper<CandyMachine>({
+    path: `${CANDY_MACHINE}/${GET}`,
+    params,
+  })
   return response.data
 }
