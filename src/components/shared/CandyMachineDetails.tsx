@@ -19,12 +19,18 @@ import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 
 const normalise = (value: number, MAX: number): number => (value * 100) / MAX
 type DetailsProps = { candyMachine: CandyMachine }
-type CandyMachineDetailsProps = { comicIssue: ComicIssue; isAuthenticated: boolean; bounce?: boolean }
+type CandyMachineDetailsProps = {
+  comicIssue: ComicIssue
+  isAuthenticated: boolean
+  bounce?: boolean
+  onMint?: VoidFunction
+}
 
 export const CandyMachineDetails: React.FC<CandyMachineDetailsProps> = ({
   comicIssue,
   isAuthenticated,
   bounce = false,
+  onMint,
 }) => {
   const { candyMachine, selectedCoupon, isLoading, coupons } = useCandyMachineStore((state) => state)
 
@@ -39,7 +45,7 @@ export const CandyMachineDetails: React.FC<CandyMachineDetailsProps> = ({
             <UserDetails candyMachine={candyMachine} />
             <ProgressBar value={normalise(candyMachine.itemsMinted, candyMachine.supply)} />
             <ComicVault />
-            <PurchaseRow comicIssue={comicIssue} isAuthenticated={isAuthenticated} bounce={bounce} />
+            <PurchaseRow comicIssue={comicIssue} isAuthenticated={isAuthenticated} bounce={bounce} onMint={onMint} />
           </div>
         )}
         {coupons.length ? (
@@ -183,9 +189,16 @@ type PurchaseRowProps = {
   comicIssue: ComicIssue
   isAuthenticated: boolean
   bounce?: boolean
+  onMint?: VoidFunction
 } & React.HTMLAttributes<HTMLDivElement>
 
-export const PurchaseRow: React.FC<PurchaseRowProps> = ({ comicIssue, className, isAuthenticated, bounce = false }) => {
+export const PurchaseRow: React.FC<PurchaseRowProps> = ({
+  comicIssue,
+  className,
+  isAuthenticated,
+  bounce = false,
+  onMint,
+}) => {
   return (
     <div
       className={cn(
@@ -194,7 +207,7 @@ export const PurchaseRow: React.FC<PurchaseRowProps> = ({ comicIssue, className,
       )}
     >
       <NumberOfItemsWidget />
-      <MintButton comicIssue={comicIssue} isAuthenticated={isAuthenticated} bounce={bounce} />
+      <MintButton comicIssue={comicIssue} isAuthenticated={isAuthenticated} bounce={bounce} onMint={onMint} />
     </div>
   )
 }

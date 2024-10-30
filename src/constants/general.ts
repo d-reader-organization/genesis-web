@@ -20,6 +20,7 @@ export const LOCAL_STORAGE = {
   IS_INVESTMENT_DISCLAIMER_READ: 'is-investment-disclaimer-read',
   IS_MINT_PAGE_VISITED: 'is-mint-page-visited',
   IS_CLAIM_HINT_READ: 'is-claim-hint-read',
+  IS_CLAIM_WALKTHROUGH_COMPELETE: 'is-claim-walkthrough-compelete',
 }
 
 // links
