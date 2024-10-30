@@ -38,6 +38,22 @@ export const ClaimPageHintDialog: React.FC = () => {
       >
         <DialogTitle className='font-satoshi leading-[24px] text-xl'>Welcome to dReader!</DialogTitle>
         <div className='flex flex-col gap-2 w-full'>
+          <div className='rounded-xl bg-grey-500 p-4 gap-4 flex max-w-[437px]'>
+            <div className='size-5'>🎃</div>
+            <div className='inline-block gap-2 w-full max-w-[369px]'>
+              <Text as='p' styleVariant='body-normal' fontWeight='bold' className='max-sm:text-xs'>
+                Claim a free comic!
+              </Text>
+              <Text
+                as='p'
+                styleVariant='body-small'
+                fontWeight='medium'
+                className='max-sm:text-xs text-grey-100 text-ellipsis overflow-auto'
+              >
+                Mark Spears&apos; digital collectible comic will be available for free claim at 10am EST Oct 31st, Halloween! 👻
+              </Text>
+            </div>
+          </div>
           <div className='rounded-xl bg-grey-500 flex flex-col max-w-[437px]'>
             <div className='p-4 gap-4 flex'>
               <div className='size-5'>▶️</div>
@@ -79,7 +95,7 @@ export const ClaimPageHintDialog: React.FC = () => {
               </Text>
             </div>
           </div>
-          <div className='rounded-xl bg-grey-500 p-4 gap-4 flex max-w-[437px]'>
+          {/* <div className='rounded-xl bg-grey-500 p-4 gap-4 flex max-w-[437px]'>
             <div className='size-5'>🤝</div>
             <div className='inline-block gap-2 w-full max-w-[369px]'>
               <Text as='p' styleVariant='body-normal' fontWeight='bold' className='max-sm:text-xs'>
@@ -95,7 +111,7 @@ export const ClaimPageHintDialog: React.FC = () => {
                 message on any social channel.
               </Text>
             </div>
-          </div>
+          </div> */}
         </div>
         <Button variant='secondary' className='rounded-[16px] font-bold text-base w-full' onClick={onClick}>
           I understand!
