@@ -145,7 +145,7 @@ export const NavConnectButton: React.FC = () => (
     className='p-0 sm:p-0 justify-start border-none text-20 sm:text-24 font-bold leading-tight font-satoshi tracking-normal h-7 sm:h-7 py-0 sm:py-0'
     text='Connect wallet'
   >
-    <Text as='h4' styleVariant='secondary-heading'>
+    <Text as='h4' styleVariant='secondary-heading' className='hover:text-white'>
       Connect wallet
     </Text>
   </ConnectButton>

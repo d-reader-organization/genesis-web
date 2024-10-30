@@ -55,7 +55,7 @@ export const updateUser = async (id: string | number, request: UpdateUserData): 
 export const updateUserAvatar = async (id: string | number, request: FormData): Promise<{ errorMessage?: string }> => {
   const response = await fetchWrapper<User>({
     path: `${USER}/${UPDATE}/${id}/${AVATAR}`,
-    body: request,
+    formData: request,
     method: 'PATCH',
   })
 
