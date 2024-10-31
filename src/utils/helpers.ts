@@ -132,9 +132,9 @@ export const shortenAssetName = (name: string): string => {
   return `#${last}`
 }
 
-export const getSlideUrl = (slide: CarouselSlide) => {
+export const getSlideFallbackUrl = (slide: CarouselSlide): string => {
   if (slide.comicIssueId) return RoutePath.Mint(slide.comicIssueId)
   else if (slide.creatorSlug) return RoutePath.Creator(slide.creatorSlug)
   else if (slide.comicSlug) return RoutePath.Comic(slide.comicSlug)
-  else return slide.externalLink
+  else return slide.externalLink ?? ''
 }
