@@ -176,6 +176,9 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounc
     })?.mintPrice ?? 0
   const splToken = supportedTokens?.find((token) => token.address === selectedCurrency?.splTokenAddress)
 
+  const price = getMintPrice(mintPrice * numberOfItems, splToken?.decimals ?? 1)
+  const isFree = price == 0
+
   return isLive ? (
     <>
       {hasWalletConnected ? (
@@ -186,15 +189,21 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounc
           >
             {!isMintTransactionLoading ? (
               <div className='flex items-center gap-1.5 text-base font-bold leading-[22.4px]'>
-                <span>Purchase</span>
-                <Image
-                  alt='currency'
-                  src={splToken?.icon ?? splToken?.symbol ?? ''}
-                  width={14}
-                  height={14}
-                  className='h-3.5 w-3.5'
-                />
-                <span>{getMintPrice(mintPrice * numberOfItems, splToken?.decimals ?? 1)}</span>
+                {isFree ? (
+                  <span>Claim for free</span>
+                ) : (
+                  <>
+                    <span>Purchase</span>
+                    <Image
+                      alt='currency'
+                      src={splToken?.icon ?? splToken?.symbol ?? ''}
+                      width={14}
+                      height={14}
+                      className='h-3.5 w-3.5'
+                    />
+                    <span>{price}</span>
+                  </>
+                )}
               </div>
             ) : (
               <Loader />
