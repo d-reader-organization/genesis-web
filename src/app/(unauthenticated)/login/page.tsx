@@ -19,7 +19,7 @@ export default async function LoginPage() {
         <DividerWithText text='or with' />
         <LoginForm />
         <ForgotPasswordDialog />
-        <RegisterLink/>
+        <RegisterLink />
       </main>
     </>
   )

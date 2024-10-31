@@ -45,7 +45,8 @@ export const ClaimPageHintDialog: React.FC = () => {
                 fontWeight='medium'
                 className='max-sm:text-xs text-grey-100 text-ellipsis overflow-auto'
               >
-                Mark Spears&apos; digital collectible comic will be available for free claim at 10am EST Oct 31st, Halloween! 👻
+                Mark Spears&apos; digital collectible comic will be available for free claim at 10am EST Oct 31st,
+                Halloween! 👻
               </Text>
             </div>
           </div>
