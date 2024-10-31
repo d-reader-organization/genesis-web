@@ -132,9 +132,9 @@ export const shortenAssetName = (name: string): string => {
   return `#${last}`
 }
 
-export const getSlideUrl = (slide: CarouselSlide) => {
-  if (slide.comicIssueId) return RoutePath.Mint(slide.comicIssueId)
-  else if (slide.creatorSlug) return RoutePath.Creator(slide.creatorSlug)
-  else if (slide.comicSlug) return RoutePath.Comic(slide.comicSlug)
-  else return slide.externalLink
+export const getSlideUrlAndText = (slide: CarouselSlide): { href: string; text: string } => {
+  if (slide.comicIssueId) return { href: RoutePath.Mint(slide.comicIssueId), text: 'To launchpad' }
+  else if (slide.creatorSlug) return { href: RoutePath.Creator(slide.creatorSlug), text: 'Check out' }
+  else if (slide.comicSlug) return { href: RoutePath.Comic(slide.comicSlug), text: 'Check out' }
+  else return { href: slide.externalLink ?? '', text: 'Open' }
 }
