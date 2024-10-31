@@ -1,7 +1,14 @@
 import { CarouselLocation } from '@/enums/carouselLocation'
 
+export enum CarouselTagType {
+  Chip = 'Chip',
+  Button = 'Button',
+}
+
 export type CarouselTag = {
   title: string
+  type: CarouselTagType
+  href?: string
   timestamp?: string
 }
 
