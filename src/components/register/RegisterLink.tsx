@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { RoutePath } from '@/enums/routePath'
 import { Text } from '@/components/ui'
 import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 
 export const RegisterLink: React.FC = () => {
   const searchParams = useSearchParams()
@@ -18,3 +19,9 @@ export const RegisterLink: React.FC = () => {
     </Link>
   )
 }
+
+export const RegisterLinkWrapper: React.FC = () => (
+  <Suspense>
+    <RegisterLink />
+  </Suspense>
+)

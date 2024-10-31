@@ -5,7 +5,7 @@ import { LoginForm } from '@/components/form/LoginForm'
 import { GoogleSignInButton } from '@/components/shared/buttons/GoogleSignInButton'
 import { ForgotPasswordDialog } from '@/components/shared/dialogs/ForgotPasswordDialog'
 import { DividerWithText } from '@/components/shared/Divider'
-import { RegisterLink } from '@/components/register/RegisterLink'
+import { RegisterLinkWrapper } from '@/components/register/RegisterLink'
 
 export default async function LoginPage() {
   return (
@@ -19,7 +19,7 @@ export default async function LoginPage() {
         <DividerWithText text='or with' />
         <LoginForm />
         <ForgotPasswordDialog />
-        <RegisterLink />
+        <RegisterLinkWrapper />
       </main>
     </>
   )
