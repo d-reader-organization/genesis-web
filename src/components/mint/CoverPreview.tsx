@@ -61,11 +61,7 @@ export const CoverPreviewDialog: React.FC<Props> = ({
               )}
               <InfoStats title='Cover artist' value={cover.artist} />
             </div>
-            <RarityChip
-              isVertical
-              rarity={cover.rarity}
-              supply={getRaritySupply(candyMachine?.supply ?? 0, cover.share)}
-            />
+            <RarityChip rarity={cover.rarity} />
           </div>
         </div>
         {hideArrows ? null : <Arrow arrowOrientation='RIGHT' className='bg-transparent' onClick={onNextClick} />}
