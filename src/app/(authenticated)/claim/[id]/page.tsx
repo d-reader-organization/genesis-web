@@ -8,6 +8,7 @@ import { PagesPreview } from '@/components/mint/PagesPreview'
 import { ClaimPageHintDialog } from '@/components/shared/dialogs/ClaimPageHintDialog'
 import { Divider } from '@/components/shared/Divider'
 import { Text } from '@/components/ui'
+import { MONSTER_CLAIM_QR_SLUG } from '@/constants/general'
 import { ComicRarity } from '@/enums/comicRarity'
 import { RoutePath } from '@/enums/routePath'
 import { ComicIssuePageParams } from '@/models/common'
@@ -38,7 +39,9 @@ export async function generateMetadata({
 
 export default async function ClaimPage({ params }: ComicIssuePageParams) {
   //hotfix: remove it after the monsters claim window expires
-  if (params.id === 'mark-spears-monsters') redirect(RoutePath.Claim(148), RedirectType.replace)
+  if (params.id === MONSTER_CLAIM_QR_SLUG) {
+    redirect(RoutePath.Claim(148), RedirectType.replace)
+  }
 
   const comicIssue = await fetchPublicComicIssue(params.id)
   if (!comicIssue) return null
