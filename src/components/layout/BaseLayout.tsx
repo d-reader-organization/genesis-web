@@ -2,6 +2,8 @@ import React from 'react'
 import { Navigation } from './Navigation'
 import { fetchMe } from '@/app/lib/api/user/queries'
 import { Footer } from './Footer'
+import Script from 'next/script'
+import { IntercomClient } from '@/components/shared/IntercomClient'
 
 type Props = React.PropsWithChildren & { showFooter?: boolean }
 
@@ -14,6 +16,19 @@ export const BaseLayout: React.FC<Props> = async ({ children, showFooter = false
         {children}
       </main>
       {showFooter ? <Footer /> : null}
+      <Script
+        strategy='afterInteractive'
+        id='intercom-settings'
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.intercomSettings = {
+              api_base: "https://api-iam.intercom.io",
+              app_id: "wfqufkpe"
+            };
+          `,
+        }}
+      />
+      <IntercomClient />
     </div>
   )
 }
