@@ -2,13 +2,13 @@
 
 import React, { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
-import { CarouselSlide, CarouselTag } from '@/models/carousel/carouselSlide'
+import { CarouselSlide, CarouselTag, CarouselTagType } from '@/models/carousel/carouselSlide'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/shared/Badge'
 import Link from 'next/link'
-import { getSlideUrlAndText } from '@/utils/helpers'
+import { getSlideFallbackUrl } from '@/utils/helpers'
 import { Text } from '../Text'
 import { CircleIcon } from 'lucide-react'
 import { Carousel, CarouselContent, CarouselItem } from './Carousel'
@@ -63,15 +63,16 @@ export const HeroCarousel: React.FC<Props> = ({ slides }) => {
       >
         <CarouselContent className='overflow-visible'>
           {slides.map((slide, index) => {
-            const { href, text } = getSlideUrlAndText(slide)
+            const fallbackHref = getSlideFallbackUrl(slide)
             const isNextSlide = currentSlide + 1 >= slides.length ? index === 0 : currentSlide + 1 === index
+            const linkTag = slide.tags?.find((tag) => tag.type === CarouselTagType.Button)
             return (
               <CarouselItem
                 key={index}
                 className='w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl h-full sm:rounded-xl hover:brightness-110'
               >
                 <Link
-                  href={href}
+                  href={linkTag?.href ?? fallbackHref}
                   key={slide.title}
                   className={cn(
                     'flex relative transition-all duration-200 w-full h-60 sm:h-80 md:h-[530px]',
@@ -104,7 +105,7 @@ export const HeroCarousel: React.FC<Props> = ({ slides }) => {
                       currentSlide !== index && 'opacity-0'
                     )}
                   >
-                    <TopSection tags={slide.tags ?? []} />
+                    <ChipSection tags={slide.tags?.filter((tag) => tag.type === CarouselTagType.Chip) ?? []} />
                     <div className='flex flex-col items-start gap-2'>
                       <Text as='h2' styleVariant='primary-heading' className='line-clamp-1 text-ellipsis text-start'>
                         {slide.title}
@@ -120,7 +121,7 @@ export const HeroCarousel: React.FC<Props> = ({ slides }) => {
                     </div>
                     <div className='bg-yellow-500 px-2 py-2 sm:px-5 sm:py-3 rounded-lg sm:rounded-xl backdrop-blur-md flex justify-center items-center h-7 sm:h-[42px] w-fit'>
                       <Text as='span' styleVariant='body-small' fontWeight='bold' className='text-black uppercase'>
-                        {text}
+                        {linkTag?.title ?? 'See details'}
                       </Text>
                     </div>
                   </div>
@@ -130,17 +131,16 @@ export const HeroCarousel: React.FC<Props> = ({ slides }) => {
           })}
         </CarouselContent>
       </Carousel>
-
       {dots}
     </div>
   )
 }
 
-type TopSectionProps = {
+type ChipSectionProps = {
   tags: CarouselTag[]
 }
 
-const TopSection: React.FC<TopSectionProps> = ({ tags }) => (
+const ChipSection: React.FC<ChipSectionProps> = ({ tags }) => (
   <div className='flex items-center gap-2'>
     {tags.map((tag) => (
       <Badge key={tag.title} className='gap-2 items-center'>
