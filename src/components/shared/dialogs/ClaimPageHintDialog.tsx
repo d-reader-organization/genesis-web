@@ -24,9 +24,6 @@ export const ClaimPageHintDialog: React.FC = () => {
     }
   }
 
-  // TODO: make sure all flags (booleans) are handled correctly
-  // TODO: update all the dialog text (James should help)
-
   return (
     <Dialog open={claimHintDialog} onOpenChange={toggleClaimHintDialog}>
       <DialogContent
@@ -93,7 +90,7 @@ export const ClaimPageHintDialog: React.FC = () => {
               </Text>
             </div>
           </div>
-          {/* <div className='rounded-xl bg-grey-500 p-4 gap-4 flex max-w-[437px]'>
+          <div className='rounded-xl bg-grey-500 p-4 gap-4 flex max-w-[437px]'>
             <div className='size-5'>🤝</div>
             <div className='inline-block gap-2 w-full max-w-[369px]'>
               <Text as='p' styleVariant='body-normal' fontWeight='bold' className='max-sm:text-xs'>
@@ -109,7 +106,7 @@ export const ClaimPageHintDialog: React.FC = () => {
                 message on any social channel.
               </Text>
             </div>
-          </div> */}
+          </div>
         </div>
         <Button variant='secondary' className='rounded-[16px] font-bold text-base w-full' onClick={onClick}>
           I understand!
