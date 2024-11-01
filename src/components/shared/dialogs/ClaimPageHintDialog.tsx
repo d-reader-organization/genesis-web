@@ -69,8 +69,8 @@ export const ClaimPageHintDialog: React.FC = () => {
                 fontWeight='medium'
                 className='max-sm:text-xs text-grey-100 text-ellipsis overflow-auto'
               >
-                All comics you collect are stored in your Digital Comic Vault. To generate your Vault you&apos;ll need to
-                connect your gmail via TipLink service in the next step!
+                All comics you collect are stored in your Digital Comic Vault. To generate your Vault you&apos;ll need
+                to connect your gmail via TipLink service in the next step!
               </Text>
             </div>
           </div>
