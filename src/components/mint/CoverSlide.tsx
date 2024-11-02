@@ -9,9 +9,10 @@ type Props = {
   isPriority: boolean
   totalSupply: number
   onClick: () => void
+  hideRarityChip?: boolean
 }
 
-export const CoverSlide: React.FC<Props> = ({ cover, isPriority, totalSupply, onClick }) => (
+export const CoverSlide: React.FC<Props> = ({ cover, isPriority, totalSupply, onClick, hideRarityChip = false }) => (
   <button
     className='relative flex-[0_0_100%] max-h-[400px] md:max-h-[520px] flex flex-col items-center justify-center hover:brightness-110'
     onClick={onClick}
@@ -24,7 +25,8 @@ export const CoverSlide: React.FC<Props> = ({ cover, isPriority, totalSupply, on
       priority={isPriority}
       sizes='(max-width: 350px) 100vw, 350px'
       className='rounded-2xl min-h-96 w-full object-cover'
+
     />
-    <RarityChip className='-mt-3.5' rarity={cover.rarity} supply={getRaritySupply(totalSupply, cover.share)} />
+    {!hideRarityChip && <RarityChip className='-mt-3.5' rarity={cover.rarity} supply={getRaritySupply(totalSupply, cover.share)} />}
   </button>
 )
