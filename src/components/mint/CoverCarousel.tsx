@@ -19,6 +19,7 @@ export const CoverCarousel: React.FC<Props> = ({ covers, comicIssue }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000, stopOnMouseEnter: true })])
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
   const [isCoverPreviewOpen, toggleCoverPreview] = useToggle()
+  const hasCoverVariants = covers.length > 1
 
   const { data: candyMachine } = useFetchCandyMachine({
     candyMachineAddress: comicIssue.activeCandyMachineAddress ?? '',
@@ -50,12 +51,13 @@ export const CoverCarousel: React.FC<Props> = ({ covers, comicIssue }) => {
                 totalSupply={candyMachine?.supply ?? 0}
                 key={`${cover.rarity}-${index}`}
                 onClick={() => toggleCoverPreview()}
+                hideRarityChip={!hasCoverVariants}
               />
             ))}
           </div>
         </div>
       </div>
-      <SliderDots emblaApi={emblaApi} slides={covers} selectedIndex={selectedIndex} />
+      {hasCoverVariants && <SliderDots emblaApi={emblaApi} slides={covers} selectedIndex={selectedIndex} />}
       <CoverPreviewDialog
         cover={covers[selectedIndex]}
         candyMachine={candyMachine}
