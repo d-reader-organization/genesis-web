@@ -1,4 +1,5 @@
 import { Text } from '@/components/ui'
+import { SUPPORT_EMAIL } from '@/constants/general'
 import Link from 'next/link'
 import React from 'react'
 
@@ -11,7 +12,7 @@ export default function FaqPage() {
         </Text>
         <p className='text-center'>Find answers to your questions! For any details contact us at </p>
         <Text as='p' styleVariant='body-xlarge' className='text-important-color'>
-          support@dreader.io
+          {SUPPORT_EMAIL}
         </Text>
         <br />
         If you&apos;d like to report your bug use the&nbsp;
