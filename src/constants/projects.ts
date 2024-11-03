@@ -205,7 +205,7 @@ export const PROJECTS: Project[] = [
       'https://d323dls9ny69nf.cloudfront.net/comics/apt-323-collectors-edition-1713288491154/banner-1713964884959.png',
     cover:
       'https://d323dls9ny69nf.cloudfront.net/comics/apt-323-collectors-edition-1713288491154/issues/collectors-edition-1713289013265/cover-common-1713289076229.jpg',
-    logo: 'https://d323dls9ny69nf.cloudfront.net/comics/apt-323-collectors-edition-1713288491154/logo-1713964885062.png',
+    logo: '/assets/images/invest/recent_succesful_project_logos/apt-323-logo.png',
     creator: {
       name: 'StudioNX',
       avatar: 'https://d323dls9ny69nf.cloudfront.net/creators/studio-nx/avatar-1697021201713.png',
@@ -248,7 +248,7 @@ export const PROJECTS: Project[] = [
     tags: ['Action', 'Adventure', 'Romance', 'Comedy', 'Sci-fi', 'Fantasy', 'Crime'],
     banner: 'https://d323dls9ny69nf.cloudfront.net/comics/dream-city/banner.png',
     cover: 'https://d323dls9ny69nf.cloudfront.net/comics/dream-city/cover.png',
-    logo: 'https://d323dls9ny69nf.cloudfront.net/comics/dream-city/logo.png',
+    logo: '/assets/images/invest/recent_succesful_project_logos/dream-city-logo.png',
     creator: {
       name: 'Brandon Mullins',
       avatar: 'https://d323dls9ny69nf.cloudfront.net/creators/brandon-mullins/avatar-1695669858324.jpg',

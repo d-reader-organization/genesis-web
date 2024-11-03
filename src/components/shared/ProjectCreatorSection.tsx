@@ -14,7 +14,7 @@ export const ProjectCreatorSection: React.FC<Props> = ({ creator, tags }) => {
         <AvatarImage src={creator.avatar} size={42} alt={creator + ' Avatar'} className='' />
         <span className='text-white text-base font-bold leading-snug'>{creator.name}</span>
       </div>
-      <div className='flex flex-wrap gap-2'>
+      <div className='flex flex-wrap gap-2 max-md:pl-[1px]'>
         {tags.map((tag, index) => (
           <div
             className={cn(

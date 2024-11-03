@@ -16,6 +16,7 @@ import {
 import GooglePlayIcon from 'public/assets/vector-icons/footer/google.svg'
 import AppStoreIcon from 'public/assets/vector-icons/footer/app-store.svg'
 import { SoonTag } from '../shared/Tags'
+import { cn } from '@/lib/utils'
 
 export const Footer: React.FC = () => (
   <div className='bg-black min-h-[220px] h-full flex justify-center items-center'>
@@ -23,10 +24,9 @@ export const Footer: React.FC = () => (
       <div className='flex max-md:flex-wrap max-md:gap-8 items-start justify-between w-full mt-8'>
         <FooterColumn
           links={[
-            { isComingSoon: true, href: '/', name: 'Discover' },
-            { isComingSoon: true, href: '/', name: 'Marketplace' },
-            { isComingSoon: true, href: '/invest', name: 'Invest' },
-            { isComingSoon: true, href: '/', name: 'Launchpad' },
+            { href: '/discover', name: 'Discover', isComingSoon: true },
+            { href: '/marketplace', name: 'Marketplace', isComingSoon: true },
+            { href: '/invest', name: 'Invest', isComingSoon: true, isClickable: false },
           ]}
           title='Essentials'
         />
@@ -78,6 +78,7 @@ type ColumnProps = {
 
 type FooterLink = {
   isComingSoon?: boolean
+  isClickable?: boolean
   href: string
   name: string
 }
@@ -88,25 +89,33 @@ const FooterColumn: React.FC<ColumnProps> = ({ links, title }) => (
       {title}
     </Text>
     <div className='flex flex-col gap-4'>
-      {links.map((link, index) =>
-        link.isComingSoon ? (
-          <div key={`${link.name}-${index}`} className='flex items-end gap-1 relative'>
-            <Text as='span' styleVariant='body-normal' className='text-grey-300'>
-              {link.name}
-            </Text>
-            <SoonTag className='bg-grey-300' />
-          </div>
-        ) : (
+      {links.map((link, index) => {
+        const { isClickable = true } = link
+        return (
           <Link
-            className='text-base font-medium text-grey-100'
+            className={cn(
+              'flex gap-1',
+              { 'text-grey-100': isClickable },
+              {
+                'pointer-events-none text-grey-300': !isClickable,
+              }
+            )}
             href={link.href}
             key={`${link.name}-${index}`}
             target='_blank'
           >
-            {link.name}
+            <Text
+              as='span'
+              styleVariant='body-normal'
+              fontWeight='medium'
+              className={cn({ 'font-normal': !isClickable })}
+            >
+              {link.name}
+            </Text>
+            {link.isComingSoon && <SoonTag className='bg-grey-300' />}
           </Link>
         )
-      )}
+      })}
     </div>
   </div>
 )

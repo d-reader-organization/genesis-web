@@ -9,6 +9,7 @@ import { InvestScreenWelcomeDialog } from '@/components/shared/dialogs/InvestScr
 import { PROJECTS } from '@/constants/projects'
 import { SuccessfulProject, isSuccessfulProject } from '@/models/project'
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
 export const metadata: Metadata = {
   title: 'Genesis',
@@ -49,7 +50,7 @@ export default async function InvestPage() {
   const successfulProjects = fetchSuccessfulProjects()
 
   if (successfulProjects.length === 0) {
-    return 'Projects not found'
+    notFound()
   }
 
   return (
