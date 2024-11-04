@@ -58,7 +58,7 @@ const FAQ: React.FC = () => {
           </Expandable>
 
           <Expandable title='🌐 How do I buy the comic from my mobile browser?' id='buy-on-mobile-browser'>
-            <ExpandableText text='Our web app is currently available at https://dreader.app' />
+            <ExpandableText text='Our web app is currently available at https://www.dreader.app' />
             <ExpandableText text='To buy the comic:' />
             <ol className='list-decimal list-inside pl-5'>
               <li>Open our web app from your mobile wallet&apos;s in-app browser.</li>
@@ -77,7 +77,7 @@ const FAQ: React.FC = () => {
           </Expandable>
 
           <Expandable title='💻 How do I buy the comic from my desktop browser?' id='buy-on-desktop-browser'>
-            <ExpandableText text='Our web app is currently available at https://dreader.app' />
+            <ExpandableText text='Our web app is currently available at https://www.dreader.app' />
             <ExpandableText text='To buy the comic:' />
             <ol className='list-decimal list-inside pl-5'>
               <li>Open our web app.</li>
