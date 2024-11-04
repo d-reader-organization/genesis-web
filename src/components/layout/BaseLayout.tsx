@@ -29,8 +29,8 @@ export const BaseLayout: React.FC<Props> = async ({ children, mainClassName, sho
         dangerouslySetInnerHTML={{
           __html: `
             window.intercomSettings = {
-              api_base: "https://api-iam.intercom.io",
-              app_id: "wfqufkpe"
+              api_base: '${process.env.NEXT_PUBLIC_INTERCOM_API_BASE}',
+              app_id: '${process.env.NEXT_PUBLIC_INTERCOM_APP_ID}'
             };
           `,
         }}
