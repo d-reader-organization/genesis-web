@@ -39,11 +39,6 @@ export const SUPPORT_EMAIL = 'support@dreader.io'
 export const SUPPORT_LINK = 'mailto:' + SUPPORT_EMAIL
 
 // metadata
-export const USED_TRAIT = 'used'
-export const SIGNED_TRAIT = 'signed'
-export const DEFAULT_COMIC_ISSUE_USED = 'false'
-export const DEFAULT_COMIC_ISSUE_IS_SIGNED = 'false'
-export const RARITY_TRAIT = 'rarity'
 export const METADATA_IMAGE_SIZE = { width: 1200, height: 630 }
 
 // wallet
@@ -72,7 +67,6 @@ export const MEMO_PROGRAM_ID = new PublicKey('MemoSq4gqABAXKb96qnH8TysNcWxMyWCqX
 
 export const MONSTER_CLAIM_QR_SLUG = 'mark-spears-monsters'
 
-export const usernameTooltip = `Your username will be visible to the dReader community`
 export const payoutDetails: string =
   '*Previous payouts are not indicative of future results, and no representation is made that any investment will or is likely to achieve profits or losses similar to those discussed on this website. All investments involve risks, and the value of investments may fluctuate over time.'
 
