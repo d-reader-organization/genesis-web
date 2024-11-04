@@ -8,15 +8,8 @@ import DiscordIcon from 'public/assets/vector-icons/discord-icon.svg'
 import TwitterIcon from 'public/assets/vector-icons/twitter-icon.svg'
 import InstagramIcon from 'public/assets/vector-icons/instagram-icon.svg'
 import MailIconInverse from 'public/assets/vector-icons/mail-icon-inverse.svg'
-import {
-  SUPPORT_LINK,
-  DISCORD_LINK,
-  INSTAGRAM_LINK,
-  TWITTER_LINK,
-  SUPPORT_EMAIL,
-  D_READER_LINK,
-} from '@/constants/general'
-import BunBunUnderConstruction from 'public/assets/images/under-construction.png'
+import { SUPPORT_LINK, DISCORD_LINK, INSTAGRAM_LINK, TWITTER_LINK, SUPPORT_EMAIL, D_READER_LINK } from '@/constants/general'
+import BunBunUnderConstruction from 'public/assets/images/site-under-construction.png'
 
 export default function UnderConstruction() {
   return (
@@ -48,10 +41,8 @@ export default function UnderConstruction() {
           fontWeight='medium'
           className='text-grey-100 text-center px-1 pt-3 sm:px-14 max-sm:text-xs sm:pt-8 md:px-20 mb-4'
         >
-          This page is currently under construction, and we can&apos;t wait to show you what we&apos;ve been working on.
-          Please check back later!
-          <br />
-          <br />
+          This page is currently under construction, and we can&apos;t wait to show you what we&apos;ve been working on. Please check back later!
+          <br /><br />
           In the meantime, feel free to reach out to us:
         </Text>
         <div className='flex w-full justify-center gap-1 sm:gap-2 text-grey-100 pt-1'>
@@ -93,7 +84,12 @@ export default function UnderConstruction() {
           href={D_READER_LINK}
         >
           <MoveLeft size={16} />
-          <Text as='p' styleVariant='body-normal' fontWeight='medium' className='max-sm:text-xs'>
+          <Text
+            as='p'
+            styleVariant='body-normal'
+            fontWeight='medium'
+            className='max-sm:text-xs'
+          >
             Go back
           </Text>
         </Link>
