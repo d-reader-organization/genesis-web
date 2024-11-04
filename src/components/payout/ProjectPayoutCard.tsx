@@ -4,7 +4,7 @@ import { payoutDetails } from '@/constants/general'
 import { formatNumberWithCommas } from '@/utils/general'
 import { formatPercentage, formatUSD } from '@/utils/general'
 import { ProjectFunding, ProjectPayout } from '@/models/project'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 
 type Props = {
   payout: ProjectPayout

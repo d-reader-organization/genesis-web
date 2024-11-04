@@ -1,5 +1,5 @@
 import Link, { LinkProps } from 'next/link'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 
 const DEFAULT_ICON_CLASSNAME = 'w-4 sm:w-5'
 

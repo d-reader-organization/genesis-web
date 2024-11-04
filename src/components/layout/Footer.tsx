@@ -10,7 +10,7 @@ import {
 import GooglePlayIcon from 'public/assets/vector-icons/footer/google.svg'
 import AppStoreIcon from 'public/assets/vector-icons/footer/app-store.svg'
 import { SoonTag } from '../shared/Tags'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 import { ESSENTIAL_LINKS, MAIN_LINKS, NavigationLink, SOCIAL_LINKS } from '@/constants/navigationLinks'
 
 export const Footer: React.FC = () => (
