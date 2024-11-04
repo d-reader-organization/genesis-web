@@ -18,7 +18,6 @@ type Props = {
 }
 
 export const HeroCarousel: React.FC<Props> = ({ slides }) => {
-  const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000 })])
   const [currentSlide, setCurrentSlide] = useState<number>(0)
   const [emblaApi, setEmblaApi] = useState<ReturnType<typeof useEmblaCarousel>[1]>()
 
@@ -53,12 +52,11 @@ export const HeroCarousel: React.FC<Props> = ({ slides }) => {
   )
 
   return (
-    <div className='flex flex-col gap-6 w-full max-w-screen-xl sm:mt-3 md:mt-6'>
+    <div className='flex flex-col gap-6 w-full max-w-screen-lg sm:mt-3 md:mt-6'>
       <Carousel
-        className='w-full max-w-screen-xl h-60 sm:h-80 md:h-[530px]'
-        opts={{ loop: true }}
-        plugins={[Autoplay({ delay: 5000 })]}
-        ref={emblaRef}
+        className='w-full max-w-screen-lg h-60 sm:h-80 md:h-[530px]'
+        opts={{ loop: true, duration: 40 }}
+        plugins={[Autoplay({ delay: 5000, jump: false })]}
         setApi={(api) => setEmblaApi(api)}
       >
         <CarouselContent className='overflow-visible'>
@@ -69,14 +67,18 @@ export const HeroCarousel: React.FC<Props> = ({ slides }) => {
             return (
               <CarouselItem
                 key={index}
-                className='w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl h-full sm:rounded-xl hover:brightness-110'
+                className='w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-lg h-full sm:rounded-xl hover:brightness-110'
               >
-                <Link
-                  href={linkTag?.href ?? fallbackHref}
+                <button
                   key={slide.title}
+                  onClick={() => {
+                    if (index !== currentSlide) {
+                      isNextSlide ? emblaApi?.scrollNext() : emblaApi?.scrollPrev()
+                    }
+                  }}
                   className={cn(
-                    'flex relative transition-all duration-200 w-full h-60 sm:h-80 md:h-[530px]',
-                    index !== currentSlide && 'sm:h-60 md:h-[475px] pointer-events-none'
+                    'flex relative transition-all duration-300 w-full h-60 sm:h-80 md:h-[530px]',
+                    index !== currentSlide && 'sm:h-60 md:h-[475px]'
                   )}
                 >
                   <Image
@@ -99,10 +101,13 @@ export const HeroCarousel: React.FC<Props> = ({ slides }) => {
                           : 'linear-gradient(270deg, rgba(21, 23, 28, 0.60) 0%, #15171C 30.36%)',
                     }}
                   />
-                  <div
+                  <Link
+                    href={linkTag?.href ?? fallbackHref}
+                    aria-disabled={currentSlide !== index}
+                    target={!!linkTag?.href ? '_blank' : ''}
                     className={cn(
-                      'relative flex flex-col justify-center gap-8 h-full w-full p-4 md:p-6 lg:p-8 sm:max-w-[90%] md:max-w-[70%]',
-                      currentSlide !== index && 'opacity-0'
+                      'relative flex flex-col justify-center gap-8 h-full w-fit p-4 md:p-6 lg:p-8 sm:max-w-[90%] md:max-w-[70%]',
+                      currentSlide !== index && 'opacity-0 pointer-events-none'
                     )}
                   >
                     <ChipSection tags={slide.tags?.filter((tag) => tag.type === CarouselTagType.Chip) ?? []} />
@@ -124,8 +129,8 @@ export const HeroCarousel: React.FC<Props> = ({ slides }) => {
                         {linkTag?.title ?? 'See details'}
                       </Text>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </button>
               </CarouselItem>
             )
           })}
@@ -145,7 +150,7 @@ const ChipSection: React.FC<ChipSectionProps> = ({ tags }) => (
     {tags.map((tag) => (
       <Badge key={tag.title} className='gap-2 items-center'>
         <CircleIcon className='text-white size-3' fill='#fff' />
-        <Text as='span' styleVariant='body-normal' fontWeight='bold'>
+        <Text as='span' styleVariant='body-normal' fontWeight='bold' className='uppercase'>
           {tag.title}
         </Text>
       </Badge>

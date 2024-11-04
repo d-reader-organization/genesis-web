@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://dreader.app
+Host: https://www.dreader.app
 
 # Sitemaps
-Sitemap: https://dreader.app/sitemap.xml
+Sitemap: https://www.dreader.app/sitemap.xml

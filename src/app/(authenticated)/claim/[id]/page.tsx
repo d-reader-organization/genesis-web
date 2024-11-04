@@ -8,9 +8,12 @@ import { PagesPreview } from '@/components/mint/PagesPreview'
 import { ClaimPageHintDialog } from '@/components/shared/dialogs/ClaimPageHintDialog'
 import { Divider } from '@/components/shared/Divider'
 import { Text } from '@/components/ui'
+import { MONSTER_CLAIM_QR_SLUG } from '@/constants/general'
 import { ComicRarity } from '@/enums/comicRarity'
+import { RoutePath } from '@/enums/routePath'
 import { ComicIssuePageParams } from '@/models/common'
 import { Metadata } from 'next'
+import { redirect, RedirectType } from 'next/navigation'
 
 export async function generateMetadata({
   params,
@@ -35,6 +38,11 @@ export async function generateMetadata({
 }
 
 export default async function ClaimPage({ params }: ComicIssuePageParams) {
+  //hotfix: remove it after the monsters claim window expires
+  if (params.id === MONSTER_CLAIM_QR_SLUG) {
+    redirect(RoutePath.Claim(148), RedirectType.replace)
+  }
+
   const comicIssue = await fetchPublicComicIssue(params.id)
   if (!comicIssue) return null
   const pages = await fetchComicIssuePreviewPages(comicIssue.id)

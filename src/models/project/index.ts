@@ -13,12 +13,12 @@ export type ProjectFunding = {
   pledgedAmount: number
   raiseGoal: number
   numberOfBackers: number
-  daysLeft: number // this should be a date
+  daysLeft: number
 }
 
 export type ProjectPayout = {
   roiPercent: number
-  daysForRoi: number // this should be a date
+  daysForRoi: number
   summary: string
 }
 

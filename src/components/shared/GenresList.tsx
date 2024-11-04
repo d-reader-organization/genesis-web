@@ -27,7 +27,7 @@ export const GenreTags: React.FC<Props> = ({ className, genres }) => (
         className={cn('p-2 flex justify-center items-center rounded-lg bg-grey-500', className)}
         key={`${genre.name}-${index}`}
       >
-        <Text as='p' styleVariant='body-normal' fontWeight='medium' className='text-grey-100'>
+        <Text as='p' styleVariant='body-normal' fontWeight='medium' className='text-grey-100 min-w-10'>
           {genre.name}
         </Text>
       </div>
