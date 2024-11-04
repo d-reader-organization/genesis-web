@@ -1,4 +1,4 @@
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import React from 'react'
 import { ButtonLink } from '../ui/Button'
 import WenImageSrc from 'public/assets/wen.png'

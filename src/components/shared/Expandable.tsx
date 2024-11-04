@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import ArrowDownIcon from 'public/assets/vector-icons/arrow-down-2.svg'
 import useEventListener from '@/hooks/useEventListener'
 import Image from 'next/image'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 import { TokenDetail } from '@/utils/mint'
 import { useCountdown } from '@/hooks/useCountdown'
 

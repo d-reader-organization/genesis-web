@@ -2,7 +2,7 @@
 
 import { OwnedAssetPreview } from '@/components/digital-asset/OwnedAssetPreview'
 import { Button, Text } from '@/components/ui'
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import { OwnedComicIssue } from '@/models/comicIssue'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'

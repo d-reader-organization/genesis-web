@@ -5,7 +5,7 @@ import { useFetchUseComicIssueAssetTransaction } from '@/api/transaction/queries
 import { Asset } from '@/models/asset'
 import { useRouter } from 'next/navigation'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
-import { sleep } from '@/utils/helpers'
+import { sleep } from '@/utils/general'
 import { confirmingTransaction, toast } from '@/components/ui/toast/use-toast'
 
 type ReturnType = {

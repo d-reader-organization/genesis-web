@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 import { Text } from '@/components/ui'
 import React from 'react'
 import MintIcon from 'public/assets/vector-icons/mint-icon.svg'

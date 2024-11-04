@@ -3,7 +3,7 @@ import { Text } from '../ui'
 import Link from 'next/link'
 import { Divider } from '../shared/Divider'
 import DReaderSymbol from 'public/assets/vector-icons/logo-symbol.svg'
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import {
   DISCORD_LINK,
   DPUBLISHER_LINK,

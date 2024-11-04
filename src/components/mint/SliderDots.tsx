@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 import { getRarityColor, getRarityTextColor } from '@/utils/rarity'
 import React from 'react'
 import RarityIcon from 'public/assets/vector-icons/rarity-icon.svg'

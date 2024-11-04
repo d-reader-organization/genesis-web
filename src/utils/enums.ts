@@ -1,3 +1,64 @@
+export enum SortOrder {
+  ASC = 'asc',
+  DESC = 'desc',
+}
+
+export enum SliderType {
+  comicList,
+  comicIssueList,
+}
+
+export enum Role {
+  Superadmin = 'Superadmin',
+  Admin = 'Admin',
+  User = 'User',
+  Tester = 'Tester',
+}
+
+export enum GlobalStatusType {
+  Success = 'Success',
+  Info = 'Info',
+  Warning = 'Warning',
+  Maintenance = 'Maintenance',
+}
+
+export enum AudienceType {
+  Everyone = 'Everyone',
+  Teen = 'Teen',
+  TeenPlus = 'TeenPlus',
+  Mature = 'Mature',
+}
+
+export enum CarouselLocation {
+  HomePrimary = 'HomePrimary',
+  HomeSecondary = 'HomeSecondary',
+}
+
+export enum CollaboratorRole {
+  Advisor = 'Advisor',
+  Artist = 'Artist',
+  CoWriter = 'CoWriter',
+  Colorist = 'Colorist',
+  CoverArtist = 'CoverArtist',
+  CreativeDirector = 'CreativeDirector',
+  Editor = 'Editor',
+  Illustrator = 'Illustrator',
+  Inker = 'Inker',
+  Letterer = 'Letterer',
+  Penciler = 'Penciler',
+  Translator = 'Translator',
+  Writer = 'Writer',
+}
+
+export enum ComicRarity {
+  None = 'None',
+  Common = 'Common',
+  Uncommon = 'Uncommon',
+  Rare = 'Rare',
+  Epic = 'Epic',
+  Legendary = 'Legendary',
+}
+
 export const RoutePath = Object.freeze({
   Home: '/',
   Welcome: '/welcome',

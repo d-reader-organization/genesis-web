@@ -104,5 +104,3 @@ export const useAuthorizeWallet: AuthorizeWalletHook = (callback) => {
     authorizeWallet()
   }, [authorizeWallet])
 }
-
-export default useAuthorizeWallet

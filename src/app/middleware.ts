@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { RoutePath } from './enums/routePath'
-import { accessTokenKey, jwtCookieProps, redirectToKey, refreshTokenKey } from './constants/general'
-import { refreshTokenCall } from './app/lib/api/auth/queries'
-import { isAuthenticatedUser } from './app/lib/auth'
+import { RoutePath } from '@/utils/enums'
+import { accessTokenKey, jwtCookieProps, redirectToKey, refreshTokenKey } from '@/constants/general'
+import { refreshTokenCall } from './lib/api/auth/queries'
+import { isAuthenticatedUser } from './lib/auth'
 
 const allowedOrigins = ['https://dial.to']
 

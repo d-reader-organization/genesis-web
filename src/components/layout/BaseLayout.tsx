@@ -2,7 +2,7 @@ import React from 'react'
 import { Navigation } from './Navigation'
 import { fetchMe } from '@/app/lib/api/user/queries'
 import { Footer } from './Footer'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 
 type Props = React.PropsWithChildren & { mainClassName?: string; showFooter?: boolean }
 

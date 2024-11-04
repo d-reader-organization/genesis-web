@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { PlusIcon, MinusIcon } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 import { Text } from '../ui'
 
 interface FAQItem {

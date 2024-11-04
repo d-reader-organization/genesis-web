@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import { Text } from '@/components/ui'
 import { useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'

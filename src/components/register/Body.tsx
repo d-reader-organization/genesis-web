@@ -7,7 +7,7 @@ import { CreateAccountContent } from './tabs/CreateAccount'
 import { ConnectWalletContent } from './tabs/ConnectWallet'
 import { EmailVerificationContent } from './tabs/EmailVerification'
 import { redirectToKey } from '@/constants/general'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 
 enum TabValue {
   createAccount = 'createAccount',

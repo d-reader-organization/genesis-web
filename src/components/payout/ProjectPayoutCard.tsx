@@ -1,8 +1,8 @@
 import React from 'react'
 import { ReceiptText } from 'lucide-react'
-import { payoutDetails } from '@/constants/tooltips'
-import { formatNumberWithCommas } from '@/utils/numbers'
-import { formatPercentage, formatUSD } from '@/utils/numbers'
+import { payoutDetails } from '@/constants/general'
+import { formatNumberWithCommas } from '@/utils/general'
+import { formatPercentage, formatUSD } from '@/utils/general'
 import { ProjectFunding, ProjectPayout } from '@/models/project'
 
 type Props = {

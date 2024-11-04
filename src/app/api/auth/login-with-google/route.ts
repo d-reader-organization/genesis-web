@@ -1,4 +1,4 @@
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import { Authorization } from '@/models/auth'
 import { NextRequest, NextResponse } from 'next/server'
 

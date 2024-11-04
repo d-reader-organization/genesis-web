@@ -40,5 +40,3 @@ export const useOnScreen = <E extends HTMLElement>(): [boolean, boolean, React.R
 
   return [hasIntersected, intersecting, currentElement]
 }
-
-export default useOnScreen

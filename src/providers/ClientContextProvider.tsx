@@ -1,12 +1,12 @@
 'use client'
 
-import { endpoint } from '@/constants/solanaEnv'
+import { endpoint } from '@/constants/general'
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 import { createContext, useContext } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { usePathname } from 'next/navigation'
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import { useWalletAdapter } from '@/hooks/useWalletAdapter'
 
 export const ClientContext = createContext(null)

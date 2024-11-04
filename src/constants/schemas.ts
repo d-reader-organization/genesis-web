@@ -1,4 +1,4 @@
-import { generateMaxLengthErrorMessage, generateMinLengthErrorMessage } from '@/utils/error'
+import { generateMaxLengthErrorMessage, generateMinLengthErrorMessage } from '@/utils/general'
 import { z } from 'zod'
 
 const loginSchema = z.object({

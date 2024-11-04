@@ -3,9 +3,9 @@ import React from 'react'
 import { Section } from '../shared/Section'
 import Image from 'next/image'
 import Link from 'next/link'
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import AnnouncementIcon from 'public/assets/vector-icons/announcement.svg'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 
 type Props = {
   actionHref: string

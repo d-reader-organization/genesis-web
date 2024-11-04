@@ -2,7 +2,7 @@ import React from 'react'
 import { Text } from '../../ui/Text'
 import MailIcon from 'public/assets/vector-icons/mail-icon.svg'
 import { Button, ButtonLink, toast } from '../../ui'
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import { useRequestUserEmailVerification } from '@/api/user'
 
 type Props = {

@@ -3,7 +3,7 @@
 import { User } from '@/models/user'
 import React from 'react'
 import { ProfileWidget } from '../../ProfileWidget'
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import { LogoutButton } from '../../buttons/LogoutButton'
 import { ProductSocials } from '../../ProductSocials'
 import { ConnectedWalletBox } from './WalletSection'

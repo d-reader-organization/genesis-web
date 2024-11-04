@@ -1,4 +1,4 @@
-import { CarouselLocation } from '@/enums/carouselLocation'
+import { CarouselLocation } from '@/utils/enums'
 
 export enum CarouselTagType {
   Chip = 'Chip',

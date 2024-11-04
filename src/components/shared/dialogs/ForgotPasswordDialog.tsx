@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/Dialog'
-import useToggle from '@/hooks/useToggle'
+import { useToggle } from '@/hooks/useToggle'
 
 export const ForgotPasswordDialog: React.FC = () => {
   const [passwordDialogOpen, togglePasswordDialog] = useToggle()

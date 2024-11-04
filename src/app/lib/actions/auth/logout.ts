@@ -1,7 +1,7 @@
 'use server'
 
 import { accessTokenKey, refreshTokenKey } from '@/constants/general'
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import { cookies } from 'next/headers'
 import { redirect, RedirectType } from 'next/navigation'
 

@@ -1,4 +1,4 @@
-import { ComicRarity } from '@/enums/comicRarity'
+import { ComicRarity } from '@/utils/enums'
 import { AssetAttribute } from '@/models/asset/assetAttribute'
 import { WalletIdentity } from '@/models/wallet/walletIdentity'
 

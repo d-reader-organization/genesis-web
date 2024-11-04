@@ -1,6 +1,6 @@
 import { fetchComicIssues } from '@/app/lib/api/comicIssue/queries'
-import { RoutePath } from '@/enums/routePath'
-import { SortOrder } from '@/enums/sortOrder'
+import { RoutePath } from '@/utils/enums'
+import { SortOrder } from '@/utils/enums'
 import { ComicIssueSortTag } from '@/models/comicIssue/comicIssueParams'
 import { redirect, RedirectType } from 'next/navigation'
 

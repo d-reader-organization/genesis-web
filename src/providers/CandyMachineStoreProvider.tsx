@@ -10,7 +10,7 @@ import { useFetchSupportedTokens } from '@/api/settings/queries/useFetchSupporte
 import { CouponType } from '@/models/candyMachine/candyMachineCoupon'
 import { getDefaultCoupon, isComicVaultCoupon } from '@/utils/mint'
 import { WRAPPED_SOL_MINT } from '@metaplex-foundation/js'
-import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
+import { useAuthorizeWallet } from '@/hooks/useAuthorizeWallet'
 import React from 'react'
 
 export type CandyMachineStoreApi = ReturnType<typeof createCandyMachineStore>

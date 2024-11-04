@@ -6,9 +6,9 @@ import { Wallet } from '@solana/wallet-adapter-react'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Button, ButtonProps } from '../../ui/Button'
 import { WalletListItem } from '../WalletListItem'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 import { Text } from '../../ui/Text'
-import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
+import { useAuthorizeWallet } from '@/hooks/useAuthorizeWallet'
 require('@solana/wallet-adapter-react-ui/styles.css')
 
 type Props = {

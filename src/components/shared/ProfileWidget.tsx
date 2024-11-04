@@ -1,5 +1,5 @@
-import { RoutePath } from '@/enums/routePath'
-import { cn } from '@/lib/utils'
+import { RoutePath } from '@/utils/enums'
+import { cn } from '@/utils/general'
 import { User } from '@/models/user'
 import Image from 'next/image'
 import Link from 'next/link'

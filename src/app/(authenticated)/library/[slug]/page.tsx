@@ -2,7 +2,12 @@ import { fetchOwnedComicIssues } from '@/app/lib/api/comicIssue/queries'
 import { fetchMe } from '@/app/lib/api/user/queries'
 import { BaseLayout } from '@/components/layout/BaseLayout'
 import { LibraryTabs } from '@/components/library/Tabs'
-import { SlugParamsProps } from '@/lib/types'
+
+type SlugParamsProps = {
+  params: {
+    slug: string
+  }
+}
 
 export default async function OwnedIssuesPage({ params: { slug: comicSlug } }: SlugParamsProps) {
   const me = await fetchMe()

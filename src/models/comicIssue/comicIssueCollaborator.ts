@@ -1,4 +1,4 @@
-import { CollaboratorRole } from '@/enums/collaboratorRole'
+import { CollaboratorRole } from '@/utils/enums'
 
 export interface ComicIssueCollaborator {
   role: CollaboratorRole

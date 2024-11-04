@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Text } from '../ui/Text'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 import { SoonTag } from '../shared/Tags'
 
 type NavItemLinkProps = {

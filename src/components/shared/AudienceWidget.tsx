@@ -1,4 +1,4 @@
-import { AudienceType } from '@/enums/audienceType'
+import { AudienceType } from '@/utils/enums'
 import React from 'react'
 
 type Props = {

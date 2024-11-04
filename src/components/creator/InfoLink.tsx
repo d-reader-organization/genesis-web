@@ -1,7 +1,7 @@
 import React from 'react'
 import { Creator } from '@/models/creator'
 import { AvatarImage } from '../shared/AvatarImage'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   creator: Pick<Creator, 'name' | 'slug' | 'isVerified' | 'avatar'> | undefined

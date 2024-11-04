@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 import { Project, ProjectCreator } from '@/models/project'
 import { AvatarImage } from '@/components/shared/AvatarImage'
 

@@ -14,7 +14,7 @@ import { useToggle } from '@/hooks'
 import { Skeleton, toast } from '../../ui'
 import { fetchMintTransaction } from '@/app/lib/api/transaction/queries'
 import { useFetchCandyMachine } from '@/api/candyMachine'
-import { versionedTransactionFromBs64 } from '@/utils/transactions'
+import { versionedTransactionFromBs64 } from '@/utils/general'
 import { io } from 'socket.io-client'
 import { sendMintTransaction } from '@/app/lib/api/transaction/mutations'
 import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
@@ -22,7 +22,7 @@ import { VersionedTransaction } from '@solana/web3.js'
 import Image from 'next/image'
 import { AssetMintEvent } from '@/models/asset/assetMintEvent'
 import { ConnectButton } from './ConnectButton'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 
 type Props = {
   comicIssue: ComicIssue

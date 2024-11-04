@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { CandyMachineCoupon } from '@/models/candyMachine/candyMachineCoupon'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 
 type CardProps = {
   coupon: CandyMachineCoupon

@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { PlusIcon, MinusIcon } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 import Image from 'next/image'
 
 type ProjectInfoProps = {

@@ -3,7 +3,7 @@ import { ComicBanner } from '@/components/comic/Banner'
 import { ComicHeader } from '@/components/comic/Header'
 import { ComicIssueList } from '@/components/comicIssue/List'
 import { BaseLayout } from '@/components/layout/BaseLayout'
-import { SortOrder } from '@/enums/sortOrder'
+import { SortOrder } from '@/utils/enums'
 import { ComicIssueSortTag } from '@/models/comicIssue/comicIssueParams'
 import React from 'react'
 

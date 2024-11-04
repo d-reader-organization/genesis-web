@@ -1,4 +1,4 @@
-import { Role } from '@/enums/role'
+import { Role } from '@/utils/enums'
 import { Creator } from '@/models/creator'
 import { User } from '@/models/user'
 

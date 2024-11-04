@@ -1,7 +1,7 @@
 import { PartialGenre } from '@/models/genre'
 import React from 'react'
 import { Text } from '@/components/ui/Text'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 
 type Props = {
   genres: PartialGenre[]

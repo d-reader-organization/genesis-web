@@ -1,7 +1,7 @@
 import { phantomLedgerAdapter, solflareLedgerAdapter } from '@/constants/ledgerAdapter'
 import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets'
 import { useMemo } from 'react'
-import { network } from '@/constants/solanaEnv'
+import { network } from '@/constants/general'
 import { TipLinkWalletAdapter } from '@tiplink/wallet-adapter'
 
 type WalletAdapterHook = () => (PhantomWalletAdapter | SolflareWalletAdapter | TipLinkWalletAdapter)[]

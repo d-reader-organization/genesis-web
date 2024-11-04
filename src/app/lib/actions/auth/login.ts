@@ -1,7 +1,7 @@
 'use server'
 
 import { AUTH_QUERY_KEYS } from '@/api/auth/authKeys'
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import { AuthFormState, Authorization } from '@/models/auth'
 import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'

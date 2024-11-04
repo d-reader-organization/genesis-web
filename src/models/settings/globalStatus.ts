@@ -1,4 +1,4 @@
-import { GlobalStatusType } from '@/enums/globalStatusType'
+import { GlobalStatusType } from '@/utils/enums'
 
 export interface GlobalStatus {
   type: GlobalStatusType

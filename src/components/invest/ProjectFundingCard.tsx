@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { TrendingUp } from 'lucide-react'
 import { ProjectFunding } from '@/models/project'
-import { formatNumberWithCommas, formatUSD } from '@/utils/numbers'
+import { formatNumberWithCommas, formatUSD } from '@/utils/general'
 
 type ProjectFundingCardProps = {
   funding: ProjectFunding

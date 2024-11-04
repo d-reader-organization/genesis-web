@@ -1,5 +1,5 @@
 import LogoWithTextIcon from 'public/assets/vector-icons/logo-with-text.svg'
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import { ButtonLink } from '@/components/ui/Button'
 import { verifyUserEmail } from '@/app/lib/api/user/mutations'
 import { ArrowRight } from 'lucide-react'

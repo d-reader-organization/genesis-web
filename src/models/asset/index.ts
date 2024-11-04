@@ -1,4 +1,4 @@
-import { ComicRarity } from '@/enums/comicRarity'
+import { ComicRarity } from '@/utils/enums'
 import { AssetAttribute } from './assetAttribute'
 
 export interface Asset {

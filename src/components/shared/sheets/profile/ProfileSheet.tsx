@@ -5,7 +5,7 @@ import { User } from '@/models/user'
 import React from 'react'
 import { AuthProfileContent } from './AuthProfileContent'
 import { GuestProfileContent } from './GuestProfileContent'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 
 type ProfileSheetProps = {
   isOpen: boolean

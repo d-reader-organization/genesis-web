@@ -2,7 +2,7 @@ import { ComicStats } from './comicStats'
 import { ComicMyStats } from './comicMyStats'
 import { Creator } from '../creator'
 import { PartialGenre } from '../genre'
-import { AudienceType } from '@/enums/audienceType'
+import { AudienceType } from '@/utils/enums'
 
 export interface BasicComic {
   title: string

@@ -1,5 +1,5 @@
 import React from 'react'
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import { ProductSocials } from '../../ProductSocials'
 import { ContentWithGradientImageBg } from '../../ContentWithGradientImageBg'
 import { SignInOrRegisterLinkButton } from '../../buttons/SignInOrRegisterLinkButton'

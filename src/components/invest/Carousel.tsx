@@ -1,6 +1,6 @@
 'use client'
 
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
 import Link from 'next/link'

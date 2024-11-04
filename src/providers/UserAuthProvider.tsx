@@ -10,7 +10,7 @@ import {
   lsSetUser,
   lsRemoveActiveUser,
 } from '@/utils/localStorage'
-import { parseJwtPayload } from '@/utils/objects'
+import { parseJwtPayload } from '@/utils/general'
 import { isNil } from 'lodash'
 import { signOut } from 'next-auth/react'
 import { refreshTokenCall } from '@/app/lib/api/auth/queries'

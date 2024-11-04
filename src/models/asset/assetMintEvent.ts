@@ -1,4 +1,4 @@
-import { ComicRarity } from '@/enums/comicRarity'
+import { ComicRarity } from '@/utils/enums'
 import { CandyMachineReceipt } from '../candyMachine/candyMachineReceipt'
 
 export interface AssetEventData {

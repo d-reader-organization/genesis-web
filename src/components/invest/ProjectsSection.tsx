@@ -1,12 +1,12 @@
 import { SuccessfulProject } from '@/models/project'
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import { ChevronRightIcon, InfoIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/Tooltip'
-import { roiTooltip } from '@/constants/tooltips'
-import { formatUSD } from '@/utils/numbers'
+import { roiTooltip } from '@/constants/general'
+import { formatUSD } from '@/utils/general'
 import { Text } from '../ui'
 
 type Props = {

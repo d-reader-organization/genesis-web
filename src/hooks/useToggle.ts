@@ -10,5 +10,3 @@ export const useToggle: ToggleHook = (initialState = false) => {
 
   return [state, toggleState, falsifyState, truthifyState]
 }
-
-export default useToggle

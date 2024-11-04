@@ -5,11 +5,11 @@ import clsx from 'clsx'
 import React from 'react'
 import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
 import Link from 'next/link'
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import { InfoListActions } from '../shared/InfoListActions'
 import { useRouter } from 'next/navigation'
 import { Button } from '../ui'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 
 type Props = {
   comicIssue: ComicIssue

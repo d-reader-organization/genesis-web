@@ -1,16 +1,17 @@
 import { Comic } from '@/models/comic'
 import { SectionSlider } from '../shared/SectionSlider'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 import { LargeComicCard } from './cards/LargeCard'
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import { DefaultComicCard } from './cards/DefaultCard'
-import { ComicCardType } from '@/lib/types'
 
 type Props = {
   cardType: ComicCardType
   comics: Comic[]
   title: string
 }
+
+type ComicCardType = 'large' | 'default'
 
 export const ComicSectionSlider: React.FC<Props> = ({ cardType, comics, title }) => {
   return (

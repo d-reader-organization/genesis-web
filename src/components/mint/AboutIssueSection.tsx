@@ -7,8 +7,8 @@ import { ExternalLink } from 'lucide-react'
 import { Divider } from '../shared/Divider'
 import { CreatorInfoLink } from '../creator/InfoLink'
 import React from 'react'
-import { AudienceType } from '@/enums/audienceType'
-import { RoutePath } from '@/enums/routePath'
+import { AudienceType } from '@/utils/enums'
+import { RoutePath } from '@/utils/enums'
 
 type Props = {
   comicIssue: ComicIssue

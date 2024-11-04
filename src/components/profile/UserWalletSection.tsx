@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { useFetchUserWallets } from '@/api/user'
-import { shortenString } from '@/utils/helpers'
+import { shortenString } from '@/utils/general'
 import { Button, Text } from '../ui'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { useDisconnectUserWallet } from '@/api/auth'

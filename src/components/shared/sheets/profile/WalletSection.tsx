@@ -5,7 +5,7 @@ import { Copy, Power, Wallet } from 'lucide-react'
 import { toast } from '@/components/ui/toast/use-toast'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { ConnectButton } from '../../buttons/ConnectButton'
-import { shortenSolanaAddress } from '@/utils/helpers'
+import { shortenSolanaAddress } from '@/utils/general'
 import ConnectWalletIcons from 'public/assets/vector-icons/connect-wallet-sidebar.svg'
 import { ButtonIconWrapper } from '../../buttons/IconWrapper'
 

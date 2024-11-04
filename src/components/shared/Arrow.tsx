@@ -2,7 +2,7 @@
 
 import React from 'react'
 import ChevronRight from 'public/assets/vector-icons/chevron-right.svg'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 
 type ArrowOrientation = 'TOP' | 'RIGHT' | 'BOTTOM' | 'LEFT'
 

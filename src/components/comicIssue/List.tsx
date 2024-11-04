@@ -2,7 +2,7 @@
 
 import { useFetchComicIssues } from '@/api/comicIssue/queries/useFetchComicIssues'
 import { useBreakpoints } from '@/hooks/useBreakpoints'
-import useOnScreen from '@/hooks/useOnScreen'
+import { useOnScreen } from '@/hooks/useOnScreen'
 import { ComicIssueParams } from '@/models/comicIssue/comicIssueParams'
 import React, { useEffect, useMemo } from 'react'
 import { ComicIssueCard } from './Card'

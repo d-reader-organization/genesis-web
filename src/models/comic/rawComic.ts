@@ -1,4 +1,4 @@
-import { AudienceType } from '@/enums/audienceType'
+import { AudienceType } from '@/utils/enums'
 import { RawComicStats } from './rawComicStats'
 import { PartialGenre } from '../genre'
 

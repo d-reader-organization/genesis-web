@@ -2,7 +2,7 @@ import { Comic } from '@/models/comic'
 import Link from 'next/link'
 import React from 'react'
 import { ContentWithGradientImageBg } from '../../shared/ContentWithGradientImageBg'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comic: Comic

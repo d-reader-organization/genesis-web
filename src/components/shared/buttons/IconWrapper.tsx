@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/general'
 import React from 'react'
 
 type ButtonIconWrapperProps = React.HTMLAttributes<HTMLButtonElement> & React.PropsWithChildren

@@ -1,4 +1,4 @@
-import { SortOrder } from '@/enums/sortOrder'
+import { SortOrder } from '@/utils/enums'
 import { Pagination } from '@/models/pagination'
 
 export enum CreatorFilterTag {

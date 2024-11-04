@@ -11,7 +11,7 @@ import { Divider } from '@/components/shared/Divider'
 import { AboutIssueSection } from '@/components/mint/AboutIssueSection'
 import { PagesPreview } from '@/components/mint/PagesPreview'
 import Link from 'next/link'
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import { ChevronRightIcon } from 'lucide-react'
 import { InfoListActions } from '@/components/shared/InfoListActions'
 

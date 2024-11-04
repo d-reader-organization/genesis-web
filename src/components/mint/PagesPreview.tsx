@@ -1,4 +1,4 @@
-import { RoutePath } from '@/enums/routePath'
+import { RoutePath } from '@/utils/enums'
 import { ComicPage } from '@/models/comic/comicPage'
 import { EyeIcon } from 'lucide-react'
 import Image from 'next/image'

@@ -1,6 +1,8 @@
 import { ResponseCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 import { WalletName } from '@solana/wallet-adapter-base'
 import { PublicKey } from '@solana/web3.js'
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base'
+import { clusterApiUrl } from '@solana/web3.js'
 
 export const baseApiUrl = `${process.env.NEXT_PUBLIC_API_ENDPOINT}`
 export const accessTokenKey = 'access_token'
@@ -66,3 +68,14 @@ export const LEDGER_ADAPTERS = {
 export const MEMO_PROGRAM_ID = new PublicKey('MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr')
 
 export const MONSTER_CLAIM_QR_SLUG = 'mark-spears-monsters'
+
+export const usernameTooltip = `Your username will be visible to the dReader community`
+export const payoutDetails: string =
+  '*Previous payouts are not indicative of future results, and no representation is made that any investment will or is likely to achieve profits or losses similar to those discussed on this website. All investments involve risks, and the value of investments may fluctuate over time.'
+
+export const roiTooltip = (roiPercent: number) =>
+  `This means that the issuer returned 100% of the initial investment amount for each investor plus ${roiPercent}% of that initial investment. So if an  investor invested $100, the issuer returned $100 + $${roiPercent} which equals $${100 + roiPercent}.`
+
+// Solana RPC Node Endpoint
+export const endpoint = (process.env.NEXT_PUBLIC_SOLANA_RPC_NODE_ENDPOINT as string) || clusterApiUrl('devnet')
+export const network = (process.env.NEXT_PUBLIC_SOLANA_CLUSTER as WalletAdapterNetwork) || WalletAdapterNetwork.Devnet
