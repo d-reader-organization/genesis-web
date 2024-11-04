@@ -33,7 +33,7 @@ export default async function ComicIssuePage({ params: { id } }: ComicIssuePageP
             <Text as='p' styleVariant='body-normal' fontWeight='medium' className='text-grey-600'>
               Read episode
             </Text>
-            <ChevronRightIcon className="text-grey-600" />
+            <ChevronRightIcon className='text-grey-600' />
           </Link>
           <InfoListActions
             averageRating={comicIssue.stats?.averageRating}

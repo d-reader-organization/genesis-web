@@ -4,9 +4,7 @@ import Link from 'next/link'
 import { Divider } from '../shared/Divider'
 import DReaderSymbol from 'public/assets/vector-icons/logo-symbol.svg'
 import { RoutePath } from '@/utils/enums'
-import {
-  GOOGLE_PLAY_APP_LINK,
-} from '@/constants/general'
+import { GOOGLE_PLAY_APP_LINK } from '@/constants/general'
 import GooglePlayIcon from 'public/assets/vector-icons/footer/google.svg'
 import AppStoreIcon from 'public/assets/vector-icons/footer/app-store.svg'
 import { SoonTag } from '../shared/Tags'
@@ -17,18 +15,9 @@ export const Footer: React.FC = () => (
   <div className='bg-black min-h-[220px] h-full flex justify-center items-center'>
     <div className='flex flex-col justify-end gap-6 md:gap-8 max-w-screen-xl w-full p-4'>
       <div className='flex max-md:flex-wrap max-md:gap-8 items-start justify-between w-full mt-8'>
-        <FooterColumn
-          links={ESSENTIAL_LINKS}
-          title='Essentials'
-        />
-        <FooterColumn
-          links={MAIN_LINKS}
-          title='Links'
-        />
-        <FooterColumn
-          links={SOCIAL_LINKS}
-          title='Rabbithole'
-        />
+        <FooterColumn links={ESSENTIAL_LINKS} title='Essentials' />
+        <FooterColumn links={MAIN_LINKS} title='Links' />
+        <FooterColumn links={SOCIAL_LINKS} title='Rabbithole' />
         <MobileAppsColumn />
       </div>
       <Divider className='md:mt-8 bg-grey-400' />
@@ -57,7 +46,6 @@ type ColumnProps = {
   title: string
 }
 
-
 const FooterColumn: React.FC<ColumnProps> = ({ links, title }) => (
   <div className='flex flex-col gap-6'>
     <Text as='h4' styleVariant='secondary-heading'>
@@ -67,10 +55,7 @@ const FooterColumn: React.FC<ColumnProps> = ({ links, title }) => (
       {links.map((link, index) => {
         return (
           <Link
-            className={cn(
-              'flex gap-1',
-              link.isClickable ? 'text-grey-100' : 'pointer-events-none text-grey-300'
-            )}
+            className={cn('flex gap-1', link.isClickable ? 'text-grey-100' : 'pointer-events-none text-grey-300')}
             href={link.href}
             key={`${link.name}-${index}`}
             target={link.targetBlank ? '_blank' : undefined}

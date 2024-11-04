@@ -8,7 +8,14 @@ import DiscordIcon from 'public/assets/vector-icons/discord-icon.svg'
 import TwitterIcon from 'public/assets/vector-icons/twitter-icon.svg'
 import InstagramIcon from 'public/assets/vector-icons/instagram-icon.svg'
 import MailIconInverse from 'public/assets/vector-icons/mail-icon-inverse.svg'
-import { SUPPORT_LINK, DISCORD_LINK, INSTAGRAM_LINK, TWITTER_LINK, SUPPORT_EMAIL, D_READER_LINK } from '@/constants/general'
+import {
+  SUPPORT_LINK,
+  DISCORD_LINK,
+  INSTAGRAM_LINK,
+  TWITTER_LINK,
+  SUPPORT_EMAIL,
+  D_READER_LINK,
+} from '@/constants/general'
 import RabbitHole from 'public/assets/images/rabbit-hole.png'
 
 export default function NotFound() {
@@ -84,12 +91,7 @@ export default function NotFound() {
           href={D_READER_LINK}
         >
           <MoveLeft size={16} />
-          <Text
-            as='p'
-            styleVariant='body-normal'
-            fontWeight='medium'
-            className='max-sm:text-xs'
-          >
+          <Text as='p' styleVariant='body-normal' fontWeight='medium' className='max-sm:text-xs'>
             Go back
           </Text>
         </Link>
