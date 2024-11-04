@@ -4,8 +4,6 @@ interface Params {
   entity: string
 }
 
-function DiscoverPage({ params }: { params: Params }) {
+export default function DiscoverPage({ params }: { params: Params }) {
   return <BaseLayout>Discover {params.entity}</BaseLayout>
 }
-
-export default DiscoverPage
