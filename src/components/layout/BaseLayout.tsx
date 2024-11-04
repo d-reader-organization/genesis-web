@@ -4,7 +4,6 @@ import { fetchMe } from '@/app/lib/api/user/queries'
 import { Footer } from './Footer'
 import { cn } from '@/lib/utils'
 import { IntercomClient } from '../shared/IntercomClient'
-import Script from 'next/script'
 
 type Props = React.PropsWithChildren & { mainClassName?: string; showFooter?: boolean }
 
@@ -23,18 +22,6 @@ export const BaseLayout: React.FC<Props> = async ({ children, mainClassName, sho
         {children}
       </main>
       {showFooter ? <Footer /> : null}
-      <Script
-        strategy='afterInteractive'
-        id='intercom-settings'
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.intercomSettings = {
-              api_base: '${process.env.NEXT_PUBLIC_INTERCOM_API_BASE}',
-              app_id: '${process.env.NEXT_PUBLIC_INTERCOM_APP_ID}'
-            };
-          `,
-        }}
-      />
       <IntercomClient />
     </div>
   )
