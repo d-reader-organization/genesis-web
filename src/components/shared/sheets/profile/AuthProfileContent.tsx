@@ -11,6 +11,7 @@ import { NavItemLink } from '@/components/layout/NavItemLink'
 import { usePathname } from 'next/navigation'
 import { NavConnectButton } from '../../buttons/ConnectButton'
 import { useWallet } from '@solana/wallet-adapter-react'
+import { SUPPORT_LINK } from '@/constants/general'
 
 type AuthProfileContentProps = { user: User }
 
@@ -26,7 +27,7 @@ export const AuthProfileContent: React.FC<AuthProfileContentProps> = ({ user }) 
         <div className='flex flex-col gap-4 text-2xl font-bold leading-[28.8px] text-grey-100'>
           <NavItemLink href={RoutePath.Library} isActive={isLibrary} title='My Library' />
           <NavItemLink href={RoutePath.Profile} isActive={isProfile} title='Settings' />
-          <NavItemLink href='mailto:support@dreader.io' isActive={false} title='Help center' />
+          <NavItemLink href={SUPPORT_LINK} isActive={false} title='Help center' />
           {publicKey ? null : <NavConnectButton />}
         </div>
       </div>

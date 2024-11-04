@@ -70,19 +70,19 @@ const InfoItem: React.FC<{ item: InfoItemProps; isLast?: boolean }> = ({ item, i
         onClick={() => setIsExpanded(!isExpanded)}
         aria-expanded={isExpanded}
       >
-        <h2
+        <h1
           className={cn(
-            'flex items-start min-w-[90px] self-start text-white text-xl font-semibold leading-tight tracking-tight',
+            'flex items-start min-w-[98px] self-start text-white text-xl font-semibold leading-none mt-1 md:mt-[3px] tracking-tight font-obviouslyNarrow',
             isExpanded ? 'pb-2' : ''
           )}
         >
           {item.section}
-        </h2>
+        </h1>
 
         <div className='flex flex-col justify-center align-center w-full md:min-w-[300px] md:max-w-[600px]'>
           <div
             ref={contentRef}
-            className='transition-all duration-200 ease-in-out text-sm md:text-base font-medium leading-[140%]'
+            className='transition-all duration-200 ease-in-out text-sm md:text-base  font-medium leading-[140%]'
             style={{
               maxHeight: maxHeight,
               overflow: 'hidden',

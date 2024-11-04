@@ -1,28 +1,29 @@
+import { Project } from '@/models/project'
+import { PROJECTS } from '@/constants/projects'
 import { BaseLayout } from '@/components/layout/BaseLayout'
 import { ProjectHeader } from '@/components/shared/ProjectHeader'
 import { ProjectBanner } from '@/components/shared/ProjectBanner'
 import { ProjectCreatorSection } from '@/components/shared/ProjectCreatorSection'
-import { ProjectFundingCard } from '@/components/invest/ProjectFundingCard'
 import { ProjectInfo } from '@/components/invest/ProjectInfo'
-import { PROJECTS } from '@/constants/projects'
-import { Project } from '@/models/project'
+import { ProjectFundingCard } from '@/components/invest/ProjectFundingCard'
+import { notFound } from 'next/navigation'
 
 type Props = {
   params: { slug: string }
 }
 
-function fetchProjectBySlug(slug: string): Project {
+function fetchProjectBySlug(slug: string): Project | undefined {
   const project = PROJECTS.find((project) => project.slug === slug)
-
-  if (!project) {
-    throw new Error('Project with slug ' + slug + ' not found')
-  }
 
   return project
 }
 
 export default async function InvestPage({ params }: Props) {
   const project = fetchProjectBySlug(params.slug)
+
+  if (!project) {
+    return notFound()
+  }
 
   return (
     <BaseLayout>

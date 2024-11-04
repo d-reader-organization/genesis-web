@@ -1,11 +1,12 @@
+import { PROJECTS } from '@/constants/projects'
 import { BaseLayout } from '@/components/layout/BaseLayout'
 import { ProjectHeader } from '@/components/shared/ProjectHeader'
 import { ProjectBanner } from '@/components/shared/ProjectBanner'
-import { ProjectCreatorSection } from '@/components/shared/ProjectCreatorSection'
-import { ProjectPayoutCard } from '@/components/payout/ProjectPayoutCard'
 import { ProjectSummary } from '@/components/payout/ProjectSummary'
-import { PROJECTS } from '@/constants/projects'
 import { SuccessfulProject, isSuccessfulProject } from '@/models/project'
+import { ProjectPayoutCard } from '@/components/payout/ProjectPayoutCard'
+import { ProjectCreatorSection } from '@/components/shared/ProjectCreatorSection'
+import { notFound } from 'next/navigation'
 
 type Props = {
   params: { slug: string }
@@ -21,7 +22,7 @@ export default async function PayoutPage({ params }: Props) {
   const project = fetchSuccessfulProject(params.slug)
 
   if (!project) {
-    return 'Project not found'
+    return notFound()
   }
 
   return (

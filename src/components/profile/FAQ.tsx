@@ -5,6 +5,7 @@ import { Expandable } from '@/components/shared/Expandable'
 import { ExpandableText } from '@/components/shared/ExpandableText'
 import { Text } from '../ui'
 import Link from 'next/link'
+import { SUPPORT_EMAIL } from '@/constants/general'
 
 const FAQ: React.FC = () => {
   return (
@@ -57,7 +58,7 @@ const FAQ: React.FC = () => {
           </Expandable>
 
           <Expandable title='🌐 How do I buy the comic from my mobile browser?' id='buy-on-mobile-browser'>
-            <ExpandableText text='Our web app is currently available at https://dreader.app' />
+            <ExpandableText text='Our web app is currently available at https://www.dreader.app' />
             <ExpandableText text='To buy the comic:' />
             <ol className='list-decimal list-inside pl-5'>
               <li>Open our web app from your mobile wallet&apos;s in-app browser.</li>
@@ -76,7 +77,7 @@ const FAQ: React.FC = () => {
           </Expandable>
 
           <Expandable title='💻 How do I buy the comic from my desktop browser?' id='buy-on-desktop-browser'>
-            <ExpandableText text='Our web app is currently available at https://dreader.app' />
+            <ExpandableText text='Our web app is currently available at https://www.dreader.app' />
             <ExpandableText text='To buy the comic:' />
             <ol className='list-decimal list-inside pl-5'>
               <li>Open our web app.</li>
@@ -161,7 +162,7 @@ const FAQ: React.FC = () => {
 
           <Expandable title={`🙋‍♂️ How can I contact support?`} id='contact-support'>
             <ExpandableText text='For any questions, concerns, or technical issues, please reach out to our support team at ' />
-            <span className='text-important-color'>support@dreader.io</span>
+            <span className='text-important-color'>{SUPPORT_EMAIL}</span>
             <ExpandableText text=" or raise a #support ticket on our discord server. We're here to help." />
           </Expandable>
         </div>
@@ -174,7 +175,7 @@ const FAQ: React.FC = () => {
             <ExpandableText text='Yes, in order to publish comics/mangas on dReader, visit ' />
             <Link href='https://dpublisher.app'>dPublisher</Link>
             <ExpandableText text='. dPublisher is a website for self-publishing digital comics and mangas. For any questions, reach out to us at ' />
-            <span className='text-important-color'>support@dreader.io</span>.
+            <span className='text-important-color'>{SUPPORT_EMAIL}</span>.
           </Expandable>
         </div>
       </div>

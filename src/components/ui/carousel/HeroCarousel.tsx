@@ -52,9 +52,9 @@ export const HeroCarousel: React.FC<Props> = ({ slides }) => {
   )
 
   return (
-    <div className='flex flex-col gap-6 w-full max-w-screen-xl sm:mt-3 md:mt-6'>
+    <div className='flex flex-col gap-6 w-full max-w-screen-lg sm:mt-3 md:mt-6'>
       <Carousel
-        className='w-full max-w-screen-xl h-60 sm:h-80 md:h-[530px]'
+        className='w-full max-w-screen-lg h-60 sm:h-80 md:h-[530px]'
         opts={{ loop: true, duration: 40 }}
         plugins={[Autoplay({ delay: 5000, jump: false })]}
         setApi={(api) => setEmblaApi(api)}
@@ -67,7 +67,7 @@ export const HeroCarousel: React.FC<Props> = ({ slides }) => {
             return (
               <CarouselItem
                 key={index}
-                className='w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl h-full sm:rounded-xl hover:brightness-110'
+                className='w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-lg h-full sm:rounded-xl hover:brightness-110'
               >
                 <button
                   key={slide.title}

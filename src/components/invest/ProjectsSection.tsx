@@ -37,6 +37,7 @@ const Card: React.FC<CardProps> = ({ project }) => (
   <div className='bg-grey-500 flex flex-col items-center gap-4 md:gap-[30px] p-4 md:p-6 pt-4 rounded-xl max-w-[242px] md:max-w-[354px]'>
     <div className='flex items-center max-h-[84px] h-full'>
       <Image
+      //project.name logo alt
         alt={`logo-${project.logo}`}
         src={project.logo}
         className='max-h-[84px] h-full object-cover p-1 w-auto'

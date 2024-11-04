@@ -33,7 +33,10 @@ export const INSTAGRAM_LINK = 'https://www.instagram.com/d_reader_app'
 export const TENSOR_LINK = 'https://www.tensor.trade/creator/dreader'
 export const GOOGLE_PLAY_APP_LINK = 'https://play.google.com/store/apps/details?id=io.app.dreader'
 export const LINKTREE_LINK = 'https://dreader.io/links'
-export const DPUBLISHER_LINK = 'https://dpublisher.app'
+export const D_PUBLISHER_LINK = 'https://www.dpublisher.app'
+export const D_READER_LINK = 'https://www.dreader.app'
+export const SUPPORT_EMAIL = 'support@dreader.io'
+export const SUPPORT_LINK = 'mailto:' + SUPPORT_EMAIL
 
 // metadata
 export const USED_TRAIT = 'used'

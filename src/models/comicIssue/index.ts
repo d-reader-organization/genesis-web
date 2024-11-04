@@ -8,6 +8,7 @@ import { StatefulCover } from './statefulCover'
 import { StatelessCover } from './statelessCover'
 import { RoyaltyWallet } from './royaltyWallet'
 import { CollectibleComic } from '../comic/collectibleComic'
+import { ComicIssueCollectibleInfo } from './comicIssueCollectibleInfo'
 
 export interface BasicComicIssue {
   id: number
@@ -35,7 +36,7 @@ export interface BasicComicIssue {
 
 export interface ComicIssue extends BasicComicIssue {
   activeCandyMachineAddress?: string
-  collectionAddress?: string
+  collectibleInfo?: ComicIssueCollectibleInfo
   creator?: Pick<Creator, 'name' | 'slug' | 'isVerified' | 'avatar'>
   comic?: Pick<Comic, 'title' | 'slug' | 'audienceType'>
   genres?: PartialGenre[]

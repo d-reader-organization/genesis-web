@@ -24,18 +24,20 @@ export default async function ComicIssuePage({ params: { id } }: ComicIssuePageP
     <BaseLayout>
       <ComicIssueBanner cover={comicIssue.cover} />
       <div className='flex flex-col max-md:items-center md:flex-row md:justify-center gap-6 md:gap-10 w-full mb-2'>
-        <div className='flex flex-col'>
+        <div className='flex flex-col gap-4'>
           <CoverCarousel comicIssue={comicIssue} covers={comicIssue.statelessCovers ?? []} />
           <Link
             href={RoutePath.ReadComicIssue(comicIssue.id)}
-            className='flex justify-center items-center gap-2 self-stretch text-[#AFB3BC] rounded-xl bg-grey-400 py-3 pr-2 pl-4 hover:brightness-125 max-h-[36px] md:max-h-[42px]'
+            className='flex justify-center items-center gap-2 self-stretch rounded-xl bg-yellow-500 py-3 pr-2 pl-4 hover:brightness-125 max-h-[36px] md:max-h-[42px]'
           >
-            <p className='text-xs md:text-base font-medium leading-normal md:leading-[22.4px]'>read episode</p>
-            <ChevronRightIcon />
+            <Text as='p' styleVariant='body-normal' fontWeight='medium' className='text-grey-600'>
+              Read episode
+            </Text>
+            <ChevronRightIcon className="text-grey-600" />
           </Link>
           <InfoListActions
             averageRating={comicIssue.stats?.averageRating}
-            className='flex w-fit my-4 [&>*]:min-w-20'
+            className='flex w-fit [&>*]:min-w-20'
             comicIssueId={comicIssue.id}
             favouritesCount={comicIssue.stats?.favouritesCount}
             isFavourite={comicIssue.myStats?.isFavourite}
