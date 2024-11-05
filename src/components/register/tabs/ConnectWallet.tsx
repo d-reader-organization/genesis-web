@@ -8,7 +8,7 @@ import { useSearchParams } from 'next/navigation'
 import { RoutePath } from '@/enums/routePath'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { redirectToKey } from '@/constants/general'
+import { REDIRECT_TO_KEY } from '@/constants/general'
 
 type Props = {
   isGoogleSignUp?: boolean
@@ -21,7 +21,7 @@ const BaseWalletMultiButtonDynamic = dynamic(
 
 const ConnectWalletContent: React.FC<Props> = ({ isGoogleSignUp, onSkip }) => {
   const searchParams = useSearchParams()
-  const redirectTo = searchParams.get(redirectToKey)
+  const redirectTo = searchParams.get(REDIRECT_TO_KEY)
 
   return (
     <main className='container mb-4 md:mb-8 sm:p-0 flex flex-col max-w-sm gap-4'>

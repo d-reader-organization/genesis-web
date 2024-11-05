@@ -28,7 +28,7 @@ export const ProjectInfo: React.FC<ProjectInfoProps> = ({ info }) => {
 }
 
 const InfoItem: React.FC<{ item: InfoItemProps; isLast?: boolean }> = ({ item, isLast }) => {
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(true)
   const contentRef = useRef<HTMLDivElement>(null)
   const [maxHeight, setMaxHeight] = useState('0px')
   const [isCollapsing, setIsCollapsing] = useState(false)

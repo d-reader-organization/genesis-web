@@ -1,9 +1,10 @@
-import { googleAccessTokenKey, redirectToKey } from '@/constants/general'
+import { googleAccessTokenKey, REDIRECT_TO_KEY } from '@/constants/general'
 import { Authorization } from '@/models/auth'
 import GoogleProvider from 'next-auth/providers/google'
 import { cookies } from 'next/headers'
 import NextAuth from 'next-auth'
 import { parseAndSetCookieAfterAuth } from '@/app/lib/actions/auth/login'
+import { withRedirect } from '@/lib/utils'
 
 const handler = NextAuth({
   providers: [
@@ -23,8 +24,8 @@ const handler = NextAuth({
   callbacks: {
     redirect: async (params) => {
       const url = new URL(params.url)
-      const redirectTo = url.searchParams.get(redirectToKey) ?? ''
-      return redirectTo ? `${params.baseUrl}${redirectTo}` : params.url
+      const redirectTo = url.searchParams.get(REDIRECT_TO_KEY) ?? ''
+      return redirectTo ? withRedirect(params.baseUrl, redirectTo) : params.url
     },
     signIn: async ({ account }) => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/login-with-google`, {

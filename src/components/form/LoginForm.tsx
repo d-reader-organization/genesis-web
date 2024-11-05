@@ -5,7 +5,7 @@ import React, { Suspense } from 'react'
 import { loginAction } from '@/app/lib/actions/auth/login'
 import { useFormState, useFormStatus } from 'react-dom'
 import { useSearchParams } from 'next/navigation'
-import { redirectToKey } from '@/constants/general'
+import { REDIRECT_TO_KEY } from '@/constants/general'
 import { Loader } from '../shared/Loader'
 
 const SubmitButton: React.FC = () => {
@@ -19,7 +19,7 @@ const SubmitButton: React.FC = () => {
 
 const Form: React.FC = () => {
   const searchParams = useSearchParams()
-  const redirectTo = searchParams.get(redirectToKey)
+  const redirectTo = searchParams.get(REDIRECT_TO_KEY)
   const [state, action] = useFormState(loginAction.bind(null, redirectTo), null)
   React.useEffect(() => {
     if (state?.error) {
