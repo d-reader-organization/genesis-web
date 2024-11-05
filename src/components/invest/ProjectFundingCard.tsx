@@ -6,7 +6,7 @@ import { TrendingUp } from 'lucide-react'
 import { ProjectFunding } from '@/models/project'
 import { formatNumberWithCommas, formatUSD } from '@/utils/numbers'
 import { differenceInDays } from 'date-fns'
-import { Text, toast } from '../ui'
+import { Button, Text, toast } from '../ui'
 import { cn, withRedirect } from '@/lib/utils'
 import { useUserAuth } from '@/providers/UserAuthProvider'
 import { RoutePath } from '@/enums/routePath'
@@ -15,14 +15,22 @@ import { useWallet } from '@solana/wallet-adapter-react'
 import { fetchExpressInterestTransaction } from '@/app/lib/api/transaction/queries'
 import { versionedTransactionFromBs64 } from '@/utils/transactions'
 import { expressInterest } from '@/app/lib/api/invest/mutations'
+import { useToggle } from '@/hooks'
+import { Loader } from '../shared/Loader'
 
 type ProjectFundingCardProps = {
   funding: ProjectFunding
   slug: string
   className: string
+  isAuthenticated?: boolean
 }
 
-export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({ funding, slug, className }) => {
+export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({
+  funding,
+  slug,
+  className,
+  isAuthenticated,
+}) => {
   const currentDate = new Date()
   const startedAt = funding.startDate ? new Date(funding.startDate) : undefined
   const hasFundingStarted = startedAt ? startedAt <= currentDate : false
@@ -93,7 +101,7 @@ export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({ funding,
             <InvestButton slug={slug} />
           )
         ) : (
-          <ExpressInterestButton slug={slug} />
+          <ExpressInterestButton slug={slug} isAuthenticated={isAuthenticated} />
         )}
 
         <div className='flex flex-row w-full h-full justify-center items-center p-[12px] gap-[12px] bg-gradient-to-br from-[#4a4e53] to-grey-500 rounded-xl md:gap-4 md:h-[89px] md:p-4'>
@@ -185,48 +193,83 @@ const InvestButton: React.FC<InvestButtonProps> = ({ slug }) => {
 
 type ExpressInterestButtonProps = {
   slug: string
+  isAuthenticated?: boolean
 }
 
-const ExpressInterestButton: React.FC<ExpressInterestButtonProps> = ({ slug }) => {
-  const { isAuthenticated } = useUserAuth()
+const ExpressInterestButton: React.FC<ExpressInterestButtonProps> = ({ slug, isAuthenticated }) => {
   const { publicKey, signTransaction } = useWallet()
+  const [isLoading, toggleLoading] = useToggle()
+
+  const buttonStyles =
+    'flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-yellow-500 hover:brightness-100 md:p-4'
 
   const handleExpressInterest = async () => {
     if (!publicKey || !signTransaction) {
       toast({ description: 'Please connect your wallet', variant: 'error' })
       return
     }
-    const { data: encodedTransaction, errorMessage } = await fetchExpressInterestTransaction({
-      walletAddress: publicKey.toString(),
-      projectId: slug,
-    })
-    if (!encodedTransaction || errorMessage) {
-      toast({ description: `Failed to fetch transaction: ${errorMessage}`, variant: 'error' })
-      return
+
+    try {
+      toggleLoading()
+
+      const { data: encodedTransaction, errorMessage } = await fetchExpressInterestTransaction({
+        walletAddress: publicKey.toString(),
+        projectId: slug,
+      })
+
+      if (!encodedTransaction || errorMessage) {
+        throw new Error(errorMessage || 'Failed to fetch transaction')
+      }
+
+      const transaction = versionedTransactionFromBs64(encodedTransaction)
+      const signedTransaction = await signTransaction(transaction)
+      const serializedTransaction = Buffer.from(signedTransaction.serialize()).toString('base64')
+
+      await expressInterest({
+        slug,
+        request: { transaction: serializedTransaction },
+      })
+
+      toast({
+        description: 'Successfully expressed interest!',
+        variant: 'success',
+      })
+    } catch (error) {
+      console.error('Express interest error:', error)
+      toast({
+        description: error instanceof Error ? error.message : 'Failed to express interest. Please try again.',
+        variant: 'error',
+      })
+    } finally {
+      toggleLoading()
     }
-
-    const transaction = versionedTransactionFromBs64(encodedTransaction)
-    const signedTransaction = await signTransaction(transaction)
-
-    const serializedTransaction = Buffer.from(signedTransaction.serialize()).toString('base64')
-    await expressInterest({ slug, request: { transaction: serializedTransaction } })
   }
 
-  return isAuthenticated ? (
-    <Link
-      href={withRedirect(RoutePath.Login, RoutePath.ExpressInterest(slug))}
-      className='flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-yellow-500 hover:brightness-100 md:p-4'
-    >
-      <Text as='p' styleVariant='body-normal' fontWeight='bold' className='text-grey-600 leading-snug max-md:text-base'>
-        Express interest
-      </Text>
-    </Link>
-  ) : (
-    <ConnectButton
-      className='flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-yellow-500 hover:brightness-100 md:p-4'
-      onClick={handleExpressInterest}
-    >
-      {publicKey ? 'Express Interest' : 'Connect Wallet'}
-    </ConnectButton>
+  // Not authenticated - show login link
+  if (!isAuthenticated) {
+    return (
+      <Link href={withRedirect(RoutePath.Login, RoutePath.InvestDetails(slug))} className={buttonStyles}>
+        <Text
+          as='p'
+          styleVariant='body-normal'
+          fontWeight='bold'
+          className='text-grey-600 leading-snug max-md:text-base'
+        >
+          Express interest
+        </Text>
+      </Link>
+    )
+  }
+
+  // No wallet connected - show connect button
+  if (!publicKey) {
+    return <ConnectButton className={buttonStyles} text='Connect' />
+  }
+
+  // Wallet connected - show express interest button
+  return (
+    <Button onClick={handleExpressInterest} className={buttonStyles} disabled={isLoading}>
+      {isLoading ? <Loader /> : 'Express Interest'}
+    </Button>
   )
 }

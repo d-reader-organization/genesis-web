@@ -46,6 +46,10 @@ export const fetchExpressInterestTransaction = async (args: ExpressInterestParam
   }
 
   const params: ExpressInterestParams = { walletAddress: args.walletAddress, projectId: `${project.id}` }
-  const response = await fetchWrapper<string>({ path: `${TRANSACTION}/${EXPRESS_INTEREST}`, params })
+  const response = await fetchWrapper<string>({
+    path: `${TRANSACTION}/${EXPRESS_INTEREST}`,
+    params,
+    isTextResponse: true,
+  })
   return response
 }
