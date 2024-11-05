@@ -6,7 +6,7 @@ import { SignInOrRegisterLinkButton } from '../../buttons/SignInOrRegisterLinkBu
 import BunbunBanner from 'public/assets/images/bunbun_yg4h.jpg'
 import { WalletSection } from './WalletSection'
 import { usePathname } from 'next/navigation'
-import { redirectToKey } from '@/constants/general'
+import { withRedirect } from '@/lib/utils'
 
 export const GuestProfileContent: React.FC = () => (
   <div className='flex flex-col justify-between gap-6 h-full'>
@@ -20,17 +20,18 @@ export const GuestProfileContent: React.FC = () => (
 
 const BannerWidget: React.FC = () => {
   const pathname = usePathname()
-  const redirectTo = pathname !== '/' ? `?${redirectToKey}=${pathname}` : ''
+  const href = withRedirect(RoutePath.Login, pathname)
+
   return (
     <ContentWithGradientImageBg className='p-4' image={BunbunBanner.src}>
       <div className='flex flex-col justify-between h-full'>
         <div className='text-2xl leading-[28.8px] font-medium'>
-          <span className='font-bold'>Signed in&nbsp;</span>
-          <span>users get up to &nbsp;</span>
-          <span className='font-bold'>30% OFF&nbsp;</span>
+          <span className='font-bold'>Sign in</span>
+          <span> and get up to </span>
+          <span className='font-bold'>30% OFF </span>
           <span>on all comic mints!</span>
         </div>
-        <SignInOrRegisterLinkButton href={`${RoutePath.Login}${redirectTo}`} />
+        <SignInOrRegisterLinkButton href={href} />
       </div>
     </ContentWithGradientImageBg>
   )

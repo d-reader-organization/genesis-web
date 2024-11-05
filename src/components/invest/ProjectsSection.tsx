@@ -37,8 +37,7 @@ const Card: React.FC<CardProps> = ({ project }) => (
   <div className='bg-grey-500 flex flex-col items-center gap-4 md:gap-[30px] p-4 md:p-6 pt-4 rounded-xl max-w-[242px] md:max-w-[354px]'>
     <div className='flex items-center max-h-[84px] h-full'>
       <Image
-      //project.name logo alt
-        alt={`logo-${project.logo}`}
+        alt=""
         src={project.logo}
         className='max-h-[84px] h-full object-cover p-1 w-auto'
         width={306}
@@ -47,8 +46,8 @@ const Card: React.FC<CardProps> = ({ project }) => (
     </div>
     <RoiWidget roi={project.payout.roiPercent} tooltipText={roiTooltip(project.payout.roiPercent)} />
     <div className='flex max-md:flex-col justify-center gap-4 md:gap-12 lg:gap-16 xl:gap-20 items-center'>
-      <InvestmentStatsBox title='RAISED' value={formatUSD(project.funding.raiseGoal)} />
-      <InvestmentStatsBox title='BACKERS' value={project.funding.numberOfBackers} />
+      <InvestmentStatsBox title='REVENUE' value={formatUSD(project.payout.revenue)} />
+      <InvestmentStatsBox title='BUYERS' value={project.payout.numberOfBuyers} />
     </div>
     <p className='text-xs md:text-base font-bold leading-normal md:leading-[22.4px] text-center'>
       Payout processed {project.payout?.daysForRoi} days after the offering closed.

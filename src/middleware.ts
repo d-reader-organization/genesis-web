@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { RoutePath } from './enums/routePath'
-import { accessTokenKey, jwtCookieProps, redirectToKey, refreshTokenKey } from './constants/general'
+import { accessTokenKey, jwtCookieProps, REDIRECT_TO_KEY, refreshTokenKey } from './constants/general'
 import { refreshTokenCall } from './app/lib/api/auth/queries'
 import { isAuthenticatedUser } from './app/lib/auth'
 
@@ -26,7 +26,7 @@ export async function middleware(request: NextRequest) {
   }
 
   if (requestUrlPath.includes(RoutePath.Login) && isAuthenticatedUser()) {
-    const redirectTo = request.nextUrl.searchParams.get(redirectToKey)
+    const redirectTo = request.nextUrl.searchParams.get(REDIRECT_TO_KEY)
     return NextResponse.redirect(new URL(redirectTo ?? RoutePath.Home, request.url))
   }
 
@@ -76,6 +76,6 @@ const handleUnauthorized = async ({ path, refreshToken, url }: { path: string; r
     }
   }
   const updatedUrl = new URL(RoutePath.Login, url)
-  updatedUrl.searchParams.append(redirectToKey, path)
+  updatedUrl.searchParams.append(REDIRECT_TO_KEY, path)
   return NextResponse.redirect(updatedUrl)
 }

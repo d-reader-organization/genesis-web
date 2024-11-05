@@ -35,8 +35,10 @@ export const PROJECTS: Project[] = [
     funding: {
       pledgedAmount: 256510,
       raiseGoal: 300000,
+      startDate: undefined, // TODO: 1.6.2024
+      endDate: undefined, // TODO: 15 days left
       numberOfBackers: 1023,
-      daysLeft: 15,
+      numberOfInterestedInvestors: 2,
     },
   },
   {
@@ -73,8 +75,10 @@ export const PROJECTS: Project[] = [
     funding: {
       pledgedAmount: 11840,
       raiseGoal: 25000,
+      startDate: undefined, // TODO: 1.6.2024
+      endDate: undefined, // TODO: 20 days left
       numberOfBackers: 670,
-      daysLeft: 20,
+      numberOfInterestedInvestors: 2,
     },
   },
   {
@@ -111,8 +115,10 @@ export const PROJECTS: Project[] = [
     funding: {
       pledgedAmount: 43271,
       raiseGoal: 60000,
+      startDate: undefined, // TODO: 1.6.2024
+      endDate: undefined, // TODO: 10 days left
       numberOfBackers: 954,
-      daysLeft: 10,
+      numberOfInterestedInvestors: 2,
     },
   },
   {
@@ -149,8 +155,10 @@ export const PROJECTS: Project[] = [
     funding: {
       pledgedAmount: 28192,
       raiseGoal: 50000,
+      startDate: undefined, // TODO: 1.6.2024
+      endDate: undefined, // TODO: 30 days left
       numberOfBackers: 582,
-      daysLeft: 30,
+      numberOfInterestedInvestors: 2,
     },
   },
   {
@@ -184,14 +192,18 @@ export const PROJECTS: Project[] = [
       },
     ],
     funding: {
-      pledgedAmount: 40000,
-      raiseGoal: 40000,
-      numberOfBackers: 790,
-      daysLeft: 0,
+      pledgedAmount: 4000,
+      raiseGoal: 4000,
+      startDate: undefined, // TODO: 1.6.2024
+      endDate: undefined, // TODO: completed
+      numberOfBackers: 2,
+      numberOfInterestedInvestors: 2,
     },
     payout: {
-      roiPercent: 160,
-      daysForRoi: 73,
+      revenue: 22000,
+      roiPercent: 550,
+      daysForRoi: 36,
+      numberOfBuyers: 682,
       summary:
         "Surviving in Tensor City is damn near impossible. When a group of Raiders follow some leaked alpha to an abandoned building, they'll learn just how do-or-die the space truly is. Emphasis on the DIE part. Because, shit's about to go down in this action-packed, sci-fi adventure -- the first ever story set in the Tensorian universe!",
     },
@@ -229,14 +241,18 @@ export const PROJECTS: Project[] = [
       },
     ],
     funding: {
-      pledgedAmount: 4000,
-      raiseGoal: 4000,
-      numberOfBackers: 82,
-      daysLeft: 0,
+      pledgedAmount: 2000,
+      raiseGoal: 2000,
+      startDate: undefined, // TODO: 1.6.2024
+      endDate: undefined, // TODO: completed
+      numberOfBackers: 4,
+      numberOfInterestedInvestors: 2,
     },
     payout: {
-      roiPercent: 60,
-      daysForRoi: 94,
+      revenue: 5600,
+      roiPercent: 280,
+      daysForRoi: 24,
+      numberOfBuyers: 290,
       summary:
         'Join college dropouts Breeson & Jenkins, the dumbest degens in town, on their whacky adventures at Apartment 323. Every day they do super-important stuff like eating junk food, getting wasted, throwing parties and trying to hold down a job while constantly receiving eviction threats from the stoopid landlord.',
     },
@@ -272,14 +288,18 @@ export const PROJECTS: Project[] = [
       },
     ],
     funding: {
-      pledgedAmount: 10000,
-      raiseGoal: 10000,
-      numberOfBackers: 274,
-      daysLeft: 0,
+      pledgedAmount: 1000,
+      raiseGoal: 1000,
+      startDate: undefined, // TODO: 1.6.2024
+      endDate: undefined, // TODO: completed
+      numberOfBackers: 2,
+      numberOfInterestedInvestors: 2,
     },
     payout: {
-      roiPercent: 40,
-      daysForRoi: 164,
+      revenue: 2000,
+      roiPercent: 200,
+      daysForRoi: 72,
+      numberOfBuyers: 174,
       summary:
         "Dive into Dream City's vibrant tapestry! This short comic anthology weaves tales of love, mystery, sci-fi, and more, all set against the backdrop of the dystopian metropolis of Dream City. Explore many genres in one captivating collection!",
     },
@@ -316,14 +336,18 @@ export const PROJECTS: Project[] = [
       },
     ],
     funding: {
-      pledgedAmount: 20000,
-      raiseGoal: 20000,
-      numberOfBackers: 581,
-      daysLeft: 0,
+      pledgedAmount: 6000,
+      raiseGoal: 6000,
+      startDate: undefined, // TODO: 1.6.2024
+      endDate: undefined, // TODO: completed
+      numberOfBackers: 2,
+      numberOfInterestedInvestors: 2,
     },
     payout: {
-      roiPercent: 140,
-      daysForRoi: 78,
+      revenue: 25000,
+      roiPercent: 410,
+      daysForRoi: 94,
+      numberOfBuyers: 502,
       summary:
         'After the conclusion of "The Plague Wars," Liberty has dwindled to a mere shell of its former self. Under the rule of B.E.G., the once thriving metropolis has deteriorated into a dystopian wasteland, where corruption thrives and hope has faded. This speculative fiction series follows the lives of a group of individuals, collectively known as The Syndicate, displaced by the war and now navigating the challenges of this new world. Through the dark & shadowy streets and the barren outskirts, each character confronts their own struggles, their stories intertwining as they reunite, their bonds strengthened by adversity, to confront the challenges of the present while facing the demons of their past. Staring down the reality of extinction, they come to understand that their battle extends beyond challenging the oppressive regime to confronting their own inner conflicts. "Originz" offers a grounded exploration of resilience amidst adversity where every step forward carries the weight of history.',
     },

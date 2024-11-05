@@ -12,6 +12,7 @@ import { ComicIssue } from '@/models/comicIssue'
 import { ConnectButton } from '../buttons/ConnectButton'
 import Link from 'next/link'
 import { Text } from '@/components/ui'
+import { withRedirect } from '@/lib/utils'
 
 export const CouponDescriptionDialog: React.FC<CommonDialogProps & { comicIssue: ComicIssue }> = ({
   open,
@@ -25,11 +26,11 @@ export const CouponDescriptionDialog: React.FC<CommonDialogProps & { comicIssue:
       case CouponType.RegisteredUser || CouponType.WhitelistedUser:
         return (
           <>
-            <Link className='underline' href={`${RoutePath.Register}?redirectTo=/mint/${comicIssue.id}`}>
+            <Link className='underline' href={withRedirect(RoutePath.Register, RoutePath.Mint(comicIssue.id))}>
               Register
             </Link>
             &nbsp;/&nbsp;
-            <Link className='underline' href={`${RoutePath.Login}?redirectTo=/mint/${comicIssue.id}`}>
+            <Link className='underline' href={withRedirect(RoutePath.Login, RoutePath.Mint(comicIssue.id))}>
               Login →
             </Link>
           </>

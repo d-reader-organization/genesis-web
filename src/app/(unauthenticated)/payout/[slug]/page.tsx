@@ -35,8 +35,7 @@ export default async function PayoutPage({ params }: Props) {
             <ProjectHeader title={project.title} subtitle={project.subtitle} className='md:hidden' />
             <ProjectPayoutCard
               payout={project.payout}
-              raiseGoal={project.funding.raiseGoal}
-              numberOfBackers={project.funding.numberOfBackers}
+              funding={project.funding}
               className='md:hidden'
             />
             <ProjectCreatorSection creator={project.creator} tags={project.tags} />
@@ -45,8 +44,7 @@ export default async function PayoutPage({ params }: Props) {
           <div className='flex flex-col'>
             <ProjectPayoutCard
               payout={project.payout}
-              raiseGoal={project.funding.raiseGoal}
-              numberOfBackers={project.funding.numberOfBackers}
+              funding={project.funding}
               className='max-md:hidden'
             />
           </div>
