@@ -6,10 +6,15 @@ import { TrendingUp } from 'lucide-react'
 import { ProjectFunding } from '@/models/project'
 import { formatNumberWithCommas, formatUSD } from '@/utils/numbers'
 import { differenceInDays } from 'date-fns'
-import { Text } from '../ui'
+import { Text, toast } from '../ui'
 import { cn, withRedirect } from '@/lib/utils'
 import { useUserAuth } from '@/providers/UserAuthProvider'
 import { RoutePath } from '@/enums/routePath'
+import { ConnectButton } from '../shared/buttons/ConnectButton'
+import { useWallet } from '@solana/wallet-adapter-react'
+import { fetchExpressInterestTransaction } from '@/app/lib/api/transaction/queries'
+import { versionedTransactionFromBs64 } from '@/utils/transactions'
+import { expressInterest } from '@/app/lib/api/invest/mutations'
 
 type ProjectFundingCardProps = {
   funding: ProjectFunding
@@ -184,18 +189,44 @@ type ExpressInterestButtonProps = {
 
 const ExpressInterestButton: React.FC<ExpressInterestButtonProps> = ({ slug }) => {
   const { isAuthenticated } = useUserAuth()
-  const href = isAuthenticated
-    ? RoutePath.ExpressInterest(slug)
-    : withRedirect(RoutePath.Login, RoutePath.ExpressInterest(slug))
+  const { publicKey, signTransaction } = useWallet()
 
-  return (
+  const handleExpressInterest = async () => {
+    if (!publicKey || !signTransaction) {
+      toast({ description: 'Please connect your wallet', variant: 'error' })
+      return
+    }
+    const { data: encodedTransaction, errorMessage } = await fetchExpressInterestTransaction({
+      walletAddress: publicKey.toString(),
+      projectId: slug,
+    })
+    if (!encodedTransaction || errorMessage) {
+      toast({ description: `Failed to fetch transaction: ${errorMessage}`, variant: 'error' })
+      return
+    }
+
+    const transaction = versionedTransactionFromBs64(encodedTransaction)
+    const signedTransaction = await signTransaction(transaction)
+
+    const serializedTransaction = Buffer.from(signedTransaction.serialize()).toString('base64')
+    await expressInterest({ slug, request: { transaction: serializedTransaction } })
+  }
+
+  return isAuthenticated ? (
     <Link
-      href={href}
+      href={withRedirect(RoutePath.Login, RoutePath.ExpressInterest(slug))}
       className='flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-yellow-500 hover:brightness-100 md:p-4'
     >
       <Text as='p' styleVariant='body-normal' fontWeight='bold' className='text-grey-600 leading-snug max-md:text-base'>
         Express interest
       </Text>
     </Link>
+  ) : (
+    <ConnectButton
+      className='flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-yellow-500 hover:brightness-100 md:p-4'
+      onClick={handleExpressInterest}
+    >
+      {publicKey ? 'Express Interest' : 'Connect Wallet'}
+    </ConnectButton>
   )
 }

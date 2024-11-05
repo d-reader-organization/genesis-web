@@ -59,5 +59,5 @@ export type UserProjectInterest = {
 }
 
 export type ExpressInterest = {
-  transactionSignature: string
+  transaction: string
 }

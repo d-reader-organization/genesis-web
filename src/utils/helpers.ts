@@ -1,3 +1,4 @@
+import { PROJECTS } from '@/constants/projects'
 import { RoutePath } from '@/enums/routePath'
 import { CarouselSlide } from '@/models/carousel/carouselSlide'
 import { PartialGenre } from '@/models/genre'
@@ -137,4 +138,9 @@ export const getSlideFallbackUrl = (slide: CarouselSlide): string => {
   else if (slide.creatorSlug) return RoutePath.Creator(slide.creatorSlug)
   else if (slide.comicSlug) return RoutePath.Comic(slide.comicSlug)
   else return slide.externalLink ?? ''
+}
+
+export const findProjectBySlug = (slug: string) => {
+  const project = PROJECTS.find((project) => project.slug === slug)
+  return project
 }
