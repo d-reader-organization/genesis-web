@@ -1,3 +1,4 @@
+import { fetchSuccessfulProjects } from '@/app/lib/api/invest/queries'
 import { investSlides } from '@/app/lib/data/invest/carouselData'
 import { highInterestProjects } from '@/app/lib/data/invest/projectsData'
 import { InvestCarousel } from '@/components/invest/Carousel'
@@ -6,8 +7,6 @@ import { ProjectsSection } from '@/components/invest/ProjectsSection'
 import { InvestSection } from '@/components/invest/Section'
 import { BaseLayout } from '@/components/layout/BaseLayout'
 import { InvestScreenWelcomeDialog } from '@/components/shared/dialogs/InvestScreenWelcomeDialog'
-import { PROJECTS } from '@/constants/projects'
-import { SuccessfulProject, isSuccessfulProject } from '@/models/project'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -42,26 +41,24 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
 }
 
-function fetchSuccessfulProjects(): SuccessfulProject[] {
-  return PROJECTS.filter(isSuccessfulProject)
-}
-
 export default async function InvestPage() {
-  const successfulProjects = fetchSuccessfulProjects()
+  const { data: successfulProjects, errorMessage } = await fetchSuccessfulProjects()
 
-  if (successfulProjects.length === 0) {
+  if (errorMessage) {
     notFound()
   }
 
   return (
-    <BaseLayout>
-      <div className='flex flex-col gap-10 max-w-screen-xl w-full'>
-        <InvestCarousel slides={investSlides} />
-        <ProjectsSection projects={successfulProjects} title='Recent Successful Projects' />
-        <InvestSection actionHref='/invest' data={highInterestProjects} title='Gauging Interest' />
-        <FaqSection />
-        <InvestScreenWelcomeDialog />
-      </div>
-    </BaseLayout>
+    successfulProjects && (
+      <BaseLayout>
+        <div className='flex flex-col gap-10 max-w-screen-xl w-full'>
+          <InvestCarousel slides={investSlides} />
+          <ProjectsSection projects={successfulProjects} title='Recent Successful Projects' />
+          <InvestSection actionHref='/invest' data={highInterestProjects} title='Gauging Interest' />
+          <FaqSection />
+          <InvestScreenWelcomeDialog />
+        </div>
+      </BaseLayout>
+    )
   )
 }

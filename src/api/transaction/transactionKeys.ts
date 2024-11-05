@@ -8,6 +8,7 @@ import { PrivateBidParams } from '@/models/transaction/privateBid'
 import { SignComicParams } from '@/models/transaction/signComic'
 import { TipCreatorParams } from '@/models/transaction/tipCreator'
 import { UseComicIssueAssetParams } from '@/models/transaction/useComicIssueAsset'
+import { ExpressInterestParams } from '@/models/transaction/expressInterest'
 
 export const TRANSACTION_QUERY_KEYS = Object.freeze({
   TRANSACTION: 'transaction',
@@ -23,6 +24,7 @@ export const TRANSACTION_QUERY_KEYS = Object.freeze({
   MULTIPLE_BUY: 'multiple-buy',
   CANCEL_BID: 'cancel-bid',
   CANCEL_LISTING: 'cancel-listing',
+  EXPRESS_INTEREST: 'express-interest',
 })
 
 export const transactionKeys = Object.freeze({
@@ -95,5 +97,12 @@ export const transactionKeys = Object.freeze({
     TRANSACTION_QUERY_KEYS.CANCEL_LISTING,
     params.assetAddress,
     params.receiptAddress,
+  ],
+  expressInterest: (params: ExpressInterestParams) => [
+    TRANSACTION_QUERY_KEYS.TRANSACTION,
+    TRANSACTION_QUERY_KEYS.EXPRESS_INTEREST,
+    params.walletAddress,
+    params.projectId,
+    params.splTokenAddress,
   ],
 })
