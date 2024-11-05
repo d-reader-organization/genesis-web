@@ -8,11 +8,10 @@ import { cn } from '@/lib/utils'
 
 type Props = {
   payout: ProjectPayout
-  raiseGoal: ProjectFunding['raiseGoal']
-  numberOfBackers: ProjectFunding['numberOfBackers']
+  funding: ProjectFunding
 } & React.HTMLAttributes<HTMLDivElement>
 
-export const ProjectPayoutCard: React.FC<Props> = ({ payout, raiseGoal, numberOfBackers, className }) => {
+export const ProjectPayoutCard: React.FC<Props> = ({ payout, funding, className }) => {
   return (
     <div
       className={cn(
@@ -26,20 +25,20 @@ export const ProjectPayoutCard: React.FC<Props> = ({ payout, raiseGoal, numberOf
 
       <div className='flex w-full md:flex-col items-start pb-[2px] md:gap-5 md:pb-[6px]'>
         <PayoutStats
-          text='total raised'
-          value={formatUSD(raiseGoal)}
+          text={`total raised by ${funding.numberOfBackers} backers`}
+          value={formatUSD(funding.raiseGoal)}
           valueColor='text-[#fceb54] '
           valueSizeMd='md:text-3xl'
           textSizeMd='md:text-xl'
         />
-        <PayoutStats text='backers' value={formatNumberWithCommas(numberOfBackers)} />
+        <PayoutStats text='buyers' value={formatNumberWithCommas(payout.numberOfBuyers)} />
         <PayoutStats
           text='return on investment'
           value={formatPercentage(payout.roiPercent)}
           className='max-md:hidden'
         />
         <PayoutStats text='ROI' value={formatPercentage(payout.roiPercent)} className='md:hidden' />
-        <PayoutStats text='days for ROI' value={payout.daysForRoi} />
+        <PayoutStats text='days for payout processing' value={payout.daysForRoi} />
       </div>
 
       <div>
@@ -51,7 +50,7 @@ export const ProjectPayoutCard: React.FC<Props> = ({ payout, raiseGoal, numberOf
             <ReceiptText color='green' size={20} className='max-md:hidden' />
             <ReceiptText color='green' size={16} className='md:hidden' />
           </div>
-          <p className='text-[#aeaeae] text-[14px] font-medium leading-snug'>Licencing Participation Agreement</p>
+          <p className='text-grey-100 text-[14px] font-medium leading-snug'>Licencing Participation Agreement</p>
         </div>
         <p className='text-[10px] italic pt-1 leading-normal max-md:pl-1 md:px-2'>{payoutDetails}</p>
       </div>

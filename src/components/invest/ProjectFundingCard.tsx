@@ -5,19 +5,29 @@ import Link from 'next/link'
 import { TrendingUp } from 'lucide-react'
 import { ProjectFunding } from '@/models/project'
 import { formatNumberWithCommas, formatUSD } from '@/utils/numbers'
+import { differenceInDays } from 'date-fns'
 import { Text } from '../ui'
-import { cn } from '@/lib/utils'
+import { cn, withRedirect } from '@/lib/utils'
+import { useUserAuth } from '@/providers/UserAuthProvider'
+import { RoutePath } from '@/enums/routePath'
 
 type ProjectFundingCardProps = {
   funding: ProjectFunding
+  slug: string
   className: string
 }
 
-export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({ funding, className }) => {
+export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({ funding, slug, className }) => {
+  const currentDate = new Date()
+  const startedAt = funding.startDate ? new Date(funding.startDate) : undefined
+  const hasFundingStarted = startedAt ? startedAt <= currentDate : false
+  const hasFundingEnded = funding.pledgedAmount >= funding.raiseGoal
+  const daysLeft = funding.endDate ? differenceInDays(new Date(funding.endDate), currentDate) : undefined
+
   return (
     <div
       className={
-        'flex flex-col p-2 gap-4 bg-grey-500 justify-between items-start shadow md:rounded-xl md:p-6 md:sticky md:top-[100px] md:max-w-[485px] md:min-w-[300px] md:h-[550px] md:gap-0 ' +
+        'flex flex-col p-2 gap-4 bg-grey-500 justify-between items-start shadow md:rounded-xl md:p-6 md:sticky md:top-[100px] md:max-w-[485px] md:min-w-[300px] md:max-h-[550px] md:gap-6 ' +
         className
       }
     >
@@ -52,32 +62,34 @@ export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({ funding,
           valueColor='text-yellow-500 '
           className='md:hidden items-center'
         />
-        <FundingStats
-          text='backers'
-          value={formatNumberWithCommas(funding.numberOfBackers)}
-          className='max-md:items-center'
-        />
-        <FundingStats
-          text='days left'
-          value={formatNumberWithCommas(funding.daysLeft)}
-          className='max-md:items-center'
-        />
+        {hasFundingStarted ? (
+          <FundingStats
+            text='backers'
+            value={formatNumberWithCommas(funding.numberOfBackers)}
+            className='max-md:items-center'
+          />
+        ) : (
+          <FundingStats
+            text='expressed interest'
+            value={formatNumberWithCommas(funding.numberOfInterestedInvestors) + ' investors'}
+            className='max-md:items-center'
+          />
+        )}
+        {daysLeft !== undefined && (
+          <FundingStats text='days left' value={formatNumberWithCommas(daysLeft)} className='max-md:items-center' />
+        )}
       </div>
 
       <div className='flex flex-col w-full gap-2 md:gap-4'>
-        <Link
-          href={'placeholder'}
-          className='flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-yellow-500 hover:brightness-100 md:p-4'
-        >
-          <Text
-            as='p'
-            styleVariant='body-normal'
-            fontWeight='bold'
-            className='text-grey-600 leading-snug max-md:text-base'
-          >
-            Back this project
-          </Text>
-        </Link>
+        {hasFundingStarted ? (
+          hasFundingEnded ? (
+            <FundingEndedButton />
+          ) : (
+            <InvestButton slug={slug} />
+          )
+        ) : (
+          <ExpressInterestButton slug={slug} />
+        )}
 
         <div className='flex flex-row w-full h-full justify-center items-center p-[12px] gap-[12px] bg-gradient-to-br from-[#4a4e53] to-grey-500 rounded-xl md:gap-4 md:h-[89px] md:p-4'>
           <div
@@ -90,7 +102,7 @@ export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({ funding,
             as='p'
             styleVariant='body-normal'
             fontWeight='medium'
-            className='text-[#aeaeae] leading-tight max-md:text-sm'
+            className='text-grey-100 leading-tight max-md:text-sm'
           >
             Rewards will be distributed as creator completes milestones
           </Text>
@@ -130,5 +142,60 @@ const FundingStats: React.FC<FundingStatsProps> = ({ text, value, valueColor = '
         {text}
       </Text>
     </div>
+  )
+}
+
+const FundingEndedButton: React.FC = () => {
+  return (
+    <Link
+      href='#'
+      className='flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-yellow-500 hover:brightness-100 md:p-4'
+    >
+      <Text as='p' styleVariant='body-normal' fontWeight='bold' className='text-grey-600 leading-snug max-md:text-base'>
+        Fully backed
+      </Text>
+    </Link>
+  )
+}
+
+type InvestButtonProps = {
+  slug: string
+}
+
+const InvestButton: React.FC<InvestButtonProps> = ({ slug }) => {
+  const { isAuthenticated } = useUserAuth()
+  const href = isAuthenticated ? RoutePath.InvestCheckout(slug) : withRedirect(RoutePath.InvestCheckout(slug))
+
+  return (
+    <Link
+      href={href}
+      className='flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-yellow-500 hover:brightness-100 md:p-4'
+    >
+      <Text as='p' styleVariant='body-normal' fontWeight='bold' className='text-grey-600 leading-snug max-md:text-base'>
+        Back this project
+      </Text>
+    </Link>
+  )
+}
+
+type ExpressInterestButtonProps = {
+  slug: string
+}
+
+const ExpressInterestButton: React.FC<ExpressInterestButtonProps> = ({ slug }) => {
+  const { isAuthenticated } = useUserAuth()
+  const href = isAuthenticated
+    ? RoutePath.ExpressInterest(slug)
+    : withRedirect(RoutePath.Login, RoutePath.ExpressInterest(slug))
+
+  return (
+    <Link
+      href={href}
+      className='flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-yellow-500 hover:brightness-100 md:p-4'
+    >
+      <Text as='p' styleVariant='body-normal' fontWeight='bold' className='text-grey-600 leading-snug max-md:text-base'>
+        Express interest
+      </Text>
+    </Link>
   )
 }
