@@ -54,7 +54,7 @@ export default async function InvestPage() {
         <div className='flex flex-col gap-10 max-w-screen-xl w-full'>
           <InvestCarousel slides={investSlides} />
           <ProjectsSection projects={successfulProjects} title='Recent Successful Projects' />
-          <InvestSection actionHref='/invest' data={highInterestProjects} title='Gauging Interest' />
+          <InvestSection data={highInterestProjects} title='Gauging Interest' />
           <FaqSection />
           <InvestScreenWelcomeDialog />
         </div>

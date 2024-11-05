@@ -20,18 +20,11 @@ export const SectionSlider: React.FC<Props> = ({ children, slidesToScroll, title
           <h1 className='text-xl md:text-[32px] font-semibold leading-[20px] md:leading-8 tracking-[0.04px] md:tracking-[0.064px] font-obviouslyNarrow'>
             {title}
           </h1>
-          {/* <Link
-        className='max-h-9 md:max-h-[42px] bg-grey-400 pl-4 py-3 pr-2 rounded-xl flex gap-1 items-center hover:brightness-125'
-        href={actionHref}
-      >
-        <p className='text-xs leading-normal md:text-base font-medium text-[#AFB3BC]'>See all</p>
-        <ChevronRight />
-      </Link> */}
         </div>
         <ControlledArrows onLeftClick={() => emblaApi?.scrollPrev()} onRightClick={() => emblaApi?.scrollNext()} />
       </div>
       <div className='overflow-hidden' ref={emblaRef}>
-        <div className='flex'>{children}</div>
+        <div className='flex w-[calc(100%+24px)]'>{children}</div>
       </div>
     </div>
   )

@@ -1,27 +1,30 @@
 import { InterestProject } from '@/app/lib/data/invest/projectsData'
 import React from 'react'
-import { Section } from '../shared/Section'
 import Image from 'next/image'
 import Link from 'next/link'
 import { RoutePath } from '@/enums/routePath'
 import AnnouncementIcon from 'public/assets/vector-icons/announcement.svg'
 import { cn } from '@/lib/utils'
+import { SectionSlider } from '../shared/SectionSlider'
 
 type Props = {
-  actionHref: string
   data: InterestProject[]
   title: string
 }
 
-export const InvestSection: React.FC<Props> = ({ actionHref, data, title }) => {
+export const InvestSection: React.FC<Props> = ({ data, title }) => {
   return (
-    <Section actionHref={actionHref} title={title}>
-      <div className='grid grid-cols-1 660:grid-cols-3 gap-4 sm:gap-6 md:gap-10 '>
-        {data.map((project) => (
+    <SectionSlider title={title}>
+      {data.map((project) => (
+        <div
+          key={project.title}
+          className={cn(
+            'flex flex-[0_0_100%] min-w-0 xs:flex-[0_0_100%] sm:flex-[0_0_50%] md:flex-[0_0_50%] pr-4 md:pr-6 lg:flex-[0_0_33.333%]'
+          )}
+        >
           <Link
             href={RoutePath.InvestDetails(project.slug)}
-            className='relative  max-h-[382px] min-h-[382px] rounded-xl hover:brightness-125'
-            key={project.title}
+            className='relative max-h-[382px] min-h-[382px] rounded-xl hover:brightness-125 w-[100%]'
           >
             <Image alt={project.title} src={project.image} className='object-cover rounded-xl' fill />
             <div className='absolute inset-0 bg-gradient-to-b from-transparent to-black rounded-xl'></div>
@@ -51,8 +54,8 @@ export const InvestSection: React.FC<Props> = ({ actionHref, data, title }) => {
               </div>
             </div>
           </Link>
-        ))}
-      </div>
-    </Section>
+        </div>
+      ))}
+    </SectionSlider>
   )
 }
