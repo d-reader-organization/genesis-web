@@ -16,6 +16,7 @@ export type ProjectFunding = {
   numberOfInterestedInvestors: number
   startDate?: string
   endDate?: string
+  isUserInterested?: boolean
 }
 
 export type ProjectPayout = {
@@ -27,6 +28,7 @@ export type ProjectPayout = {
 }
 
 export type Project = {
+  id: number
   slug: string
   title: string
   subtitle: string
@@ -44,4 +46,18 @@ export type SuccessfulProject = Project & { payout: ProjectPayout }
 
 export function isSuccessfulProject(project: Project | undefined): project is SuccessfulProject {
   return project !== undefined && 'payout' in project
+}
+
+export type ProjectExpressedInterest = {
+  id: number
+  count: number
+}
+
+export type UserProjectInterest = {
+  countOfUserExpressedInterest: number
+  isInterested: boolean
+}
+
+export type ExpressInterest = {
+  transactionSignature: string
 }

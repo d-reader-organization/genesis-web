@@ -25,8 +25,9 @@ export const CoverSlide: React.FC<Props> = ({ cover, isPriority, totalSupply, on
       priority={isPriority}
       sizes='(max-width: 350px) 100vw, 350px'
       className='rounded-2xl min-h-96 w-full object-cover'
-
     />
-    {!hideRarityChip && <RarityChip className='-mt-3.5' rarity={cover.rarity} supply={getRaritySupply(totalSupply, cover.share)} />}
+    {!hideRarityChip && (
+      <RarityChip className='-mt-3.5' rarity={cover.rarity} supply={getRaritySupply(totalSupply, cover.share)} />
+    )}
   </button>
 )
