@@ -11,6 +11,7 @@ import {
   UserProjectInterest,
 } from '@/models/project'
 import { PROJECTS } from '@/constants/projects'
+import { findProjectBySlug } from '@/utils/helpers'
 
 const { GET, INVEST } = INVEST_QUERY_KEYS
 
@@ -39,9 +40,9 @@ export const fetchSuccessfulProjects = async (): Promise<{
 }
 
 export const fetchProject = async (slug: string): Promise<{ data: Nullable<Project>; errorMessage?: string }> => {
-  const project = PROJECTS.find((project) => project.slug === slug)
+  const project = findProjectBySlug(slug)
   if (!project) {
-    return { data: null, errorMessage: "Project with slug doesn't exists" }
+    return { data: null, errorMessage: `Project with slug ${slug} does not exists` }
   }
 
   const { data } = await fetchWrapper<UserProjectInterest>({
