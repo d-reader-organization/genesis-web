@@ -7,12 +7,13 @@ import { ProjectFundingCard } from '@/components/invest/ProjectFundingCard'
 import { notFound } from 'next/navigation'
 import { fetchProject } from '@/app/lib/api/invest/queries'
 import { isAuthenticatedUser } from '@/app/lib/auth'
+import { ProjectInvestDialog } from '@/components/shared/dialogs/ProjectInvestDialog'
 
 type Props = {
   params: { slug: string }
 }
 
-export default async function InvestPage({ params }: Props) {
+export default async function ProjectInvestPage({ params }: Props) {
   const { data: project, errorMessage } = await fetchProject(params.slug)
   const isAuthenticated = isAuthenticatedUser()
 
@@ -22,7 +23,7 @@ export default async function InvestPage({ params }: Props) {
 
   return (
     project && (
-      <BaseLayout>
+      <BaseLayout showFooter>
         <div className='flex flex-col max-w-screen-xl w-full'>
           <ProjectHeader title={project.title} subtitle={project.subtitle} className='max-md:hidden' />
           <div className='flex flex-col md:flex-row w-full h-full gap-6 md:gap-10'>
@@ -48,6 +49,7 @@ export default async function InvestPage({ params }: Props) {
             </div>
           </div>
         </div>
+        <ProjectInvestDialog />
       </BaseLayout>
     )
   )

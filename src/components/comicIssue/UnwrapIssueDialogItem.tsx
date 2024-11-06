@@ -24,7 +24,7 @@ export const UnwrapIssueDialogItem: React.FC<{ asset: Asset; closeDialog: VoidFu
   asset,
   closeDialog,
 }) => {
-  const [isUnwrapWarningRead] = useLocalStorage(LOCAL_STORAGE.IS_UNWRAP_HINT_READ, false)
+  const [isDialogRead] = useLocalStorage(LOCAL_STORAGE.IS_UNWRAP_HINT_READ, false)
   const [unwrapWarningDialog, toggleUnwrapWarningDialog] = useToggle(false)
 
   const { handleUnwrap, isUnwrapLoading } = useHandleUnwrap({
@@ -70,7 +70,7 @@ export const UnwrapIssueDialogItem: React.FC<{ asset: Asset; closeDialog: VoidFu
           )}
         </div>
       </div>
-      {isUnwrapWarningRead ? (
+      {isDialogRead ? (
         <BaseWalletMultiButtonDynamic className={unwrapButtonStyle} onClick={handleUnwrap}>
           {isUnwrapLoading ? <Loader /> : 'Open'}
         </BaseWalletMultiButtonDynamic>

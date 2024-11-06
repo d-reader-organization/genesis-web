@@ -12,7 +12,7 @@ import { LOCAL_STORAGE } from '@/constants/general'
 type Props = { handleUnwrap: () => Promise<void>; isLoading: boolean } & CommonDialogProps
 
 export const UnwrapWarningDialog: React.FC<Props> = ({ handleUnwrap, isLoading, open, toggleDialog }) => {
-  const [isUnwrapWarningRead, setIsUnwrapWarningRead] = useLocalStorage(LOCAL_STORAGE.IS_UNWRAP_HINT_READ, false)
+  const [isDialogRead, setIsDialogRead] = useLocalStorage(LOCAL_STORAGE.IS_UNWRAP_HINT_READ, false)
   return (
     <Dialog open={open} onOpenChange={toggleDialog}>
       <DialogContent
@@ -32,9 +32,9 @@ export const UnwrapWarningDialog: React.FC<Props> = ({ handleUnwrap, isLoading, 
         <div className='flex items-center justify-center space-x-2'>
           <Checkbox
             id='ask-again'
-            checked={isUnwrapWarningRead}
+            checked={isDialogRead}
             onCheckedChange={(value) => {
-              setIsUnwrapWarningRead(!!value)
+              setIsDialogRead(!!value)
             }}
           />
           <label htmlFor='ask-again' className='text-base font-medium leading-5 cursor-pointer'>

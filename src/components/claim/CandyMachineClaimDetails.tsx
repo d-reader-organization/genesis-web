@@ -13,15 +13,12 @@ type Props = {
 }
 
 export const CandyMachineClaimDetails: React.FC<Props> = ({ comicIssue, isAuthenticated }) => {
-  const [isClaimWalkthroughCompelete, setClaimWalkthroughCompelete] = useLocalStorage(
-    LOCAL_STORAGE.IS_CLAIM_WALKTHROUGH_COMPELETE,
-    false
-  )
-  const [showBouncingPurchaseButton, , closeBouncingPurchaseButton] = useToggle(!isClaimWalkthroughCompelete)
+  const [isDialogRead, setIsDialogRead] = useLocalStorage(LOCAL_STORAGE.IS_CLAIM_WALKTHROUGH_COMPELETE, false)
+  const [showBouncingPurchaseButton, , closeBouncingPurchaseButton] = useToggle(!isDialogRead)
 
   const onMint = () => {
     closeBouncingPurchaseButton()
-    setClaimWalkthroughCompelete(true)
+    setIsDialogRead(true)
   }
 
   return (

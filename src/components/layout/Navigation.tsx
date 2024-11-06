@@ -38,13 +38,15 @@ export const Navigation: React.FC<Props> = ({ me }) => {
       >
         <div className='flex items-center justify-between p-4 max-w-screen-xl w-full'>
           <div className='flex items-center gap-8'>
-            <Link href={RoutePath.Home}>
-              {isInvest ? (
+            {isInvest ? (
+              <Link href={RoutePath.Invest}>
                 <GenesisLogo className='h-8 min-w-fit fill-white ml-4' />
-              ) : (
+              </Link>
+            ) : (
+              <Link href={RoutePath.Home}>
                 <DReaderLogo className='h-8 min-w-fit fill-white ml-4' />
-              )}
-            </Link>
+              </Link>
+            )}
             <SearchInput />
             <div className='flex items-center gap-10'>
               <MenuItem href={RoutePath.Invest} isActive={isInvest} isComingSoon title='Invest' />

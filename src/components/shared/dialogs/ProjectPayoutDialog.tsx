@@ -3,11 +3,11 @@
 import React from 'react'
 import { useLocalStorage, useToggle } from '@/hooks'
 import { LOCAL_STORAGE } from '@/constants/general'
-import { INVEST_DISCLAIMER_DIALOG_STEPS } from '@/constants/dialogs'
+import { PROJECT_PAYOUT_DIALOG_STEPS } from '@/constants/dialogs'
 import { MultiStepDialog } from './MultiStepDialog'
 
-export const InvestScreenWelcomeDialog: React.FC = () => {
-  const [isDialogRead, setIsDialogRead] = useLocalStorage(LOCAL_STORAGE.IS_INVESTMENT_DISCLAIMER_READ, false)
+export const ProjectPayoutDialog: React.FC = () => {
+  const [isDialogRead, setIsDialogRead] = useLocalStorage(LOCAL_STORAGE.IS_PROJECT_PAYOUT_DISCLAIMER_READ, false)
   const [open, toggleDialog] = useToggle(!isDialogRead)
 
   const onCompleted = () => {
@@ -18,7 +18,7 @@ export const InvestScreenWelcomeDialog: React.FC = () => {
   return (
     <MultiStepDialog
       open={open}
-      steps={INVEST_DISCLAIMER_DIALOG_STEPS}
+      steps={PROJECT_PAYOUT_DIALOG_STEPS}
       toggleDialog={toggleDialog}
       onCompleted={onCompleted}
     />

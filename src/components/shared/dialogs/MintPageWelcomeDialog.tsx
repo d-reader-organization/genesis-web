@@ -8,12 +8,12 @@ import { Text } from '@/components/ui'
 import { LOCAL_STORAGE } from '@/constants/general'
 
 export const MintPageWelcomeDialog: React.FC = () => {
-  const [isMintPageVisited, setIsMintPageVisited] = useLocalStorage(LOCAL_STORAGE.IS_MINT_PAGE_VISITED, false)
-  const [mintPageWelcomeDialog, toggleMintPageWelcomeDialog] = useToggle(!isMintPageVisited)
+  const [isDialogRead, setIsDialogRead] = useLocalStorage(LOCAL_STORAGE.IS_MINT_PAGE_VISITED, false)
+  const [mintPageWelcomeDialog, toggleMintPageWelcomeDialog] = useToggle(!isDialogRead)
 
   const onClick = () => {
     toggleMintPageWelcomeDialog()
-    setIsMintPageVisited(true)
+    setIsDialogRead(true)
   }
 
   return (

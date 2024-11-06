@@ -13,7 +13,7 @@ export type DialogContentItem = {
   video?: string
 }
 
-export const DIALOG_STEPS: DialogStep[] = [
+export const INVEST_DISCLAIMER_DIALOG_STEPS: DialogStep[] = [
   {
     // title: 'Join the community changing entertainment!',
     title: 'Invest into breakthrough stories!',
@@ -27,12 +27,12 @@ export const DIALOG_STEPS: DialogStep[] = [
       {
         icon: '💵',
         title: 'Invest into breakthrough stories',
-        text: `Support the creator on its journey, help with distribution, and reap the benefits as it generates revenue.`,
+        text: `Support the creator on their journey, help with distribution, and reap the benefits as the story generates revenue.`,
       },
       {
         icon: '📚',
         title: `You're the executive 🫵`,
-        text: `YOU have the power to decide which story gets produced! It's time for original stories which will win over the world.`,
+        text: `YOU have the power to decide which story gets produced! It's time for original stories to win over the world.`,
       },
     ],
   },
@@ -72,6 +72,49 @@ There are 38 Godzilla and 13 Kong movies.`,
         icon: '⁉️',
         title: 'Got any questions?',
         text: `Find the FAQ at the bottom of the site, or connect with us via social links in the footer.`,
+      },
+    ],
+  },
+]
+
+export const PROJECT_INVEST_DIALOG_STEPS: DialogStep[] = [
+  {
+    title: `Is this the story you're looking for?!`,
+    buttonLabel: 'Got it!',
+    items: [
+      {
+        icon: '🔎',
+        title: 'Do your research',
+        text: `On this page you can find all the project details: plot, roadmap, team, distribution plans, offering, ...`,
+      },
+      {
+        icon: '✋',
+        title: 'Express interest to invest',
+        text: `If you like the story, 'express interest' to invest. Once sufficient investors opt in, fundraise will start.`,
+      },
+      {
+        icon: '🪙',
+        title: 'Story is tokenized',
+        text: 'After the fundraise concludes, ownership of the story will be represented with a token.',
+      },
+    ],
+  },
+]
+
+export const PROJECT_PAYOUT_DIALOG_STEPS: DialogStep[] = [
+  {
+    title: `Story payout details`,
+    buttonLabel: 'Got it!',
+    items: [
+      {
+        icon: '💰',
+        title: 'This story is profitable',
+        text: `Creators of this story and its investors have made profits.`,
+      },
+      {
+        icon: '📄',
+        title: 'Details available',
+        text: `On this page you can find details of the payout such as amount raised, revenue generated, number of backers, and days it took to process the payout.`,
       },
     ],
   },
