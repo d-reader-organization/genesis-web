@@ -3,13 +3,7 @@
 import { fetchWrapper } from '../../fetchWrapper'
 import { Nullable } from '@/models/common'
 import { INVEST_QUERY_KEYS } from '@/api/invest'
-import {
-  isSuccessfulProject,
-  Project,
-  ProjectExpressedInterest,
-  SuccessfulProject,
-  UserProjectInterest,
-} from '@/models/project'
+import { isSuccessfulProject, Project, SuccessfulProject, UserProjectInterest } from '@/models/project'
 import { PROJECTS } from '@/constants/projects'
 import { findProjectBySlug } from '@/utils/helpers'
 
@@ -19,7 +13,7 @@ export const fetchSuccessfulProjects = async (): Promise<{
   data: Nullable<SuccessfulProject[]>
   errorMessage?: string
 }> => {
-  const { data: investorInterests, errorMessage } = await fetchWrapper<ProjectExpressedInterest[]>({
+  const { data: userProjectInterest, errorMessage } = await fetchWrapper<UserProjectInterest[]>({
     path: `${INVEST}/${GET}`,
   })
 
@@ -32,7 +26,8 @@ export const fetchSuccessfulProjects = async (): Promise<{
     ...project,
     funding: {
       ...project.funding,
-      numberOfInterestedInvestors: investorInterests?.find((interest) => interest.id === project.id)?.count ?? 0,
+      numberOfInterestedInvestors:
+        userProjectInterest?.find((interest) => interest.slug === project.slug)?.countOfUserExpressedInterest ?? 0,
     },
   }))
 
@@ -59,7 +54,7 @@ export const fetchProject = async (slug: string): Promise<{ data: Nullable<Proje
       funding: {
         ...project.funding,
         numberOfInterestedInvestors: data.countOfUserExpressedInterest,
-        isUserInterested: data.isInterested,
+        isUserInterested: data.isUserInterested,
       },
     },
   }

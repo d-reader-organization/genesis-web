@@ -2,7 +2,6 @@ import { Project } from '@/models/project'
 
 export const PROJECTS: Project[] = [
   {
-    id: 1,
     slug: 'the-recruits',
     title: 'The Recruits - animated comic',
     subtitle: 'Celebrating the Degenerate Apes community',
@@ -43,7 +42,6 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: 2,
     slug: 'mad-lads',
     title: 'Mad Lads',
     subtitle: 'A tale of chaos and mischief',
@@ -84,7 +82,6 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: 3,
     slug: 'bonk',
     title: 'Bonk',
     subtitle: 'The wildest ride in the galaxy',
@@ -125,7 +122,6 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: 4,
     slug: 'galactic-geckos',
     title: 'Galactic Geckos',
     subtitle: 'A space odyssey of epic proportions',
@@ -166,7 +162,6 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: 5,
     slug: 'enter-the-tensorverse',
     title: 'Enter the Tensorverse',
     subtitle: 'Survive or Die: The First Adventure in Tensor City',
@@ -214,7 +209,6 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: 6,
     slug: 'apt-323',
     title: 'Apt 323',
     subtitle: 'Chaos, Parties, and Eviction: Life at Apartment 323',
@@ -264,7 +258,6 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: 7,
     slug: 'dream-city',
     title: 'Dream City',
     subtitle: 'Tales of Love, Mystery, and Sci-Fi in Dream City',
@@ -312,7 +305,6 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    id: 8,
     slug: 'liberty-square-originz',
     title: 'Liberty Square Originz',
     subtitle: "Surviving a Dystopian Wasteland: The Syndicate's Fight for Freedom",
