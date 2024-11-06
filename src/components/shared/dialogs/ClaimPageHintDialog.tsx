@@ -11,14 +11,14 @@ import { GoogleViaTipLinkWalletName } from '@tiplink/wallet-adapter'
 
 export const ClaimPageHintDialog: React.FC = () => {
   const { select } = useWallet()
-  const [isClaimHintRead, setIsClaimHintRead] = useLocalStorage(LOCAL_STORAGE.IS_CLAIM_HINT_READ, false)
-  const [claimHintDialog, toggleClaimHintDialog] = useToggle(!isClaimHintRead)
+  const [isDialogRead, setIsDialogRead] = useLocalStorage(LOCAL_STORAGE.IS_CLAIM_HINT_READ, false)
+  const [claimHintDialog, toggleClaimHintDialog] = useToggle(!isDialogRead)
 
   const onClick = async () => {
     select(GoogleViaTipLinkWalletName)
     try {
       toggleClaimHintDialog()
-      setIsClaimHintRead(true)
+      setIsDialogRead(true)
     } catch (e) {
       toast({ description: 'failed to connect wallet, try again!', variant: 'error' })
     }

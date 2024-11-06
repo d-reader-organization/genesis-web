@@ -51,7 +51,7 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [])
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
   const [unwrapWarningDialog, toggleUnwrapDialog] = useToggle(false)
-  const [isUnwrapWarningRead] = useLocalStorage(LOCAL_STORAGE.IS_UNWRAP_HINT_READ, false)
+  const [isDialogRead] = useLocalStorage(LOCAL_STORAGE.IS_UNWRAP_HINT_READ, false)
 
   const [isUnwrapTransactionLoading, setUnwrapTransactionLoading] = useState<boolean>(false)
   const { publicKey, signTransaction } = useWallet()
@@ -170,7 +170,7 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
                   <Button
                     className='rounded-[12px]'
                     onClick={async () => {
-                      if (!isUnwrapWarningRead) {
+                      if (!isDialogRead) {
                         toggleUnwrapDialog()
                         return
                       }
