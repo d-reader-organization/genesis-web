@@ -14,6 +14,7 @@ import { MobileNav } from './MobileNavigation'
 import { ProfileSheet } from '../shared/sheets/profile/ProfileSheet'
 import { SearchInput } from '../shared/SearchInput'
 import { User } from '@/models/user'
+import { SoonTag } from '../shared/Tags'
 
 type Props = {
   me: User | null
@@ -92,22 +93,20 @@ type MenuItemProps = {
   href: string
   isActive: boolean
   isComingSoon?: boolean
+  disabled?: boolean
   title: string
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ href, isActive, isComingSoon = false, title }) => (
-  <div className='flex items-center gap-1 text-base font-bold leading-[22.4px]'>
-    {isComingSoon ? (
-      <>
-        <span className='text-grey-300'>{title}</span>
-        <div className='flex items-center justify-center px-1.5 py-1 bg-grey-300 rounded-lg min-w-[42px] max-h-5'>
-          <span className='text-[10px] font-bold leading-normal text-grey-600'>SOON</span>
-        </div>
-      </>
-    ) : (
-      <Link className={cn('text-grey-100', isActive && 'text-yellow-500')} href={href}>
-        {title}
-      </Link>
+const MenuItem: React.FC<MenuItemProps> = ({ href, isActive, title, isComingSoon = false, disabled = false }) => (
+  <Link
+    className={cn(
+      'flex items-center gap-1 text-base font-bold leading-[22.4px] text-grey-100',
+      isActive && 'text-yellow-500',
+      disabled && 'text-grey-300'
     )}
-  </div>
+    href={disabled ? '#' : href}
+  >
+    {title}
+    {isComingSoon && <SoonTag />}
+  </Link>
 )
