@@ -46,7 +46,7 @@ export const fetchProject = async (slug: string): Promise<{ data: Nullable<Proje
   }
 
   const { data } = await fetchWrapper<UserProjectInterest>({
-    path: `${INVEST}/${GET}/${project?.id}`,
+    path: `${INVEST}/${GET}/${slug}`,
   })
 
   if (!data) {

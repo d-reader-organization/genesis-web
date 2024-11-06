@@ -102,7 +102,7 @@ export const transactionKeys = Object.freeze({
     TRANSACTION_QUERY_KEYS.TRANSACTION,
     TRANSACTION_QUERY_KEYS.EXPRESS_INTEREST,
     params.walletAddress,
-    params.projectId,
+    params.projectSlug,
     params.splTokenAddress,
   ],
 })
