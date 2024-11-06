@@ -50,7 +50,7 @@ export default async function InvestPage() {
 
   return (
     successfulProjects && (
-      <BaseLayout>
+      <BaseLayout showFooter>
         <div className='flex flex-col gap-10 max-w-screen-xl w-full'>
           <InvestCarousel slides={investSlides} />
           <ProjectsSection projects={successfulProjects} title='Recent Successful Projects' />
