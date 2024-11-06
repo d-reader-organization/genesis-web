@@ -65,21 +65,21 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
                     <div className='flex flex-col gap-3'>
                       <div className='flex justify-between w-full'>
                         {/* <Link href={RoutePath.Discover}>Discover</Link> */}
-                        <NavItemLink href={RoutePath.Home} isActive={isHome} title='Home' />
+                        <NavItemLink as="h4" href={RoutePath.Home} isActive={isHome} title='Home' />
                         <button onClick={() => setIsOpen(false)}>
                           <X className='size-6 text-grey-100' />
                         </button>
                       </div>
-                      <NavItemLink href={RoutePath.Discover} isActive={false} isComingSoon title='Discover' />
-                      <NavItemLink href={RoutePath.Invest} isActive={false} isComingSoon title='Invest' />
+                      <NavItemLink as="h4" href={RoutePath.Discover} isActive={false} isComingSoon title='Discover' />
+                      <NavItemLink as="h4" href={RoutePath.Invest} isActive={false} isComingSoon title='Invest' />
                       {!publicKey ? <NavConnectButton /> : null}
                     </div>
                     {user ? (
                       <div className='flex flex-col gap-6 border-t border-t-grey-400'>
                         <ProfileWidget user={user} />
                         <div className='flex flex-col gap-4'>
-                          <NavItemLink href={RoutePath.Library} isActive={isLibrary} title='Library' />
-                          <NavItemLink href={RoutePath.Profile} isActive={isProfile} title='Settings' />
+                          <NavItemLink as="h4" href={RoutePath.Library} isActive={isLibrary} title='Library' />
+                          <NavItemLink as="h4" href={RoutePath.Profile} isActive={isProfile} title='Settings' />
                         </div>
                         {publicKey ? <ConnectedWalletBox address={publicKey.toBase58()} /> : null}
                         <LogoutButton />
