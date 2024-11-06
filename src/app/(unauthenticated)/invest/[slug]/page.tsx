@@ -6,7 +6,6 @@ import { ProjectInfo } from '@/components/invest/ProjectInfo'
 import { ProjectFundingCard } from '@/components/invest/ProjectFundingCard'
 import { notFound } from 'next/navigation'
 import { fetchProject } from '@/app/lib/api/invest/queries'
-import { isAuthenticatedUser } from '@/app/lib/auth'
 import { ProjectInvestDialog } from '@/components/shared/dialogs/ProjectInvestDialog'
 
 type Props = {
@@ -15,42 +14,29 @@ type Props = {
 
 export default async function ProjectInvestPage({ params }: Props) {
   const { data: project, errorMessage } = await fetchProject(params.slug)
-  const isAuthenticated = isAuthenticatedUser()
 
-  if (errorMessage) {
+  if (!project || errorMessage) {
     return notFound()
   }
 
   return (
-    project && (
-      <BaseLayout showFooter>
-        <div className='flex flex-col max-w-screen-xl w-full'>
-          <ProjectHeader title={project.title} subtitle={project.subtitle} className='max-md:hidden' />
-          <div className='flex flex-col md:flex-row w-full h-full gap-6 md:gap-10'>
-            <div className='flex flex-col w-full'>
-              <ProjectBanner title={project.title} banner={project.banner} cover={project.cover} />
-              <ProjectHeader title={project.title} subtitle={project.subtitle} className='md:hidden' />
-              <ProjectFundingCard
-                funding={project.funding}
-                slug={project.slug}
-                isAuthenticated={isAuthenticated}
-                className='md:hidden'
-              />
-              <ProjectCreatorSection creator={project.creator} tags={project.tags} />
-              <ProjectInfo info={project.info} />
-            </div>
-            <div className='flex flex-col'>
-              <ProjectFundingCard
-                funding={{ ...project.funding }}
-                slug={project.slug}
-                isAuthenticated={isAuthenticated}
-                className='max-md:hidden'
-              />
-            </div>
+    <BaseLayout showFooter>
+      <div className='flex flex-col max-w-screen-xl w-full'>
+        <ProjectHeader title={project.title} subtitle={project.subtitle} className='max-md:hidden' />
+        <div className='flex flex-col md:flex-row w-full h-full gap-6 md:gap-10'>
+          <div className='flex flex-col w-full'>
+            <ProjectBanner title={project.title} banner={project.banner} cover={project.cover} />
+            <ProjectHeader title={project.title} subtitle={project.subtitle} className='md:hidden' />
+            <ProjectFundingCard funding={project.funding} slug={project.slug} className='md:hidden' />
+            <ProjectCreatorSection creator={project.creator} tags={project.tags} />
+            <ProjectInfo info={project.info} />
+          </div>
+          <div className='flex flex-col'>
+            <ProjectFundingCard funding={{ ...project.funding }} slug={project.slug} className='max-md:hidden' />
           </div>
         </div>
-        <ProjectInvestDialog />
-      </BaseLayout>
-    )
+      </div>
+      <ProjectInvestDialog />
+    </BaseLayout>
   )
 }
