@@ -14,7 +14,7 @@ import { MobileNav } from './MobileNavigation'
 import { ProfileSheet } from '../shared/sheets/profile/ProfileSheet'
 import { SearchInput } from '../shared/SearchInput'
 import { User } from '@/models/user'
-import { SoonTag } from '../shared/Tags'
+import { NavItemLink } from './NavItemLink'
 
 type Props = {
   me: User | null
@@ -49,12 +49,12 @@ export const Navigation: React.FC<Props> = ({ me }) => {
             )}
             <SearchInput />
             <div className='flex items-center gap-10'>
-              <MenuItem href={RoutePath.Invest} isActive={isInvest} isComingSoon title='Invest' />
+              <NavItemLink href={RoutePath.Invest} isActive={isInvest} isComingSoon title='Invest' />
             </div>
           </div>
           {me ? (
             <div className='flex items-center gap-8'>
-              <MenuItem href={RoutePath.Library} isActive={isLibrary} title='My Library' />
+              <NavItemLink href={RoutePath.Library} isActive={isLibrary} title='My Library' />
               <button
                 className='flex items-center cursor-pointer'
                 onClick={() => setOpenProfileSheet(!isProfileSheetOpen)}
@@ -90,25 +90,3 @@ export const Navigation: React.FC<Props> = ({ me }) => {
     </>
   )
 }
-
-type MenuItemProps = {
-  href: string
-  isActive: boolean
-  isComingSoon?: boolean
-  disabled?: boolean
-  title: string
-}
-
-const MenuItem: React.FC<MenuItemProps> = ({ href, isActive, title, isComingSoon = false, disabled = false }) => (
-  <Link
-    className={cn(
-      'flex items-center gap-1 text-base font-bold leading-[22.4px] text-grey-100',
-      isActive && 'text-yellow-500',
-      disabled && 'text-grey-300'
-    )}
-    href={disabled ? '#' : href}
-  >
-    {title}
-    {isComingSoon && <SoonTag />}
-  </Link>
-)
