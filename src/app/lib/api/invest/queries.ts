@@ -42,7 +42,7 @@ export const fetchSuccessfulProjects = async (): Promise<{
 export const fetchProject = async (slug: string): Promise<{ data: Nullable<Project>; errorMessage?: string }> => {
   const project = findProjectBySlug(slug)
   if (!project) {
-    return { data: null, errorMessage: `Project with slug ${slug} does not exists` }
+    return { data: null, errorMessage: `Project with slug ${slug} not found` }
   }
 
   const { data } = await fetchWrapper<UserProjectInterest>({
@@ -50,7 +50,7 @@ export const fetchProject = async (slug: string): Promise<{ data: Nullable<Proje
   })
 
   if (!data) {
-    return { data: null, errorMessage: "Project with slug doesn't exists" }
+    return { data: null, errorMessage: `Project with slug ${slug} not found` }
   }
 
   return {
