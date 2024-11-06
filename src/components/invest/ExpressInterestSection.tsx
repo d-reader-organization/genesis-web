@@ -37,7 +37,7 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
   const [other, setOther] = useState<number | undefined>()
   // "other" option should open a text input
   // we need to pull in the data from the project
-  const { push } = useRouter()
+  const { push, refresh } = useRouter()
 
   const onSubmit = async () => {
     // send API request with the selected amount
@@ -82,6 +82,7 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
       // throw confetti after submitting
       // redirectTo after a couple of seconds
       toggleLoading()
+      refresh()
       push(RoutePath.InvestDetails(slug))
     }
   }
