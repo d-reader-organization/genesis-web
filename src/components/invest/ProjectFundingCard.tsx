@@ -88,7 +88,7 @@ export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({ funding,
             <InvestButton slug={slug} />
           )
         ) : (
-          <ExpressInterestButton slug={slug} />
+          <ExpressInterestButton slug={slug} isUserInterested={funding.isUserInterested} />
         )}
 
         <div className='flex flex-row w-full h-full justify-center items-center p-[12px] gap-[12px] bg-gradient-to-br from-[#4a4e53] to-grey-500 rounded-xl md:gap-4 md:h-[89px] md:p-4'>
@@ -180,9 +180,10 @@ const InvestButton: React.FC<InvestButtonProps> = ({ slug }) => {
 
 type ExpressInterestButtonProps = {
   slug: string
+  isUserInterested?: boolean
 }
 
-const ExpressInterestButton: React.FC<ExpressInterestButtonProps> = ({ slug }) => {
+const ExpressInterestButton: React.FC<ExpressInterestButtonProps> = ({ slug, isUserInterested }) => {
   const { isAuthenticated } = useUserAuth()
   const href = isAuthenticated
     ? RoutePath.ExpressInterest(slug)
@@ -191,10 +192,15 @@ const ExpressInterestButton: React.FC<ExpressInterestButtonProps> = ({ slug }) =
   return (
     <Link
       href={href}
-      className='flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-yellow-500 hover:brightness-100 md:p-4'
+      className={`flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch rounded-xl md:p-4 ${isUserInterested ? 'bg-grey-500 border-2 border-white pointer-events-none' : 'bg-yellow-500 hover:brightness-100'}`}
     >
-      <Text as='p' styleVariant='body-normal' fontWeight='bold' className='text-grey-600 leading-snug max-md:text-base'>
-        Express interest
+      <Text
+        as='p'
+        styleVariant='body-normal'
+        fontWeight='bold'
+        className={`${isUserInterested ? 'text-white' : 'text-grey-600'} leading-snug max-md:text-base`}
+      >
+        {isUserInterested ? 'Interested!' : 'Express interest'}
       </Text>
     </Link>
   )

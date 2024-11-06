@@ -9,7 +9,6 @@ import { generateQueryParamsArray } from '@/utils/arrayQueryParams'
 import { UseComicIssueAssetParams } from '@/models/transaction/useComicIssueAsset'
 import { MintParams } from '@/models/transaction/mint'
 import { ExpressInterestParams } from '@/models/transaction/expressInterest'
-import { findProjectBySlug } from '@/utils/helpers'
 
 const { TRANSACTION, MINT, MULTIPLE_BUY, USE_COMIC_ISSUE_ASSET, EXPRESS_INTEREST } = TRANSACTION_QUERY_KEYS
 
@@ -39,13 +38,7 @@ export const fetchUseComicIssueAssetTransaction = async (
   return response.data ? decodeTransaction(response.data, 'base64') : null
 }
 
-export const fetchExpressInterestTransaction = async (args: ExpressInterestParams) => {
-  const project = findProjectBySlug(args.projectId)
-  if (!project) {
-    return { data: null, errorMessage: `Project with slug ${args.projectId} not found` }
-  }
-
-  const params: ExpressInterestParams = { walletAddress: args.walletAddress, projectId: `${project.id}` }
+export const fetchExpressInterestTransaction = async (params: ExpressInterestParams) => {
   const response = await fetchWrapper<string>({
     path: `${TRANSACTION}/${EXPRESS_INTEREST}`,
     params,

@@ -31,7 +31,7 @@ export default async function ExpressInterestPage({ params }: Props) {
           <Text as='h4' styleVariant='secondary-heading' fontWeight='medium' className='text-center'>
             What is the most you would be interested in investing?
           </Text>
-          <ExpressInterestSection />
+          <ExpressInterestSection slug={params.slug} />
           <Text as='p' styleVariant='body-xsmall' className='text-grey-100' italic>
             *A person&apos;s indication of interest involves no obligation or commitment of any kind. No money or other
             consideration is being solicited, and if sent in response, will not be accepted.
