@@ -36,7 +36,7 @@ export const InvestCarousel: React.FC<Props> = ({ slides }) => {
   return (
     <div className='flex flex-col gap-4 md:gap-6 w-full max-w-screen-xl'>
       <div
-        className='relative flex h-[363px] md:h-[500px] items-center gap-2.5 flex-shrink-0 rounded-xl overflow-hidden shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]'
+        className='relative flex carousel-height items-center gap-2.5 flex-shrink-0 rounded-xl overflow-hidden shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]'
         ref={emblaRef}
       >
         <div className='flex w-full'>
@@ -77,13 +77,13 @@ export const InvestCarousel: React.FC<Props> = ({ slides }) => {
 }
 
 const DetailsSection: React.FC<{ slide: InvestSlide }> = ({ slide }) => (
-  <div className='h-full flex flex-col justify-end p-4 md:p-16'>
+  <div className='h-full flex flex-col w-full justify-end p-4 md:p-8'>
     <Image
       alt='logo'
       src={slide.logo}
       width={290}
       height={130}
-      className='self-center sm:self-start max-h-32 md:max-w-[290px]l w-auto'
+      className='self-start max-h-24 md:max-w-[290px] w-auto'
     />
     <div className='flex flex-col justify-end gap-4 md:gap-6 max-w-[550px]'>
       <h1 className='text-xl md:text-[40px] leading-[20px] md:leading-[40px] font-semibold tracking-[0.08px] md:mb-4 font-obviouslyNarrow'>

@@ -50,7 +50,7 @@ const Card: React.FC<CardProps> = ({ project }) => (
       <InvestmentStatsBox title='BUYERS' value={project.payout.numberOfBuyers} />
     </div>
     <p className='text-sm md:text-base font-bold leading-normal md:leading-[22.4px] text-center'>
-      Payout processed {project.payout?.daysForRoi} days after the offering closed.
+      Profitability achieved {project.payout?.daysForRoi} days after the offering closed.
     </p>
     <Link
       href={RoutePath.Payout(project.slug)}
