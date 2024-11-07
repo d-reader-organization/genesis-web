@@ -11,6 +11,9 @@ import { ConnectButton } from '../shared/buttons/ConnectButton'
 import { useRouter } from 'next/navigation'
 import { RoutePath } from '@/enums/routePath'
 import { Loader } from '../shared/Loader'
+import { ExpressedInterestDialog } from '../shared/dialogs/ExpressedInterestDialog'
+import {addSeconds} from 'date-fns'
+
 
 interface Option {
   label: string
@@ -35,6 +38,7 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
   const { publicKey, signTransaction } = useWallet()
   const [isLoading, toggleLoading] = useToggle()
   const [other, setOther] = useState<number | undefined>()
+  const [showExpressedInterestDialog, toggleExpressedInterestDialog] = useToggle()
   // "other" option should open a text input
   // we need to pull in the data from the project
   const { push, refresh } = useRouter()
@@ -79,45 +83,52 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
         variant: 'error',
       })
     } finally {
-      // throw confetti after submitting
-      // redirectTo after a couple of seconds
       toggleLoading()
-      refresh()
-      push(RoutePath.InvestDetails(slug))
+      toggleExpressedInterestDialog()
     }
   }
 
+  const handleRedirectToProjectPage = () => {
+    refresh()
+    push(RoutePath.InvestDetails(slug))
+  }
+
   return (
-    <div className='flex flex-col gap-8'>
-      <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
-        {EXPRESS_INTEREST_OPTIONS.map((option) => (
-          <Button
-            key={option.value}
-            variant='outline'
-            className={`h-12 text-xl border-green-genesis hover:bg-green-genesis hover:text-black ${selectedOption?.label == option.label ? 'bg-green-genesis text-black' : ''}`}
-            onClick={() => {
-              if (option.label == selectedOption?.label) setOption(undefined)
-              else setOption(option)
-            }}
-          >
-            {option.label}
+    <>
+      <div className='flex flex-col gap-8'>
+        <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
+          {EXPRESS_INTEREST_OPTIONS.map((option) => (
+            <Button
+              key={option.value}
+              variant='outline'
+              className={`h-12 text-xl border-green-genesis hover:bg-green-genesis hover:text-black ${selectedOption?.label == option.label ? 'bg-green-genesis text-black' : ''}`}
+              onClick={() => {
+                if (option.label == selectedOption?.label) setOption(undefined)
+                else setOption(option)
+              }}
+            >
+              {option.label}
+            </Button>
+          ))}
+        </div>
+        <Input
+          type='number'
+          onChange={(e) => setOther(+e.target.value)}
+          defaultValue={0}
+          min={0}
+          className={`max-w-full border-green-genesis ${selectedOption?.label === 'Other' ? '' : 'hidden'}`}
+        />
+        {publicKey ? (
+          <Button className='w-full h-12 bg-green-genesis text-black' onClick={onSubmit}>
+            {isLoading ? <Loader /> : 'Express Interest'}
           </Button>
-        ))}
+        ) : (
+          <ConnectButton className='w-full h-12 bg-green-genesis text-black' text='Connect Wallet' />
+        )}
       </div>
-      <Input
-        type='number'
-        onChange={(e) => setOther(+e.target.value)}
-        defaultValue={0}
-        min={0}
-        className={`max-w-full border-green-genesis ${selectedOption?.label === 'Other' ? '' : 'hidden'}`}
-      />
-      {publicKey ? (
-        <Button className='w-full h-12 bg-green-genesis text-black' onClick={onSubmit}>
-          {isLoading ? <Loader /> : 'Express Interest'}
-        </Button>
-      ) : (
-        <ConnectButton className='w-full h-12 bg-green-genesis text-black' text='Connect Wallet' />
+      {showExpressedInterestDialog && (
+        <ExpressedInterestDialog open={showExpressedInterestDialog} toggleDialog={handleRedirectToProjectPage} expirationDate={addSeconds(new Date(), 5)} />
       )}
-    </div>
+    </>
   )
 }
