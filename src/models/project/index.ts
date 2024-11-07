@@ -57,3 +57,13 @@ export type ExpressInterest = {
   transaction: string
   expressedAmount: number
 }
+
+export type UserInterestedReceipt = {
+  id: number
+  projectSlug: string
+  walletAddress: string
+  transactionSignature: string
+  timestamp: Date
+  username: string
+  expressedAmount: number
+}
