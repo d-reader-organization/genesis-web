@@ -39,7 +39,7 @@ export const ProjectPayoutCard: React.FC<Props> = ({ payout, funding, className 
           className='max-md:hidden'
         />
         <PayoutStats text='ROI' value={formatPercentage(payout.roiPercent)} className='md:hidden' />
-        <PayoutStats text='days for payout processing' value={payout.daysForRoi} />
+        <PayoutStats text='days to profitability' value={payout.daysForRoi} />
       </div>
 
       <div className='flex flex-col gap-1'>

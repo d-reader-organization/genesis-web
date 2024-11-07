@@ -9,6 +9,7 @@ import { BaseLayout } from '@/components/layout/BaseLayout'
 import { InvestScreenWelcomeDialog } from '@/components/shared/dialogs/InvestScreenWelcomeDialog'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { Text } from '@/components/ui'
 
 export const metadata: Metadata = {
   title: 'Genesis',
@@ -52,6 +53,15 @@ export default async function InvestPage() {
     successfulProjects && (
       <BaseLayout showFooter>
         <div className='flex flex-col gap-10 max-w-screen-xl w-full'>
+          <div
+            className='flex flex-col justify-center items-center gap-2 py-6 pl-2 text-center md:pt-8 md:pb-0'>
+            <Text as='h3' styleVariant='primary-heading'>
+              Scout & Invest into the future of storytelling
+            </Text>
+            <Text as='p' styleVariant='body-large'>
+              Join the community of investors by supporting original stories that will change the world.
+            </Text>
+          </div>
           <InvestCarousel slides={investSlides} />
           <ProjectsSection projects={successfulProjects} title='Recent Successful Projects' />
           <InvestSection data={highInterestProjects} title='Gauging Interest' />

@@ -251,7 +251,7 @@ export const PROJECTS: Project[] = [
     payout: {
       revenue: 5600,
       roiPercent: 280,
-      daysForRoi: 24,
+      daysForRoi: 38,
       numberOfBuyers: 290,
       summary:
         'Join college dropouts Breeson & Jenkins, the dumbest degens in town, on their whacky adventures at Apartment 323. Every day they do super-important stuff like eating junk food, getting wasted, throwing parties and trying to hold down a job while constantly receiving eviction threats from the stoopid landlord.',
