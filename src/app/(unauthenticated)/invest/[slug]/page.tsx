@@ -7,6 +7,7 @@ import { ProjectFundingCard } from '@/components/invest/ProjectFundingCard'
 import { notFound } from 'next/navigation'
 import { fetchProject } from '@/app/lib/api/invest/queries'
 import { ProjectInvestDialog } from '@/components/shared/dialogs/ProjectInvestDialog'
+import { InterestUpdatesSection } from '@/components/invest/InterestUpdatesSection'
 
 type Props = {
   params: { slug: string }
@@ -30,6 +31,7 @@ export default async function ProjectInvestPage({ params }: Props) {
             <ProjectFundingCard funding={project.funding} slug={project.slug} className='md:hidden' />
             <ProjectCreatorSection creator={project.creator} tags={project.tags} />
             <ProjectInfo info={project.info} />
+            <InterestUpdatesSection slug={project.slug} />
           </div>
           <div className='flex flex-col'>
             <ProjectFundingCard funding={{ ...project.funding }} slug={project.slug} className='max-md:hidden' />

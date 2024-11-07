@@ -32,7 +32,9 @@ export const MultiStepDialog: React.FC<Props> = ({ steps, open, toggleDialog, on
         className='max-w-[485px] rounded-2xl flex flex-col items-center bg-grey-400 shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)] p-6 pt-8 gap-4'
         showCloseIcon={false}
       >
-        {activeStep.title && <DialogTitle className='font-satoshi leading-[24px] text-xl text-center'>{activeStep.title}</DialogTitle>}
+        {activeStep.title && (
+          <DialogTitle className='font-satoshi leading-[24px] text-xl text-center'>{activeStep.title}</DialogTitle>
+        )}
         <div className='flex flex-col gap-2 w-full'>
           {activeStep.items.map((item) => {
             if (item.video) return <VideoItem key={item.title} {...item} />
@@ -55,14 +57,16 @@ const TextItem: React.FC<DialogContentItem> = ({ icon, title, text }) => {
         <Text as='p' styleVariant='body-normal' fontWeight='bold'>
           {title}
         </Text>
-        {text && <Text
-          as='p'
-          styleVariant='body-small'
-          fontWeight='medium'
-          className='text-grey-100 text-ellipsis overflow-auto whitespace-pre text-wrap'
-        >
-          {text}
-        </Text>}
+        {text && (
+          <Text
+            as='p'
+            styleVariant='body-small'
+            fontWeight='medium'
+            className='text-grey-100 text-ellipsis overflow-auto whitespace-pre text-wrap'
+          >
+            {text}
+          </Text>
+        )}
       </div>
     </div>
   )
@@ -77,14 +81,16 @@ const VideoItem: React.FC<DialogContentItem> = ({ icon, title, text, video }) =>
           <Text as='p' styleVariant='body-normal' fontWeight='bold'>
             {title}
           </Text>
-          {text && <Text
-            as='p'
-            styleVariant='body-small'
-            fontWeight='medium'
-            className='text-grey-100 text-ellipsis overflow-auto'
-          >
-            {text}
-          </Text>}
+          {text && (
+            <Text
+              as='p'
+              styleVariant='body-small'
+              fontWeight='medium'
+              className='text-grey-100 text-ellipsis overflow-auto'
+            >
+              {text}
+            </Text>
+          )}
         </div>
       </div>
       <div className='pl-4 pr-4 pb-4'>

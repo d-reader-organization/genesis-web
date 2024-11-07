@@ -3,11 +3,17 @@
 import { fetchWrapper } from '../../fetchWrapper'
 import { Nullable } from '@/models/common'
 import { INVEST_QUERY_KEYS } from '@/api/invest'
-import { isSuccessfulProject, Project, SuccessfulProject, UserProjectInterest } from '@/models/project'
+import {
+  isSuccessfulProject,
+  Project,
+  SuccessfulProject,
+  UserInterestedReceipt,
+  UserProjectInterest,
+} from '@/models/project'
 import { PROJECTS } from '@/constants/projects'
 import { findProjectBySlug } from '@/utils/helpers'
 
-const { GET, INVEST } = INVEST_QUERY_KEYS
+const { GET, INVEST, INTEREST_RECEIPTS } = INVEST_QUERY_KEYS
 
 export const fetchSuccessfulProjects = async (): Promise<{
   data: Nullable<SuccessfulProject[]>
@@ -58,4 +64,11 @@ export const fetchProject = async (slug: string): Promise<{ data: Nullable<Proje
       },
     },
   }
+}
+
+export const fetchUserInterestedReceipts = async (slug: string): Promise<UserInterestedReceipt[]> => {
+  const { data } = await fetchWrapper<UserInterestedReceipt[]>({
+    path: `${INVEST}/${GET}/${slug}/${INTEREST_RECEIPTS}`,
+  })
+  return data || []
 }
