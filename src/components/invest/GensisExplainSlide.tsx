@@ -38,6 +38,7 @@ export const GenesisExplainSlide: React.FC = () => {
       <YoutubeVideoDialog
         open={showYtDialog}
         toggleDialog={toggleYtDialog}
+        title='Genesis promotional video'
         videoUrl={'https://www.youtube.com/embed/QjdGuCf6n08?si=U4t2m5yPnwgVLvwG'}
       />
     </>
