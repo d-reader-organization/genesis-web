@@ -9,6 +9,7 @@ import Image from 'next/image'
 import { Hourglass } from 'lucide-react'
 import { InvestSlide, SlideStats } from '@/app/lib/data/invest/carouselData'
 import { CarouselDots } from '../shared/CarouselDots'
+import { cn } from '@/lib/utils'
 
 type Props = {
   slides: InvestSlide[]
@@ -71,7 +72,14 @@ export const InvestCarousel: React.FC<Props> = ({ slides }) => {
           })}
         </div>
       </div>
-      {<CarouselDots emblaApi={emblaApi} slides={slides} selectedIndex={selectedIndex} />}
+      {
+        <CarouselDots
+          emblaApi={emblaApi}
+          slides={slides}
+          selectedIndex={selectedIndex}
+          selectedSliderColor='bg-green-genesis'
+        />
+      }
     </div>
   )
 }
@@ -112,17 +120,31 @@ const Paragraph: React.FC<{ text: string }> = ({ text }) => (
   <p className='text-xs md:text-base font-medium leading-[normal] md:leading-[22.4px]'>{text}</p>
 )
 
-const Tags: React.FC<{ tags: { title: string }[] }> = ({ tags }) => {
+type TagProps = {
+  title: string
+  className?: string
+}
+
+const Tags: React.FC<{ tags: TagProps[] }> = ({ tags }) => {
   return (
     <div className='flex gap-2 items-center'>
+      <Tag title='Learn More' className='bg-green-genesis bg-opacity-100 text-grey-500 font-bold' />
       {tags.map((tag, index) => (
-        <div
-          className='p-2 max-h-5 md:max-h-7 bg-white bg-opacity-20 backdrop-blur-[25px] flex items-center justify-center rounded-lg text-[10px] md:text-base'
-          key={`${tag}-${index}`}
-        >
-          {tag.title}
-        </div>
+        <Tag key={`${tag}-${index}`} title={tag.title} />
       ))}
+    </div>
+  )
+}
+
+const Tag: React.FC<TagProps> = ({ title, className }) => {
+  return (
+    <div
+      className={cn(
+        'p-2 max-h-5 md:max-h-7 bg-white bg-opacity-20 backdrop-blur-[25px] flex items-center justify-center rounded-lg text-[10px] md:text-base',
+        className
+      )}
+    >
+      {title}
     </div>
   )
 }

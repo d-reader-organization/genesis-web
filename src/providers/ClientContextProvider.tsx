@@ -4,15 +4,15 @@ import { endpoint } from '@/constants/solanaEnv'
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { usePathname } from 'next/navigation'
 import { createContext, useContext } from 'react'
 // import { useLocalStorage } from '@/hooks/useLocalStorage'
 // import { IMPORTANT_NOTICE } from '@/constants/staticText'
 // import CloseIcon from 'public/assets/vector-icons/close.svg'
 // import Dialog from '@mui/material/Dialog'
 import { CircleSdkProvider } from '@/providers/CircleSdkProvider'
+// import { usePathname } from 'next/navigation'
+// import { RoutePath } from '@/enums/routePath'
 import { useWalletAdapter } from '@/hooks/useWalletAdapter'
-import { RoutePath } from '@/enums/routePath'
 
 export const ClientContext = createContext(null)
 
@@ -28,13 +28,12 @@ const queryClient = new QueryClient({
 })
 
 const ClientContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const pathname = usePathname()
-  // only autoconnect on /comic-issue , /mint and /claim screens
-  const autoConnect =
-    pathname.toLowerCase().startsWith(RoutePath.ComicIssue('')) ||
-    pathname.toLowerCase().startsWith(RoutePath.Mint('')) ||
-    pathname.toLocaleLowerCase().startsWith(RoutePath.Claim(''))
-  // const [isFirstTimeVisitor, setIsFirstTimeVisitor] = useLocalStorage('firstTimeVisitor', true)
+  // const pathname = usePathname()
+  // only autoconnect on /comic-issue, /mint and /claim screens
+  // const isComicIssueScreen = pathname.toLowerCase().startsWith(RoutePath.ComicIssue(''))
+  // const isMintScreen = pathname.toLowerCase().startsWith(RoutePath.Mint(''))
+  // const isClaimScreen = pathname.toLowerCase().startsWith(RoutePath.Claim(''))
+  const autoConnect = false // isComicIssueScreen || isMintScreen || isClaimScreen
   const wallets = useWalletAdapter()
 
   return (

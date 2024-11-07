@@ -17,7 +17,7 @@ export const INVEST_DISCLAIMER_DIALOG_STEPS: DialogStep[] = [
   {
     // title: 'Join the community changing entertainment!',
     title: '',
-    buttonLabel: 'Count me in!',
+    buttonLabel: 'Next!',
     items: [
       {
         icon: '🔎',
@@ -52,12 +52,12 @@ export const INVEST_DISCLAIMER_DIALOG_STEPS: DialogStep[] = [
 
 export const PROJECT_INVEST_DIALOG_STEPS: DialogStep[] = [
   {
-    title: 'What to do now?',
+    title: '',
     buttonLabel: 'Got it!',
     items: [
       {
         icon: '🔎',
-        title: 'Do your research on the page',
+        title: 'Do your research',
         text: '',
       },
       {
@@ -69,25 +69,6 @@ export const PROJECT_INVEST_DIALOG_STEPS: DialogStep[] = [
         icon: '🪙',
         title: 'Wait for the story token offering',
         text: '',
-      },
-    ],
-  },
-]
-
-export const PROJECT_PAYOUT_DIALOG_STEPS: DialogStep[] = [
-  {
-    title: `Story payout details`,
-    buttonLabel: 'Got it!',
-    items: [
-      {
-        icon: '💰',
-        title: 'This story is profitable',
-        text: `Creators of this story and its investors have made profits.`,
-      },
-      {
-        icon: '📄',
-        title: 'Details available',
-        text: `On this page find details such as amount raised, number of backers, revenue, and days it took to profit.`,
       },
     ],
   },

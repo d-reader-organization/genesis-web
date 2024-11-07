@@ -7,7 +7,6 @@ import { SuccessfulProject, isSuccessfulProject } from '@/models/project'
 import { ProjectPayoutCard } from '@/components/payout/ProjectPayoutCard'
 import { ProjectCreatorSection } from '@/components/shared/ProjectCreatorSection'
 import { notFound } from 'next/navigation'
-import { ProjectPayoutDialog } from '@/components/shared/dialogs/ProjectPayoutDialog'
 
 type Props = {
   params: { slug: string }
@@ -43,7 +42,6 @@ export default async function PayoutPage({ params }: Props) {
           </div>
         </div>
       </div>
-      <ProjectPayoutDialog />
     </BaseLayout>
   )
 }

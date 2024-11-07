@@ -94,7 +94,7 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
           <Button
             key={option.value}
             variant='outline'
-            className={`h-12 text-xl border-yellow-500 hover:bg-yellow-500 hover:text-black ${selectedOption?.label == option.label ? 'bg-yellow-500 text-black' : ''}`}
+            className={`h-12 text-xl border-green-genesis hover:bg-green-genesis hover:text-black ${selectedOption?.label == option.label ? 'bg-green-genesis text-black' : ''}`}
             onClick={() => {
               if (option.label == selectedOption?.label) setOption(undefined)
               else setOption(option)
@@ -109,14 +109,14 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
         onChange={(e) => setOther(+e.target.value)}
         defaultValue={0}
         min={0}
-        className={`max-w-full border-yellow-500 ${selectedOption?.label === 'Other' ? '' : 'hidden'}`}
+        className={`max-w-full border-green-genesis ${selectedOption?.label === 'Other' ? '' : 'hidden'}`}
       />
       {publicKey ? (
-        <Button className='w-full h-12 bg-yellow-500 text-black' onClick={onSubmit}>
+        <Button className='w-full h-12 bg-green-genesis text-black' onClick={onSubmit}>
           {isLoading ? <Loader /> : 'Express Interest'}
         </Button>
       ) : (
-        <ConnectButton className='w-full h-12 bg-yellow-500 text-black' text='Connect Wallet' />
+        <ConnectButton className='w-full h-12 bg-green-genesis text-black' text='Connect Wallet' />
       )}
     </div>
   )

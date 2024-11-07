@@ -25,6 +25,7 @@ export const Navigation: React.FC<Props> = ({ me }) => {
   const pathname = usePathname()
   const isInvest = pathname.startsWith(RoutePath.Invest)
   const isLibrary = pathname.startsWith(RoutePath.Library)
+  const activeLinkColor = isInvest ? 'text-green-genesis' : 'text-yellow-500'
 
   return (
     <>
@@ -49,12 +50,23 @@ export const Navigation: React.FC<Props> = ({ me }) => {
             )}
             <SearchInput />
             <div className='flex items-center gap-10'>
-              <NavItemLink href={RoutePath.Invest} isActive={isInvest} isComingSoon title='Invest' />
+              <NavItemLink
+                activeColor={activeLinkColor}
+                href={RoutePath.Invest}
+                isActive={isInvest}
+                isComingSoon
+                title='Invest'
+              />
             </div>
           </div>
           {me ? (
             <div className='flex items-center gap-8'>
-              <NavItemLink href={RoutePath.Library} isActive={isLibrary} title='My Library' />
+              <NavItemLink
+                activeColor={activeLinkColor}
+                href={RoutePath.Library}
+                isActive={isLibrary}
+                title='My Library'
+              />
               <button
                 className='flex items-center cursor-pointer'
                 onClick={() => setOpenProfileSheet(!isProfileSheetOpen)}

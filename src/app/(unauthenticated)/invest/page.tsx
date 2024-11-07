@@ -6,7 +6,6 @@ import { FaqSection } from '@/components/invest/Faq'
 import { ProjectsSection } from '@/components/invest/ProjectsSection'
 import { InvestSection } from '@/components/invest/Section'
 import { BaseLayout } from '@/components/layout/BaseLayout'
-import { InvestScreenWelcomeDialog } from '@/components/shared/dialogs/InvestScreenWelcomeDialog'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Text } from '@/components/ui'
@@ -51,10 +50,33 @@ export default async function InvestPage() {
 
   return (
     successfulProjects && (
-      <BaseLayout showFooter>
-        <div className='flex flex-col gap-10 max-w-screen-xl w-full'>
-          <div
-            className='flex flex-col justify-center items-center gap-2 py-6 pl-2 text-center md:pt-8 md:pb-0'>
+      <>
+        <div className='mt-20 md:mt-16 bg-green-genesis'>
+          <div className='relative max-w-[1536px] mx-auto'>
+            <div className='relative max-w-[780px] lg:max-w-[1080px]'>
+              <iframe
+                src='https://www.youtube.com/embed/QjdGuCf6n08?si=U4t2m5yPnwgVLvwG&autoplay=1&mute=1&controls=0&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1'
+                className='w-full h-auto aspect-video bg-green-genesis pointer-events-none'
+                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                title='Genesis promotional video'
+                referrerPolicy='strict-origin-when-cross-origin'
+              />
+              <div className='max-sm:hidden pointer-events-none absolute top-0 right-0 min-w-[180px] xl:min-w-[80px] h-full bg-gradient-to-l from-[#07cc75] to-transparent' />
+              <div className='max-xl:hidden pointer-events-none absolute top-0 left-0 xl:min-w-[20px] h-full bg-gradient-to-l from-transparent to-[#07cc75]' />
+            </div>
+            <div className='absolute top-0 right-0 p-2 max-w-96 flex flex-col justify-center items-center gap-2 text-center h-full max-md:hidden'>
+              <Text as='h3' styleVariant='primary-heading'>
+                Scout & Invest into the future of storytelling
+              </Text>
+              <Text as='p' styleVariant='body-large'>
+                Join the community of investors by supporting original stories that will change the world.
+              </Text>
+            </div>
+          </div>
+        </div>
+
+        <BaseLayout showFooter>
+          <div className='md:hidden flex flex-col justify-center items-center gap-2 pb-16 px-8 pl-2 text-center'>
             <Text as='h3' styleVariant='primary-heading'>
               Scout & Invest into the future of storytelling
             </Text>
@@ -62,13 +84,15 @@ export default async function InvestPage() {
               Join the community of investors by supporting original stories that will change the world.
             </Text>
           </div>
-          <InvestCarousel slides={investSlides} />
-          <ProjectsSection projects={successfulProjects} title='Recent Successful Projects' />
-          <InvestSection data={highInterestProjects} title='Gauging Interest' />
-          <FaqSection />
-          <InvestScreenWelcomeDialog />
-        </div>
-      </BaseLayout>
+          <div className='flex flex-col gap-10 max-w-screen-xl w-full'>
+            <InvestSection data={highInterestProjects} title='Gauging Interest' />
+            <ProjectsSection projects={successfulProjects} title='Recent Successful Projects' />
+            <InvestCarousel slides={investSlides} />
+            <InvestSection data={highInterestProjects} title='You Might Like' />
+            <FaqSection />
+          </div>
+        </BaseLayout>
+      </>
     )
   )
 }
