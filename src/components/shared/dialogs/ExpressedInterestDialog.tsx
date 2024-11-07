@@ -13,7 +13,7 @@ type Props = {
 } & CommonDialogProps
 
 export const ExpressedInterestDialog: React.FC<Props> = ({ open, toggleDialog, expirationDate }) => {
-  const { countdownString } = useCountdown({ expirationDate: expirationDate.toString()})
+  const { seconds } = useCountdown({ expirationDate: expirationDate.toString() })
   setTimeout(() => toggleDialog(), 5 * 1000)
 
   return (
@@ -36,7 +36,9 @@ export const ExpressedInterestDialog: React.FC<Props> = ({ open, toggleDialog, e
             >
               Share on &#120143;
             </Link>
-            <Text as='p' styleVariant='body-xsmall'>Redirect in {countdownString} s</Text>
+            <Text as='p' styleVariant='body-xsmall'>
+              Redirect in {seconds} s
+            </Text>
           </div>
         </DialogContent>
       </Dialog>
