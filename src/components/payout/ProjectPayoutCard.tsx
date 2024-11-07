@@ -28,7 +28,7 @@ export const ProjectPayoutCard: React.FC<Props> = ({ payout, funding, className 
         <PayoutStats
           text={`total raised by ${funding.numberOfBackers} backers`}
           value={formatUSD(funding.raiseGoal)}
-          valueColor='text-[#fceb54] '
+          valueColor='text-green-genesis'
           valueSizeMd='md:text-3xl'
           textSizeMd='md:text-xl'
         />

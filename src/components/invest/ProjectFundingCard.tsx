@@ -42,7 +42,7 @@ export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({ funding,
         </Text>
         <div className='relative h-[8px] rounded-[27px] w-full bg-[#44464d]'>
           <div
-            className='h-[8px] bg-yellow-500 rounded-[27px] absolute top-0 left-0'
+            className='h-[8px] bg-green-genesis rounded-[27px] absolute top-0 left-0'
             style={{ width: `${(funding.pledgedAmount / funding.raiseGoal) * 100}%` }}
           />
         </div>
@@ -52,14 +52,14 @@ export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({ funding,
         <FundingStats
           text={'pledged of ' + formatUSD(funding.raiseGoal)}
           value={formatUSD(funding.pledgedAmount)}
-          valueColor='text-yellow-500 '
+          valueColor='text-green-genesis '
           valueSizeMd='md:text-[32px] '
           className='max-md:hidden'
         />
         <FundingStats
           text={'of ' + formatUSD(funding.raiseGoal)}
           value={formatUSD(funding.pledgedAmount)}
-          valueColor='text-yellow-500 '
+          valueColor='text-green-genesis '
           className='md:hidden items-center'
         />
         {hasFundingStarted ? (
@@ -149,7 +149,7 @@ const FundingEndedButton: React.FC = () => {
   return (
     <Link
       href='#'
-      className='flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-yellow-500 hover:brightness-100 md:p-4'
+      className='flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-green-genesis hover:brightness-100 md:p-4'
     >
       <Text as='p' styleVariant='body-normal' fontWeight='bold' className='text-grey-600 leading-snug max-md:text-base'>
         Fully backed
@@ -169,7 +169,7 @@ const InvestButton: React.FC<InvestButtonProps> = ({ slug }) => {
   return (
     <Link
       href={href}
-      className='flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-yellow-500 hover:brightness-100 md:p-4'
+      className='flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-green-genesis hover:brightness-100 md:p-4'
     >
       <Text as='p' styleVariant='body-normal' fontWeight='bold' className='text-grey-600 leading-snug max-md:text-base'>
         Back this project
@@ -192,7 +192,7 @@ const ExpressInterestButton: React.FC<ExpressInterestButtonProps> = ({ slug, isU
   return (
     <Link
       href={href}
-      className={`flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch rounded-xl md:p-4 ${isUserInterested ? 'bg-grey-500 border-2 border-white pointer-events-none' : 'bg-yellow-500 hover:brightness-100'}`}
+      className={`flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch rounded-xl md:p-4 ${isUserInterested ? 'bg-grey-500 border-2 border-white pointer-events-none' : 'bg-green-genesis hover:brightness-100'}`}
     >
       <Text
         as='p'

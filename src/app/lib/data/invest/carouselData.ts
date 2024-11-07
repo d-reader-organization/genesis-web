@@ -38,9 +38,6 @@ export const investSlides: InvestSlide[] = [
         title: 'Animated comic',
       },
       {
-        title: 'Action',
-      },
-      {
         title: 'Comedy',
       },
     ],
@@ -65,16 +62,13 @@ export const investSlides: InvestSlide[] = [
     ],
     tags: [
       {
-        title: 'Comic Series',
+        title: 'Comic',
       },
       {
         title: 'Adventure',
       },
       {
         title: 'Sci-fi',
-      },
-      {
-        title: 'Superhero',
       },
     ],
   },
@@ -98,13 +92,10 @@ export const investSlides: InvestSlide[] = [
     ],
     tags: [
       {
-        title: 'Comic Series',
+        title: 'Comic',
       },
       {
         title: 'Action',
-      },
-      {
-        title: 'Superhero',
       },
     ],
   },
