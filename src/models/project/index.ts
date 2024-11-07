@@ -39,6 +39,7 @@ export type Project = {
   info: ProjectInfo
   funding: ProjectFunding
   payout?: ProjectPayout
+  videoUrl?: string
 }
 
 export type SuccessfulProject = Project & { payout: ProjectPayout }
