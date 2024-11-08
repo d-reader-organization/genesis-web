@@ -21,7 +21,7 @@ export const InvestPageHero: React.FC = () => {
           the future of storytelling
         </Text>
         <Text as='p' styleVariant='body-xlarge' className='max-w-[520px]'>
-          Join the community of investors by supporting original stories that will change the world.
+          Support original stories that will change the world.
         </Text>
       </div>
       <div className='relative w-full bg-grey-600'>

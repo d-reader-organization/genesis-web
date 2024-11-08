@@ -28,13 +28,13 @@ const ClientContextProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   // const isComicIssueScreen = pathname.toLowerCase().startsWith(RoutePath.ComicIssue(''))
   // const isMintScreen = pathname.toLowerCase().startsWith(RoutePath.Mint(''))
   // const isClaimScreen = pathname.toLowerCase().startsWith(RoutePath.Claim(''))
-  const autoConnect = false // isComicIssueScreen || isMintScreen || isClaimScreen
+  // const autoConnect = isComicIssueScreen || isMintScreen || isClaimScreen
   const wallets = useWalletAdapter()
 
   return (
     <QueryClientProvider client={queryClient}>
       <ConnectionProvider endpoint={endpoint}>
-        <WalletProvider wallets={wallets} autoConnect={autoConnect}>
+        <WalletProvider wallets={wallets}>
           <WalletModalProvider className='wallet-dialog'>{children}</WalletModalProvider>
         </WalletProvider>
       </ConnectionProvider>

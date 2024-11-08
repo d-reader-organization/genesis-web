@@ -19,12 +19,13 @@ interface Option {
   value: number
 }
 
+const DEFAULT_OPTION: Option = { label: '$50', value: 50 }
 const EXPRESS_INTEREST_OPTIONS: Option[] = [
   { label: '$20', value: 20 },
+  DEFAULT_OPTION,
   { label: '$100', value: 100 },
   { label: '$500', value: 500 },
   { label: '$1,000', value: 1000 },
-  { label: '$2,500', value: 2500 },
   { label: 'Other', value: 0 },
 ]
 
@@ -33,7 +34,7 @@ type Props = {
 }
 
 export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
-  const [selectedOption, setOption] = useState<Option | undefined>()
+  const [selectedOption, setOption] = useState<Option | undefined>(DEFAULT_OPTION)
   const { publicKey, signTransaction } = useWallet()
   const [isLoading, toggleLoading] = useToggle()
   const [other, setOther] = useState<number | undefined>()

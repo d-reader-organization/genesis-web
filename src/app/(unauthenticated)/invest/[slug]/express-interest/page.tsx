@@ -29,7 +29,11 @@ export default async function ExpressInterestPage({ params }: Props) {
 
         <div className='w-full max-w-2xl bg-grey-400 rounded-lg p-8 space-y-8'>
           <Text as='h4' styleVariant='secondary-heading' fontWeight='medium' className='text-center'>
-            What is the most you would be interested in investing?
+            What is the most you would be willing to invest?
+          </Text>
+          <Text as='p' styleVariant='body-normal' className='text-center'>
+            We want to understand how many people are interested in this story. This action won&apos;t start the
+            investment process. Expressing interest will incur a $1 fee to prevent spam.
           </Text>
           <ExpressInterestSection slug={params.slug} />
           <Text as='p' styleVariant='body-xsmall' className='text-grey-100' italic>
