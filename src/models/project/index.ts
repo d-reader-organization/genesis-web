@@ -53,6 +53,7 @@ export type UserProjectInterest = {
   slug: string
   countOfUserExpressedInterest: number
   isUserInterested?: boolean
+  expectedPledgedAmount?: number
 }
 
 export type ExpressInterest = {
