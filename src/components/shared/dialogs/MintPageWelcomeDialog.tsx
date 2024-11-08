@@ -75,23 +75,6 @@ export const MintPageWelcomeDialog: React.FC = () => {
               </Text>
             </div>
           </div>
-          <div className='rounded-xl bg-grey-500 p-4 gap-4 flex max-w-[437px]'>
-            <div className='size-5'>🚧</div>
-            <div className='inline-block gap-2 w-full max-w-[369px]'>
-              <Text as='p' styleVariant='body-normal' fontWeight='bold' className='max-sm:text-xs'>
-                App is under construction
-              </Text>
-              <Text
-                as='p'
-                styleVariant='body-small'
-                fontWeight='medium'
-                className='max-sm:text-xs text-grey-100 text-ellipsis overflow-auto'
-              >
-                We&apos;re rolling out new screens and features bi-weekly. Expect new interface and experience
-                improvements!
-              </Text>
-            </div>
-          </div>
         </div>
         <Button variant='secondary' className='rounded-[16px] font-bold text-base w-full' onClick={onClick}>
           I understand!

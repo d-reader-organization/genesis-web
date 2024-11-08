@@ -4,7 +4,6 @@ import React from 'react'
 import { RoutePath } from '@/enums/routePath'
 import { usePathname } from 'next/navigation'
 import DReaderLogo from 'public/assets/vector-icons/full-logo.svg'
-import GenesisLogo from 'public/assets/vector-icons/genesis-logo.svg'
 import ArrowDownIcon from 'public/assets/vector-icons/arrow-down-2.svg'
 import { Button } from '../ui'
 import Link from 'next/link'
@@ -15,6 +14,7 @@ import { ProfileSheet } from '../shared/sheets/profile/ProfileSheet'
 import { SearchInput } from '../shared/SearchInput'
 import { User } from '@/models/user'
 import { NavItemLink } from './NavItemLink'
+import { GenesisNavigation } from './GenesisNavigation'
 
 type Props = {
   me: User | null
@@ -25,7 +25,8 @@ export const Navigation: React.FC<Props> = ({ me }) => {
   const pathname = usePathname()
   const isInvest = pathname.startsWith(RoutePath.Invest)
   const isLibrary = pathname.startsWith(RoutePath.Library)
-  const activeLinkColor = isInvest ? 'text-green-genesis' : 'text-yellow-500'
+
+  if (isInvest) return <GenesisNavigation me={me} />
 
   return (
     <>
@@ -34,24 +35,18 @@ export const Navigation: React.FC<Props> = ({ me }) => {
         className={cn(
           'max-md:hidden max-h-20 bg-grey-600 bg-opacity-85 backdrop-blur-[25px] w-full flex justify-center',
           'fixed top-0 z-50',
-          isProfileSheetOpen ? 'z-10' : ''
+          isProfileSheetOpen && 'z-10'
         )}
       >
         <div className='flex items-center justify-between p-4 max-w-screen-xl w-full'>
           <div className='flex items-center gap-8'>
-            {isInvest ? (
-              <Link href={RoutePath.Invest}>
-                <GenesisLogo className='h-8 min-w-fit fill-white ml-4' />
-              </Link>
-            ) : (
-              <Link href={RoutePath.Home}>
-                <DReaderLogo className='h-8 min-w-fit fill-white ml-4' />
-              </Link>
-            )}
+            <Link href={RoutePath.Home}>
+              <DReaderLogo className='h-8 min-w-fit fill-white ml-4' />
+            </Link>
             <SearchInput />
             <div className='flex items-center gap-10'>
               <NavItemLink
-                activeColor={activeLinkColor}
+                activeColor='text-yellow-500'
                 href={RoutePath.Invest}
                 isActive={isInvest}
                 isComingSoon
@@ -62,7 +57,7 @@ export const Navigation: React.FC<Props> = ({ me }) => {
           {me ? (
             <div className='flex items-center gap-8'>
               <NavItemLink
-                activeColor={activeLinkColor}
+                activeColor='text-yellow-500'
                 href={RoutePath.Library}
                 isActive={isLibrary}
                 title='My Library'

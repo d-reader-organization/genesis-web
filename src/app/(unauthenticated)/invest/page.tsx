@@ -1,15 +1,14 @@
 import { fetchSuccessfulProjects } from '@/app/lib/api/invest/queries'
-import { investSlides } from '@/app/lib/data/invest/carouselData'
+// import { investSlides } from '@/app/lib/data/invest/carouselData'
 import { highInterestProjects } from '@/app/lib/data/invest/projectsData'
-import { InvestCarousel } from '@/components/invest/Carousel'
+// import { InvestCarousel } from '@/components/invest/Carousel'
 import { FaqSection } from '@/components/invest/Faq'
 import { ProjectsSection } from '@/components/invest/ProjectsSection'
 import { InvestSection } from '@/components/invest/Section'
 import { BaseLayout } from '@/components/layout/BaseLayout'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Text } from '@/components/ui'
-import { GenesisExplainSlide } from '@/components/invest/GensisExplainSlide'
+import { InvestPageHero } from '@/components/invest/InvestPageHero'
 
 export const metadata: Metadata = {
   title: 'Genesis',
@@ -52,20 +51,12 @@ export default async function InvestPage() {
   return (
     successfulProjects && (
       <>
-        <GenesisExplainSlide />
+        <InvestPageHero />
         <BaseLayout showFooter>
-          <div className='md:hidden flex flex-col justify-center items-center gap-2 pb-16 px-8 pl-2 text-center'>
-            <Text as='h3' styleVariant='primary-heading'>
-              Scout & Invest into the future of storytelling
-            </Text>
-            <Text as='p' styleVariant='body-large'>
-              Join the community of investors by supporting original stories that will change the world.
-            </Text>
-          </div>
           <div className='flex flex-col gap-10 max-w-screen-xl w-full'>
             <InvestSection data={highInterestProjects} title='Gauging Interest' />
             <ProjectsSection projects={successfulProjects} title='Recent Successful Projects' />
-            <InvestCarousel slides={investSlides} />
+            {/* <InvestCarousel slides={investSlides} /> */}
             <InvestSection data={highInterestProjects} title='You Might Like' />
             <FaqSection />
           </div>

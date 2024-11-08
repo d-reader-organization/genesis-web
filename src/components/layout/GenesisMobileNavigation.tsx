@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import DReaderSymbol from 'public/assets/vector-icons/logo.svg'
+import GenesisSymbol from 'public/assets/vector-icons/genesis-logo.svg'
 import { RoutePath } from '@/enums/routePath'
 import { cn } from '@/lib/utils'
 import { ButtonLink } from '../ui/Button'
@@ -16,13 +17,12 @@ import { NavConnectButton } from '../shared/buttons/ConnectButton'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { NavItemLink } from './NavItemLink'
 import { ConnectedWalletBox } from '../shared/sheets/profile/WalletSection'
-import { GenesisMobileNavigation } from './GenesisMobileNavigation'
 
 type Props = {
   user?: User | null
 }
 
-export const MobileNav: React.FC<Props> = ({ user }) => {
+export const GenesisMobileNavigation: React.FC<Props> = ({ user }) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false)
   const [isSearchOpen, setIsSearchOpen] = React.useState<boolean>(false)
   const { publicKey } = useWallet()
@@ -30,17 +30,15 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
   const isHome = pathname === '/'
   const isLibrary = pathname.startsWith(RoutePath.Library)
   const isProfile = pathname.startsWith(RoutePath.Profile)
-  const isInvest = pathname.startsWith(RoutePath.Invest)
-  const activeLinkColor = isInvest ? 'text-green-genesis' : 'text-yellow-500'
-
-  if (isInvest) return <GenesisMobileNavigation user={user} />
+  const isInvest = pathname.endsWith(RoutePath.Invest)
 
   return (
     <>
       <div
         className={cn(
-          'fixed top-0 z-50 w-full md:hidden h-full bg-grey-600 bg-opacity-85 backdrop-blur-[25px]',
-          isOpen ? 'max-h-full' : 'max-h-20'
+          'fixed top-0 z-50 w-full md:hidden h-full bg-opacity-85 backdrop-blur-[25px]',
+          isOpen ? 'max-h-full' : 'max-h-20',
+          isInvest ? 'bg-green-genesis' : 'bg-grey-600'
         )}
       >
         {isSearchOpen ? (
@@ -53,11 +51,11 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
         ) : (
           <>
             <div className={cn('flex justify-between items-center px-4 h-20', isOpen && 'hidden')}>
-              <button onClick={() => setIsSearchOpen(!isSearchOpen)}>
-                <Search size={24} />
-              </button>
               <Link href={RoutePath.Home}>
                 <DReaderSymbol className='size-6 fill-white' />
+              </Link>
+              <Link href={RoutePath.Invest}>
+                <GenesisSymbol className='size-6 fill-white' />
               </Link>
               <button onClick={() => setIsOpen(!isOpen)}>{isOpen ? <X size={24} /> : <Menu size={24} />}</button>
             </div>
@@ -71,7 +69,7 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
                       <div className='flex justify-between w-full'>
                         {/* <Link href={RoutePath.Discover}>Discover</Link> */}
                         <NavItemLink
-                          activeColor={activeLinkColor}
+                          activeColor='text-green-genesis'
                           as='h4'
                           href={RoutePath.Home}
                           isActive={isHome}
@@ -82,7 +80,7 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
                         </button>
                       </div>
                       <NavItemLink
-                        activeColor={activeLinkColor}
+                        activeColor='text-green-genesis'
                         as='h4'
                         href={RoutePath.Discover}
                         isActive={false}
@@ -90,7 +88,7 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
                         title='Discover'
                       />
                       <NavItemLink
-                        activeColor={activeLinkColor}
+                        activeColor='text-green-genesis'
                         as='h4'
                         href={RoutePath.Invest}
                         isActive={false}
@@ -104,14 +102,14 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
                         <ProfileWidget user={user} />
                         <div className='flex flex-col gap-4'>
                           <NavItemLink
-                            activeColor={activeLinkColor}
+                            activeColor='text-green-genesis'
                             as='h4'
                             href={RoutePath.Library}
                             isActive={isLibrary}
                             title='Library'
                           />
                           <NavItemLink
-                            activeColor={activeLinkColor}
+                            activeColor='text-green-genesis'
                             as='h4'
                             href={RoutePath.Profile}
                             isActive={isProfile}
