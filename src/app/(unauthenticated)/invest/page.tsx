@@ -8,6 +8,7 @@ import { BaseLayout } from '@/components/layout/BaseLayout'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { InvestPageHero } from '@/components/invest/InvestPageHero'
+import { ceil } from 'lodash'
 
 export const metadata: Metadata = {
   title: 'Genesis',
@@ -42,26 +43,30 @@ export const metadata: Metadata = {
 
 export default async function InvestPage() {
   const { data: successfulProjects } = await fetchSuccessfulProjects()
-  const { data: highInterestProjects, errorMessage } = await fetchHighInterestProjects()
+  const { data: interestProjects, errorMessage } = await fetchHighInterestProjects()
+
+  const sliceIndex = ceil(interestProjects.length / 2)
+  const [firstHalf, secondHalf] = [
+    interestProjects.slice(0, sliceIndex),
+    interestProjects.slice(sliceIndex, interestProjects.length),
+  ]
 
   if (errorMessage) {
     notFound()
   }
 
   return (
-    highInterestProjects && (
-      <>
-        <InvestPageHero />
-        <BaseLayout showFooter>
-          <div className='flex flex-col gap-10 max-w-screen-xl w-full'>
-            <InvestSection data={highInterestProjects} title='Gauging Interest' />
-            <ProjectsSection projects={successfulProjects} title='Recent Successful Projects' />
-            {/* <InvestCarousel slides={investSlides} /> */}
-            <InvestSection data={highInterestProjects} title='You Might Like' />
-            <FaqSection />
-          </div>
-        </BaseLayout>
-      </>
-    )
+    <>
+      <InvestPageHero />
+      <BaseLayout showFooter>
+        <div className='flex flex-col gap-10 max-w-screen-xl w-full'>
+          <InvestSection data={firstHalf} title='Gauging Interest' />
+          <ProjectsSection projects={successfulProjects} title='Recent Successful Projects' />
+          {/* <InvestCarousel slides={investSlides} /> */}
+          <InvestSection data={secondHalf} title='You Might Like' />
+          <FaqSection />
+        </div>
+      </BaseLayout>
+    </>
   )
 }
