@@ -12,7 +12,6 @@ import { useRouter } from 'next/navigation'
 import { RoutePath } from '@/enums/routePath'
 import { Loader } from '../shared/Loader'
 import { ExpressedInterestDialog } from '../shared/dialogs/ExpressedInterestDialog'
-import { addSeconds } from 'date-fns'
 
 interface Option {
   label: string
@@ -127,11 +126,7 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
         )}
       </div>
       {showExpressedInterestDialog && (
-        <ExpressedInterestDialog
-          open={showExpressedInterestDialog}
-          toggleDialog={handleRedirectToProjectPage}
-          expirationDate={addSeconds(new Date(), 5)}
-        />
+        <ExpressedInterestDialog open={showExpressedInterestDialog} toggleDialog={handleRedirectToProjectPage} />
       )}
     </>
   )
