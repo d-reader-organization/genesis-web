@@ -45,7 +45,6 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
 
   const onSubmit = async () => {
     // send API request with the selected amount
-    console.log(selectedOption)
     if (!selectedOption) {
       toast({ description: 'Please select an amount', variant: 'error' })
       return
@@ -72,10 +71,7 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
         slug,
         request: { transaction: serializedTransaction, expressedAmount: expressedAmount || 0 },
       })
-      toast({
-        description: 'Successfully expressed interest!',
-        variant: 'success',
-      })
+      toggleExpressedInterestDialog()
     } catch (error) {
       console.error('Express interest error:', error)
       toast({
@@ -84,13 +80,12 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
       })
     } finally {
       toggleLoading()
-      toggleExpressedInterestDialog()
     }
   }
 
-  const handleRedirectToProjectPage = () => {
+  const handleRedirectToProjectPage = async () => {
     refresh()
-    push(RoutePath.InvestDetails(slug))
+    setTimeout(() => push(RoutePath.InvestDetails(slug)), 100)
   }
 
   return (
