@@ -16,20 +16,35 @@ export const PROJECTS: Project[] = [
     info: [
       {
         section: 'Overview',
-        text: 'The Recruits is a badass, fun-filled adventure story, about a ragtag group of rebels who battle the corrupt forces of Ape City. Led by a gun-toting, foul mouthed kamikaze Drop Bear called Roach and a paranoid weed smoking chief, these degens of fortune are hellbent on bringing justice to all the criminals, bent politicians and super villains that plague their city!',
+        text: `The Recruits is a badass, fun filled adventure story about a ragtag group of rebel apes. Led by a gun-toting, foul mouthed kamikaze Drop Bear called Roach, these degens of fortune are hellbent on bringing justice to all the villains that plague Ape city.
+
+        This is a 24 page fully animated comic, complete with professional voice acting, music and soundFX. Plus it will be jam packed with non stop laughs, accidental explosions and very questionable degens.
+        `,
         image: '/assets/images/invest/the-recruits-details-overview.png',
       },
       {
         section: 'Team',
-        text: 'Roach, Sparky, and Bubbles - a team of misfits that argue more over snacks than strategy. They might not be perfect, but together, they are unstoppable... most of the time.',
+        text: `Art by StudioNX: the Emmy winning studio behind the animated comic 'Niko & the Sword of Light' www.studionx.com
+
+               Written by Roach: OG Indie comics creator with multiple published comic series,  4 crowdfunding campaigns & his own YouTube channel.
+        `,
       },
       {
         section: 'Offering',
-        text: 'Non-stop thrills, accidental explosions, and questionable decisions. Laughter guaranteed, survival optional!',
+        text: `• 30% of lifetime revenue of the animated comic will be distributed back to investors on a quarterly basis. (*% received will depend on investment tier)
+
+               • Backers will also receive behind the scenes Discord access and more
+        `,
       },
       {
         section: 'Roadmap',
-        text: 'Phase 1: Catch the bad guys. Phase 2: Get better snacks. Phase 3: Maybe save the world, or at least not destroy it.',
+        text: `• 6 months production to complete the fully animated comic.
+
+               • The finished comic will be released on dReader with collectible covers.
+
+               • 3 months later the comic will be packaged into an app and sold on the appstore/googleplay.
+
+               • After 1 year the team will pitch the project as an animated series.`,
       },
     ],
     funding: {
@@ -136,20 +151,41 @@ export const PROJECTS: Project[] = [
     info: [
       {
         section: 'Overview',
-        text: 'The Galactic Geckos are an elite team of space mercenaries known for taking on the toughest jobs in the galaxy. With their cool demeanor and unmatched skills, they always get the job done... and look good while doing it.',
+        text: `What if I told you there was more to the Geckos than their brutal galactic races?
+
+        What if there were power hungry pirates out there, sailing through space, capturing & destroying ships that wander too far out into space?
+
+        What if there were bounty hunters, making their living earning paid work on the outskirt of the galaxy?
+        
+        There are galactic mysteries all around us. And, soon, they will be discovered!
+        This character drive, action-adventure series, follows a young girl and a team of mercenaries who narrowly escaped an evil space pirate -- only to be thrown into an epic adventure that will unlock the secrets of the galaxy and threaten life as they know it!`,
         image: '',
       },
       {
         section: 'Team',
-        text: 'Led by Zog, the Gecko Commander, his team includes Sly, the sharp-tongued strategist, and Venom, the muscle with a mysterious past. Together, they navigate dangerous missions with style and precision.',
+        text: `Created & written by Roach: OG Indie comics creator & Solana enjooyer.
+
+              Created multiple published comic series, done 4+ successful crowdfunding campaigns, hosted a YouTube interview show about writing & creating comics.
+
+              Artwork by Antonio: Newcomer artist who's style captures the OG Galactic Gecko artwork - bringing them to life.`,
       },
       {
         section: 'Offering',
-        text: 'Epic space battles, high-stakes missions, and a lot of slick gecko moves. Get ready for an adventure that’s out of this world!',
+        text: `• 30% of Lifetime Revenue generated will be distributed to Investors on an annual basis
+
+               • % received will depend on Investment ammount (Investment Tier?).
+               `,
       },
       {
         section: 'Roadmap',
-        text: 'Phase 1: Accept a dangerous mission. Phase 2: Fight off space pirates. Phase 3: Save the galaxy... and collect a huge bounty.',
+        text: `• Multi-Series Comic Book
+
+               • Issues/chapters building up towards a 150 page physical book.
+
+               • Each individual issue will be released on dReader with collectible covers
+
+               • The individual issues and/or collected edition book will be published physically by publishing partners (the goal will be to get the book published in physical editions, in multiple global regions).
+              `,
       },
     ],
     funding: {
@@ -176,19 +212,33 @@ export const PROJECTS: Project[] = [
     info: [
       {
         section: 'Overview',
-        text: 'Enter the Tensorverse follows a thrilling sci-fi journey with unexpected turns and futuristic battles.',
+        text: `Enter the Tensorverse is an action-packed, sci-fi crime story, and the first ever story set in the Tensorian universe!
+        
+        When a group of Raiders follow some leaked alpha to an abandoned building, they'll learn just how do-or-die the space truly is as they pull the curtain back on a major conspriacy that threatens to bring down the entire city!`,
       },
       {
         section: 'Team',
-        text: 'The story is crafted by a talented group of artists and writers, bringing a unique sci-fi adventure to life.',
+        text: `Created & written by Roach: OG Indie comics creator & Solana enjooyer. 
+        
+        Created multiple published comic series, done 4+ successful crowdfunding campaigns, hosted a YouTube interview show about writing & creating comics.
+        
+        Artwork by Ed Jimenez: OG comic artist who's worked with Funko, Hasbro, Paramount Pictures, and more.`,
       },
       {
         section: 'Offering',
-        text: 'Expect futuristic action, complex characters, and deep storytelling that pushes the boundaries of imagination.',
+        text: `• 30% of Lifetime Revenue generated will be distributed to Investors on an annual basis
+
+               • % received will depend on Investment ammount (Investment Tier?).`,
       },
       {
         section: 'Roadmap',
-        text: 'Phase 1: Concept art and story development. Phase 2: Launch the first volume. Phase 3: Expand the universe with new adventures.',
+        text: `• Multi-Series Comic Book
+               • 5 Issues/chapters building up towards a 150 page physical book.
+
+               • Each individual issue will be released on dReader with collectible covers
+
+               • The individual issues and/or collected edition book will be published physically by publishing partners (the goal will be to get the book published in physical editions, in multiple global regions).
+              `,
       },
     ],
     funding: {
