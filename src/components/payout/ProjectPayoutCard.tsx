@@ -82,7 +82,9 @@ const PayoutStats: React.FC<PayoutStatsProps> = ({
       <p className={cn('font-semibold text-xl leading-tight tracking-tight md:leading-none', valueSizeMd, valueColor)}>
         {value}
       </p>
-      <p className={cn('text-[#c2c5ce] text-xs font-medium leading-normal md:leading-relaxed', textSizeMd)}>{text}</p>
+      <p className={cn('text-[#c2c5ce] text-xs font-medium leading-normal md:leading-relaxed text-center', textSizeMd)}>
+        {text}
+      </p>
     </div>
   )
 }
