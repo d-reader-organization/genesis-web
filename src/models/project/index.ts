@@ -1,6 +1,7 @@
 export type ProjectCreator = {
   name: string
   avatar: string
+  twitterHandle?: string
 }
 
 export type ProjectInfo = {

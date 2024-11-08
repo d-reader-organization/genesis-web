@@ -37,7 +37,7 @@ export const InvestPageHero: React.FC = () => {
         <div className='absolute top-0 left-0 flex justify-center items-center w-full h-full'>
           <PlayIcon
             fill='white'
-            className='relative cursor-pointer h-40 w-40 p-12 -mt-16 lg:-mt-24 rounded-[60px] bg-grey-400/50 backdrop-blur-sm'
+            className='relative cursor-pointer h-16 w-16 p-5 rounded-[25px] sm:h-28 sm:w-28 sm:p-8 sm:rounded-[40px] md:h-40 md:w-40 md:p-12 md:rounded-[60px] -mt-16 lg:-mt-24 bg-grey-400/50 backdrop-blur-sm'
             onClick={toggleVideoDialog}
           />
         </div>

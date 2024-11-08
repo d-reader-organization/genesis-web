@@ -16,20 +16,35 @@ export const PROJECTS: Project[] = [
     info: [
       {
         section: 'Overview',
-        text: 'The Recruits is a badass, fun-filled adventure story, about a ragtag group of rebels who battle the corrupt forces of Ape City. Led by a gun-toting, foul mouthed kamikaze Drop Bear called Roach and a paranoid weed smoking chief, these degens of fortune are hellbent on bringing justice to all the criminals, bent politicians and super villains that plague their city!',
+        text: `The Recruits is a badass, fun filled adventure story about a ragtag group of rebel apes. Led by a gun-toting, foul mouthed kamikaze Drop Bear called Roach, these degens of fortune are hellbent on bringing justice to all the villains that plague Ape city.
+
+        This is a 24 page fully animated comic, complete with professional voice acting, music and soundFX. Plus it will be jam packed with non stop laughs, accidental explosions and very questionable degens.
+        `,
         image: '/assets/images/invest/the-recruits-details-overview.png',
       },
       {
         section: 'Team',
-        text: 'Roach, Sparky, and Bubbles - a team of misfits that argue more over snacks than strategy. They might not be perfect, but together, they are unstoppable... most of the time.',
+        text: `Art by StudioNX: the Emmy winning studio behind the animated comic 'Niko & the Sword of Light' www.studionx.com
+
+               Written by Roach: OG Indie comics creator with multiple published comic series,  4 crowdfunding campaigns & his own YouTube channel.
+        `,
       },
       {
         section: 'Offering',
-        text: 'Non-stop thrills, accidental explosions, and questionable decisions. Laughter guaranteed, survival optional!',
+        text: `• 30% of lifetime revenue of the animated comic will be distributed back to investors on a quarterly basis. (*% received will depend on investment tier)
+
+               • Backers will also receive behind the scenes Discord access and more
+        `,
       },
       {
         section: 'Roadmap',
-        text: 'Phase 1: Catch the bad guys. Phase 2: Get better snacks. Phase 3: Maybe save the world, or at least not destroy it.',
+        text: `• 6 months production to complete the fully animated comic.
+
+               • The finished comic will be released on dReader with collectible covers.
+
+               • 3 months later the comic will be packaged into an app and sold on the appstore/googleplay.
+
+               • After 1 year the team will pitch the project as an animated series.`,
       },
     ],
     funding: {
@@ -136,20 +151,41 @@ export const PROJECTS: Project[] = [
     info: [
       {
         section: 'Overview',
-        text: 'The Galactic Geckos are an elite team of space mercenaries known for taking on the toughest jobs in the galaxy. With their cool demeanor and unmatched skills, they always get the job done... and look good while doing it.',
+        text: `What if I told you there was more to the Geckos than their brutal galactic races?
+
+        What if there were power hungry pirates out there, sailing through space, capturing & destroying ships that wander too far out into space?
+
+        What if there were bounty hunters, making their living earning paid work on the outskirt of the galaxy?
+        
+        There are galactic mysteries all around us. And, soon, they will be discovered!
+        This character drive, action-adventure series, follows a young girl and a team of mercenaries who narrowly escaped an evil space pirate -- only to be thrown into an epic adventure that will unlock the secrets of the galaxy and threaten life as they know it!`,
         image: '',
       },
       {
         section: 'Team',
-        text: 'Led by Zog, the Gecko Commander, his team includes Sly, the sharp-tongued strategist, and Venom, the muscle with a mysterious past. Together, they navigate dangerous missions with style and precision.',
+        text: `Created & written by Roach: OG Indie comics creator & Solana enjooyer.
+
+              Created multiple published comic series, done 4+ successful crowdfunding campaigns, hosted a YouTube interview show about writing & creating comics.
+
+              Artwork by Antonio: Newcomer artist who's style captures the OG Galactic Gecko artwork - bringing them to life.`,
       },
       {
         section: 'Offering',
-        text: 'Epic space battles, high-stakes missions, and a lot of slick gecko moves. Get ready for an adventure that’s out of this world!',
+        text: `• 30% of Lifetime Revenue generated will be distributed to Investors on an annual basis
+
+               • % received will depend on Investment ammount (Investment Tier?).
+               `,
       },
       {
         section: 'Roadmap',
-        text: 'Phase 1: Accept a dangerous mission. Phase 2: Fight off space pirates. Phase 3: Save the galaxy... and collect a huge bounty.',
+        text: `• Multi-Series Comic Book
+
+               • Issues/chapters building up towards a 150 page physical book.
+
+               • Each individual issue will be released on dReader with collectible covers
+
+               • The individual issues and/or collected edition book will be published physically by publishing partners (the goal will be to get the book published in physical editions, in multiple global regions).
+              `,
       },
     ],
     funding: {
@@ -176,19 +212,33 @@ export const PROJECTS: Project[] = [
     info: [
       {
         section: 'Overview',
-        text: 'Enter the Tensorverse follows a thrilling sci-fi journey with unexpected turns and futuristic battles.',
+        text: `Enter the Tensorverse is an action-packed, sci-fi crime story, and the first ever story set in the Tensorian universe!
+        
+        When a group of Raiders follow some leaked alpha to an abandoned building, they'll learn just how do-or-die the space truly is as they pull the curtain back on a major conspriacy that threatens to bring down the entire city!`,
       },
       {
         section: 'Team',
-        text: 'The story is crafted by a talented group of artists and writers, bringing a unique sci-fi adventure to life.',
+        text: `Created & written by Roach: OG Indie comics creator & Solana enjooyer. 
+        
+        Created multiple published comic series, done 4+ successful crowdfunding campaigns, hosted a YouTube interview show about writing & creating comics.
+        
+        Artwork by Ed Jimenez: OG comic artist who's worked with Funko, Hasbro, Paramount Pictures, and more.`,
       },
       {
         section: 'Offering',
-        text: 'Expect futuristic action, complex characters, and deep storytelling that pushes the boundaries of imagination.',
+        text: `• 30% of Lifetime Revenue generated will be distributed to Investors on an annual basis
+
+               • % received will depend on Investment ammount (Investment Tier?).`,
       },
       {
         section: 'Roadmap',
-        text: 'Phase 1: Concept art and story development. Phase 2: Launch the first volume. Phase 3: Expand the universe with new adventures.',
+        text: `• Multi-Series Comic Book
+               • 5 Issues/chapters building up towards a 150 page physical book.
+
+               • Each individual issue will be released on dReader with collectible covers
+
+               • The individual issues and/or collected edition book will be published physically by publishing partners (the goal will be to get the book published in physical editions, in multiple global regions).
+              `,
       },
     ],
     funding: {
@@ -350,6 +400,66 @@ export const PROJECTS: Project[] = [
       numberOfBuyers: 502,
       summary:
         'After the conclusion of "The Plague Wars," Liberty has dwindled to a mere shell of its former self. Under the rule of B.E.G., the once thriving metropolis has deteriorated into a dystopian wasteland, where corruption thrives and hope has faded. This speculative fiction series follows the lives of a group of individuals, collectively known as The Syndicate, displaced by the war and now navigating the challenges of this new world. Through the dark & shadowy streets and the barren outskirts, each character confronts their own struggles, their stories intertwining as they reunite, their bonds strengthened by adversity, to confront the challenges of the present while facing the demons of their past. Staring down the reality of extinction, they come to understand that their battle extends beyond challenging the oppressive regime to confronting their own inner conflicts. "Originz" offers a grounded exploration of resilience amidst adversity where every step forward carries the weight of history.',
+    },
+  },
+  {
+    slug: 'the-lump-sum-saga',
+    title: 'The Lump Sum Saga',
+    subtitle:
+      'Two species; one mission - to plant a landing beacon that will guide the fleet to a rallying point on a new world full of hope and opportunity.',
+    tags: ['Action', 'Sci-fi'],
+    banner: 'https://d323dls9ny69nf.cloudfront.net/comics/the-lump-sum-saga-1717785540240/banner-1717785588300.jpg',
+    cover:
+      'https://d323dls9ny69nf.cloudfront.net/comics/the-lump-sum-saga-1717785540240/issues/prologue-only-the-fate-of-our-world-1717800670471/cover-common-1718125589989.png',
+    logo: 'https://d323dls9ny69nf.cloudfront.net/comics/comics/the-lump-sum-saga-1717785540240/logo-1717785588371.png',
+    creator: {
+      name: 'Greg Tjosvold',
+      avatar: 'https://d323dls9ny69nf.cloudfront.net/creators/greg-tjosvold/avatar-1697040090281.jpg',
+      twitterHandle: 'gregtjosvold',
+    },
+    info: [
+      {
+        section: 'Overview',
+        text: `Spiders and gerbils and poodles, oh my! In The Lump Sum Saga, we join a team of scientists from the planet "Home" on a daring mission to land a probe on an alien world capable of supporting life - Earth. 
+
+              The eclectic cast of characters includes:
+              • JoJo: an LWD (little white dog) who becomes the unexpected nexus between two worlds. 
+              • The Commander: The spider-esque Darksider lead of the alien landing team is still alive. Stranded in a world of giants, can she use her cunning and intelligence to find a way to call Home?
+              • The President: The profoundly intelligent leader of the rodent-like Lightsiders wants to save his only love, and his planet at the same time.
+
+              What starts as an eclectic sci-fi adventure soon becomes a very familiar superhero epic that finally answers the question "What if the spider had a story?"`,
+      },
+      {
+        section: 'Team',
+        text: `Writer Greg Tjosvold took early retirement from an award-winning teaching career to tackle his growing list of works-in-progress and creative to-dos. The Lump Sum Saga started as a classroom NaNoWriMo project that ignited his current obsession with comics and sequential art. Greg is also the editor of the Tech for Comics blog and the author of “Comic NFTs - An Ethical Approach.”
+
+Artist Sergi Domènech studied comics & illustration at the prestigious Escola JOSO in Barcelona. He won several comic book contests and created several didactic comics as the artist and writer for the Spanish CSIC. He continues to work internationally. For the French market, he drew Jeanne d’Arc for Hachette in collaboration with Magma Studio. His previous work for the English market includes Sorority Babes for Full Moon as well as Money Clip and The Disciple in collaboration with Comics Experience. He is currently finishing the second instalment of The Lump Sum Saga. Lump Dog will be available to the public early in 2025. `,
+      },
+      {
+        section: 'Offering',
+        text: `• 80% of net revenue generated will be distributed to investors on an annual basis for five years.
+
+               • % received will depend on investment amount (Investment Tier?).`,
+      },
+      {
+        section: 'Roadmap',
+        text: `• Multi-Series Comic Book
+
+               • 3 additional issues/chapters building up towards a 176 page physical book. The first 56 pages are already in production or complete. The series is meant to be an ongoing series beyond this milestone should the series find an engaged audience and investors have be suitably compensated during the initial five year investment period.
+               
+               • Each individual issue will be released on dReader with collectible covers.
+               
+               • The individual issues and/or collected edition book will be published physically, initially distributed for sale via Kickstarter or other applicable crowd funding platform.
+              `,
+      },
+    ],
+    funding: {
+      pledgedAmount: 6000,
+      raiseGoal: 6000,
+      startDate: undefined, // TODO: 1.6.2024
+      endDate: undefined, // TODO: completed
+      numberOfBackers: 2,
+      numberOfInterestedInvestors: 2,
     },
   },
 ]

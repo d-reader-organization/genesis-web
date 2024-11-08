@@ -121,7 +121,11 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
         )}
       </div>
       {showExpressedInterestDialog && (
-        <ExpressedInterestDialog open={showExpressedInterestDialog} toggleDialog={handleRedirectToProjectPage} />
+        <ExpressedInterestDialog
+          slug={slug}
+          open={showExpressedInterestDialog}
+          toggleDialog={handleRedirectToProjectPage}
+        />
       )}
     </>
   )

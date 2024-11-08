@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { PlusIcon, MinusIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import { Text } from '../ui'
 
 type ProjectInfoProps = {
   info: InfoItemProps[]
@@ -92,7 +93,9 @@ const InfoItem: React.FC<{ item: InfoItemProps; isLast?: boolean }> = ({ item, i
             onTransitionEnd={handleTransitionEnd}
           >
             <div className='flex flex-col justify-center items-start gap-4 relative w-full'>
-              <p> {item.text} </p>
+              <Text as='p' styleVariant='body-normal' className='whitespace-pre-line'>
+                {item.text}
+              </Text>
               {item.image && (
                 <Image
                   src={item.image}

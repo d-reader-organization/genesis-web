@@ -6,8 +6,15 @@ import { CommonDialogProps } from '@/models/common'
 import Realistic from 'react-canvas-confetti/dist/presets/realistic'
 import { Button, Text } from '@/components/ui'
 import Link from 'next/link'
+import { fetchTwitterIntentExpressedInterest } from '@/api/twitter/queries/fetchTwitterIntentExpressedInterest'
 
-export const ExpressedInterestDialog: React.FC<CommonDialogProps> = ({ open, toggleDialog }) => {
+type Props = {
+  slug: string
+} & CommonDialogProps
+
+export const ExpressedInterestDialog: React.FC<Props> = ({ open, slug, toggleDialog }) => {
+  const { data: twitterIntent } = fetchTwitterIntentExpressedInterest(slug)
+
   return (
     <Dialog open={open} onOpenChange={toggleDialog}>
       <DialogContent
@@ -40,7 +47,7 @@ export const ExpressedInterestDialog: React.FC<CommonDialogProps> = ({ open, tog
             Nah I'm good
           </Button>
           <Link
-            href='#test'
+            href={twitterIntent || ''}
             className='flex justify-center items-center px-2 rounded-[16px] font-bold w-full bg-green-genesis text-black'
             onClick={toggleDialog}
             target='_blank'
