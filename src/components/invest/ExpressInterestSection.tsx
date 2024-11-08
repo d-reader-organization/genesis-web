@@ -36,7 +36,7 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
   const [selectedOption, setOption] = useState<Option | undefined>(DEFAULT_OPTION)
   const { publicKey, signTransaction } = useWallet()
   const [isLoading, toggleLoading] = useToggle()
-  const [other, setOther] = useState<number | undefined>()
+  const [other, setOther] = useState<number | undefined>(1)
   const [showExpressedInterestDialog, toggleExpressedInterestDialog] = useToggle()
   // "other" option should open a text input
   // we need to pull in the data from the project
@@ -87,6 +87,14 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
     setTimeout(() => push(RoutePath.InvestDetails(slug)), 100)
   }
 
+  const handleChangeOtherInput = (value: number) => {
+    if (value) {
+      setOther(Math.abs(value))
+    } else {
+      setOther(undefined)
+    }
+  }
+
   return (
     <>
       <div className='flex flex-col gap-8'>
@@ -107,9 +115,11 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
         </div>
         <Input
           type='number'
-          onChange={(e) => setOther(+e.target.value)}
-          defaultValue={0}
-          min={0}
+          value={other}
+          onChange={(e) => handleChangeOtherInput(+e.target.value)}
+          defaultValue={1}
+          min={1}
+          max={1000}
           className={`max-w-full border-green-genesis ${selectedOption?.label === 'Other' ? '' : 'hidden'}`}
         />
         {publicKey ? (
@@ -121,7 +131,11 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
         )}
       </div>
       {showExpressedInterestDialog && (
-        <ExpressedInterestDialog open={showExpressedInterestDialog} toggleDialog={handleRedirectToProjectPage} />
+        <ExpressedInterestDialog
+          slug={slug}
+          open={showExpressedInterestDialog}
+          toggleDialog={handleRedirectToProjectPage}
+        />
       )}
     </>
   )
