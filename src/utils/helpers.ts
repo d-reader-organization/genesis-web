@@ -2,6 +2,7 @@ import { PROJECTS } from '@/constants/projects'
 import { RoutePath } from '@/enums/routePath'
 import { CarouselSlide } from '@/models/carousel/carouselSlide'
 import { PartialGenre } from '@/models/genre'
+import { Project } from '@/models/project'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 
 export function sleep(ms: number): Promise<void> {
@@ -143,4 +144,19 @@ export const getSlideFallbackUrl = (slide: CarouselSlide): string => {
 export const findProjectBySlug = (slug: string) => {
   const project = PROJECTS.find((project) => project.slug === slug)
   return project
+}
+
+export const getTwitterIntentExpressedInterest = (project: Project) => {
+  const title = project.title
+  const creatorTwtitter = project.creator.twitterHandle ? `@${project.creator.twitterHandle}` : project.creator.name
+  const twitterIntentPrefix = 'https://x.com/intent/tweet?text='
+
+  const headline = `Can't wait to see ${title} by ${creatorTwtitter} come to life! 🔥`
+  const content = 'Want to see fresh stories instead of endless remakes?'
+
+  const shoutOutLine = '@GenesisDotApp is creating something special in storytelling.'
+  const genesisLink = '🔗 https://dreader.app/invest'
+
+  const tweetText = encodeURI(`${twitterIntentPrefix}${headline}\n\n${content}\n${shoutOutLine}\n\n${genesisLink}`)
+  return tweetText
 }

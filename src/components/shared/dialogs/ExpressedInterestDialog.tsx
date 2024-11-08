@@ -7,14 +7,17 @@ import Realistic from 'react-canvas-confetti/dist/presets/realistic'
 import Link from 'next/link'
 import { useCountdown } from '@/hooks/useCountdown'
 import { Text } from '@/components/ui'
+import { fetchTwitterIntentExpressedInterest } from '@/api/twitter/queries/fetchTwitterIntentExpressedInterest'
 
 type Props = {
+  slug: string
   expirationDate: Date
 } & CommonDialogProps
 
-export const ExpressedInterestDialog: React.FC<Props> = ({ open, toggleDialog, expirationDate }) => {
+export const ExpressedInterestDialog: React.FC<Props> = ({ open, toggleDialog, slug, expirationDate }) => {
   const { seconds } = useCountdown({ expirationDate: expirationDate.toString() })
   setTimeout(() => toggleDialog(), 5 * 1000)
+  const { data: twitterIntent } = fetchTwitterIntentExpressedInterest(slug)
 
   return (
     <>
@@ -30,7 +33,7 @@ export const ExpressedInterestDialog: React.FC<Props> = ({ open, toggleDialog, e
               Thank you for expressing interest !
             </DialogTitle>
             <Link
-              href={''}
+              href={twitterIntent || ''}
               target='_blank'
               className='w-max self-center box-border border-2 border-black p-2 bg-white text-black rounded-lg font-medium cursor-pointer'
             >

@@ -125,6 +125,7 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
         <ExpressedInterestDialog
           open={showExpressedInterestDialog}
           toggleDialog={handleRedirectToProjectPage}
+          slug={slug}
           expirationDate={addSeconds(new Date(), 5)}
         />
       )}
