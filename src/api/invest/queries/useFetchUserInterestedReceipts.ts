@@ -7,7 +7,7 @@ export const useFetchUserInterestedReceipts = (slug: string) => {
   return useQuery({
     queryFn: () => fetchUserInterestedReceipts(slug),
     queryKey: investKeys.getUserInterestedReceipts(slug),
-    staleTime: 1000 * 10, // stale for 10 seconds
+    refetchInterval: 1000*10,
     enabled: !!slug,
     throwOnError: onQueryError,
   })
