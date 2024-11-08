@@ -13,9 +13,9 @@ interface FAQItem {
 const faqs: FAQItem[] = [
   {
     question: 'Are dReader and Genesis the same company?',
-    answer: `Genesis is a crowdfunding portal which helps indie creators tokenize their Intellectual Property and distribute it to their desired audience. They primarily work with comic creators, game developers, and book writers that want to raise money to pursue their projects. 
+    answer: `Genesis is a crowdfunding portal which helps indie creators tokenize their Intellectual Property and distribute it to their desired audience. Genesis primarily works with comic creators, animation studios, game developers, and book writers that want to raise money to pursue their projects. 
 
-Decentralized Reader LLC works with many of the same indie creators to distribute their comics once they have been produced. dReader is the platform responsible for distributing shows like The Recruits, Tensorians, The Embers etc.`,
+Decentralized Reader LLC works with many of the same indie creators to distribute their comics once they have been produced. dReader is the platform responsible for distributing series like The Recruits, Tensorians, The Embers etc.`,
   },
   {
     question: 'Can I invest more than once?',
@@ -23,22 +23,33 @@ Decentralized Reader LLC works with many of the same indie creators to distribut
       'You may invest as many times as you would like until you reach your investment limit under the crowdfunding regulations.',
   },
   {
-    question: "Can I invest if I'm not a U.S. citizen?",
-    answer: 'TODO. Currently drafting up this answer with our lawyer office',
+    question: 'What are the legal implications?',
+    answer:
+      'We are currently exploring the legal framework for investing into Intellectual Properties. Currently, the platform DOES NOT OFFER INVESTMENT FEATURES. We only enable consumers to express interest to invest, but no investing or token issuance will take place until the legal framework has been established',
   },
   {
-    question: 'Is the content on this website real?',
-    answer: `No, this is just a dummy demo app. Nothing shown on this web version implies partnership with entities used as a mock reference.
-    
-    Legal framework off the app will be resolved in the coming weeks & months. Final approach to adding "IP investment" features is yet to be determined.`,
+    question: 'Who are the creators on the platform?',
+    answer: `On Genesis you can find various indie creators and web3 brands working on crowdfunding their IP. Some creators base their story on existing web3 brands, with or without their endorsement.
+    `,
   },
   {
-    question: 'What does contributing to the fundraise campaign imply?',
-    answer: 'TODO. Currently drafting up this answer with our lawyer office',
+    question: 'What does contributing to the fundraise imply?',
+    answer:
+      "Currently, there are no implications to contributions since crowdfunding hasn't been enabled yet. The only active features on Genesis currently are discoverability and expressing interest to invest. People who express interest into stories are not committed to contributing.",
+  },
+  {
+    question: 'Stories will be tokenized?',
+    answer:
+      'Indeed, stories will be tokenized. The goal is to enable creators to raise funds for their story and issue tokens which would act as a revenue share of their IP.',
   },
   {
     question: 'Where can I learn more?',
-    answer: 'TODO. Add a linktree',
+    answer: 'Best place to learn more about Genesis and dReader is on the links provided on the Footer of the app.',
+  },
+  {
+    question: 'I want to raise funds for my story!',
+    answer:
+      "Connect with us!! Whether you're an animator, comic artist, or a writer - get in touch with us. Find us on any social media channels or email at support@dreader.io",
   },
 ]
 
