@@ -73,7 +73,7 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
         slug,
         request: { transaction: serializedTransaction, expressedAmount: expressedAmount || 0 },
       })
-      await queryClient.invalidateQueries({queryKey:investKeys.getUserInterestedReceipts(slug)});
+      await queryClient.invalidateQueries({ queryKey: investKeys.getUserInterestedReceipts(slug) })
       toggleExpressedInterestDialog()
     } catch (error) {
       console.error('Express interest error:', error)
