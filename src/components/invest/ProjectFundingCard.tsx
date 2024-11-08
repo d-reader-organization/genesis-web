@@ -184,14 +184,9 @@ type ExpressInterestButtonProps = {
 }
 
 const ExpressInterestButton: React.FC<ExpressInterestButtonProps> = ({ slug, isUserInterested }) => {
-  const { isAuthenticated } = useUserAuth()
-  const href = isAuthenticated
-    ? RoutePath.ExpressInterest(slug)
-    : withRedirect(RoutePath.Login, RoutePath.ExpressInterest(slug))
-
   return (
     <Link
-      href={href}
+      href={RoutePath.ExpressInterest(slug)}
       className={`flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch rounded-xl md:p-4 ${isUserInterested ? 'bg-grey-500 border-2 border-white pointer-events-none' : 'bg-green-genesis hover:brightness-100'}`}
     >
       <Text
