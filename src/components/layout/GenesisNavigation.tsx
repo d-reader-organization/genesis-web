@@ -40,12 +40,10 @@ export const GenesisNavigation: React.FC<Props> = ({ me }) => {
             <GenesisLogo className='h-8 min-w-fit fill-white ml-4' />
           </Link>
           <div className='flex items-center gap-2'>
-            <div className='flex items-center border border-white rounded-xl p-2'>
+            <Link className='flex items-center border border-white rounded-xl p-2' href={RoutePath.Home}>
               <MoveLeft size={16} />
-              <Link href={RoutePath.Home}>
-                <DReaderLogo className='h-6 min-w-fit fill-white ml-4' />
-              </Link>
-            </div>
+              <DReaderLogo className='h-6 min-w-fit fill-white ml-4' />
+            </Link>
             {me ? (
               <button
                 className='flex items-center cursor-pointer'

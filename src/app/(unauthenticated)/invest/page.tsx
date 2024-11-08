@@ -1,6 +1,5 @@
-import { fetchSuccessfulProjects } from '@/app/lib/api/invest/queries'
+import { fetchHighInterestProjects, fetchSuccessfulProjects } from '@/app/lib/api/invest/queries'
 // import { investSlides } from '@/app/lib/data/invest/carouselData'
-import { highInterestProjects } from '@/app/lib/data/invest/projectsData'
 // import { InvestCarousel } from '@/components/invest/Carousel'
 import { FaqSection } from '@/components/invest/Faq'
 import { ProjectsSection } from '@/components/invest/ProjectsSection'
@@ -42,14 +41,15 @@ export const metadata: Metadata = {
 }
 
 export default async function InvestPage() {
-  const { data: successfulProjects, errorMessage } = await fetchSuccessfulProjects()
+  const { data: successfulProjects } = await fetchSuccessfulProjects()
+  const { data: highInterestProjects, errorMessage } = await fetchHighInterestProjects()
 
   if (errorMessage) {
     notFound()
   }
 
   return (
-    successfulProjects && (
+    highInterestProjects && (
       <>
         <InvestPageHero />
         <BaseLayout showFooter>
