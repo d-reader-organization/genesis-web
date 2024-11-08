@@ -44,7 +44,7 @@ export const ExpressedInterestDialog: React.FC<Props> = ({ open, slug, toggleDia
         <Realistic autorun={{ speed: 0.5, duration: 1000 }} />
         <div className='flex justify-between w-full'>
           <Button variant='secondary' className='mr-4 rounded-[16px] font-bold text-base w-full' onClick={toggleDialog}>
-            Nah I'm good
+            Nah I&apos;m good
           </Button>
           <Link
             href={twitterIntent || ''}
