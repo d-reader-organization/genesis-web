@@ -12,6 +12,8 @@ import { useRouter } from 'next/navigation'
 import { RoutePath } from '@/enums/routePath'
 import { Loader } from '../shared/Loader'
 import { ExpressedInterestDialog } from '../shared/dialogs/ExpressedInterestDialog'
+import { useQueryClient } from '@tanstack/react-query'
+import { investKeys } from '@/api/invest'
 
 interface Option {
   label: string
@@ -38,6 +40,7 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
   const [isLoading, toggleLoading] = useToggle()
   const [other, setOther] = useState<number | undefined>(1)
   const [showExpressedInterestDialog, toggleExpressedInterestDialog] = useToggle()
+  const queryClient = useQueryClient()
   // "other" option should open a text input
   // we need to pull in the data from the project
   const { push, refresh } = useRouter()
@@ -70,6 +73,7 @@ export const ExpressInterestSection: React.FC<Props> = ({ slug }) => {
         slug,
         request: { transaction: serializedTransaction, expressedAmount: expressedAmount || 0 },
       })
+      await queryClient.invalidateQueries({queryKey:investKeys.getUserInterestedReceipts(slug)});
       toggleExpressedInterestDialog()
     } catch (error) {
       console.error('Express interest error:', error)

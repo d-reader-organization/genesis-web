@@ -19,7 +19,7 @@ export const InterestUpdatesCard: React.FC<Props> = ({ slug, className }) => {
 
   return (
     receipts &&
-    receipts.length && (
+    receipts.length > 0 && (
       <div
         className={clsx(
           'flex flex-col m-auto w-full md:max-w-[488px] md:max-h-[478px] bg-grey-500 rounded-xl p-2 gap-6 max-md:rounded-none',
