@@ -148,13 +148,13 @@ export const findProjectBySlug = (slug: string) => {
 
 export const getTwitterIntentExpressedInterest = (project: Project) => {
   const title = project.title
-  const creatorTwtitter = project.creator.twitterHandle ? `@${project.creator.twitterHandle}` : project.creator.name
+  const creatorTwitter = project.creator.twitterHandle ? `@${project.creator.twitterHandle}` : project.creator.name
   const twitterIntentPrefix = 'https://x.com/intent/tweet?text='
 
-  const headline = `Can't wait to see ${title} by ${creatorTwtitter} come to life! 🔥`
-  const content = 'Want to see fresh stories instead of endless remakes?'
+  const headline = `Can't wait to see ${title} by ${creatorTwitter} come to life! 🔥`
+  const content = 'Want to see fresh stories instead of endless remakes?\n'
 
-  const shoutOutLine = '@GenesisDotApp is creating something special in storytelling.'
+  const shoutOutLine = '@GenesisDotApp is creating something special.'
   const genesisLink = '🔗 https://dreader.app/invest'
 
   const tweetText = encodeURI(`${twitterIntentPrefix}${headline}\n\n${content}\n${shoutOutLine}\n\n${genesisLink}`)

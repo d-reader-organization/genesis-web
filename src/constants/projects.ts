@@ -3,15 +3,16 @@ import { Project } from '@/models/project'
 export const PROJECTS: Project[] = [
   {
     slug: 'the-recruits',
-    title: 'The Recruits - animated comic',
+    title: 'The Recruits',
     subtitle: 'Celebrating the Degenerate Apes community',
     tags: ['Action', 'Comedy'],
     banner: 'https://d323dls9ny69nf.cloudfront.net/comics/the-recruits-1714399610806/banner-1714399885999.jpg',
     cover: 'https://d323dls9ny69nf.cloudfront.net/comics/the-recruits-1714399610806/cover-1714399885808.jpg',
     logo: 'https://d323dls9ny69nf.cloudfront.net/comics/the-recruits-1714399610806/logo-1714399886123.png',
     creator: {
-      name: 'DegenApes',
+      name: 'Degen Apes',
       avatar: 'https://d323dls9ny69nf.cloudfront.net/creators/degen-apes-1714396919823/avatar-1714397500055.jpg',
+      twitterHandle: 'DegenApeAcademy',
     },
     info: [
       {
@@ -48,7 +49,58 @@ export const PROJECTS: Project[] = [
       },
     ],
     funding: {
-      pledgedAmount: 256510,
+      pledgedAmount: 0,
+      raiseGoal: 300000,
+      startDate: undefined, // TODO: 1.6.2024
+      endDate: undefined, // TODO: 15 days left
+      numberOfBackers: 1023,
+      numberOfInterestedInvestors: 2,
+    },
+  },
+  {
+    slug: 'inner-demons',
+    title: 'Inner Demons',
+    subtitle: 'An original IP by dReader studios',
+    tags: ['Animated Series', 'Action', 'Sci-fi', 'Drama'],
+    banner: 'https://d323dls9ny69nf.cloudfront.net/genesis/inner-demons-banner.jpg',
+    cover: '',
+    logo: '',
+    creator: {
+      name: 'dReader Studios',
+      avatar: '/assets/logo.png',
+    },
+    info: [
+      {
+        section: 'Overview',
+        text: `Inner Demons is about Luna, a rebellious comic artist who is seriously down on her luck. She got fired from her job, her apartment burnt down and her boyfriend dumped her all in one night. To make matters worse, her comic characters have begun to come to life to haunt her. Can things get any worse...?
+
+This is a 24 page fully animated comic, complete with professional voice acting, music and soundFX.`,
+        image: 'https://d323dls9ny69nf.cloudfront.net/genesis/header.png',
+      },
+      {
+        section: 'Team',
+        text: `An original IP by dReader studios`,
+      },
+      {
+        section: 'Offering',
+        text: `• 30% of lifetime revenue of the animated comic will be distributed back to investors on a quarterly basis. (*% received will depend on investment tier)
+
+               • Backers will also receive behind the scenes Discord access and more
+        `,
+      },
+      {
+        section: 'Roadmap',
+        text: `• 6 months production to complete the fully animated comic.
+
+               • The finished comic will be released on dReader with collectible covers.
+
+               • 3 months later the comic will be packaged into an app and sold on the appstore/googleplay.
+
+               • The team will then pitch the project as an animated series to Netflix and alike.`,
+      },
+    ],
+    funding: {
+      pledgedAmount: 0,
       raiseGoal: 300000,
       startDate: undefined, // TODO: 1.6.2024
       endDate: undefined, // TODO: 15 days left
@@ -60,13 +112,14 @@ export const PROJECTS: Project[] = [
     slug: 'mad-lads',
     title: 'Mad Lads',
     subtitle: 'A tale of chaos and mischief',
-    tags: ['Comic Series', 'Action', 'Superhero'],
-    banner: '/assets/images/invest/mad-lads-banner.jpg',
+    tags: ['Manga Series', 'Action', 'Superhero'],
+    banner: 'https://d323dls9ny69nf.cloudfront.net/genesis/mad-lads-banner-3.jpg',
     cover: '/assets/images/invest/mad-lads-cover.png',
     logo: '/assets/images/invest/mad-king-logo.png',
     creator: {
-      name: 'Mad King',
-      avatar: '/assets/images/invest/mad-king-avatar.jpg',
+      name: 'Mad Muse',
+      avatar: 'https://d323dls9ny69nf.cloudfront.net/genesis/mad-muse.jpg',
+      twitterHandle: 'MadMuse_',
     },
     info: [
       {
@@ -84,11 +137,14 @@ export const PROJECTS: Project[] = [
       },
       {
         section: 'Roadmap',
-        text: 'Phase 1: Survive the next quest. Phase 2: Steal something valuable. Phase 3: Run for your life... again.',
+        text: `
+        Phase 1: Survive the next quest.
+        Phase 2: Steal something valuable.
+        Phase 3: Run for your life... again.`,
       },
     ],
     funding: {
-      pledgedAmount: 11840,
+      pledgedAmount: 0,
       raiseGoal: 25000,
       startDate: undefined, // TODO: 1.6.2024
       endDate: undefined, // TODO: 20 days left
@@ -128,7 +184,7 @@ export const PROJECTS: Project[] = [
       },
     ],
     funding: {
-      pledgedAmount: 43271,
+      pledgedAmount: 0,
       raiseGoal: 60000,
       startDate: undefined, // TODO: 1.6.2024
       endDate: undefined, // TODO: 10 days left
@@ -147,6 +203,7 @@ export const PROJECTS: Project[] = [
     creator: {
       name: 'Gecko Studios',
       avatar: 'https://d323dls9ny69nf.cloudfront.net/creators/degen-apes-1714396919823/avatar-1714397500055.jpg',
+      twitterHandle: 'GalacticGeckoSG',
     },
     info: [
       {
@@ -159,7 +216,7 @@ export const PROJECTS: Project[] = [
         
         There are galactic mysteries all around us. And, soon, they will be discovered!
         This character drive, action-adventure series, follows a young girl and a team of mercenaries who narrowly escaped an evil space pirate -- only to be thrown into an epic adventure that will unlock the secrets of the galaxy and threaten life as they know it!`,
-        image: '',
+        image: 'https://d323dls9ny69nf.cloudfront.net/genesis/geckos-rarity.png',
       },
       {
         section: 'Team',
@@ -189,7 +246,7 @@ export const PROJECTS: Project[] = [
       },
     ],
     funding: {
-      pledgedAmount: 28192,
+      pledgedAmount: 0,
       raiseGoal: 50000,
       startDate: undefined, // TODO: 1.6.2024
       endDate: undefined, // TODO: 30 days left
@@ -201,13 +258,14 @@ export const PROJECTS: Project[] = [
     slug: 'enter-the-tensorverse',
     title: 'Enter the Tensorverse',
     subtitle: 'Survive or Die: The First Adventure in Tensor City',
-    tags: ['Action', 'Adventure', 'Sci-fi'],
+    tags: ['Animated Series', 'Action', 'Sci-fi'],
     banner: 'https://d323dls9ny69nf.cloudfront.net/comics/enter-the-tensorverse/banner-1704914829715.png',
     cover: 'https://d323dls9ny69nf.cloudfront.net/comics/enter-the-tensorverse/cover-1704914829469.jpg',
     logo: 'https://d323dls9ny69nf.cloudfront.net/comics/enter-the-tensorverse/logo-1704914830030.png',
     creator: {
-      name: 'Tensor',
-      avatar: 'https://d323dls9ny69nf.cloudfront.net/creators/tensor/avatar-1704912927423.jpg',
+      name: 'StudioNX',
+      avatar: 'https://d323dls9ny69nf.cloudfront.net/genesis/mad-muse.jpg',
+      twitterHandle: 'StudioNx',
     },
     info: [
       {
@@ -252,7 +310,7 @@ export const PROJECTS: Project[] = [
     payout: {
       revenue: 22000,
       roiPercent: 550,
-      daysForRoi: 36,
+      daysForRoi: 46,
       numberOfBuyers: 682,
       summary:
         "Surviving in Tensor City is damn near impossible. When a group of Raiders follow some leaked alpha to an abandoned building, they'll learn just how do-or-die the space truly is. Emphasis on the DIE part. Because, shit's about to go down in this action-packed, sci-fi adventure -- the first ever story set in the Tensorian universe!",
@@ -301,7 +359,7 @@ export const PROJECTS: Project[] = [
     payout: {
       revenue: 5600,
       roiPercent: 280,
-      daysForRoi: 38,
+      daysForRoi: 48,
       numberOfBuyers: 290,
       summary:
         'Join college dropouts Breeson & Jenkins, the dumbest degens in town, on their whacky adventures at Apartment 323. Every day they do super-important stuff like eating junk food, getting wasted, throwing parties and trying to hold down a job while constantly receiving eviction threats from the stoopid landlord.',
@@ -407,8 +465,8 @@ export const PROJECTS: Project[] = [
     title: 'The Lump Sum Saga',
     subtitle:
       'Two species; one mission - to plant a landing beacon that will guide the fleet to a rallying point on a new world full of hope and opportunity.',
-    tags: ['Action', 'Sci-fi'],
-    banner: 'https://d323dls9ny69nf.cloudfront.net/comics/the-lump-sum-saga-1717785540240/banner-1717785588300.jpg',
+    tags: ['Comic Series', 'Action', 'Sci-fi'],
+    banner: 'https://d323dls9ny69nf.cloudfront.net/genesis/lump-sum-banner.jpg',
     cover:
       'https://d323dls9ny69nf.cloudfront.net/comics/the-lump-sum-saga-1717785540240/issues/prologue-only-the-fate-of-our-world-1717800670471/cover-common-1718125589989.png',
     logo: 'https://d323dls9ny69nf.cloudfront.net/comics/comics/the-lump-sum-saga-1717785540240/logo-1717785588371.png',
@@ -428,6 +486,7 @@ export const PROJECTS: Project[] = [
               • The President: The profoundly intelligent leader of the rodent-like Lightsiders wants to save his only love, and his planet at the same time.
 
               What starts as an eclectic sci-fi adventure soon becomes a very familiar superhero epic that finally answers the question "What if the spider had a story?"`,
+        image: 'https://d323dls9ny69nf.cloudfront.net/genesis/lump-sum-rarity.png',
       },
       {
         section: 'Team',

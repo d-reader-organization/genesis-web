@@ -25,7 +25,7 @@ export const fetchSuccessfulProjects = async (): Promise<{
 }
 
 export const fetchHighInterestProjects = async (): Promise<{
-  data: Nullable<InterestProject[]>
+  data: InterestProject[]
   errorMessage?: string
 }> => {
   const { data: userProjectInterest, errorMessage } = await fetchWrapper<UserProjectInterest[]>({
@@ -33,7 +33,7 @@ export const fetchHighInterestProjects = async (): Promise<{
   })
 
   if (errorMessage) {
-    return { data: null, errorMessage }
+    return { data: [], errorMessage }
   }
 
   const projects = highInterestProjects.map((project) => ({
