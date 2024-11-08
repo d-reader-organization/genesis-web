@@ -27,7 +27,7 @@ export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({ funding,
   return (
     <div
       className={
-        'flex flex-col p-2 gap-4 bg-grey-500 justify-between items-start shadow md:rounded-xl md:p-6 md:sticky md:top-[100px] md:max-w-[485px] md:min-w-[300px] md:max-h-[550px] md:gap-6 ' +
+        'flex flex-col p-2 gap-4 bg-grey-500 justify-between items-start shadow md:rounded-xl md:p-6 md:top-[100px] md:max-w-[485px] md:min-w-[300px] md:max-h-[550px] md:gap-6 ' +
         className
       }
     >
