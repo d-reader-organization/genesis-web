@@ -13,7 +13,7 @@ export const highInterestProjects: InterestProject[] = [
     image: '/assets/images/invest/mad-lads-cover.png',
     slug: 'mad-lads',
     stats: {
-      likes: 1023,
+      likes: 0,
     },
     tags: ['Comic Series', 'Action', 'Superhero'],
     title: 'Mad Lads',
@@ -22,7 +22,7 @@ export const highInterestProjects: InterestProject[] = [
     image: '/assets/images/invest/bonk-cover.png',
     slug: 'bonk',
     stats: {
-      likes: 2278,
+      likes: 0,
     },
     tags: ['Animated Series', 'Adventure', 'Sci-fi', 'Comedy'],
     title: 'Bonk',
@@ -31,7 +31,7 @@ export const highInterestProjects: InterestProject[] = [
     image: '/assets/images/invest/galactic-geckos-cover.png',
     slug: 'galactic-geckos',
     stats: {
-      likes: 820,
+      likes: 0,
     },
     tags: ['Comic Series', 'Adventure', 'Sci-fi', 'Superhero'],
     title: 'Galactic Geckos',

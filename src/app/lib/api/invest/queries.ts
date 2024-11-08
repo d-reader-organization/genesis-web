@@ -12,11 +12,20 @@ import {
 } from '@/models/project'
 import { PROJECTS } from '@/constants/projects'
 import { findProjectBySlug } from '@/utils/helpers'
+import { highInterestProjects, InterestProject } from '../../data/invest/projectsData'
 
 const { GET, INVEST, INTEREST_RECEIPTS } = INVEST_QUERY_KEYS
 
 export const fetchSuccessfulProjects = async (): Promise<{
-  data: Nullable<SuccessfulProject[]>
+  data: SuccessfulProject[]
+  errorMessage?: string
+}> => {
+  const successfulProjects = PROJECTS.filter(isSuccessfulProject)
+  return { data: successfulProjects }
+}
+
+export const fetchHighInterestProjects = async (): Promise<{
+  data: Nullable<InterestProject[]>
   errorMessage?: string
 }> => {
   const { data: userProjectInterest, errorMessage } = await fetchWrapper<UserProjectInterest[]>({
@@ -27,13 +36,11 @@ export const fetchSuccessfulProjects = async (): Promise<{
     return { data: null, errorMessage }
   }
 
-  const successfulProjects = PROJECTS.filter(isSuccessfulProject)
-  const projects = successfulProjects.map((project) => ({
+  const projects = highInterestProjects.map((project) => ({
     ...project,
-    funding: {
-      ...project.funding,
-      numberOfInterestedInvestors:
-        userProjectInterest?.find((interest) => interest.slug === project.slug)?.countOfUserExpressedInterest ?? 0,
+    stats: {
+      ...project.stats,
+      likes: userProjectInterest?.find((interest) => interest.slug === project.slug)?.countOfUserExpressedInterest ?? 0,
     },
   }))
 
