@@ -20,7 +20,7 @@ export const ESSENTIAL_LINKS: NavigationLink[] = [
   { href: '/', name: 'Home', isComingSoon: false, disabled: false, targetBlank: false },
   { href: '/discover', name: 'Discover', isComingSoon: true, disabled: false, targetBlank: false },
   { href: '/marketplace', name: 'Marketplace', isComingSoon: true, disabled: false, targetBlank: false },
-  { href: '/invest', name: 'Invest', isComingSoon: true, disabled: false, targetBlank: false },
+  { href: '/invest', name: 'Invest', isComingSoon: false, disabled: false, targetBlank: false },
 ]
 
 export const MAIN_LINKS: NavigationLink[] = [

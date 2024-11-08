@@ -92,7 +92,6 @@ export const GenesisMobileNavigation: React.FC<Props> = ({ user }) => {
                         as='h4'
                         href={RoutePath.Invest}
                         isActive={false}
-                        isComingSoon
                         title='Invest'
                       />
                       {!publicKey ? <NavConnectButton /> : null}
