@@ -402,4 +402,64 @@ export const PROJECTS: Project[] = [
         'After the conclusion of "The Plague Wars," Liberty has dwindled to a mere shell of its former self. Under the rule of B.E.G., the once thriving metropolis has deteriorated into a dystopian wasteland, where corruption thrives and hope has faded. This speculative fiction series follows the lives of a group of individuals, collectively known as The Syndicate, displaced by the war and now navigating the challenges of this new world. Through the dark & shadowy streets and the barren outskirts, each character confronts their own struggles, their stories intertwining as they reunite, their bonds strengthened by adversity, to confront the challenges of the present while facing the demons of their past. Staring down the reality of extinction, they come to understand that their battle extends beyond challenging the oppressive regime to confronting their own inner conflicts. "Originz" offers a grounded exploration of resilience amidst adversity where every step forward carries the weight of history.',
     },
   },
+  {
+    slug: 'the-lump-sum-saga',
+    title: 'The Lump Sum Saga',
+    subtitle:
+      'Two species; one mission - to plant a landing beacon that will guide the fleet to a rallying point on a new world full of hope and opportunity.',
+    tags: ['Action', 'Sci-fi'],
+    banner: 'https://d323dls9ny69nf.cloudfront.net/comics/the-lump-sum-saga-1717785540240/banner-1717785588300.jpg',
+    cover:
+      'https://d323dls9ny69nf.cloudfront.net/comics/the-lump-sum-saga-1717785540240/issues/prologue-only-the-fate-of-our-world-1717800670471/cover-common-1718125589989.png',
+    logo: 'https://d323dls9ny69nf.cloudfront.net/comics/comics/the-lump-sum-saga-1717785540240/logo-1717785588371.png',
+    creator: {
+      name: 'Greg Tjosvold',
+      avatar: 'https://d323dls9ny69nf.cloudfront.net/creators/greg-tjosvold/avatar-1697040090281.jpg',
+      twitterHandle: 'gregtjosvold',
+    },
+    info: [
+      {
+        section: 'Overview',
+        text: `Spiders and gerbils and poodles, oh my! In The Lump Sum Saga, we join a team of scientists from the planet "Home" on a daring mission to land a probe on an alien world capable of supporting life - Earth. 
+
+              The eclectic cast of characters includes:
+              • JoJo: an LWD (little white dog) who becomes the unexpected nexus between two worlds. 
+              • The Commander: The spider-esque Darksider lead of the alien landing team is still alive. Stranded in a world of giants, can she use her cunning and intelligence to find a way to call Home?
+              • The President: The profoundly intelligent leader of the rodent-like Lightsiders wants to save his only love, and his planet at the same time.
+
+              What starts as an eclectic sci-fi adventure soon becomes a very familiar superhero epic that finally answers the question "What if the spider had a story?"`,
+      },
+      {
+        section: 'Team',
+        text: `Writer Greg Tjosvold took early retirement from an award-winning teaching career to tackle his growing list of works-in-progress and creative to-dos. The Lump Sum Saga started as a classroom NaNoWriMo project that ignited his current obsession with comics and sequential art. Greg is also the editor of the Tech for Comics blog and the author of “Comic NFTs - An Ethical Approach.”
+
+Artist Sergi Domènech studied comics & illustration at the prestigious Escola JOSO in Barcelona. He won several comic book contests and created several didactic comics as the artist and writer for the Spanish CSIC. He continues to work internationally. For the French market, he drew Jeanne d’Arc for Hachette in collaboration with Magma Studio. His previous work for the English market includes Sorority Babes for Full Moon as well as Money Clip and The Disciple in collaboration with Comics Experience. He is currently finishing the second instalment of The Lump Sum Saga. Lump Dog will be available to the public early in 2025. `,
+      },
+      {
+        section: 'Offering',
+        text: `• 80% of net revenue generated will be distributed to investors on an annual basis for five years.
+
+               • % received will depend on investment amount (Investment Tier?).`,
+      },
+      {
+        section: 'Roadmap',
+        text: `• Multi-Series Comic Book
+
+               • 3 additional issues/chapters building up towards a 176 page physical book. The first 56 pages are already in production or complete. The series is meant to be an ongoing series beyond this milestone should the series find an engaged audience and investors have be suitably compensated during the initial five year investment period.
+               
+               • Each individual issue will be released on dReader with collectible covers.
+               
+               • The individual issues and/or collected edition book will be published physically, initially distributed for sale via Kickstarter or other applicable crowd funding platform.
+              `,
+      },
+    ],
+    funding: {
+      pledgedAmount: 6000,
+      raiseGoal: 6000,
+      startDate: undefined, // TODO: 1.6.2024
+      endDate: undefined, // TODO: completed
+      numberOfBackers: 2,
+      numberOfInterestedInvestors: 2,
+    },
+  },
 ]
