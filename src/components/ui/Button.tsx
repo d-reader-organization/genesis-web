@@ -37,7 +37,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
 
@@ -73,6 +73,7 @@ const ButtonLink: React.FC<Props> = ({
     <Link
       className={cn(
         'flex justify-center items-center min-w-40 p-[14px] rounded-lg cursor-pointer text-base font-semibold hover:brightness-105',
+        className,
         {
           'bg-important-color': backgroundColor === 'important',
           'bg-transparent': backgroundColor === 'transparent',
@@ -87,7 +88,6 @@ const ButtonLink: React.FC<Props> = ({
           'button-link--clickable-effect': clickableEffect,
           'button-link--no-min-width': noMinWidth,
           'button-link--bold': bold,
-          className,
         }
       )}
       target={blank ? '_blank' : props.target}
