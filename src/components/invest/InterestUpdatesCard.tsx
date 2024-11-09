@@ -27,14 +27,14 @@ export const InterestUpdatesCard: React.FC<Props> = ({ slug, className }) => {
         )}
       >
         <div className='flex justify-between rounded-t-lg py-6 px-4 bg-grey-600 max-md:bg-grey-500 items-center'>
-          <Text as='h5' styleVariant='primary-heading'>
+          <Text as='h5' styleVariant='primary-heading' className='text-20'>
             Campaign Activity
           </Text>
           <ACTIVITY_ICON />
         </div>
-        <div className='bg-grey-300 overflow-y-auto h-[362px]'>
+        <div className='bg-grey-300 overflow-y-auto max-h-[362px]'>
           <div className='flex flex-col gap-6 p-6 pl-4 pr-2 bg-grey-500'>
-            {receipts.map((receipt) => (
+            {receipts.map((receipt, index) => (
               <div key={receipt.id} className='flex flex-col gap-6'>
                 <div className='flex gap-4'>
                   <Image
@@ -49,7 +49,7 @@ export const InterestUpdatesCard: React.FC<Props> = ({ slug, className }) => {
                     <strong>${receipt.expressedAmount}!</strong> {formatDate(receipt.timestamp, 'MM/dd/yyyy')}
                   </Text>
                 </div>
-                <Divider />
+                <Divider className={index == receipts.length - 1 ? 'hidden' : ''} />
               </div>
             ))}
           </div>
