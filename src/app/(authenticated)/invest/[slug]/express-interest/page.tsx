@@ -3,6 +3,9 @@ import { Text } from '@/components/ui'
 import { fetchProject } from '@/app/lib/api/invest/queries'
 import { notFound } from 'next/navigation'
 import { ExpressInterestSection } from '@/components/invest/ExpressInterestSection'
+import Link from 'next/link'
+import { MoveLeft } from 'lucide-react'
+import { RoutePath } from '@/enums/routePath'
 
 type Props = {
   params: { slug: string }
@@ -20,11 +23,20 @@ export default async function ExpressInterestPage({ params }: Props) {
       {project.funding.isUserInterested ? (
         <div className='m-auto'>
           <Text as='h2' styleVariant='body-large'>
-            You&apos;ve already expressed interest ! 🎉
+            You&apos;ve already expressed interest into this story! 🎉
           </Text>
+          <Link
+            className='flex items-center gap-1 pt-7 sm:pt-9 sm:gap-2 border-b-2 text-grey-100 border-grey-100 w-max mx-auto'
+            href={RoutePath.Invest}
+          >
+            <MoveLeft size={16} />
+            <Text as='p' styleVariant='body-normal' fontWeight='medium' className='max-sm:text-xs'>
+              Go back
+            </Text>
+          </Link>
         </div>
       ) : (
-        <div className='flex flex-col items-center gap-8 max-w-screen-md w-full py-8 md:py-16'>
+        <div className='flex flex-col items-center gap-8 max-w-screen-md w-full py-4'>
           <div className='text-center space-y-4'>
             <Text as='h4' styleVariant='secondary-heading' fontWeight='medium' className='text-grey-100'>
               If an offering were to be launched for

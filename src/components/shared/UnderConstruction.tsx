@@ -14,9 +14,9 @@ import {
   INSTAGRAM_LINK,
   TWITTER_LINK,
   SUPPORT_EMAIL,
-  D_READER_LINK,
 } from '@/constants/general'
 import BunBunUnderConstruction from 'public/assets/images/site-under-construction.png'
+import { RoutePath } from '@/enums/routePath'
 
 export default function UnderConstruction() {
   return (
@@ -90,7 +90,7 @@ export default function UnderConstruction() {
         </div>
         <Link
           className='flex items-center gap-1 pt-7 sm:pt-9 sm:gap-2 border-b-2 text-grey-100 border-grey-100'
-          href={D_READER_LINK}
+          href={RoutePath.Home}
         >
           <MoveLeft size={16} />
           <Text as='p' styleVariant='body-normal' fontWeight='medium' className='max-sm:text-xs'>
