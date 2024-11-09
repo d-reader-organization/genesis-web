@@ -67,8 +67,8 @@ export default async function ProjectInvestPage({ params }: Props) {
             <ProjectHeader title={project.title} subtitle={project.subtitle} className='md:hidden' />
             <ProjectFundingCard funding={project.funding} slug={project.slug} className='md:hidden' />
             <ProjectCreatorSection creator={project.creator} tags={project.tags} />
-            <ProjectInfo info={project.info} />
             <InterestUpdatesCard slug={project.slug} className='md:hidden -ml-4 w-screen rounded-none' />
+            <ProjectInfo info={project.info} />
           </div>
           <div className='flex flex-col'>
             <ProjectFundingCard funding={{ ...project.funding }} slug={project.slug} className='max-md:hidden' />

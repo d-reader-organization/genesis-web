@@ -101,7 +101,7 @@ This is a 24 page fully animated comic, complete with professional voice acting,
     ],
     funding: {
       pledgedAmount: 0,
-      raiseGoal: 300000,
+      raiseGoal: 30000,
       startDate: undefined, // TODO: 1.6.2024
       endDate: undefined, // TODO: 15 days left
       numberOfBackers: 1023,

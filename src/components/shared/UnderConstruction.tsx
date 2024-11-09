@@ -8,13 +8,7 @@ import DiscordIcon from 'public/assets/vector-icons/discord-icon.svg'
 import TwitterIcon from 'public/assets/vector-icons/twitter-icon.svg'
 import InstagramIcon from 'public/assets/vector-icons/instagram-icon.svg'
 import MailIconInverse from 'public/assets/vector-icons/mail-icon-inverse.svg'
-import {
-  SUPPORT_LINK,
-  DISCORD_LINK,
-  INSTAGRAM_LINK,
-  TWITTER_LINK,
-  SUPPORT_EMAIL,
-} from '@/constants/general'
+import { SUPPORT_LINK, DISCORD_LINK, INSTAGRAM_LINK, TWITTER_LINK, SUPPORT_EMAIL } from '@/constants/general'
 import BunBunUnderConstruction from 'public/assets/images/site-under-construction.png'
 import { RoutePath } from '@/enums/routePath'
 
