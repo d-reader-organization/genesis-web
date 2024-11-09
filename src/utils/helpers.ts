@@ -157,6 +157,6 @@ export const getTwitterIntentExpressedInterest = (project: Project) => {
   const shoutOutLine = '@GenesisDotApp is cooking 🍳'
   const genesisLink = '🔗👇 Check it out\nhttps://dreader.app/invest'
 
-  const tweetText = encodeURI(`${twitterIntentPrefix}${headline}\n${content}\n${shoutOutLine}\n\n${genesisLink}`)
+  const tweetText = encodeURI(`${twitterIntentPrefix}${headline}\n\n${content}\n${shoutOutLine}\n${genesisLink}`)
   return tweetText
 }
