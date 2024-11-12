@@ -43,7 +43,7 @@ export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({ funding,
         <div className='relative h-[8px] rounded-[27px] w-full bg-[#44464d]'>
           <div
             className='h-[8px] bg-green-genesis rounded-[27px] absolute top-0 left-0'
-            style={{ width: `${(funding.pledgedAmount / funding.raiseGoal) * 100}%` }}
+            style={{ width: `${Math.min(1, funding.pledgedAmount / funding.raiseGoal) * 100}%` }}
           />
         </div>
       </div>
