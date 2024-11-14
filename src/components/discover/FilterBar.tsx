@@ -86,13 +86,13 @@ const FilterSheet: React.FC<FilterSheetProps> = ({ isOpen, triggerOpenChange }) 
           </div>
         </SheetContent>
       </Sheet>
-      <div
+      {/* page blur on sheet opening <div
         className={cn(
           'fixed inset-0 bg-transparent  backdrop-blur-[25px] z-40 transition-all duration-300',
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         )}
         aria-hidden='true'
-      />
+      /> */}
     </div>
   )
 }

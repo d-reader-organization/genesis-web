@@ -13,7 +13,7 @@ export const CreatorsContent: React.FC = () => {
   const [creators, setCreators] = useState<Creator[] | undefined>(undefined)
 
   useEffect(() => {
-    const fetchParams = async () => {
+    const fetchData = async () => {
       try {
         const data = await fetchCreators(creatorParams)
         setCreators(data)
@@ -22,7 +22,7 @@ export const CreatorsContent: React.FC = () => {
       }
     }
 
-    fetchParams()
+    fetchData()
   }, [creatorParams])
 
   return (

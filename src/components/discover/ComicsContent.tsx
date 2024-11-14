@@ -13,7 +13,7 @@ export const ComicsContent: React.FC = () => {
   const [comics, setComics] = useState<Comic[] | undefined>(undefined)
 
   useEffect(() => {
-    const fetchParams = async () => {
+    const fetchData = async () => {
       try {
         const data = await fetchComics(comicParams)
         setComics(data)
@@ -22,7 +22,7 @@ export const ComicsContent: React.FC = () => {
       }
     }
 
-    fetchParams()
+    fetchData()
   }, [comicParams])
 
   return (
