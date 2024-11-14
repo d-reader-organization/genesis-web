@@ -13,6 +13,7 @@ export const fetchComicIssues = async (params: ComicIssueParams): Promise<ComicI
   const { data } = await fetchWrapper<ComicIssue[]>({
     params,
     path: `${COMIC_ISSUE}/${GET}`,
+    revalidateCacheInSeconds: 5 * 10,
   })
   return data ?? []
 }
@@ -36,7 +37,10 @@ export const fetchComicIssuePages = async (id: string | number): Promise<ComicPa
 }
 
 export const fetchComicIssuePreviewPages = async (id: string | number): Promise<ComicPage[]> => {
-  const response = await fetchWrapper<ComicPage[]>({ path: `${COMIC_ISSUE}/${GET}/${id}/${PREVIEW_PAGES}` })
+  const response = await fetchWrapper<ComicPage[]>({
+    path: `${COMIC_ISSUE}/${GET}/${id}/${PREVIEW_PAGES}`,
+    revalidateCacheInSeconds: 60,
+  })
   return response.data ?? []
 }
 
