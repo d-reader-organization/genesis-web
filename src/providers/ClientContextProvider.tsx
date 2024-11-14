@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 // import { usePathname } from 'next/navigation'
 // import { RoutePath } from '@/enums/routePath'
 import { useWalletAdapter } from '@/hooks/useWalletAdapter'
+import { AuthorizeWalletProvider } from './AuthorizeWalletContextProvider'
 
 export const ClientContext = createContext(null)
 
@@ -35,7 +36,9 @@ const ClientContextProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     <QueryClientProvider client={queryClient}>
       <ConnectionProvider endpoint={endpoint}>
         <WalletProvider wallets={wallets}>
-          <WalletModalProvider className='wallet-dialog'>{children}</WalletModalProvider>
+          <AuthorizeWalletProvider>
+            <WalletModalProvider className='wallet-dialog'>{children}</WalletModalProvider>
+          </AuthorizeWalletProvider>
         </WalletProvider>
       </ConnectionProvider>
     </QueryClientProvider>
