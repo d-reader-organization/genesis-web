@@ -14,7 +14,7 @@ async function ProfilePage() {
     <BaseLayout>
       <main className='w-full max-w-[1200px] mx-auto'>
         <Tabs defaultValue='1'>
-          <TabsList className='border-b-2 border-grey-300 w-full flex justify-start'>
+          <TabsList className='border-b-2 border-grey-300 w-full flex gap-4 justify-start'>
             <TabsTrigger value='1' className='tab-button text-white font-bold text-sm sm:text-base'>
               Account
             </TabsTrigger>
