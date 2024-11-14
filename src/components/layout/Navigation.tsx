@@ -17,9 +17,10 @@ import { User } from '@/models/user'
 
 type Props = {
   me: User | null
+  hideSearch?: boolean
 }
 
-export const Navigation: React.FC<Props> = ({ me }) => {
+export const Navigation: React.FC<Props> = ({ me, hideSearch = false }) => {
   const [isProfileSheetOpen, setOpenProfileSheet] = React.useState<boolean>(false)
   const pathname = usePathname()
   const isInvest = pathname.startsWith(RoutePath.Invest)
@@ -44,7 +45,7 @@ export const Navigation: React.FC<Props> = ({ me }) => {
                 <DReaderLogo className='h-8 min-w-fit fill-white ml-4' />
               )}
             </Link>
-            <SearchInput />
+            {!hideSearch && <SearchInput />}
             <div className='flex items-center gap-10'>
               <MenuItem href={RoutePath.Invest} isActive={isInvest} isComingSoon title='Invest' />
             </div>

@@ -1,7 +1,7 @@
-//import { BaseLayout } from '@/components/layout/BaseLayout'
-import UnderConstruction from '@/components/shared/UnderConstruction'
+import { redirect } from 'next/navigation'
 
 export default function DiscoverPage() {
-  return <UnderConstruction />
-  //return <BaseLayout>Discover {params.entity}</BaseLayout>
+  redirect('/discover/comics')
+
+  return null
 }
