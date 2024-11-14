@@ -10,7 +10,6 @@ import { useFetchSupportedTokens } from '@/api/settings/queries/useFetchSupporte
 import { CouponType } from '@/models/candyMachine/candyMachineCoupon'
 import { getDefaultCoupon, isComicVaultCoupon } from '@/utils/mint'
 import { WRAPPED_SOL_MINT } from '@metaplex-foundation/js'
-import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
 import React from 'react'
 
 export type CandyMachineStoreApi = ReturnType<typeof createCandyMachineStore>
@@ -29,7 +28,6 @@ export const CandyMachineStoreProvider = ({
   children,
 }: CandyMachineStoreProviderProps) => {
   const { publicKey } = useWallet()
-  
   const {
     data: candyMachine,
     refetch,
@@ -39,7 +37,6 @@ export const CandyMachineStoreProvider = ({
     walletAddress: publicKey?.toBase58() ?? '',
   })
   const { data: supportedTokens = [] } = useFetchSupportedTokens()
-  useAuthorizeWallet(refetch)
   const storeRef = useRef<CandyMachineStoreApi>()
   if (!storeRef.current) {
     const defaultCoupon = getDefaultCoupon(candyMachine?.coupons ?? [], isAuthenticated)
@@ -70,7 +67,7 @@ export const CandyMachineStoreProvider = ({
         (coupon) => !(coupon.type === CouponType.PublicUser || isComicVaultCoupon(coupon))
       ),
     })
-  }, [candyMachine, isLoading, supportedTokens])
+  }, [candyMachine, isLoading, supportedTokens.length])
 
   useEffect(() => {
     if (candyMachine) {

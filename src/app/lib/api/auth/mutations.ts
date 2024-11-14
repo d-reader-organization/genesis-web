@@ -25,7 +25,6 @@ export const requestWalletPassword = async (address: string): Promise<string> =>
   const response = await fetchWrapper<string>({
     path: `${AUTH}/${WALLET}/${REQUEST_PASSWORD}/${address}`,
     method: 'PATCH',
-    revalidateCacheInSeconds: 30,
     isTextResponse: true,
   })
   return response.data ?? ''

@@ -8,7 +8,7 @@ import { Button, ButtonProps } from '../../ui/Button'
 import { WalletListItem } from '../WalletListItem'
 import { cn } from '@/lib/utils'
 import { Text } from '../../ui/Text'
-import useAuthorizeWallet from '@/hooks/useAuthorizeWallet'
+import { useAuthorizeWalletContext } from '@/providers/AuthorizeWalletContextProvider'
 require('@solana/wallet-adapter-react-ui/styles.css')
 
 type Props = {
@@ -22,7 +22,7 @@ type Props = {
  * https://github.com/solana-labs/wallet-adapter/tree/master/packages/core/react */
 export const ConnectButton: React.FC<Props> = ({ onClick, text, children, ...props }) => {
   const [actionTriggered, setActionTriggered] = useState(false)
-  useAuthorizeWallet()
+  useAuthorizeWalletContext()
 
   const [walletModalConfig, setWalletModalConfig] = useState<Readonly<{
     onSelectWallet(walletName: WalletName): void
