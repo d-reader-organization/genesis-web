@@ -48,10 +48,14 @@
 }
 
 .carousel-height {
-  height: 320px;
+  height: 380px;
 
   @media (min-width: 900px) {
-    height: 511px;
+    height: 380px;
+  }
+
+  @media (min-width: 1200px) {
+    height: 380px;
   }
 }
 

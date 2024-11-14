@@ -4,6 +4,7 @@ import { payoutDetails } from '@/constants/tooltips'
 import { formatNumberWithCommas } from '@/utils/numbers'
 import { formatPercentage, formatUSD } from '@/utils/numbers'
 import { ProjectFunding, ProjectPayout } from '@/models/project'
+import { Text } from '@/components/ui'
 import { cn } from '@/lib/utils'
 
 type Props = {
@@ -27,7 +28,7 @@ export const ProjectPayoutCard: React.FC<Props> = ({ payout, funding, className 
         <PayoutStats
           text={`total raised by ${funding.numberOfBackers} backers`}
           value={formatUSD(funding.raiseGoal)}
-          valueColor='text-[#fceb54] '
+          valueColor='text-green-genesis'
           valueSizeMd='md:text-3xl'
           textSizeMd='md:text-xl'
         />
@@ -38,10 +39,10 @@ export const ProjectPayoutCard: React.FC<Props> = ({ payout, funding, className 
           className='max-md:hidden'
         />
         <PayoutStats text='ROI' value={formatPercentage(payout.roiPercent)} className='md:hidden' />
-        <PayoutStats text='days for payout processing' value={payout.daysForRoi} />
+        <PayoutStats text='days to profitability' value={payout.daysForRoi} />
       </div>
 
-      <div>
+      <div className='flex flex-col gap-1'>
         <div className='flex flex-row w-full justify-center items-center p-[10px] bg-gradient-to-br from-[#4a4e53] to-[#1f222a] rounded-xl gap-[14px] md:max-h-[104px] md:p-[12px]'>
           <div
             className='flex max-h-[36px] max-w-[36px] md:max-h-[54px] md:max-w-[54px] p-[8px] bg-white rounded-xl shadow border border-[#56a05e]'
@@ -52,7 +53,9 @@ export const ProjectPayoutCard: React.FC<Props> = ({ payout, funding, className 
           </div>
           <p className='text-grey-100 text-[14px] font-medium leading-snug'>Licencing Participation Agreement</p>
         </div>
-        <p className='text-[10px] italic pt-1 leading-normal max-md:pl-1 md:px-2'>{payoutDetails}</p>
+        <Text as='p' styleVariant='body-xsmall' className='text-grey-100' italic>
+          {payoutDetails}
+        </Text>
       </div>
     </div>
   )
@@ -79,7 +82,9 @@ const PayoutStats: React.FC<PayoutStatsProps> = ({
       <p className={cn('font-semibold text-xl leading-tight tracking-tight md:leading-none', valueSizeMd, valueColor)}>
         {value}
       </p>
-      <p className={cn('text-[#c2c5ce] text-xs font-medium leading-normal md:leading-relaxed', textSizeMd)}>{text}</p>
+      <p className={cn('text-[#c2c5ce] text-xs font-medium leading-normal md:leading-relaxed text-center', textSizeMd)}>
+        {text}
+      </p>
     </div>
   )
 }

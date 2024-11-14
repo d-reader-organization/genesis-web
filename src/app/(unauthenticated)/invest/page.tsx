@@ -1,14 +1,14 @@
-import { fetchSuccessfulProjects } from '@/app/lib/api/invest/queries'
-import { investSlides } from '@/app/lib/data/invest/carouselData'
-import { highInterestProjects } from '@/app/lib/data/invest/projectsData'
-import { InvestCarousel } from '@/components/invest/Carousel'
+import { fetchHighInterestProjects, fetchSuccessfulProjects } from '@/app/lib/api/invest/queries'
+// import { investSlides } from '@/app/lib/data/invest/carouselData'
+// import { InvestCarousel } from '@/components/invest/Carousel'
 import { FaqSection } from '@/components/invest/Faq'
 import { ProjectsSection } from '@/components/invest/ProjectsSection'
 import { InvestSection } from '@/components/invest/Section'
 import { BaseLayout } from '@/components/layout/BaseLayout'
-import { InvestScreenWelcomeDialog } from '@/components/shared/dialogs/InvestScreenWelcomeDialog'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { InvestPageHero } from '@/components/invest/InvestPageHero'
+import { ceil } from 'lodash'
 
 export const metadata: Metadata = {
   title: 'Genesis',
@@ -42,23 +42,31 @@ export const metadata: Metadata = {
 }
 
 export default async function InvestPage() {
-  const { data: successfulProjects, errorMessage } = await fetchSuccessfulProjects()
+  const { data: successfulProjects } = await fetchSuccessfulProjects()
+  const { data: interestProjects, errorMessage } = await fetchHighInterestProjects()
+
+  const sliceIndex = ceil(interestProjects.length / 2)
+  const [firstHalf, secondHalf] = [
+    interestProjects.slice(0, sliceIndex),
+    interestProjects.slice(sliceIndex, interestProjects.length),
+  ]
 
   if (errorMessage) {
     notFound()
   }
 
   return (
-    successfulProjects && (
-      <BaseLayout>
+    <>
+      <InvestPageHero />
+      <BaseLayout showFooter>
         <div className='flex flex-col gap-10 max-w-screen-xl w-full'>
-          <InvestCarousel slides={investSlides} />
+          <InvestSection data={firstHalf} title='Gauging Interest' />
           <ProjectsSection projects={successfulProjects} title='Recent Successful Projects' />
-          <InvestSection actionHref='/invest' data={highInterestProjects} title='Gauging Interest' />
+          {/* <InvestCarousel slides={investSlides} /> */}
+          <InvestSection data={secondHalf} title='You Might Like' />
           <FaqSection />
-          <InvestScreenWelcomeDialog />
         </div>
       </BaseLayout>
-    )
+    </>
   )
 }

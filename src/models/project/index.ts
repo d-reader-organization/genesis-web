@@ -1,6 +1,7 @@
 export type ProjectCreator = {
   name: string
   avatar: string
+  twitterHandle?: string
 }
 
 export type ProjectInfo = {
@@ -28,7 +29,6 @@ export type ProjectPayout = {
 }
 
 export type Project = {
-  id: number
   slug: string
   title: string
   subtitle: string
@@ -40,6 +40,7 @@ export type Project = {
   info: ProjectInfo
   funding: ProjectFunding
   payout?: ProjectPayout
+  videoUrl?: string
 }
 
 export type SuccessfulProject = Project & { payout: ProjectPayout }
@@ -48,16 +49,24 @@ export function isSuccessfulProject(project: Project | undefined): project is Su
   return project !== undefined && 'payout' in project
 }
 
-export type ProjectExpressedInterest = {
-  id: number
-  count: number
-}
-
 export type UserProjectInterest = {
+  slug: string
   countOfUserExpressedInterest: number
-  isInterested: boolean
+  isUserInterested?: boolean
+  expectedPledgedAmount?: number
 }
 
 export type ExpressInterest = {
   transaction: string
+  expressedAmount: number
+}
+
+export type UserInterestedReceipt = {
+  id: number
+  projectSlug: string
+  walletAddress: string
+  transactionSignature: string
+  timestamp: Date
+  username: string
+  expressedAmount: number
 }

@@ -55,7 +55,7 @@ const FooterColumn: React.FC<ColumnProps> = ({ links, title }) => (
       {links.map((link, index) => {
         return (
           <Link
-            className={cn('flex gap-1', link.isClickable ? 'text-grey-100' : 'pointer-events-none text-grey-300')}
+            className={cn('flex gap-1', link.disabled ? 'pointer-events-none text-grey-300' : 'text-grey-100')}
             href={link.href}
             key={`${link.name}-${index}`}
             target={link.targetBlank ? '_blank' : undefined}
@@ -64,7 +64,7 @@ const FooterColumn: React.FC<ColumnProps> = ({ links, title }) => (
               as='span'
               styleVariant='body-normal'
               fontWeight='medium'
-              className={link.isClickable ? 'font-normal' : ''}
+              className={link.disabled ? '' : 'font-normal'}
             >
               {link.name}
             </Text>

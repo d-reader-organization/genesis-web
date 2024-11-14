@@ -1,12 +1,12 @@
-import { RoutePath } from '@/enums/routePath'
-import DReaderSymbol from 'public/assets/vector-icons/logo.svg'
-import { ButtonLink } from '../ui/Button'
+import React from 'react'
 import Link from 'next/link'
+import DReaderSymbol from 'public/assets/vector-icons/logo.svg'
+import { RoutePath } from '@/enums/routePath'
 import { cn } from '@/lib/utils'
+import { ButtonLink } from '../ui/Button'
 import { Menu, Search, X } from 'lucide-react'
 import { Sheet, SheetContent, SheetTitle } from '../ui/sheet'
 import { User } from '@/models/user'
-import React from 'react'
 import { ProfileWidget } from '../shared/ProfileWidget'
 import { LogoutButton } from '../shared/buttons/LogoutButton'
 import { ProductSocials } from '../shared/ProductSocials'
@@ -16,6 +16,7 @@ import { NavConnectButton } from '../shared/buttons/ConnectButton'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { NavItemLink } from './NavItemLink'
 import { ConnectedWalletBox } from '../shared/sheets/profile/WalletSection'
+import { GenesisMobileNavigation } from './GenesisMobileNavigation'
 
 type Props = {
   user?: User | null
@@ -29,6 +30,10 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
   const isHome = pathname === '/'
   const isLibrary = pathname.startsWith(RoutePath.Library)
   const isProfile = pathname.startsWith(RoutePath.Profile)
+  const isInvest = pathname.startsWith(RoutePath.Invest)
+  const activeLinkColor = isInvest ? 'text-green-genesis' : 'text-yellow-500'
+
+  if (isInvest) return <GenesisMobileNavigation user={user} />
 
   return (
     <>
@@ -65,21 +70,52 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
                     <div className='flex flex-col gap-3'>
                       <div className='flex justify-between w-full'>
                         {/* <Link href={RoutePath.Discover}>Discover</Link> */}
-                        <NavItemLink href={RoutePath.Home} isActive={isHome} title='Home' />
+                        <NavItemLink
+                          activeColor={activeLinkColor}
+                          as='h4'
+                          href={RoutePath.Home}
+                          isActive={isHome}
+                          title='Home'
+                        />
                         <button onClick={() => setIsOpen(false)}>
                           <X className='size-6 text-grey-100' />
                         </button>
                       </div>
-                      <NavItemLink href={RoutePath.Discover} isActive={false} isComingSoon title='Discover' />
-                      <NavItemLink href={RoutePath.Invest} isActive={false} isComingSoon title='Invest' />
+                      <NavItemLink
+                        activeColor={activeLinkColor}
+                        as='h4'
+                        href={RoutePath.Discover}
+                        isActive={false}
+                        isComingSoon
+                        title='Discover'
+                      />
+                      <NavItemLink
+                        activeColor={activeLinkColor}
+                        as='h4'
+                        href={RoutePath.Invest}
+                        isActive={false}
+                        title='Invest'
+                      />
                       {!publicKey ? <NavConnectButton /> : null}
                     </div>
                     {user ? (
                       <div className='flex flex-col gap-6 border-t border-t-grey-400'>
                         <ProfileWidget user={user} />
                         <div className='flex flex-col gap-4'>
-                          <NavItemLink href={RoutePath.Library} isActive={isLibrary} title='Library' />
-                          <NavItemLink href={RoutePath.Profile} isActive={isProfile} title='Settings' />
+                          <NavItemLink
+                            activeColor={activeLinkColor}
+                            as='h4'
+                            href={RoutePath.Library}
+                            isActive={isLibrary}
+                            title='Library'
+                          />
+                          <NavItemLink
+                            activeColor={activeLinkColor}
+                            as='h4'
+                            href={RoutePath.Profile}
+                            isActive={isProfile}
+                            title='Settings'
+                          />
                         </div>
                         {publicKey ? <ConnectedWalletBox address={publicKey.toBase58()} /> : null}
                         <LogoutButton />

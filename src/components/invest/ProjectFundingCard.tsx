@@ -6,31 +6,18 @@ import { TrendingUp } from 'lucide-react'
 import { ProjectFunding } from '@/models/project'
 import { formatNumberWithCommas, formatUSD } from '@/utils/numbers'
 import { differenceInDays } from 'date-fns'
-import { Button, Text, toast } from '../ui'
+import { Text } from '../ui'
 import { cn, withRedirect } from '@/lib/utils'
 import { useUserAuth } from '@/providers/UserAuthProvider'
 import { RoutePath } from '@/enums/routePath'
-import { ConnectButton } from '../shared/buttons/ConnectButton'
-import { useWallet } from '@solana/wallet-adapter-react'
-import { fetchExpressInterestTransaction } from '@/app/lib/api/transaction/queries'
-import { versionedTransactionFromBs64 } from '@/utils/transactions'
-import { expressInterest } from '@/app/lib/api/invest/mutations'
-import { useToggle } from '@/hooks'
-import { Loader } from '../shared/Loader'
 
 type ProjectFundingCardProps = {
   funding: ProjectFunding
   slug: string
   className: string
-  isAuthenticated?: boolean
 }
 
-export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({
-  funding,
-  slug,
-  className,
-  isAuthenticated,
-}) => {
+export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({ funding, slug, className }) => {
   const currentDate = new Date()
   const startedAt = funding.startDate ? new Date(funding.startDate) : undefined
   const hasFundingStarted = startedAt ? startedAt <= currentDate : false
@@ -40,7 +27,7 @@ export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({
   return (
     <div
       className={
-        'flex flex-col p-2 gap-4 bg-grey-500 justify-between items-start shadow md:rounded-xl md:p-6 md:sticky md:top-[100px] md:max-w-[485px] md:min-w-[300px] md:max-h-[550px] md:gap-6 ' +
+        'flex flex-col p-2 gap-4 bg-grey-500 justify-between items-start shadow md:rounded-xl md:p-6 md:top-[100px] md:max-w-[485px] md:min-w-[300px] md:max-h-[550px] md:gap-6 ' +
         className
       }
     >
@@ -55,8 +42,8 @@ export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({
         </Text>
         <div className='relative h-[8px] rounded-[27px] w-full bg-[#44464d]'>
           <div
-            className='h-[8px] bg-yellow-500 rounded-[27px] absolute top-0 left-0'
-            style={{ width: `${(funding.pledgedAmount / funding.raiseGoal) * 100}%` }}
+            className='h-[8px] bg-green-genesis rounded-[27px] absolute top-0 left-0'
+            style={{ width: `${Math.min(1, funding.pledgedAmount / funding.raiseGoal) * 100}%` }}
           />
         </div>
       </div>
@@ -65,14 +52,14 @@ export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({
         <FundingStats
           text={'pledged of ' + formatUSD(funding.raiseGoal)}
           value={formatUSD(funding.pledgedAmount)}
-          valueColor='text-yellow-500 '
+          valueColor='text-green-genesis '
           valueSizeMd='md:text-[32px] '
           className='max-md:hidden'
         />
         <FundingStats
           text={'of ' + formatUSD(funding.raiseGoal)}
           value={formatUSD(funding.pledgedAmount)}
-          valueColor='text-yellow-500 '
+          valueColor='text-green-genesis '
           className='md:hidden items-center'
         />
         {hasFundingStarted ? (
@@ -101,7 +88,7 @@ export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({
             <InvestButton slug={slug} />
           )
         ) : (
-          <ExpressInterestButton slug={slug} isAuthenticated={isAuthenticated} />
+          <ExpressInterestButton slug={slug} isUserInterested={funding.isUserInterested} />
         )}
 
         <div className='flex flex-row w-full h-full justify-center items-center p-[12px] gap-[12px] bg-gradient-to-br from-[#4a4e53] to-grey-500 rounded-xl md:gap-4 md:h-[89px] md:p-4'>
@@ -162,7 +149,7 @@ const FundingEndedButton: React.FC = () => {
   return (
     <Link
       href='#'
-      className='flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-yellow-500 hover:brightness-100 md:p-4'
+      className='flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-green-genesis hover:brightness-100 md:p-4'
     >
       <Text as='p' styleVariant='body-normal' fontWeight='bold' className='text-grey-600 leading-snug max-md:text-base'>
         Fully backed
@@ -182,7 +169,7 @@ const InvestButton: React.FC<InvestButtonProps> = ({ slug }) => {
   return (
     <Link
       href={href}
-      className='flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-yellow-500 hover:brightness-100 md:p-4'
+      className='flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-green-genesis hover:brightness-100 md:p-4'
     >
       <Text as='p' styleVariant='body-normal' fontWeight='bold' className='text-grey-600 leading-snug max-md:text-base'>
         Back this project
@@ -193,83 +180,23 @@ const InvestButton: React.FC<InvestButtonProps> = ({ slug }) => {
 
 type ExpressInterestButtonProps = {
   slug: string
-  isAuthenticated?: boolean
+  isUserInterested?: boolean
 }
 
-const ExpressInterestButton: React.FC<ExpressInterestButtonProps> = ({ slug, isAuthenticated }) => {
-  const { publicKey, signTransaction } = useWallet()
-  const [isLoading, toggleLoading] = useToggle()
-
-  const buttonStyles =
-    'flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch text-grey-600 rounded-xl bg-yellow-500 hover:brightness-100 md:p-4'
-
-  const handleExpressInterest = async () => {
-    if (!publicKey || !signTransaction) {
-      toast({ description: 'Please connect your wallet', variant: 'error' })
-      return
-    }
-
-    try {
-      toggleLoading()
-
-      const { data: encodedTransaction, errorMessage } = await fetchExpressInterestTransaction({
-        walletAddress: publicKey.toString(),
-        projectId: slug,
-      })
-
-      if (!encodedTransaction || errorMessage) {
-        throw new Error(errorMessage || 'Failed to fetch transaction')
-      }
-
-      const transaction = versionedTransactionFromBs64(encodedTransaction)
-      const signedTransaction = await signTransaction(transaction)
-      const serializedTransaction = Buffer.from(signedTransaction.serialize()).toString('base64')
-
-      await expressInterest({
-        slug,
-        request: { transaction: serializedTransaction },
-      })
-
-      toast({
-        description: 'Successfully expressed interest!',
-        variant: 'success',
-      })
-    } catch (error) {
-      console.error('Express interest error:', error)
-      toast({
-        description: error instanceof Error ? error.message : 'Failed to express interest. Please try again.',
-        variant: 'error',
-      })
-    } finally {
-      toggleLoading()
-    }
-  }
-
-  // Not authenticated - show login link
-  if (!isAuthenticated) {
-    return (
-      <Link href={withRedirect(RoutePath.Login, RoutePath.InvestDetails(slug))} className={buttonStyles}>
-        <Text
-          as='p'
-          styleVariant='body-normal'
-          fontWeight='bold'
-          className='text-grey-600 leading-snug max-md:text-base'
-        >
-          Express interest
-        </Text>
-      </Link>
-    )
-  }
-
-  // No wallet connected - show connect button
-  if (!publicKey) {
-    return <ConnectButton className={buttonStyles} text='Connect' />
-  }
-
-  // Wallet connected - show express interest button
+const ExpressInterestButton: React.FC<ExpressInterestButtonProps> = ({ slug, isUserInterested }) => {
   return (
-    <Button onClick={handleExpressInterest} className={buttonStyles} disabled={isLoading}>
-      {isLoading ? <Loader /> : 'Express Interest'}
-    </Button>
+    <Link
+      href={RoutePath.ExpressInterest(slug)}
+      className={`flex flex-col w-full h-full max-h-[52px] p-[14px] justify-center items-center self-stretch rounded-xl md:p-4 ${isUserInterested ? 'bg-grey-500 border-2 border-white pointer-events-none' : 'bg-green-genesis hover:brightness-100'}`}
+    >
+      <Text
+        as='p'
+        styleVariant='body-normal'
+        fontWeight='bold'
+        className={`${isUserInterested ? 'text-white' : 'text-grey-600'} leading-snug max-md:text-base`}
+      >
+        {isUserInterested ? 'Interested!' : 'Express interest'}
+      </Text>
+    </Link>
   )
 }

@@ -63,7 +63,9 @@ export const config = {
   matcher: ['/:path*', '/api/:path*'],
 }
 
-const authRoutesRegex = /^\/(comic|comic-issue|library|profile|claim)(\/.*)?$/
+// TODO: why aren't authorized and unauthorized routes
+// handled by (authorized) and (unauthorized) folders?
+const authRoutesRegex = /^\/(comic|comic-issue|library|profile|claim|invest\/[^/]+\/express-interest)(\/.*)?$/
 
 const handleUnauthorized = async ({ path, refreshToken, url }: { path: string; refreshToken: string; url: string }) => {
   if (refreshToken) {

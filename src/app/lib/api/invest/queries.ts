@@ -6,33 +6,41 @@ import { INVEST_QUERY_KEYS } from '@/api/invest'
 import {
   isSuccessfulProject,
   Project,
-  ProjectExpressedInterest,
   SuccessfulProject,
+  UserInterestedReceipt,
   UserProjectInterest,
 } from '@/models/project'
 import { PROJECTS } from '@/constants/projects'
 import { findProjectBySlug } from '@/utils/helpers'
+import { highInterestProjects, InterestProject } from '../../data/invest/projectsData'
 
-const { GET, INVEST } = INVEST_QUERY_KEYS
+const { GET, INVEST, INTEREST_RECEIPTS } = INVEST_QUERY_KEYS
 
 export const fetchSuccessfulProjects = async (): Promise<{
-  data: Nullable<SuccessfulProject[]>
+  data: SuccessfulProject[]
   errorMessage?: string
 }> => {
-  const { data: investorInterests, errorMessage } = await fetchWrapper<ProjectExpressedInterest[]>({
+  const successfulProjects = PROJECTS.filter(isSuccessfulProject)
+  return { data: successfulProjects }
+}
+
+export const fetchHighInterestProjects = async (): Promise<{
+  data: InterestProject[]
+  errorMessage?: string
+}> => {
+  const { data: userProjectInterest, errorMessage } = await fetchWrapper<UserProjectInterest[]>({
     path: `${INVEST}/${GET}`,
   })
 
   if (errorMessage) {
-    return { data: null, errorMessage }
+    return { data: [], errorMessage }
   }
 
-  const successfulProjects = PROJECTS.filter(isSuccessfulProject)
-  const projects = successfulProjects.map((project) => ({
+  const projects = highInterestProjects.map((project) => ({
     ...project,
-    funding: {
-      ...project.funding,
-      numberOfInterestedInvestors: investorInterests?.find((interest) => interest.id === project.id)?.count ?? 0,
+    stats: {
+      ...project.stats,
+      likes: userProjectInterest?.find((interest) => interest.slug === project.slug)?.countOfUserExpressedInterest ?? 0,
     },
   }))
 
@@ -42,15 +50,15 @@ export const fetchSuccessfulProjects = async (): Promise<{
 export const fetchProject = async (slug: string): Promise<{ data: Nullable<Project>; errorMessage?: string }> => {
   const project = findProjectBySlug(slug)
   if (!project) {
-    return { data: null, errorMessage: `Project with slug ${slug} does not exists` }
+    return { data: null, errorMessage: `Project with slug ${slug} not found` }
   }
 
   const { data } = await fetchWrapper<UserProjectInterest>({
-    path: `${INVEST}/${GET}/${project?.id}`,
+    path: `${INVEST}/${GET}/${slug}`,
   })
 
   if (!data) {
-    return { data: null, errorMessage: "Project with slug doesn't exists" }
+    return { data: null, errorMessage: `Project with slug ${slug} not found` }
   }
 
   return {
@@ -59,8 +67,16 @@ export const fetchProject = async (slug: string): Promise<{ data: Nullable<Proje
       funding: {
         ...project.funding,
         numberOfInterestedInvestors: data.countOfUserExpressedInterest,
-        isUserInterested: data.isInterested,
+        isUserInterested: data.isUserInterested,
+        pledgedAmount: data.expectedPledgedAmount || 0,
       },
     },
   }
+}
+
+export const fetchUserInterestedReceipts = async (slug: string): Promise<UserInterestedReceipt[]> => {
+  const { data } = await fetchWrapper<UserInterestedReceipt[]>({
+    path: `${INVEST}/${GET}/${slug}/${INTEREST_RECEIPTS}`,
+  })
+  return data || []
 }

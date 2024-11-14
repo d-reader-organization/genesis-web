@@ -8,15 +8,9 @@ import DiscordIcon from 'public/assets/vector-icons/discord-icon.svg'
 import TwitterIcon from 'public/assets/vector-icons/twitter-icon.svg'
 import InstagramIcon from 'public/assets/vector-icons/instagram-icon.svg'
 import MailIconInverse from 'public/assets/vector-icons/mail-icon-inverse.svg'
-import {
-  SUPPORT_LINK,
-  DISCORD_LINK,
-  INSTAGRAM_LINK,
-  TWITTER_LINK,
-  SUPPORT_EMAIL,
-  D_READER_LINK,
-} from '@/constants/general'
+import { SUPPORT_LINK, DISCORD_LINK, INSTAGRAM_LINK, TWITTER_LINK, SUPPORT_EMAIL } from '@/constants/general'
 import RabbitHole from 'public/assets/images/rabbit-hole.png'
+import { RoutePath } from '@/enums/routePath'
 
 export default function NotFound() {
   return (
@@ -88,7 +82,7 @@ export default function NotFound() {
         </div>
         <Link
           className='flex items-center gap-1 pt-7 sm:pt-9 sm:gap-2 border-b-2 text-grey-100 border-grey-100'
-          href={D_READER_LINK}
+          href={RoutePath.Home}
         >
           <MoveLeft size={16} />
           <Text as='p' styleVariant='body-normal' fontWeight='medium' className='max-sm:text-xs'>

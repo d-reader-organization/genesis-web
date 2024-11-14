@@ -4,7 +4,6 @@ import React from 'react'
 import { RoutePath } from '@/enums/routePath'
 import { usePathname } from 'next/navigation'
 import DReaderLogo from 'public/assets/vector-icons/full-logo.svg'
-import GenesisLogo from 'public/assets/vector-icons/genesis-logo.svg'
 import ArrowDownIcon from 'public/assets/vector-icons/arrow-down-2.svg'
 import { Button } from '../ui'
 import Link from 'next/link'
@@ -14,6 +13,8 @@ import { MobileNav } from './MobileNavigation'
 import { ProfileSheet } from '../shared/sheets/profile/ProfileSheet'
 import { SearchInput } from '../shared/SearchInput'
 import { User } from '@/models/user'
+import { NavItemLink } from './NavItemLink'
+import { GenesisNavigation } from './GenesisNavigation'
 
 type Props = {
   me: User | null
@@ -26,6 +27,8 @@ export const Navigation: React.FC<Props> = ({ me, hideSearch = false }) => {
   const isInvest = pathname.startsWith(RoutePath.Invest)
   const isLibrary = pathname.startsWith(RoutePath.Library)
 
+  if (isInvest) return <GenesisNavigation me={me} />
+
   return (
     <>
       <MobileNav user={me} />
@@ -33,26 +36,27 @@ export const Navigation: React.FC<Props> = ({ me, hideSearch = false }) => {
         className={cn(
           'max-md:hidden max-h-20 bg-grey-600 bg-opacity-85 backdrop-blur-[25px] w-full flex justify-center',
           'fixed top-0 z-50',
-          isProfileSheetOpen ? 'z-10' : ''
+          isProfileSheetOpen && 'z-10'
         )}
       >
         <div className='flex items-center justify-between p-4 max-w-screen-xl w-full'>
           <div className='flex items-center gap-8'>
             <Link href={RoutePath.Home}>
-              {isInvest ? (
-                <GenesisLogo className='h-8 min-w-fit fill-white ml-4' />
-              ) : (
-                <DReaderLogo className='h-8 min-w-fit fill-white ml-4' />
-              )}
+              <DReaderLogo className='h-8 min-w-fit fill-white ml-4' />
             </Link>
             {!hideSearch && <SearchInput />}
             <div className='flex items-center gap-10'>
-              <MenuItem href={RoutePath.Invest} isActive={isInvest} isComingSoon title='Invest' />
+              <NavItemLink activeColor='text-yellow-500' href={RoutePath.Invest} isActive={isInvest} title='Invest' />
             </div>
           </div>
           {me ? (
             <div className='flex items-center gap-8'>
-              <MenuItem href={RoutePath.Library} isActive={isLibrary} title='My Library' />
+              <NavItemLink
+                activeColor='text-yellow-500'
+                href={RoutePath.Library}
+                isActive={isLibrary}
+                title='My Library'
+              />
               <button
                 className='flex items-center cursor-pointer'
                 onClick={() => setOpenProfileSheet(!isProfileSheetOpen)}
@@ -88,27 +92,3 @@ export const Navigation: React.FC<Props> = ({ me, hideSearch = false }) => {
     </>
   )
 }
-
-type MenuItemProps = {
-  href: string
-  isActive: boolean
-  isComingSoon?: boolean
-  title: string
-}
-
-const MenuItem: React.FC<MenuItemProps> = ({ href, isActive, isComingSoon = false, title }) => (
-  <div className='flex items-center gap-1 text-base font-bold leading-[22.4px]'>
-    {isComingSoon ? (
-      <>
-        <span className='text-grey-300'>{title}</span>
-        <div className='flex items-center justify-center px-1.5 py-1 bg-grey-300 rounded-lg min-w-[42px] max-h-5'>
-          <span className='text-[10px] font-bold leading-normal text-grey-600'>SOON</span>
-        </div>
-      </>
-    ) : (
-      <Link className={cn('text-grey-100', isActive && 'text-yellow-500')} href={href}>
-        {title}
-      </Link>
-    )}
-  </div>
-)

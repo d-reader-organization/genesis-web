@@ -19,15 +19,30 @@ export const AuthProfileContent: React.FC<AuthProfileContentProps> = ({ user }) 
   const pathname = usePathname()
   const isLibrary = pathname.startsWith(RoutePath.Library)
   const isProfile = pathname.startsWith(RoutePath.Profile)
+  const isInvest = pathname.startsWith(RoutePath.Invest)
+  const activeLinkColor = isInvest ? 'text-green-genesis' : 'text-yellow-500'
   const { publicKey } = useWallet()
+
   return (
     <div className='flex flex-col justify-between h-full'>
       <div className='flex flex-col'>
         <ProfileWidget className='mb-[29px]' user={user} />
         <div className='flex flex-col gap-4 text-2xl font-bold leading-[28.8px] text-grey-100'>
-          <NavItemLink href={RoutePath.Library} isActive={isLibrary} title='My Library' />
-          <NavItemLink href={RoutePath.Profile} isActive={isProfile} title='Settings' />
-          <NavItemLink href={SUPPORT_LINK} isActive={false} title='Help center' />
+          <NavItemLink
+            activeColor={activeLinkColor}
+            as='h4'
+            href={RoutePath.Library}
+            isActive={isLibrary}
+            title='My Library'
+          />
+          <NavItemLink
+            activeColor={activeLinkColor}
+            as='h4'
+            href={RoutePath.Profile}
+            isActive={isProfile}
+            title='Settings'
+          />
+          <NavItemLink activeColor={activeLinkColor} as='h4' href={SUPPORT_LINK} isActive={false} title='Help center' />
           {publicKey ? null : <NavConnectButton />}
         </div>
       </div>

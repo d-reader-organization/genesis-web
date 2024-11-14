@@ -1,5 +1,5 @@
 export type ExpressInterestParams = {
   walletAddress: string
-  projectId: string
+  projectSlug: string
   splTokenAddress?: string
 }

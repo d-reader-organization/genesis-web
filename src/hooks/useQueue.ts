@@ -3,6 +3,7 @@ import { useCallback, useMemo, useState } from 'react'
 
 export type QueueHook<T> = {
   items: T[]
+  top: T
   add: (item: T) => void
   update: (item: T) => void
   remove: (item: T) => void
@@ -20,6 +21,7 @@ export const useQueue = <T>(options: QueueOptions<T> = defaultOptions): QueueHoo
   const isEmpty = useMemo(() => items.length === 0, [items.length])
   const length = useMemo(() => items.length, [items.length])
   const { size = Infinity, identity } = options
+  const top = items[0]
 
   const equals = useCallback(
     (a: T, b: T) => {
@@ -76,7 +78,7 @@ export const useQueue = <T>(options: QueueOptions<T> = defaultOptions): QueueHoo
     setItems([])
   }, [])
 
-  return { items, add, update, remove, clear, contains, length, isEmpty }
+  return { items, top, add, update, remove, clear, contains, length, isEmpty }
 }
 
 export default useQueue

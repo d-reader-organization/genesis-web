@@ -9,6 +9,7 @@ import Image from 'next/image'
 import { Hourglass } from 'lucide-react'
 import { InvestSlide, SlideStats } from '@/app/lib/data/invest/carouselData'
 import { CarouselDots } from '../shared/CarouselDots'
+import { cn } from '@/lib/utils'
 
 type Props = {
   slides: InvestSlide[]
@@ -36,7 +37,7 @@ export const InvestCarousel: React.FC<Props> = ({ slides }) => {
   return (
     <div className='flex flex-col gap-4 md:gap-6 w-full max-w-screen-xl'>
       <div
-        className='relative flex h-[363px] md:h-[500px] items-center gap-2.5 flex-shrink-0 rounded-xl overflow-hidden shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]'
+        className='relative flex carousel-height items-center gap-2.5 flex-shrink-0 rounded-xl overflow-hidden shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]'
         ref={emblaRef}
       >
         <div className='flex w-full'>
@@ -71,19 +72,26 @@ export const InvestCarousel: React.FC<Props> = ({ slides }) => {
           })}
         </div>
       </div>
-      {<CarouselDots emblaApi={emblaApi} slides={slides} selectedIndex={selectedIndex} />}
+      {
+        <CarouselDots
+          emblaApi={emblaApi}
+          slides={slides}
+          selectedIndex={selectedIndex}
+          selectedSliderColor='bg-green-genesis'
+        />
+      }
     </div>
   )
 }
 
 const DetailsSection: React.FC<{ slide: InvestSlide }> = ({ slide }) => (
-  <div className='h-full flex flex-col justify-end p-4 md:p-16'>
+  <div className='h-full flex flex-col w-full justify-end p-4 md:p-8'>
     <Image
       alt='logo'
       src={slide.logo}
       width={290}
       height={130}
-      className='self-center sm:self-start max-h-32 md:max-w-[290px]l w-auto'
+      className='self-start max-h-24 md:max-w-[290px] w-auto'
     />
     <div className='flex flex-col justify-end gap-4 md:gap-6 max-w-[550px]'>
       <h1 className='text-xl md:text-[40px] leading-[20px] md:leading-[40px] font-semibold tracking-[0.08px] md:mb-4 font-obviouslyNarrow'>
@@ -112,17 +120,31 @@ const Paragraph: React.FC<{ text: string }> = ({ text }) => (
   <p className='text-xs md:text-base font-medium leading-[normal] md:leading-[22.4px]'>{text}</p>
 )
 
-const Tags: React.FC<{ tags: { title: string }[] }> = ({ tags }) => {
+type TagProps = {
+  title: string
+  className?: string
+}
+
+const Tags: React.FC<{ tags: TagProps[] }> = ({ tags }) => {
   return (
     <div className='flex gap-2 items-center'>
+      <Tag title='Learn More' className='bg-green-genesis bg-opacity-100 text-grey-500 font-bold' />
       {tags.map((tag, index) => (
-        <div
-          className='p-2 max-h-5 md:max-h-7 bg-white bg-opacity-20 backdrop-blur-[25px] flex items-center justify-center rounded-lg text-[10px] md:text-base'
-          key={`${tag}-${index}`}
-        >
-          {tag.title}
-        </div>
+        <Tag key={`${tag}-${index}`} title={tag.title} />
       ))}
+    </div>
+  )
+}
+
+const Tag: React.FC<TagProps> = ({ title, className }) => {
+  return (
+    <div
+      className={cn(
+        'p-2 max-h-5 md:max-h-7 bg-white bg-opacity-20 backdrop-blur-[25px] flex items-center justify-center rounded-lg text-[10px] md:text-base',
+        className
+      )}
+    >
+      {title}
     </div>
   )
 }
