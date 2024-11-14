@@ -8,7 +8,7 @@ export const useFetchCandyMachine = (params: CandyMachineParams) => {
   return useQuery({
     queryFn: () => fetchCandyMachine(params),
     queryKey: candyMachineKeys.get(params),
-    staleTime: 1000 * 10, // stale for 10 seconds
+    staleTime: 1000 * 60, // stale for 10 seconds
     enabled: !!params.candyMachineAddress,
     throwOnError: onQueryError,
   })
