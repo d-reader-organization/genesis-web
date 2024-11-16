@@ -54,6 +54,7 @@ export const fetchOwnedComicIssues = async ({
   const response = await fetchWrapper<OwnedComicIssue[]>({
     path: `${COMIC_ISSUE}/${GET}/${BY_OWNER}/${userId}`,
     params,
+    revalidateCacheInSeconds: 10,
   })
   return response.data ?? []
 }

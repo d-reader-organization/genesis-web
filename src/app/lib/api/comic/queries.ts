@@ -34,6 +34,7 @@ export const fetchComicsByOwner = async ({
   const { data } = await fetchWrapper<Comic[]>({
     params,
     path: `${COMIC}/${GET}/${BY_OWNER}/${userId}`,
+    revalidateCacheInSeconds: 10,
   })
 
   return data ?? []
