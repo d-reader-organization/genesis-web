@@ -13,7 +13,7 @@ type ParamsType = Record<string, unknown>
 const generateQueryParams = (params: ParamsType) =>
   Object.entries(params).reduce((prev, [key, value]) => {
     // console.log(`${key}: ${value} | ${typeof value}`)
-    if (isUndefined(value) || isEmpty(value)) return prev
+    if (isUndefined(value) || value === '') return prev
     else return { ...prev, [key]: `${value}` }
   }, {})
 
