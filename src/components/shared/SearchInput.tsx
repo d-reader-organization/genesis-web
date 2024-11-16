@@ -150,7 +150,7 @@ type SearchResultProps = {
 }
 
 const SearchResult: React.FC<SearchResultProps> = ({ result }) => (
-  <Link href={result.href} className='flex items-center justify-between hover:brightness-125'>
+  <Link href={result.href} className='flex items-center justify-between hover:brightness-125' prefetch={false}>
     <div className='flex items-center gap-2'>
       <Image
         width={24}

@@ -31,6 +31,7 @@ export const NavItemLink: React.FC<NavigationLinkProps> = ({
         'hover:text-white'
       )}
       href={disabled ? '#' : href}
+      prefetch={false}
     >
       <Text as={as} styleVariant='secondary-heading'>
         {title}

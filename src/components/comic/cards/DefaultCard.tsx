@@ -12,6 +12,7 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
 export const DefaultComicCard: React.FC<Props> = ({ className, href, comic }) => (
   <Link
     href={href}
+    prefetch={false}
     className={cn(
       'relative overflow-hidden h-[242px] md:h-[295px] w-full max-w-[223px] rounded-xl hover:brightness-110 shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]',
       className
