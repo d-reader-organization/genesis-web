@@ -19,7 +19,11 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, className, ...prop
     )}
     {...props}
   >
-    <Link className='absolute top-0 left-0 w-full h-full text-inherit' href={RoutePath.ComicIssue(comicIssue.id)}>
+    <Link
+      className='absolute top-0 left-0 w-full h-full text-inherit'
+      href={RoutePath.ComicIssue(comicIssue.id)}
+      prefetch={false}
+    >
       <Overlay className='rounded-2xl' />
       <Image
         sizes='(max-width: 580px) 100vw,(max-width: 900px) 50vw,(max-width: 1200)33vw,25vw'

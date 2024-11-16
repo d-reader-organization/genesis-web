@@ -33,6 +33,7 @@ export const IconLink: React.FC<Props> = ({
       target={blank ? '_blank' : undefined}
       href={href || '#'}
       {...props}
+      prefetch={false}
     >
       {children || (Icon && <Icon className={cn(DEFAULT_ICON_CLASSNAME, iconClassName)} />)}
     </Link>

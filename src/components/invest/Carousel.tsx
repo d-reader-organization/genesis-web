@@ -44,7 +44,7 @@ export const InvestCarousel: React.FC<Props> = ({ slides }) => {
           {slides.map((slide, index) => {
             const visitUrl = getSlideUrl(slide)
             return (
-              <Link className='flex-[0_0_100%] min-w-0 relative' key={index} href={visitUrl ?? ''}>
+              <Link className='flex-[0_0_100%] min-w-0 relative' key={index} href={visitUrl ?? ''} prefetch={false}>
                 <div className='overflow-hidden rounded-xl'>
                   <div className='p-0 relative carousel-height'>
                     {visitUrl && (

@@ -18,7 +18,7 @@ export const ProfileWidget: React.FC<Props> = ({ className, user }) => (
       src={user.avatar}
       className='size-12 object-cover rounded-full border border-black'
     />
-    <Link href={RoutePath.Profile} className='flex flex-col justify-center max-h-12'>
+    <Link href={RoutePath.Profile} className='flex flex-col justify-center max-h-12' prefetch={false}>
       <span className='text-lg font-bold leading-[25.2px] text-grey-100'>{user.name}</span>
       <span className='text-grey-200 text-sm font-medium leading-[19.6px]'>view profile</span>
     </Link>

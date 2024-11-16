@@ -28,6 +28,7 @@ export default async function ExpressInterestPage({ params }: Props) {
           <Link
             className='flex items-center gap-1 pt-7 sm:pt-9 sm:gap-2 border-b-2 text-grey-100 border-grey-100 w-max mx-auto'
             href={RoutePath.Invest}
+            prefetch={false}
           >
             <MoveLeft size={16} />
             <Text as='p' styleVariant='body-normal' fontWeight='medium' className='max-sm:text-xs'>

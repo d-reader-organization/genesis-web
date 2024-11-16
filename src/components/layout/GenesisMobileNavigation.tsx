@@ -51,10 +51,10 @@ export const GenesisMobileNavigation: React.FC<Props> = ({ user }) => {
         ) : (
           <>
             <div className={cn('flex justify-between items-center px-4 h-20', isOpen && 'hidden')}>
-              <Link href={RoutePath.Home}>
+              <Link href={RoutePath.Home} prefetch={false}>
                 <DReaderSymbol className='size-6 fill-white' />
               </Link>
-              <Link href={RoutePath.Invest}>
+              <Link href={RoutePath.Invest} prefetch={false}>
                 <GenesisSymbol className='size-6 fill-white' />
               </Link>
               <button onClick={() => setIsOpen(!isOpen)}>{isOpen ? <X size={24} /> : <Menu size={24} />}</button>
