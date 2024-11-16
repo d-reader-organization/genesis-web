@@ -9,7 +9,7 @@ import { Suspense } from 'react'
 export const RegisterLink: React.FC = () => {
   const searchParams = useSearchParams()
   return (
-    <Link className='flex hover:brightness-150' href={`${RoutePath.Register}?${searchParams}`}>
+    <Link className='flex hover:brightness-150' href={`${RoutePath.Register}?${searchParams}`} prefetch={false}>
       <Text as='p' styleVariant='body-normal' className='text-grey-100'>
         Don&apos;t have an account?&nbsp;
       </Text>

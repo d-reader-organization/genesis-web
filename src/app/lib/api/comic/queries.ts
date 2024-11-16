@@ -19,7 +19,6 @@ export const fetchComics = async (params: ComicParams): Promise<Comic[]> => {
 export const fetchComic = async (slug: string): Promise<Comic | null> => {
   const { data } = await fetchWrapper<Comic>({
     path: `${COMIC}/${GET}/${slug}`,
-    revalidateCacheInSeconds: 5,
   })
 
   return data

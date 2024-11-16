@@ -16,7 +16,7 @@ export const LargeComicCard: React.FC<Props> = ({ className, comic, index, href 
     className={cn('h-[229px] md:h-[279px] hover:brightness-110 shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]', className)}
     gradientDirectionClassName='bg-gradient-to-t'
   >
-    <Link href={href} className='flex flex-col justify-end h-full w-full p-6'>
+    <Link href={href} prefetch={false} className='flex flex-col justify-end h-full w-full p-6'>
       <div className='flex gap-4 items-center'>
         <span className='text-white text-opacity-40 text-[48px] font-bold leading-[57.6px]'>{index + 1}</span>
         <div className='flex flex-col'>

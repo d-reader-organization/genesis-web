@@ -46,7 +46,11 @@ export const EReaderNavigation: React.FC<Props> = ({ comicIssue, hideNavigation 
           <Button variant='ghost' onClick={() => back()} className={cn('w-fit', navigationLinkStyle)}>
             <ArrowRightIcon className={arrowRightReversedStyle} />
           </Button>
-          <Link href={RoutePath.ComicIssue(comicIssue.id)} className={clsx('flex gap-1', navigationLinkStyle)}>
+          <Link
+            href={RoutePath.ComicIssue(comicIssue.id)}
+            className={clsx('flex gap-1', navigationLinkStyle)}
+            prefetch={false}
+          >
             <div className='hidden sm:block'>
               <strong>EP {comicIssue.number}</strong>&nbsp;&nbsp;
             </div>
