@@ -1,4 +1,5 @@
 import { accessTokenKey, baseApiUrl, SUCC_RESPONSE_STATUS_CODES } from '@/constants/general'
+import { isEmpty, isUndefined } from 'lodash'
 import { cookies } from 'next/headers'
 
 const defaultHeaders = {
@@ -11,7 +12,9 @@ type ParamsType = Record<string, unknown>
 
 const generateQueryParams = (params: ParamsType) =>
   Object.entries(params).reduce((prev, [key, value]) => {
-    return { ...prev, [key]: `${value}` }
+    // console.log(`${key}: ${value} | ${typeof value}`)
+    if (isUndefined(value) || isEmpty(value)) return prev
+    else return { ...prev, [key]: `${value}` }
   }, {})
 
 /**
