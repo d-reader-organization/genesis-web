@@ -21,13 +21,17 @@ export const fetchComicIssues = async (params: ComicIssueParams): Promise<ComicI
 export const fetchComicIssue = async (id: string | number): Promise<Nullable<ComicIssue>> => {
   const { data } = await fetchWrapper<ComicIssue>({
     path: `${COMIC_ISSUE}/${GET}/${id}`,
+    revalidateCacheInSeconds: 5,
   })
 
   return data
 }
 
 export const fetchPublicComicIssue = async (id: string | number): Promise<Nullable<ComicIssue>> => {
-  const response = await fetchWrapper<ComicIssue>({ path: `${COMIC_ISSUE}/${GET_PUBLIC}/${id}` })
+  const response = await fetchWrapper<ComicIssue>({
+    path: `${COMIC_ISSUE}/${GET_PUBLIC}/${id}`,
+    revalidateCacheInSeconds: 5,
+  })
   return response.data
 }
 

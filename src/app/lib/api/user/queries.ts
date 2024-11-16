@@ -14,7 +14,7 @@ export const fetchMe = async (): Promise<Nullable<User>> => {
   if (!isAuthenticatedUser()) {
     return null
   }
-  const response = await fetchWrapper<User>({ path: `${USER}/${GET}/${ME}`, revalidateCacheInSeconds: 5 })
+  const response = await fetchWrapper<User>({ path: `${USER}/${GET}/${ME}`, revalidateCacheInSeconds: 10 })
   return response.data
 }
 
