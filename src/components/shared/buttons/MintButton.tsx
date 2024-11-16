@@ -15,7 +15,7 @@ import { Skeleton, toast } from '../../ui'
 import { fetchMintTransaction } from '@/app/lib/api/transaction/queries'
 import { useFetchCandyMachine } from '@/api/candyMachine/queries/useFetchCandyMachine'
 import { versionedTransactionFromBs64 } from '@/utils/transactions'
-import { io } from 'socket.io-client'
+// import { io } from 'socket.io-client'
 import { sendMintTransaction } from '@/app/lib/api/transaction/mutations'
 import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 import { VersionedTransaction } from '@solana/web3.js'
@@ -60,21 +60,21 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounc
     if (!walletAddress && !isMintTransactionLoading) {
       return
     }
-    const socket = io(process.env.NEXT_PUBLIC_API_ENDPOINT || '')
-    socket.on(`wallet/${walletAddress}/item-minted`, async (assetEventData: AssetMintEvent): Promise<void> => {
-      clearTimeout(timeoutId)
-      setAssetMintEventData(assetEventData)
-      closeConfirmingTransaction()
-      setTimeoutId(undefined)
-      toggleAssetMinted()
-      toast({ description: 'Successfully minted the comic! Find the asset in your wallet', variant: 'success' })
-      await refetch()
-    })
+    // const socket = io(process.env.NEXT_PUBLIC_API_ENDPOINT || '')
+    // socket.on(`wallet/${walletAddress}/item-minted`, async (assetEventData: AssetMintEvent): Promise<void> => {
+    //   clearTimeout(timeoutId)
+    //   setAssetMintEventData(assetEventData)
+    //   closeConfirmingTransaction()
+    //   setTimeoutId(undefined)
+    //   toggleAssetMinted()
+    //   toast({ description: 'Successfully minted the comic! Find the asset in your wallet', variant: 'success' })
+    //   await refetch()
+    // })
 
-    return () => {
-      socket.off(`wallet/${walletAddress}/item-minted`)
-      socket.disconnect()
-    }
+    // return () => {
+    //   socket.off(`wallet/${walletAddress}/item-minted`)
+    //   socket.disconnect()
+    // }
   }, [walletAddress, isMintTransactionLoading])
 
   const handleMint = async () => {
