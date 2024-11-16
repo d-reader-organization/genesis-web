@@ -12,6 +12,7 @@ export const fetchCandyMachine = async (params: CandyMachineParams): Promise<Nul
   const response = await fetchWrapper<CandyMachine>({
     path: `${CANDY_MACHINE}/${GET}`,
     params,
+    revalidateCacheInSeconds: 10,
   })
   return response.data
 }
