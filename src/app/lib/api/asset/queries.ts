@@ -17,6 +17,7 @@ export const fetchAssets = async (params: AssetParams): Promise<Asset[]> => {
   const response = await fetchWrapper<Asset[]>({
     path: `${ASSET}/${GET}`,
     params,
+    revalidateCacheInSeconds: 5,
   })
   return response.data ?? []
 }
