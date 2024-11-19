@@ -22,6 +22,9 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
+  logging: {
+    fetches: { fullUrl: true },
+  },
   images: {
     remotePatterns: [
       {

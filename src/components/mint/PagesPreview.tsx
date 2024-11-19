@@ -15,6 +15,7 @@ export const PagesPreview: React.FC<Props> = ({ comicIssueId, pages }) => {
     <Link
       className='relative w-fit max-md:self-center max-h-fit'
       href={RoutePath.ReadComicIssue(comicIssueId)}
+      prefetch={false}
       target='_blank'
     >
       <div className='grid grid-cols-3 gap-6 self-end'>

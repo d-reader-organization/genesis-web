@@ -56,7 +56,7 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
               <button onClick={() => setIsSearchOpen(!isSearchOpen)}>
                 <Search size={24} />
               </button>
-              <Link href={RoutePath.Home}>
+              <Link href={RoutePath.Home} prefetch={false}>
                 <DReaderSymbol className='size-6 fill-white' />
               </Link>
               <button onClick={() => setIsOpen(!isOpen)}>{isOpen ? <X size={24} /> : <Menu size={24} />}</button>

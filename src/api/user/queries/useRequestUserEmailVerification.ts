@@ -5,10 +5,10 @@ import { requestUserEmailVerification } from '@/app/lib/api/user/queries'
 export const useRequestUserEmailVerification = () => {
   return useMutation({
     mutationFn: () => requestUserEmailVerification(),
-    onSuccess: () => {
+    onSuccess: (error) => {
       toast({
-        description: 'Verification email sent, check your inbox!',
-        variant: 'success',
+        description: error || 'Verification email sent, check your inbox!',
+        variant: error ? 'error' : 'success',
       })
     },
     throwOnError: onQueryError,

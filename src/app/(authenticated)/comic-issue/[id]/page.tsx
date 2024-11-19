@@ -28,6 +28,7 @@ export default async function ComicIssuePage({ params: { id } }: ComicIssuePageP
           <CoverCarousel comicIssue={comicIssue} covers={comicIssue.statelessCovers ?? []} />
           <Link
             href={RoutePath.ReadComicIssue(comicIssue.id)}
+            prefetch={false}
             className='flex justify-center items-center gap-2 self-stretch rounded-xl bg-yellow-500 py-3 pr-2 pl-4 hover:brightness-125 max-h-[36px] md:max-h-[42px]'
           >
             <Text as='p' styleVariant='body-normal' fontWeight='medium' className='text-grey-600'>

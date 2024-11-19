@@ -1,4 +1,5 @@
 import { accessTokenKey, baseApiUrl, SUCC_RESPONSE_STATUS_CODES } from '@/constants/general'
+import { isUndefined } from 'lodash'
 import { cookies } from 'next/headers'
 
 const defaultHeaders = {
@@ -11,7 +12,9 @@ type ParamsType = Record<string, unknown>
 
 const generateQueryParams = (params: ParamsType) =>
   Object.entries(params).reduce((prev, [key, value]) => {
-    return { ...prev, [key]: `${value}` }
+    // console.log(`${key}: ${value} | ${typeof value}`)
+    if (isUndefined(value) || value === '') return prev
+    else return { ...prev, [key]: `${value}` }
   }, {})
 
 /**
@@ -54,7 +57,7 @@ export async function fetchWrapper<T>({
     method,
     ...(revalidateCacheInSeconds && { next: { revalidate: revalidateCacheInSeconds } }),
     headers: {
-      ...(!formData && { ...defaultHeaders }), // qucik fix: file upload - server will figure out proper content type
+      ...(!formData && { ...defaultHeaders }), // quick fix: file upload - server will figure out proper content type
       ...headers,
       ...(token && { authorization: token }),
     },

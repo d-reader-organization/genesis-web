@@ -14,7 +14,7 @@ export const fetchMe = async (): Promise<Nullable<User>> => {
   if (!isAuthenticatedUser()) {
     return null
   }
-  const response = await fetchWrapper<User>({ path: `${USER}/${GET}/${ME}` })
+  const response = await fetchWrapper<User>({ path: `${USER}/${GET}/${ME}`, revalidateCacheInSeconds: 10 })
   return response.data
 }
 
@@ -33,8 +33,9 @@ export const fetchUserAssets = async (id: string | number): Promise<WalletAsset[
   return response.data ?? []
 }
 
-export const requestUserEmailVerification = async (): Promise<void> => {
-  await fetchWrapper<void>({ path: `${USER}/${REQUEST_EMAIL_VERIFICATION}` })
+export const requestUserEmailVerification = async (): Promise<string> => {
+  const { errorMessage } = await fetchWrapper<void>({ path: `${USER}/${REQUEST_EMAIL_VERIFICATION}`, method: 'PATCH' })
+  return errorMessage ?? ' '
 }
 
 export const syncUserWallets = async (id: string | number): Promise<void> => {

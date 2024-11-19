@@ -20,6 +20,7 @@ export const OwnedCard: React.FC<Props> = ({ className, comic, href }) => {
   return (
     <Link
       href={href}
+      prefetch={false}
       className={cn(
         'relative overflow-hidden h-[242px] md:h-[330px] w-full max-w-[178px] md:max-w-[223px] rounded-xl hover:brightness-110 shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]',
         className
