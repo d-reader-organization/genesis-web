@@ -36,11 +36,6 @@ const EmailVerificationContent: React.FC<Props> = ({ redirectTo }) => {
           variant='link'
           onClick={() => {
             requestUserEmailVerification()
-            toast({
-              title: '',
-              description: 'Verification email sent, check your inbox!',
-              variant: 'success',
-            })
           }}
         >
           Resend email confirmation link
