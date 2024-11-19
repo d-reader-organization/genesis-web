@@ -3,16 +3,16 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Input } from '../ui/Input'
 import { Loader2, Search, X } from 'lucide-react'
-import { Comic } from '@/models/comic'
-import { Creator } from '@/models/creator'
+import { SearchResultComic } from '@/models/comic'
+import { SearchResultCreator } from '@/models/creator'
 import { useDebouncedCallback } from 'use-debounce'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
-import { useFetchComics } from '@/api/comic/queries/useFetchComics'
-import { useFetchCreators } from '@/api/creator/queries/useFetchCreators'
 import { pluralizeString } from '@/utils/helpers'
 import { RoutePath } from '@/enums/routePath'
 import Link from 'next/link'
+import { useSearchComics } from '@/api/comic/queries/useSearchComics'
+import { useSearchCreators } from '@/api/creator/queries/useSearchCreators'
 
 type Props = React.InputHTMLAttributes<HTMLInputElement>
 
@@ -31,11 +31,12 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [showResults, setShowResults] = useState<boolean>(false)
   const searchRef = useRef<HTMLDivElement>(null)
-  const { refetch: fetchComics } = useFetchComics({ skip: 0, take: 3, titleSubstring: searchTerm.toLowerCase() }, false)
-  const { refetch: fetchCreators } = useFetchCreators(
-    { skip: 0, take: 3, nameSubstring: searchTerm.toLowerCase() },
-    false
-  )
+  const { refetch: fetchComics } = useSearchComics({
+    params: { skip: 0, take: 3, titleSubstring: searchTerm.toLowerCase() },
+  })
+  const { refetch: fetchCreators } = useSearchCreators({
+    params: { skip: 0, take: 3, nameSubstring: searchTerm.toLowerCase() },
+  })
 
   const searchAPI = async (): Promise<{
     comics: SearchResultModel[]
@@ -45,18 +46,18 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
     const comics = comicsResult.data?.pages.at(0) ?? []
     const creators = creatorsResult.data?.pages.at(0) ?? []
     return {
-      comics: comics.map((comic: Comic) => ({
+      comics: comics.map((comic: SearchResultComic) => ({
         id: comic.slug,
         image: comic.cover,
         title: comic.title,
-        episodeCount: comic.stats?.issuesCount ?? 0,
+        episodeCount: comic.issuesCount,
         href: RoutePath.Comic(comic.slug),
       })),
-      creators: creators.map((creator: Creator) => ({
+      creators: creators.map((creator: SearchResultCreator) => ({
         id: creator.slug,
         image: creator.avatar,
         title: creator.name,
-        episodeCount: creator.stats?.comicIssuesCount ?? 0,
+        episodeCount: creator.issuesCount,
         href: RoutePath.Creator(creator.slug),
       })),
     }

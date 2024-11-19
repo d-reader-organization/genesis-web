@@ -1,17 +1,25 @@
 'use server'
 
 import { COMIC_QUERY_KEYS } from '@/api/comic/comicKeys'
-import { Comic } from '@/models/comic'
+import { Comic, SearchResultComic } from '@/models/comic'
 import { ComicParams } from '@/models/comic/comicParams'
 import { fetchWrapper } from '../../fetchWrapper'
 
-const { BY_OWNER, COMIC, FAVORITES, GET } = COMIC_QUERY_KEYS
+const { BY_OWNER, COMIC, FAVORITES, GET, SEARCH } = COMIC_QUERY_KEYS
 
 export const fetchComics = async (params: ComicParams): Promise<Comic[]> => {
   const { data } = await fetchWrapper<Comic[]>({
     params,
     path: `${COMIC}/${GET}`,
     revalidateCacheInSeconds: 15 * 60,
+  })
+  return data ?? []
+}
+
+export const searchComics = async (params: ComicParams): Promise<SearchResultComic[]> => {
+  const { data } = await fetchWrapper<SearchResultComic[]>({
+    params,
+    path: `${COMIC}/${SEARCH}`,
   })
   return data ?? []
 }
