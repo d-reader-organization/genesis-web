@@ -1,5 +1,5 @@
 import { accessTokenKey, baseApiUrl, SUCC_RESPONSE_STATUS_CODES } from '@/constants/general'
-import { isEmpty, isUndefined } from 'lodash'
+import { isUndefined } from 'lodash'
 import { cookies } from 'next/headers'
 
 const defaultHeaders = {
@@ -57,7 +57,7 @@ export async function fetchWrapper<T>({
     method,
     ...(revalidateCacheInSeconds && { next: { revalidate: revalidateCacheInSeconds } }),
     headers: {
-      ...(!formData && { ...defaultHeaders }), // qucik fix: file upload - server will figure out proper content type
+      ...(!formData && { ...defaultHeaders }), // quick fix: file upload - server will figure out proper content type
       ...headers,
       ...(token && { authorization: token }),
     },
