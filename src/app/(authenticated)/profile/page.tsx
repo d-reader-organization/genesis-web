@@ -6,6 +6,7 @@ import { AccountSettingSection } from '@/components/profile/AccountSettingSectio
 import FAQ from '@/components/profile/FAQ'
 import { Text } from '@/components/ui'
 import Link from 'next/link'
+import { RoutePath } from '@/enums/routePath'
 
 async function ProfilePage() {
   const me = await fetchMe()
@@ -36,7 +37,7 @@ async function ProfilePage() {
                 <h2 className='text-2xl font-bold'>Security & Privacy</h2>
                 <Text as='p' styleVariant='body-normal' className='text-gray-400 italic'>
                   Change your security settings and review the privacy policy{' '}
-                  <Link target='_' href={'/privacy-policy'} className='text-important-color underline font-bold'>
+                  <Link target='_' href={RoutePath.PrivacyPolicy} className='text-important-color underline font-bold'>
                     here
                   </Link>
                 </Text>

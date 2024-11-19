@@ -67,7 +67,7 @@ export const CandyMachineStoreProvider = ({
         (coupon) => !(coupon.type === CouponType.PublicUser || isComicVaultCoupon(coupon))
       ),
     })
-  }, [candyMachine, isLoading, supportedTokens])
+  }, [candyMachine, isLoading, supportedTokens.length])
 
   useEffect(() => {
     if (candyMachine) {

@@ -4,7 +4,8 @@ import React from 'react'
 import { Info, TicketIcon } from 'lucide-react'
 import { getCouponDiscount } from '@/utils/mint'
 import { CouponCardButton } from './CouponCardButton'
-import { Skeleton } from '../ui'
+import { Skeleton } from '../ui/Skeleton'
+import { Text } from '../ui/Text'
 import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 import { CouponDescriptionDialog } from '../shared/dialogs/CouponDescriptionDialog'
 import { useToggle } from '@/hooks'
@@ -16,12 +17,13 @@ export const CouponsSection: React.FC<{ comicIssue: ComicIssue }> = ({ comicIssu
   return (
     <>
       <div className='flex flex-col gap-6'>
-        <div className='flex gap-3 items-center xs:gap-3'>
-          <TicketIcon size={24} />
-          <h5 className='text-xl font-semibold leading-[20px] tracking-[0.04px] mt-1'>Discount coupons</h5>
+        <div className='flex gap-3 items-center xs:gap-3 max-h-[22px]'>
+          <TicketIcon className='size-6' />
+          <Text as='h5' styleVariant='primary-heading' className='mt-1'>
+            Discount coupons
+          </Text>
           <Info
-            className='h-[18px] w-[18px] hover:cursor-pointer'
-            color='#c2c5ce'
+            className='h-[18px] w-[18px] hover:cursor-pointer text-grey-100'
             onClick={toggleCouponDescriptionDialog}
           />
         </div>
@@ -50,7 +52,7 @@ export const CouponsSectionLoading: React.FC = () => (
   <>
     <Skeleton className='h-[49px] md:hidden w-full' />
     <div className='flex flex-col gap-6 max-md:hidden'>
-      <Skeleton className='h-6 w-44' />
+      <Skeleton className='h-[22px] w-44' />
       <div className='flex items-center gap-3'>
         <Skeleton className='max-w-[212px] w-full h-[137px]' />
         <Skeleton className='max-w-[212px] w-full h-[137px]' />
