@@ -12,7 +12,7 @@ import { RoutePath } from '@/enums/routePath'
 export const ComicsContent: React.FC = () => {
   const comicParams = useDiscoverFilterStore((state) => state.comicParams)
   const [comics, setComics] = useState<Comic[]>([])
-  //const comics = await fetchComics(comicParams)
+
   useEffect(() => {
     const fetchData = async () => {
       try {

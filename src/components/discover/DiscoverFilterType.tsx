@@ -6,14 +6,14 @@ import { ChevronDown } from 'lucide-react'
 import React from 'react'
 import { Text } from '@/components/ui'
 
-type FilterTypeProps = {
+type Props = {
   filter: Genre[] | undefined
   filterLabel: string
   selectedTags: string[] | undefined
   updateSelectedTags: (genreSlugs: string[]) => void
 }
 
-export const FilterType: React.FC<FilterTypeProps> = ({ filter, filterLabel, selectedTags, updateSelectedTags }) => {
+export const DiscoverFilterType: React.FC<Props> = ({ filter, filterLabel, selectedTags, updateSelectedTags }) => {
   const [isExpanded, setIsExpanded] = React.useState(true)
   const contentRef = React.useRef<HTMLDivElement>(null)
 

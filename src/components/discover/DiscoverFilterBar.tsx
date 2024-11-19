@@ -6,9 +6,9 @@ import React from 'react'
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
 import { Settings2, ChevronDown } from 'lucide-react'
 import { useDiscoverFilterStore } from '@/providers/DiscoverFilterStoreProvider'
-import { FilterType } from './FilterType'
+import { DiscoverFilterType } from './DiscoverFilterType'
 
-export const FilterBar: React.FC = () => {
+export const DiscoverFilterBar: React.FC = () => {
   const [isFilterSheetOpen, setFilterSheetOpen] = React.useState<boolean>(false)
   const clearAll = useDiscoverFilterStore((state) => state.resetToInitialState)
 
@@ -77,7 +77,7 @@ const FilterSheet: React.FC<FilterSheetProps> = ({ isOpen, triggerOpenChange }) 
           ))}
         </div> */}
           <div className='flex flex-col'>
-            <FilterType
+            <DiscoverFilterType
               filter={completeGenresList}
               filterLabel='Genres'
               selectedTags={comicGenreSlugs}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Tabs } from '@/components/discover/Tabs'
-import { FilterBar } from './FilterBar'
+import { DiscoverFilterBar } from './DiscoverFilterBar'
 import { cn } from '@/lib/utils'
 import { SECTIONS } from '@/constants/filters'
 import { DiscoverFilterStoreProvider } from '@/providers/DiscoverFilterStoreProvider'
@@ -24,7 +24,7 @@ export const DiscoverWrapper: React.FC<Props> = async ({ children, mainClassName
         <div className={cn('flex flex-col max-w-screen-xl w-full gap-3')}>
           <DiscoverFilterStoreProvider>
             <Tabs sections={SECTIONS} />
-            <FilterBar />
+            <DiscoverFilterBar />
             {children}
           </DiscoverFilterStoreProvider>
         </div>
