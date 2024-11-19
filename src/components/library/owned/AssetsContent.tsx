@@ -53,6 +53,7 @@ export const OwnedIssuesContent: React.FC<Props> = ({ ownedIssues }) => {
                 <Link
                   className='h-full max-h-[42px] w-full max-w-28 py-3 px-4 flex justify-center items-center rounded-xl bg-grey-400'
                   href={RoutePath.ReadComicIssue(ownedIssue.id)}
+                  prefetch={false}
                 >
                   <Text as='p' styleVariant='body-normal' fontWeight='medium' className='text-grey-100'>
                     Read EP {ownedIssue.number}

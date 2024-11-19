@@ -35,7 +35,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function NewMintPage({ params }: ComicIssuePageParams) {
+export default async function MintPage({ params }: ComicIssuePageParams) {
   const comicIssue = await fetchPublicComicIssue(params.id)
   if (!comicIssue) return null
   const pages = await fetchComicIssuePreviewPages(comicIssue.id)
