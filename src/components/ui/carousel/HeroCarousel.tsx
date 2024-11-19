@@ -105,6 +105,7 @@ export const HeroCarousel: React.FC<Props> = ({ slides }) => {
                     href={linkTag?.href ?? fallbackHref}
                     aria-disabled={currentSlide !== index}
                     target={!!linkTag?.href ? '_blank' : ''}
+                    prefetch={index === 0}
                     className={cn(
                       'relative flex flex-col justify-center gap-8 h-full w-fit p-4 md:p-6 lg:p-8 sm:max-w-[90%] md:max-w-[70%]',
                       currentSlide !== index && 'opacity-0 pointer-events-none'
