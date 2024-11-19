@@ -31,8 +31,11 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [showResults, setShowResults] = useState<boolean>(false)
   const searchRef = useRef<HTMLDivElement>(null)
-  const { refetch: fetchComics } = useFetchComics({ skip: 0, take: 3, titleSubstring: searchTerm.toLowerCase() })
-  const { refetch: fetchCreators } = useFetchCreators({ skip: 0, take: 3, nameSubstring: searchTerm.toLowerCase() })
+  const { refetch: fetchComics } = useFetchComics({ skip: 0, take: 3, titleSubstring: searchTerm.toLowerCase() }, false)
+  const { refetch: fetchCreators } = useFetchCreators(
+    { skip: 0, take: 3, nameSubstring: searchTerm.toLowerCase() },
+    false
+  )
 
   const searchAPI = async (): Promise<{
     comics: SearchResultModel[]
@@ -151,7 +154,7 @@ type SearchResultProps = {
 
 const SearchResult: React.FC<SearchResultProps> = ({ result }) => (
   <Link href={result.href} className='flex items-center justify-between hover:brightness-125' prefetch={false}>
-    <div className='flex items-center gap-2'>
+    <div className='flex items-center gap-2 w-4/5'>
       <Image
         width={24}
         height={24}
