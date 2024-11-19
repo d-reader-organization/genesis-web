@@ -81,3 +81,5 @@ export type UpdateComicFilesData = Partial<{
   banner: File
   logo: File
 }>
+
+export type SearchResultComic = Pick<Comic, 'cover' | 'slug' | 'title'> & { issuesCount: number }
