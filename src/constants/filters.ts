@@ -64,25 +64,6 @@ export const FILTERS: Filter[] = [
     tags: ['Popular'],
   },
   {
-    id: 'genres',
-    label: 'Genres',
-    tags: [
-      'Adventure',
-      'Action',
-      'Comedy',
-      'Crime',
-      'Drama',
-      'Superhero',
-      'Sci-fi',
-      'Manga',
-      'Fantasy',
-      'History',
-      'Horror',
-      'Romance',
-      'Non-fiction',
-    ],
-  },
-  {
     id: 'price',
     label: 'Price',
     tags: ['All', 'Paid', 'Free'],
@@ -105,25 +86,24 @@ export const FILTERS: Filter[] = [
 ]
 
 export type Section = {
-  id: string
+  slug: string
   name: string
   url: string
 }
 
 export const SECTIONS: Section[] = [
-  { id: 'none', name: '', url: '' },
   {
-    id: 'comics',
+    slug: 'comics',
     name: 'Comics',
     url: '/discover/comics',
   },
   {
-    id: 'issues',
-    name: 'Issues',
-    url: '/discover/issues',
+    slug: 'issues',
+    name: 'Episodes',
+    url: '/discover/comic-issues',
   },
   {
-    id: 'creators',
+    slug: 'creators',
     name: 'Creators',
     url: '/discover/creators',
   },

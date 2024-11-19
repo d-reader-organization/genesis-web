@@ -1,5 +1,4 @@
-import { Section } from '@/components/discover/filters'
-import { SortOrder } from '@/enums/sortOrder'
+import { Section } from '@/constants/filters'
 import { ComicParams } from '@/models/comic/comicParams'
 import { ComicIssueParams } from '@/models/comicIssue/comicIssueParams'
 import { CreatorParams } from '@/models/creator/creatorParams'
@@ -7,7 +6,6 @@ import { Genre } from '@/models/genre-new'
 import { createStore } from 'zustand/vanilla'
 
 export type DiscoverFilterState = {
-  selectedSection: Section | undefined
   comicParams: ComicParams
   comicIssueParams: ComicIssueParams
   creatorParams: CreatorParams
@@ -15,18 +13,17 @@ export type DiscoverFilterState = {
 }
 
 export type DiscoverFilterActions = {
-  updateSelectedSection: (section: Section | undefined) => void
   updateComicParams: (params: Partial<ComicParams>) => void
   updateComicIssueParams: (params: Partial<ComicIssueParams>) => void
   updateCreatorParams: (params: Partial<CreatorParams>) => void
   updateCompleteGenresList: (genres: Genre[]) => void
   updateAllParamGenreSlugs: (genreSlugs: string[]) => void
+  resetToInitialState: () => void
 }
 
 export type DiscoverFilterStore = DiscoverFilterState & DiscoverFilterActions
 
 export const defaultInitState: DiscoverFilterState = {
-  selectedSection: undefined,
   comicParams: {
     skip: 0,
     take: 20,
@@ -63,7 +60,6 @@ export const defaultInitState: DiscoverFilterState = {
 export const createDiscoverFilterStore = (initState: DiscoverFilterState = defaultInitState) => {
   return createStore<DiscoverFilterStore>()((set) => ({
     ...initState,
-    updateSelectedSection: (section: Section | undefined) => set(() => ({ selectedSection: section })),
     updateComicParams: (params) => set((state) => ({ comicParams: { ...state.comicParams, ...params } })),
     updateComicIssueParams: (params) =>
       set((state) => ({ comicIssueParams: { ...state.comicIssueParams, ...params } })),
@@ -74,6 +70,11 @@ export const createDiscoverFilterStore = (initState: DiscoverFilterState = defau
         comicParams: { ...state.comicParams, genreSlugs: genreSlugs.length ? genreSlugs : undefined },
         comicIssueParams: { ...state.comicIssueParams, genreSlugs: genreSlugs.length ? genreSlugs : undefined },
         creatorParams: { ...state.creatorParams, genreSlugs: genreSlugs.length ? genreSlugs : undefined },
+      })),
+    resetToInitialState: () =>
+      set((state) => ({
+        ...defaultInitState,
+        completeGenresList: state.completeGenresList,
       })),
   }))
 }

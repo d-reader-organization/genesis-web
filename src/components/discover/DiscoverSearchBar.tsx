@@ -3,16 +3,15 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Input } from '@/components/ui/Input'
 import { Loader2, Search, X } from 'lucide-react'
-import { Comic } from '@/models/comic'
-import { Creator } from '@/models/creator'
 import { useDebouncedCallback } from 'use-debounce'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useFetchComics } from '@/api/comic/queries/useFetchComics'
 import { useFetchCreators } from '@/api/creator/queries/useFetchCreators'
-import { pluralizeString } from '@/utils/helpers'
+import { useFetchComicIssues } from '@/api/comicIssue'
+import { usePathname } from 'next/navigation'
 import { RoutePath } from '@/enums/routePath'
-import Link from 'next/link'
 
 type Props = React.InputHTMLAttributes<HTMLInputElement>
 
@@ -26,37 +25,65 @@ type SearchResultModel = {
 
 export const SearchInput: React.FC<Props> = ({ className }) => {
   const [searchTerm, setSearchTerm] = useState<string>('')
-  const [comicsResults, setComicsResults] = useState<SearchResultModel[]>([])
-  const [creatorsResults, setCreatorsResults] = useState<SearchResultModel[]>([])
+  const [searchResult, setSearchResult] = useState<SearchResultModel[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [showResults, setShowResults] = useState<boolean>(false)
   const searchRef = useRef<HTMLDivElement>(null)
-  const { refetch: fetchComics } = useFetchComics({ skip: 0, take: 3, titleSubstring: searchTerm.toLowerCase() })
-  const { refetch: fetchCreators } = useFetchCreators({ skip: 0, take: 3, nameSubstring: searchTerm.toLowerCase() })
+  const pathname = usePathname()
 
-  const searchAPI = async (): Promise<{
-    comics: SearchResultModel[]
-    creators: SearchResultModel[]
-  }> => {
-    const [comicsResult, creatorsResult] = await Promise.all([fetchComics(), fetchCreators()])
-    const comics = comicsResult.data?.pages.at(0) ?? []
-    const creators = creatorsResult.data?.pages.at(0) ?? []
-    return {
-      comics: comics.map((comic: Comic) => ({
-        id: comic.slug,
-        image: comic.cover,
-        title: comic.title,
-        episodeCount: comic.stats?.issuesCount ?? 0,
-        href: RoutePath.Comic(comic.slug),
-      })),
-      creators: creators.map((creator: Creator) => ({
-        id: creator.slug,
-        image: creator.avatar,
-        title: creator.name,
-        episodeCount: creator.stats?.comicIssuesCount ?? 0,
-        href: RoutePath.Creator(creator.slug),
-      })),
+  const { refetch: fetchComics } = useFetchComics({ skip: 0, take: 3, titleSubstring: searchTerm.toLowerCase() }, false)
+  const { refetch: fetchCreators } = useFetchCreators(
+    { skip: 0, take: 3, nameSubstring: searchTerm.toLowerCase() },
+    false
+  )
+  const { refetch: fetchComicIssues } = useFetchComicIssues({
+    params: { skip: 0, take: 3, titleSubstring: searchTerm.toLowerCase() },
+    enabled: false,
+  })
+
+  const searchAPI = async (): Promise<SearchResultModel[]> => {
+    let searchResult: SearchResultModel[] = []
+    let fetchResult
+
+    switch (true) {
+      case pathname.includes(RoutePath.DiscoverComics): {
+        fetchResult = await fetchComics()
+        searchResult = (fetchResult.data?.pages.at(0) ?? []).map((comic) => ({
+          id: comic.slug,
+          image: comic.cover,
+          title: comic.title,
+          episodeCount: comic.stats?.issuesCount ?? 0,
+          href: RoutePath.Comic(comic.slug),
+        }))
+        break
+      }
+      case pathname.includes(RoutePath.DiscoverCreators): {
+        fetchResult = await fetchCreators()
+        searchResult = (fetchResult.data?.pages.at(0) ?? []).map((creator) => ({
+          id: creator.slug,
+          image: creator.avatar,
+          title: creator.name,
+          episodeCount: creator.stats?.comicIssuesCount ?? 0,
+          href: RoutePath.Creator(creator.slug),
+        }))
+        break
+      }
+      case pathname.includes(RoutePath.DiscoverComicIssues): {
+        fetchResult = await fetchComicIssues()
+        searchResult = (fetchResult.data?.pages.at(0) ?? []).map((issue) => ({
+          id: issue.slug,
+          image: issue.cover,
+          title: issue.title,
+          episodeCount: issue.number,
+          href: RoutePath.ComicIssue(issue.slug),
+        }))
+        break
+      }
+      default:
+        throw new Error('Invalid pathname')
     }
+
+    return searchResult
   }
 
   useEffect(() => {
@@ -74,15 +101,13 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
 
   const debouncedSearch = useDebouncedCallback(async (value) => {
     if (!value) {
-      setComicsResults([])
-      setCreatorsResults([])
+      setSearchResult([])
       setShowResults(false)
       return
     }
     setIsLoading(true)
-    const { comics, creators } = await searchAPI()
-    setComicsResults(comics)
-    setCreatorsResults(creators)
+    const results = await searchAPI()
+    setSearchResult(results)
     setShowResults(true)
     setIsLoading(false)
   }, 300)
@@ -106,7 +131,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
         <Search className='size-[18px] absolute top-3 left-3 text-grey-200' />
       )}
       <Input
-        placeholder='Search comics or creators'
+        placeholder='Search'
         value={searchTerm}
         className='pl-10 pr-10 w-full max-w-[100%]'
         onChange={(e) => setSearchTerm(e.target.value)}
@@ -114,18 +139,15 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
       <Loader2
         className={cn('size-[18px] animate-spin absolute top-3 right-3 text-grey-200', isLoading ? '' : 'hidden')}
       />
-      {showResults ? (
+      {showResults && (
         <div className='flex flex-col gap-6 p-4 rounded-xl bg-grey-500 absolute top-14 md:top-16 w-full'>
-          {creatorsResults.length || comicsResults.length ? (
-            <>
-              {creatorsResults.length ? <SearchResultsContainer results={creatorsResults} title='CREATORS' /> : null}
-              {comicsResults.length ? <SearchResultsContainer results={comicsResults} title='COMIC SERIES' /> : null}
-            </>
+          {searchResult.length ? (
+            <SearchResultsContainer results={searchResult} title='Results' />
           ) : (
             <span className='text-base font-medium text-center'>No results found</span>
           )}
         </div>
-      ) : null}
+      )}
     </div>
   )
 }
@@ -134,6 +156,7 @@ type SearchResultsContainerProps = {
   results: SearchResultModel[]
   title: string
 }
+
 const SearchResultsContainer: React.FC<SearchResultsContainerProps> = ({ results, title }) => (
   <div className='flex flex-col gap-2'>
     <span className='text-xs font-bold text-grey-200 leading-normal'>{title}</span>
@@ -163,8 +186,8 @@ const SearchResult: React.FC<SearchResultProps> = ({ result }) => (
         {result.title}
       </span>
     </div>
-    <span className='text-grey-100 text-sm font-medium leading-[19.6px]'>
+    {/* <span className="text-grey-100 text-sm font-medium leading-[19.6px]">
       {result.episodeCount} {pluralizeString(result.episodeCount, 'EP')}
-    </span>
+    </span> */}
   </Link>
 )

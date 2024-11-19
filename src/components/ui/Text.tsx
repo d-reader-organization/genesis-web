@@ -12,7 +12,7 @@ type StyleVariant =
   | 'body-xsmall'
 type FontWeight = 'bold' | 'semibold' | 'medium' | 'normal'
 
-type TextProps = {
+export type TextProps = {
   as: Variant
   styleVariant: StyleVariant
   className?: string

@@ -16,7 +16,7 @@ type FilterTypeProps = {
 export const FilterType: React.FC<FilterTypeProps> = ({ filter, filterLabel, selectedTags, updateSelectedTags }) => {
   const [isExpanded, setIsExpanded] = React.useState(true)
   const contentRef = React.useRef<HTMLDivElement>(null)
-  
+
   const handleTagClick = (tag: string) => {
     switch (true) {
       case !selectedTags:

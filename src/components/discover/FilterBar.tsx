@@ -5,12 +5,12 @@ import { SearchInput } from './DiscoverSearchBar'
 import React from 'react'
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
 import { Settings2, ChevronDown } from 'lucide-react'
-import { cn } from '@/lib/utils'
 import { useDiscoverFilterStore } from '@/providers/DiscoverFilterStoreProvider'
 import { FilterType } from './FilterType'
 
 export const FilterBar: React.FC = () => {
   const [isFilterSheetOpen, setFilterSheetOpen] = React.useState<boolean>(false)
+  const clearAll = useDiscoverFilterStore((state) => state.resetToInitialState)
 
   return (
     <div className='flex'>
@@ -25,7 +25,7 @@ export const FilterBar: React.FC = () => {
             Filter
           </Text>
         </Button>
-        <Button className='max-h-10 bg-grey-500 text-grey-100'>
+        <Button onClick={clearAll} className='max-h-10 bg-grey-500 text-grey-100'>
           <Text as='p' styleVariant='body-normal'>
             Clear all
           </Text>
