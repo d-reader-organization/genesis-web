@@ -54,6 +54,7 @@ const Card: React.FC<CardProps> = ({ project }) => (
     </p>
     <Link
       href={RoutePath.Payout(project.slug)}
+      prefetch={false}
       className='flex justify-center items-center gap-2 self-stretch text-[#AFB3BC] rounded-xl bg-grey-400 py-3 pr-2 pl-4 hover:brightness-125 max-h-[36px] md:max-h-[42px]'
     >
       <p className='text-xs md:text-base font-medium leading-normal md:leading-[22.4px]'>Learn more</p>

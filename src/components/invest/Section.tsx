@@ -24,6 +24,7 @@ export const InvestSection: React.FC<Props> = ({ data, title }) => {
         >
           <Link
             href={RoutePath.InvestDetails(project.slug)}
+            prefetch={false}
             className='relative max-h-[382px] min-h-[382px] rounded-xl hover:brightness-125 w-[100%]'
           >
             <Image alt={project.title} src={project.image} className='object-cover rounded-xl' fill />
