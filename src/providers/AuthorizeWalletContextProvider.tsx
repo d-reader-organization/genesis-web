@@ -1,7 +1,7 @@
 import { ReactNode, useContext, createContext, useCallback, useState, useEffect } from 'react'
 import { useWallet, useConnection } from '@solana/wallet-adapter-react'
-import { useFetchMe, useFetchUserWallets, userKeys } from '@/api/user'
-import { useConnectUserWallet, useRequestWalletPassword } from '@/api/auth'
+import { useFetchMe, useFetchUserWallets } from '@/api/user/queries'
+import { useConnectUserWallet } from '@/api/auth/queries/useConnectUserWallet'
 import { useQueryClient } from '@tanstack/react-query'
 import { Transaction, PublicKey, TransactionInstruction, Keypair } from '@solana/web3.js'
 import bs58 from 'bs58'
@@ -9,6 +9,8 @@ import { LEDGER_ADAPTERS } from '@/constants/general'
 import { MEMO_PROGRAM_ID } from '@/constants/general'
 import { SignedDataType } from '@/models/wallet/connectWallet'
 import { toast } from '@/components/ui'
+import { requestWalletPassword } from '@/app/lib/api/auth/mutations'
+import { userKeys } from '@/api/user/userKeys'
 
 interface AuthorizeWalletContextType {
   authorizeWallet: (callback?: VoidFunction) => Promise<void>
@@ -26,7 +28,6 @@ export function AuthorizeWalletProvider({ children }: { children: ReactNode }) {
   const { data: me } = useFetchMe()
   const { data: connectedWallets = [], isLoading, isFetched } = useFetchUserWallets(me?.id || 0)
 
-  const { mutateAsync: requestWalletPassword } = useRequestWalletPassword()
   const { mutateAsync: connectUserWallet } = useConnectUserWallet()
   const queryClient = useQueryClient()
 
@@ -81,7 +82,6 @@ export function AuthorizeWalletProvider({ children }: { children: ReactNode }) {
         const { errorMessage } = await connectUserWallet({ address, encoding, signedDataType: type })
 
         if (errorMessage) {
-          toast({ description: `Error connecting wallet! ${errorMessage}`, variant: 'error' })
           return
         }
 

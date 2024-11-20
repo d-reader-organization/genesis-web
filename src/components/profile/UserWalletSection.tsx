@@ -1,11 +1,11 @@
 'use client'
 
 import React from 'react'
-import { useFetchUserWallets } from '@/api/user'
+import { useFetchUserWallets } from '@/api/user/queries/useFetchUserWallets'
 import { shortenString } from '@/utils/helpers'
 import { Button, Text } from '../ui'
 import { useWallet } from '@solana/wallet-adapter-react'
-import { useDisconnectUserWallet } from '@/api/auth'
+import { useDisconnectUserWallet } from '@/api/auth/queries/useDisconnectUserWallet'
 import CloseIcon from 'public/assets/vector-icons/close.svg'
 import { ConnectButton } from '../shared/buttons/ConnectButton'
 

@@ -13,7 +13,7 @@ import { ConfirmingTransactionDialog } from '../dialogs/ConfirmingTransactionDia
 import { useToggle } from '@/hooks'
 import { Skeleton, toast } from '../../ui'
 import { fetchMintTransaction } from '@/app/lib/api/transaction/queries'
-import { useFetchCandyMachine } from '@/api/candyMachine'
+import { useFetchCandyMachine } from '@/api/candyMachine/queries/useFetchCandyMachine'
 import { versionedTransactionFromBs64 } from '@/utils/transactions'
 import { io } from 'socket.io-client'
 import { sendMintTransaction } from '@/app/lib/api/transaction/mutations'

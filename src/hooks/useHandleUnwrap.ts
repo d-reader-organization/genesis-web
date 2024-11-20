@@ -1,12 +1,12 @@
 'use client'
 
 import React from 'react'
-import { useFetchUseComicIssueAssetTransaction } from '@/api/transaction/queries/useFetchUseComicIssueAssetTransaction'
 import { Asset } from '@/models/asset'
 import { useRouter } from 'next/navigation'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { sleep } from '@/utils/helpers'
 import { confirmingTransaction, toast } from '@/components/ui/toast/use-toast'
+import { fetchUseComicIssueAssetTransaction } from '@/app/lib/api/transaction/queries'
 
 type ReturnType = {
   handleUnwrap: () => Promise<void>
@@ -20,18 +20,13 @@ export const useHandleUnwrap = ({ asset, onSuccess }: { asset: Asset; onSuccess:
   const { signTransaction } = useWallet()
   const { connection } = useConnection()
 
-  const { refetch: fetchUseComicIssueAssetTransaction } = useFetchUseComicIssueAssetTransaction(
-    {
-      ownerAddress: asset.ownerAddress,
-      assetAddress: asset.address,
-    },
-    false
-  )
-
   const handleUnwrap = async () => {
     try {
       setIsLoading(true)
-      const { data: unwrapTransaction } = await fetchUseComicIssueAssetTransaction()
+      const unwrapTransaction = await fetchUseComicIssueAssetTransaction({
+        assetAddress: asset.address,
+        ownerAddress: asset.ownerAddress,
+      })
       if (unwrapTransaction) {
         if (!signTransaction) return
         const latestBlockhash = await connection.getLatestBlockhash()

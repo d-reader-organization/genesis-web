@@ -1,6 +1,5 @@
 'use server'
 
-import { TRANSACTION_QUERY_KEYS } from '@/api/transaction/transactionKeys'
 import { fetchWrapper } from '../../fetchWrapper'
 import { MultipleBuyParams } from '@/models/transaction/multipleBuy'
 import { Transaction } from '@solana/web3.js'
@@ -9,6 +8,7 @@ import { generateQueryParamsArray } from '@/utils/arrayQueryParams'
 import { UseComicIssueAssetParams } from '@/models/transaction/useComicIssueAsset'
 import { MintParams } from '@/models/transaction/mint'
 import { ExpressInterestParams } from '@/models/transaction/expressInterest'
+import { TRANSACTION_QUERY_KEYS } from './keys'
 
 const { TRANSACTION, MINT, MULTIPLE_BUY, USE_COMIC_ISSUE_ASSET, EXPRESS_INTEREST } = TRANSACTION_QUERY_KEYS
 
