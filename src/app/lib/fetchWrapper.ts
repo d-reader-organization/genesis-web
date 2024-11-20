@@ -4,7 +4,6 @@ import { cookies } from 'next/headers'
 
 const defaultHeaders = {
   Accept: 'application/json',
-  'Access-Control-Allow-Credentials': 'true',
   'Content-Type': 'application/json',
 }
 
