@@ -8,12 +8,14 @@ export const useConnectUserWallet = () => {
   const { refresh } = useRouter()
   return useMutation({
     mutationFn: (data: ConnectWalletData) => connectUserWallet(data),
-    onSuccess: () => {
+    onSuccess: ({ errorMessage }) => {
       toast({
-        description: 'Wallet connected!',
-        variant: 'success',
+        description: errorMessage ?? 'Wallet connected!',
+        variant: !!errorMessage ? 'error' : 'success',
       })
-      refresh()
+      if (!errorMessage) {
+        refresh()
+      }
     },
   })
 }

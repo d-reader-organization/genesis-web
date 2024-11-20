@@ -20,10 +20,9 @@ import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { toast } from '@/components/ui'
 import { sleep } from '@/utils/helpers'
 import { useQueryClient } from '@tanstack/react-query'
-import { comicIssueKeys } from '@/api/comicIssue'
+import { comicIssueKeys } from '@/api/comicIssue/comicIssueKeys'
 import { useRouter } from 'next/navigation'
-import { assetKeys } from '@/api/asset/assetKeys'
-import { useFetchMe } from '@/api/user'
+import { useFetchMe } from '@/api/user/queries/useFetchMe'
 import { Loader } from 'lucide-react'
 import { LOCAL_STORAGE } from '@/constants/general'
 import { withRedirect } from '@/lib/utils'
@@ -97,7 +96,6 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
 
       queryClient.invalidateQueries({ queryKey: comicIssueKeys.get(comicIssue.id) })
       queryClient.invalidateQueries({ queryKey: comicIssueKeys.getByOwner(myId) })
-      queryClient.invalidateQueries({ queryKey: assetKeys.getMany({ comicIssueId: comicIssue.id }) })
       queryClient.invalidateQueries({ queryKey: comicIssueKeys.getPages(comicIssue.id) })
 
       push(RoutePath.ReadComicIssue(comicIssue.id), { scroll: false })

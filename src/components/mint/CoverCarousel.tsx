@@ -10,7 +10,7 @@ import { CoverSlide } from './CoverSlide'
 import { SliderDots } from './SliderDots'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { ComicIssue } from '@/models/comicIssue'
-import { useFetchCandyMachine } from '@/api/candyMachine'
+import { useFetchCandyMachine } from '@/api/candyMachine/queries/useFetchCandyMachine'
 
 type Props = { covers: StatelessCover[]; comicIssue: ComicIssue }
 

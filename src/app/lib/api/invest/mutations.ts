@@ -1,8 +1,8 @@
 'use server'
 
 import { fetchWrapper } from '../../fetchWrapper'
-import { INVEST_QUERY_KEYS } from '@/api/invest'
 import { ExpressInterest } from '@/models/project'
+import { INVEST_QUERY_KEYS } from './keys'
 
 const { INVEST, EXPRESS_INTEREST } = INVEST_QUERY_KEYS
 
