@@ -7,11 +7,12 @@ import { AUTH_QUERY_KEYS } from '@/api/auth/authKeys'
 const { AUTH, WALLET, CONNECT, DISCONNECT, REQUEST_PASSWORD } = AUTH_QUERY_KEYS
 
 export const connectUserWallet = async (data: ConnectWalletData): Promise<{ errorMessage?: string }> => {
-  return await fetchWrapper<void>({
+  const response = await fetchWrapper<void>({
     path: `${AUTH}/${WALLET}/${CONNECT}`,
     method: 'PATCH',
     body: data,
   })
+  return response
 }
 
 export const disconnectUserWallet = async (address: string): Promise<{ errorMessage?: string }> => {

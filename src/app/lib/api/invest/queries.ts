@@ -2,7 +2,6 @@
 
 import { fetchWrapper } from '../../fetchWrapper'
 import { Nullable } from '@/models/common'
-import { INVEST_QUERY_KEYS } from '@/api/invest'
 import {
   isSuccessfulProject,
   Project,
@@ -13,6 +12,7 @@ import {
 import { PROJECTS } from '@/constants/projects'
 import { findProjectBySlug } from '@/utils/helpers'
 import { highInterestProjects, InterestProject } from '../../data/invest/projectsData'
+import { INVEST_QUERY_KEYS } from './keys'
 
 const { GET, INVEST, INTEREST_RECEIPTS } = INVEST_QUERY_KEYS
 

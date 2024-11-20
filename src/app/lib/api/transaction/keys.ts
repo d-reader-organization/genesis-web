@@ -1,0 +1,16 @@
+export const TRANSACTION_QUERY_KEYS = Object.freeze({
+  TRANSACTION: 'transaction',
+  MINT_ONE: 'mint-one',
+  MINT: 'mint',
+  SIGN_COMIC: 'sign-comic',
+  USE_COMIC_ISSUE_ASSET: 'use-comic-issue-asset',
+  SEND_MINT_TRANSACTION: 'send-mint-transaction',
+  LIST: 'list',
+  PRIVATE_BID: 'private-bid',
+  INSTANT_BUY: 'instant-buy',
+  TIP_CREATOR: 'tip-creator',
+  MULTIPLE_BUY: 'multiple-buy',
+  CANCEL_BID: 'cancel-bid',
+  CANCEL_LISTING: 'cancel-listing',
+  EXPRESS_INTEREST: 'express-interest',
+})

@@ -1,7 +1,7 @@
 'use server'
 
-import { TRANSACTION_QUERY_KEYS } from '@/api/transaction'
 import { fetchWrapper } from '../../fetchWrapper'
+import { TRANSACTION_QUERY_KEYS } from './keys'
 
 const { TRANSACTION, SEND_MINT_TRANSACTION } = TRANSACTION_QUERY_KEYS
 

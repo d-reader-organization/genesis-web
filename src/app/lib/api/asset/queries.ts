@@ -1,10 +1,10 @@
 'use server'
 
-import { ASSET_QUERY_KEYS } from '@/api/asset/assetKeys'
 import { Asset } from '@/models/asset'
 import { fetchWrapper } from '../../fetchWrapper'
 import { Nullable } from '@/models/common'
 import { AssetParams } from '@/models/asset/assetParams'
+import { ASSET_QUERY_KEYS } from './keys'
 
 const { ASSET, GET } = ASSET_QUERY_KEYS
 

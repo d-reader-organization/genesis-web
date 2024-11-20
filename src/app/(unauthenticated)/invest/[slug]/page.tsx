@@ -5,7 +5,7 @@ import { ProjectCreatorSection } from '@/components/shared/ProjectCreatorSection
 import { ProjectInfo } from '@/components/invest/ProjectInfo'
 import { ProjectFundingCard } from '@/components/invest/ProjectFundingCard'
 import { notFound } from 'next/navigation'
-import { fetchProject } from '@/app/lib/api/invest/queries'
+import { fetchProject, fetchUserInterestedReceipts } from '@/app/lib/api/invest/queries'
 import { ProjectInvestDialog } from '@/components/shared/dialogs/ProjectInvestDialog'
 import { InterestUpdatesCard } from '@/components/invest/InterestUpdatesCard'
 import { Metadata } from 'next'
@@ -52,6 +52,8 @@ export default async function ProjectInvestPage({ params }: Props) {
     return notFound()
   }
 
+  const receipts = await fetchUserInterestedReceipts(project.slug)
+
   return (
     <BaseLayout showFooter>
       <div className='flex flex-col max-w-screen-xl w-full'>
@@ -67,12 +69,12 @@ export default async function ProjectInvestPage({ params }: Props) {
             <ProjectHeader title={project.title} subtitle={project.subtitle} className='md:hidden' />
             <ProjectFundingCard funding={project.funding} slug={project.slug} className='md:hidden' />
             <ProjectCreatorSection creator={project.creator} tags={project.tags} />
-            <InterestUpdatesCard slug={project.slug} className='md:hidden -ml-4 w-screen rounded-none' />
+            <InterestUpdatesCard className='md:hidden -ml-4 w-screen rounded-none' receipts={receipts} />
             <ProjectInfo info={project.info} />
           </div>
           <div className='flex flex-col'>
             <ProjectFundingCard funding={{ ...project.funding }} slug={project.slug} className='max-md:hidden' />
-            <InterestUpdatesCard slug={project.slug} className='max-md:hidden' />
+            <InterestUpdatesCard className='max-md:hidden' receipts={receipts} />
           </div>
         </div>
       </div>
