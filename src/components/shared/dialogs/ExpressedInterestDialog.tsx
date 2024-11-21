@@ -6,7 +6,7 @@ import { CommonDialogProps } from '@/models/common'
 import Realistic from 'react-canvas-confetti/dist/presets/realistic'
 import { Button, Text } from '@/components/ui'
 import Link from 'next/link'
-import { fetchTwitterIntentExpressedInterest } from '@/api/twitter/queries/fetchTwitterIntentExpressedInterest'
+import { fetchTwitterIntentExpressedInterest } from '@/app/lib/api/twitter/queries'
 
 type Props = {
   slug: string

@@ -2,7 +2,11 @@
     "rules": [
       {
         "pathPattern": "/mint/*",
-        "apiPath": "https://api-dev-devnet.dreader.io/blink/action-spec/mint/*"
+        "apiPath": "https://api-main-mainnet.dreader.io/blink/action-spec/mint/*"
+      },
+      {
+        "pathPattern": "/comic-sign/*",
+        "apiPath": "https://api-main-mainnet.dreader.io/blink/action-spec/comic-sign/*"
       }
     ]
 }

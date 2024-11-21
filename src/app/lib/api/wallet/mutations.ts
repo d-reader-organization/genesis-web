@@ -1,7 +1,7 @@
-import { WALLET_QUERY_KEYS } from '@/api/wallet/walletKeys'
 import { Wallet, UpdateWalletData } from '@/models/wallet'
 import { fetchWrapper } from '@/app/lib/fetchWrapper'
 import { Nullable } from '@/models/common'
+import { WALLET_QUERY_KEYS } from './keys'
 
 const { WALLET, UPDATE } = WALLET_QUERY_KEYS
 

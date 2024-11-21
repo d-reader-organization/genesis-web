@@ -7,6 +7,19 @@ const withPWA = require('next-pwa')({
 const path = require('path')
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async headers() {
+    return [
+      {
+        source: '/privacy-policy',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'max-age=2592000, stale-while-revalidate=86400',
+          },
+        ],
+      },
+    ]
+  },
   eslint: {
     dirs: ['src'],
   },

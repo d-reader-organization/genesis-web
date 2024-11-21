@@ -19,11 +19,7 @@ const defaultTextStyles: React.CSSProperties = {
 }
 
 export const runtime = 'edge'
-export const dynamic = 'force-dynamic'
 
-// const fetchAsset = (url: URL) => fetch(url).then((res) => res.arrayBuffer())
-
-// const fetchSatoshiFont = fetchAsset(new URL('../../../fonts/Satoshi-Regular.woff2', import.meta.url))
 export async function generateImageMetadata({ params }: { params: { id: string } }) {
   const comicIssue: ComicIssue = await (
     await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/${COMIC_ISSUE}/${GET_PUBLIC}/${params.id}`, {

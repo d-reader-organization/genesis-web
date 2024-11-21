@@ -1,6 +1,5 @@
 'use client'
 
-import { useFetchUserInterestedReceipts } from '@/api/invest/queries/useFetchUserInterestedReceipts'
 import { formatDate } from 'date-fns'
 import { Text } from '../ui'
 import { Divider } from '../shared/Divider'
@@ -8,15 +7,13 @@ import clsx from 'clsx'
 import ACTIVITY_ICON from 'public/assets/vector-icons/activity-icon.svg'
 import ANON_BUNNY from 'public/assets/images/anon-bunny.png'
 import Image from 'next/image'
+import { UserInterestedReceipt } from '@/models/project'
 
 type Props = {
-  slug: string
-  className: string
-}
+  receipts: UserInterestedReceipt[]
+} & React.HtmlHTMLAttributes<HTMLDivElement>
 
-export const InterestUpdatesCard: React.FC<Props> = ({ slug, className }) => {
-  const { data: receipts } = useFetchUserInterestedReceipts(slug)
-
+export const InterestUpdatesCard: React.FC<Props> = ({ className, receipts }) => {
   return (
     receipts &&
     receipts.length > 0 && (

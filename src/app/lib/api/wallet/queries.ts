@@ -1,8 +1,8 @@
 import { Nullable } from '@/models/common'
 import { fetchWrapper } from '../../fetchWrapper'
 import { Wallet } from '@/models/wallet'
-import { WALLET_QUERY_KEYS } from '@/api/wallet/walletKeys'
 import { WalletAsset } from '@/models/wallet/walletAsset'
+import { WALLET_QUERY_KEYS } from './keys'
 
 const { ASSETS, WALLET, GET, SYNC } = WALLET_QUERY_KEYS
 
