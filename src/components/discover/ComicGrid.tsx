@@ -6,30 +6,38 @@ import { Text } from '../ui'
 import { useDiscoverFilterStore } from '@/providers/DiscoverFilterStoreProvider'
 import { Comic } from '@/models/comic'
 import { RoutePath } from '@/enums/routePath'
-import { useFetchComics } from '@/api/comic'
+import { useFetchComics } from '@/api/comic/queries'
+import { useMemo } from 'react'
 
-export const ComicsContent: React.FC = () => {
-  const comicParams = useDiscoverFilterStore((state) => state.comicParams)
+export const ComicGrid: React.FC = () => {
+  const storeComicParams = useDiscoverFilterStore((state) => state.comicParams)
+  const comicParams = useMemo(() => storeComicParams, [storeComicParams])
   const { flatData: comics, fetchNextPage, hasNextPage, isFetching, isError } = useFetchComics(comicParams)
-  //const comics : Comic[] = []
+
   return (
-    <div className='grid max-sm:1 sm:grid-cols-2 660:grid-cols-4 grid-cols-4 gap-6 pt-2'>
-      {comics?.map((comic: Comic) => (
+    <div className='grid max-sm:1 sm:grid-cols-2 660:grid-cols-6 gap-6 pt-2'>
+      {comics.map((comic: Comic) => (
         <Link
           href={RoutePath.Comic(comic.slug)}
-          className='flex flex-col w-full rounded-xl hover:brightness-125 border border-grey-300 p-2'
+          className='flex flex-col relative w-full h-[307px] rounded-xl hover:brightness-125 border border-grey-300 p-2'
           key={comic.title}
         >
-            <Image
-              alt={comic.title + ' Cover'}
-              src={comic.cover}
-              className='rounded-xl h-auto w-full'
-              height={1000}
-              width={895}
-            />
-            {/* <Text as='p' styleVariant='body-normal' fontWeight='bold' className='absolute inset-2'>1EP</Text>  */}
-
-          <div className='flex flex-col gap-1 p-2 mt-2 justify-center h-full'>
+          <Image
+            alt={comic.title + ' Cover'}
+            src={comic.cover}
+            className='rounded-xl h-[233px] w-full'
+            height={1000}
+            width={895}
+          />
+          <Text
+            as='p'
+            styleVariant='body-normal'
+            fontWeight='bold'
+            className='absolute bg-gray-700 bg-opacity-60 top-3 right-3 rounded-xl px-2'
+          >
+            {comic.stats?.issuesCount} EP 
+          </Text>
+          <div className='flex flex-col pl-2 mt-2 justify-center'>
             <Text as='p' styleVariant='body-large' fontWeight='bold'>
               {comic.title}
             </Text>

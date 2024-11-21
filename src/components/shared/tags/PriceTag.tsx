@@ -42,6 +42,7 @@ export const PriceTag: React.FC<Props> = ({
         as={as}
         styleVariant={styleVariant}
         className={clsx(
+          'flex flex-row items-center',
           inline ? 'inline-flex' : 'flex',
           reverse ? 'flex-row-reverse' : 'flex-row',
           'items-center',
@@ -71,8 +72,6 @@ export const PriceTag: React.FC<Props> = ({
             height: size,
             marginLeft: reverse ? '0.2rem' : '0.5rem',
             marginRight: reverse ? '0.5rem' : '0.2rem',
-            color: 'inherit',
-            fill: 'inherit',
           }}
         />
       )}

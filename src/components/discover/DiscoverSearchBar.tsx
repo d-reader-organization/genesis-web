@@ -9,7 +9,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useFetchComics } from '@/api/comic/queries/useFetchComics'
 import { useFetchCreators } from '@/api/creator/queries/useFetchCreators'
-import { useFetchComicIssues } from '@/api/comicIssue'
+import { useFetchComicIssues } from '@/api/comicIssue/queries'
 import { usePathname } from 'next/navigation'
 import { RoutePath } from '@/enums/routePath'
 

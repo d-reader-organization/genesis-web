@@ -1,19 +1,28 @@
-import { ImageProps } from 'next/image'
-import Image from 'next/image'
-import clsx from 'clsx'
+import React from 'react'
+import Image, { ImageProps } from 'next/image'
+import { cn } from '@/lib/utils'
 
-interface Props extends Omit<ImageProps, 'alt'> {
-  size: number
+export type AvatarSize = 'small' | 'medium' | 'big'
+
+export interface AvatarImageProps extends Omit<ImageProps, 'alt'> {
+  size?: AvatarSize
   alt?: ImageProps['alt']
+  className?: string
 }
 
-export const AvatarImage: React.FC<Props> = ({ size = 40, className, alt = '', ...props }) => {
+const sizeVariants: Record<AvatarSize, string> = {
+  small: 'w-10 h-10',
+  medium: 'w-12 h-12',
+  big: 'w-14 h-14',
+}
+
+export const AvatarImage: React.FC<AvatarImageProps> = ({ size = 'medium', alt = '', className, ...props }) => {
   return (
     <Image
       alt={alt}
-      width={size}
-      height={size}
-      className={clsx('border-2 border-grey-500 bg-grey-600 rounded-full w-12 h-12', className)}
+      width={56}
+      height={56}
+      className={cn('border-2 border-grey-500 bg-grey-600 rounded-full', sizeVariants[size], className)}
       {...props}
     />
   )
