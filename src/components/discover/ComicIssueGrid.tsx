@@ -29,7 +29,7 @@ export const ComicIssuesContent: React.FC = () => {
 
   return (
     <div className='grid grid-cols-4 md:grid-cols-5 gap-6 pt-2'>
-      {comicIssues?.map((comicIssue: ComicIssue) => (
+      {comicIssues.map((comicIssue: ComicIssue) => (
         <Link
           href={RoutePath.ComicIssue(comicIssue.id)}
           className='relative w-[226px] h-[328px] rounded-xl hover:brightness-125'

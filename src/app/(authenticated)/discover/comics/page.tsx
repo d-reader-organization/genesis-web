@@ -1,6 +1,6 @@
 import React from 'react'
-import { DiscoverWrapper } from '@/components/discover/DiscoverWrapper'
-import { ComicsContent } from '@/components/discover/ComicsContent'
+import { DiscoverWrapper } from '@/components/discover/DiscoverPageWrapper'
+import { ComicsContent } from '@/components/discover/ComicGrid'
 
 export default function DiscoverComicsPage() {
   return (

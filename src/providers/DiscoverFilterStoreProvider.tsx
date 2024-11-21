@@ -3,8 +3,6 @@
 import { createContext, useContext, useEffect, ReactNode } from 'react'
 import { useStore } from 'zustand'
 import { createDiscoverFilterStore, DiscoverFilterStore, defaultInitState } from '@/stores/DiscoverFilterStore'
-import { usePathname } from 'next/navigation'
-import { SECTIONS } from '@/constants/filters'
 import { fetchGenres } from '@/app/lib/api/genre/queries'
 
 export const store = createDiscoverFilterStore(defaultInitState)
@@ -16,8 +14,6 @@ export type DiscoverFilterStoreProviderProps = {
 }
 
 export const DiscoverFilterStoreProvider = ({ children }: DiscoverFilterStoreProviderProps) => {
-  const pathname = usePathname()
-
   const updateCompleteGenresList = store.getState().updateCompleteGenresList
 
   useEffect(() => {
