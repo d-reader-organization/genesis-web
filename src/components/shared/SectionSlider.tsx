@@ -24,7 +24,7 @@ export const SectionSlider: React.FC<Props> = ({ children, slidesToScroll, title
         <ControlledArrows onLeftClick={() => emblaApi?.scrollPrev()} onRightClick={() => emblaApi?.scrollNext()} />
       </div>
       <div className='overflow-hidden' ref={emblaRef}>
-        <div className='flex w-[calc(100%+24px)]'>{children}</div>
+        <div className='flex w-[calc(100%+15px)] md:w-[calc(100%+23px)]'>{children}</div>
       </div>
     </div>
   )
