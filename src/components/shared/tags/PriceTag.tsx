@@ -42,7 +42,6 @@ export const PriceTag: React.FC<Props> = ({
         as={as}
         styleVariant={styleVariant}
         className={clsx(
-          'flex flex-row items-center',
           inline ? 'inline-flex' : 'flex',
           reverse ? 'flex-row-reverse' : 'flex-row',
           'items-center',

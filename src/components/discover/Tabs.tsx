@@ -1,6 +1,6 @@
 'use client'
 
-import { Section } from '@/constants/filters'
+import { Tab } from '@/constants/discoverTabs'
 import Link from 'next/link'
 import { Text } from '../ui'
 import React from 'react'
@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 
 type Props = {
-  sections: Section[]
+  sections: Tab[]
 }
 
 export const Tabs: React.FC<Props> = ({ sections }) => {
@@ -16,7 +16,7 @@ export const Tabs: React.FC<Props> = ({ sections }) => {
 
   return (
     <div className='flex flex-col w-full'>
-      <div className='flex gap-6 relative'>
+      <div className='flex justify-around gap-6 relative md:justify-start'>
         {sections.map((section) => (
           <Link
             href={section.url}
@@ -29,10 +29,7 @@ export const Tabs: React.FC<Props> = ({ sections }) => {
             <Text
               as='h4'
               styleVariant='secondary-heading'
-              className={cn(
-                'cursor-pointer',
-                selectedSection === section.url ? 'text-white' : 'text-grey-200 cursor-pointer'
-              )}
+              className={cn('cursor-pointer', selectedSection === section.url ? 'text-white' : 'text-grey-200')}
             >
               {section.name}
             </Text>

@@ -4,20 +4,25 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Text } from '../ui'
 import { useDiscoverFilterStore } from '@/providers/DiscoverFilterStoreProvider'
-import { useEffect, useMemo, useState } from 'react'
-import { fetchComicIssues } from '@/app/lib/api/comicIssue/queries'
+import { useMemo } from 'react'
 import { ComicIssue } from '@/models/comicIssue'
 import { RoutePath } from '@/enums/routePath'
 import { PriceTag } from '../shared/tags/PriceTag'
 import { useFetchComicIssues } from '@/api/comicIssue/queries'
 
-export const EpisodeGrid: React.FC = () => {
+export const ComicIssueGrid: React.FC = () => {
   const storeComicIssueParams = useDiscoverFilterStore((state) => state.comicIssueParams)
   const comicIssueParams = useMemo(() => storeComicIssueParams, [storeComicIssueParams])
-  const { flatData: comicIssues, fetchNextPage, hasNextPage, isFetching, isError } = useFetchComicIssues({params: comicIssueParams})
+  const {
+    flatData: comicIssues,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isError,
+  } = useFetchComicIssues({ params: comicIssueParams })
 
   return (
-    <div className='grid grid-cols-4 md:grid-cols-5 gap-6 pt-2'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 660:grid-cols-3 1160:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-6 pt-2'>
       {comicIssues.map((comicIssue: ComicIssue) => (
         <Link
           href={RoutePath.ComicIssue(comicIssue.id)}
@@ -45,7 +50,13 @@ export const EpisodeGrid: React.FC = () => {
                 <Text as='p' styleVariant='body-normal' className='text-gray-100'>
                   EP {comicIssue.number}/{comicIssue.stats.totalIssuesCount}
                 </Text>
-                <PriceTag styleVariant='body-normal' colorfulIcon size={14} price={comicIssue.stats.price} />
+                <PriceTag
+                  styleVariant='body-normal'
+                  inline={false}
+                  colorfulIcon
+                  size={14}
+                  price={comicIssue.stats.price}
+                />
               </div>
             )}
           </div>

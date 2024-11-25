@@ -1,4 +1,4 @@
-import { GenreParams } from '@/models/genre-new/genreParams'
+import { GenreParams } from '@/models/genre/genreParams'
 
 export const GENRE_QUERY_KEYS = Object.freeze({
   GENRE: 'genre',

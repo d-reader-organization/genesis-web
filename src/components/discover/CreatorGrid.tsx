@@ -4,8 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Text } from '../ui'
 import { useDiscoverFilterStore } from '@/providers/DiscoverFilterStoreProvider'
-import { useEffect, useMemo, useState } from 'react'
-import { fetchCreators } from '@/app/lib/api/creator/queries'
+import { useMemo } from 'react'
 import { Creator } from '@/models/creator'
 import { RoutePath } from '@/enums/routePath'
 import { IconLink } from '@/components/shared/IconLink'
@@ -19,7 +18,7 @@ export const CreatorGrid: React.FC = () => {
   const { flatData: creators, fetchNextPage, hasNextPage, isFetching, isError } = useFetchCreators(creatorParams)
 
   return (
-    <div className='grid grid-cols-4 gap-6 pt-2'>
+    <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 pt-2'>
       {creators.map((creator: Creator) => (
         <Link
           href={RoutePath.Creator(creator.slug)}
@@ -42,18 +41,17 @@ export const CreatorGrid: React.FC = () => {
               className='absolute inset-x-4 -inset-y-8'
             />
             <div className='flex flex-col items-start justify-end'>
-              <Text as='p' styleVariant='body-large' fontWeight='bold' className=''>
+              <Text as='p' styleVariant='body-large' fontWeight='bold'>
                 {creator.name}
               </Text>
-              <Text as='p' styleVariant='body-normal' className=''>
+              <Text as='p' styleVariant='body-normal'>
                 {creator.stats.followersCount + ' Followers'}
               </Text>
             </div>
             <IconLink
-              className='flex bg-grey-400 rounded-lg sm:rounded-xl gap-2 p-4 text-grey-100'
-              href={'placeholder'}
+              className='flex bg-grey-400 rounded-lg sm:rounded-xl gap-2 p-4 max-h-12 text-grey-100'
+              href={'#'}
               Icon={UserPlusIcon}
-              blank
             >
               <UserPlusIcon className='w-5' />
               <Text as='p' styleVariant='body-large' fontWeight='medium' className='max-sm:text-xs'>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Tabs } from '@/components/discover/Tabs'
 import { DiscoverFilterBar } from './DiscoverFilterBar'
 import { cn } from '@/lib/utils'
-import { SECTIONS } from '@/constants/filters'
+import { DISCOVER_TABS } from '@/constants/discoverTabs'
 import { DiscoverFilterStoreProvider } from '@/providers/DiscoverFilterStoreProvider'
 import { fetchMe } from '@/app/lib/api/user/queries'
 import { Navigation } from '../layout/Navigation'
@@ -23,7 +23,7 @@ export const DiscoverWrapper: React.FC<Props> = async ({ children, mainClassName
       >
         <div className={cn('flex flex-col max-w-screen-xl w-full gap-3')}>
           <DiscoverFilterStoreProvider>
-            <Tabs sections={SECTIONS} />
+            <Tabs sections={DISCOVER_TABS} />
             <DiscoverFilterBar />
             {children}
           </DiscoverFilterStoreProvider>

@@ -12,18 +12,17 @@ export type DiscoverFilterState = {
 }
 
 export type DiscoverFilterActions = {
-  resetToDefaultInitState: () => void
-  updateCompleteGenresList: (genres: Genre[]) => void
-  updateAllParamGenreSlugs: (genreSlugs: string[]) => void
   updateComicParams: (params: Partial<ComicParams>) => void
   updateComicIssueParams: (params: Partial<ComicIssueParams>) => void
   updateCreatorParams: (params: Partial<CreatorParams>) => void
+  updateCompleteGenresList: (genres: Genre[]) => void
+  updateAllParamGenreSlugs: (genreSlugs: string[]) => void
+  resetToDefaultInitState: () => void
 }
 
 export type DiscoverFilterStore = DiscoverFilterState & DiscoverFilterActions
 
 export const defaultInitState: DiscoverFilterState = {
-  completeGenresList: [],
   comicParams: {
     skip: 0,
     take: 20,
@@ -54,46 +53,27 @@ export const defaultInitState: DiscoverFilterState = {
     filterTag: undefined,
     sortTag: undefined,
   },
+  completeGenresList: [],
 }
 
 export const createDiscoverFilterStore = (initState: DiscoverFilterState = defaultInitState) => {
   return createStore<DiscoverFilterStore>()((set) => ({
     ...initState,
+    updateComicParams: (params) => set((state) => ({ comicParams: { ...state.comicParams, ...params } })),
+    updateComicIssueParams: (params) =>
+      set((state) => ({ comicIssueParams: { ...state.comicIssueParams, ...params } })),
+    updateCreatorParams: (params) => set((state) => ({ creatorParams: { ...state.creatorParams, ...params } })),
+    updateCompleteGenresList: (genres: Genre[]) => set(() => ({ completeGenresList: genres })),
+    updateAllParamGenreSlugs: (genreSlugs: string[]) =>
+      set((state) => ({
+        comicParams: { ...state.comicParams, genreSlugs: genreSlugs.length ? genreSlugs : undefined },
+        comicIssueParams: { ...state.comicIssueParams, genreSlugs: genreSlugs.length ? genreSlugs : undefined },
+        creatorParams: { ...state.creatorParams, genreSlugs: genreSlugs.length ? genreSlugs : undefined },
+      })),
     resetToDefaultInitState: () =>
       set((state) => ({
         ...defaultInitState,
         completeGenresList: state.completeGenresList,
-      })),
-    updateCompleteGenresList: (genres) =>
-      set(() => ({
-        completeGenresList: genres,
-      })),
-    updateAllParamGenreSlugs: (genreSlugs) =>
-      set((state) => ({
-        comicParams: {
-          ...state.comicParams,
-          genreSlugs: genreSlugs.length ? genreSlugs : undefined,
-        },
-        comicIssueParams: {
-          ...state.comicIssueParams,
-          genreSlugs: genreSlugs.length ? genreSlugs : undefined,
-        },
-        creatorParams: {
-          ...state.creatorParams,
-          genreSlugs: genreSlugs.length ? genreSlugs : undefined,
-        },
-      })),
-    updateComicParams: (params) =>
-      set((state) => ({
-        comicParams: { ...state.comicParams, ...params },
-      })),
-    updateComicIssueParams: (params) =>
-      set((state) => ({
-        comicIssueParams: { ...state.comicIssueParams, ...params },
-      })),
-    updateCreatorParams: (params) =>
-      set((state) => ({
-        creatorParams: { ...state.creatorParams, ...params },
       })),
   }))
 }

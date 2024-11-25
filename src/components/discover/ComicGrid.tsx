@@ -15,7 +15,7 @@ export const ComicGrid: React.FC = () => {
   const { flatData: comics, fetchNextPage, hasNextPage, isFetching, isError } = useFetchComics(comicParams)
 
   return (
-    <div className='grid max-sm:1 sm:grid-cols-2 660:grid-cols-6 gap-6 pt-2'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 1160:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 pt-2'>
       {comics.map((comic: Comic) => (
         <Link
           href={RoutePath.Comic(comic.slug)}
@@ -35,7 +35,7 @@ export const ComicGrid: React.FC = () => {
             fontWeight='bold'
             className='absolute bg-gray-700 bg-opacity-60 top-3 right-3 rounded-xl px-2'
           >
-            {comic.stats?.issuesCount} EP 
+            {comic.stats?.issuesCount} EP
           </Text>
           <div className='flex flex-col pl-2 mt-2 justify-center'>
             <Text as='p' styleVariant='body-large' fontWeight='bold'>
