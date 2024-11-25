@@ -18,32 +18,12 @@ import {
   CREATORS_FILTER_CRITERIA,
   CREATORS_SORT_CRITERIA,
 } from '@/constants/discoverQueryCriterias'
+import { useDiscoverStoreActiveFiltersCount } from '../../hooks/useDiscoverStoreActiveFiltersCount'
 
 export const DiscoverFilterBar: React.FC = () => {
   const [isFilterSheetOpen, setFilterSheetOpen] = React.useState<boolean>(false)
   const clearAll = useDiscoverFilterStore((state) => state.resetToDefaultInitState)
-
-  const store = useDiscoverFilterStore((state) => state)
-  const pathname = usePathname()
-
-  const activeFiltersCount = React.useMemo(() => {
-    switch (true) {
-      case pathname.includes(RoutePath.DiscoverComics): {
-        const { genreSlugs, filterTag, sortTag } = store.comicParams
-        return (genreSlugs?.length || 0) + (filterTag ? 1 : 0) + (sortTag ? 1 : 0)
-      }
-      case pathname.includes(RoutePath.DiscoverComicIssues): {
-        const { genreSlugs, filterTag, sortTag } = store.comicIssueParams
-        return (genreSlugs?.length || 0) + (filterTag ? 1 : 0) + (sortTag ? 1 : 0)
-      }
-      case pathname.includes(RoutePath.DiscoverCreators): {
-        const { genreSlugs, filterTag, sortTag } = store.creatorParams
-        return (genreSlugs?.length || 0) + (filterTag ? 1 : 0) + (sortTag ? 1 : 0)
-      }
-      default:
-        return 0
-    }
-  }, [pathname, store])
+  const activeFiltersCount = useDiscoverStoreActiveFiltersCount()
 
   return (
     <div className='flex'>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tabs } from '@/components/discover/Tabs'
+import { Tabs } from '@/components/shared/Tabs'
 import { DiscoverFilterBar } from './DiscoverFilterBar'
 import { cn } from '@/lib/utils'
 import { DISCOVER_TABS } from '@/constants/tabs'
