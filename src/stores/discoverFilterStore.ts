@@ -26,7 +26,7 @@ export const defaultInitState: DiscoverFilterState = {
   completeGenresList: [],
   comicParams: {
     skip: 0,
-    take: 20,
+    take: 10,
     genreSlugs: undefined,
     sortOrder: undefined,
     creatorSlug: undefined,

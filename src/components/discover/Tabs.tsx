@@ -1,6 +1,6 @@
 'use client'
 
-import { Tab } from '@/constants/discoverTabs'
+import { Tab } from '@/constants/tabs'
 import Link from 'next/link'
 import { Text } from '../ui'
 import React from 'react'

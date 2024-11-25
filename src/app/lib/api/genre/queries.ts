@@ -1,8 +1,8 @@
 'use server'
 
 import { fetchWrapper } from '../../fetchWrapper'
-import { Genre } from '@/models/genre-new'
-import { GenreParams } from '@/models/genre-new/genreParams'
+import { Genre } from '@/models/genre'
+import { GenreParams } from '@/models/genre/genreParams'
 import { GENRE_QUERY_KEYS } from '@/api/genre/genreKeys'
 
 const { GENRE, GET } = GENRE_QUERY_KEYS

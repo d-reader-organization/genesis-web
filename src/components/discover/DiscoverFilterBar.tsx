@@ -6,23 +6,44 @@ import React from 'react'
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
 import { Settings2, ChevronDown } from 'lucide-react'
 import { useDiscoverFilterStore } from '@/providers/DiscoverFilterStoreProvider'
-import { Genre } from '@/models/genre'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 import { RoutePath } from '@/enums/routePath'
 import {
-  ALL_DISCOVER_SEARCH_CRITERIAS,
-  COMIC_FILTER_CRITERIA,
-  COMIC_ISSUE_FILTER_CRITERIA,
-  COMIC_ISSUE_SORT_CRITERIA,
-  COMIC_SORT_CRITERIA,
-  CREATOR_FILTER_CRITERIA,
-  CREATOR_SORT_CRITERIA,
-} from '@/constants/discoverSearchCriteria'
+  ALL_DISCOVER_QUERY_CRITERIAS,
+  COMICS_FILTER_CRITERIA,
+  COMIC_ISSUES_FILTER_CRITERIA,
+  COMIC_ISSUES_SORT_CRITERIA,
+  COMICS_SORT_CRITERIA,
+  CREATORS_FILTER_CRITERIA,
+  CREATORS_SORT_CRITERIA,
+} from '@/constants/discoverQueryCriterias'
 
 export const DiscoverFilterBar: React.FC = () => {
   const [isFilterSheetOpen, setFilterSheetOpen] = React.useState<boolean>(false)
   const clearAll = useDiscoverFilterStore((state) => state.resetToDefaultInitState)
+
+  const store = useDiscoverFilterStore((state) => state)
+  const pathname = usePathname()
+
+  const activeFiltersCount = React.useMemo(() => {
+    switch (true) {
+      case pathname.includes(RoutePath.DiscoverComics): {
+        const { genreSlugs, filterTag, sortTag } = store.comicParams
+        return (genreSlugs?.length || 0) + (filterTag ? 1 : 0) + (sortTag ? 1 : 0)
+      }
+      case pathname.includes(RoutePath.DiscoverComicIssues): {
+        const { genreSlugs, filterTag, sortTag } = store.comicIssueParams
+        return (genreSlugs?.length || 0) + (filterTag ? 1 : 0) + (sortTag ? 1 : 0)
+      }
+      case pathname.includes(RoutePath.DiscoverCreators): {
+        const { genreSlugs, filterTag, sortTag } = store.creatorParams
+        return (genreSlugs?.length || 0) + (filterTag ? 1 : 0) + (sortTag ? 1 : 0)
+      }
+      default:
+        return 0
+    }
+  }, [pathname, store])
 
   return (
     <div className='flex'>
@@ -36,14 +57,16 @@ export const DiscoverFilterBar: React.FC = () => {
           <Text as='p' styleVariant='body-normal'>
             Filter
           </Text>
-          <Text
-            as='p'
-            fontWeight='bold'
-            styleVariant='body-small'
-            className='flex -top-1 -right-2 absolute justify-center items-center w-5 h-5 bg-white text-grey-600 rounded-full'
-          >
-            3
-          </Text>
+          {activeFiltersCount !== 0 && (
+            <Text
+              as='p'
+              fontWeight='bold'
+              styleVariant='body-small'
+              className='flex -top-1 -right-2 absolute justify-center items-center w-5 h-5 bg-white text-grey-600 rounded-full'
+            >
+              {activeFiltersCount}
+            </Text>
+          )}
         </Button>
         <Button onClick={clearAll} className='max-h-10 bg-grey-500 text-grey-100'>
           <Text as='p' styleVariant='body-normal'>
@@ -76,11 +99,11 @@ const FilterSheet: React.FC<FilterSheetProps> = ({ isOpen, triggerOpenChange }) 
   const { sortCriteria, filterCriteria } = React.useMemo(() => {
     switch (true) {
       case pathname.includes(RoutePath.DiscoverComics):
-        return { sortCriteria: COMIC_SORT_CRITERIA, filterCriteria: COMIC_FILTER_CRITERIA }
+        return { sortCriteria: COMICS_SORT_CRITERIA, filterCriteria: COMICS_FILTER_CRITERIA }
       case pathname.includes(RoutePath.DiscoverComicIssues):
-        return { sortCriteria: COMIC_ISSUE_SORT_CRITERIA, filterCriteria: COMIC_ISSUE_FILTER_CRITERIA }
+        return { sortCriteria: COMIC_ISSUES_SORT_CRITERIA, filterCriteria: COMIC_ISSUES_FILTER_CRITERIA }
       case pathname.includes(RoutePath.DiscoverCreators):
-        return { sortCriteria: CREATOR_SORT_CRITERIA, filterCriteria: CREATOR_FILTER_CRITERIA }
+        return { sortCriteria: CREATORS_SORT_CRITERIA, filterCriteria: CREATORS_FILTER_CRITERIA }
       default:
         throw new Error('Invalid pathname')
     }
@@ -112,21 +135,21 @@ const FilterSheet: React.FC<FilterSheetProps> = ({ isOpen, triggerOpenChange }) 
 }
 
 export type DiscoverFilterBySingleTagProps = {
-  searchCriteria: ALL_DISCOVER_SEARCH_CRITERIAS
+  searchCriteria: ALL_DISCOVER_QUERY_CRITERIAS
 }
 
 export const DiscoverFilterBySingleTag = ({ searchCriteria }: DiscoverFilterBySingleTagProps) => {
   const store = useDiscoverFilterStore((state) => state)
   const contentRef = React.useRef<HTMLDivElement>(null)
   const [isExpanded, setIsExpanded] = React.useState(true)
-  const [selectedTag, setSelectedTag] = React.useState<string | undefined>()
+
+  const selectedTag = searchCriteria.getSelected(store)
 
   const handleTagClick = <K extends keyof (typeof searchCriteria)['tags']>(
     key: K,
     tag: (typeof searchCriteria)['tags'][K]
   ) => {
     const newTag: (typeof searchCriteria)['tags'][K] | undefined = selectedTag === tag ? undefined : tag
-    setSelectedTag(newTag)
     searchCriteria.updateFunction(store, newTag)
   }
 
