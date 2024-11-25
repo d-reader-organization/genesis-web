@@ -23,7 +23,7 @@ export const DiscoverWrapper: React.FC<Props> = async ({ children, mainClassName
       >
         <div className={cn('flex flex-col max-w-screen-xl w-full gap-3')}>
           <DiscoverFilterStoreProvider>
-            <Tabs sections={DISCOVER_TABS} />
+            <Tabs label={'Discover'} tabs={DISCOVER_TABS} />
             <DiscoverFilterBar />
             {children}
           </DiscoverFilterStoreProvider>

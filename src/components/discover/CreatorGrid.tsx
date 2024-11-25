@@ -2,9 +2,9 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Text } from '../ui'
+import { Text, useToast } from '../ui'
 import { useDiscoverFilterStore } from '@/providers/DiscoverFilterStoreProvider'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Creator } from '@/models/creator'
 import { RoutePath } from '@/enums/routePath'
 import { IconLink } from '@/components/shared/IconLink'
@@ -17,9 +17,16 @@ export const CreatorGrid: React.FC = () => {
   const storeCreatorParams = useDiscoverFilterStore((state) => state.creatorParams)
   const creatorParams = useMemo(() => storeCreatorParams, [storeCreatorParams])
   const { flatData: creators, fetchNextPage, hasNextPage, isFetching, isError } = useFetchCreators(creatorParams)
+  const { toast } = useToast()
+
+  useEffect(() => {
+    if (isError) {
+      toast({ title: 'Error!', description: 'There was a problem fetching creator data', variant: 'error' })
+    }
+  }, [isError])
 
   return (
-    <div className='flex flex-col items-center'>
+    <>
       <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 pt-2'>
         {creators.map((creator: Creator) => (
           <Link
@@ -64,7 +71,9 @@ export const CreatorGrid: React.FC = () => {
           </Link>
         ))}
       </div>
-      {hasNextPage && <ShowMoreButton onClick={fetchNextPage} disabled={isFetching} />}
-    </div>
+      <div className='flex flex-col items-center'>
+        {hasNextPage && <ShowMoreButton onClick={fetchNextPage} disabled={isFetching} />}
+      </div>
+    </>
   )
 }

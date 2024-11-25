@@ -5,10 +5,10 @@ import { Genre } from '@/models/genre'
 import { createStore } from 'zustand/vanilla'
 
 export type DiscoverFilterState = {
+  completeGenresList: Genre[]
   comicParams: ComicParams
   comicIssueParams: ComicIssueParams
   creatorParams: CreatorParams
-  completeGenresList: Genre[]
 }
 
 export type DiscoverFilterActions = {
@@ -26,7 +26,7 @@ export const defaultInitState: DiscoverFilterState = {
   completeGenresList: [],
   comicParams: {
     skip: 0,
-    take: 10,
+    take: 20,
     genreSlugs: undefined,
     sortOrder: undefined,
     creatorSlug: undefined,

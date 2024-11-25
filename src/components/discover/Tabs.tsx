@@ -8,30 +8,35 @@ import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 
 type Props = {
-  sections: Tab[]
+  label: string
+  tabs: Tab[]
 }
 
-export const Tabs: React.FC<Props> = ({ sections }) => {
-  const selectedSection = usePathname()
+export const Tabs: React.FC<Props> = ({ label, tabs }) => {
+  const selectedTab = usePathname()
 
   return (
-    <div className='flex flex-col w-full'>
-      <div className='flex justify-around gap-6 relative md:justify-start'>
-        {sections.map((section) => (
+    <div className='flex flex-col w-full relative '>
+      <Text
+        as='h1'
+        styleVariant='primary-heading'
+        className='absolute -top-6 left-2 text-grey-100 text-transparent uppercase bg-gradient-to-b from-grey-400 via-grey-600 via-60% to-transparent bg-clip-text'
+      >
+        {label}
+      </Text>
+      <div className='flex justify-around gap-6 relative md:justify-start mt-2'>
+        {tabs.map((tab: Tab) => (
           <Link
-            href={section.url}
-            key={section.url}
-            className={cn(
-              'bg-transparent rounded-none px-1 pb-1',
-              selectedSection === section.url && 'border-b-[2px] z-10'
-            )}
+            key={tab.url}
+            href={tab.url}
+            className={cn('bg-transparent rounded-none px-1 pb-1', selectedTab === tab.url && 'border-b-[2px] z-10')}
           >
             <Text
               as='h4'
               styleVariant='secondary-heading'
-              className={cn('cursor-pointer', selectedSection === section.url ? 'text-white' : 'text-grey-200')}
+              className={cn('cursor-pointer', selectedTab === tab.url ? 'text-white' : 'text-grey-200')}
             >
-              {section.name}
+              {tab.name}
             </Text>
           </Link>
         ))}

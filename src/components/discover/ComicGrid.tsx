@@ -2,21 +2,28 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Text } from '../ui'
+import { Text, useToast } from '../ui'
 import { useDiscoverFilterStore } from '@/providers/DiscoverFilterStoreProvider'
 import { Comic } from '@/models/comic'
 import { RoutePath } from '@/enums/routePath'
 import { useFetchComics } from '@/api/comic/queries'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { ShowMoreButton } from './ShowMoreButton'
 
 export const ComicGrid: React.FC = () => {
   const storeComicParams = useDiscoverFilterStore((state) => state.comicParams)
   const comicParams = useMemo(() => storeComicParams, [storeComicParams])
   const { flatData: comics, fetchNextPage, hasNextPage, isFetching, isError } = useFetchComics(comicParams)
+  const { toast } = useToast()
+
+  useEffect(() => {
+    if (isError) {
+      toast({ title: 'Error!', description: 'There was a problem fetching comic data', variant: 'error' })
+    }
+  }, [isError])
 
   return (
-    <div className='flex flex-col items-center'>
+    <>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 1160:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 pt-2'>
         {comics.map((comic: Comic) => (
           <Link
@@ -50,7 +57,9 @@ export const ComicGrid: React.FC = () => {
           </Link>
         ))}
       </div>
-      {hasNextPage && <ShowMoreButton onClick={fetchNextPage} disabled={isFetching} />}
-    </div>
+      <div className='flex flex-col items-center'>
+        {hasNextPage && <ShowMoreButton onClick={fetchNextPage} disabled={isFetching} />}
+      </div>
+    </>
   )
 }
