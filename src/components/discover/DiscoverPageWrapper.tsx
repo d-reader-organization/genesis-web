@@ -1,8 +1,8 @@
 import React from 'react'
 import { Tabs } from '@/components/shared/Tabs'
-import { DiscoverFilterBar } from './DiscoverFilterBar'
+import { DiscoverQueryBar } from './DiscoverQueryBar'
 import { cn } from '@/lib/utils'
-import { DISCOVER_TABS } from '@/constants/tabs'
+import { DISCOVER_PAGE_TABS } from '@/constants/tabs'
 import { DiscoverFilterStoreProvider } from '@/providers/DiscoverFilterStoreProvider'
 import { fetchMe } from '@/app/lib/api/user/queries'
 import { Navigation } from '../layout/Navigation'
@@ -23,8 +23,8 @@ export const DiscoverWrapper: React.FC<Props> = async ({ children, mainClassName
       >
         <div className={cn('flex flex-col max-w-screen-xl w-full gap-3')}>
           <DiscoverFilterStoreProvider>
-            <Tabs label={'Discover'} tabs={DISCOVER_TABS} />
-            <DiscoverFilterBar />
+            <Tabs label={'Discover'} tabs={DISCOVER_PAGE_TABS} />
+            <DiscoverQueryBar />
             {children}
           </DiscoverFilterStoreProvider>
         </div>

@@ -8,26 +8,20 @@ import { Settings2, ChevronDown } from 'lucide-react'
 import { useDiscoverFilterStore } from '@/providers/DiscoverFilterStoreProvider'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
-import { RoutePath } from '@/enums/routePath'
 import {
-  ALL_DISCOVER_QUERY_CRITERIAS,
-  COMICS_FILTER_CRITERIA,
-  COMIC_ISSUES_FILTER_CRITERIA,
-  COMIC_ISSUES_SORT_CRITERIA,
-  COMICS_SORT_CRITERIA,
-  CREATORS_FILTER_CRITERIA,
-  CREATORS_SORT_CRITERIA,
-} from '@/constants/discoverQueryCriterias'
-import { useDiscoverStoreActiveFiltersCount } from '../../hooks/useDiscoverStoreActiveFiltersCount'
+  ALL_DISCOVER_PAGE_QUERY_CRITERIAS,
+  QUERY_CRITERIA_MAP,
+} from '@/constants/discoverPageQueryCriterias'
+import { useDiscoverStoreActiveFiltersCount } from '@/hooks/useDiscoverStoreActiveFiltersCount'
 
-export const DiscoverFilterBar: React.FC = () => {
+export const DiscoverQueryBar: React.FC = () => {
   const [isFilterSheetOpen, setFilterSheetOpen] = React.useState<boolean>(false)
   const clearAll = useDiscoverFilterStore((state) => state.resetToDefaultInitState)
   const activeFiltersCount = useDiscoverStoreActiveFiltersCount()
 
   return (
     <div className='flex'>
-      <FilterSheet isOpen={isFilterSheetOpen} triggerOpenChange={(open: boolean) => setFilterSheetOpen(open)} />
+      <QuerySheet isOpen={isFilterSheetOpen} triggerOpenChange={(open: boolean) => setFilterSheetOpen(open)} />
       <div className='flex gap-4 w-[100%] max-md:justify-center'>
         <Button
           className='relative max-h-10 flex text-grey-100 bg-grey-500 gap-2'
@@ -68,25 +62,23 @@ export const DiscoverFilterBar: React.FC = () => {
   )
 }
 
-type FilterSheetProps = {
+type QuerySheetProps = {
   isOpen: boolean
   triggerOpenChange: (open: boolean) => void
 }
 
-const FilterSheet: React.FC<FilterSheetProps> = ({ isOpen, triggerOpenChange }) => {
+const QuerySheet: React.FC<QuerySheetProps> = ({ isOpen, triggerOpenChange }) => {
   const pathname = usePathname()
+  const isValidKey = (key: string): key is keyof typeof QUERY_CRITERIA_MAP => key in QUERY_CRITERIA_MAP
 
-  const { sortCriteria, filterCriteria } = React.useMemo(() => {
-    switch (true) {
-      case pathname.includes(RoutePath.DiscoverComics):
-        return { sortCriteria: COMICS_SORT_CRITERIA, filterCriteria: COMICS_FILTER_CRITERIA }
-      case pathname.includes(RoutePath.DiscoverComicIssues):
-        return { sortCriteria: COMIC_ISSUES_SORT_CRITERIA, filterCriteria: COMIC_ISSUES_FILTER_CRITERIA }
-      case pathname.includes(RoutePath.DiscoverCreators):
-        return { sortCriteria: CREATORS_SORT_CRITERIA, filterCriteria: CREATORS_FILTER_CRITERIA }
-      default:
-        throw new Error('Invalid pathname')
+  const queryCriteria = React.useMemo(() => {
+    const matchedKey = Object.keys(QUERY_CRITERIA_MAP).find((key) => pathname.includes(key))
+
+    if (!matchedKey || !isValidKey(matchedKey)) {
+      throw new Error('Invalid pathname')
     }
+
+    return QUERY_CRITERIA_MAP[matchedKey]
   }, [pathname])
 
   return (
@@ -104,9 +96,10 @@ const FilterSheet: React.FC<FilterSheetProps> = ({ isOpen, triggerOpenChange }) 
             Filter by
           </Text>
           <div className='flex flex-col'>
-            <DiscoverFilterBySingleTag searchCriteria={filterCriteria} />
-            <DiscoverFilterBySingleTag searchCriteria={sortCriteria} />
-            <DiscoverFilterByGenres />
+            {queryCriteria.map(({ label, criteria }) => (
+              <DiscoverQueryBySingleTag key={label} queryCriteria={criteria} />
+            ))}
+            <DiscoverQueryByGenres />
           </div>
         </SheetContent>
       </Sheet>
@@ -114,23 +107,23 @@ const FilterSheet: React.FC<FilterSheetProps> = ({ isOpen, triggerOpenChange }) 
   )
 }
 
-export type DiscoverFilterBySingleTagProps = {
-  searchCriteria: ALL_DISCOVER_QUERY_CRITERIAS
+export type DiscoverQueryBySingleTagProps = {
+  queryCriteria: ALL_DISCOVER_PAGE_QUERY_CRITERIAS
 }
 
-export const DiscoverFilterBySingleTag = ({ searchCriteria }: DiscoverFilterBySingleTagProps) => {
+export const DiscoverQueryBySingleTag = ({ queryCriteria }: DiscoverQueryBySingleTagProps) => {
   const store = useDiscoverFilterStore((state) => state)
   const contentRef = React.useRef<HTMLDivElement>(null)
   const [isExpanded, setIsExpanded] = React.useState(true)
 
-  const selectedTag = searchCriteria.getSelected(store)
+  const selectedTag = queryCriteria.getSelectedTags(store)
 
-  const handleTagClick = <K extends keyof (typeof searchCriteria)['tags']>(
+  const handleTagClick = <K extends keyof (typeof queryCriteria)['tags']>(
     key: K,
-    tag: (typeof searchCriteria)['tags'][K]
+    tag: (typeof queryCriteria)['tags'][K]
   ) => {
-    const newTag: (typeof searchCriteria)['tags'][K] | undefined = selectedTag === tag ? undefined : tag
-    searchCriteria.updateFunction(store, newTag)
+    const newTag: (typeof queryCriteria)['tags'][K] | undefined = selectedTag === tag ? undefined : tag
+    queryCriteria.updateSelectedTags(store, newTag)
   }
 
   return (
@@ -141,7 +134,7 @@ export const DiscoverFilterBySingleTag = ({ searchCriteria }: DiscoverFilterBySi
         aria-expanded={isExpanded}
       >
         <Text as='p' styleVariant='body-large'>
-          {searchCriteria.label}
+          {queryCriteria.label}
         </Text>
         <ChevronDown size={19} />
       </button>
@@ -154,9 +147,9 @@ export const DiscoverFilterBySingleTag = ({ searchCriteria }: DiscoverFilterBySi
         }}
       >
         <div className='flex flex-wrap gap-2'>
-          {Object.keys(searchCriteria.tags).map((key) => {
-            const typedKey = key as keyof (typeof searchCriteria)['tags']
-            const value = searchCriteria.tags[typedKey]
+          {Object.keys(queryCriteria.tags).map((key) => {
+            const typedKey = key as keyof (typeof queryCriteria)['tags']
+            const value = queryCriteria.tags[typedKey]
             const isSelected = selectedTag === value
 
             return (
@@ -180,7 +173,7 @@ export const DiscoverFilterBySingleTag = ({ searchCriteria }: DiscoverFilterBySi
   )
 }
 
-export const DiscoverFilterByGenres: React.FC = () => {
+export const DiscoverQueryByGenres: React.FC = () => {
   const [isExpanded, setIsExpanded] = React.useState(true)
   const contentRef = React.useRef<HTMLDivElement>(null)
   const genres = useDiscoverFilterStore((state) => state.completeGenresList)

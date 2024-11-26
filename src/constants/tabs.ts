@@ -4,7 +4,7 @@ export type Tab = {
   url: string
 }
 
-export const DISCOVER_TABS: Tab[] = [
+export const DISCOVER_PAGE_TABS: Tab[] = [
   {
     slug: 'comics',
     name: 'Comics',

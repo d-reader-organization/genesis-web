@@ -2,12 +2,12 @@
 
 import { createContext, useContext, useEffect, ReactNode } from 'react'
 import { useStore } from 'zustand'
-import { createDiscoverFilterStore, DiscoverFilterStore, defaultInitState } from '@/stores/DiscoverFilterStore'
+import { createDiscoverQueryStore, DiscoverQueryStore, defaultInitState } from '@/stores/DiscoverQueryStore'
 import { fetchGenres } from '@/app/lib/api/genre/queries'
 import { Genre } from '@/models/genre'
 
-export const store = createDiscoverFilterStore(defaultInitState)
-export type DiscoverFilterStoreApi = ReturnType<typeof createDiscoverFilterStore>
+export const store = createDiscoverQueryStore(defaultInitState)
+export type DiscoverFilterStoreApi = ReturnType<typeof createDiscoverQueryStore>
 export const DiscoverFilterStoreContext = createContext<DiscoverFilterStoreApi | undefined>(undefined)
 
 const fetchData = async (updateCompleteGenresList: (genres: Genre[]) => void) => {
@@ -33,7 +33,7 @@ export const DiscoverFilterStoreProvider = ({ children }: DiscoverFilterStorePro
   return <DiscoverFilterStoreContext.Provider value={store}>{children}</DiscoverFilterStoreContext.Provider>
 }
 
-export const useDiscoverFilterStore = <T,>(selector: (store: DiscoverFilterStore) => T): T => {
+export const useDiscoverFilterStore = <T,>(selector: (store: DiscoverQueryStore) => T): T => {
   const storeContext = useContext(DiscoverFilterStoreContext)
 
   if (!storeContext) {
