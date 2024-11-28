@@ -1,5 +1,4 @@
 import { OwnedComicCard } from '@/components/comic/cards/OwnedCard'
-import { RoutePath } from '@/enums/routePath'
 import { Comic } from '@/models/comic'
 import { Text } from '@/components//ui/Text'
 import React from 'react'
