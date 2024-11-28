@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Text } from '../ui'
+import { Text } from '../../ui'
 import { Comic } from '@/models/comic'
 import { RoutePath } from '@/enums/routePath'
 import { Ellipsis } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { COMIC_IMAGE_SIZES } from '@/constants/imageSizes'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comic: Comic
@@ -35,11 +36,10 @@ export const ComicCard: React.FC<Props> = ({
       )}
     >
       <Image
-        alt={comic.title}
         src={comic.cover}
+        alt=''
         className='rounded-xl h-auto w-full aspect-comic-cover object-cover'
-        width={1000}
-        height={895}
+        {...COMIC_IMAGE_SIZES['cover']}
       />
       <div className='flex absolute top-3 right-3 gap-1'>
         {/** comic isfree missing in api model, plug isFree const */}

@@ -6,7 +6,7 @@ import { useFetchComicIssues } from '@/api/comicIssue/queries'
 import { useToast } from '../ui'
 import { ComicIssue } from '@/models/comicIssue'
 import { ShowMoreButton } from './ShowMoreButton'
-import { ComicIssueCard } from './ComicIssueCard'
+import { ComicIssueCard } from '../comicIssue/cards/ComicIssueCard'
 
 export const ComicIssueGrid: React.FC = () => {
   const comicIssueParams = useDiscoverQueryStore((state) => state.comicIssueParams)

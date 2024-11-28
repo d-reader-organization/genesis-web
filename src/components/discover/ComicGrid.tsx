@@ -5,7 +5,7 @@ import { useDiscoverQueryStore } from '@/providers/DiscoverQueryStoreProvider'
 import { useFetchComics } from '@/api/comic/queries'
 import { useEffect } from 'react'
 import { ShowMoreButton } from './ShowMoreButton'
-import { ComicCard } from './ComicCard'
+import { ComicCard } from '../comic/cards/ComicCard'
 
 export const ComicGrid: React.FC = () => {
   const comicParams = useDiscoverQueryStore((state) => state.comicParams)

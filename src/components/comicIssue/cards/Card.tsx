@@ -3,9 +3,9 @@ import Image from 'next/image'
 import clsx from 'clsx'
 import { RoutePath } from '@/enums/routePath'
 import Link from 'next/link'
-import { Text } from '../ui'
-import { Overlay } from './Overlay'
-import { PriceTag } from '../shared/tags/PriceTag'
+import { Text } from '../../ui'
+import { Overlay } from '../Overlay'
+import { PriceTag } from '../../shared/tags/PriceTag'
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   comicIssue: ComicIssue

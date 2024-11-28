@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Text } from '../ui'
-import { PriceTag } from '../shared/tags/PriceTag'
+import { Text } from '../../ui'
+import { PriceTag } from '../../shared/tags/PriceTag'
 import { ComicIssue } from '@/models/comicIssue'
 import { RoutePath } from '@/enums/routePath'
 import { cn } from '@/lib/utils'
+import { COMIC_ISSUE_IMAGE_SIZES } from '@/constants/imageSizes'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comicIssue: ComicIssue
@@ -23,10 +24,9 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, showPrice = true, 
       )}
     >
       <Image
-        alt={''}
         src={comicIssue.cover}
-        width={895}
-        height={1000}
+        alt={''}
+        {...COMIC_ISSUE_IMAGE_SIZES['cover']}
         className='rounded-xl h-auto w-full aspect-comic-issue-cover'
       />
       {showPrice && isFree && (

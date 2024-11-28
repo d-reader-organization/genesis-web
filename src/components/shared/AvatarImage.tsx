@@ -2,7 +2,7 @@ import React from 'react'
 import Image, { ImageProps } from 'next/image'
 import { cn } from '@/lib/utils'
 
-export type AvatarSize = 'small' | 'medium' | 'big'
+export type AvatarSize = 'small' | 'medium' | 'large'
 
 export interface AvatarImageProps extends Omit<ImageProps, 'alt'> {
   size?: AvatarSize
@@ -13,7 +13,7 @@ export interface AvatarImageProps extends Omit<ImageProps, 'alt'> {
 const sizeVariants: Record<AvatarSize, string> = {
   small: 'w-10 h-10',
   medium: 'w-12 h-12',
-  big: 'w-14 h-14',
+  large: 'w-14 h-14',
 }
 
 export const AvatarImage: React.FC<AvatarImageProps> = ({ size = 'medium', alt = '', className, ...props }) => {

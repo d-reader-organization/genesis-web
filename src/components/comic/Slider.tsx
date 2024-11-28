@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 import { LargeComicCard } from './cards/LargeCard'
 import { RoutePath } from '@/enums/routePath'
 import { ComicCardType } from '@/lib/types'
-import { ComicCard } from '../discover/ComicCard'
+import { ComicCard } from './cards/ComicCard'
 //import { DefaultComicCard } from './cards/DefaultCard'
 
 type Props = {
