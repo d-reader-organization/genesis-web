@@ -53,7 +53,7 @@ export const OwnedComicCard: React.FC<Props> = ({ comic }) => {
         </Text>
       </div>
       <div className='flex gap-2 sm:p-2'>
-        <Link //extract
+        <Link
           className='h-9 sm:h-[42px] w-full  py-3 px-4 flex justify-center items-center rounded-xl bg-grey-400'
           href={RoutePath.ReadComic(comic.slug)}
           prefetch={false}
