@@ -16,7 +16,7 @@ export const DefaultComicCard: React.FC<Props> = ({ className, href, comic }) =>
     href={href}
     prefetch={false}
     className={cn(
-      'h-[242px] md:h-[295px] w-full max-w-[240px] rounded-xl hover:brightness-110 flex flex-col gap-1.5',
+      'h-[222px] md:h-[307px] w-full max-w-[240px] rounded-xl hover:brightness-110 flex flex-col gap-1.5',
       className
     )}
   >
@@ -24,9 +24,9 @@ export const DefaultComicCard: React.FC<Props> = ({ className, href, comic }) =>
       <Image
         alt='card cover'
         src={comic.cover}
-        fill
-        sizes='(max-width: 1200px) 240px, 320px'
-        className='object-cover rounded-xl w-full opacity-50'
+        width={1000}
+        height={900}
+        className='object-cover rounded-xl h-[163px] md:h-[233px] w-full opacity-50'
       />
       <Image
         alt='comic logo'

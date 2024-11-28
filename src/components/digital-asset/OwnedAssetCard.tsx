@@ -14,10 +14,10 @@ export const OwnedAssetCard: React.FC<Props> = ({ asset }) => (
     <div className='flex flex-col items-center hover:brightness-105'>
       <Image
         alt={`owned ${asset.name} cover`}
-        width={223}
-        height={322}
+        width={690}
+        height={1000}
         src={asset.image}
-        className='w-auto max-h-[322px] h-full'
+        className=' w-[140px] sm:w-[210px] h-full'
       />
       <div className='flex items-center -mt-3.5'>
         <RarityChip rarity={asset.rarity} />

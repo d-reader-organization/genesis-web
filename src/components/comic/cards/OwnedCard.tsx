@@ -16,14 +16,14 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
 
 export const OwnedComicCard: React.FC<Props> = ({ comic }) => {
   return (
-    <CardBorderWrapper className='flex flex-col gap-1 sm:gap-2 size-fit h-[262px] w-[156px] sm:h-[361px] sm:w-[226px]'>
+    <CardBorderWrapper className='flex flex-col  size-fit h-[262px] w-[156px] sm:h-[361px] sm:w-[226px]'>
       <div className='relative size-full max-h-[233px]'>
         <Image
           alt={`Owned comic cover ${comic.title}`}
           src={comic.cover}
-          fill
-          sizes='(max-width: 900px) 220px, 260px'
-          className='object-cover rounded-xl w-auto opacity-50'
+          width={1000}
+          height={900}
+          className='object-cover rounded-xl h-[155px] sm:h-[233px] w-full opacity-50'
         />
         <Image
           alt={`Owned comic logo ${comic.title}`}
@@ -34,7 +34,7 @@ export const OwnedComicCard: React.FC<Props> = ({ comic }) => {
         />
         <CopiesCount count={comic.myStats?.collectiblesCount ?? 0} />
       </div>
-      <div className='flex flex-col gap-2 p-2'>
+      <div className='flex flex-col p-2'>
         <Text
           as='span'
           styleVariant='body-normal'
