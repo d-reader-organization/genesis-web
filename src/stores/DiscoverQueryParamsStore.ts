@@ -4,14 +4,14 @@ import { CreatorParams } from '@/models/creator/creatorParams'
 import { Genre } from '@/models/genre'
 import { createStore } from 'zustand/vanilla'
 
-export type DiscoverQueryStoreState = {
+export type DiscoverQueryParamsStoreState = {
   completeGenresList: Genre[]
   comicParams: ComicParams
   comicIssueParams: ComicIssueParams
   creatorParams: CreatorParams
 }
 
-export type DiscoverQueryStoreActions = {
+export type DiscoverQueryParamsStoreActions = {
   resetToDefaultInitState: () => void
   updateCompleteGenresList: (genres: Genre[]) => void
   updateAllParamGenreSlugs: (genreSlugs: string[]) => void
@@ -20,9 +20,9 @@ export type DiscoverQueryStoreActions = {
   updateCreatorParams: (params: Partial<CreatorParams>) => void
 }
 
-export type DiscoverQueryStore = DiscoverQueryStoreState & DiscoverQueryStoreActions
+export type DiscoverQueryParamsStore = DiscoverQueryParamsStoreState & DiscoverQueryParamsStoreActions
 
-export const defaultInitState: DiscoverQueryStoreState = {
+export const defaultInitState: DiscoverQueryParamsStoreState = {
   completeGenresList: [],
   comicParams: {
     skip: 0,
@@ -56,8 +56,8 @@ export const defaultInitState: DiscoverQueryStoreState = {
   },
 }
 
-export const createDiscoverQueryStore = (initState: DiscoverQueryStoreState = defaultInitState) => {
-  return createStore<DiscoverQueryStore>()((set) => ({
+export const createDiscoverQueryParamsStore = (initState: DiscoverQueryParamsStoreState = defaultInitState) => {
+  return createStore<DiscoverQueryParamsStore>()((set) => ({
     ...initState,
     resetToDefaultInitState: () =>
       set((state) => ({

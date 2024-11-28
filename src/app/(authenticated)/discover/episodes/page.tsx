@@ -1,11 +1,11 @@
 import React from 'react'
-import { DiscoverWrapper } from '@/components/discover/DiscoverPageWrapper'
+import { DiscoverPageWrapper } from '@/components/discover/DiscoverPageWrapper'
 import { ComicIssueGrid } from '@/components/discover/ComicIssueGrid'
 
-export default function DiscoverComicsPage() {
+export default function DiscoverEpisodesPage() {
   return (
-    <DiscoverWrapper>
+    <DiscoverPageWrapper>
       <ComicIssueGrid />
-    </DiscoverWrapper>
+    </DiscoverPageWrapper>
   )
 }

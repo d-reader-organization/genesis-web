@@ -19,7 +19,7 @@ export const DefaultComicCard: React.FC<Props> = ({ className, href, comic }) =>
     )}
   >
     <Image
-      alt='card cover'
+      alt=''
       src={comic.cover}
       fill
       sizes='(max-width: 1200px) 500px, 320px'

@@ -1,11 +1,11 @@
 import React from 'react'
-import { DiscoverWrapper } from '@/components/discover/DiscoverPageWrapper'
+import { DiscoverPageWrapper } from '@/components/discover/DiscoverPageWrapper'
 import { CreatorGrid } from '@/components/discover/CreatorGrid'
 
-export default function DiscoverComicsPage() {
+export default function DiscoverCreatorsPage() {
   return (
-    <DiscoverWrapper>
+    <DiscoverPageWrapper>
       <CreatorGrid />
-    </DiscoverWrapper>
+    </DiscoverPageWrapper>
   )
 }

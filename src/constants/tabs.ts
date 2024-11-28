@@ -1,3 +1,5 @@
+import { RoutePath } from '@/enums/routePath'
+
 export type Tab = {
   slug: string
   name: string
@@ -8,16 +10,16 @@ export const DISCOVER_PAGE_TABS: Tab[] = [
   {
     slug: 'comics',
     name: 'Comics',
-    url: '/discover/comics',
+    url: RoutePath.DiscoverComics,
   },
   {
     slug: 'issues',
     name: 'Episodes',
-    url: '/discover/episodes',
+    url: RoutePath.DiscoverComicIssues,
   },
   {
     slug: 'creators',
     name: 'Creators',
-    url: '/discover/creators',
+    url: RoutePath.DiscoverCreators,
   },
 ]

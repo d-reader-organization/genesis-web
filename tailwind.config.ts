@@ -22,16 +22,16 @@ const config = {
     },
     extend: {
       aspectRatio: {
-        'comic-cover-aspect-ratio': '1000/900',
-        'comic-banner-aspect-ratio': '1920/900',
-        'comic-logo-aspect-ratio': '800/450',
+        'comic-cover': '1000/895',
+        'comic-banner': '1536/300',
+        'comic-logo': '800/450',
 
-        'comic-issue-cover-aspect-ratio': '690/1000',
-        'comic-issue-signature-aspect-ratio': '380/240',
+        'comic-issue-cover': '210/304',
+        'comic-issue-signature': '380/240',
 
-        'creator-banner-aspect-ratio': '1920/900',
-        'creator-avatar-aspect-ratio': '500/500',
-        'creator-logo-aspect-ratio': '800/450',
+        'creator-banner': '1920/900',
+        'creator-avatar': '500/500',
+        'creator-logo': '800/450',
       },
       fontSize: {
         xxs: ['10px', '1.25'],

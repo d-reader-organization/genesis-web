@@ -3,8 +3,9 @@ import { SectionSlider } from '../shared/SectionSlider'
 import { cn } from '@/lib/utils'
 import { LargeComicCard } from './cards/LargeCard'
 import { RoutePath } from '@/enums/routePath'
-import { DefaultComicCard } from './cards/DefaultCard'
 import { ComicCardType } from '@/lib/types'
+import { ComicCard } from '../discover/ComicCard'
+//import { DefaultComicCard } from './cards/DefaultCard'
 
 type Props = {
   cardType: ComicCardType
@@ -29,7 +30,8 @@ export const ComicSectionSlider: React.FC<Props> = ({ cardType, comics, title })
             {isLargeCard ? (
               <LargeComicCard comic={comic} index={index} href={href} />
             ) : (
-              <DefaultComicCard comic={comic} href={href} />
+              //    <DefaultComicCard comic={comic} href={href} />
+              <ComicCard comic={comic} />
             )}
           </div>
         )

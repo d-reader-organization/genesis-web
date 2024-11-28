@@ -2,25 +2,25 @@ import { RoutePath } from '@/enums/routePath'
 import { ComicFilterTag, ComicSortTag } from '@/models/comic/comicParams'
 import { ComicIssueSortTag, ComicIssueFilterTag } from '@/models/comicIssue/comicIssueParams'
 import { CreatorSortTag, CreatorFilterTag } from '@/models/creator/creatorParams'
-import { DiscoverQueryStore } from '@/stores/DiscoverQueryStore'
+import { DiscoverQueryParamsStore } from '@/stores/DiscoverQueryParamsStore'
 
 export type DiscoverPageQueryCriteria<E extends Record<string, string>> = {
   label: string
   tags: E
-  getSelectedTags: (store: DiscoverQueryStore) => E[keyof E] | undefined
-  updateSelectedTags: (store: DiscoverQueryStore, tag: E[keyof E] | undefined) => void
+  getSelectedTags: (store: DiscoverQueryParamsStore) => E[keyof E] | undefined
+  updateSelectedTags: (store: DiscoverQueryParamsStore, tag: E[keyof E] | undefined) => void
 }
 
 function createDiscoverPageQueryCriteria<E extends Record<string, string>>(
   label: string,
   tags: E,
-  getSelectedTags: (store: DiscoverQueryStore) => E[keyof E] | undefined,
-  updateSelectedTags: (store: DiscoverQueryStore, tag: E[keyof E] | undefined) => void
+  getSelectedTags: (store: DiscoverQueryParamsStore) => E[keyof E] | undefined,
+  updateSelectedTags: (store: DiscoverQueryParamsStore, tag: E[keyof E] | undefined) => void
 ): DiscoverPageQueryCriteria<E> {
   return { label, tags, getSelectedTags, updateSelectedTags }
 }
 
-export type ALL_DISCOVER_PAGE_QUERY_CRITERIAS =
+export type ALL_DISCOVER_PAGE_QUERY_CRITERIA =
   | DiscoverPageQueryCriteria<typeof ComicFilterTag>
   | DiscoverPageQueryCriteria<typeof ComicSortTag>
   | DiscoverPageQueryCriteria<typeof ComicIssueFilterTag>
@@ -28,7 +28,7 @@ export type ALL_DISCOVER_PAGE_QUERY_CRITERIAS =
   | DiscoverPageQueryCriteria<typeof CreatorFilterTag>
   | DiscoverPageQueryCriteria<typeof CreatorSortTag>
 
-// criterias
+// criteria
 export const COMICS_FILTER_CRITERIA = createDiscoverPageQueryCriteria(
   'Most Wanted',
   ComicFilterTag,
@@ -72,24 +72,24 @@ export const CREATORS_SORT_CRITERIA = createDiscoverPageQueryCriteria(
 )
 
 // criteria arrays
-export const QUERY_COMIC_CRITERIAS = [
-  { label: 'Comics Filter', criteria: COMICS_FILTER_CRITERIA },
-  { label: 'Comics Sort', criteria: COMICS_SORT_CRITERIA },
-];
+export const QUERY_COMIC_CRITERIA = [
+  { id: 1, criteria: COMICS_FILTER_CRITERIA },
+  { id: 2, criteria: COMICS_SORT_CRITERIA },
+]
 
-export const QUERY_COMIC_ISSUE_CRITERIAS = [
-  { label: 'Comic Issues Filter', criteria: COMIC_ISSUES_FILTER_CRITERIA },
-  { label: 'Comic Issues Sort', criteria: COMIC_ISSUES_SORT_CRITERIA },
-];
+export const QUERY_COMIC_ISSUE_CRITERIA = [
+  { id: 1, criteria: COMIC_ISSUES_FILTER_CRITERIA },
+  { id: 2, criteria: COMIC_ISSUES_SORT_CRITERIA },
+]
 
-export const QUERY_CREATOR_CRITERIAS = [
-  { label: 'Creators Filter', criteria: CREATORS_FILTER_CRITERIA },
-  { label: 'Creators Sort', criteria: CREATORS_SORT_CRITERIA },
-];
+export const QUERY_CREATOR_CRITERIA = [
+  { id: 1, criteria: CREATORS_FILTER_CRITERIA },
+  { id: 2, criteria: CREATORS_SORT_CRITERIA },
+]
 
 // query criteria map
 export const QUERY_CRITERIA_MAP = {
-  [RoutePath.DiscoverComics]: QUERY_COMIC_CRITERIAS,
-  [RoutePath.DiscoverComicIssues]: QUERY_COMIC_ISSUE_CRITERIAS,
-  [RoutePath.DiscoverCreators]: QUERY_CREATOR_CRITERIAS,
-};
+  [RoutePath.DiscoverComics]: QUERY_COMIC_CRITERIA,
+  [RoutePath.DiscoverComicIssues]: QUERY_COMIC_ISSUE_CRITERIA,
+  [RoutePath.DiscoverCreators]: QUERY_CREATOR_CRITERIA,
+}

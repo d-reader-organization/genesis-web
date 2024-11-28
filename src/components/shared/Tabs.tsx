@@ -16,11 +16,11 @@ export const Tabs: React.FC<Props> = ({ label, tabs }) => {
   const selectedTab = usePathname()
 
   return (
-    <div className='flex flex-col w-full relative '>
+    <div className='flex flex-col w-full -mt-4'>
       <Text
         as='h1'
         styleVariant='primary-heading'
-        className='absolute -top-6 left-2 text-grey-100 text-transparent uppercase bg-gradient-to-b from-grey-400 via-grey-600 via-60% to-transparent bg-clip-text'
+        className='text-grey-100 text-transparent uppercase bg-gradient-to-b from-grey-400 via-grey-600 via-60% to-transparent bg-clip-text -mb-8 ml-2'
       >
         {label}
       </Text>

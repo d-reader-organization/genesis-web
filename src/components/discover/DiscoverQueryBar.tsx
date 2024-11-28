@@ -5,18 +5,15 @@ import { SearchInput } from './DiscoverSearchBar'
 import React from 'react'
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
 import { Settings2, ChevronDown } from 'lucide-react'
-import { useDiscoverFilterStore } from '@/providers/DiscoverFilterStoreProvider'
+import { useDiscoverQueryStore } from '@/providers/DiscoverQueryStoreProvider'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
-import {
-  ALL_DISCOVER_PAGE_QUERY_CRITERIAS,
-  QUERY_CRITERIA_MAP,
-} from '@/constants/discoverPageQueryCriterias'
+import { ALL_DISCOVER_PAGE_QUERY_CRITERIA, QUERY_CRITERIA_MAP } from '@/constants/discoverQueryCriteria'
 import { useDiscoverStoreActiveFiltersCount } from '@/hooks/useDiscoverStoreActiveFiltersCount'
 
 export const DiscoverQueryBar: React.FC = () => {
   const [isFilterSheetOpen, setFilterSheetOpen] = React.useState<boolean>(false)
-  const clearAll = useDiscoverFilterStore((state) => state.resetToDefaultInitState)
+  const clearAll = useDiscoverQueryStore((state) => state.resetToDefaultInitState)
   const activeFiltersCount = useDiscoverStoreActiveFiltersCount()
 
   return (
@@ -96,8 +93,8 @@ const QuerySheet: React.FC<QuerySheetProps> = ({ isOpen, triggerOpenChange }) =>
             Filter by
           </Text>
           <div className='flex flex-col'>
-            {queryCriteria.map(({ label, criteria }) => (
-              <DiscoverQueryBySingleTag key={label} queryCriteria={criteria} />
+            {queryCriteria.map(({ id, criteria }) => (
+              <DiscoverQueryBySingleTag key={id} queryCriteria={criteria} />
             ))}
             <DiscoverQueryByGenres />
           </div>
@@ -108,11 +105,11 @@ const QuerySheet: React.FC<QuerySheetProps> = ({ isOpen, triggerOpenChange }) =>
 }
 
 export type DiscoverQueryBySingleTagProps = {
-  queryCriteria: ALL_DISCOVER_PAGE_QUERY_CRITERIAS
+  queryCriteria: ALL_DISCOVER_PAGE_QUERY_CRITERIA
 }
 
 export const DiscoverQueryBySingleTag = ({ queryCriteria }: DiscoverQueryBySingleTagProps) => {
-  const store = useDiscoverFilterStore((state) => state)
+  const store = useDiscoverQueryStore((state) => state)
   const contentRef = React.useRef<HTMLDivElement>(null)
   const [isExpanded, setIsExpanded] = React.useState(true)
 
@@ -176,9 +173,9 @@ export const DiscoverQueryBySingleTag = ({ queryCriteria }: DiscoverQueryBySingl
 export const DiscoverQueryByGenres: React.FC = () => {
   const [isExpanded, setIsExpanded] = React.useState(true)
   const contentRef = React.useRef<HTMLDivElement>(null)
-  const genres = useDiscoverFilterStore((state) => state.completeGenresList)
-  const updateAllParamGenreSlugs = useDiscoverFilterStore((store) => store.updateAllParamGenreSlugs)
-  let selectedTags = useDiscoverFilterStore((store) => store.comicParams.genreSlugs)
+  const genres = useDiscoverQueryStore((state) => state.completeGenresList)
+  const updateAllParamGenreSlugs = useDiscoverQueryStore((store) => store.updateAllParamGenreSlugs)
+  let selectedTags = useDiscoverQueryStore((store) => store.comicParams.genreSlugs)
 
   const handleTagClick = (tag: string) => {
     switch (true) {

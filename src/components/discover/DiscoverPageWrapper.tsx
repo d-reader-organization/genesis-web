@@ -3,13 +3,13 @@ import { Tabs } from '@/components/shared/Tabs'
 import { DiscoverQueryBar } from './DiscoverQueryBar'
 import { cn } from '@/lib/utils'
 import { DISCOVER_PAGE_TABS } from '@/constants/tabs'
-import { DiscoverFilterStoreProvider } from '@/providers/DiscoverFilterStoreProvider'
+import { DiscoverQueryStoreProvider } from '@/providers/DiscoverQueryStoreProvider'
 import { fetchMe } from '@/app/lib/api/user/queries'
 import { Navigation } from '../layout/Navigation'
 
 type Props = React.PropsWithChildren & { mainClassName?: string }
 
-export const DiscoverWrapper: React.FC<Props> = async ({ children, mainClassName }) => {
+export const DiscoverPageWrapper: React.FC<Props> = async ({ children, mainClassName }) => {
   const me = await fetchMe()
 
   return (
@@ -22,11 +22,11 @@ export const DiscoverWrapper: React.FC<Props> = async ({ children, mainClassName
         )}
       >
         <div className={cn('flex flex-col max-w-screen-xl w-full gap-3')}>
-          <DiscoverFilterStoreProvider>
-            <Tabs label={'Discover'} tabs={DISCOVER_PAGE_TABS} />
+          <DiscoverQueryStoreProvider>
+            <Tabs label='Discover' tabs={DISCOVER_PAGE_TABS} />
             <DiscoverQueryBar />
             {children}
-          </DiscoverFilterStoreProvider>
+          </DiscoverQueryStoreProvider>
         </div>
       </main>
     </div>
