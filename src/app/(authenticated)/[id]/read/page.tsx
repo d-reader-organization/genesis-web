@@ -33,7 +33,7 @@ export default async function ReadComicIssuePage({ params }: ComicIssuePageParam
               <p className='text-lg sm:text-xl font-bold'>This is a comic preview!</p>
               {!comicIssue.myStats?.canRead && (
                 <p className='text-sm sm:text-base md:text-xl'>
-                  To view all pages you need to own at least one <strong>opened</strong> comic issue asset.
+                  To view all pages you need to own at least one <strong>opened</strong> copy of this item.
                 </p>
               )}
               <UnwrapIssueDialog assets={assets} showUnwrapButton={hasUnusedAssets && !comicIssue.myStats?.canRead} />

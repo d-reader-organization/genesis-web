@@ -51,8 +51,8 @@ export const PROJECTS: Project[] = [
     funding: {
       pledgedAmount: 0,
       raiseGoal: 300000,
-      startDate: undefined, // TODO: 1.6.2024
-      endDate: undefined, // TODO: 15 days left
+      startDate: undefined,
+      endDate: undefined,
       numberOfBackers: 1023,
       numberOfInterestedInvestors: 2,
     },
@@ -102,8 +102,8 @@ This is a 24 page fully animated comic, complete with professional voice acting,
     funding: {
       pledgedAmount: 0,
       raiseGoal: 30000,
-      startDate: undefined, // TODO: 1.6.2024
-      endDate: undefined, // TODO: 15 days left
+      startDate: undefined,
+      endDate: undefined,
       numberOfBackers: 1023,
       numberOfInterestedInvestors: 2,
     },
@@ -146,8 +146,8 @@ This is a 24 page fully animated comic, complete with professional voice acting,
     funding: {
       pledgedAmount: 0,
       raiseGoal: 25000,
-      startDate: undefined, // TODO: 1.6.2024
-      endDate: undefined, // TODO: 20 days left
+      startDate: undefined,
+      endDate: undefined,
       numberOfBackers: 670,
       numberOfInterestedInvestors: 2,
     },
@@ -186,8 +186,8 @@ This is a 24 page fully animated comic, complete with professional voice acting,
     funding: {
       pledgedAmount: 0,
       raiseGoal: 60000,
-      startDate: undefined, // TODO: 1.6.2024
-      endDate: undefined, // TODO: 10 days left
+      startDate: undefined,
+      endDate: undefined,
       numberOfBackers: 954,
       numberOfInterestedInvestors: 2,
     },
@@ -248,8 +248,8 @@ This is a 24 page fully animated comic, complete with professional voice acting,
     funding: {
       pledgedAmount: 0,
       raiseGoal: 50000,
-      startDate: undefined, // TODO: 1.6.2024
-      endDate: undefined, // TODO: 30 days left
+      startDate: undefined,
+      endDate: undefined,
       numberOfBackers: 582,
       numberOfInterestedInvestors: 2,
     },
@@ -302,8 +302,8 @@ This is a 24 page fully animated comic, complete with professional voice acting,
     funding: {
       pledgedAmount: 4000,
       raiseGoal: 4000,
-      startDate: undefined, // TODO: 1.6.2024
-      endDate: undefined, // TODO: completed
+      startDate: undefined,
+      endDate: undefined,
       numberOfBackers: 2,
       numberOfInterestedInvestors: 2,
     },
@@ -351,8 +351,8 @@ This is a 24 page fully animated comic, complete with professional voice acting,
     funding: {
       pledgedAmount: 2000,
       raiseGoal: 2000,
-      startDate: undefined, // TODO: 1.6.2024
-      endDate: undefined, // TODO: completed
+      startDate: undefined,
+      endDate: undefined,
       numberOfBackers: 4,
       numberOfInterestedInvestors: 2,
     },
@@ -398,8 +398,8 @@ This is a 24 page fully animated comic, complete with professional voice acting,
     funding: {
       pledgedAmount: 1000,
       raiseGoal: 1000,
-      startDate: undefined, // TODO: 1.6.2024
-      endDate: undefined, // TODO: completed
+      startDate: undefined,
+      endDate: undefined,
       numberOfBackers: 2,
       numberOfInterestedInvestors: 2,
     },
@@ -446,8 +446,8 @@ This is a 24 page fully animated comic, complete with professional voice acting,
     funding: {
       pledgedAmount: 6000,
       raiseGoal: 6000,
-      startDate: undefined, // TODO: 1.6.2024
-      endDate: undefined, // TODO: completed
+      startDate: undefined,
+      endDate: undefined,
       numberOfBackers: 2,
       numberOfInterestedInvestors: 2,
     },
@@ -515,8 +515,8 @@ Artist Sergi Domènech studied comics & illustration at the prestigious Escola J
     funding: {
       pledgedAmount: 6000,
       raiseGoal: 6000,
-      startDate: undefined, // TODO: 1.6.2024
-      endDate: undefined, // TODO: completed
+      startDate: undefined,
+      endDate: undefined,
       numberOfBackers: 2,
       numberOfInterestedInvestors: 2,
     },

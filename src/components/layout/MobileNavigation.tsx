@@ -89,13 +89,13 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
                         isComingSoon
                         title='Discover'
                       />
-                      <NavItemLink
+                      {/* <NavItemLink
                         activeColor={activeLinkColor}
                         as='h4'
                         href={RoutePath.Invest}
                         isActive={false}
                         title='Invest'
-                      />
+                      /> */}
                       {!publicKey ? <NavConnectButton /> : null}
                     </div>
                     {user ? (
