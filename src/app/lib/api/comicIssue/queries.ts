@@ -7,13 +7,13 @@ import { COMIC_ISSUE_QUERY_KEYS } from '@/api/comicIssue/comicIssueKeys'
 import { Nullable } from '@/models/common'
 import { ComicPage } from '@/models/comic/comicPage'
 
-const { BY_OWNER, COMIC_ISSUE, GET, GET_PUBLIC, PAGES, PREVIEW_PAGES } = COMIC_ISSUE_QUERY_KEYS
+const { BY_OWNER, COMIC_ISSUE, GET, GET_PUBLIC, PAGES } = COMIC_ISSUE_QUERY_KEYS
 
 export const fetchComicIssues = async (params: ComicIssueParams): Promise<ComicIssue[]> => {
   const { data } = await fetchWrapper<ComicIssue[]>({
     params,
     path: `${COMIC_ISSUE}/${GET}`,
-    revalidateCacheInSeconds: 5 * 10,
+    revalidateCacheInSeconds: 60,
   })
   return data ?? []
 }
@@ -36,14 +36,6 @@ export const fetchPublicComicIssue = async (id: string | number): Promise<Nullab
 
 export const fetchComicIssuePages = async (id: string | number): Promise<ComicPage[]> => {
   const response = await fetchWrapper<ComicPage[]>({ path: `${COMIC_ISSUE}/${GET}/${id}/${PAGES}` })
-  return response.data ?? []
-}
-
-export const fetchComicIssuePreviewPages = async (id: string | number): Promise<ComicPage[]> => {
-  const response = await fetchWrapper<ComicPage[]>({
-    path: `${COMIC_ISSUE}/${GET}/${id}/${PREVIEW_PAGES}`,
-    revalidateCacheInSeconds: 60,
-  })
   return response.data ?? []
 }
 

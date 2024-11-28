@@ -1,4 +1,4 @@
-import { fetchComicIssuePreviewPages, fetchPublicComicIssue } from '@/app/lib/api/comicIssue/queries'
+import { fetchComicIssuePages, fetchPublicComicIssue } from '@/app/lib/api/comicIssue/queries'
 import { isAuthenticatedUser } from '@/app/lib/auth'
 import { BaseLayout } from '@/components/layout/BaseLayout'
 import { AboutIssueSection } from '@/components/mint/AboutIssueSection'
@@ -38,7 +38,7 @@ export async function generateMetadata({
 export default async function MintPage({ params }: ComicIssuePageParams) {
   const comicIssue = await fetchPublicComicIssue(params.id)
   if (!comicIssue) return null
-  const pages = await fetchComicIssuePreviewPages(comicIssue.id)
+  const pages = await fetchComicIssuePages(comicIssue.id)
   const isAuthenticated = isAuthenticatedUser()
 
   return (

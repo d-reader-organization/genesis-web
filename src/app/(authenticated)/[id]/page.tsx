@@ -1,4 +1,4 @@
-import { fetchComicIssue, fetchComicIssuePreviewPages } from '@/app/lib/api/comicIssue/queries'
+import { fetchComicIssue, fetchComicIssuePages } from '@/app/lib/api/comicIssue/queries'
 import { ComicIssueBanner } from '@/components/comicIssue/Banner'
 import { ComicIssuePageParams } from '@/models/common'
 import React from 'react'
@@ -17,8 +17,8 @@ import { InfoListActions } from '@/components/shared/InfoListActions'
 
 export default async function ComicIssuePage({ params: { id } }: ComicIssuePageParams) {
   const comicIssue = await fetchComicIssue(id)
-  if (!comicIssue || !comicIssue.stats || !comicIssue.myStats) return null
-  const pages = await fetchComicIssuePreviewPages(comicIssue.id)
+  if (!comicIssue || !comicIssue.stats) return null
+  const pages = await fetchComicIssuePages(comicIssue.id)
 
   return (
     <BaseLayout>
