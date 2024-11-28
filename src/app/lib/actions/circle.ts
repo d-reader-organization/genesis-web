@@ -2,6 +2,7 @@
 
 import { initiateUserControlledWalletsClient } from '@circle-fin/user-controlled-wallets'
 import {
+  type DeviceTokenEmailData,
   type DeviceTokenSocialData,
   type PinData,
   type UserData,
@@ -14,11 +15,28 @@ export type SignMessagePayload = {
   walletId: string
 }
 
-export type SignTransactionPayload = { transaction: string; userToken: string; walletAddress: string; walletId: string }
+export type SignTransactionPayload = {
+  rawTransaction: string
+  userToken: string
+  walletAddress: string
+  walletId: string
+}
 
 const circleClient = initiateUserControlledWalletsClient({
   apiKey: process.env.CIRCLE_API_KEY ?? '',
 })
+
+export const createUserForLoginWithEmail = async (input: {
+  deviceId: string
+  email: string
+}): Promise<DeviceTokenEmailData | undefined> => {
+  try {
+    const response = await circleClient.createDeviceTokenForEmailLogin(input)
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 export const createUserForSocialLogin = async (deviceId: string): Promise<DeviceTokenSocialData | undefined> => {
   const response = await circleClient.createDeviceTokenForSocialLogin({
