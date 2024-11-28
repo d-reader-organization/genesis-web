@@ -1,4 +1,4 @@
-import { OwnedCard } from '@/components/comic/cards/OwnedCard'
+import { OwnedComicCard } from '@/components/comic/cards/OwnedCard'
 import { RoutePath } from '@/enums/routePath'
 import { Comic } from '@/models/comic'
 import { Text } from '@/components//ui/Text'
@@ -57,7 +57,7 @@ export const OwnedComicsContent: React.FC<Props> = ({ comics }) => {
         </Text>
         <div className='flex flex-wrap gap-6 md:gap-10 w-full'>
           {comics.slice(startAt, endAt).map((comic) => (
-            <OwnedCard key={`owned_${comic.slug}`} comic={comic} href={RoutePath.ComicRead(comic.slug)} />
+            <OwnedComicCard key={`owned_${comic.slug}`} comic={comic} />
           ))}
         </div>
       </div>

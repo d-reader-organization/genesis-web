@@ -3,6 +3,8 @@ import Link from 'next/link'
 import React from 'react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import { Text } from '@/components/ui'
+import { CopiesCount } from '@/components/shared/CopiesCount'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comic: Comic
@@ -14,19 +16,18 @@ export const DefaultComicCard: React.FC<Props> = ({ className, href, comic }) =>
     href={href}
     prefetch={false}
     className={cn(
-      'relative overflow-hidden h-[242px] md:h-[295px] w-full max-w-[223px] rounded-xl hover:brightness-110 shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]',
+      'h-[242px] md:h-[295px] w-full max-w-[240px] rounded-xl hover:brightness-110 flex flex-col gap-1.5',
       className
     )}
   >
-    <Image
-      alt='card cover'
-      src={comic.cover}
-      fill
-      sizes='(max-width: 1200px) 500px, 320px'
-      className='object-cover rounded-xl w-auto'
-    />
-    <div className='absolute inset-0 bg-gradient-to-t from-black to-transparent' />
-    <div className='relative z-10 h-full flex flex-col justify-end'>
+    <div className='relative size-full'>
+      <Image
+        alt='card cover'
+        src={comic.cover}
+        fill
+        sizes='(max-width: 1200px) 240px, 320px'
+        className='object-cover rounded-xl w-full opacity-50'
+      />
       <Image
         alt='comic logo'
         src={comic.logo}
@@ -34,12 +35,25 @@ export const DefaultComicCard: React.FC<Props> = ({ className, href, comic }) =>
         height={120}
         className='object-cover h-120 w-auto absolute m-auto top-0 bottom-0 left-0 right-0 pointer-events-none'
       />
-      <div className='flex flex-col gap-0.5 p-4 pt-0'>
-        <span className='text-base font-bold leading-[22.4px] line-clamp-1 overflow-ellipsis'>{comic.title}</span>
-        <span className='text-sm font-medium leading-[19.6px] text-grey-100 line-clamp-1 overflow-ellipsis'>
-          by&nbsp;{comic.creator?.name}
-        </span>
-      </div>
+      <CopiesCount count={comic.stats?.issuesCount ?? 0} withText />
+    </div>
+    <div className='flex flex-col gap-2 p-2'>
+      <Text
+        as='span'
+        styleVariant='body-normal'
+        fontWeight='bold'
+        className='line-clamp-1 overflow-ellipsis max-md:text-sm'
+      >
+        {comic.title}
+      </Text>
+      <Text
+        as='span'
+        styleVariant='body-small'
+        fontWeight='medium'
+        className='line-clamp-1 overflow-ellipsis text-grey-100 max-md:text-xs'
+      >
+        by&nbsp;{comic.creator?.name}
+      </Text>
     </div>
   </Link>
 )

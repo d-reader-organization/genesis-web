@@ -4,67 +4,72 @@ import { Comic } from '@/models/comic'
 import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
-import { cn } from '@/lib/utils'
-import { Button, Text } from '@/components/ui'
+import { Text } from '@/components/ui'
 import { RoutePath } from '@/enums/routePath'
-import { useRouter } from 'next/navigation'
 import { CopiesCount } from '@/components/shared/CopiesCount'
+import { CardBorderWrapper } from '@/components/shared/CardBorderWrapper'
+import { MoreHorizontalIcon } from 'lucide-react'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comic: Comic
-  href: string
 }
 
-export const OwnedCard: React.FC<Props> = ({ className, comic, href }) => {
-  const { push } = useRouter()
+export const OwnedComicCard: React.FC<Props> = ({ comic }) => {
   return (
-    <Link
-      href={href}
-      prefetch={false}
-      className={cn(
-        'relative overflow-hidden h-[242px] md:h-[330px] w-full max-w-[178px] md:max-w-[223px] rounded-xl hover:brightness-110 shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]',
-        className
-      )}
-    >
-      <Image
-        alt='card cover'
-        src={comic.cover}
-        fill
-        sizes='(max-width: 1200px) 500px, 320px'
-        className='object-cover rounded-xl w-auto'
-      />
-      <div className='absolute inset-0 bg-gradient-to-t from-black to-transparent' />
-      <div className='relative z-10 h-full flex flex-col justify-end'>
-        <div className='flex size-8 px-2 justify-center items-center rounded-xl backdrop-blur-md bg-white bg-opacity-20 absolute top-2 right-2'>
-          <CopiesCount count={comic.myStats?.collectiblesCount ?? 0} />
-        </div>
+    <CardBorderWrapper className='flex flex-col gap-1 sm:gap-2 size-fit h-[262px] w-[156px] sm:h-[361px] sm:w-[226px]'>
+      <div className='relative size-full max-h-[233px]'>
         <Image
-          alt='comic logo'
+          alt={`Owned comic cover ${comic.title}`}
+          src={comic.cover}
+          fill
+          sizes='(max-width: 900px) 220px, 260px'
+          className='object-cover rounded-xl w-auto opacity-50'
+        />
+        <Image
+          alt={`Owned comic logo ${comic.title}`}
           src={comic.logo}
           width={120}
           height={120}
-          className='object-cover h-120 w-auto absolute m-auto -top-16 md:-top-6 bottom-0 left-0 right-0 pointer-events-none'
+          className='object-cover h-120 w-auto absolute m-auto top-0 bottom-0 left-0 right-0 pointer-events-none'
         />
-        <div className='flex flex-col gap-4 p-4 pt-0'>
-          <div className='flex flex-col gap-0.5'>
-            <span className='text-base font-bold leading-[22.4px] line-clamp-1 overflow-ellipsis'>{comic.title}</span>
-            <span className='text-sm font-medium leading-[19.6px] text-grey-100 line-clamp-1 overflow-ellipsis'>
-              by&nbsp;{comic.creator?.name}
-            </span>
-          </div>
-          <Button
-            className='max-h-[42px] w-full py-3 px-6 flex justify-center items-center rounded-xl backdrop-blur-md bg-white bg-opacity-10 self-center'
-            onClick={(event) => {
-              event?.preventDefault()
-              push(RoutePath.OwnedAssets(comic.slug))
-            }}
-          >
-            <Text as='p' styleVariant='body-normal' fontWeight='medium' className='text-grey-100'>
-              Info
-            </Text>
-          </Button>
-        </div>
+        <CopiesCount count={comic.myStats?.collectiblesCount ?? 0} />
       </div>
-    </Link>
+      <div className='flex flex-col gap-2 p-2'>
+        <Text
+          as='span'
+          styleVariant='body-normal'
+          fontWeight='bold'
+          className='line-clamp-1 overflow-ellipsis max-md:text-sm'
+        >
+          {comic.title}
+        </Text>
+        <Text
+          as='span'
+          styleVariant='body-small'
+          fontWeight='medium'
+          className='line-clamp-1 overflow-ellipsis text-grey-100 max-md:text-xs'
+        >
+          by&nbsp;{comic.creator?.name}
+        </Text>
+      </div>
+      <div className='flex gap-2 sm:p-2'>
+        <Link
+          className='h-9 sm:h-[42px] w-full  py-3 px-4 flex justify-center items-center rounded-xl bg-grey-400'
+          href={RoutePath.ReadComic(comic.slug)}
+          prefetch={false}
+        >
+          <Text as='p' styleVariant='body-normal' fontWeight='medium' className='text-grey-100 max-sm:text-sm'>
+            Read
+          </Text>
+        </Link>
+        <Link
+          className='h-9 sm:h-[42px] rounded-xl border border-grey-200 flex justify-center items-center py-2 px-3'
+          href={RoutePath.OwnedAssets(comic.slug)}
+          prefetch={false}
+        >
+          <MoreHorizontalIcon className='h-[18px] w-[18px]' />
+        </Link>
+      </div>
+    </CardBorderWrapper>
   )
 }
