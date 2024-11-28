@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import { ContentWithGradientImageBg } from '../../shared/ContentWithGradientImageBg'
 import { cn } from '@/lib/utils'
+import { Text } from '../../ui/Text'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comic: Comic
@@ -20,8 +21,22 @@ export const LargeComicCard: React.FC<Props> = ({ className, comic, index, href 
       <div className='flex gap-4 items-center'>
         <span className='text-white text-opacity-40 text-[48px] font-bold leading-[57.6px]'>{index + 1}</span>
         <div className='flex flex-col'>
-          <span className='text-base font-bold leading-[22.4px] overflow-ellipsis line-clamp-1'>{comic.title}</span>
-          <span className='text-sm font-medium leading-[19.6px] text-grey-100'>by&nbsp;{comic.creator?.name}</span>
+          <Text
+            as='span'
+            styleVariant='body-normal'
+            fontWeight='bold'
+            className='line-clamp-1 overflow-ellipsis max-md:text-sm'
+          >
+            {comic.title}
+          </Text>
+          <Text
+            as='span'
+            styleVariant='body-small'
+            fontWeight='medium'
+            className='line-clamp-1 overflow-ellipsis text-grey-100 max-md:text-xs'
+          >
+            by&nbsp;{comic.creator?.name}
+          </Text>
         </div>
       </div>
     </Link>
