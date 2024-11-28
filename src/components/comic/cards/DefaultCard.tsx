@@ -4,6 +4,7 @@ import React from 'react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { Text } from '@/components/ui'
+import { CopiesCount } from '@/components/shared/CopiesCount'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comic: Comic
@@ -34,6 +35,7 @@ export const DefaultComicCard: React.FC<Props> = ({ className, href, comic }) =>
         height={120}
         className='object-cover h-120 w-auto absolute m-auto top-0 bottom-0 left-0 right-0 pointer-events-none'
       />
+      <CopiesCount count={comic.stats?.issuesCount ?? 0} withText />
     </div>
     <div className='flex flex-col gap-2 p-2'>
       <Text

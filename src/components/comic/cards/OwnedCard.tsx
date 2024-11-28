@@ -32,9 +32,7 @@ export const OwnedComicCard: React.FC<Props> = ({ comic }) => {
           height={120}
           className='object-cover h-120 w-auto absolute m-auto top-0 bottom-0 left-0 right-0 pointer-events-none'
         />
-        <div className='absolute top-2 right-2 bg-white bg-opacity-20 size-6 flex justify-center items-center rounded-lg'>
-          <CopiesCount count={comic.myStats?.collectiblesCount ?? 0} />
-        </div>
+        <CopiesCount count={comic.myStats?.collectiblesCount ?? 0} />
       </div>
       <div className='flex flex-col gap-2 p-2'>
         <Text
