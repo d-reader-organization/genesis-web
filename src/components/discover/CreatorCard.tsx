@@ -53,4 +53,3 @@ export const CreatorCard: React.FC<Props> = ({ creator }) => (
     </div>
   </Link>
 )
-//TODO CHECK GRIDS
