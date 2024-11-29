@@ -1,7 +1,5 @@
 'use client'
 
-import { useEffect } from 'react'
-import { useToast } from '../ui'
 import { useDiscoverQueryStore } from '@/providers/DiscoverQueryStoreProvider'
 import { useFetchCreators } from '@/api/creator/queries'
 import { HorizontalCreatorCard } from '../creator/cards/HorizontalCard'
@@ -9,18 +7,7 @@ import { ShowMoreButton } from './ShowMoreButton'
 
 export const CreatorGrid: React.FC = () => {
   const creatorParams = useDiscoverQueryStore((state) => state.creatorParams)
-  const { flatData: creators, fetchNextPage, hasNextPage, isFetching, isError } = useFetchCreators(creatorParams)
-  const { toast } = useToast()
-
-  useEffect(() => {
-    if (isError) {
-      toast({
-        title: 'Error!',
-        description: 'There was a problem fetching creator data',
-        variant: 'error',
-      })
-    }
-  }, [isError])
+  const { flatData: creators, fetchNextPage, hasNextPage, isFetching } = useFetchCreators(creatorParams)
 
   return (
     <>

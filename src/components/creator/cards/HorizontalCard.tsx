@@ -6,7 +6,7 @@ import UserPlusIcon from 'public/assets/vector-icons/user-plus-icon.svg'
 import { AvatarImage } from '@/components/shared/AvatarImage'
 import { Creator } from '@/models/creator'
 import { RoutePath } from '@/enums/routePath'
-import { CREATOR_IMAGE_SIZES } from '@/constants/imageSizes'
+import { CREATOR_BANNER_SIZE } from '@/constants/imageSizes'
 
 type Props = {
   creator: Creator
@@ -22,7 +22,7 @@ export const HorizontalCreatorCard: React.FC<Props> = ({ creator }) => (
       src={creator.banner}
       alt=''
       className='rounded-xl w-full aspect-creator-banner object-cover object-top'
-      {...CREATOR_IMAGE_SIZES['banner']}
+      {...CREATOR_BANNER_SIZE}
     />
     <div className='relative p-2 flex gap-2 items-end justify-between h-full'>
       <AvatarImage src={creator.avatar} alt='' size='medium' className='absolute inset-x-4 -inset-y-8' />

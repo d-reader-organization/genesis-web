@@ -6,7 +6,7 @@ import UserPlusIcon from 'public/assets/vector-icons/user-plus-icon.svg'
 import { AvatarImage, AvatarSize } from '@/components/shared/AvatarImage'
 import { Creator } from '@/models/creator'
 import { RoutePath } from '@/enums/routePath'
-import { CREATOR_IMAGE_SIZES } from '@/constants/imageSizes'
+import { CREATOR_BANNER_SIZE, } from '@/constants/imageSizes'
 
 type Props = {
   creator: Creator
@@ -23,7 +23,7 @@ export const VerticalCreatorCard: React.FC<Props> = ({ creator, avatarSize = 'me
       src={creator.banner}
       alt=''
       className='rounded-xl w-full object-cover object-top aspect-creator-banner'
-      {...CREATOR_IMAGE_SIZES['banner']}
+      {...CREATOR_BANNER_SIZE}
     />
     <div className='flex flex-col relative p-2 gap-2 items-center h-full'>
       <AvatarImage

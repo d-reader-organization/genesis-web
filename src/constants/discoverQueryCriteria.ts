@@ -30,42 +30,42 @@ export type ALL_DISCOVER_PAGE_QUERY_CRITERIA =
 
 // criteria
 export const COMICS_FILTER_CRITERIA = createDiscoverPageQueryCriteria(
-  'Most Wanted',
+  'Filter By',
   ComicFilterTag,
   (store) => store.comicParams.filterTag,
   (store, tag) => store.updateComicParams({ filterTag: tag })
 )
 
 export const COMICS_SORT_CRITERIA = createDiscoverPageQueryCriteria(
-  'Engagement',
+  'Sort By',
   ComicSortTag,
   (store) => store.comicParams.sortTag,
   (store, tag) => store.updateComicParams({ sortTag: tag })
 )
 
 export const COMIC_ISSUES_FILTER_CRITERIA = createDiscoverPageQueryCriteria(
-  'Most Wanted',
+  'Filter By',
   ComicIssueFilterTag,
   (store) => store.comicIssueParams.filterTag,
   (store, tag) => store.updateComicIssueParams({ filterTag: tag })
 )
 
 export const COMIC_ISSUES_SORT_CRITERIA = createDiscoverPageQueryCriteria(
-  'Engagement',
+  'Sort By',
   ComicIssueSortTag,
   (store) => store.comicIssueParams.sortTag,
   (store, tag) => store.updateComicIssueParams({ sortTag: tag })
 )
 
 export const CREATORS_FILTER_CRITERIA = createDiscoverPageQueryCriteria(
-  'Most Wanted',
+  'Filter By',
   CreatorFilterTag,
   (store) => store.creatorParams.filterTag,
   (store, tag) => store.updateCreatorParams({ filterTag: tag })
 )
 
 export const CREATORS_SORT_CRITERIA = createDiscoverPageQueryCriteria(
-  'Engagement',
+  'Sort By',
   CreatorSortTag,
   (store) => store.creatorParams.sortTag,
   (store, tag) => store.updateCreatorParams({ sortTag: tag })

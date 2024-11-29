@@ -1,9 +1,7 @@
 'use client'
 
-import { useEffect } from 'react'
 import { useDiscoverQueryStore } from '@/providers/DiscoverQueryStoreProvider'
 import { useFetchComicIssues } from '@/api/comicIssue/queries'
-import { useToast } from '../ui'
 import { ComicIssue } from '@/models/comicIssue'
 import { ShowMoreButton } from './ShowMoreButton'
 import { ComicIssueCard } from '../comicIssue/cards/ComicIssueCard'
@@ -16,20 +14,7 @@ export const ComicIssueGrid: React.FC = () => {
     fetchNextPage,
     hasNextPage,
     isFetching,
-    isError,
   } = useFetchComicIssues({ params: comicIssueParams })
-
-  const { toast } = useToast()
-
-  useEffect(() => {
-    if (isError) {
-      toast({
-        title: 'Error!',
-        description: 'There was a problem fetching comic episodes data',
-        variant: 'error',
-      })
-    }
-  }, [isError, toast])
 
   return (
     <>

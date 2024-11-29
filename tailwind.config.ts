@@ -22,14 +22,11 @@ const config = {
     },
     extend: {
       aspectRatio: {
-        'comic-cover': '1000/900',
+        'comic-cover': '900/1000',
         'comic-banner': '1920/900',
-        'comic-logo': '800/450',
-        'comic-issue-cover': '210/304',
-        'comic-issue-signature': '380/240',
+        'comic-issue-cover': '1024/1484',
         'creator-banner': '1920/900',
         'creator-avatar': '500/500',
-        'creator-logo': '800/450',
       },
       fontSize: {
         xxs: ['10px', '1.25'],

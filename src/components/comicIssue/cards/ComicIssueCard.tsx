@@ -5,14 +5,13 @@ import { PriceTag } from '../../shared/tags/PriceTag'
 import { ComicIssue } from '@/models/comicIssue'
 import { RoutePath } from '@/enums/routePath'
 import { cn } from '@/lib/utils'
-import { COMIC_ISSUE_IMAGE_SIZES } from '@/constants/imageSizes'
+import { COMIC_ISSUE_COVER_SIZE } from '@/constants/imageSizes'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comicIssue: ComicIssue
-  showPrice?: boolean
 }
 
-export const ComicIssueCard: React.FC<Props> = ({ comicIssue, showPrice = true, className }) => {
+export const ComicIssueCard: React.FC<Props> = ({ comicIssue, className }) => {
   const isFree = !(comicIssue.stats?.price != null && comicIssue.stats.price !== 0)
 
   return (
@@ -26,10 +25,10 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, showPrice = true, 
       <Image
         src={comicIssue.cover}
         alt=''
-        {...COMIC_ISSUE_IMAGE_SIZES['cover']}
+        {...COMIC_ISSUE_COVER_SIZE}
         className='rounded-xl h-auto w-full aspect-comic-issue-cover'
       />
-      {showPrice && isFree && (
+      {isFree && (
         <Text
           as='span'
           styleVariant='body-normal'
@@ -53,8 +52,8 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, showPrice = true, 
             <Text as='span' styleVariant='body-normal' className='text-gray-100'>
               EP {comicIssue.number}/{comicIssue.stats.totalIssuesCount}
             </Text>
-            {showPrice && !isFree && (
-              <PriceTag styleVariant='body-normal' inline={false} icon size={14} price={comicIssue.stats.price} />
+            {!isFree && (
+              <PriceTag styleVariant='body-normal' inline={false} bold icon size={14} price={comicIssue.stats.price} />
             )}
           </div>
         )}

@@ -3,7 +3,7 @@
 import React, { DetailedHTMLProps, HTMLAttributes, useCallback, useEffect, useState } from 'react'
 import clsx from 'clsx'
 
-import ChevronDownIcon from 'public/assets/vector-icons/chevron-down-icon.svg'
+import ChevronDownIcon from 'public/assets/vector-icons/chevron-down.svg'
 import useEventListener from '@/hooks/useEventListener'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'

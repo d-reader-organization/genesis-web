@@ -14,7 +14,7 @@ export const DiscoverPageWrapper: React.FC<Props> = async ({ children, mainClass
 
   return (
     <div className='flex flex-col min-h-screen'>
-      <Navigation me={me} hideSearch />
+      <Navigation me={me} />
       <main
         className={cn(
           'flex flex-col w-full h-full items-center mt-20 md:mt-16 p-4 md:p-6 lg:p-8 xs:pb-24 sm:pb-24 md:pb-24 lg:pb-24 flex-1',

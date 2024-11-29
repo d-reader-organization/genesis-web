@@ -10,7 +10,7 @@ import { REDIRECT_TO_KEY } from '@/constants/general'
 import { cn } from '@/lib/utils'
 
 enum TabValue {
-  createAccount = 'createAccount',
+  createAccount = 'create-account',
   connectWallet = 'connect-wallet',
   verifyEmail = 'verify-email',
 }

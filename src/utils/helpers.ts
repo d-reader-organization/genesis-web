@@ -123,7 +123,10 @@ export function genresToSlugs(genres: PartialGenre[]): string[] {
   return genres.map((genre) => genre.slug)
 }
 
-export const pluralizeString = (count: number, value: string) => (count > 1 ? `${value}s` : value)
+export const pluralizeString = (value: string, count?: number) => {
+  if (typeof count !== 'number') return ''
+  return count > 1 ? `${value}s` : value
+}
 
 export const shortenSolanaAddress = ({ address, slice = 4 }: { address: string; slice?: number }) =>
   address.slice(0, slice) + '...' + address.slice(-slice)
