@@ -39,6 +39,7 @@ import bs58 from 'bs58'
 import { io } from 'socket.io-client'
 import { sendMintTransaction } from '@/app/lib/api/transaction/mutations'
 import { AssetMintEvent } from '@/models/asset/assetMintEvent'
+import { fetchMe } from '@/app/lib/api/user/queries'
 
 let webSdk: W3SSdk
 
@@ -227,7 +228,7 @@ export const CircleSdkProvider = ({ children }: SdkProviderProps): JSX.Element =
       const deviceId = await webSdk.getDeviceId()
       const response = withGoogle
         ? await createUserForSocialLogin(deviceId)
-        : await createUserForLoginWithEmail({ deviceId, email: 'luka@dreader.io' })
+        : await createUserForLoginWithEmail({ deviceId, email: (await fetchMe())?.email ?? '' })
       if (!response) {
         return
       }

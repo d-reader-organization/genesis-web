@@ -63,7 +63,7 @@ export const config = {
   matcher: ['/:path*', '/api/:path*'],
 }
 
-const authRoutesRegex = /^\/(library|profile|claim|invest\/[^/]+\/express-interest)(\/.*)?$/
+const authRoutesRegex = /^\/(library|profile|claim|circle|invest\/[^/]+\/express-interest)(\/.*)?$/
 
 const handleUnauthorized = async ({ path, refreshToken, url }: { path: string; refreshToken: string; url: string }) => {
   if (refreshToken) {
