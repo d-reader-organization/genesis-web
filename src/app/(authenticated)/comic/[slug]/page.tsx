@@ -16,7 +16,7 @@ type Props = {
 export default async function ComicPage({ params: { slug } }: Props) {
   const comic = await fetchComic(slug)
 
-  if (!comic || !comic.stats || !comic.myStats) {
+  if (!comic || !comic.stats) {
     return null
   }
 

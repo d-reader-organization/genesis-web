@@ -1,4 +1,4 @@
-import { fetchComicIssuePreviewPages, fetchPublicComicIssue } from '@/app/lib/api/comicIssue/queries'
+import { fetchComicIssuePages, fetchPublicComicIssue } from '@/app/lib/api/comicIssue/queries'
 import { isAuthenticatedUser } from '@/app/lib/auth'
 import { CandyMachineClaimDetails } from '@/components/claim/CandyMachineClaimDetails'
 import { BaseLayout } from '@/components/layout/BaseLayout'
@@ -45,7 +45,7 @@ export default async function ClaimPage({ params }: ComicIssuePageParams) {
 
   const comicIssue = await fetchPublicComicIssue(params.id)
   if (!comicIssue) return null
-  const pages = await fetchComicIssuePreviewPages(comicIssue.id)
+  const pages = await fetchComicIssuePages(comicIssue.id)
   const isAuthenticated = isAuthenticatedUser()
 
   return (

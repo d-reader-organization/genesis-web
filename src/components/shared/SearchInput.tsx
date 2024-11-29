@@ -32,10 +32,10 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
   const [showResults, setShowResults] = useState<boolean>(false)
   const searchRef = useRef<HTMLDivElement>(null)
   const { refetch: fetchComics } = useSearchComics({
-    params: { skip: 0, take: 3, titleSubstring: searchTerm.toLowerCase() },
+    params: { skip: 0, take: 3, search: searchTerm.toLowerCase() },
   })
   const { refetch: fetchCreators } = useSearchCreators({
-    params: { skip: 0, take: 3, nameSubstring: searchTerm.toLowerCase() },
+    params: { skip: 0, take: 3, search: searchTerm.toLowerCase() },
   })
 
   const searchAPI = async (): Promise<{

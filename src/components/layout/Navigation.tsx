@@ -45,9 +45,9 @@ export const Navigation: React.FC<Props> = ({ me, hideSearch = false }) => {
               <DReaderLogo className='h-8 min-w-fit fill-white ml-4' />
             </Link>
             {!hideSearch && <SearchInput />}
-            <div className='flex items-center gap-10'>
+            {/* <div className='flex items-center gap-10'>
               <NavItemLink activeColor='text-yellow-500' href={RoutePath.Invest} isActive={isInvest} title='Invest' />
-            </div>
+            </div> */}
           </div>
           {me ? (
             <div className='flex items-center gap-8'>

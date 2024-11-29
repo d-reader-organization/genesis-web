@@ -11,7 +11,7 @@ export enum CreatorSortTag {
 }
 
 export type CreatorParams = Pagination & {
-  nameSubstring?: string
+  search?: string
   genreSlugs?: string[]
   sortOrder?: SortOrder
   filterTag?: CreatorFilterTag
