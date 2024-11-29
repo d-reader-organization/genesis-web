@@ -58,6 +58,7 @@ const FooterColumn: React.FC<ColumnProps> = ({ links, title }) => (
             className={cn('flex gap-1', link.disabled ? 'pointer-events-none text-grey-300' : 'text-grey-100')}
             href={link.href}
             key={`${link.name}-${index}`}
+            prefetch={false}
             target={link.targetBlank ? '_blank' : undefined}
           >
             <Text

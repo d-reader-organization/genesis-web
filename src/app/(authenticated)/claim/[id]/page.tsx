@@ -1,5 +1,5 @@
 import { fetchComicIssuePages, fetchPublicComicIssue } from '@/app/lib/api/comicIssue/queries'
-import { isAuthenticatedUser } from '@/app/lib/auth'
+import { isAuthenticatedUser } from '@/app/lib/utils/auth'
 import { CandyMachineClaimDetails } from '@/components/claim/CandyMachineClaimDetails'
 import { BaseLayout } from '@/components/layout/BaseLayout'
 import { AboutIssueSection } from '@/components/mint/AboutIssueSection'
