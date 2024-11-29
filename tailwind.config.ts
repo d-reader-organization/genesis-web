@@ -13,6 +13,7 @@ const config = {
     },
     screens: {
       xs: '0px',
+      320: '320px',
       sm: '580px',
       660: '660px',
       md: '900px',

@@ -5,7 +5,6 @@ import { Comic } from '@/models/comic'
 import { RoutePath } from '@/enums/routePath'
 import { cn } from '@/lib/utils'
 import { COMIC_COVER_SIZE } from '@/constants/imageSizes'
-// import { CopiesCount } from '@/components/shared/CopiesCount'
 import { pluralizeString } from '@/utils/helpers'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
