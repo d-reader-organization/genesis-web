@@ -1,6 +1,5 @@
 'use client'
 
-import React from 'react'
 import { Button } from '@/components/ui'
 import { useCircleSdk } from '@/providers/CircleSdkProvider'
 
@@ -38,13 +37,15 @@ export default function CirclePage() {
       )}
       {userToken ? (
         <div className='flex flex-col gap-4'>
-          <Button
-            onClick={() => {
-              createWalletAction?.()
-            }}
-          >
-            Create wallet
-          </Button>
+          {!activeWallet ? (
+            <Button
+              onClick={() => {
+                createWalletAction?.()
+              }}
+            >
+              Create wallet
+            </Button>
+          ) : null}
           {!!activeWallet ? (
             <div className='flex flex-col gap-4'>
               <Button
