@@ -18,7 +18,7 @@ export const CoverSlide: React.FC<Props> = ({ cover, isPriority, totalSupply, on
     onClick={onClick}
   >
     <Image
-      alt={`${cover.rarity} - cover`}
+      alt={cover.rarity + ' cover'}
       src={cover.image}
       width='0'
       height='0'

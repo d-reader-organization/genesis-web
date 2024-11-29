@@ -22,14 +22,14 @@ export const DefaultComicCard: React.FC<Props> = ({ className, href, comic }) =>
   >
     <div className='relative size-full'>
       <Image
-        alt='card cover'
+        alt=''
         src={comic.cover}
         width={1000}
         height={900}
         className='object-cover rounded-xl h-[163px] md:h-[233px] w-full opacity-50'
       />
       <Image
-        alt='comic logo'
+        alt=''
         src={comic.logo}
         width={120}
         height={120}

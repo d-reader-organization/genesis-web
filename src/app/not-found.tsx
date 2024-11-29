@@ -15,24 +15,22 @@ import { RoutePath } from '@/enums/routePath'
 export default function NotFound() {
   return (
     <BaseLayout>
-      <div className='flex flex-col sm:w-[660px] justify-center items-center sm:pt-5 md:pt-10'>
+      <div className='flex flex-col sm:w-[660px] justify-center items-center pt-2'>
         <Text
           as='h1'
           styleVariant='primary-heading'
-          className='text-grey-400 uppercase text-center text-6xl leading-[52px] sm:text-9xl sm:leading-[111.36px] tracking-tight select-none'
+          className='text-grey-400 uppercase text-center text-7xl leading-[62px] sm:text-7xl sm:leading-[62px] tracking-tight select-none'
         >
           YOU&apos;VE
           <br />
           FOUND THE
           <br />
-          RABBIT
-          <br />
-          HOLE
+          RABBIT HOLE
         </Text>
         <Image
           src={RabbitHole.src}
-          alt='dReader Page not found'
-          className='w-[200px] sm:w-[360px] -mt-[46px] sm:-mt-[86px] h-auto pointer-events-none'
+          alt=''
+          className='w-[180px] mr-4 -mt-10 h-auto pointer-events-none'
           width={400}
           height={254}
         />
@@ -40,7 +38,7 @@ export default function NotFound() {
           as='p'
           styleVariant='body-normal'
           fontWeight='medium'
-          className='text-grey-100 max-sm:text-xs text-center pt-4 mb-4 sm:pt-6'
+          className='text-grey-100 text-center px-1 pt-3 sm:px-14 max-sm:text-xs sm:pt-4 md:px-20 mb-4'
         >
           You&apos;ve dug too deep and fell into a rabbit hole.
           <br />

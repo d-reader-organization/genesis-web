@@ -201,7 +201,7 @@ const SearchResult: React.FC<SearchResultProps> = ({ result }) => (
         height={24}
         className='object-cover rounded-lg bg-grey-700 size-6'
         src={result.image}
-        alt='image'
+        alt=''
       />
       <span className='text-sm text-white font-bold leading-[19.6px] overflow-ellipsis line-clamp-1'>
         {result.title}

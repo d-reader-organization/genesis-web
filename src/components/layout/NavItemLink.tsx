@@ -28,7 +28,7 @@ export const NavItemLink: React.FC<NavigationLinkProps> = ({
         'flex items-center gap-1 text-base font-bold leading-[22.4px] text-grey-100',
         isActive && activeColor,
         disabled && 'text-grey-300',
-        'hover:text-white'
+        !disabled && 'hover:text-white'
       )}
       href={disabled ? '#' : href}
       prefetch={false}

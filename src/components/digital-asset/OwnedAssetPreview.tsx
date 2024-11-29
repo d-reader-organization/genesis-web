@@ -39,7 +39,7 @@ export const OwnedAssetPreview: React.FC<Props> = ({ asset }) => {
       >
         <DialogTitle className='sr-only'>Owned asset preview dialog</DialogTitle>
         <div className='flex flex-col gap-6 md:gap-8 items-center max-sm:mt-6 h-full'>
-          <Image alt={`owned ${asset.name} cover`} width={223} height={322} src={asset.image} />
+          <Image alt={"asset " + shortenAssetName(asset.name)} width={223} height={322} src={asset.image} />
           <div className='flex gap-4 max-h-12 sm:max-h-[52px] w-full'>
             {/* <Button className='w-full rounded-xl' size='normal' variant='outline'>
               <Text as='p' styleVariant='body-normal' fontWeight='medium'>

@@ -195,7 +195,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounc
                   <>
                     <span>Purchase</span>
                     <Image
-                      alt='currency'
+                      alt={splToken?.name || 'currency'}
                       src={splToken?.icon ?? splToken?.symbol ?? ''}
                       width={14}
                       height={14}

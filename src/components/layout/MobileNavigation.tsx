@@ -28,9 +28,11 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
   const { publicKey } = useWallet()
   const pathname = usePathname()
   const isHome = pathname === '/'
+  const isDiscover = pathname.startsWith(RoutePath.Discover)
+  const isInvest = pathname.startsWith(RoutePath.Invest)
+  // const isMarketplace = pathname.startsWith(RoutePath.Marketplace)
   const isLibrary = pathname.startsWith(RoutePath.Library)
   const isProfile = pathname.startsWith(RoutePath.Profile)
-  const isInvest = pathname.startsWith(RoutePath.Invest)
   const activeLinkColor = isInvest ? 'text-green-genesis' : 'text-yellow-500'
 
   if (isInvest) return <GenesisMobileNavigation user={user} />
@@ -85,15 +87,24 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
                         activeColor={activeLinkColor}
                         as='h4'
                         href={RoutePath.Discover}
-                        isActive={false}
-                        isComingSoon
+                        isActive={isDiscover}
                         title='Discover'
                       />
                       {/* <NavItemLink
                         activeColor={activeLinkColor}
                         as='h4'
+                        href={RoutePath.Marketplace}
+                        isActive={isMarketplace}
+                        isComingSoon
+                        disabled
+                        title='Marketplace'
+                      /> */}
+                      {/* <NavItemLink
+                        activeColor={activeLinkColor}
+                        as='h4'
                         href={RoutePath.Invest}
-                        isActive={false}
+                        isActive={isInvest}
+                        isComingSoon
                         title='Invest'
                       /> */}
                       {!publicKey ? <NavConnectButton /> : null}
@@ -107,7 +118,7 @@ export const MobileNav: React.FC<Props> = ({ user }) => {
                             as='h4'
                             href={RoutePath.Library}
                             isActive={isLibrary}
-                            title='Library'
+                            title='My Library'
                           />
                           <NavItemLink
                             activeColor={activeLinkColor}

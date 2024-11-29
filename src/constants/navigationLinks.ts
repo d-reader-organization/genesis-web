@@ -1,3 +1,4 @@
+import { RoutePath } from '@/enums/routePath'
 import {
   SUPPORT_LINK,
   LINKTREE_LINK,
@@ -18,14 +19,14 @@ export type NavigationLink = {
 
 export const ESSENTIAL_LINKS: NavigationLink[] = [
   { href: '/', name: 'Home', isComingSoon: false, disabled: false, targetBlank: false },
-  { href: '/discover', name: 'Discover', isComingSoon: true, disabled: false, targetBlank: false },
-  { href: '/marketplace', name: 'Marketplace', isComingSoon: true, disabled: false, targetBlank: false },
-  { href: '/invest', name: 'Invest', isComingSoon: false, disabled: false, targetBlank: false },
+  { href: RoutePath.Discover, name: 'Discover', isComingSoon: false, disabled: false, targetBlank: false },
+  { href: RoutePath.Marketplace, name: 'Marketplace', isComingSoon: true, disabled: false, targetBlank: false },
+  { href: RoutePath.Invest, name: 'Invest', isComingSoon: true, disabled: false, targetBlank: false },
 ]
 
 export const MAIN_LINKS: NavigationLink[] = [
   { href: SUPPORT_LINK, name: 'Help center', isComingSoon: false, disabled: false, targetBlank: true },
-  { href: '/faq', name: 'FAQ', isComingSoon: false, disabled: false, targetBlank: false },
+  { href: RoutePath.FAQ, name: 'FAQ', isComingSoon: false, disabled: false, targetBlank: false },
   { href: LINKTREE_LINK, name: 'Linktree', isComingSoon: false, disabled: false, targetBlank: true },
   { href: D_PUBLISHER_LINK, name: 'Publish a comic', isComingSoon: false, disabled: false, targetBlank: true },
 ]

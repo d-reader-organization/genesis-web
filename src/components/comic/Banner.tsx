@@ -35,7 +35,7 @@ export const ComicBanner: React.FC<Props> = ({ banner, cover, logo }) => {
           width={600}
           height={300}
           className='w-full h-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-3/4 object-contain max-h-[100px] max-w-[60%] sm:max-w-[50%] sm:max-h-[120px] md:max-w-[33%] md:max-h-[140px] lg:max-w-[25%] lg:max-h-40'
-          alt='Comic logo'
+          alt=''
         />
       )}
     </div>
