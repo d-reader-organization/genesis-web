@@ -3,7 +3,7 @@ import { Navigation } from './Navigation'
 import { fetchMe } from '@/app/lib/api/user/queries'
 import { Footer } from './Footer'
 import { cn } from '@/lib/utils'
-import { IntercomClient } from '../shared/IntercomClient'
+// import { IntercomClient } from '../shared/IntercomClient'
 
 type Props = React.PropsWithChildren & { mainClassName?: string; showFooter?: boolean }
 
@@ -22,7 +22,7 @@ export const BaseLayout: React.FC<Props> = async ({ children, mainClassName, sho
         {children}
       </main>
       {showFooter ? <Footer /> : null}
-      <IntercomClient />
+      {/* <IntercomClient user={me} /> */}
     </div>
   )
 }
