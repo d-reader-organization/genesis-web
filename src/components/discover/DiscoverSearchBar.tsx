@@ -39,7 +39,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
       ...store.comicParams,
       skip: 0,
       take: 3,
-      titleSubstring: searchTerm.toLowerCase(),
+      search: searchTerm.toLowerCase(),
     },
     false
   )
@@ -48,7 +48,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
       ...store.creatorParams,
       skip: 0,
       take: 3,
-      nameSubstring: searchTerm.toLowerCase(),
+      search: searchTerm.toLowerCase(),
     },
     false
   )
@@ -57,7 +57,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
       ...store.comicIssueParams,
       skip: 0,
       take: 3,
-      titleSubstring: searchTerm.toLowerCase(),
+      search: searchTerm.toLowerCase(),
     },
     enabled: false,
   })
