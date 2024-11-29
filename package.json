@@ -17,6 +17,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,md,mdx,css,scss}\""
   },
   "dependencies": {
+    "@circle-fin/user-controlled-wallets": "^5.0.0",
+    "@circle-fin/w3s-pw-web-sdk": "^1.1.6",
     "@hookform/resolvers": "^3.9.0",
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",

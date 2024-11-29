@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { RoutePath } from './enums/routePath'
 import { accessTokenKey, jwtCookieProps, REDIRECT_TO_KEY, refreshTokenKey } from './constants/general'
 import { refreshTokenCall } from './app/lib/api/auth/queries'
-import { isAuthenticatedUser } from './app/lib/auth'
+import { isTokenValid } from './app/lib/utils/jwt'
 
 const allowedOrigins = ['https://dial.to']
 
@@ -13,10 +13,10 @@ const corsOptions = {
 
 export async function middleware(request: NextRequest) {
   const requestUrlPath = request.nextUrl.pathname
-
+  const isAuthenticatedUser = isTokenValid(request.cookies.get(accessTokenKey)?.value ?? '')
   if (authRoutesRegex.test(requestUrlPath)) {
     const refreshToken = request.cookies.get(refreshTokenKey)?.value ?? ''
-    if (!isAuthenticatedUser()) {
+    if (!isAuthenticatedUser) {
       return await handleUnauthorized({
         path: requestUrlPath,
         refreshToken,
@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  if (requestUrlPath.includes(RoutePath.Login) && isAuthenticatedUser()) {
+  if (requestUrlPath.includes(RoutePath.Login) && isAuthenticatedUser) {
     const redirectTo = request.nextUrl.searchParams.get(REDIRECT_TO_KEY)
     return NextResponse.redirect(new URL(redirectTo ?? RoutePath.Home, request.url))
   }
@@ -60,10 +60,19 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/:path*', '/api/:path*'],
+  matcher: [
+    '/claim/:path+',
+    '/discover/:path+',
+    '/invest/:path+/express-interest',
+    '/library/:path*',
+    '/profile',
+    '/circle',
+    '/mint/:path+',
+    '/api/:path*',
+  ],
 }
 
-const authRoutesRegex = /^\/(library|profile|claim|invest\/[^/]+\/express-interest)(\/.*)?$/
+const authRoutesRegex = /^\/(library|profile|claim|circle|invest\/[^/]+\/express-interest)(\/.*)?$/
 
 const handleUnauthorized = async ({ path, refreshToken, url }: { path: string; refreshToken: string; url: string }) => {
   if (refreshToken) {
