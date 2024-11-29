@@ -1,4 +1,3 @@
-import { ResponseCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 import { WalletName } from '@solana/wallet-adapter-base'
 import { PublicKey } from '@solana/web3.js'
 
@@ -9,7 +8,7 @@ export const googleAccessTokenKey = 'google_access_token'
 export const SUCC_RESPONSE_STATUS_CODES = [200, 201]
 export const REDIRECT_TO_KEY = 'redirectTo'
 
-export const jwtCookieProps: Partial<ResponseCookie> = {
+export const jwtCookieProps = {
   httpOnly: true,
   secure: true,
   maxAge: 100 * 24 * 60 * 60,

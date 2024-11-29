@@ -4,7 +4,7 @@ import { USER_QUERY_KEYS } from '@/api/user/userKeys'
 import { User } from '@/models/user'
 import { fetchWrapper } from '../../fetchWrapper'
 import { Nullable } from '@/models/common'
-import { isAuthenticatedUser } from '../../auth'
+import { isAuthenticatedUser } from '../../utils/auth'
 import { Wallet } from '@/models/wallet'
 import { WalletAsset } from '@/models/wallet/walletAsset'
 
