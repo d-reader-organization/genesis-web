@@ -16,22 +16,17 @@ const config = {
       sm: '580px',
       660: '660px',
       md: '900px',
-      lg: '1200px',
       1160: '1160px',
+      lg: '1200px',
       xl: '1536px',
     },
     extend: {
       aspectRatio: {
-        'comic-cover-aspect-ratio': '1000/900',
-        'comic-banner-aspect-ratio': '1920/900',
-        'comic-logo-aspect-ratio': '800/450',
-
-        'comic-issue-cover-aspect-ratio': '690/1000',
-        'comic-issue-signature-aspect-ratio': '380/240',
-
-        'creator-banner-aspect-ratio': '1920/900',
-        'creator-avatar-aspect-ratio': '500/500',
-        'creator-logo-aspect-ratio': '800/450',
+        'comic-cover': '900/1000',
+        'comic-banner': '1920/900',
+        'comic-issue-cover': '1024/1484',
+        'creator-banner': '1920/900',
+        'creator-avatar': '500/500',
       },
       fontSize: {
         xxs: ['10px', '1.25'],

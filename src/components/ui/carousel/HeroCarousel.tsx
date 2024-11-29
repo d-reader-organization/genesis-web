@@ -82,7 +82,7 @@ export const HeroCarousel: React.FC<Props> = ({ slides }) => {
                   )}
                 >
                   <Image
-                    alt={`slide image ${slide.title}`}
+                    alt={slide.title + ' slide'}
                     src={slide.image}
                     fill
                     priority={index === 0}

@@ -4,7 +4,7 @@ import React from 'react'
 import { RoutePath } from '@/enums/routePath'
 import GenesisLogo from 'public/assets/vector-icons/genesis-logo.svg'
 import DReaderLogo from 'public/assets/vector-icons/full-logo.svg'
-import ArrowDownIcon from 'public/assets/vector-icons/arrow-down-2.svg'
+import ChevronDownIcon from 'public/assets/vector-icons/chevron-down.svg'
 import { Button } from '../ui'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
@@ -55,13 +55,13 @@ export const GenesisNavigation: React.FC<Props> = ({ me }) => {
               >
                 <div className='bg-white rounded-xl flex items-center justify-center gap-1.5 px-2 h-10'>
                   <Image
-                    alt='avatar'
+                    alt=''
                     src={me.avatar || 'https://d323dls9ny69nf.cloudfront.net/users/5256/avatar-1713526462785.png'}
                     width={28}
                     height={28}
                     className='size-7 object-cover rounded-full border border-black'
                   />
-                  <ArrowDownIcon className='flex justify-center items-center fill-grey-500' />
+                  <ChevronDownIcon className='text-grey-100 w-6 h-6' />
                 </div>
               </button>
             ) : (

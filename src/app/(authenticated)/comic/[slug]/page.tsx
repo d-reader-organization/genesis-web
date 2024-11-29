@@ -19,6 +19,7 @@ export default async function ComicPage({ params: { slug } }: Props) {
   if (!comic || !comic.stats) {
     return null
   }
+
   return (
     <BaseLayout>
       <ComicBanner banner={comic.banner} cover={comic.cover} logo={comic.logo} />

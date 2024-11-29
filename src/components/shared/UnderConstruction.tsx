@@ -15,11 +15,11 @@ import { RoutePath } from '@/enums/routePath'
 export default function UnderConstruction() {
   return (
     <BaseLayout>
-      <div className='flex flex-col sm:w-[660px] justify-center items-center sm:pt-5 md:pt-10'>
+      <div className='flex flex-col sm:w-[660px] justify-center items-center pt-2'>
         <Text
           as='h1'
           styleVariant='primary-heading'
-          className='text-grey-400 uppercase text-center text-7xl leading-[62px] sm:text-9xl sm:leading-[111.36px] tracking-tight select-none'
+          className='text-grey-400 uppercase text-center text-7xl leading-[62px] sm:text-7xl sm:leading-[62px] tracking-tight select-none'
         >
           WE&apos;RE
           <br />
@@ -32,7 +32,7 @@ export default function UnderConstruction() {
         <Image
           src={BunBunUnderConstruction.src}
           alt='dReader Page not found'
-          className='w-[214px] sm:w-[400px] mr-4 -mt-16 sm:-mt-[124px] sm:mr-8 h-auto pointer-events-none'
+          className='w-[214px] mr-4 -mt-16 h-auto pointer-events-none'
           width={400}
           height={430}
         />
@@ -40,7 +40,7 @@ export default function UnderConstruction() {
           as='p'
           styleVariant='body-normal'
           fontWeight='medium'
-          className='text-grey-100 text-center px-1 pt-3 sm:px-14 max-sm:text-xs sm:pt-8 md:px-20 mb-4'
+          className='text-grey-100 text-center px-1 pt-3 sm:px-14 max-sm:text-xs sm:pt-4 md:px-20 mb-4'
         >
           This page is currently under construction, and we can&apos;t wait to show you what we&apos;ve been working on.
           Please check back later!

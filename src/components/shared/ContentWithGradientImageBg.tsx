@@ -15,7 +15,7 @@ export const ContentWithGradientImageBg: React.FC<Props> = ({
   image,
 }) => (
   <div className={cn('relative h-full w-full overflow-hidden rounded-xl', className)}>
-    <Image src={image} alt='Background' className='object-cover' fill sizes='auto' />
+    <Image src={image} alt='' className='object-cover' fill sizes='auto' />
     <div className={cn('absolute inset-0 bg-gradient-to-b from-black to-transparent', gradientDirectionClassName)} />
     <div className='relative z-10 h-full'>{children}</div>
   </div>

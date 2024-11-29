@@ -3,7 +3,7 @@
 import React, { DetailedHTMLProps, HTMLAttributes, useCallback, useEffect, useState } from 'react'
 import clsx from 'clsx'
 
-import ArrowDownIcon from 'public/assets/vector-icons/arrow-down-2.svg'
+import ChevronDownIcon from 'public/assets/vector-icons/chevron-down.svg'
 import useEventListener from '@/hooks/useEventListener'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
@@ -36,8 +36,8 @@ export const Expandable: React.FC<Props> = ({
 
     setContentHeight(
       contentRef.clientHeight +
-        +contentRef.style.getPropertyValue('padding-top').split('px')[0] +
-        +contentRef.style.getPropertyValue('padding-bottom').split('px')[0]
+      +contentRef.style.getPropertyValue('padding-top').split('px')[0] +
+      +contentRef.style.getPropertyValue('padding-bottom').split('px')[0]
     )
   }, [contentRef])
 
@@ -60,8 +60,8 @@ export const Expandable: React.FC<Props> = ({
       >
         {titleComponent ?? title}
         {hideArrow ? null : (
-          <ArrowDownIcon
-            className={clsx('transition transform duration-150 ease-in-out', {
+          <ChevronDownIcon
+            className={clsx('w-6 h-6 text-white transition transform duration-150 ease-in-out', {
               'transform -rotate-180': isExpanded,
             })}
           />
@@ -108,8 +108,8 @@ export const CurrencyExpandable: React.FC<CurrencyExpandableProps> = ({
 
     setContentHeight(
       contentRef.clientHeight +
-        +contentRef.style.getPropertyValue('padding-top').split('px')[0] +
-        +contentRef.style.getPropertyValue('padding-bottom').split('px')[0]
+      +contentRef.style.getPropertyValue('padding-top').split('px')[0] +
+      +contentRef.style.getPropertyValue('padding-bottom').split('px')[0]
     )
   }, [contentRef])
 
@@ -134,20 +134,20 @@ export const CurrencyExpandable: React.FC<CurrencyExpandableProps> = ({
           {/* {discountWidget} */}
           <button
             className='flex gap-2 items-center w-fit rounded-xl border-none bg-grey-600 p-2'
-            onClick={disableExpand ? () => {} : () => setIsExpanded((currentIsExpanded) => !currentIsExpanded)}
+            onClick={disableExpand ? () => { } : () => setIsExpanded((currentIsExpanded) => !currentIsExpanded)}
           >
             <span className='text-base md:text-2xl font-bold leading-[16px] md:leading-[24px]'>
               {selectedCurrencySetting.price}
             </span>
             <Image
-              alt='price'
+              alt={selectedCurrencySetting.name}
               src={selectedCurrencySetting.icon ?? selectedCurrencySetting.symbol}
               width={20}
               height={20}
               className='w-6 h-6'
             />
             {disableExpand ? null : (
-              <ArrowDownIcon
+              <ChevronDownIcon
                 className={clsx('transition transform duration-150 ease-in-out', {
                   'transform -rotate-180': isExpanded,
                 })}

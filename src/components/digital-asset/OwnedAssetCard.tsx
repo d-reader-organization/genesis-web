@@ -4,6 +4,7 @@ import Image from 'next/image'
 import React from 'react'
 import { StateChip } from '../shared/chips/State'
 import { CardBorderWrapper } from '../shared/CardBorderWrapper'
+import { shortenAssetName } from '@/utils/helpers'
 
 type Props = {
   asset: Asset
@@ -13,7 +14,7 @@ export const OwnedAssetCard: React.FC<Props> = ({ asset }) => (
   <CardBorderWrapper className='rounded-xl'>
     <div className='flex flex-col items-center hover:brightness-105'>
       <Image
-        alt={`owned ${asset.name} cover`}
+        alt={"asset " + shortenAssetName(asset.name)}
         width={690}
         height={1000}
         src={asset.image}

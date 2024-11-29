@@ -6,8 +6,9 @@ import { roundNumber } from '@/utils/numbers'
 import { Text } from '../../ui'
 import clsx from 'clsx'
 import React from 'react'
+import { TextProps } from '../../ui'
 
-interface Props {
+interface Props extends Partial<TextProps> {
   price?: number | null
   size?: number
   bold?: boolean
@@ -31,13 +32,15 @@ export const PriceTag: React.FC<Props> = ({
   icon = false,
   colorfulIcon = false,
   maxDecimals,
+  as = 'p',
+  styleVariant = 'body-normal',
   ...props
 }) => {
   const TypographyWrapper: React.FC<{ children: React.ReactNode }> = (tprops) => {
     return (
       <Text
-        as='p'
-        styleVariant='body-normal'
+        as={as}
+        styleVariant={styleVariant}
         className={clsx(
           inline ? 'inline-flex' : 'flex',
           reverse ? 'flex-row-reverse' : 'flex-row',
@@ -68,8 +71,6 @@ export const PriceTag: React.FC<Props> = ({
             height: size,
             marginLeft: reverse ? '0.2rem' : '0.5rem',
             marginRight: reverse ? '0.5rem' : '0.2rem',
-            color: 'inherit',
-            fill: 'inherit',
           }}
         />
       )}

@@ -11,7 +11,6 @@ import { NavItemLink } from '@/components/layout/NavItemLink'
 import { usePathname } from 'next/navigation'
 import { NavConnectButton } from '../../buttons/ConnectButton'
 import { useWallet } from '@solana/wallet-adapter-react'
-import { SUPPORT_LINK } from '@/constants/general'
 
 type AuthProfileContentProps = { user: User }
 
@@ -42,7 +41,6 @@ export const AuthProfileContent: React.FC<AuthProfileContentProps> = ({ user }) 
             isActive={isProfile}
             title='Settings'
           />
-          <NavItemLink activeColor={activeLinkColor} as='h4' href={SUPPORT_LINK} isActive={false} title='Help center' />
           {publicKey ? null : <NavConnectButton />}
         </div>
       </div>

@@ -12,13 +12,14 @@ type StyleVariant =
   | 'body-xsmall'
 type FontWeight = 'bold' | 'semibold' | 'medium' | 'normal'
 
-type TextProps = {
+export type TextProps = {
   as: Variant
   styleVariant: StyleVariant
   className?: string
   children: React.ReactNode
   fontWeight?: FontWeight
   italic?: boolean
+  title?: string
 }
 
 const variantStyles: Record<Variant, string> = {
@@ -55,6 +56,7 @@ export const Text: React.FC<TextProps> = ({
   className,
   children,
   fontWeight,
+  title,
   italic = false,
 }) => {
   return (
@@ -64,8 +66,9 @@ export const Text: React.FC<TextProps> = ({
         styleVariants[styleVariant],
         fontWeight && fontWeightVariants[fontWeight],
         italic && 'italic',
-        className
+        className,
       )}
+      title={title}
     >
       {children}
     </Component>

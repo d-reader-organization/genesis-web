@@ -4,7 +4,7 @@ import React from 'react'
 import { RoutePath } from '@/enums/routePath'
 import { usePathname } from 'next/navigation'
 import DReaderLogo from 'public/assets/vector-icons/full-logo.svg'
-import ArrowDownIcon from 'public/assets/vector-icons/arrow-down-2.svg'
+import ChevronDownIcon from 'public/assets/vector-icons/chevron-down.svg'
 import { Button } from '../ui'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
@@ -18,12 +18,15 @@ import { GenesisNavigation } from './GenesisNavigation'
 
 type Props = {
   me: User | null
+  hideSearch?: boolean
 }
 
-export const Navigation: React.FC<Props> = ({ me }) => {
+export const Navigation: React.FC<Props> = ({ me, hideSearch = false }) => {
   const [isProfileSheetOpen, setOpenProfileSheet] = React.useState<boolean>(false)
   const pathname = usePathname()
+  const isDiscover = pathname.startsWith(RoutePath.Discover)
   const isInvest = pathname.startsWith(RoutePath.Invest)
+  // const isMarketplace = pathname.startsWith(RoutePath.Marketplace)
   const isLibrary = pathname.startsWith(RoutePath.Library)
 
   if (isInvest) return <GenesisNavigation me={me} />
@@ -43,9 +46,15 @@ export const Navigation: React.FC<Props> = ({ me }) => {
             <Link href={RoutePath.Home} prefetch={false}>
               <DReaderLogo className='h-8 min-w-fit fill-white ml-4' />
             </Link>
-            <SearchInput />
+            {!hideSearch && <SearchInput />}
+            <div className='flex items-center gap-10'>
+              <NavItemLink activeColor='text-yellow-500' href={RoutePath.Discover} isActive={isDiscover} title='Discover' />
+            </div>
             {/* <div className='flex items-center gap-10'>
               <NavItemLink activeColor='text-yellow-500' href={RoutePath.Invest} isActive={isInvest} title='Invest' />
+              </div> */}
+            {/* <div className='flex items-center gap-10'>
+              <NavItemLink activeColor='text-yellow-500' href={RoutePath.Marketplace} isActive={isMarketplace} title='Marketplace' isComingSoon disabled />
             </div> */}
           </div>
           {me ? (
@@ -68,7 +77,7 @@ export const Navigation: React.FC<Props> = ({ me }) => {
                     height={28}
                     className='size-7 object-cover rounded-full border border-black'
                   />
-                  <ArrowDownIcon className='flex justify-center items-center' />
+                  <ChevronDownIcon className='w-6 h-6 text-grey-100' />
                 </div>
               </button>
             </div>

@@ -168,7 +168,7 @@ const SearchResult: React.FC<SearchResultProps> = ({ result }) => (
       </span>
     </div>
     <span className='text-grey-100 text-sm font-medium leading-[19.6px]'>
-      {result.episodeCount} {pluralizeString(result.episodeCount, 'EP')}
+      {result.episodeCount} {pluralizeString('EP', result.episodeCount)}
     </span>
   </Link>
 )
