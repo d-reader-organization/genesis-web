@@ -25,7 +25,7 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, showPrice = true, 
     >
       <Image
         src={comicIssue.cover}
-        alt={''}
+        alt=''
         {...COMIC_ISSUE_IMAGE_SIZES['cover']}
         className='rounded-xl h-auto w-full aspect-comic-issue-cover'
       />

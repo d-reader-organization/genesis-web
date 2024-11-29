@@ -19,7 +19,7 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
 export const ComicCard: React.FC<Props> = ({
   comic,
   showNumberOfEps = true,
-  showEpsText = true,
+  showEpsText: showEpisodesTag = true,
   showReadButton = false,
   showLogo = false,
   withCoverOpacity = false,
@@ -73,7 +73,7 @@ export const ComicCard: React.FC<Props> = ({
             fontWeight='bold'
             className=' bg-white bg-opacity-20 rounded-xl backdrop-blur-lg p-1 px-2'
           >
-            {showNumberOfEps && issuesCount} {showEpsText && issuesLabel}
+            {showNumberOfEps && issuesCount} {showEpisodesTag && issuesLabel}
           </Text>
         )}
       </div>
