@@ -17,7 +17,7 @@ export default async function HomePage() {
   ])
 
   return (
-    <BaseLayout mainClassName='p-0 md:p-0 lg:p-0' showFooter>
+    <BaseLayout mainClassName='px-0 md:px-0 lg:px-0 pt-0 md:pt-0 lg:pt-0' showFooter>
       <div className='flex justify-center items-center size-full overflow-hidden'>
         <HeroCarousel slides={carouselSlides} />
       </div>
