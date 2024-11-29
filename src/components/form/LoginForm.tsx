@@ -1,7 +1,7 @@
 'use client'
 
 import { Button, Input, Label, toast } from '@/components/ui'
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import { loginAction } from '@/app/lib/actions/auth/login'
 import { useFormState, useFormStatus } from 'react-dom'
 import { useSearchParams } from 'next/navigation'
@@ -21,7 +21,8 @@ const Form: React.FC = () => {
   const searchParams = useSearchParams()
   const redirectTo = searchParams.get(REDIRECT_TO_KEY)
   const [state, action] = useFormState(loginAction.bind(null, redirectTo), null)
-  React.useEffect(() => {
+
+  useEffect(() => {
     if (state?.error) {
       toast({
         title: 'Error',
@@ -29,7 +30,7 @@ const Form: React.FC = () => {
         variant: 'error',
       })
     }
-  }, [state?.error, toast])
+  }, [state?.error])
 
   return (
     <form action={action} className='space-y-4'>

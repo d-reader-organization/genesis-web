@@ -22,7 +22,7 @@ export const useSteps = <T>(steps: T[]): StepsHook<T> => {
 
   const next = useCallback(() => {
     setActiveStepIndex((prevIndex) => (prevIndex >= lastIndex ? lastIndex : prevIndex + 1))
-  }, [])
+  }, [lastIndex])
 
   const reset = useCallback(() => {
     setActiveStepIndex(0)

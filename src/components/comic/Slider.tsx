@@ -3,7 +3,6 @@ import { SectionSlider } from '../shared/SectionSlider'
 import { cn } from '@/lib/utils'
 import { LargeComicCard } from './cards/LargeCard'
 import { ComicCardType } from '@/lib/types'
-import { CardBorderWrapper } from '../shared/CardBorderWrapper'
 import { DefaultComicCard } from './cards/DefaultCard'
 
 type Props = {
