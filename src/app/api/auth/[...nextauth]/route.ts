@@ -4,7 +4,6 @@ import GoogleProvider from 'next-auth/providers/google'
 import { cookies } from 'next/headers'
 import NextAuth from 'next-auth'
 import { parseAndSetCookieAfterAuth } from '@/app/lib/actions/auth/login'
-import { withRedirect } from '@/lib/utils'
 
 const handler = NextAuth({
   providers: [
@@ -25,7 +24,7 @@ const handler = NextAuth({
     redirect: async (params) => {
       const url = new URL(params.url)
       const redirectTo = url.searchParams.get(REDIRECT_TO_KEY) ?? ''
-      return redirectTo ? withRedirect(params.baseUrl, redirectTo) : params.url
+      return redirectTo ? `${params.baseUrl}${redirectTo}` : params.url
     },
     signIn: async ({ account }) => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/login-with-google`, {
