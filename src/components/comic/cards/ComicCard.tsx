@@ -5,16 +5,14 @@ import { Comic } from '@/models/comic'
 import { RoutePath } from '@/enums/routePath'
 import { cn } from '@/lib/utils'
 import { COMIC_COVER_SIZE } from '@/constants/imageSizes'
+// import { CopiesCount } from '@/components/shared/CopiesCount'
 import { pluralizeString } from '@/utils/helpers'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comic: Comic
 }
 
-export const ComicCard: React.FC<Props> = ({
-  comic,
-  className,
-}) => {
+export const DefaultComicCard: React.FC<Props> = ({ comic, className }) => {
   const isFree = false // TODO: showIsFree && comic.isFree
 
   return (
@@ -22,14 +20,14 @@ export const ComicCard: React.FC<Props> = ({
       href={RoutePath.Comic(comic.slug)}
       prefetch={false}
       className={cn(
-        'flex flex-col gap-3 w-full relative rounded-xl hover:brightness-110 border border-grey-300 p-2 pb-3',
+        'flex flex-col gap-3 w-full relative hover:brightness-110 p-2 border border-grey-300 rounded-2xl size-full',
         className
       )}
     >
       <Image
         src={comic.cover}
         alt=''
-        className={cn('rounded-xl h-auto aspect-comic-cover object-cover')}
+        className='rounded-xl h-auto aspect-comic-cover object-cover opacity-50'
         {...COMIC_COVER_SIZE}
       />
       <Image
@@ -56,15 +54,19 @@ export const ComicCard: React.FC<Props> = ({
           styleVariant='body-normal'
           fontWeight='bold'
           className=' bg-white bg-opacity-20 rounded-xl backdrop-blur-lg p-1 px-2'
-        >{comic.stats?.issuesCount} {pluralizeString("EP", comic.stats?.issuesCount)}
+        >
+          {comic.stats?.issuesCount} {pluralizeString('EP', comic.stats?.issuesCount)}
         </Text>
         {/* <CopiesCount count={comic.stats?.issuesCount} withText /> */}
       </div>
-      <div className='flex flex-col gap-2 p-2'>
-
-      </div>
       <div className='flex flex-col px-2'>
-        <Text title={comic.title} as='p' styleVariant='body-large' fontWeight='bold' className='line-clamp-1 overflow-ellipsis'>
+        <Text
+          title={comic.title}
+          as='p'
+          styleVariant='body-large'
+          fontWeight='bold'
+          className='line-clamp-1 overflow-ellipsis'
+        >
           {comic.title}
         </Text>
         <Text as='p' styleVariant='body-normal' className='text-grey-100 line-clamp-1 overflow-ellipsis'>
