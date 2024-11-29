@@ -18,9 +18,10 @@ import { GenesisNavigation } from './GenesisNavigation'
 
 type Props = {
   me: User | null
+  hideSearch?: boolean
 }
 
-export const Navigation: React.FC<Props> = ({ me }) => {
+export const Navigation: React.FC<Props> = ({ me, hideSearch = false }) => {
   const [isProfileSheetOpen, setOpenProfileSheet] = React.useState<boolean>(false)
   const pathname = usePathname()
   const isInvest = pathname.startsWith(RoutePath.Invest)
@@ -43,7 +44,7 @@ export const Navigation: React.FC<Props> = ({ me }) => {
             <Link href={RoutePath.Home} prefetch={false}>
               <DReaderLogo className='h-8 min-w-fit fill-white ml-4' />
             </Link>
-            <SearchInput />
+            {!hideSearch && <SearchInput />}
             {/* <div className='flex items-center gap-10'>
               <NavItemLink activeColor='text-yellow-500' href={RoutePath.Invest} isActive={isInvest} title='Invest' />
             </div> */}

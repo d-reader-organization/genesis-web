@@ -8,7 +8,7 @@ export const RoutePath = Object.freeze({
   RegisterConnectWallet: '/register/connect-wallet',
   Discover: '/discover',
   DiscoverComics: '/discover/comics',
-  DiscoverComicIssues: '/discover/comic-issues',
+  DiscoverComicIssues: '/discover/episodes',
   DiscoverCreators: '/discover/creators',
   Library: '/library',
   OwnedAssets: (slug: string) => `/library/${slug}`,
