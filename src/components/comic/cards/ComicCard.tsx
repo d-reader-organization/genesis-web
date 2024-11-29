@@ -11,14 +11,18 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
   comic: Comic
   showNumberOfEps?: boolean
   showEpsText?: boolean
+  showLogo?: boolean
+  withCoverOpacity?: boolean
   showReadButton?: boolean
 }
 
 export const ComicCard: React.FC<Props> = ({
   comic,
-  showNumberOfEps = false,
-  showEpsText = false,
+  showNumberOfEps = true,
+  showEpsText = true,
   showReadButton = false,
+  showLogo = false,
+  withCoverOpacity = false,
   //showIsFree = true,
   className,
 }) => {
@@ -31,24 +35,33 @@ export const ComicCard: React.FC<Props> = ({
       href={RoutePath.Comic(comic.slug)}
       prefetch={false}
       className={cn(
-        'flex flex-col gap-2 relative w-full rounded-xl hover:brightness-115 border border-grey-300 p-2 pb-3',
+        'flex flex-col gap-3 w-full relative rounded-xl hover:brightness-110 border border-grey-300 p-2 pb-3',
         className
       )}
     >
       <Image
         src={comic.cover}
         alt=''
-        className='rounded-xl h-auto w-full aspect-comic-cover object-cover'
+        className={cn('rounded-xl h-auto aspect-comic-cover object-cover', withCoverOpacity && 'opacity-50')}
         {...COMIC_IMAGE_SIZES['cover']}
       />
+      {showLogo && (
+        <Image
+          alt=''
+          src={comic.logo}
+          width={120}
+          height={120}
+          className='object-cover h-120 w-auto absolute m-auto -top-2 bottom-14 left-0 right-0 pointer-events-none'
+        />
+      )}
       <div className='flex absolute top-3 right-3 gap-1'>
         {/** comic isfree missing in api model, plug isFree const */}
         {false && (
           <Text
-            as='p'
+            as='span'
             styleVariant='body-normal'
             fontWeight='bold'
-            className='bg-yellow-500 rounded-xl px-2 text-black'
+            className='bg-yellow-500 rounded-xl p-1 px-2 text-black'
           >
             FREE
           </Text>
@@ -58,35 +71,36 @@ export const ComicCard: React.FC<Props> = ({
             as='p'
             styleVariant='body-normal'
             fontWeight='bold'
-            className=' bg-gray-700 bg-opacity-60 rounded-xl px-2 backdrop-blur-lg'
+            className=' bg-white bg-opacity-20 rounded-xl backdrop-blur-lg p-1 px-2'
           >
             {showNumberOfEps && issuesCount} {showEpsText && issuesLabel}
           </Text>
         )}
       </div>
-      <div className='flex flex-col px-2 justify-center'>
+      <div className='flex flex-col px-2'>
         <Text as='p' styleVariant='body-large' fontWeight='bold' className='line-clamp-1 overflow-ellipsis'>
           {comic.title}
         </Text>
         <Text as='p' styleVariant='body-normal' className='text-grey-100 line-clamp-1 overflow-ellipsis'>
           {comic.creator ? 'by ' + comic.creator.name : ''}
         </Text>
-        {showReadButton && (
-          <div className='flex w-full gap-3 max-h-10 mt-2'>
-            <Link
-              href={RoutePath.ComicRead(comic.slug)}
-              className='flex w-full items-center justify-center rounded-xl bg-grey-400 text-grey-100  p-3'
-            >
-              <Text as='p' styleVariant='body-large'>
-                Read
-              </Text>
-            </Link>
-            <button className='flex justify-center items-center p-2 border border-grey-300 rounded-xl'>
-              <Ellipsis />
-            </button>
-          </div>
-        )}
       </div>
+      {showReadButton && (
+        <div className='flex w-full gap-3 max-h-10 px-2'>
+          <Link
+            href={RoutePath.ReadComic(comic.slug)}
+            className='flex w-full items-center justify-center rounded-xl bg-grey-400 text-grey-100 p-3 shadow-md'
+          >
+            <Text as='p' styleVariant='body-large'>
+              Read
+            </Text>
+          </Link>
+          <button className='flex justify-center items-center p-2 border border-grey-300 rounded-xl'>
+            <Ellipsis />
+          </button>
+        </div>
+      )}
     </Link>
   )
 }
+//TODO: pluralize string, dropdown icon, 

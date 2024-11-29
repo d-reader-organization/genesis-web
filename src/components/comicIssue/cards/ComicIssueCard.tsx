@@ -31,26 +31,26 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, showPrice = true, 
       />
       {showPrice && isFree && (
         <Text
-          as='p'
+          as='span'
           styleVariant='body-normal'
           fontWeight='bold'
-          className='bg-yellow-500 rounded-xl px-2 text-black absolute right-4 top-4'
+          className='bg-yellow-500 rounded-xl p-1 px-2 text-black absolute right-3 top-3'
         >
           FREE
         </Text>
       )}
       <div className='flex flex-col  text-gray-100 px-2 pt-2'>
         {comicIssue.comic && (
-          <Text as='p' styleVariant='body-normal' className='text-gray-100 line-clamp-1 overflow-ellipsis'>
+          <Text as='span' styleVariant='body-normal' className='text-gray-100 line-clamp-1 overflow-ellipsis'>
             {comicIssue.comic.title}
           </Text>
         )}
-        <Text as='p' styleVariant='body-large' fontWeight='bold' className='line-clamp-1 overflow-ellipsis'>
+        <Text as='span' styleVariant='body-large' fontWeight='bold' className='line-clamp-1 overflow-ellipsis'>
           {comicIssue.title}
         </Text>
         {comicIssue.stats && (
           <div className='flex relative w-full justify-between text-gray-100'>
-            <Text as='p' styleVariant='body-normal' className='text-gray-100'>
+            <Text as='span' styleVariant='body-normal' className='text-gray-100'>
               EP {comicIssue.number}/{comicIssue.stats.totalIssuesCount}
             </Text>
             {showPrice && !isFree && (

@@ -4,7 +4,7 @@ import React from 'react'
 import { RoutePath } from '@/enums/routePath'
 import { usePathname } from 'next/navigation'
 import DReaderLogo from 'public/assets/vector-icons/full-logo.svg'
-import ArrowDownIcon from 'public/assets/vector-icons/arrow-down-2.svg'
+import ChevronDownIcon from 'public/assets/vector-icons/chevron-down.svg'
 import { Button } from '../ui'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
@@ -69,7 +69,7 @@ export const Navigation: React.FC<Props> = ({ me, hideSearch = false }) => {
                     height={28}
                     className='size-7 object-cover rounded-full border border-black'
                   />
-                  <ArrowDownIcon className='flex justify-center items-center' />
+                  <ChevronDownIcon className='w-6 h-6 text-grey-100' />
                 </div>
               </button>
             </div>

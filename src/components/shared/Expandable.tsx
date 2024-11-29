@@ -3,7 +3,7 @@
 import React, { DetailedHTMLProps, HTMLAttributes, useCallback, useEffect, useState } from 'react'
 import clsx from 'clsx'
 
-import ArrowDownIcon from 'public/assets/vector-icons/arrow-down-2.svg'
+import ChevronDownIcon from 'public/assets/vector-icons/chevron-down-icon.svg'
 import useEventListener from '@/hooks/useEventListener'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
@@ -60,8 +60,8 @@ export const Expandable: React.FC<Props> = ({
       >
         {titleComponent ?? title}
         {hideArrow ? null : (
-          <ArrowDownIcon
-            className={clsx('transition transform duration-150 ease-in-out', {
+          <ChevronDownIcon
+            className={clsx('w-6 h-6 text-white transition transform duration-150 ease-in-out', {
               'transform -rotate-180': isExpanded,
             })}
           />
@@ -147,7 +147,7 @@ export const CurrencyExpandable: React.FC<CurrencyExpandableProps> = ({
               className='w-6 h-6'
             />
             {disableExpand ? null : (
-              <ArrowDownIcon
+              <ChevronDownIcon
                 className={clsx('transition transform duration-150 ease-in-out', {
                   'transform -rotate-180': isExpanded,
                 })}

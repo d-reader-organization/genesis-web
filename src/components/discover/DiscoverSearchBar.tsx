@@ -12,6 +12,7 @@ import { useFetchCreators } from '@/api/creator/queries/useFetchCreators'
 import { useFetchComicIssues } from '@/api/comicIssue/queries'
 import { usePathname } from 'next/navigation'
 import { RoutePath } from '@/enums/routePath'
+import { useDiscoverQueryStore } from '@/providers/DiscoverQueryStoreProvider'
 
 type Props = React.InputHTMLAttributes<HTMLInputElement>
 
@@ -31,13 +32,33 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
   const searchRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
 
-  const { refetch: fetchComics } = useFetchComics({ skip: 0, take: 3, titleSubstring: searchTerm.toLowerCase() }, false)
+  const store = useDiscoverQueryStore((state) => state)
+
+  const { refetch: fetchComics } = useFetchComics(
+    {
+      ...store.comicParams,
+      skip: 0,
+      take: 3,
+      titleSubstring: searchTerm.toLowerCase(),
+    },
+    false
+  )
   const { refetch: fetchCreators } = useFetchCreators(
-    { skip: 0, take: 3, nameSubstring: searchTerm.toLowerCase() },
+    {
+      ...store.creatorParams,
+      skip: 0,
+      take: 3,
+      nameSubstring: searchTerm.toLowerCase(),
+    },
     false
   )
   const { refetch: fetchComicIssues } = useFetchComicIssues({
-    params: { skip: 0, take: 3, titleSubstring: searchTerm.toLowerCase() },
+    params: {
+      ...store.comicIssueParams,
+      skip: 0,
+      take: 3,
+      titleSubstring: searchTerm.toLowerCase(),
+    },
     enabled: false,
   })
 
