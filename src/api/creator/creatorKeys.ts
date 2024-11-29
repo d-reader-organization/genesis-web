@@ -23,7 +23,7 @@ export const creatorKeys = Object.freeze({
   getMany: (params: CreatorParams) => [
     CREATOR_QUERY_KEYS.CREATOR,
     CREATOR_QUERY_KEYS.GET,
-    params.nameSubstring,
+    params.search,
     params.genreSlugs,
     params.filterTag,
     params.sortOrder,

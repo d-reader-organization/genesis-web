@@ -16,7 +16,7 @@ export enum ComicSortTag {
 
 export type ComicParams = Pagination & {
   creatorSlug?: string
-  titleSubstring?: string
+  search?: string
   genreSlugs?: string[]
   sortOrder?: SortOrder
   filterTag?: ComicFilterTag
