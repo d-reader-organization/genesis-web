@@ -2,8 +2,9 @@
 
 import Intercom from '@intercom/messenger-js-sdk';
 import { User } from '@/models/user';
+import { Nullable } from '@/models/common';
 
-type Props = { user?: User }
+type Props = { user: Nullable<User> }
 
 export const IntercomClient: React.FC<Props> = ({ user }) => {
 
