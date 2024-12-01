@@ -28,7 +28,7 @@ export const DiscoverQueryStoreProvider = ({ children }: DiscoverQueryStoreProvi
 
   useEffect(() => {
     fetchData(updateCompleteGenresList)
-  }, [])
+  }, [updateCompleteGenresList])
 
   return <DiscoverQueryParamsStoreContext.Provider value={store}>{children}</DiscoverQueryParamsStoreContext.Provider>
 }

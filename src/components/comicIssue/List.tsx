@@ -5,10 +5,10 @@ import { useBreakpoints } from '@/hooks/useBreakpoints'
 import useOnScreen from '@/hooks/useOnScreen'
 import { ComicIssueParams } from '@/models/comicIssue/comicIssueParams'
 import React, { useEffect, useMemo } from 'react'
-import { ComicIssueCard } from './cards/Card'
 import { Text } from '../ui/Text'
 import clsx from 'clsx'
 import { Loader } from '../shared/Loader'
+import { ComicIssueCard } from './cards/ComicIssueCard'
 
 type Props = {
   enabled: boolean

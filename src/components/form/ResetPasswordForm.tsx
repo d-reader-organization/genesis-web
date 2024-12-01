@@ -28,7 +28,7 @@ export const ResetPasswordForm: React.FC<Props> = ({ verificationToken }) => {
         variant: 'success',
       })
     }
-  }, [state?.error, state?.success, toast])
+  }, [state?.error, state?.success])
 
   return (
     <form action={action} className='flex flex-col items-center gap-4'>

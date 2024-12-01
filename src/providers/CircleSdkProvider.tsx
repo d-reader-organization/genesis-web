@@ -107,9 +107,10 @@ export const CircleSdkProvider = ({ children }: SdkProviderProps): JSX.Element =
       return
     }
     const socket = io(process.env.NEXT_PUBLIC_API_ENDPOINT || '')
-    socket.on(`wallet/${walletAddress}/item-minted`, async (assetEventData: AssetMintEvent): Promise<void> => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    socket.on(`wallet/${walletAddress}/item-minted`, async (_assetEventData: AssetMintEvent): Promise<void> => {
       setIsMintTransactionLoading(false)
-      toast({ description: 'Successfully minted the comic! Find the asset in your wallet', variant: 'success' })
+      toast({ description: 'Purchase successful! Find the asset(s) in your wallet', variant: 'success' })
     })
 
     return () => {

@@ -20,6 +20,7 @@
     "@circle-fin/user-controlled-wallets": "^5.0.0",
     "@circle-fin/w3s-pw-web-sdk": "^1.1.6",
     "@hookform/resolvers": "^3.9.0",
+    "@intercom/messenger-js-sdk": "^0.0.14",
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
     "@metaplex-foundation/js": "^0.20.1",
@@ -65,6 +66,8 @@
     "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.25.9",
+    "@types/bs58": "^4.0.4",
     "@types/lodash": "^4.17.5",
     "@types/node": "^20",
     "@types/react": "^18",

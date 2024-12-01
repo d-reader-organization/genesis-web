@@ -74,7 +74,7 @@ const RegisterForm: React.FC<FormProps> = ({ isGoogleSignUp, onSuccess }) => {
         variant: 'error',
       })
     }
-  }, [state?.success, state?.error, toast])
+  }, [state?.success, state?.error, toast, onSuccess])
 
   return isGoogleSignUp ? <GoogleForm action={action} /> : <RegularForm action={action} error={state?.error} />
 }

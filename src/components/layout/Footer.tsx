@@ -26,16 +26,21 @@ export const Footer: React.FC = () => (
         <Text as='span' className='text-grey-200' styleVariant='body-normal'>
           &#169; Decentralized Reader, ltd
         </Text>
-        <Link href={RoutePath.PrivacyPolicy} target='_blank'>
-          <Text as='span' className='text-grey-200 hover:text-white' styleVariant='body-normal'>
-            Terms
+        <div>
+          <Link href={RoutePath.PrivacyPolicy} target='_blank'>
+            <Text as='span' className='text-grey-200 hover:text-white' styleVariant='body-normal'>
+              Terms
+            </Text>
+          </Link>
+          <Text as='span' className='text-grey-200 hover:text-white mx-2' styleVariant='body-normal'>
+            |
           </Text>
-        </Link>
-        <Link href={RoutePath.PrivacyPolicy} target='_blank'>
-          <Text as='span' className='text-grey-200 hover:text-white' styleVariant='body-normal'>
-            Privacy Policy
-          </Text>
-        </Link>
+          <Link href={RoutePath.PrivacyPolicy} target='_blank'>
+            <Text as='span' className='text-grey-200 hover:text-white' styleVariant='body-normal'>
+              Privacy Policy
+            </Text>
+          </Link>
+        </div>
       </div>
     </div>
   </div>
@@ -80,7 +85,7 @@ const FooterColumn: React.FC<ColumnProps> = ({ links, title }) => (
 const MobileAppsColumn: React.FC = () => (
   <div className='flex flex-col gap-8 max-w-80'>
     <Text as='h4' styleVariant='secondary-heading'>
-      Get the most of dReader with a mobile app!
+      Get the most out of dReader with a mobile app!
     </Text>
     <div className='flex items-center gap-4'>
       <Link href={GOOGLE_PLAY_APP_LINK} target='_blank'>

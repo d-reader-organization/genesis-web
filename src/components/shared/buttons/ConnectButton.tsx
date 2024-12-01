@@ -70,7 +70,7 @@ export const ConnectButton: React.FC<Props> = ({ onClick, text, children, classN
         break
       }
     }
-  }, [buttonState, onClick, onConnect, onSelectWallet])
+  }, [buttonState, onClick, onConnect, onDisconnect, onSelectWallet])
 
   useEffect(() => {
     if (buttonState == 'has-wallet' && onConnect) {
