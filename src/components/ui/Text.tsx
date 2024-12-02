@@ -66,7 +66,7 @@ export const Text: React.FC<TextProps> = ({
         styleVariants[styleVariant],
         fontWeight && fontWeightVariants[fontWeight],
         italic && 'italic',
-        className,
+        className
       )}
       title={title}
     >

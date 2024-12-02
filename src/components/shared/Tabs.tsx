@@ -7,24 +7,16 @@ import React from 'react'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 
-type Props = {
-  label: string
+type Props = React.HTMLAttributes<HTMLDivElement> & {
   tabs: Tab[]
 }
 
-export const Tabs: React.FC<Props> = ({ label, tabs }) => {
+export const Tabs: React.FC<Props> = ({ tabs, className }) => {
   const selectedTab = usePathname()
 
   return (
-    <div className='flex flex-col w-full -mt-4'>
-      <Text
-        as='h1'
-        styleVariant='primary-heading'
-        className='text-grey-100 text-transparent uppercase bg-gradient-to-b from-grey-400 via-grey-600 via-60% to-transparent bg-clip-text -mb-8 ml-2'
-      >
-        {label}
-      </Text>
-      <div className='flex justify-around gap-6 relative md:justify-start mt-2'>
+    <>
+      <div className={cn('flex justify-around gap-6 md:justify-start', className)}>
         {tabs.map((tab: Tab) => (
           <Link
             key={tab.url}
@@ -41,7 +33,7 @@ export const Tabs: React.FC<Props> = ({ label, tabs }) => {
           </Link>
         ))}
       </div>
-      <div className='w-full h-[2px] bg-grey-300 rounded-md -mt-[2px]' />
-    </div>
+      <div className='w-full h-[2px] bg-grey-300 rounded-md -mt-[14px]' />
+    </>
   )
 }

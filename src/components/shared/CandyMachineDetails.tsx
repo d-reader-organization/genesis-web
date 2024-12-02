@@ -145,7 +145,7 @@ const CurrencyRow: React.FC<CurrencyRowProps> = ({ isSelected = false, token, se
       onClick={() => setCurrency(currencySetting)}
     >
       <div className='flex items-center gap-2'>
-        <Image alt="" src={token.icon} width={16} height={16} className='w-5 h-5' />
+        <Image alt='' src={token.icon} width={16} height={16} className='w-5 h-5' />
         <span className='text-base font-medium leading-[22.4px]'>{token.name}</span>
       </div>
       <span className='text-base font-medium leading-[22.4px]'>{token.price}</span>

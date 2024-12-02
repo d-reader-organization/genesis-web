@@ -2,7 +2,7 @@
 
 import { useDiscoverQueryStore } from '@/providers/DiscoverQueryStoreProvider'
 import { useFetchCreators } from '@/api/creator/queries'
-import { HorizontalCreatorCard } from '../creator/cards/HorizontalCard'
+import { DefaultCard } from '../creator/cards/DefaultCard'
 import { ShowMoreButton } from './ShowMoreButton'
 
 export const CreatorGrid: React.FC = () => {
@@ -11,9 +11,9 @@ export const CreatorGrid: React.FC = () => {
 
   return (
     <>
-      <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 pt-2'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 pt-2'>
         {creators.map((creator) => (
-          <HorizontalCreatorCard key={creator.slug} creator={creator} />
+          <DefaultCard key={creator.slug} creator={creator} />
         ))}
       </div>
       <div className='flex flex-col items-center'>

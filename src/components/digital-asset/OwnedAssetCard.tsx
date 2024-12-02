@@ -14,7 +14,7 @@ export const OwnedAssetCard: React.FC<Props> = ({ asset }) => (
   <CardBorderWrapper className='rounded-xl'>
     <div className='flex flex-col items-center hover:brightness-105'>
       <Image
-        alt={"asset " + shortenAssetName(asset.name)}
+        alt={'asset ' + shortenAssetName(asset.name)}
         width={690}
         height={1000}
         src={asset.image}

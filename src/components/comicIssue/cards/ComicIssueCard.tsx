@@ -6,6 +6,7 @@ import { ComicIssue } from '@/models/comicIssue'
 import { RoutePath } from '@/enums/routePath'
 import { cn } from '@/lib/utils'
 import { COMIC_ISSUE_COVER_SIZE } from '@/constants/imageSizes'
+import { OverflownTextWithTooltip } from '@/components/ui/OverflownTextWithTooltip'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comicIssue: ComicIssue
@@ -18,7 +19,7 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, className }) => {
     <Link
       href={RoutePath.ComicIssue(comicIssue.id)}
       className={cn(
-        'flex relative flex-col w-full p-2 border border-grey-300 rounded-xl hover:brightness-115',
+        'flex relative flex-col w-full p-2 border border-grey-300 rounded-2xl hover:brightness-115',
         className
       )}
     >
@@ -26,7 +27,7 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, className }) => {
         src={comicIssue.cover}
         alt=''
         {...COMIC_ISSUE_COVER_SIZE}
-        className='rounded-xl h-auto w-full aspect-comic-issue-cover'
+        className='rounded-2xl h-auto w-full aspect-comic-issue-cover'
       />
       {isFree && (
         <Text
@@ -38,15 +39,13 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, className }) => {
           FREE
         </Text>
       )}
-      <div className='flex flex-col  text-gray-100 px-2 pt-2'>
+      <div className='flex flex-col text-gray-100 px-2 pt-2'>
         {comicIssue.comic && (
           <Text as='span' styleVariant='body-normal' className='text-gray-100 line-clamp-1 overflow-ellipsis'>
             {comicIssue.comic.title}
           </Text>
         )}
-        <Text as='span' styleVariant='body-large' fontWeight='bold' className='line-clamp-1 overflow-ellipsis'>
-          {comicIssue.title}
-        </Text>
+        <OverflownTextWithTooltip text={comicIssue.title} className='text-lg font-bold' />
         {comicIssue.stats && (
           <div className='flex relative w-full justify-between text-gray-100'>
             <Text as='span' styleVariant='body-normal' className='text-gray-100'>

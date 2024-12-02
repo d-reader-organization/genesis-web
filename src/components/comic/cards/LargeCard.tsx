@@ -12,10 +12,17 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
 }
 
 export const LargeComicCard: React.FC<Props> = ({ className, comic, index }) => (
-  <Link href={RoutePath.Comic(comic.slug)} prefetch={false} className='flex flex-col justify-end h-full w-full p-2 border border-grey-300 rounded-2xl size-full'>
+  <Link
+    href={RoutePath.Comic(comic.slug)}
+    prefetch={false}
+    className='flex flex-col justify-end h-full w-full p-2 border border-grey-300 rounded-2xl size-full'
+  >
     <ContentWithGradientImageBg
       image={comic.cover}
-      className={cn('h-[229px] md:h-[279px] hover:brightness-110 shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]', className)}
+      className={cn(
+        'h-[229px] md:h-[279px] hover:brightness-110 shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)]',
+        className
+      )}
       gradientDirectionClassName='bg-gradient-to-t'
     >
       <div className='flex gap-4 items-center absolute bottom-0 p-2 sm:p-6'>

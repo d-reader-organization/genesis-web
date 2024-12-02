@@ -125,7 +125,7 @@ export function genresToSlugs(genres: PartialGenre[]): string[] {
 
 export const pluralizeString = (value: string, count?: number) => {
   if (typeof count !== 'number') return ''
-  return count > 1 ? `${value}s` : value
+  return count === 1 ? value : `${value}s`
 }
 
 export const shortenSolanaAddress = ({ address, slice = 4 }: { address: string; slice?: number }) =>

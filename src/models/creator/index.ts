@@ -38,3 +38,5 @@ export type UpdateCreatorFilesData = Partial<{
 }>
 
 export type SearchResultCreator = Pick<Creator, 'avatar' | 'name' | 'slug'> & { issuesCount: number }
+
+export type FollowCreator = Pick<Creator, 'slug'>

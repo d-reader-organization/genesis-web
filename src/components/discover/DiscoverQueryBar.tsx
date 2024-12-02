@@ -89,8 +89,8 @@ const QuerySheet: React.FC<QuerySheetProps> = ({ isOpen, triggerOpenChange }) =>
           className='p-6 flex flex-col h-full w-full bg-grey-600 shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)] max-w-[420px]'
           onInteractOutside={() => triggerOpenChange(false)}
         >
-          <Text as='p' styleVariant='body-xlarge' fontWeight='bold'>
-            Filter by
+          <Text as='span' styleVariant='body-xlarge' fontWeight='bold'>
+            Search criteria
           </Text>
           <div className='flex flex-col'>
             {queryCriteria.map(({ id, criteria }) => (
@@ -130,7 +130,7 @@ export const DiscoverQueryBySingleTag = ({ queryCriteria }: DiscoverQueryBySingl
         onClick={() => setIsExpanded(!isExpanded)}
         aria-expanded={isExpanded}
       >
-        <Text as='p' styleVariant='body-large'>
+        <Text as='p' styleVariant='body-xlarge' fontWeight='bold'>
           {queryCriteria.label}
         </Text>
         <ChevronDown size={19} />
@@ -153,12 +153,12 @@ export const DiscoverQueryBySingleTag = ({ queryCriteria }: DiscoverQueryBySingl
               <div
                 key={key}
                 className={cn(
-                  'flex justify-center items-center max-h-8 p-2 rounded-lg cursor-pointer',
+                  'flex justify-center items-center p-2 px-3 rounded-lg cursor-pointer',
                   isSelected ? 'bg-white text-black' : 'bg-grey-500 text-grey-100'
                 )}
                 onClick={() => handleTagClick(typedKey, value)}
               >
-                <Text as='p' styleVariant='body-xsmall'>
+                <Text as='p' styleVariant='body-large'>
                   {key}
                 </Text>
               </div>
@@ -198,7 +198,7 @@ export const DiscoverQueryByGenres: React.FC = () => {
         onClick={() => setIsExpanded(!isExpanded)}
         aria-expanded={isExpanded}
       >
-        <Text as='p' styleVariant='body-large'>
+        <Text as='span' styleVariant='body-xlarge' fontWeight='bold'>
           Genres
         </Text>
         <ChevronDown size={19} />
@@ -215,13 +215,13 @@ export const DiscoverQueryByGenres: React.FC = () => {
           {genres?.map((tag, index) => (
             <div
               className={cn(
-                'flex justify-center items-center max-h-8 p-2 rounded-lg cursor-pointer',
+                'flex justify-center items-center p-2 px-3 rounded-lg cursor-pointer',
                 selectedTags?.includes(tag.slug) ? 'bg-white text-black' : 'bg-grey-500 text-grey-100'
               )}
               key={`${tag.slug}-${index}`}
               onClick={() => handleTagClick(tag.slug)}
             >
-              <Text as='p' styleVariant='body-xsmall'>
+              <Text as='span' styleVariant='body-large'>
                 {tag.name}
               </Text>
             </div>

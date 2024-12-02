@@ -13,6 +13,7 @@ export type DiscoverQueryParamsStoreState = {
 
 export type DiscoverQueryParamsStoreActions = {
   resetToDefaultInitState: () => void
+  updateSearch: (search: string | undefined) => void
   updateCompleteGenresList: (genres: Genre[]) => void
   updateAllParamGenreSlugs: (genreSlugs: string[]) => void
   updateComicParams: (params: Partial<ComicParams>) => void
@@ -40,8 +41,8 @@ export const defaultInitState: DiscoverQueryParamsStoreState = {
     genreSlugs: undefined,
     sortOrder: undefined,
     creatorSlug: undefined,
-    comicSlug: undefined,
     search: undefined,
+    comicSlug: undefined,
     filterTag: undefined,
     sortTag: undefined,
   },
@@ -49,8 +50,8 @@ export const defaultInitState: DiscoverQueryParamsStoreState = {
     skip: 0,
     take: 20,
     genreSlugs: undefined,
-    sortOrder: undefined,
     search: undefined,
+    sortOrder: undefined,
     filterTag: undefined,
     sortTag: undefined,
   },
@@ -63,6 +64,21 @@ export const createDiscoverQueryParamsStore = (initState: DiscoverQueryParamsSto
       set((state) => ({
         ...defaultInitState,
         completeGenresList: state.completeGenresList,
+      })),
+    updateSearch: (search) =>
+      set((state) => ({
+        comicParams: {
+          ...state.comicParams,
+          search: search,
+        },
+        comicIssueParams: {
+          ...state.comicIssueParams,
+          search: search,
+        },
+        creatorParams: {
+          ...state.creatorParams,
+          search: search,
+        },
       })),
     updateCompleteGenresList: (genres) =>
       set(() => ({
