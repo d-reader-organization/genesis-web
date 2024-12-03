@@ -16,7 +16,7 @@ export interface BasicCreator {
   website: string
   twitter: string
   instagram: string
-  lynkfire: string
+  linktree: string
 }
 
 export interface Creator extends BasicCreator {
@@ -27,7 +27,7 @@ export interface Creator extends BasicCreator {
 export type UpdateCreatorData = Partial<
   Pick<
     Creator,
-    'email' | 'description' | 'flavorText' | 'tippingAddress' | 'website' | 'twitter' | 'instagram' | 'lynkfire'
+    'email' | 'description' | 'flavorText' | 'tippingAddress' | 'website' | 'twitter' | 'instagram' | 'linktree'
   >
 >
 

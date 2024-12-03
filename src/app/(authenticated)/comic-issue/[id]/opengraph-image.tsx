@@ -78,7 +78,7 @@ export default async function GET({ params }: { params: { id: string }; id: numb
         <p style={{ ...defaultTextStyles, top: 280 }}>
           {comicIssue.title || ''} (EP{comicIssue.number})
         </p>
-        {comicIssue.activeCandyMachineAddress && (
+        {comicIssue.collectibleInfo?.activeCandyMachineAddress && (
           <p
             style={{
               position: 'absolute',

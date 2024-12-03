@@ -22,7 +22,7 @@ export const CoverCarousel: React.FC<Props> = ({ covers, comicIssue }) => {
   const hasCoverVariants = covers.length > 1
 
   const { data: candyMachine } = useFetchCandyMachine({
-    candyMachineAddress: comicIssue.activeCandyMachineAddress ?? '',
+    candyMachineAddress: comicIssue.collectibleInfo?.activeCandyMachineAddress ?? '',
     walletAddress: publicKey?.toBase58() ?? '',
   })
 

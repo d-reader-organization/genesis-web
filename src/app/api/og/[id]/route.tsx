@@ -71,7 +71,7 @@ function generateImage(comicIssue: ComicIssue, coverImage: string) {
         <p style={{ ...defaultTextStyles, top: 280 }}>
           {comicIssue.title || ''} (EP{comicIssue.number})
         </p>
-        {comicIssue.activeCandyMachineAddress && (
+        {comicIssue.collectibleInfo?.activeCandyMachineAddress && (
           <p
             style={{
               position: 'absolute',
