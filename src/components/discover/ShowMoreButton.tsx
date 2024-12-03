@@ -25,7 +25,12 @@ export const ShowMoreButton: React.FC<ShowMoreButtonProps> = ({ onClick, disable
         <Loader2 className='size-12 animate-spin text-yellow-500' />
       ) : (
         <div className='flex justify-center items-center gap-2 text-grey-100'>
-          <Text as='p' styleVariant='body-large' fontWeight='bold' className='flex justify-center items-center gap-1 max-md:text-base'>
+          <Text
+            as='p'
+            styleVariant='body-large'
+            fontWeight='bold'
+            className='flex justify-center items-center gap-1 max-md:text-base'
+          >
             Show more
           </Text>
           <ChevronDownIcon className='w-4 h-4 md:w-5 md:h-5' />

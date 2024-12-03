@@ -33,7 +33,7 @@ export const DiscoverQueryBar: React.FC = () => {
             Clear all
           </Text>
         </Button>
-        <DiscoverSearchBar/>
+        <DiscoverSearchBar />
         <FilterButton
           isFilterSheetOpen={isFilterSheetOpen}
           setFilterSheetOpen={setFilterSheetOpen}
@@ -47,8 +47,8 @@ export const DiscoverQueryBar: React.FC = () => {
           <Text as='p' styleVariant='body-normal' className='max-md:hidden'>
             Sort by
           </Text>
-          <ChevronDown size={19} className='max-md:hidden'/>
-          <ListFilter size={17} className='md:hidden'/>
+          <ChevronDown size={19} className='max-md:hidden' />
+          <ListFilter size={17} className='md:hidden' />
         </Button>
       </div>
     </div>

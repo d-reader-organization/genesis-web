@@ -63,8 +63,8 @@ export const PriceTag: React.FC<Props> = ({
   const roundedPrice = !isNil(maxDecimals) ? roundNumber(formattedPrice, maxDecimals) : formattedPrice
 
   // Check for prices below the threshold
-  const threshold = 0.01; // Default threshold for 2 decimals
-  const isBelowThreshold = formattedPrice < threshold;
+  const threshold = 0.01 // Default threshold for 2 decimals
+  const isBelowThreshold = formattedPrice < threshold
 
   return (
     <TypographyWrapper>
@@ -74,22 +74,22 @@ export const PriceTag: React.FC<Props> = ({
       {isBelowThreshold ? threshold : roundedPrice}
       {icon && (
         <SolanaIcon
-        style={{
-          width: size,
-          height: size,
-          marginLeft: reverse ? '0.2rem' : '0.4rem',
-          marginRight: reverse ? '0.4rem' : '0.2rem',
-        }}
+          style={{
+            width: size,
+            height: size,
+            marginLeft: reverse ? '0.2rem' : '0.4rem',
+            marginRight: reverse ? '0.4rem' : '0.2rem',
+          }}
         />
       )}
       {colorfulIcon && (
         <SolanaColoredIcon
-        style={{
-          width: size,
-          height: size,
-          marginLeft: reverse ? '0.2rem' : '0.4rem',
-          marginRight: reverse ? '0.4rem' : '0.2rem',
-        }}
+          style={{
+            width: size,
+            height: size,
+            marginLeft: reverse ? '0.2rem' : '0.4rem',
+            marginRight: reverse ? '0.4rem' : '0.2rem',
+          }}
         />
       )}
     </TypographyWrapper>

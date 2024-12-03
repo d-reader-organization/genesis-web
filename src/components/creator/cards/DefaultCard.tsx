@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Text, toast } from '@/components/ui'
+import { Text } from '@/components/ui'
 import UserPlusIcon from 'public/assets/vector-icons/user-plus-icon.svg'
 import { AvatarImage } from '@/components/shared/AvatarImage'
 import { Creator } from '@/models/creator'
