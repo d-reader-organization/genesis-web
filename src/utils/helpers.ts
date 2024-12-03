@@ -65,9 +65,9 @@ export function prependYouTube(string?: string) {
   } else return ''
 }
 
-export function prependLynkfire(string?: string) {
+export function prependLinktreefire(string?: string) {
   if (string) {
-    return prependHttps('lynkfire.com/') + string
+    return prependHttps('linktree.com/') + string
   } else return ''
 }
 
@@ -101,8 +101,8 @@ export function removeYouTube(string?: string) {
   } else return ''
 }
 
-export function removeLynkfire(string?: string) {
-  if (string?.startsWith('https://lynkfire.com/')) {
+export function removeLinktree(string?: string) {
+  if (string?.startsWith('https://linktree.com/')) {
     return string.substring(21)
   } else return ''
 }
