@@ -55,7 +55,7 @@ export const DefaultCard: React.FC<Props> = ({ creator, className }) => {
         className='rounded-2xl w-full aspect-creator-banner object-cover object-top'
         {...CREATOR_BANNER_SIZE}
       />
-      <div className='flex relative p-2 justify-between mt-4 gap-2 flex-col items-center pb-1 md:gap-0 md:flex-row md:items-start md:pb-0'>
+      <div className='flex relative p-2 justify-between mt-4 gap-2 flex-col items-center pb-1 md:gap-0 md:flex-row md:items-start'>
         <AvatarImage
           src={creator.avatar}
           alt=''
@@ -77,10 +77,10 @@ export const DefaultCard: React.FC<Props> = ({ creator, className }) => {
         </div>
         {!creator.myStats?.isFollowing && (
           <button
-            className='flex bg-grey-300 bg-opacity-30 items-center rounded-xl gap-2 max-md:mt-1 p-4 max-h-9 sm:max-h-12 text-grey-100'
+            className='flex bg-grey-300 bg-opacity-30 items-center rounded-xl gap-2 max-md:mt-1 p-4 max-h-9 sm:max-h-11 text-grey-100'
             onClick={handleFollow}
           >
-            <UserPlusIcon className='w-5' />
+            <UserPlusIcon className='w-4 sm:w-5' />
             <Text as='span' styleVariant='body-large' fontWeight='medium' className='max-sm:text-sm'>
               Follow
             </Text>
@@ -88,7 +88,7 @@ export const DefaultCard: React.FC<Props> = ({ creator, className }) => {
         )}
         {creator.myStats?.isFollowing && (
           <button
-            className='flex bg-grey-300 bg-opacity-30 items-center rounded-xl gap-2 max-md:mt-1 p-4 max-h-9 sm:max-h-12 text-grey-100'
+            className='flex bg-grey-300 bg-opacity-30 items-center rounded-xl gap-2 max-md:mt-1 p-4 max-h-9 sm:max-h-11 text-grey-100'
             onClick={handleFollow}
           >
             <UserPlusIcon className='w-5' />
