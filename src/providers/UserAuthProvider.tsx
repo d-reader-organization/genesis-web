@@ -27,8 +27,8 @@ const initialContextValue: UserAuthContextState = {
   isAuthenticated: false,
   isAuthenticating: true,
   addAuthorization: () => emptyUserPayload,
-  removeAuthorization: () => { },
-  logout: () => { },
+  removeAuthorization: () => {},
+  logout: () => {},
 }
 
 export const UserAuthContext = createContext<UserAuthContextState>(initialContextValue)

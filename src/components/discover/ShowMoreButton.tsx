@@ -23,7 +23,7 @@ export const ShowMoreButton: React.FC<ShowMoreButtonProps> = ({ onClick, disable
           <Text as='p' styleVariant='body-large' fontWeight='bold' className='flex justify-center items-center gap-1'>
             Show more
           </Text>
-          <ChevronDownIcon  className='w-5 h-5'/>
+          <ChevronDownIcon className='w-5 h-5' />
         </div>
       )}
     </button>

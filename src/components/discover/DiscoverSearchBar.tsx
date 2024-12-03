@@ -196,13 +196,7 @@ type SearchResultProps = {
 const SearchResult: React.FC<SearchResultProps> = ({ result }) => (
   <Link href={result.href} className='flex items-center justify-between hover:brightness-125'>
     <div className='flex items-center gap-2'>
-      <Image
-        width={24}
-        height={24}
-        className='object-cover rounded-lg bg-grey-700 size-6'
-        src={result.image}
-        alt=''
-      />
+      <Image width={24} height={24} className='object-cover rounded-lg bg-grey-700 size-6' src={result.image} alt='' />
       <span className='text-sm text-white font-bold leading-[19.6px] overflow-ellipsis line-clamp-1'>
         {result.title}
       </span>

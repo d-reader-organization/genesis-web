@@ -6,7 +6,7 @@ import UserPlusIcon from 'public/assets/vector-icons/user-plus-icon.svg'
 import { AvatarImage, AvatarSize } from '@/components/shared/AvatarImage'
 import { Creator } from '@/models/creator'
 import { RoutePath } from '@/enums/routePath'
-import { CREATOR_BANNER_SIZE, } from '@/constants/imageSizes'
+import { CREATOR_BANNER_SIZE } from '@/constants/imageSizes'
 
 type Props = {
   creator: Creator

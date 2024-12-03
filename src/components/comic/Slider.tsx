@@ -15,7 +15,7 @@ export const ComicSectionSlider: React.FC<Props> = ({ cardType, comics, title })
   const isLargeCard = cardType === 'large'
   return (
     <SectionSlider title={title}>
-      {comics.map((comic, index) =>
+      {comics.map((comic, index) => (
         <div
           key={`${cardType}_${comic.slug}`}
           className={cn(
@@ -23,13 +23,9 @@ export const ComicSectionSlider: React.FC<Props> = ({ cardType, comics, title })
             isLargeCard ? '' : 'xs:flex-[0_0_50%] sm:flex-[0_0_33.333%] lg:flex-[0_0_16.67%]'
           )}
         >
-          {isLargeCard ? (
-            <LargeComicCard comic={comic} index={index} />
-          ) : (
-            <DefaultComicCard comic={comic} />
-          )}
+          {isLargeCard ? <LargeComicCard comic={comic} index={index} /> : <DefaultComicCard comic={comic} />}
         </div>
-      )}
+      ))}
     </SectionSlider>
   )
 }

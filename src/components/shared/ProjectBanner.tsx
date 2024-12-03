@@ -24,7 +24,7 @@ export const ProjectBanner: React.FC<Props> = ({ title, banner, cover, videoUrl 
           <div>
             <Image
               src={banner}
-              alt=""
+              alt=''
               fill
               style={{ objectFit: 'cover', objectPosition: 'top' }}
               className='max-sm:hidden md:rounded-xl shadow-lg'

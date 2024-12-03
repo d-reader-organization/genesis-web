@@ -48,7 +48,12 @@ export const Navigation: React.FC<Props> = ({ me, hideSearch = false }) => {
             </Link>
             {!hideSearch && <SearchInput />}
             <div className='flex items-center gap-10'>
-              <NavItemLink activeColor='text-yellow-500' href={RoutePath.Discover} isActive={isDiscover} title='Discover' />
+              <NavItemLink
+                activeColor='text-yellow-500'
+                href={RoutePath.Discover}
+                isActive={isDiscover}
+                title='Discover'
+              />
             </div>
             {/* <div className='flex items-center gap-10'>
               <NavItemLink activeColor='text-yellow-500' href={RoutePath.Invest} isActive={isInvest} title='Invest' />

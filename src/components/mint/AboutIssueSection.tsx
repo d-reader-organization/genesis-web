@@ -37,7 +37,7 @@ export const AboutIssueSection: React.FC<Props> = ({ comicIssue }) => (
           <ExternalLink className='text-grey-100' size={20} />
           <span className='text-base font-medium leading-[22.4px] text-grey-100'>Explore series</span>
         </Link>
-        {comicIssue.collectibleInfo && !comicIssue.activeCandyMachineAddress && (
+        {comicIssue.collectibleInfo && !comicIssue.collectibleInfo?.activeCandyMachineAddress && (
           <Link
             className='max-h-9 px-3 py-2 flex gap-2 justify-center items-center rounded-lg bg-yellow-500'
             href={`https://www.tensor.trade/trade/${comicIssue.collectibleInfo.collectionAddress}`}

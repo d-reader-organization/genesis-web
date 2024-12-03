@@ -1,10 +1,10 @@
 import { ComicIssue } from '.'
 
-export interface PublishOnChainData
-  extends Pick<ComicIssue, 'royaltyWallets' | 'supply' | 'mintPrice' | 'discountMintPrice' | 'creatorAddress'> {
+export interface PublishOnChainData extends Pick<ComicIssue, 'royaltyWallets' | 'supply' | 'mintPrice'> {
   startDate: string
   endDate: string
   publicMintLimit?: number
   freezePeriod?: number
-  sellerFeeBasisPoints: ComicIssue['sellerFee']
+  sellerFeeBasisPoints: number
+  creatorAddress: string
 }

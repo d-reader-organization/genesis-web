@@ -19,14 +19,14 @@ export const OwnedComicCard: React.FC<Props> = ({ comic }) => {
     <CardBorderWrapper className='flex flex-col  size-fit h-[262px] w-[156px] sm:h-[361px] sm:w-[226px]'>
       <div className='relative size-full max-h-[233px]'>
         <Image
-          alt=""
+          alt=''
           src={comic.cover}
           width={1000}
           height={900}
           className='object-cover rounded-xl h-[155px] sm:h-[233px] w-full opacity-50'
         />
         <Image
-          alt=""
+          alt=''
           src={comic.logo}
           width={120}
           height={120}

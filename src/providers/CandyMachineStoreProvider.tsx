@@ -33,7 +33,7 @@ export const CandyMachineStoreProvider = ({
     refetch,
     isLoading,
   } = useFetchCandyMachine({
-    candyMachineAddress: comicIssue.activeCandyMachineAddress ?? '',
+    candyMachineAddress: comicIssue?.collectibleInfo?.activeCandyMachineAddress ?? '',
     walletAddress: publicKey?.toBase58() ?? '',
   })
   const { data: supportedTokens = [] } = useFetchSupportedTokens()

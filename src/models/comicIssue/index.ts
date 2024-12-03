@@ -14,13 +14,10 @@ export interface BasicComicIssue {
   id: number
   number: number
   supply: number
-  discountMintPrice: number
   mintPrice: number
-  sellerFee: number
   title: string
   slug: string
   comicSlug: string
-  creatorAddress: string
   description: string
   flavorText: string
   cover: string
@@ -28,14 +25,12 @@ export interface BasicComicIssue {
   releaseDate: string
   isFreeToRead: boolean
   isFullyUploaded: boolean
-  isSecondarySaleActive: boolean
   isPublished: boolean
   isPopular: boolean
   isVerified: boolean
 }
 
 export interface ComicIssue extends BasicComicIssue {
-  activeCandyMachineAddress?: string
   collectibleInfo?: ComicIssueCollectibleInfo
   creator?: Pick<Creator, 'name' | 'slug' | 'isVerified' | 'avatar'>
   comic?: Pick<Comic, 'title' | 'slug' | 'audienceType'>
@@ -61,11 +56,7 @@ export interface CreateComicIssueData
   > {
   isFullyUploaded?: BasicComicIssue['isFullyUploaded']
   supply?: BasicComicIssue['supply']
-  discountMintPrice?: BasicComicIssue['discountMintPrice']
   mintPrice?: BasicComicIssue['mintPrice']
-  sellerFeeBasisPoints?: BasicComicIssue['sellerFee']
-  creatorAddress?: BasicComicIssue['creatorAddress']
-  creatorBackupAddress?: string
   collaborators?: ComicIssueCollaborator[]
   royaltyWallets?: RoyaltyWallet[]
   releaseDate: Date
@@ -76,14 +67,10 @@ export type UpdateComicIssueData = Partial<
     CreateComicIssueData,
     | 'number'
     | 'supply'
-    | 'discountMintPrice'
     | 'mintPrice'
-    | 'sellerFeeBasisPoints'
     | 'description'
     | 'flavorText'
     | 'releaseDate'
-    | 'creatorAddress'
-    | 'creatorBackupAddress'
     | 'collaborators'
     | 'royaltyWallets'
   >
