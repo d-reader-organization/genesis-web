@@ -13,13 +13,13 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
 }
 
 export const ComicIssueCard: React.FC<Props> = ({ comicIssue, className }) => {
-  const isFree = !(comicIssue.stats?.price != null && comicIssue.stats.price !== 0)
+  const isFree = comicIssue.stats?.price == null || comicIssue.stats.price === 0
 
   return (
     <Link
       href={RoutePath.ComicIssue(comicIssue.id)}
       className={cn(
-        'flex relative flex-col w-full p-2 border border-grey-300 rounded-2xl hover:brightness-115',
+        'flex relative flex-col w-full p-2 border border-grey-300 rounded-2xl hover:brightness-110',
         className
       )}
     >
@@ -34,25 +34,48 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, className }) => {
           as='span'
           styleVariant='body-normal'
           fontWeight='bold'
-          className='bg-yellow-500 rounded-xl p-1 px-2 text-black absolute right-3 top-3'
+          className='bg-yellow-500 rounded-xl p-1 px-2 text-black absolute right-3 top-3 max-sm:text-xs'
         >
           FREE
         </Text>
       )}
       <div className='flex flex-col text-gray-100 px-2 pt-2'>
         {comicIssue.comic && (
-          <Text as='span' styleVariant='body-normal' className='text-gray-100 line-clamp-1 overflow-ellipsis'>
+          <Text
+            as='span'
+            styleVariant='body-normal'
+            className='text-gray-100 line-clamp-1 overflow-ellipsis max-sm:text-sm'
+          >
             {comicIssue.comic.title}
           </Text>
         )}
-        <OverflownTextWithTooltip text={comicIssue.title} className='text-lg font-bold' />
+        <OverflownTextWithTooltip text={comicIssue.title} className='text-lg font-bold max-sm:text-base' />
         {comicIssue.stats && (
           <div className='flex relative w-full justify-between text-gray-100'>
-            <Text as='span' styleVariant='body-normal' className='text-gray-100'>
+            <Text as='span' styleVariant='body-normal' className='text-gray-100 max-sm:text-sm'>
               EP {comicIssue.number}/{comicIssue.stats.totalIssuesCount}
             </Text>
             {!isFree && (
-              <PriceTag styleVariant='body-normal' inline={false} bold icon size={14} price={comicIssue.stats.price} />
+              <>
+                <PriceTag
+                  styleVariant='body-normal'
+                  className='max-sm:hidden'
+                  inline={false}
+                  bold
+                  icon
+                  size={14}
+                  price={comicIssue.stats.price}
+                />
+                <PriceTag
+                  styleVariant='body-small'
+                  className='sm:hidden'
+                  inline={false}
+                  bold
+                  icon
+                  size={12}
+                  price={comicIssue.stats.price}
+                />
+              </>
             )}
           </div>
         )}

@@ -138,6 +138,7 @@ type SearchResultsContainerProps = {
   results: SearchResultModel[]
   title: string
 }
+
 const SearchResultsContainer: React.FC<SearchResultsContainerProps> = ({ results, title }) => (
   <div className='flex flex-col gap-2'>
     <span className='text-xs font-bold text-grey-200 leading-normal'>{title}</span>

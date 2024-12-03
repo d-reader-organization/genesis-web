@@ -19,7 +19,7 @@ export const DefaultComicCard: React.FC<Props> = ({ comic, className }) => {
       href={RoutePath.Comic(comic.slug)}
       prefetch={false}
       className={cn(
-        'flex flex-col gap-3 w-full relative hover:brightness-110 p-2 border border-grey-300 rounded-2xl size-full',
+        'flex flex-col gap-3 relative hover:brightness-110 p-2 border border-grey-300 rounded-2xl',
         className
       )}
     >
@@ -43,19 +43,19 @@ export const DefaultComicCard: React.FC<Props> = ({ comic, className }) => {
             FREE
           </Text>
         )}
-        <CopiesCount count={comic.stats?.issuesCount} episodes />
+        <CopiesCount count={comic.stats?.issuesCount} withLabel />
       </div>
-      <div className='flex flex-col px-2'>
+      <div className='flex flex-col px-2 pb-1 max-sm:gap-1'>
         <Text
           title={comic.title}
           as='p'
           styleVariant='body-large'
           fontWeight='bold'
-          className='line-clamp-1 overflow-ellipsis'
+          className='line-clamp-1 overflow-ellipsis max-sm:text-sm'
         >
           {comic.title}
         </Text>
-        <Text as='p' styleVariant='body-normal' className='text-grey-100 line-clamp-1 overflow-ellipsis'>
+        <Text as='p' styleVariant='body-normal' className='text-grey-100 line-clamp-1 overflow-ellipsis max-sm:text-xs'>
           {comic.creator ? 'by ' + comic.creator.name : ''}
         </Text>
       </div>

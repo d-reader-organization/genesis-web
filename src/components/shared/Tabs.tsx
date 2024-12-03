@@ -16,7 +16,7 @@ export const Tabs: React.FC<Props> = ({ tabs, className }) => {
 
   return (
     <>
-      <div className={cn('flex justify-around gap-6 md:justify-start', className)}>
+      <div className={cn('flex justify-start gap-6', className)}>
         {tabs.map((tab: Tab) => (
           <Link
             key={tab.url}

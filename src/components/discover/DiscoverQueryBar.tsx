@@ -1,15 +1,16 @@
 'use client'
 
 import { Button, Text } from '@/components/ui'
-import { SearchInput } from './DiscoverSearchBar'
+import { DiscoverSearchBar } from './DiscoverSearchBar'
 import React from 'react'
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
-import { Settings2, ChevronDown } from 'lucide-react'
+import { ListFilter, ChevronDown } from 'lucide-react'
 import { useDiscoverQueryStore } from '@/providers/DiscoverQueryStoreProvider'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 import { ALL_DISCOVER_PAGE_QUERY_CRITERIA, QUERY_CRITERIA_MAP } from '@/constants/discoverQueryCriteria'
 import { useDiscoverStoreActiveFiltersCount } from '@/hooks/useDiscoverStoreActiveFiltersCount'
+import { FilterButton } from './FilterButton'
 
 export const DiscoverQueryBar: React.FC = () => {
   const [isFilterSheetOpen, setFilterSheetOpen] = React.useState<boolean>(false)
@@ -19,40 +20,35 @@ export const DiscoverQueryBar: React.FC = () => {
   return (
     <div className='flex'>
       <QuerySheet isOpen={isFilterSheetOpen} triggerOpenChange={(open: boolean) => setFilterSheetOpen(open)} />
-      <div className='flex gap-4 w-[100%] max-md:justify-center'>
-        <Button
-          className='relative max-h-10 flex text-grey-100 bg-grey-500 gap-2'
-          onClick={() => setFilterSheetOpen(!isFilterSheetOpen)}
-        >
-          <Settings2 size={19} />
-          <Text as='p' styleVariant='body-normal'>
-            Filter
-          </Text>
-          {activeFiltersCount !== 0 && (
-            <Text
-              as='p'
-              fontWeight='bold'
-              styleVariant='body-small'
-              className='flex -top-1 -right-2 absolute justify-center items-center w-5 h-5 bg-white text-grey-600 rounded-full'
-            >
-              {activeFiltersCount}
-            </Text>
-          )}
-        </Button>
-        <Button onClick={clearAll} className='max-h-10 bg-grey-500 text-grey-100'>
+      <div className='flex gap-1 md:gap-4 w-[100%]'>
+        <FilterButton
+          isFilterSheetOpen={isFilterSheetOpen}
+          setFilterSheetOpen={setFilterSheetOpen}
+          activeFiltersCount={activeFiltersCount}
+          className='max-md:hidden'
+          withLabel
+        />
+        <Button onClick={clearAll} className='max-h-10 bg-grey-500 text-grey-100 max-md:hidden'>
           <Text as='p' styleVariant='body-normal'>
             Clear all
           </Text>
         </Button>
-        <SearchInput className='max-md:hidden' />
+        <DiscoverSearchBar/>
+        <FilterButton
+          isFilterSheetOpen={isFilterSheetOpen}
+          setFilterSheetOpen={setFilterSheetOpen}
+          activeFiltersCount={activeFiltersCount}
+          className='md:hidden'
+        />
         <Button
           className='max-h-10 p-4 flex justify-center items-center bg-grey-500 text-grey-100 gap-2'
           onClick={() => setFilterSheetOpen(!isFilterSheetOpen)}
         >
-          <Text as='p' styleVariant='body-normal'>
+          <Text as='p' styleVariant='body-normal' className='max-md:hidden'>
             Sort by
           </Text>
-          <ChevronDown size={19} />
+          <ChevronDown size={19} className='max-md:hidden'/>
+          <ListFilter size={17} className='md:hidden'/>
         </Button>
       </div>
     </div>

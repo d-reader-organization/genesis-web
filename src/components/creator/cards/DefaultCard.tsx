@@ -6,7 +6,7 @@ import { AvatarImage } from '@/components/shared/AvatarImage'
 import { Creator } from '@/models/creator'
 import { RoutePath } from '@/enums/routePath'
 import { CREATOR_BANNER_SIZE } from '@/constants/imageSizes'
-import { followCreator } from '@/app/lib/api/creator/queries'
+import { followCreator } from '@/app/lib/api/creator/mutations'
 import { useRouter } from 'next/navigation'
 import { pluralizeString } from '@/utils/helpers'
 import { cn } from '@/lib/utils'
@@ -25,26 +25,27 @@ export const DefaultCard: React.FC<Props> = ({ creator, className }) => {
     await followCreator({
       slug: creator.slug,
     })
-    
-    //kako api zna koji user followa? change behavior on followed
-    //handleClose()
-    //split into two toats, put?
-    creator.myStats.isFollowing &&
-      toast({
-        description: creator.myStats.isFollowing
-          ? 'You are now following ' + creator.name + '!'
-          : 'Failed to follow ' + creator.name + ', try again later!',
-        variant: 'success',
-      })
+
     refresh()
   }
+
+  // const handleUnfollow = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  //   e.preventDefault()
+  //   e.stopPropagation()
+
+  //   await unfollowCreator({
+  //     slug: creator.slug,
+  //   })
+
+  //   refresh()
+  // }
 
   return (
     <Link
       href={RoutePath.Creator(creator.slug)}
       prefetch={false}
       className={cn(
-        'flex flex-col gap-2 w-full rounded-2xl hover:brightness-125 border border-grey-300 p-2',
+        'flex flex-col gap-2 w-full rounded-2xl hover:brightness-110 border border-grey-300 p-2',
         className
       )}
     >
@@ -61,23 +62,41 @@ export const DefaultCard: React.FC<Props> = ({ creator, className }) => {
           size='large'
           className='absolute max-md:-top-7 max-md:left-1/2 max-md:transform max-md:-translate-x-1/2 max-md:-translate-y-1/2 md:inset-x-6 md:-inset-y-14'
         />
-        <div className='flex flex-col items-center md:items-start w-2/3'>
-          <Text as='span' styleVariant='body-large' fontWeight='bold' className='line-clamp-1 overflow-ellipsis'>
+        <div className='flex flex-col items-center md:items-start'>
+          <Text
+            as='span'
+            styleVariant='body-large'
+            fontWeight='bold'
+            className='line-clamp-1 overflow-ellipsis max-sm:text-base'
+          >
             {creator.name}
           </Text>
-          <Text as='span' styleVariant='body-normal' className='line-clamp-1 overflow-ellipsis'>
+          <Text as='span' styleVariant='body-normal' className='line-clamp-1 overflow-ellipsis max-sm:text-sm'>
             {creator.stats.followersCount + ' ' + pluralizeString('Follower', creator.stats.followersCount)}
           </Text>
         </div>
-        <button
-          className='flex bg-grey-300 bg-opacity-30 items-center rounded-xl gap-2 p-4 max-h-12 text-grey-100'
-          onClick={handleFollow}
-        >
-          <UserPlusIcon className='w-5' />
-          <Text as='span' styleVariant='body-large' fontWeight='medium' className=''>
-            Follow
-          </Text>
-        </button>
+        {!creator.myStats?.isFollowing && (
+          <button
+            className='flex bg-grey-300 bg-opacity-30 items-center rounded-xl gap-2 max-md:mt-1 p-4 max-h-9 sm:max-h-12 text-grey-100'
+            onClick={handleFollow}
+          >
+            <UserPlusIcon className='w-5' />
+            <Text as='span' styleVariant='body-large' fontWeight='medium' className='max-sm:text-sm'>
+              Follow
+            </Text>
+          </button>
+        )}
+        {creator.myStats?.isFollowing && (
+          <button
+            className='flex bg-grey-300 bg-opacity-30 items-center rounded-xl gap-2 max-md:mt-1 p-4 max-h-9 sm:max-h-12 text-grey-100'
+            onClick={handleFollow}
+          >
+            <UserPlusIcon className='w-5' />
+            <Text as='span' styleVariant='body-large' fontWeight='medium' className='max-sm:text-sm'>
+              Unfollow
+            </Text>
+          </button>
+        )}
       </div>
     </Link>
   )

@@ -5,13 +5,23 @@ import { Input } from '@/components/ui/Input'
 import { Search, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useDiscoverQueryStore } from '@/providers/DiscoverQueryStoreProvider'
+import { RoutePath } from '@/enums/routePath'
+import { usePathname } from 'next/navigation'
 
 type Props = React.InputHTMLAttributes<HTMLInputElement>
 
-export const SearchInput: React.FC<Props> = ({ className }) => {
+export const DiscoverSearchBar: React.FC<Props> = ({ className }) => {
   const searchRef = React.useRef<HTMLDivElement>(null)
   const searchTerm = useDiscoverQueryStore((state) => state.comicParams.search)
   const setSearchTerm = useDiscoverQueryStore((state) => state.updateSearch)
+  const pathname = usePathname()
+
+  const getPlaceholder = React.useCallback(() => {
+    if (pathname === RoutePath.DiscoverComics) return 'Search by comics'
+    if (pathname === RoutePath.DiscoverComicIssues) return 'Search by episodes'
+    if (pathname === RoutePath.DiscoverCreators) return 'Search by creators'
+    return 'Search'
+  }, [pathname])
 
   return (
     <div className={cn('relative z-10 w-full', className)} ref={searchRef}>
@@ -23,7 +33,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
         <Search className='size-[18px] absolute top-3 left-3 text-grey-200' />
       )}
       <Input
-        placeholder='Search'
+        placeholder={getPlaceholder()}
         value={searchTerm || ''}
         className='pl-10 pr-10 w-full max-w-[100%]'
         onChange={(e) => setSearchTerm(e.target.value)}

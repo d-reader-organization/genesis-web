@@ -5,10 +5,10 @@ import { cn } from '@/lib/utils'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   count?: number
-  episodes?: boolean
+  withLabel?: boolean
 }
 
-export const CopiesCount: React.FC<Props> = ({ count, episodes = false, className }) => (
+export const CopiesCount: React.FC<Props> = ({ count, withLabel = false, className }) => (
   <Text
     as='span'
     styleVariant='body-small'
@@ -16,6 +16,6 @@ export const CopiesCount: React.FC<Props> = ({ count, episodes = false, classNam
     className={cn('bg-white bg-opacity-20 rounded-2xl backdrop-blur-lg p-1 px-2', className)}
   >
     {count}
-    {episodes ? ` ${pluralizeString('EP', count)}` : ''}
+    {withLabel ? ` ${pluralizeString('EP', count)}` : ''}
   </Text>
 )
