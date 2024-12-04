@@ -63,7 +63,7 @@ export const PriceTag: React.FC<Props> = ({
   const roundedPrice = !isNil(maxDecimals) ? roundNumber(formattedPrice, maxDecimals) : formattedPrice
 
   // Check for prices below the threshold
-  const threshold = 0.01 // Default threshold for 2 decimals
+  const threshold = 0.001 // Default threshold for 2 decimals
   const isBelowThreshold = formattedPrice < threshold
 
   return (

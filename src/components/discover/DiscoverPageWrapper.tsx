@@ -26,7 +26,7 @@ export const DiscoverPageWrapper: React.FC<Props> = async ({ children, mainClass
             as='h1'
             fontWeight='semibold'
             styleVariant='primary-heading'
-            className='text-white sm:uppercase ml-1 max-sm:text-20 max-sm:tracking-0048'
+            className='text-white sm:uppercase max-sm:text-20 max-sm:tracking-0048'
           >
             Discover
           </Text>
