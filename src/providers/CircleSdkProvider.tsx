@@ -21,7 +21,7 @@ import {
 } from '@/constants/circle'
 import {
   type Wallet,
-  type DeviceTokenSocialData,
+  type DeviceTokenEmailData,
 } from '@circle-fin/user-controlled-wallets/dist/types/clients/user-controlled-wallets'
 import {
   createUserForLoginWithEmail,
@@ -48,7 +48,8 @@ type ContextReturnType = {
   executeChallenge?: (challengeId: string) => void
   userToken?: string
   activeWallet?: Wallet
-  onLogin?: (withGoogle?: boolean) => Promise<void>
+  onLogin?: () => Promise<void>
+  onGoogleLogin?: () => Promise<void>
   createWalletAction?: () => Promise<void>
   requestAndSignMessage?: (input: { address: string; walletId: string }) => Promise<void>
   fetchAndSignTransaction?: (input: { address: string; walletId: string }) => Promise<void>
@@ -184,7 +185,7 @@ export const CircleSdkProvider = ({ children }: SdkProviderProps): JSX.Element =
         } else if (result?.type === ChallengeType.SIGN_TRANSACTION) {
           const signTransactionResult = result as SignTransactionResult
           await sendTransactionApi(signTransactionResult.data?.signedTransaction ?? '')
-        } else if (result?.type === ChallengeType.CREATE_WALLET) {
+        } else if (result?.type === ChallengeType.CREATE_WALLET || result?.type === ChallengeType.INITIALIZE) {
           await getAndSetActiveWallet(userToken ?? '')
         }
       })
@@ -197,7 +198,7 @@ export const CircleSdkProvider = ({ children }: SdkProviderProps): JSX.Element =
     setDeviceId(newDeviceId)
   }, [])
 
-  const setUserDeviceTokens = useCallback((data: DeviceTokenSocialData) => {
+  const storeDeviceTokenData = useCallback((data: DeviceTokenEmailData) => {
     localStorage.setItem(deviceTokenKey, data.deviceToken)
     localStorage.setItem(deviceTokenEncryptionKey, data.deviceEncryptionKey ?? '')
   }, [])
@@ -221,26 +222,41 @@ export const CircleSdkProvider = ({ children }: SdkProviderProps): JSX.Element =
     []
   )
 
-  const onLogin = useCallback(
-    async (withGoogle?: boolean) => {
-      if (!webSdk) {
-        return
-      }
-      const deviceId = await webSdk.getDeviceId()
-      const response = withGoogle
-        ? await createUserForSocialLogin(deviceId)
-        : await createUserForLoginWithEmail({ deviceId, email: (await fetchMe())?.email ?? '' })
-      if (!response) {
-        return
-      }
-      setUserDeviceId(deviceId)
-      setUserDeviceTokens(response)
-      if (withGoogle) {
-        webSdk.performLogin(SocialLoginProvider.GOOGLE)
-      }
-    },
-    [setUserDeviceId, setUserDeviceTokens]
-  )
+  const onGoogleLogin = useCallback(async () => {
+    if (!webSdk) {
+      return
+    }
+    const deviceId = await webSdk.getDeviceId()
+    const response = await createUserForSocialLogin(deviceId)
+    if (!response) {
+      return
+    }
+    setUserDeviceId(deviceId)
+    storeDeviceTokenData(response)
+    webSdk.performLogin(SocialLoginProvider.GOOGLE)
+  }, [setUserDeviceId, storeDeviceTokenData])
+
+  const onLogin = useCallback(async () => {
+    if (!webSdk) {
+      return
+    }
+    const deviceId = await webSdk.getDeviceId()
+    const response = await createUserForLoginWithEmail({ deviceId, email: (await fetchMe())?.email ?? '' })
+    if (!response) {
+      return
+    }
+    setUserDeviceId(deviceId)
+    storeDeviceTokenData(response)
+    webSdk.updateConfigs({
+      appSettings: { appId: process.env.NEXT_PUBLIC_CIRCLE_APP_ID || '' },
+      loginConfigs: {
+        deviceToken: response.deviceToken,
+        deviceEncryptionKey: response.deviceEncryptionKey ?? '',
+        otpToken: response.otpToken,
+      },
+    })
+    webSdk.verifyOtp()
+  }, [setUserDeviceId, storeDeviceTokenData])
 
   const createWalletAction = useCallback(async () => {
     if (!userToken) {
@@ -324,6 +340,7 @@ export const CircleSdkProvider = ({ children }: SdkProviderProps): JSX.Element =
       executeChallenge,
       userToken,
       onLogin,
+      onGoogleLogin,
       createWalletAction,
       requestAndSignMessage,
       fetchAndSignTransaction,
@@ -333,6 +350,7 @@ export const CircleSdkProvider = ({ children }: SdkProviderProps): JSX.Element =
       executeChallenge,
       userToken,
       onLogin,
+      onGoogleLogin,
       createWalletAction,
       requestAndSignMessage,
       fetchAndSignTransaction,
