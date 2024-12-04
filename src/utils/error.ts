@@ -13,3 +13,19 @@ export const generateMaxLengthErrorMessage = (name: string, maxLength: string | 
 export const generateNotCheckedErrorMessage = (name: string) => `${name} must be checked`
 
 export const generateEmptyStringErorrMessage = (name: string) => `${name} can't be empty`
+
+interface AxiosError {
+  isAxiosError: boolean
+  message: string
+  response?: {
+    data: {
+      message: string
+    }
+  }
+  config?: any
+  request?: any
+}
+
+export function isAxiosError(error: unknown): error is AxiosError {
+  return typeof error === 'object' && error !== null && (error as AxiosError).isAxiosError === true
+}

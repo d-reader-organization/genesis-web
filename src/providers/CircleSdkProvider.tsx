@@ -263,6 +263,13 @@ export const CircleSdkProvider = ({ children }: SdkProviderProps): JSX.Element =
       return
     }
     const response = await createUserWallet(userToken)
+    if (response?.errorMessage) {
+      toast({
+        description: response?.errorMessage,
+        variant: 'error',
+      })
+      return
+    }
     executeChallenge?.(response?.challengeId ?? '')
   }, [executeChallenge, userToken])
 

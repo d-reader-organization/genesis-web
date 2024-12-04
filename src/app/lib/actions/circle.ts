@@ -1,5 +1,6 @@
 'use server'
 
+import { isAxiosError } from '@/utils/error'
 import { initiateUserControlledWalletsClient } from '@circle-fin/user-controlled-wallets'
 import {
   type DeviceTokenEmailData,
@@ -46,7 +47,9 @@ export const createUserForSocialLogin = async (deviceId: string): Promise<Device
   return response.data
 }
 
-export const createUserWallet = async (userToken: string): Promise<PinData | undefined> => {
+export const createUserWallet = async (
+  userToken: string
+): Promise<(PinData & { errorMessage?: string }) | undefined> => {
   try {
     const response = await circleClient.createUserPinWithWallets({
       userToken,
@@ -54,7 +57,9 @@ export const createUserWallet = async (userToken: string): Promise<PinData | und
     })
     return response.data
   } catch (error) {
-    console.log(error)
+    if (isAxiosError(error)) {
+      return { errorMessage: error.response?.data.message, challengeId: '' }
+    }
   }
 }
 
