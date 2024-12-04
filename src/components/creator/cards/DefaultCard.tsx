@@ -22,9 +22,7 @@ export const DefaultCard: React.FC<Props> = ({ creator, className }) => {
     e.preventDefault()
     e.stopPropagation()
 
-    await followCreator({
-      slug: creator.slug,
-    })
+    await followCreator(creator.slug)
 
     refresh()
   }
@@ -75,28 +73,19 @@ export const DefaultCard: React.FC<Props> = ({ creator, className }) => {
             {creator.stats.followersCount + ' ' + pluralizeString('Follower', creator.stats.followersCount)}
           </Text>
         </div>
-        {!creator.myStats?.isFollowing && (
-          <button
-            className='flex bg-grey-300 bg-opacity-30 items-center rounded-xl gap-2 max-md:mt-1 p-4 max-h-9 sm:max-h-11 text-grey-100'
-            onClick={handleFollow}
-          >
-            <UserPlusIcon className='w-4 sm:w-5' />
-            <Text as='span' styleVariant='body-large' fontWeight='medium' className='max-sm:text-sm'>
-              Follow
-            </Text>
-          </button>
-        )}
-        {creator.myStats?.isFollowing && (
-          <button
-            className='flex bg-grey-300 bg-opacity-30 items-center rounded-xl gap-2 max-md:mt-1 p-4 max-h-9 sm:max-h-11 text-grey-100'
-            onClick={handleFollow}
-          >
-            <UserPlusIcon className='w-5' />
-            <Text as='span' styleVariant='body-large' fontWeight='medium' className='max-sm:text-sm'>
-              Unfollow
-            </Text>
-          </button>
-        )}
+
+        <button
+          className={cn(
+            'flex bg-opacity-30 items-center rounded-xl gap-2 max-md:mt-1 p-4 max-h-9 sm:max-h-11 ',
+            creator.myStats?.isFollowing ? 'bg-white text-black' : 'text-grey-100 bg-grey-300'
+          )}
+          onClick={handleFollow}
+        >
+          <UserPlusIcon className='w-4 sm:w-5' />
+          <Text as='span' styleVariant='body-large' fontWeight='medium' className='max-sm:text-sm'>
+            {creator.myStats?.isFollowing ? 'Unfollow' : 'Follow'}
+          </Text>
+        </button>
       </div>
     </Link>
   )

@@ -27,7 +27,7 @@ function excludeTagsFromDiscoverPageQueryCriteria<E extends Record<string, strin
   return Object.fromEntries(Object.entries(allTags).filter(([key]) => !exclude.includes(key as keyof E))) as E
 }
 
-const selectedComicSortTags = excludeTagsFromDiscoverPageQueryCriteria(ComicSortTag, ['Title', 'Published'])
+//const modifiedComicSortTags = excludeTagsFromDiscoverPageQueryCriteria(ComicSortTag, ['Title', 'Published'])
 
 export type ALL_DISCOVER_PAGE_QUERY_CRITERIA =
   | DiscoverPageQueryCriteria<typeof ComicFilterTag>
@@ -47,8 +47,8 @@ export const COMICS_FILTER_CRITERIA = createDiscoverPageQueryCriteria(
 
 export const COMICS_SORT_CRITERIA = createDiscoverPageQueryCriteria(
   'Order by',
-  //ComicSortTag,
-  selectedComicSortTags,
+  ComicSortTag,
+  //modifiedComicSortTags,
   (store) => store.comicParams.sortTag,
   (store, tag) => store.updateComicParams({ sortTag: tag })
 )

@@ -21,7 +21,10 @@ export const Tabs: React.FC<Props> = ({ tabs, className }) => {
           <Link
             key={tab.url}
             href={tab.url}
-            className={cn('bg-transparent rounded-none pb-1 cursor-pointer', selectedTab === tab.url && 'border-b-[2px] z-10')}
+            className={cn(
+              'bg-transparent rounded-none pb-1 cursor-pointer',
+              selectedTab === tab.url && 'border-b-[2px] z-10'
+            )}
           >
             <Text
               as='h4'

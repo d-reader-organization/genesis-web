@@ -6,6 +6,7 @@ import { createStore } from 'zustand/vanilla'
 
 export type DiscoverQueryParamsStoreState = {
   completeGenresList: Genre[]
+  isFetching: boolean
   comicParams: ComicParams
   comicIssueParams: ComicIssueParams
   creatorParams: CreatorParams
@@ -13,6 +14,7 @@ export type DiscoverQueryParamsStoreState = {
 
 export type DiscoverQueryParamsStoreActions = {
   resetToDefaultInitState: () => void
+  updateFetching: (isFetching: boolean) => void
   updateSearch: (search: string | undefined) => void
   updateCompleteGenresList: (genres: Genre[]) => void
   updateAllParamGenreSlugs: (genreSlugs: string[]) => void
@@ -25,6 +27,7 @@ export type DiscoverQueryParamsStore = DiscoverQueryParamsStoreState & DiscoverQ
 
 export const defaultInitState: DiscoverQueryParamsStoreState = {
   completeGenresList: [],
+  isFetching: false,
   comicParams: {
     skip: 0,
     take: 20,
@@ -64,6 +67,10 @@ export const createDiscoverQueryParamsStore = (initState: DiscoverQueryParamsSto
       set((state) => ({
         ...defaultInitState,
         completeGenresList: state.completeGenresList,
+      })),
+    updateFetching: (isFetching: boolean) =>
+      set(() => ({
+        isFetching: isFetching,
       })),
     updateSearch: (search) =>
       set((state) => ({

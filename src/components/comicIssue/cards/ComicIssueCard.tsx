@@ -6,7 +6,7 @@ import { ComicIssue } from '@/models/comicIssue'
 import { RoutePath } from '@/enums/routePath'
 import { cn } from '@/lib/utils'
 import { COMIC_ISSUE_COVER_SIZE } from '@/constants/imageSizes'
-import { OverflownTextWithTooltip } from '@/components/ui/OverflownTextWithTooltip'
+import { TextWithOverflow } from '@/components/ui/TextWithOverflow'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comicIssue: ComicIssue
@@ -49,7 +49,7 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, className }) => {
             {comicIssue.comic.title}
           </Text>
         )}
-        <OverflownTextWithTooltip text={comicIssue.title} className='text-lg font-bold max-sm:text-base' />
+        <TextWithOverflow text={comicIssue.title} className='text-lg font-bold max-sm:text-base' />
         {comicIssue.stats && (
           <div className='flex relative w-full justify-between text-gray-100'>
             <Text as='span' styleVariant='body-normal' className='text-gray-100 max-sm:text-sm'>

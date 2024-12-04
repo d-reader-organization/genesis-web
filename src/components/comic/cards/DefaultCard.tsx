@@ -29,7 +29,7 @@ export const DefaultComicCard: React.FC<Props> = ({ comic, className }) => {
         className='rounded-2xl h-auto aspect-comic-cover object-cover opacity-50'
         {...COMIC_COVER_SIZE}
       />
-      <div className='absolute w-[120px] h-[120px] m-auto -top-2 bottom-14 left-0 right-0'>
+      <div className='absolute w-[70%] m-auto -top-2 bottom-14 left-0 right-0 max-w-[180px] max-h-[180px]'>
         <Image alt='' src={comic.logo} fill className='object-contain pointer-events-none' />
       </div>
       <div className='flex absolute top-3 right-3 gap-1'>

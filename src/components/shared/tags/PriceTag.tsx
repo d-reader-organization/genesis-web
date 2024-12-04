@@ -4,9 +4,9 @@ import { formatPrice } from '@/utils/helpers'
 import { isNil } from 'lodash'
 import { roundNumber } from '@/utils/numbers'
 import { Text } from '../../ui'
+import clsx from 'clsx'
 import React from 'react'
 import { TextProps } from '../../ui'
-import { cn } from '@/lib/utils'
 
 interface Props extends Partial<TextProps> {
   price?: number | null
@@ -42,7 +42,7 @@ export const PriceTag: React.FC<Props> = ({
       <Text
         as={as}
         styleVariant={styleVariant}
-        className={cn(
+        className={clsx(
           inline ? 'inline-flex' : 'flex',
           reverse ? 'flex-row-reverse' : 'flex-row',
           'items-center',
@@ -62,23 +62,17 @@ export const PriceTag: React.FC<Props> = ({
   const formattedPrice = formatPrice(price)
   const roundedPrice = !isNil(maxDecimals) ? roundNumber(formattedPrice, maxDecimals) : formattedPrice
 
-  // Check for prices below the threshold
-  const threshold = 0.001 // Default threshold for 2 decimals
-  const isBelowThreshold = formattedPrice < threshold
-
   return (
     <TypographyWrapper>
       {from ? 'from ' : ''}
       {symbol && <span>◎</span>}
-      {isBelowThreshold && '~'}
-      {isBelowThreshold ? threshold : roundedPrice}
       {icon && (
         <SolanaIcon
           style={{
             width: size,
             height: size,
-            marginLeft: reverse ? '0.2rem' : '0.4rem',
-            marginRight: reverse ? '0.4rem' : '0.2rem',
+            marginLeft: reverse ? '0.2rem' : '0.5rem',
+            marginRight: reverse ? '0.5rem' : '0.2rem',
           }}
         />
       )}
@@ -87,11 +81,12 @@ export const PriceTag: React.FC<Props> = ({
           style={{
             width: size,
             height: size,
-            marginLeft: reverse ? '0.2rem' : '0.4rem',
-            marginRight: reverse ? '0.4rem' : '0.2rem',
+            marginLeft: reverse ? '0.2rem' : '0.5rem',
+            marginRight: reverse ? '0.5rem' : '0.2rem',
           }}
         />
       )}
+      {roundedPrice}
     </TypographyWrapper>
   )
 }

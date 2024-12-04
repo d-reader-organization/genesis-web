@@ -5,6 +5,6 @@ import { fetchWrapper } from '../../fetchWrapper'
 
 const { CREATOR, FOLLOW } = CREATOR_QUERY_KEYS
 
-export const followCreator = async ({ slug }: { slug: string }): Promise<void> => {
+export const followCreator = async (slug: string): Promise<void> => {
   await fetchWrapper<void>({ path: `${CREATOR}/${FOLLOW}/${slug}`, method: 'PATCH', isTextResponse: true })
 }

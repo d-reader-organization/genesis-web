@@ -22,8 +22,8 @@ export const FilterButton: React.FC<FilterButtonProps> = ({
       className={cn('relative max-h-10 flex text-grey-100 bg-grey-500 gap-2', className)}
       onClick={() => setFilterSheetOpen(!isFilterSheetOpen)}
     >
-      <Settings2 size={19} className='max-md:hidden' />
-      <Settings2 size={17} className='md:hidden' />
+      <Settings2 size={18} className='max-md:hidden' />
+      <Settings2 size={16} className='md:hidden' />
       {withLabel && (
         <Text as='p' styleVariant='body-normal'>
           Filter
