@@ -22,8 +22,6 @@ interface AxiosError {
       message: string
     }
   }
-  config?: any
-  request?: any
 }
 
 export function isAxiosError(error: unknown): error is AxiosError {
