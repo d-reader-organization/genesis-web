@@ -32,7 +32,7 @@ export const PriceTag: React.FC<Props> = ({
   icon = false,
   colorfulIcon = false,
   maxDecimals,
-  as = 'p',
+  as: as = 'p',
   styleVariant = 'body-normal',
   className,
   ...props

@@ -49,7 +49,15 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, className }) => {
             {comicIssue.comic.title}
           </Text>
         )}
-        <TextWithOverflow text={comicIssue.title} className='text-lg font-bold max-sm:text-base' />
+        {/* <TextWithOverflow text={comicIssue.title} className='text-lg font-bold max-sm:text-base' /> */}
+        <Text
+            as='span'
+            styleVariant='body-large'
+            className='text-gray-100 line-clamp-1 overflow-ellipsis max-sm:text-sm'
+            title={comicIssue.title}
+          >
+            {comicIssue.title}
+        </Text>
         {comicIssue.stats && (
           <div className='flex relative w-full justify-between text-gray-100'>
             <Text as='span' styleVariant='body-normal' className='text-gray-100 max-sm:text-sm'>

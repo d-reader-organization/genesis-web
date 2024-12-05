@@ -12,7 +12,7 @@ type StyleVariant =
   | 'body-xsmall'
 type FontWeight = 'bold' | 'semibold' | 'medium' | 'normal'
 
-export type TextProps = React.HTMLAttributes<HTMLSpanElement | HTMLHeadingElement | HTMLParagraphElement> & {
+export type TextProps = {
   as: Variant
   styleVariant: StyleVariant
   className?: string
