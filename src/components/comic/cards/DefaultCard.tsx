@@ -36,7 +36,7 @@ export const DefaultComicCard: React.FC<Props> = ({ comic, className }) => {
         {isFree && (
           <Text
             as='span'
-            styleVariant='body-normal'
+            styleVariant='body-xsmall'
             fontWeight='bold'
             className='bg-yellow-500 rounded-xl p-1 px-2 text-black'
           >
@@ -49,13 +49,13 @@ export const DefaultComicCard: React.FC<Props> = ({ comic, className }) => {
         <Text
           title={comic.title}
           as='p'
-          styleVariant='body-large'
+          styleVariant='body-normal'
           fontWeight='bold'
           className='line-clamp-1 overflow-ellipsis max-sm:text-sm'
         >
           {comic.title}
         </Text>
-        <Text as='p' styleVariant='body-normal' className='text-grey-100 line-clamp-1 overflow-ellipsis max-sm:text-xs'>
+        <Text as='p' styleVariant='body-small' className='text-grey-100 line-clamp-1 overflow-ellipsis max-sm:text-xs'>
           {comic.creator ? 'by ' + comic.creator.name : ''}
         </Text>
       </div>

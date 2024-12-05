@@ -32,9 +32,9 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, className }) => {
       {isFree && (
         <Text
           as='span'
-          styleVariant='body-normal'
+          styleVariant='body-small'
           fontWeight='bold'
-          className='bg-yellow-500 rounded-xl p-1 px-2 text-black absolute right-3 top-3 max-sm:text-xs'
+          className='bg-yellow-500 rounded-xl p-1 px-2 text-black absolute right-3 top-3 max-sm:text-xxs'
         >
           FREE
         </Text>
@@ -43,30 +43,31 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, className }) => {
         {comicIssue.comic && (
           <Text
             as='span'
-            styleVariant='body-normal'
-            className='text-gray-100 line-clamp-1 overflow-ellipsis max-sm:text-sm'
+            styleVariant='body-small'
+            className='text-gray-100 line-clamp-1 overflow-ellipsis max-sm:text-xs'
           >
             {comicIssue.comic.title}
           </Text>
         )}
         {/* <TextWithOverflow text={comicIssue.title} className='text-lg font-bold max-sm:text-base' /> */}
         <Text
-            as='span'
-            styleVariant='body-large'
-            className='text-gray-100 line-clamp-1 overflow-ellipsis max-sm:text-sm'
-            title={comicIssue.title}
-          >
-            {comicIssue.title}
+          as='span'
+          styleVariant='body-normal'
+          fontWeight='bold'
+          className='text-white line-clamp-1 overflow-ellipsis max-sm:text-sm'
+          title={comicIssue.title}
+        >
+          {comicIssue.title}
         </Text>
         {comicIssue.stats && (
           <div className='flex relative w-full justify-between text-gray-100'>
-            <Text as='span' styleVariant='body-normal' className='text-gray-100 max-sm:text-sm'>
+            <Text as='span' styleVariant='body-small' className='text-gray-100 max-sm:text-xs'>
               EP {comicIssue.number}/{comicIssue.stats.totalIssuesCount}
             </Text>
             {!isFree && (
               <>
                 <PriceTag
-                  styleVariant='body-normal'
+                  styleVariant='body-small'
                   className='max-sm:hidden'
                   inline={false}
                   bold
@@ -75,7 +76,7 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, className }) => {
                   price={comicIssue.stats.price}
                 />
                 <PriceTag
-                  styleVariant='body-small'
+                  styleVariant='body-xsmall'
                   className='sm:hidden'
                   inline={false}
                   bold

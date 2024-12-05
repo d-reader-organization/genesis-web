@@ -43,7 +43,7 @@ export const DefaultCard: React.FC<Props> = ({ creator, className }) => {
       href={RoutePath.Creator(creator.slug)}
       prefetch={false}
       className={cn(
-        'flex flex-col gap-2 w-full rounded-2xl hover:brightness-110 border border-grey-300 p-2',
+        'flex flex-col gap-3 md:gap-2 w-full rounded-2xl hover:brightness-110 border border-grey-300 p-2',
         className
       )}
     >
@@ -58,31 +58,30 @@ export const DefaultCard: React.FC<Props> = ({ creator, className }) => {
           src={creator.avatar}
           alt=''
           size='large'
-          className='absolute max-md:-top-7 max-md:left-1/2 max-md:transform max-md:-translate-x-1/2 max-md:-translate-y-1/2 md:inset-x-6 md:-inset-y-14'
+          className='absolute max-md:-top-8 max-md:left-1/2 max-md:transform max-md:-translate-x-1/2 max-md:-translate-y-1/2 md:inset-x-6 md:-inset-y-14'
         />
-        <div className='flex flex-col items-center md:items-start'>
+        <div className='flex flex-col items-center gap-[2px] md:items-start'>
           <Text
             as='span'
-            styleVariant='body-large'
+            styleVariant='body-normal'
             fontWeight='bold'
-            className='line-clamp-1 overflow-ellipsis max-sm:text-base'
+            className='line-clamp-1 overflow-ellipsis max-sm:text-sm'
           >
             {creator.name}
           </Text>
-          <Text as='span' styleVariant='body-normal' className='line-clamp-1 overflow-ellipsis max-sm:text-sm'>
+          <Text as='span' styleVariant='body-small' className='line-clamp-1 overflow-ellipsis max-sm:text-xs'>
             {creator.stats.followersCount + ' ' + pluralizeString('Follower', creator.stats.followersCount)}
           </Text>
         </div>
-
         <button
           className={cn(
-            'flex bg-opacity-30 items-center rounded-xl gap-2 max-md:mt-1 p-4 max-h-9 sm:max-h-11 ',
+            'flex bg-opacity-30 items-center rounded-xl gap-2 max-md:mt-1 p-4 max-h-9 sm:max-h-11',
             creator.myStats?.isFollowing ? 'bg-white text-black' : 'text-grey-100 bg-grey-300'
           )}
           onClick={handleFollow}
         >
           <UserPlusIcon className='w-4 sm:w-5' />
-          <Text as='span' styleVariant='body-large' fontWeight='medium' className='max-sm:text-sm'>
+          <Text as='span' styleVariant='body-small' fontWeight='medium' className='max-sm:text-xs'>
             {creator.myStats?.isFollowing ? 'Unfollow' : 'Follow'}
           </Text>
         </button>

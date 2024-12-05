@@ -29,7 +29,7 @@ export const Tabs: React.FC<Props> = ({ tabs, className }) => {
             <Text
               as='h4'
               styleVariant='secondary-heading'
-              className={cn(selectedTab === tab.url ? 'text-white' : 'text-grey-200')}
+              className={cn('max-sm:text-base', selectedTab === tab.url ? 'text-white' : 'text-grey-200')}
             >
               {tab.name}
             </Text>

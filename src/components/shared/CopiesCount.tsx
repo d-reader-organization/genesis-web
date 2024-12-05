@@ -11,9 +11,9 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
 export const CopiesCount: React.FC<Props> = ({ count, withLabel = false, className }) => (
   <Text
     as='span'
-    styleVariant='body-small'
+    styleVariant='body-xsmall'
     fontWeight='bold'
-    className={cn('bg-white bg-opacity-20 rounded-2xl backdrop-blur-lg p-1 px-2', className)}
+    className={cn('bg-white bg-opacity-20 rounded-2xl backdrop-blur-lg p-1 px-2 max-sm:text-xxs', className)}
   >
     {count}
     {withLabel ? ` ${pluralizeString('EP', count)}` : ''}

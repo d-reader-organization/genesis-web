@@ -25,7 +25,7 @@ export const FilterButton: React.FC<FilterButtonProps> = ({
       <Settings2 size={18} className='max-md:hidden' />
       <Settings2 size={16} className='md:hidden' />
       {withLabel && (
-        <Text as='p' styleVariant='body-normal'>
+        <Text as='p' styleVariant='body-small'>
           Filter
         </Text>
       )}
@@ -33,7 +33,7 @@ export const FilterButton: React.FC<FilterButtonProps> = ({
         <Text
           as='p'
           fontWeight='bold'
-          styleVariant='body-small'
+          styleVariant='body-xsmall'
           className='flex -top-1 -right-2 absolute justify-center items-center w-5 h-5 bg-white text-grey-600 rounded-full'
         >
           {activeFiltersCount}

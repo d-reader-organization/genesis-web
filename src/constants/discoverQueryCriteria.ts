@@ -37,10 +37,6 @@ export type ALL_DISCOVER_PAGE_QUERY_CRITERIA =
   | DiscoverPageQueryCriteria<typeof CreatorFilterTag>
   | DiscoverPageQueryCriteria<typeof CreatorSortTag>
 
-export const COMICS_MAP = {
-  [ComicFilterTag.Popular]: 'Blaa',
-}
-
 // criteria
 export const COMICS_FILTER_CRITERIA = createDiscoverPageQueryCriteria(
   'Filter by',
