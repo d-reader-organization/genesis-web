@@ -129,7 +129,7 @@ export const DiscoverQueryBySingleTag = ({ queryCriteria }: DiscoverQueryBySingl
         <Text as='p' styleVariant='body-xlarge' fontWeight='bold'>
           {queryCriteria.label}
         </Text>
-        <ChevronDown size={19} />
+        <ChevronDown size={18} />
       </button>
       <div
         ref={contentRef}
