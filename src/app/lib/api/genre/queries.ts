@@ -11,6 +11,7 @@ export const fetchGenres = async (params: GenreParams = {}): Promise<Genre[]> =>
   const { data } = await fetchWrapper<Genre[]>({
     params,
     path: `${GENRE}/${GET}`,
+    revalidateCacheInSeconds: 15 * 60, //15 minutes
   })
   return data ?? []
 }

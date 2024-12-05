@@ -7,6 +7,7 @@ export default function CirclePage() {
   const {
     deviceId,
     onLogin,
+    onGoogleLogin,
     createWalletAction,
     requestAndSignMessage,
     userToken,
@@ -21,7 +22,7 @@ export default function CirclePage() {
         <div className='flex flex-col gap-4'>
           <Button
             onClick={async () => {
-              await onLogin?.(true)
+              await onGoogleLogin?.()
             }}
           >
             Login with Google

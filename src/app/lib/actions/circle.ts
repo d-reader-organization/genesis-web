@@ -1,5 +1,6 @@
 'use server'
 
+import { isAxiosError } from '@/utils/error'
 import { initiateUserControlledWalletsClient } from '@circle-fin/user-controlled-wallets'
 import {
   type DeviceTokenEmailData,
@@ -26,6 +27,7 @@ const circleClient = initiateUserControlledWalletsClient({
   apiKey: process.env.CIRCLE_API_KEY ?? '',
 })
 
+// TODO error handling for each function
 export const createUserForLoginWithEmail = async (input: {
   deviceId: string
   email: string
@@ -45,13 +47,20 @@ export const createUserForSocialLogin = async (deviceId: string): Promise<Device
   return response.data
 }
 
-export const createUserWallet = async (userToken: string): Promise<PinData | undefined> => {
-  const response = await circleClient.createWallet({
-    userToken,
-    accountType: 'EOA',
-    blockchains: ['SOL-DEVNET'],
-  })
-  return response.data
+export const createUserWallet = async (
+  userToken: string
+): Promise<(PinData & { errorMessage?: string }) | undefined> => {
+  try {
+    const response = await circleClient.createUserPinWithWallets({
+      userToken,
+      blockchains: ['SOL-DEVNET'],
+    })
+    return response.data
+  } catch (error) {
+    if (isAxiosError(error)) {
+      return { errorMessage: error.response?.data.message, challengeId: '' }
+    }
+  }
 }
 
 export const getUserStatus = async (userToken: string): Promise<UserData | undefined> => {

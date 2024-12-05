@@ -69,6 +69,7 @@ export const config = {
     '/circle',
     '/mint/:path+',
     '/api/:path*',
+    '/login/:path*',
   ],
 }
 

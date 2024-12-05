@@ -1,8 +1,6 @@
 import { ReactNode, useContext, createContext, useCallback, useState, useEffect } from 'react'
 import { useWallet, useConnection } from '@solana/wallet-adapter-react'
-import { useFetchMe, useFetchUserWallets } from '@/api/user/queries'
 import { useConnectUserWallet } from '@/api/auth/queries/useConnectUserWallet'
-import { useQueryClient } from '@tanstack/react-query'
 import { Transaction, PublicKey, TransactionInstruction, Keypair } from '@solana/web3.js'
 import bs58 from 'bs58'
 import { LEDGER_ADAPTERS } from '@/constants/general'
@@ -10,7 +8,7 @@ import { MEMO_PROGRAM_ID } from '@/constants/general'
 import { SignedDataType } from '@/models/wallet/connectWallet'
 import { toast } from '@/components/ui'
 import { requestWalletPassword } from '@/app/lib/api/auth/mutations'
-import { userKeys } from '@/api/user/userKeys'
+import { fetchMe, fetchUserWallets } from '@/app/lib/api/user/queries'
 
 interface AuthorizeWalletContextType {
   authorizeWallet: (callback?: VoidFunction) => Promise<void>
@@ -22,23 +20,26 @@ const AuthorizeWalletContext = createContext<AuthorizeWalletContextType | undefi
 
 export function AuthorizeWalletProvider({ children }: { children: ReactNode }) {
   const [isAuthorizing, setIsAuthorizing] = useState<boolean>(false)
+  const [hasWalletConnected, setHasWalletConnected] = useState<boolean>(false)
   const { wallet, publicKey, signMessage, signTransaction } = useWallet()
   const { connection } = useConnection()
 
-  const { data: me } = useFetchMe()
-  const { data: connectedWallets = [], isLoading, isFetched } = useFetchUserWallets(me?.id || 0)
-
   const { mutateAsync: connectUserWallet } = useConnectUserWallet()
-  const queryClient = useQueryClient()
-
-  const walletAddress = publicKey?.toBase58()
-  const connectedWalletAddresses = connectedWallets.map((wallet) => wallet.address)
-  const hasWalletConnected = !!walletAddress && connectedWalletAddresses.includes(walletAddress)
 
   const authorizeWallet = useCallback(
     async (callback?: VoidFunction) => {
-      if (!publicKey || !isFetched || isLoading || hasWalletConnected || !wallet || !signMessage || !signTransaction)
+      const me = await fetchMe()
+      if (!me) {
         return
+      }
+      const walletAddress = publicKey?.toBase58()
+      const connectedWallets = await fetchUserWallets(me.id)
+      const connectedWalletAddresses = connectedWallets.map((wallet) => wallet.address)
+      const hasWalletConnected = !!walletAddress && connectedWalletAddresses.includes(walletAddress)
+      setHasWalletConnected(hasWalletConnected)
+      if (!publicKey || hasWalletConnected || !wallet || !signMessage || !signTransaction) {
+        return
+      }
       setIsAuthorizing(true)
 
       try {
@@ -85,7 +86,6 @@ export function AuthorizeWalletProvider({ children }: { children: ReactNode }) {
           return
         }
 
-        queryClient.invalidateQueries({ queryKey: userKeys.getWallets(me?.id || 0) })
         if (typeof callback === 'function') callback()
       } catch (error) {
         toast({ description: `Authorization failed`, variant: 'error' })
@@ -93,20 +93,7 @@ export function AuthorizeWalletProvider({ children }: { children: ReactNode }) {
         setIsAuthorizing(false)
       }
     },
-    [
-      publicKey,
-      isFetched,
-      isLoading,
-      hasWalletConnected,
-      requestWalletPassword,
-      signMessage,
-      wallet?.adapter.name,
-      signTransaction,
-      connectUserWallet,
-      connection,
-      queryClient,
-      me?.id,
-    ]
+    [wallet, publicKey, signMessage, signTransaction, connectUserWallet, connection]
   )
 
   const value = {
@@ -119,7 +106,7 @@ export function AuthorizeWalletProvider({ children }: { children: ReactNode }) {
     if (!isAuthorizing) {
       authorizeWallet()
     }
-  }, [authorizeWallet])
+  }, [authorizeWallet, isAuthorizing])
 
   return <AuthorizeWalletContext.Provider value={value}>{children}</AuthorizeWalletContext.Provider>
 }
