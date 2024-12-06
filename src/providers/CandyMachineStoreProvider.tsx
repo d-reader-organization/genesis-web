@@ -56,7 +56,7 @@ export const CandyMachineStoreProvider = ({
 
   useEffect(() => {
     refetch()
-  }, [isAuthenticated])
+  }, [isAuthenticated, refetch])
 
   useEffect(() => {
     storeRef.current?.setState({
@@ -67,7 +67,7 @@ export const CandyMachineStoreProvider = ({
         (coupon) => !(coupon.type === CouponType.PublicUser || isComicVaultCoupon(coupon))
       ),
     })
-  }, [candyMachine, isLoading, supportedTokens.length])
+  }, [candyMachine, isLoading, supportedTokens, supportedTokens.length])
 
   useEffect(() => {
     if (candyMachine) {
@@ -81,7 +81,7 @@ export const CandyMachineStoreProvider = ({
         selectedCurrency: solCurrencySetting,
       })
     }
-  }, [candyMachine?.coupons.length, storeRef.current.getState().selectedCoupon?.stats.isEligible])
+  }, [candyMachine, candyMachine?.coupons.length, isAuthenticated])
 
   return <CandyMachineStoreContext.Provider value={storeRef.current}>{children}</CandyMachineStoreContext.Provider>
 }

@@ -11,7 +11,7 @@ export const ComicGrid: React.FC = () => {
   const { flatData: comics, fetchNextPage, hasNextPage, isFetching, isFetched } = useFetchComics(comicParams)
 
   if (isFetching && !isFetched) {
-    return <Loader className="mx-auto mt-8" />
+    return <Loader className='mx-auto mt-8' />
   }
 
   return (
@@ -22,7 +22,12 @@ export const ComicGrid: React.FC = () => {
         ))}
       </div>
       <div className='flex flex-col items-center'>
-        <ShowMoreButton onClick={fetchNextPage} isFetching={isFetching} itemsFound={comics.length} hasNextPage={hasNextPage} />
+        <ShowMoreButton
+          onClick={fetchNextPage}
+          isFetching={isFetching}
+          itemsFound={comics.length}
+          hasNextPage={hasNextPage}
+        />
       </div>
     </>
   )

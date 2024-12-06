@@ -11,7 +11,7 @@ export const CreatorGrid: React.FC = () => {
   const { flatData: creators, fetchNextPage, hasNextPage, isFetching, isFetched } = useFetchCreators(creatorParams)
 
   if (isFetching && !isFetched) {
-    return <Loader className="mx-auto mt-8" />
+    return <Loader className='mx-auto mt-8' />
   }
 
   return (

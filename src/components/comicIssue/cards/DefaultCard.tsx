@@ -6,7 +6,6 @@ import { ComicIssue } from '@/models/comicIssue'
 import { RoutePath } from '@/enums/routePath'
 import { cn } from '@/lib/utils'
 import { COMIC_ISSUE_COVER_SIZE } from '@/constants/imageSizes'
-import { TextWithOverflow } from '@/components/ui/TextWithOverflow'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comicIssue: ComicIssue

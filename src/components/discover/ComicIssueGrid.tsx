@@ -19,7 +19,7 @@ export const ComicIssueGrid: React.FC = () => {
   } = useFetchComicIssues({ params: comicIssueParams })
 
   if (isFetching && !isFetched) {
-    return <Loader className="mx-auto mt-8" />
+    return <Loader className='mx-auto mt-8' />
   }
 
   return (
