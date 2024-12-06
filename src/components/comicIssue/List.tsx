@@ -8,7 +8,7 @@ import React, { useEffect, useMemo } from 'react'
 import { Text } from '../ui/Text'
 import clsx from 'clsx'
 import { Loader } from '../shared/Loader'
-import { ComicIssueCard } from './cards/ComicIssueCard'
+import { DefaultComicIssueCard } from './cards/DefaultCard'
 
 type Props = {
   enabled: boolean
@@ -63,7 +63,7 @@ export const ComicIssueList: React.FC<Props> = ({
       ) : null}
       <div className='flex flex-wrap gap-4'>
         {comicIssues.map((issue) => (
-          <ComicIssueCard
+          <DefaultComicIssueCard
             key={`${issue.id}-${issue.slug}`}
             className={clsx(
               `basis-[45%] sm:basis-[30%] md:basis-[22%] lg:basis-[15%]`,

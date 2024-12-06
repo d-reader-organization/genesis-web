@@ -14,8 +14,9 @@ const defaultTextStyles: React.CSSProperties = {
   color: 'white',
   fontSize: '50px',
   fontWeight: 'bold',
+  display: 'flex',
+  flexWrap: 'wrap',
   overflow: 'hidden',
-  whiteSpace: 'nowrap',
 }
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {

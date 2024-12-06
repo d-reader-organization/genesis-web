@@ -6,13 +6,12 @@ import { ComicIssue } from '@/models/comicIssue'
 import { RoutePath } from '@/enums/routePath'
 import { cn } from '@/lib/utils'
 import { COMIC_ISSUE_COVER_SIZE } from '@/constants/imageSizes'
-import { TextWithOverflow } from '@/components/ui/TextWithOverflow'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comicIssue: ComicIssue
 }
 
-export const ComicIssueCard: React.FC<Props> = ({ comicIssue, className }) => {
+export const DefaultComicIssueCard: React.FC<Props> = ({ comicIssue, className }) => {
   const isFree = comicIssue.stats?.price == null || comicIssue.stats.price === 0
 
   return (
@@ -65,26 +64,15 @@ export const ComicIssueCard: React.FC<Props> = ({ comicIssue, className }) => {
               EP {comicIssue.number}/{comicIssue.stats.totalIssuesCount}
             </Text>
             {!isFree && (
-              <>
-                <PriceTag
-                  styleVariant='body-small'
-                  className='max-sm:hidden'
-                  inline={false}
-                  bold
-                  icon
-                  size={14}
-                  price={comicIssue.stats.price}
-                />
-                <PriceTag
-                  styleVariant='body-xsmall'
-                  className='sm:hidden'
-                  inline={false}
-                  bold
-                  icon
-                  size={12}
-                  price={comicIssue.stats.price}
-                />
-              </>
+              <PriceTag
+                styleVariant='body-xsmall'
+                className='sm:hidden'
+                inline={false}
+                bold
+                icon
+                size={14} // TODO: size 12 on mobile
+                price={comicIssue.stats.price}
+              />
             )}
           </div>
         )}

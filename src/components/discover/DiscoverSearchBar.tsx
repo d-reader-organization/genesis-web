@@ -7,7 +7,6 @@ import { cn } from '@/lib/utils'
 import { useDiscoverQueryStore } from '@/providers/DiscoverQueryStoreProvider'
 import { RoutePath } from '@/enums/routePath'
 import { usePathname } from 'next/navigation'
-import LoaderCircle from 'public/assets/vector-icons/loader-circle.svg'
 
 type Props = React.InputHTMLAttributes<HTMLInputElement>
 
@@ -15,7 +14,6 @@ export const DiscoverSearchBar: React.FC<Props> = ({ className }) => {
   const searchRef = React.useRef<HTMLDivElement>(null)
   const searchTerm = useDiscoverQueryStore((state) => state.comicParams.search)
   const setSearchTerm = useDiscoverQueryStore((state) => state.updateSearch)
-  const isFetching = useDiscoverQueryStore((state) => state.isFetching)
   const pathname = usePathname()
 
   const getPlaceholder = React.useCallback(() => {
@@ -39,9 +37,6 @@ export const DiscoverSearchBar: React.FC<Props> = ({ className }) => {
         value={searchTerm || ''}
         className='pl-10 pr-10 w-full max-w-[100%] rounded-lg'
         onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <LoaderCircle
-        className={cn('size-[18px] animate-spin absolute top-3 right-3 text-grey-200', isFetching ? '' : 'hidden')}
       />
     </div>
   )

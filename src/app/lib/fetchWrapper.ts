@@ -31,6 +31,7 @@ export async function fetchWrapper<T>({
   params,
   revalidateCacheInSeconds,
   isTextResponse = false,
+  timeoutInMiliseconds,
 }: {
   body?: unknown
   formData?: FormData
@@ -40,6 +41,7 @@ export async function fetchWrapper<T>({
   params?: ParamsType
   revalidateCacheInSeconds?: number
   isTextResponse?: boolean
+  timeoutInMiliseconds?: number
 }): Promise<{
   data: T | null
   errorMessage?: string
@@ -55,6 +57,7 @@ export async function fetchWrapper<T>({
     body: formData ?? JSON.stringify(body),
     method,
     ...(revalidateCacheInSeconds && { next: { revalidate: revalidateCacheInSeconds } }),
+    ...(timeoutInMiliseconds && { signal: AbortSignal.timeout(timeoutInMiliseconds) }),
     headers: {
       ...(!formData && { ...defaultHeaders }), // quick fix: file upload - server will figure out proper content type
       ...headers,

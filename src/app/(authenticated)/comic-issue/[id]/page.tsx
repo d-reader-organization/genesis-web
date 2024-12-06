@@ -14,6 +14,21 @@ import Link from 'next/link'
 import { RoutePath } from '@/enums/routePath'
 import { ChevronRightIcon } from 'lucide-react'
 import { InfoListActions } from '@/components/shared/InfoListActions'
+import { Metadata } from 'next'
+
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const ogImagePath = `/api/og/${params.id}`
+
+  return {
+    openGraph: {
+      images: ogImagePath,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      images: ogImagePath,
+    },
+  }
+}
 
 export default async function ComicIssuePage({ params: { id } }: ComicIssuePageParams) {
   const comicIssue = await fetchComicIssue(id)
