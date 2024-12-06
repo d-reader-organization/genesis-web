@@ -21,6 +21,8 @@ export const RoutePath = Object.freeze({
   ComicIssue: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}`,
   ReadComicIssue: (comicIssueId: string | number) => `/comic-issue/${comicIssueId}/read`,
   Creator: (creatorSlug: string) => `/creator/${creatorSlug}`,
+  CreatorReleases: (creatorSlug:string) => `/creator/${creatorSlug}/releases`,
+  CreatorCollectibles: (creatorSlug:string) => `/creator/${creatorSlug}/collectibles`,
   PrivacyPolicy: '/privacy-policy',
   Invest: '/invest',
   InvestDetails: (slug: string) => `/invest/${slug}`,
