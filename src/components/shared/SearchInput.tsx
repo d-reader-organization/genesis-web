@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Input } from '../ui/Input'
 import { Search, X } from 'lucide-react'
-import LoaderCircle from 'public/assets/vector-icons/loader-circle.svg'
+import LoadingSpinner from 'public/assets/vector-icons/loading-spinner.svg'
 import { SearchResultComic } from '@/models/comic'
 import { SearchResultCreator } from '@/models/creator'
 import { useDebouncedCallback } from 'use-debounce'
@@ -116,7 +116,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
         className='pl-10 pr-10 max-md:w-full'
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <LoaderCircle
+      <LoadingSpinner
         className={cn('size-[18px] animate-spin absolute top-3 right-3 text-grey-200', isLoading ? '' : 'hidden')}
       />
       {showResults ? (

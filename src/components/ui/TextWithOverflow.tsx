@@ -9,12 +9,15 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
 export const TextWithOverflow: React.FC<Props> = ({ text, className }) => {
   const textRef = useRef<HTMLSpanElement>(null)
   const [isOverflowing, setIsOverflowing] = useState(false)
+
   const handleMouseEnter = () => {
     if (textRef.current) {
       const isTextOverflowing = textRef.current.offsetWidth < textRef.current.scrollWidth
       setIsOverflowing(isTextOverflowing)
     }
   }
+
+  // TODO: use this component on ComicIssue, Comic, and Creator cards (comic.title etc.)
 
   return (
     <div className='relative inline-block'>

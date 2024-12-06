@@ -8,7 +8,7 @@ import React, { useEffect, useMemo } from 'react'
 import { Text } from '../ui/Text'
 import clsx from 'clsx'
 import { Loader } from '../shared/Loader'
-import { ComicIssueCard } from './cards/ComicIssueCard'
+import { ComicIssueCard } from './cards/DefaultCard'
 
 type Props = {
   enabled: boolean

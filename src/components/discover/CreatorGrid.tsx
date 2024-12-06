@@ -2,30 +2,33 @@
 
 import { useDiscoverQueryStore } from '@/providers/DiscoverQueryStoreProvider'
 import { useFetchCreators } from '@/api/creator/queries'
-import { DefaultCard } from '../creator/cards/DefaultCard'
-import { GridStatus } from './GridStatus'
+import { DefaultCreatorCard } from '../creator/cards/DefaultCard'
+import { ShowMoreButton } from './ShowMoreButton'
+import { Loader } from '../shared/Loader'
 
 export const CreatorGrid: React.FC = () => {
   const creatorParams = useDiscoverQueryStore((state) => state.creatorParams)
   const { flatData: creators, fetchNextPage, hasNextPage, isFetching, isFetched } = useFetchCreators(creatorParams)
 
+  if (isFetching && !isFetched) {
+    return <Loader className="mx-auto mt-8" />
+  }
+
   return (
     <>
-      {isFetched && creators.length > 0 && (
-        <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6 pt-1 sm:pt-2'>
-          {creators.map((creator) => (
-            <DefaultCard key={creator.slug} creator={creator} />
-          ))}
-        </div>
-      )}
-      <GridStatus
-        entries='creators'
-        isFetching={isFetching}
-        isFetched={isFetched}
-        fetchNextPage={fetchNextPage}
-        hasNextPage={hasNextPage}
-        arrayLength={creators.length}
-      />
+      <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6 pt-1 sm:pt-2'>
+        {creators.map((creator) => (
+          <DefaultCreatorCard key={creator.slug} creator={creator} />
+        ))}
+      </div>
+      <div className='flex flex-col items-center'>
+        <ShowMoreButton
+          onClick={fetchNextPage}
+          isFetching={isFetching}
+          itemsFound={creators.length}
+          hasNextPage={hasNextPage}
+        />{' '}
+      </div>
     </>
   )
 }

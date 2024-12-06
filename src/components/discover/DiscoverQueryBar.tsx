@@ -4,7 +4,7 @@ import { Button, Text } from '@/components/ui'
 import { DiscoverSearchBar } from './DiscoverSearchBar'
 import React from 'react'
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
-import { ListFilter, ChevronDown } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import { useDiscoverQueryStore } from '@/providers/DiscoverQueryStoreProvider'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
@@ -40,7 +40,7 @@ export const DiscoverQueryBar: React.FC = () => {
           activeFiltersCount={activeFiltersCount}
           className='md:hidden'
         />
-        <Button
+        {/* <Button
           className='max-h-10 p-4 flex justify-center items-center bg-grey-500 text-grey-100 gap-2'
           onClick={() => setFilterSheetOpen(!isFilterSheetOpen)}
         >
@@ -49,7 +49,7 @@ export const DiscoverQueryBar: React.FC = () => {
           </Text>
           <ChevronDown size={18} className='max-md:hidden' />
           <ListFilter size={16} className='md:hidden' />
-        </Button>
+        </Button> */}
       </div>
     </div>
   )

@@ -15,7 +15,7 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
   creator: Creator
 }
 
-export const DefaultCard: React.FC<Props> = ({ creator, className }) => {
+export const DefaultCreatorCard: React.FC<Props> = ({ creator, className }) => {
   const { refresh } = useRouter()
 
   const handleFollow = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -26,17 +26,6 @@ export const DefaultCard: React.FC<Props> = ({ creator, className }) => {
 
     refresh()
   }
-
-  // const handleUnfollow = async (e: React.MouseEvent<HTMLButtonElement>) => {
-  //   e.preventDefault()
-  //   e.stopPropagation()
-
-  //   await unfollowCreator({
-  //     slug: creator.slug,
-  //   })
-
-  //   refresh()
-  // }
 
   return (
     <Link
