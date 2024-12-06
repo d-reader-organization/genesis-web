@@ -6,6 +6,7 @@ import { createStore } from 'zustand/vanilla'
 
 export type DiscoverQueryParamsStoreState = {
   completeGenresList: Genre[]
+  isFetching: boolean
   comicParams: ComicParams
   comicIssueParams: ComicIssueParams
   creatorParams: CreatorParams
@@ -13,6 +14,8 @@ export type DiscoverQueryParamsStoreState = {
 
 export type DiscoverQueryParamsStoreActions = {
   resetToDefaultInitState: () => void
+  updateFetching: (isFetching: boolean) => void
+  updateSearch: (search: string | undefined) => void
   updateCompleteGenresList: (genres: Genre[]) => void
   updateAllParamGenreSlugs: (genreSlugs: string[]) => void
   updateComicParams: (params: Partial<ComicParams>) => void
@@ -24,6 +27,7 @@ export type DiscoverQueryParamsStore = DiscoverQueryParamsStoreState & DiscoverQ
 
 export const defaultInitState: DiscoverQueryParamsStoreState = {
   completeGenresList: [],
+  isFetching: false,
   comicParams: {
     skip: 0,
     take: 20,
@@ -40,8 +44,8 @@ export const defaultInitState: DiscoverQueryParamsStoreState = {
     genreSlugs: undefined,
     sortOrder: undefined,
     creatorSlug: undefined,
-    comicSlug: undefined,
     search: undefined,
+    comicSlug: undefined,
     filterTag: undefined,
     sortTag: undefined,
   },
@@ -49,8 +53,8 @@ export const defaultInitState: DiscoverQueryParamsStoreState = {
     skip: 0,
     take: 20,
     genreSlugs: undefined,
-    sortOrder: undefined,
     search: undefined,
+    sortOrder: undefined,
     filterTag: undefined,
     sortTag: undefined,
   },
@@ -63,6 +67,25 @@ export const createDiscoverQueryParamsStore = (initState: DiscoverQueryParamsSto
       set((state) => ({
         ...defaultInitState,
         completeGenresList: state.completeGenresList,
+      })),
+    updateFetching: (isFetching: boolean) =>
+      set(() => ({
+        isFetching: isFetching,
+      })),
+    updateSearch: (search) =>
+      set((state) => ({
+        comicParams: {
+          ...state.comicParams,
+          search: search,
+        },
+        comicIssueParams: {
+          ...state.comicIssueParams,
+          search: search,
+        },
+        creatorParams: {
+          ...state.creatorParams,
+          search: search,
+        },
       })),
     updateCompleteGenresList: (genres) =>
       set(() => ({

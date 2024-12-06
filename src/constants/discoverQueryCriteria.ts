@@ -20,6 +20,15 @@ function createDiscoverPageQueryCriteria<E extends Record<string, string>>(
   return { label, tags, getSelectedTags, updateSelectedTags }
 }
 
+function excludeTagsFromDiscoverPageQueryCriteria<E extends Record<string, string>>(
+  allTags: E,
+  exclude: (keyof E)[]
+): E {
+  return Object.fromEntries(Object.entries(allTags).filter(([key]) => !exclude.includes(key as keyof E))) as E
+}
+
+//const modifiedComicSortTags = excludeTagsFromDiscoverPageQueryCriteria(ComicSortTag, ['Title', 'Published'])
+
 export type ALL_DISCOVER_PAGE_QUERY_CRITERIA =
   | DiscoverPageQueryCriteria<typeof ComicFilterTag>
   | DiscoverPageQueryCriteria<typeof ComicSortTag>
@@ -30,42 +39,43 @@ export type ALL_DISCOVER_PAGE_QUERY_CRITERIA =
 
 // criteria
 export const COMICS_FILTER_CRITERIA = createDiscoverPageQueryCriteria(
-  'Filter By',
+  'Filter by',
   ComicFilterTag,
   (store) => store.comicParams.filterTag,
   (store, tag) => store.updateComicParams({ filterTag: tag })
 )
 
 export const COMICS_SORT_CRITERIA = createDiscoverPageQueryCriteria(
-  'Sort By',
+  'Order by',
   ComicSortTag,
+  //modifiedComicSortTags,
   (store) => store.comicParams.sortTag,
   (store, tag) => store.updateComicParams({ sortTag: tag })
 )
 
 export const COMIC_ISSUES_FILTER_CRITERIA = createDiscoverPageQueryCriteria(
-  'Filter By',
+  'Filter by',
   ComicIssueFilterTag,
   (store) => store.comicIssueParams.filterTag,
   (store, tag) => store.updateComicIssueParams({ filterTag: tag })
 )
 
 export const COMIC_ISSUES_SORT_CRITERIA = createDiscoverPageQueryCriteria(
-  'Sort By',
+  'Order by',
   ComicIssueSortTag,
   (store) => store.comicIssueParams.sortTag,
   (store, tag) => store.updateComicIssueParams({ sortTag: tag })
 )
 
 export const CREATORS_FILTER_CRITERIA = createDiscoverPageQueryCriteria(
-  'Filter By',
+  'Filter by',
   CreatorFilterTag,
   (store) => store.creatorParams.filterTag,
   (store, tag) => store.updateCreatorParams({ filterTag: tag })
 )
 
 export const CREATORS_SORT_CRITERIA = createDiscoverPageQueryCriteria(
-  'Sort By',
+  'Order by',
   CreatorSortTag,
   (store) => store.creatorParams.sortTag,
   (store, tag) => store.updateCreatorParams({ sortTag: tag })

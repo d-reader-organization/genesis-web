@@ -32,8 +32,9 @@ export const PriceTag: React.FC<Props> = ({
   icon = false,
   colorfulIcon = false,
   maxDecimals,
-  as = 'p',
+  as: as = 'p',
   styleVariant = 'body-normal',
+  className,
   ...props
 }) => {
   const TypographyWrapper: React.FC<{ children: React.ReactNode }> = (tprops) => {
@@ -45,7 +46,8 @@ export const PriceTag: React.FC<Props> = ({
           inline ? 'inline-flex' : 'flex',
           reverse ? 'flex-row-reverse' : 'flex-row',
           'items-center',
-          bold ? 'font-bold' : 'font-normal'
+          bold ? 'font-bold' : 'font-normal',
+          className
         )}
         {...props}
       >
@@ -84,7 +86,6 @@ export const PriceTag: React.FC<Props> = ({
           }}
         />
       )}
-
       {roundedPrice}
     </TypographyWrapper>
   )
