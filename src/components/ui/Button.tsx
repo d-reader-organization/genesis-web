@@ -1,36 +1,65 @@
-import * as React from 'react'
-import { Slot } from '@radix-ui/react-slot'
+import React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
-
 import { cn } from '@/lib/utils'
-import Link, { LinkProps } from 'next/link'
+import { type LucideIcon } from 'lucide-react'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-slate-950 dark:focus-visible:ring-slate-300',
+  'inline-flex items-center justify-center font-bold rounded-md shadow-[0px_16px_32px_-4px_rgba(0,0,0,0.10),0px_2px_4px_0px_rgba(0,0,0,0.04)] transition-colors hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none',
   {
     variants: {
       variant: {
-        default: 'bg-yellow-500 rounded-lg text-black py-8 px-4 font-semibold text-base',
-        destructive:
-          'bg-red-500 text-slate-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/90',
-        outline:
-          'flex items-center border border-grey-200 rounded-xl text-white bg-transparent w-full text-base font-medium',
-        secondary:
-          'bg-slate-100 text-slate-900 hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80',
+        primary: 'text-black',
+        secondary: 'text-grey-100',
+        outline: '',
+        white: 'text-black',
         ghost: 'w-full bg-transparent text-base font-medium leading-[22.4px] text-white',
-        link: 'text-base text-important-color bg-transparent font-normal',
+      },
+      subVariant: {
+        1: '',
+        2: '',
+        3: '',
       },
       size: {
-        default: 'h-12 p-4',
-        normal: 'h-10 sm:h-[52px] p-1 sm:p-4',
-        sm: 'h-9 rounded-md px-3',
-        lg: 'h-11 rounded-md px-8',
-        icon: 'h-10 w-10',
+        sm: 'h-9 min-w-[80px] text-xs py-1 px-4 rounded-lg gap-1',
+        md: 'h-[42px] min-w-[100px] text-sm py-2 px-5 rounded-[10px] gap-2',
+        lg: 'h-[52px] min-w-[110px] text-base py-4 px-6 rounded-xl gap-2',
+      },
+      iconPosition: {
+        left: 'flex-row',
+        right: 'flex-row-reverse',
       },
     },
+    compoundVariants: [
+      { variant: 'primary', subVariant: 1, className: 'bg-yellow-500 border-t border-yellow-100' },
+      { variant: 'primary', subVariant: 2, className: 'bg-yellow-100 border-t border-yellow-50' },
+      { variant: 'primary', subVariant: 3, className: 'bg-yellow-500 border-3 border-yellow-100' },
+      {
+        variant: 'secondary',
+        subVariant: 1,
+        className: 'bg-grey-300 bg-opacity-30 border-t border-white border-opacity-10',
+      },
+      {
+        variant: 'secondary',
+        subVariant: 2,
+        className: 'bg-grey-300 bg-opacity-90 border-t border-white border-opacity-10',
+      },
+      {
+        variant: 'secondary',
+        subVariant: 3,
+        className: 'bg-grey-300 bg-opacity-30 border-3 border-white border-opacity-10',
+      },
+      { variant: 'outline', subVariant: 1, className: 'bg-transparent border border-grey-300 text-grey-100' },
+      { variant: 'outline', subVariant: 2, className: 'bg-white bg-opacity-[0.08] border border-white text-white' },
+      { variant: 'outline', subVariant: 3, className: 'bg-transparent border-3 border-grey-300 text-grey-100' },
+      { variant: 'white', subVariant: 1, className: 'bg-white border-b border-grey-100' },
+      { variant: 'white', subVariant: 2, className: 'bg-grey-100 border-t border-white border-opacity-10' },
+      { variant: 'white', subVariant: 3, className: 'bg-white border-3 border-[#E0E0E0]' },
+    ],
     defaultVariants: {
-      variant: 'default',
-      size: 'default',
+      variant: 'primary',
+      subVariant: 1,
+      size: 'md',
+      iconPosition: 'left',
     },
   }
 )
@@ -38,63 +67,64 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  asChild?: boolean
+  iconOnly?: boolean
+  icon?: LucideIcon
 }
 
+/**
+ * Button component with various style variants and icon support.
+ *
+ * @component
+ * @param {Object} props - The properties that define the button's behavior and appearance.
+ * @param {React.ReactNode} props.children - The content of the button.
+ * @param {'primary' | 'secondary' | 'outline' | 'white'} [props.variant='primary'] - The main style variant of the button.
+ * @param {1 | 2 | 3} [props.subVariant=1] - The sub-variant of the chosen main variant.
+ * @param {'sm' | 'md' | 'lg'} [props.size='md'] - The size of the button.
+ * @param {'left' | 'right'} [props.iconPosition='left'] - The position of the icon relative to the text.
+ * @param {LucideIcon} [props.icon] - An optional Lucide icon component.
+ * @param {string} [props.className] - Additional CSS classes to apply to the button.
+ *
+ * @example
+ * // Basic usage
+ * <Button>Click me</Button>
+ *
+ * @example
+ * // With variant and subVariant
+ * <Button variant="primary" subVariant={2}>Primary Button</Button>
+ *
+ * @example
+ * // With icon
+ * import { Mail } from 'lucide-react';
+ * <Button icon={Mail}>Send Email</Button>
+ */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'button'
-    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+  ({ className, variant, subVariant, size, iconPosition, icon: Icon, iconOnly, children, ...props }, ref) => {
+    const iconSize = size === 'sm' ? 16 : size === 'md' ? 18 : 20
+
+    if (iconOnly && Icon) {
+      return (
+        <button
+          className={cn(buttonVariants({ variant, subVariant, size, iconPosition, className }), 'min-w-fit')}
+          ref={ref}
+          {...props}
+        >
+          <Icon size={iconSize} className={cn('shrink-0')} />
+        </button>
+      )
+    }
+
+    return (
+      <button
+        className={cn(buttonVariants({ variant, subVariant, size, iconPosition, className }))}
+        ref={ref}
+        {...props}
+      >
+        {Icon && <Icon size={iconSize} className='shrink-0' />}
+        {children}
+      </button>
+    )
   }
 )
 Button.displayName = 'Button'
 
-type Props = LinkProps &
-  Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps> & {
-    backgroundColor?: 'important' | 'transparent' | 'grey-100' | 'green-500' | 'yellow-500' | 'grey-600'
-    borderColor?: 'important' | 'transparent' | 'grey-100' | 'grey-300'
-    clickableEffect?: boolean
-    blank?: boolean
-    noMinWidth?: boolean
-    bold?: boolean
-  }
-
-const ButtonLink: React.FC<Props> = ({
-  backgroundColor = 'grey-100',
-  borderColor = 'transparent',
-  clickableEffect = true,
-  noMinWidth = false,
-  blank = false,
-  bold = false,
-  className,
-  ...props
-}) => {
-  return (
-    <Link
-      className={cn(
-        'flex justify-center items-center min-w-40 p-[14px] rounded-lg cursor-pointer text-base font-semibold hover:brightness-105',
-        className,
-        {
-          'bg-important-color': backgroundColor === 'important',
-          'bg-transparent': backgroundColor === 'transparent',
-          'button-link--background-color-grey-100': backgroundColor === 'grey-100',
-          'button-link--background-color-grey-600': backgroundColor === 'grey-600',
-          'button-link--background-color-green-500': backgroundColor === 'green-500',
-          'button-link--background-color-yellow-500': backgroundColor === 'yellow-500',
-          'button-link--border-color-important': borderColor === 'important',
-          'button-link--border-color-transparent': borderColor === 'transparent',
-          'border border-grey-100': borderColor === 'grey-100',
-          'border border-grey-300': borderColor === 'grey-300',
-          'button-link--clickable-effect': clickableEffect,
-          'button-link--no-min-width': noMinWidth,
-          'button-link--bold': bold,
-        }
-      )}
-      target={blank ? '_blank' : props.target}
-      {...props}
-    ></Link>
-  )
-}
-ButtonLink.displayName = 'ButtonLink'
-
-export { Button, ButtonLink, buttonVariants }
+export { Button, buttonVariants }

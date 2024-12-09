@@ -10,9 +10,8 @@ export const LogoutButton: React.FC = () => {
 
   return (
     <Button
-      className='py-5'
       variant='outline'
-      size='normal'
+      size='md'
       onClick={() => {
         logoutAction()
         refresh()

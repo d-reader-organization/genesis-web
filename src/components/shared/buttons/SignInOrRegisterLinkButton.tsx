@@ -1,6 +1,6 @@
 'use client'
 
-import { ButtonLink } from '@/components/ui'
+import { ButtonLink } from '@/components/ui/ButtonLink'
 import React from 'react'
 
 type Props = {

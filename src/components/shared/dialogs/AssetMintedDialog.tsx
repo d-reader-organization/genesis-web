@@ -3,7 +3,8 @@ import { Dialog, DialogContent } from '@/components/ui/Dialog'
 import { ComicIssue } from '@/models/comicIssue'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Button, ButtonLink } from '@/components/ui/Button'
+import { Button } from '@/components/ui/Button'
+import { ButtonLink } from '@/components/ui/ButtonLink'
 import useToggle from '@/hooks/useToggle'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import { RoutePath } from '@/enums/routePath'
@@ -189,7 +190,8 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
                 <Button
                   className='text-grey-50 border border-grey-50 rounded-[12px]'
                   onClick={toggleDialog}
-                  variant='ghost'
+                  variant='outline'
+                  size='md'
                 >
                   Close
                 </Button>

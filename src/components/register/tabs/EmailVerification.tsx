@@ -1,7 +1,9 @@
 import React from 'react'
 import { Text } from '../../ui/Text'
 import MailIcon from 'public/assets/vector-icons/mail-icon.svg'
-import { Button, ButtonLink, toast } from '../../ui'
+import { Button } from '../../ui/Button'
+import { ButtonLink } from '../../ui/ButtonLink'
+import { toast } from '../../ui/toast'
 import { RoutePath } from '@/enums/routePath'
 import { requestUserEmailVerification } from '@/app/lib/api/user/queries'
 
@@ -24,14 +26,16 @@ export const EmailVerificationContent: React.FC<Props> = ({ redirectTo }) => (
     <ButtonLink className='bg-yellow-500 text-grey-600 w-min self-center mt-4' href={redirectTo ?? RoutePath.Home}>
       Next
     </ButtonLink>
-    <div className='mt-4 flex flex-col gap-4'>
+    <div className='mt-4 flex flex-col gap-4 items-center'>
       <p className='text-sm text-grey-100 text-center'>
         Didn&apos;t get the email?
         <br />
         Check your spam folder{/* before resending */}
       </p>
       <Button
-        variant='link'
+        variant='primary'
+        size='md'
+        className='w-fit'
         onClick={async () => {
           const error = await requestUserEmailVerification()
           toast({
