@@ -14,7 +14,7 @@ const sizeVariants: Record<AvatarSize, string> = {
   small: 'w-10 h-10',
   medium: 'w-12 h-12',
   large: 'w-14 h-14',
-  xlarge: 'w-[123px] h-[123px]'
+  xlarge: 'w-[123px] h-[123px]',
 }
 
 export const AvatarImage: React.FC<AvatarImageProps> = ({ size = 'medium', alt = '', className, ...props }) => {

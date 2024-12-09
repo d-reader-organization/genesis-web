@@ -66,12 +66,11 @@ export const DefaultComicIssueCard: React.FC<Props> = ({ comicIssue, className }
             {!isFree && (
               <PriceTag
                 styleVariant='body-xsmall'
-                className='sm:hidden'
                 inline={false}
                 bold
                 icon
-                size={14} // TODO: size 12 on mobile
                 price={comicIssue.stats.price}
+                iconClassName='w-2 sm:w-3'
               />
             )}
           </div>

@@ -2,16 +2,25 @@ export const generateRandom = (max = 1, min = 0) => {
   return Math.floor(Math.random() * max + min)
 }
 
-export const formatCurrency = (value?: number, currency = '') => {
-  const numberFormater = new Intl.NumberFormat('en-US', {
+type FormatCurrency = {
+  value: number
+  currency?: string
+  divisor?: number
+  fractionDigits?: number
+}
+
+export const formatCurrency = ({ value, currency = '', divisor = 1, fractionDigits = 2 }: FormatCurrency): string => {
+  const numberFormatter = new Intl.NumberFormat('en-US', {
     style: 'decimal',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+    minimumFractionDigits: fractionDigits,
+    maximumFractionDigits: fractionDigits,
   })
 
-  const suffix = currency ? ` ${currency}` : ''
-  if (!value) return '-.--' + suffix
-  return numberFormater.format(value) + suffix
+  const suffix = currency ? currency : ''
+  if (!value) return '-.--'
+
+  const scaledValue = value / divisor
+  return suffix + numberFormatter.format(scaledValue)
 }
 
 const usdFormatter = new Intl.NumberFormat('en-US', {

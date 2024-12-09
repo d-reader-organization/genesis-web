@@ -24,35 +24,35 @@ export const NewCard: React.FC<Props> = ({ className, comic }) => (
       gradientDirectionClassName='bg-gradient-to-t'
     >
       <div className='flex flex-col gap-2 absolute bottom-0 p-2 sm:p-4'>
-          <Text as='h4' styleVariant='secondary-heading' className='line-clamp-1 overflow-ellipsis max-md:text-sm'>
-            {comic.title}
+        <Text as='h4' styleVariant='secondary-heading' className='line-clamp-1 overflow-ellipsis max-md:text-base'>
+          {comic.title}
+        </Text>
+        {comic.stats && (
+          <Text
+            as='span'
+            styleVariant='body-normal'
+            className='line-clamp-1 overflow-ellipsis text-grey-100 max-md:text-sm'
+          >
+            {comic.stats.issuesCount + ' ' + pluralizeString('Episode', comic.stats.issuesCount)}
           </Text>
-          {comic.stats && (
-            <Text
-              as='span'
-              styleVariant='body-normal'
-              className='line-clamp-1 overflow-ellipsis text-grey-100 max-md:text-xs'
-            >
-              {comic.stats.issuesCount + ' ' + pluralizeString('Episode', comic.stats.issuesCount)}
-            </Text>
-          )}
-          <div className='flex flex-wrap gap-2'>
-            {comic.genres &&
-              comic.genres.map((name, index) => (
-                <div
-                  className={cn(
-                    'flex justify-center items-center px-2 py-[2px] rounded-lg',
-                    index === 0 ? 'bg-transparent border border-grey-100' : 'bg-grey-300 bg-opacity-30'
-                  )}
-                  key={`${name}-${index}`}
-                >
-                  <Text as='span' styleVariant='body-normal' className='text-grey-100'>
-                    {name.name}
-                  </Text>
-                </div>
-              ))}
-          </div>
+        )}
+        <div className='flex flex-wrap gap-2'>
+          {comic.genres &&
+            comic.genres.map((name, index) => (
+              <div
+                className={cn(
+                  'flex justify-center items-center px-2 py-[2px] rounded-lg',
+                  index === 0 ? 'bg-transparent border border-grey-100' : 'bg-grey-300 bg-opacity-30'
+                )}
+                key={`${name}-${index}`}
+              >
+                <Text as='span' styleVariant='body-normal' className='text-grey-100 max-md:text-sm'>
+                  {name.name}
+                </Text>
+              </div>
+            ))}
         </div>
+      </div>
     </ContentWithGradientImageBg>
   </Link>
 )

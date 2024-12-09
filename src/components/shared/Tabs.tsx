@@ -29,7 +29,7 @@ export const Tabs: React.FC<Props> = ({ tabs, className }) => {
               >
                 {tab.name}
               </Text>
-              <SoonTag className='mt-1'/>
+              <SoonTag className='sm:-mt-1' />
             </div>
           ) : (
             <Link
