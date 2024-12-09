@@ -6,7 +6,7 @@ import { DISCOVER_PAGE_TABS } from '@/constants/tabs'
 import { DiscoverQueryStoreProvider } from '@/providers/DiscoverQueryStoreProvider'
 import { fetchMe } from '@/app/lib/api/user/queries'
 import { Navigation } from '../layout/Navigation'
-
+import { Text } from '../ui'
 type Props = React.PropsWithChildren & { mainClassName?: string }
 
 export const DiscoverPageWrapper: React.FC<Props> = async ({ children, mainClassName }) => {
@@ -21,9 +21,17 @@ export const DiscoverPageWrapper: React.FC<Props> = async ({ children, mainClass
           mainClassName
         )}
       >
-        <div className={cn('flex flex-col max-w-screen-xl w-full gap-3')}>
+        <div className='flex flex-col max-w-screen-xl w-full gap-3'>
+          <Text
+            as='h1'
+            fontWeight='semibold'
+            styleVariant='primary-heading'
+            className='text-white sm:uppercase max-sm:text-20 max-sm:tracking-0048'
+          >
+            Discover
+          </Text>
+          <Tabs tabs={DISCOVER_PAGE_TABS} />
           <DiscoverQueryStoreProvider>
-            <Tabs label='Discover' tabs={DISCOVER_PAGE_TABS} />
             <DiscoverQueryBar />
             {children}
           </DiscoverQueryStoreProvider>

@@ -10,6 +10,7 @@ type StyleVariant =
   | 'body-normal'
   | 'body-small'
   | 'body-xsmall'
+  | 'body-xxsmall'
 type FontWeight = 'bold' | 'semibold' | 'medium' | 'normal'
 
 export type TextProps = {
@@ -41,6 +42,7 @@ const styleVariants: Record<StyleVariant, string> = {
   'body-normal': 'text-base',
   'body-small': 'text-sm',
   'body-xsmall': 'text-xs',
+  'body-xxsmall': 'text-xxs',
 }
 
 const fontWeightVariants: Record<FontWeight, string> = {

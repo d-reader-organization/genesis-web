@@ -1,15 +1,16 @@
 'use client'
 
 import { Button, Text } from '@/components/ui'
-import { SearchInput } from './DiscoverSearchBar'
+import { DiscoverSearchBar } from './DiscoverSearchBar'
 import React from 'react'
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
-import { Settings2, ChevronDown } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import { useDiscoverQueryStore } from '@/providers/DiscoverQueryStoreProvider'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 import { ALL_DISCOVER_PAGE_QUERY_CRITERIA, QUERY_CRITERIA_MAP } from '@/constants/discoverQueryCriteria'
 import { useDiscoverStoreActiveFiltersCount } from '@/hooks/useDiscoverStoreActiveFiltersCount'
+import { FilterButton } from './FilterButton'
 
 export const DiscoverQueryBar: React.FC = () => {
   const [isFilterSheetOpen, setFilterSheetOpen] = React.useState<boolean>(false)
@@ -41,17 +42,36 @@ export const DiscoverQueryBar: React.FC = () => {
         </Button>
         <Button onClick={clearAll} variant='secondary' size='md'>
           Clear all
+      <div className='flex gap-1 md:gap-2 w-[100%]'>
+        <FilterButton
+          isFilterSheetOpen={isFilterSheetOpen}
+          setFilterSheetOpen={setFilterSheetOpen}
+          activeFiltersCount={activeFiltersCount}
+          className='max-md:hidden'
+          withLabel
+        />
+        <Button onClick={clearAll} className='max-h-10 bg-grey-500 text-grey-100 max-md:hidden'>
+          <Text as='p' styleVariant='body-small'>
+            Clear all
+          </Text>
         </Button>
-        <SearchInput className='max-md:hidden' />
-        <Button
+        <DiscoverSearchBar />
+        <FilterButton
+          isFilterSheetOpen={isFilterSheetOpen}
+          setFilterSheetOpen={setFilterSheetOpen}
+          activeFiltersCount={activeFiltersCount}
+          className='md:hidden'
+        />
+        {/* <Button
           className='max-h-10 p-4 flex justify-center items-center bg-grey-500 text-grey-100 gap-2'
           onClick={() => setFilterSheetOpen(!isFilterSheetOpen)}
         >
-          <Text as='p' styleVariant='body-normal'>
+          <Text as='p' styleVariant='body-small' className='max-md:hidden'>
             Sort by
           </Text>
-          <ChevronDown size={19} />
-        </Button>
+          <ChevronDown size={18} className='max-md:hidden' />
+          <ListFilter size={16} className='md:hidden' />
+        </Button> */}
       </div>
     </div>
   )
@@ -87,8 +107,8 @@ const QuerySheet: React.FC<QuerySheetProps> = ({ isOpen, triggerOpenChange }) =>
           className='p-6 flex flex-col h-full w-full bg-grey-600 shadow-[0px_0px_30px_0px_rgba(0,0,0,0.50)] max-w-[420px]'
           onInteractOutside={() => triggerOpenChange(false)}
         >
-          <Text as='p' styleVariant='body-xlarge' fontWeight='bold'>
-            Filter by
+          <Text as='span' styleVariant='body-large' fontWeight='bold' className='body-normal'>
+            Search criteria
           </Text>
           <div className='flex flex-col'>
             {queryCriteria.map(({ id, criteria }) => (
@@ -128,10 +148,10 @@ export const DiscoverQueryBySingleTag = ({ queryCriteria }: DiscoverQueryBySingl
         onClick={() => setIsExpanded(!isExpanded)}
         aria-expanded={isExpanded}
       >
-        <Text as='p' styleVariant='body-large'>
+        <Text as='p' styleVariant='body-large' fontWeight='bold' className='max-sm:text-base'>
           {queryCriteria.label}
         </Text>
-        <ChevronDown size={19} />
+        <ChevronDown size={18} />
       </button>
       <div
         ref={contentRef}
@@ -151,12 +171,12 @@ export const DiscoverQueryBySingleTag = ({ queryCriteria }: DiscoverQueryBySingl
               <div
                 key={key}
                 className={cn(
-                  'flex justify-center items-center max-h-8 p-2 rounded-lg cursor-pointer',
+                  'flex justify-center items-center p-2 px-3 rounded-lg cursor-pointer',
                   isSelected ? 'bg-white text-black' : 'bg-grey-500 text-grey-100'
                 )}
                 onClick={() => handleTagClick(typedKey, value)}
               >
-                <Text as='p' styleVariant='body-xsmall'>
+                <Text as='p' styleVariant='body-normal' className='max-sm:text-sm'>
                   {key}
                 </Text>
               </div>
@@ -196,10 +216,10 @@ export const DiscoverQueryByGenres: React.FC = () => {
         onClick={() => setIsExpanded(!isExpanded)}
         aria-expanded={isExpanded}
       >
-        <Text as='p' styleVariant='body-large'>
+        <Text as='span' styleVariant='body-large' fontWeight='bold' className='max-sm:text-base'>
           Genres
         </Text>
-        <ChevronDown size={19} />
+        <ChevronDown size={18} />
       </button>
       <div
         ref={contentRef}
@@ -213,13 +233,13 @@ export const DiscoverQueryByGenres: React.FC = () => {
           {genres?.map((tag, index) => (
             <div
               className={cn(
-                'flex justify-center items-center max-h-8 p-2 rounded-lg cursor-pointer',
+                'flex justify-center items-center p-2 px-3 rounded-lg cursor-pointer',
                 selectedTags?.includes(tag.slug) ? 'bg-white text-black' : 'bg-grey-500 text-grey-100'
               )}
               key={`${tag.slug}-${index}`}
               onClick={() => handleTagClick(tag.slug)}
             >
-              <Text as='p' styleVariant='body-xsmall'>
+              <Text as='span' styleVariant='body-normal' className='max-sm:text-sm'>
                 {tag.name}
               </Text>
             </div>

@@ -1,17 +1,21 @@
 import { pluralizeString } from '@/utils/helpers'
 import { Text } from '../ui/Text'
 import React from 'react'
+import { cn } from '@/lib/utils'
 
-type Props = {
+type Props = React.HTMLAttributes<HTMLDivElement> & {
   count?: number
-  withText?: boolean
+  withLabel?: boolean
 }
 
-export const CopiesCount: React.FC<Props> = ({ count, withText = false }) => (
-  <div className='absolute top-2 right-2 bg-white bg-opacity-20 h-6 min-w-6 w-fit p-1 flex justify-center items-center rounded-lg'>
-    <Text as='span' styleVariant='body-small' fontWeight='bold' className='leading-140'>
-      {count}
-      {withText ? ` ${pluralizeString('EP', count)}` : ''}
-    </Text>
-  </div>
+export const CopiesCount: React.FC<Props> = ({ count, withLabel = false, className }) => (
+  <Text
+    as='span'
+    styleVariant='body-xsmall'
+    fontWeight='bold'
+    className={cn('bg-white bg-opacity-20 rounded-2xl backdrop-blur-lg p-1 px-2 max-sm:text-xxs', className)}
+  >
+    {count}
+    {withLabel ? ` ${pluralizeString('EP', count)}` : ''}
+  </Text>
 )
