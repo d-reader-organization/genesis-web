@@ -1,8 +1,6 @@
 import React from 'react'
 import { Text } from '../ui/Text'
 import { Creator } from '@/models/creator'
-import { Share2 } from 'lucide-react'
-import { Button } from '../ui/Button'
 import { FollowCreatorButton } from '../shared/buttons/FollowCreatorButton'
 import { formatCurrency } from '@/utils/numbers'
 import { ShareButton } from '../shared/buttons/ShareButton'

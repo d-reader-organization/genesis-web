@@ -27,10 +27,7 @@ export const ShareButton: React.FC<Props> = ({ title = '', text = '' }) => {
   }
 
   return (
-    <Button
-      onClick={handleShare}
-      className='flex bg-grey-300 bg-opacity-30 rounded-lg p-3 max-h-10 text-grey-100'
-    >
+    <Button onClick={handleShare} className='flex bg-grey-300 bg-opacity-30 rounded-lg p-3 max-h-10 text-grey-100'>
       <Share2 className='w-4' />
     </Button>
   )

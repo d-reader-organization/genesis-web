@@ -50,7 +50,11 @@ export const DefaultCreatorCard: React.FC<Props> = ({ creator, className }) => (
           {creator.stats.followersCount + ' ' + pluralizeString('Follower', creator.stats.followersCount)}
         </Text>
       </div>
-      <FollowCreatorButton isFollowing={creator.myStats?.isFollowing} creatorSlug={creator.slug} className='max-md:mt-1'/>
+      <FollowCreatorButton
+        isFollowing={creator.myStats?.isFollowing}
+        creatorSlug={creator.slug}
+        className='max-md:mt-1'
+      />
     </div>
   </Link>
 )
