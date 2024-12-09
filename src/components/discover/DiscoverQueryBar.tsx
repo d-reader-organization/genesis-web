@@ -21,13 +21,13 @@ export const DiscoverQueryBar: React.FC = () => {
       <QuerySheet isOpen={isFilterSheetOpen} triggerOpenChange={(open: boolean) => setFilterSheetOpen(open)} />
       <div className='flex gap-4 w-[100%] max-md:justify-center'>
         <Button
-          className='relative max-h-10 flex text-grey-100 bg-grey-500 gap-2'
+          className='relative'
+          variant='secondary'
+          size='md'
+          icon={Settings2}
           onClick={() => setFilterSheetOpen(!isFilterSheetOpen)}
         >
-          <Settings2 size={19} />
-          <Text as='p' styleVariant='body-normal'>
-            Filter
-          </Text>
+          Filter
           {activeFiltersCount !== 0 && (
             <Text
               as='p'
@@ -39,10 +39,8 @@ export const DiscoverQueryBar: React.FC = () => {
             </Text>
           )}
         </Button>
-        <Button onClick={clearAll} className='max-h-10 bg-grey-500 text-grey-100'>
-          <Text as='p' styleVariant='body-normal'>
-            Clear all
-          </Text>
+        <Button onClick={clearAll} variant='secondary' size='md'>
+          Clear all
         </Button>
         <SearchInput className='max-md:hidden' />
         <Button
