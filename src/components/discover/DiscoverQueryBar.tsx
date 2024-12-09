@@ -28,10 +28,8 @@ export const DiscoverQueryBar: React.FC = () => {
           className='max-md:hidden'
           withLabel
         />
-        <Button onClick={clearAll} className='max-h-10 bg-grey-500 text-grey-100 max-md:hidden'>
-          <Text as='p' styleVariant='body-small'>
-            Clear all
-          </Text>
+        <Button onClick={clearAll} variant='secondary' size='md'>
+          Clear all
         </Button>
         <DiscoverSearchBar />
         <FilterButton

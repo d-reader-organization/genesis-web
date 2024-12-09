@@ -6,7 +6,7 @@ export const WhyDoINeedAWalletDialog: React.FC = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className='text-grey-100' variant='link'>
+        <Button className='text-grey-100' variant='ghost'>
           Why do I need a wallet?
         </Button>
       </DialogTrigger>

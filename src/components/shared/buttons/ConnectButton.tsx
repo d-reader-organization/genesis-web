@@ -95,7 +95,7 @@ export const ConnectButton: React.FC<Props> = ({ onClick, text, children, classN
 
   return (
     <>
-      <Button className={cn('py-5', className)} variant='outline' size='normal' onClick={handleClick} {...props}>
+      <Button className={cn('py-5', className)} variant='outline' size='md' onClick={handleClick} {...props}>
         {children || <span className='leading-[22.4px]'>{label}</span>}
       </Button>
       {/* This dialog will break af if the user clicks the "close" icon on the wallet selection menu

@@ -87,11 +87,7 @@ export const Navigation: React.FC<Props> = ({ me, hideSearch = false }) => {
               </button>
             </div>
           ) : (
-            <Button
-              className='max-h-10 p-4 flex justify-center items-center text-sm font-bold leading-[19.6px] text-black rounded-xl bg-white w-fit'
-              variant='ghost'
-              onClick={() => setOpenProfileSheet(!isProfileSheetOpen)}
-            >
+            <Button variant='white' size='md' onClick={() => setOpenProfileSheet(!isProfileSheetOpen)}>
               Connect
             </Button>
           )}

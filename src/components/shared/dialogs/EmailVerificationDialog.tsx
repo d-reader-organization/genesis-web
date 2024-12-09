@@ -21,7 +21,7 @@ export const EmailVerificationDialog: React.FC<CommonDialogProps> = ({ open, tog
           })
           toggleDialog()
         }}
-        variant='link'
+        variant='outline'
       >
         Resend email confirmation link
       </Button>

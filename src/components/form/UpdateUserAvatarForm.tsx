@@ -62,7 +62,7 @@ export const UpdateUserAvatarForm: React.FC<Props> = ({ id, avatar }) => {
               </Text>
             </div>
 
-            <Button type='submit' className='bg-grey-300 text-white w-fit'>
+            <Button type='submit' variant='secondary' subVariant={2} size='lg' className='w-fit'>
               {showLoader ? <Loader /> : 'Update Avatar'}
             </Button>
           </div>

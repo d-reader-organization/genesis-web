@@ -4,7 +4,7 @@ import DReaderSymbol from 'public/assets/vector-icons/logo.svg'
 import GenesisSymbol from 'public/assets/vector-icons/genesis-logo.svg'
 import { RoutePath } from '@/enums/routePath'
 import { cn } from '@/lib/utils'
-import { ButtonLink } from '../ui/Button'
+import { ButtonLink } from '../ui/ButtonLink'
 import { Menu, X } from 'lucide-react'
 import { Sheet, SheetContent, SheetTitle } from '../ui/sheet'
 import { User } from '@/models/user'
@@ -125,7 +125,10 @@ export const GenesisMobileNavigation: React.FC<Props> = ({ user }) => {
 
                         <ButtonLink
                           href={RoutePath.Login}
-                          className='h-full max-h-[52px] bg-white rounded-xl flex justify-center items-center py-5 text-base font-bold leading-[22.4px] text-grey-600'
+                          variant='white'
+                          size='lg'
+                          subVariant={1}
+                          className='w-fit max-md:h-[42px]'
                         >
                           Sign in
                         </ButtonLink>
