@@ -6,7 +6,7 @@ import Link from 'next/link'
 import React from 'react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/Tooltip'
 import { roiTooltip } from '@/constants/tooltips'
-import { formatUSD } from '@/utils/numbers'
+import { formatCurrency} from '@/utils/numbers'
 import { Text } from '../ui'
 
 type Props = {
@@ -46,7 +46,10 @@ const Card: React.FC<CardProps> = ({ project }) => (
     </div>
     <RoiWidget roi={project.payout.roiPercent} tooltipText={roiTooltip(project.payout.roiPercent)} />
     <div className='flex justify-center gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-center'>
-      <InvestmentStatsBox title='REVENUE' value={formatUSD(project.payout.revenue)} />
+      <InvestmentStatsBox
+        title='REVENUE'
+        value={formatCurrency({ value: project.payout.revenue, fractionDigits: 0 })}
+      />
       <InvestmentStatsBox title='BUYERS' value={project.payout.numberOfBuyers} />
     </div>
     <p className='text-sm md:text-base font-bold leading-normal md:leading-[22.4px] text-center'>

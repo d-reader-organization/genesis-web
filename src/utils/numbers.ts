@@ -9,7 +9,7 @@ type FormatCurrency = {
   fractionDigits?: number
 }
 
-export const formatCurrency = ({ value, currency = '', divisor = 1, fractionDigits = 2 }: FormatCurrency): string => {
+export const formatCurrency = ({ value, currency = '$', divisor = 1, fractionDigits = 2 }: FormatCurrency): string => {
   const numberFormatter = new Intl.NumberFormat('en-US', {
     style: 'decimal',
     minimumFractionDigits: fractionDigits,
@@ -21,16 +21,6 @@ export const formatCurrency = ({ value, currency = '', divisor = 1, fractionDigi
 
   const scaledValue = value / divisor
   return suffix + numberFormatter.format(scaledValue)
-}
-
-const usdFormatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  maximumFractionDigits: 0,
-})
-
-export const formatUSD = (value: number) => {
-  return usdFormatter.format(value)
 }
 
 export const formatPercentage = (value: number): string => {

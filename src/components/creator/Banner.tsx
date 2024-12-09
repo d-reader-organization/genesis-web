@@ -19,7 +19,7 @@ export const CreatorBanner: React.FC<Props> = ({ creator }) => {
         src={creator.banner}
         alt=''
         {...CREATOR_BANNER_SIZE}
-        className='w-full rounded-2xl aspect-creator-banner object-top object-cover sm:h-[300px]'
+        className='w-full rounded-xl aspect-creator-banner object-top object-cover sm:rounded-2xl sm:h-[300px]'
       />
       <AvatarImage
         src={creator.avatar}
