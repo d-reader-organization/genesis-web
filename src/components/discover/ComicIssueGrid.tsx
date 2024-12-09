@@ -19,7 +19,7 @@ export const ComicIssueGrid: React.FC = () => {
   } = useFetchComicIssues({ params: comicIssueParams })
 
   if (isFetching && !isFetched) {
-    return <Loader className='mx-auto mt-8' />
+    return <Loader className='mx-auto pt-6 sm:pt-8' />
   }
 
   return (
@@ -29,7 +29,7 @@ export const ComicIssueGrid: React.FC = () => {
           <DefaultComicIssueCard key={comicIssue.id} comicIssue={comicIssue} />
         ))}
       </div>
-      <div className='flex flex-col items-center'>
+      <div className='flex flex-col items-center pt-2 sm:pt-3'>
         <ShowMoreButton
           onClick={fetchNextPage}
           isFetching={isFetching}

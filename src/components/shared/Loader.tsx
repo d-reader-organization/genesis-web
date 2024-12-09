@@ -8,7 +8,7 @@ export const Loader: React.FC<Props> = ({ className = '' }) => (
   <div className={className} role='status'>
     <svg
       aria-hidden='true'
-      className='size-8 text-gray-300 animate-spin  fill-grey-500'
+      className='size-6 sm:size-8 text-gray-300 animate-spin  fill-grey-500'
       viewBox='0 0 100 101'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'

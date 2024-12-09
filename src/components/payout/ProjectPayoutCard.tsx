@@ -1,8 +1,8 @@
 import React from 'react'
 import { ReceiptText } from 'lucide-react'
 import { payoutDetails } from '@/constants/tooltips'
-import { formatNumberWithCommas } from '@/utils/numbers'
-import { formatPercentage, formatUSD } from '@/utils/numbers'
+import { formatCurrency, formatNumberWithCommas } from '@/utils/numbers'
+import { formatPercentage } from '@/utils/numbers'
 import { ProjectFunding, ProjectPayout } from '@/models/project'
 import { Text } from '@/components/ui'
 import { cn } from '@/lib/utils'
@@ -27,7 +27,7 @@ export const ProjectPayoutCard: React.FC<Props> = ({ payout, funding, className 
       <div className='flex w-full md:flex-col items-start pb-[2px] md:gap-5 md:pb-[6px]'>
         <PayoutStats
           text={`total raised by ${funding.numberOfBackers} backers`}
-          value={formatUSD(funding.raiseGoal)}
+          value={formatCurrency({ value: funding.raiseGoal, fractionDigits: 0 })}
           valueColor='text-green-genesis'
           valueSizeMd='md:text-3xl'
           textSizeMd='md:text-xl'

@@ -44,7 +44,7 @@ const LeftSection: React.FC<Props> = ({ comic }) => {
 
 const RightSection: React.FC<Props> = ({ comic }) => (
   <div className='flex flex-col gap-8 mt-4'>
-    <div className='flex justify-start md:justify-end LINKSWRAPPER'>
+    <div className='flex justify-start md:justify-end'>
       <Socials comic={comic} />
       <div className='w-max'></div>
     </div>

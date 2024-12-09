@@ -7,6 +7,8 @@ import { DiscoverQueryStoreProvider } from '@/providers/DiscoverQueryStoreProvid
 import { fetchMe } from '@/app/lib/api/user/queries'
 import { Navigation } from '../layout/Navigation'
 import { Text } from '../ui'
+import { IntercomClient } from '../shared/IntercomClient'
+
 type Props = React.PropsWithChildren & { mainClassName?: string }
 
 export const DiscoverPageWrapper: React.FC<Props> = async ({ children, mainClassName }) => {
@@ -37,6 +39,7 @@ export const DiscoverPageWrapper: React.FC<Props> = async ({ children, mainClass
           </DiscoverQueryStoreProvider>
         </div>
       </main>
+      <IntercomClient user={me} />
     </div>
   )
 }
