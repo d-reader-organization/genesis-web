@@ -1,11 +1,12 @@
 'use client'
 
 import { OwnedAssetPreview } from '@/components/digital-asset/OwnedAssetPreview'
-import { Button, Text } from '@/components/ui'
+import { Button } from '@/components/ui/Button'
+import { ButtonLink } from '@/components/ui/ButtonLink'
+import { Text } from '@/components/ui/Text'
 import { RoutePath } from '@/enums/routePath'
 import { OwnedComicIssue } from '@/models/comicIssue'
 import { ArrowLeft } from 'lucide-react'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
@@ -50,15 +51,15 @@ export const OwnedIssuesContent: React.FC<Props> = ({ ownedIssues }) => {
                 >
                   {ownedIssue.title}
                 </Text>
-                <Link
-                  className='h-full max-h-[42px] w-full max-w-28 py-3 px-4 flex justify-center items-center rounded-xl bg-grey-400'
+                <ButtonLink
+                  className='min-w-fit w-fit'
+                  variant='secondary'
+                  subVariant={1}
                   href={RoutePath.ReadComicIssue(ownedIssue.id)}
                   prefetch={false}
                 >
-                  <Text as='p' styleVariant='body-normal' fontWeight='medium' className='text-grey-100'>
-                    Read EP {ownedIssue.number}
-                  </Text>
-                </Link>
+                  Read EP {ownedIssue.number}
+                </ButtonLink>
               </div>
               <div className='flex flex-wrap gap-6 md:gap-10 w-full'>
                 {ownedIssue.collectibles.map((asset) => (

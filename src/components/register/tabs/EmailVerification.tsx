@@ -23,7 +23,7 @@ export const EmailVerificationContent: React.FC<Props> = ({ redirectTo }) => (
       Follow the simple instructions within the email to verify and become eligible for rewards. It might take up to 5
       minutes to receive the mail
     </Text>
-    <ButtonLink className='bg-yellow-500 text-grey-600 w-min self-center mt-4' href={redirectTo ?? RoutePath.Home}>
+    <ButtonLink variant='primary' subVariant={1} className='w-fit' href={redirectTo ?? RoutePath.Home}>
       Next
     </ButtonLink>
     <div className='mt-4 flex flex-col gap-4 items-center'>

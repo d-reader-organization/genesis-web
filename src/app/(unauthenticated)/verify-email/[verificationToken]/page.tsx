@@ -33,7 +33,7 @@ export default async function VerifyEmailPage({ params }: { params: Params }) {
             browse the app while enjoying full features!
           </p>
         )}
-        <ButtonLink backgroundColor='important' href={RoutePath.Home} className='text-grey-600 w-fit'>
+        <ButtonLink variant='primary' href={RoutePath.Home} className='w-fit'>
           Start exploring <ArrowRight className='size-6' />
         </ButtonLink>
       </div>

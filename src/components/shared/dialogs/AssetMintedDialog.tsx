@@ -180,9 +180,10 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
                   </Button>
                 ) : (
                   <ButtonLink
-                    className='text-grey-600 rounded-[12px]'
+                    variant='primary'
+                    size='lg'
+                    className='w-full'
                     href={withRedirect(RoutePath.Login, RoutePath.ReadComicIssue(comicIssue.id))}
-                    backgroundColor='important'
                   >
                     Login to Read
                   </ButtonLink>
