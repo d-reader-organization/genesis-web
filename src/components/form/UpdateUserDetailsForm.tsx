@@ -71,7 +71,7 @@ export const UpdateUserDetailsForm: React.FC<Props> = ({ id, name, email }) => {
           />
         </FormItem>
 
-        <Button type='submit' className='bg-grey-300 w-fit text-white'>
+        <Button type='submit' variant='secondary' subVariant={2} className='w-fit '>
           {showLoader ? <Loader /> : 'Save'}
         </Button>
       </form>

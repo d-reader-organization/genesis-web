@@ -11,7 +11,7 @@ import { Loader } from '../shared/Loader'
 const SubmitButton: React.FC = () => {
   const { pending } = useFormStatus()
   return (
-    <Button className='w-full' type='submit' aria-disabled={pending}>
+    <Button size='lg' className='w-full max-sm:h-[42px]' type='submit' aria-disabled={pending}>
       {pending ? <Loader /> : <p>Login</p>}
     </Button>
   )

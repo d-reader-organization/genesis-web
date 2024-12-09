@@ -72,7 +72,7 @@ export const UpdatePasswordForm: React.FC<Props> = ({ id }) => {
             8 characters minimum. At least 1 lowercase, 1 uppercase and 1 number
           </Text>
         </FormItem>
-        <Button type='submit' variant='default' className='bg-grey-300 text-white w-fit'>
+        <Button type='submit' variant='secondary' subVariant={2} size='md' className='w-fit'>
           {showLoader ? <Loader /> : 'Submit'}
         </Button>
       </form>

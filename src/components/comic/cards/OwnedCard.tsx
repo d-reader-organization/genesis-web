@@ -1,7 +1,6 @@
 'use client'
 
 import { Comic } from '@/models/comic'
-import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
 import { Text } from '@/components/ui'
@@ -9,6 +8,7 @@ import { RoutePath } from '@/enums/routePath'
 import { CopiesCount } from '@/components/shared/CopiesCount'
 import { CardBorderWrapper } from '@/components/shared/CardBorderWrapper'
 import { MoreHorizontalIcon } from 'lucide-react'
+import { ButtonLink } from '@/components/ui/ButtonLink'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comic: Comic
@@ -53,22 +53,24 @@ export const OwnedComicCard: React.FC<Props> = ({ comic }) => {
         </Text>
       </div>
       <div className='flex gap-2 sm:p-2'>
-        <Link
-          className='h-9 sm:h-[42px] w-full  py-3 px-4 flex justify-center items-center rounded-xl bg-grey-400'
+        <ButtonLink
+          className='w-full'
+          variant='secondary'
+          subVariant={1}
           href={RoutePath.ReadComic(comic.slug)}
           prefetch={false}
         >
-          <Text as='p' styleVariant='body-normal' fontWeight='medium' className='text-grey-100 max-sm:text-sm'>
-            Read
-          </Text>
-        </Link>
-        <Link
-          className='h-9 sm:h-[42px] rounded-xl border border-grey-200 flex justify-center items-center py-2 px-3'
+          Read
+        </ButtonLink>
+        <ButtonLink
+          className='min-w-fit px-2.5'
+          variant='outline'
+          subVariant={1}
           href={RoutePath.OwnedAssets(comic.slug)}
           prefetch={false}
-        >
-          <MoreHorizontalIcon className='h-[18px] w-[18px]' />
-        </Link>
+          icon={MoreHorizontalIcon}
+          iconOnly
+        />
       </div>
     </CardBorderWrapper>
   )

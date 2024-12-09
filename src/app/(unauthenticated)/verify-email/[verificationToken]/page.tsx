@@ -1,6 +1,6 @@
 import LogoWithTextIcon from 'public/assets/vector-icons/logo-with-text.svg'
 import { RoutePath } from '@/enums/routePath'
-import { ButtonLink } from '@/components/ui/Button'
+import { ButtonLink } from '@/components/ui/ButtonLink'
 import { verifyUserEmail } from '@/app/lib/api/user/mutations'
 import { ArrowRight } from 'lucide-react'
 import { Text } from '@/components/ui'
@@ -33,7 +33,7 @@ export default async function VerifyEmailPage({ params }: { params: Params }) {
             browse the app while enjoying full features!
           </p>
         )}
-        <ButtonLink backgroundColor='important' href={RoutePath.Home} className='text-grey-600 w-fit'>
+        <ButtonLink variant='primary' href={RoutePath.Home} className='w-fit'>
           Start exploring <ArrowRight className='size-6' />
         </ButtonLink>
       </div>

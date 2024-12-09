@@ -19,7 +19,9 @@ export const FilterButton: React.FC<FilterButtonProps> = ({
 }) => {
   return (
     <Button
-      className={cn('relative max-h-10 flex text-grey-100 bg-grey-500 gap-2', className)}
+      className={cn('relative', className)}
+      variant='secondary'
+      size='md'
       onClick={() => setFilterSheetOpen(!isFilterSheetOpen)}
     >
       <Settings2 className='w-4' />

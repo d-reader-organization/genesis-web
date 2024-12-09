@@ -29,6 +29,9 @@ const config = {
         'creator-banner': '1920/900',
         'creator-avatar': '500/500',
       },
+      borderWidth: {
+        '3': '3px',
+      },
       fontSize: {
         xxs: ['10px', '1.25'],
         xs: ['12px', '1.25'],
@@ -78,6 +81,7 @@ const config = {
         },
         yellow: {
           50: '#fffce3',
+          100: '#FFF8B8',
           200: '#FFF387',
           400: '#fff174',
           500: '#fceb54', // main
