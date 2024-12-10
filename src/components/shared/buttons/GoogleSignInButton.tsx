@@ -13,7 +13,13 @@ type Props = {
 export const GoogleSignInButton: React.FC<Props> = ({ buttonText = 'Sign in with google', className }) => {
   const handleSignIn = (providerId: string) => {
     const userAgent = navigator.userAgent.toLowerCase()
-    const isWebView = userAgent.includes('wv') || userAgent.includes('webview')
+    const isWebView =
+      userAgent.includes('wv') ||
+      userAgent.includes('webview') ||
+      typeof window.phantom !== undefined ||
+      userAgent.includes('snap') ||
+      userAgent.includes('snapchat')
+
     if (isWebView) {
       const authUrl = `/api/auth/signin/${providerId}?callbackUrl=${encodeURIComponent(window.location.origin)}`
       window.open(authUrl, '_blank')
