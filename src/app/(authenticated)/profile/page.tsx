@@ -1,5 +1,5 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/Tabs'
-import { fetchMe } from '@/app/lib/api/user/queries'
+import { fetchMe, fetchUserWallets } from '@/app/lib/api/user/queries'
 import { UserWalletSection } from '@/components/profile/UserWalletSection'
 import { BaseLayout } from '@/components/layout/BaseLayout'
 import { AccountSettingSection } from '@/components/profile/AccountSettingSection'
@@ -10,6 +10,10 @@ import { RoutePath } from '@/enums/routePath'
 
 async function ProfilePage() {
   const me = await fetchMe()
+  if (!me?.id) {
+    return null
+  }
+  const wallets = await fetchUserWallets(me.id)
 
   return (
     <BaseLayout>
@@ -30,7 +34,7 @@ async function ProfilePage() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value='1'>{me && <AccountSettingSection user={me} />}</TabsContent>
-          <TabsContent value='2'>{me && <UserWalletSection id={me.id} />}</TabsContent>
+          <TabsContent value='2'>{me && <UserWalletSection wallets={wallets} />}</TabsContent>
           <TabsContent value='3'>
             <div className='px-2'>
               <div className='py-8'>

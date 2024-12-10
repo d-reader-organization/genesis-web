@@ -106,7 +106,7 @@ export function AuthorizeWalletProvider({ children }: { children: ReactNode }) {
     if (!isAuthorizing) {
       authorizeWallet()
     }
-  }, [authorizeWallet, isAuthorizing])
+  }, [authorizeWallet])
 
   return <AuthorizeWalletContext.Provider value={value}>{children}</AuthorizeWalletContext.Provider>
 }
