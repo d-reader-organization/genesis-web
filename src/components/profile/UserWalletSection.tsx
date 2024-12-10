@@ -1,22 +1,22 @@
 'use client'
 
 import React from 'react'
-import { useFetchUserWallets } from '@/api/user/queries/useFetchUserWallets'
 import { shortenString } from '@/utils/helpers'
 import { Button, Text } from '../ui'
 import { useWallet } from '@solana/wallet-adapter-react'
-import { useDisconnectUserWallet } from '@/api/auth/queries/useDisconnectUserWallet'
 import CloseIcon from 'public/assets/vector-icons/close.svg'
 import { ConnectButton } from '../shared/buttons/ConnectButton'
+import { disconnectUserWallet } from '@/app/lib/api/auth/mutations'
+import { Wallet } from '@/models/wallet'
+import { useRouter } from 'next/navigation'
 
 type Props = {
-  id: number | string
+  wallets: Wallet[]
 }
 
-export const UserWalletSection: React.FC<Props> = ({ id }) => {
-  const { publicKey } = useWallet()
-  const { mutateAsync: disconnectWallet } = useDisconnectUserWallet()
-  const { data: connectedWallets = [], refetch } = useFetchUserWallets(id)
+export const UserWalletSection: React.FC<Props> = ({ wallets }) => {
+  const { publicKey, disconnect } = useWallet()
+  const { refresh } = useRouter()
 
   return (
     <div className='max-w-[580px] px-2'>
@@ -29,7 +29,7 @@ export const UserWalletSection: React.FC<Props> = ({ id }) => {
       </div>
 
       <ul className='border border-gray-300 rounded-lg'>
-        {connectedWallets.map((wallet) => (
+        {wallets.map((wallet) => (
           <li
             key={wallet.address}
             className={`wallet-item flex justify-between p-4 rounded-md ${wallet.address === publicKey?.toBase58() ? 'bg-gray-500' : ''}`}
@@ -39,8 +39,8 @@ export const UserWalletSection: React.FC<Props> = ({ id }) => {
             </Text>
             <Button
               onClick={async () => {
-                await disconnectWallet(wallet.address)
-                await refetch()
+                await Promise.all([disconnect(), disconnectUserWallet(wallet.address)])
+                refresh()
               }}
               variant='ghost'
               className='bg-transparent p-0 w-4 h-fit self-center'
