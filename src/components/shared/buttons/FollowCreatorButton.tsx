@@ -23,7 +23,7 @@ export const FollowCreatorButton: React.FC<Props> = ({ isFollowing, creatorSlug,
   return (
     <Button
       className={cn(
-        'flex items-center rounded-xl gap-2 p-4 max-h-9 sm:max-h-11',
+        'flex items-center rounded-xl gap-2 p-3 max-h-9 sm:max-h-11 w-[110px]',
         isFollowing ? 'bg-white text-black' : 'text-grey-100 bg-grey-300 bg-opacity-30',
         className
       )}
