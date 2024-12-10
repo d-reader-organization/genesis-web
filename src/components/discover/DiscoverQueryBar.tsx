@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Text } from '@/components/ui'
+import { Text } from '@/components/ui'
 import { DiscoverSearchBar } from './DiscoverSearchBar'
 import React from 'react'
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
@@ -28,7 +28,7 @@ export const DiscoverQueryBar: React.FC = () => {
           className='max-md:hidden'
           withLabel
         />
-        <ClearAllButton className='max-md:hidden'/>
+        <ClearAllButton className='max-md:hidden' />
         <DiscoverSearchBar />
         {/* <ClearAllButton className='md:hidden'/> */}
         <FilterButton

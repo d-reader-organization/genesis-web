@@ -49,7 +49,7 @@ export const DefaultComicIssueCard: React.FC<Props> = ({ comicIssue, className }
             {comicIssue.comic.title}
           </Text>
         )}
-         {/* <TextWithOverflow text={comicIssue.title} className='text-lg font-bold max-sm:text-base' />  */}
+        {/* <TextWithOverflow text={comicIssue.title} className='text-lg font-bold max-sm:text-base' />  */}
         <Text
           as='span'
           styleVariant='body-normal'

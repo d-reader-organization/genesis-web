@@ -19,13 +19,9 @@ export default async function CreatorReleasesPage({ params: { slug } }: Props) {
   const creator = await fetchCreator(slug)
   const comics = await fetchComics({ creatorSlug: slug, skip: 0, take: 4 })
   const tabs = getCreatorPageTabs(slug)
-  
+
   if (!creator) {
-    console.log("nocreator")
-    console.log(slug)
-    console.log(creator)
-    return null
-    //notFound()
+    notFound()
   }
 
   return (

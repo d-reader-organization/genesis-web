@@ -14,7 +14,7 @@ const { CREATOR, GET, SEARCH } = CREATOR_QUERY_KEYS
 // }
 
 export const fetchCreator = async (slug: string): Promise<Nullable<Creator>> => {
-  const response = await fetchWrapper<Creator>({ path: `${CREATOR}/${GET}/${slug}`})
+  const response = await fetchWrapper<Creator>({ path: `${CREATOR}/${GET}/${slug}` })
   return response.data
 }
 

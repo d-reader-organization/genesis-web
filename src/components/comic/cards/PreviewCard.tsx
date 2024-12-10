@@ -28,11 +28,7 @@ export const PreviewComicCard: React.FC<Props> = ({ className, comic }) => (
           {comic.title}
         </Text>
         {comic.stats && (
-          <Text
-            as='span'
-            styleVariant='body-normal'
-            className='line-clamp-1 overflow-ellipsis text-grey-100'
-          >
+          <Text as='span' styleVariant='body-normal' className='line-clamp-1 overflow-ellipsis text-grey-100'>
             {comic.stats.issuesCount + ' ' + pluralizeString('Episode', comic.stats.issuesCount)}
           </Text>
         )}
