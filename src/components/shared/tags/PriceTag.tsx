@@ -7,10 +7,10 @@ import { Text } from '../../ui'
 import clsx from 'clsx'
 import React from 'react'
 import { TextProps } from '../../ui'
+import { cn } from '@/lib/utils'
 
 interface Props extends Partial<TextProps> {
   price?: number | null
-  size?: number
   bold?: boolean
   reverse?: boolean
   from?: boolean
@@ -19,11 +19,20 @@ interface Props extends Partial<TextProps> {
   colorfulIcon?: boolean
   inline?: boolean
   maxDecimals?: number
+  iconSize: SolanaIconSize
+  iconClassName?: string
+}
+
+export type SolanaIconSize = 'small' | 'medium' | 'large'
+
+const sizeVariants: Record<SolanaIconSize, string> = {
+  small: 'w-1 sm:w-2',
+  medium: 'w-2 sm:w-3',
+  large: 'w-3 sm:w-4',
 }
 
 export const PriceTag: React.FC<Props> = ({
   price,
-  size = 16,
   bold = false,
   reverse = false,
   from = false,
@@ -35,6 +44,8 @@ export const PriceTag: React.FC<Props> = ({
   as: as = 'p',
   styleVariant = 'body-normal',
   className,
+  iconSize,
+  iconClassName,
   ...props
 }) => {
   const TypographyWrapper: React.FC<{ children: React.ReactNode }> = (tprops) => {
@@ -69,21 +80,19 @@ export const PriceTag: React.FC<Props> = ({
       {icon && (
         <SolanaIcon
           style={{
-            width: size,
-            height: size,
             marginLeft: reverse ? '0.2rem' : '0.5rem',
             marginRight: reverse ? '0.5rem' : '0.2rem',
           }}
+          className={cn(sizeVariants[iconSize], iconClassName)}
         />
       )}
       {colorfulIcon && (
         <SolanaColoredIcon
           style={{
-            width: size,
-            height: size,
             marginLeft: reverse ? '0.2rem' : '0.5rem',
             marginRight: reverse ? '0.5rem' : '0.2rem',
           }}
+          className={cn(sizeVariants[iconSize], iconClassName)}
         />
       )}
       {roundedPrice}

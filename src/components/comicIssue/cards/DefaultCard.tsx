@@ -6,6 +6,7 @@ import { ComicIssue } from '@/models/comicIssue'
 import { RoutePath } from '@/enums/routePath'
 import { cn } from '@/lib/utils'
 import { COMIC_ISSUE_COVER_SIZE } from '@/constants/imageSizes'
+//import { TextWithOverflow } from '@/components/ui/TextWithOverflow'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comicIssue: ComicIssue
@@ -48,7 +49,7 @@ export const DefaultComicIssueCard: React.FC<Props> = ({ comicIssue, className }
             {comicIssue.comic.title}
           </Text>
         )}
-        {/* <TextWithOverflow text={comicIssue.title} className='text-lg font-bold max-sm:text-base' /> */}
+        {/* <TextWithOverflow text={comicIssue.title} className='text-lg font-bold max-sm:text-base' />  */}
         <Text
           as='span'
           styleVariant='body-normal'
@@ -66,12 +67,11 @@ export const DefaultComicIssueCard: React.FC<Props> = ({ comicIssue, className }
             {!isFree && (
               <PriceTag
                 styleVariant='body-xsmall'
-                className='sm:hidden'
                 inline={false}
                 bold
                 icon
-                size={14} // TODO: size 12 on mobile
                 price={comicIssue.stats.price}
+                iconSize='medium'
               />
             )}
           </div>

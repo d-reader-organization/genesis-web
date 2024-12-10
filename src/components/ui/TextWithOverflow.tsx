@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   text: string
 }
+
 export const TextWithOverflow: React.FC<Props> = ({ text, className }) => {
   const textRef = useRef<HTMLSpanElement>(null)
   const [isOverflowing, setIsOverflowing] = useState(false)
@@ -20,15 +21,13 @@ export const TextWithOverflow: React.FC<Props> = ({ text, className }) => {
   // TODO: use this component on ComicIssue, Comic, and Creator cards (comic.title etc.)
 
   return (
-    <div className='relative inline-block'>
-      <span
-        ref={textRef}
-        className={cn('line-clamp-1 overflow-ellipsis whitespace-nowrap block', className)}
-        onMouseEnter={handleMouseEnter}
-        title={isOverflowing ? text : ''}
-      >
-        {text}
-      </span>
-    </div>
+    <span
+      ref={textRef}
+      className={cn('line-clamp-1 overflow-ellipsis whitespace-nowrap block', className)}
+      onMouseEnter={handleMouseEnter}
+      title={isOverflowing ? text : ''}
+    >
+      {text}
+    </span>
   )
 }

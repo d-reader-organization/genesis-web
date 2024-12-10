@@ -1,6 +1,7 @@
 import React from 'react'
 import Image, { ImageProps } from 'next/image'
 import { cn } from '@/lib/utils'
+import { CREATOR_AVATAR_SIZE } from '@/constants/imageSizes'
 
 export type AvatarSize = 'small' | 'medium' | 'large'
 
@@ -20,8 +21,7 @@ export const AvatarImage: React.FC<AvatarImageProps> = ({ size = 'medium', alt =
   return (
     <Image
       alt={alt}
-      width={56}
-      height={56}
+      {...CREATOR_AVATAR_SIZE}
       className={cn('border-2 border-grey-500 bg-grey-600 rounded-full', sizeVariants[size], className)}
       {...props}
     />

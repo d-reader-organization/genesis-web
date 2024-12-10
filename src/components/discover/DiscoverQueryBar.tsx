@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Text } from '@/components/ui'
+import { Text } from '@/components/ui'
 import { DiscoverSearchBar } from './DiscoverSearchBar'
 import React from 'react'
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
@@ -11,10 +11,10 @@ import { usePathname } from 'next/navigation'
 import { ALL_DISCOVER_PAGE_QUERY_CRITERIA, QUERY_CRITERIA_MAP } from '@/constants/discoverQueryCriteria'
 import { useDiscoverStoreActiveFiltersCount } from '@/hooks/useDiscoverStoreActiveFiltersCount'
 import { FilterButton } from './FilterButton'
+import { ClearAllButton } from './ClearAllButton'
 
 export const DiscoverQueryBar: React.FC = () => {
   const [isFilterSheetOpen, setFilterSheetOpen] = React.useState<boolean>(false)
-  const clearAll = useDiscoverQueryStore((state) => state.resetToDefaultInitState)
   const activeFiltersCount = useDiscoverStoreActiveFiltersCount()
 
   return (
@@ -28,10 +28,9 @@ export const DiscoverQueryBar: React.FC = () => {
           className='max-md:hidden'
           withLabel
         />
-        <Button onClick={clearAll} variant='secondary' size='md'>
-          Clear all
-        </Button>
+        <ClearAllButton className='max-md:hidden' />
         <DiscoverSearchBar />
+        {/* <ClearAllButton className='md:hidden'/> */}
         <FilterButton
           isFilterSheetOpen={isFilterSheetOpen}
           setFilterSheetOpen={setFilterSheetOpen}

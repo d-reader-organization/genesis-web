@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { TrendingUp } from 'lucide-react'
 import { ProjectFunding } from '@/models/project'
-import { formatNumberWithCommas, formatUSD } from '@/utils/numbers'
+import { formatCurrency, formatNumberWithCommas } from '@/utils/numbers'
 import { differenceInDays } from 'date-fns'
 import { Text } from '../ui'
 import { cn, withRedirect } from '@/lib/utils'
@@ -50,15 +50,15 @@ export const ProjectFundingCard: React.FC<ProjectFundingCardProps> = ({ funding,
 
       <div className='flex w-full max-md:justify-between md:flex-col items-start md:gap-[29px]'>
         <FundingStats
-          text={'pledged of ' + formatUSD(funding.raiseGoal)}
-          value={formatUSD(funding.pledgedAmount)}
+          text={'pledged of ' + formatCurrency({ value: funding.raiseGoal, fractionDigits: 0 })}
+          value={formatCurrency({ value: funding.pledgedAmount, fractionDigits: 0 })}
           valueColor='text-green-genesis '
           valueSizeMd='md:text-[32px] '
           className='max-md:hidden'
         />
         <FundingStats
-          text={'of ' + formatUSD(funding.raiseGoal)}
-          value={formatUSD(funding.pledgedAmount)}
+          text={'of ' + formatCurrency({ value: funding.raiseGoal, fractionDigits: 0 })}
+          value={formatCurrency({ value: funding.raiseGoal, fractionDigits: 0 })}
           valueColor='text-green-genesis '
           className='md:hidden items-center'
         />
