@@ -11,11 +11,11 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
   comic: Comic
 }
 
-export const NewCard: React.FC<Props> = ({ className, comic }) => (
+export const PreviewComicCard: React.FC<Props> = ({ className, comic }) => (
   <Link
     href={RoutePath.Comic(comic.slug)}
     prefetch={false}
-    className='flex flex-col aspect-comic-cover justify-end w-full p-2 border border-grey-300 rounded-xl size-full'
+    className='flex flex-col aspect-[10/9] justify-end p-2 border border-grey-300 rounded-xl'
   >
     <ContentWithGradientImageBg
       image={comic.cover}
@@ -24,21 +24,21 @@ export const NewCard: React.FC<Props> = ({ className, comic }) => (
       gradientDirectionClassName='bg-gradient-to-t'
     >
       <div className='flex flex-col gap-2 absolute bottom-0 p-2 sm:p-4'>
-        <Text as='h4' styleVariant='secondary-heading' className='line-clamp-1 overflow-ellipsis max-md:text-base'>
+        <Text as='h4' styleVariant='secondary-heading' className='line-clamp-1 overflow-ellipsis'>
           {comic.title}
         </Text>
         {comic.stats && (
           <Text
             as='span'
             styleVariant='body-normal'
-            className='line-clamp-1 overflow-ellipsis text-grey-100 max-md:text-sm'
+            className='line-clamp-1 overflow-ellipsis text-grey-100'
           >
             {comic.stats.issuesCount + ' ' + pluralizeString('Episode', comic.stats.issuesCount)}
           </Text>
         )}
-        <div className='flex flex-wrap gap-2'>
-          {comic.genres &&
-            comic.genres.map((name, index) => (
+        {comic.genres && (
+          <div className='flex flex-wrap gap-2'>
+            {comic.genres.map((name, index) => (
               <div
                 className={cn(
                   'flex justify-center items-center px-2 py-[2px] rounded-lg',
@@ -46,12 +46,13 @@ export const NewCard: React.FC<Props> = ({ className, comic }) => (
                 )}
                 key={`${name}-${index}`}
               >
-                <Text as='span' styleVariant='body-normal' className='text-grey-100 max-md:text-sm'>
+                <Text as='span' styleVariant='body-normal' className='text-grey-100'>
                   {name.name}
                 </Text>
               </div>
             ))}
-        </div>
+          </div>
+        )}
       </div>
     </ContentWithGradientImageBg>
   </Link>

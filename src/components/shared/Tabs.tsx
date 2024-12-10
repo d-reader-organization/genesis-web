@@ -18,39 +18,40 @@ export const Tabs: React.FC<Props> = ({ tabs, className }) => {
   return (
     <div className='flex flex-col gap-2'>
       <div className={cn('flex justify-start gap-6', className)}>
-        {tabs.map((tab: Tab) => {
-          return tab.disabled ? (
-            <div key={tab.url} className='flex flex-row items-center bg-transparent rounded-none pb-2'>
-              <Text
-                as='h4'
-                styleVariant='secondary-heading'
-                fontWeight='bold'
-                className={cn('max-sm:text-base', selectedTab === tab.url ? 'text-white' : 'text-grey-200')}
-              >
-                {tab.name}
-              </Text>
-              <SoonTag className='sm:-mt-1' />
-            </div>
-          ) : (
-            <Link
-              key={tab.url}
-              href={tab.url}
-              className={cn(
-                'flex items-center bg-transparent rounded-none pb-2 cursor-pointer',
-                selectedTab === tab.url && 'border-b-[2px] z-10'
-              )}
-            >
-              <Text
-                as='h4'
-                styleVariant='secondary-heading'
-                fontWeight='bold'
-                className={cn('max-sm:text-base', selectedTab === tab.url ? 'text-white' : 'text-grey-200')}
-              >
-                {tab.name}
-              </Text>
-            </Link>
-          )
-        })}
+        {tabs.map((tab: Tab) => (
+          <div
+            key={tab.url}
+            className={cn(
+              'flex flex-row items-center bg-transparent rounded-none pb-2',
+              selectedTab === tab.url && !tab.disabled && 'border-b-[2px] z-10'
+            )}
+          >
+            {tab.disabled ? (
+              <>
+                <Text
+                  as='h4'
+                  styleVariant='secondary-heading'
+                  fontWeight='bold'
+                  className={cn('max-sm:text-base', 'text-grey-200')}
+                >
+                  {tab.name}
+                </Text>
+                <SoonTag className='sm:-mt-1' />
+              </>
+            ) : (
+              <Link href={tab.url} className='flex items-center'>
+                <Text
+                  as='h4'
+                  styleVariant='secondary-heading'
+                  fontWeight='bold'
+                  className={cn('max-sm:text-base', selectedTab === tab.url ? 'text-white' : 'text-grey-200')}
+                >
+                  {tab.name}
+                </Text>
+              </Link>
+            )}
+          </div>
+        ))}
       </div>
       <div className='w-full h-[2px] bg-grey-300 -mt-[10px]' />
     </div>

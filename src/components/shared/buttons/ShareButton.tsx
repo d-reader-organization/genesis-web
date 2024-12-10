@@ -22,13 +22,17 @@ export const ShareButton: React.FC<Props> = ({ title = '', text = '' }) => {
         console.error('Error sharing content: ', err)
       }
     } else {
-      toast({ description: 'Sharing is not supported on this browser.', variant: 'error' })
+      await navigator.clipboard.writeText(window.location.toString())
+      toast({ description: 'Copied to clipboard!', variant: 'success' })
     }
   }
 
   return (
-    <Button onClick={handleShare} className='flex bg-grey-300 bg-opacity-30 rounded-lg p-3 max-h-10 text-grey-100'>
-      <Share2 className='w-4' />
-    </Button>
+    <Button
+      onClick={handleShare}
+      icon={Share2}
+      iconOnly
+      className='bg-grey-300 bg-opacity-30 rounded-lg max-w-10 max-h-10 text-grey-100'
+    />
   )
 }

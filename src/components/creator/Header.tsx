@@ -22,7 +22,7 @@ const LeftSection: React.FC<Props> = ({ creator }) => {
       <Text as='h3' styleVariant='primary-heading' fontWeight='semibold'>
         {creator.name}
       </Text>
-      <Text as='p' className='whitespace-pre-wrap mb-2' styleVariant='body-normal'>
+      <Text as='p' className='whitespace-pre-wrap mb-2 text-grey-100' styleVariant='body-normal'>
         {creator.description}
       </Text>
       <div className='flex gap-2 items-center'>
@@ -44,7 +44,7 @@ const RightSection: React.FC<Props> = ({ creator }) => (
         VOLUME
       </Text>
       <Text as='span' styleVariant='body-small' fontWeight='bold' className='uppercase max-sm:text-xs'>
-        {formatCurrency({ value: creator.stats.totalVolume, currency: '$', divisor: 1000, fractionDigits: 1 }) + 'K'}
+        {formatCurrency({ value: creator.stats.totalVolume, currency: '$', divisor: 1, fractionDigits: 0 })}
       </Text>
     </div>
     <div className='w-full h-[1px] bg-grey-300' />

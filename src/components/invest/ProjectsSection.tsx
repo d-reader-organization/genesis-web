@@ -6,7 +6,7 @@ import Link from 'next/link'
 import React from 'react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/Tooltip'
 import { roiTooltip } from '@/constants/tooltips'
-import { formatCurrency} from '@/utils/numbers'
+import { formatCurrency } from '@/utils/numbers'
 import { Text } from '../ui'
 
 type Props = {

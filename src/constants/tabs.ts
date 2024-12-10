@@ -23,8 +23,8 @@ export const DISCOVER_PAGE_TABS: Tab[] = [
 
 export const getCreatorPageTabs = (slug: string): Tab[] => [
   {
-    name: 'Releases',
-    url: RoutePath.CreatorReleases(slug),
+    name: 'Series',
+    url: RoutePath.CreatorSeries(slug),
   },
   {
     name: 'Collectibles',
