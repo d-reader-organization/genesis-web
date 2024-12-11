@@ -67,6 +67,7 @@ export const config = {
     '/library/:path*',
     '/profile',
     '/circle',
+    '/creator/:path*',
     '/mint/:path+',
     '/api/:path*',
     '/login/:path*',

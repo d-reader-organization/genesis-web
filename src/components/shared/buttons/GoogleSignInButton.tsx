@@ -4,7 +4,6 @@ import { Button } from '../../ui/Button'
 import GoogleLogoIcon from 'public/assets/vector-icons/google-logo.svg'
 import { signIn } from 'next-auth/react'
 import { Text } from '@/components/ui/Text'
-import { cn } from '@/lib/utils'
 
 type Props = {
   buttonText?: string
@@ -16,9 +15,9 @@ export const GoogleSignInButton: React.FC<Props> = ({ buttonText = 'Sign in with
     return (
       ua.includes('wv') ||
       ua.includes('webview') ||
-      ((ua.includes('iphone') || ua.includes('ipad')) && !ua.includes('safari')) ||
-      (ua.includes('android') && ua.includes('version/')) ||
-      typeof window.phantom !== 'undefined'
+      ((((ua.includes('iphone') || ua.includes('ipad')) && !ua.includes('safari')) ||
+        (ua.includes('android') && ua.includes('version/'))) &&
+        typeof window.solana !== 'undefined')
     )
   }
   const handleSignIn = (providerId: string) => {
@@ -31,14 +30,8 @@ export const GoogleSignInButton: React.FC<Props> = ({ buttonText = 'Sign in with
   }
 
   return (
-    <Button
-      onClick={() => handleSignIn('google')}
-      type='button'
-      size='lg'
-      className={cn('text-grey-100', className)}
-      variant='outline'
-    >
-      <GoogleLogoIcon className='mr-1 h-[18px]' />
+    <Button onClick={() => handleSignIn('google')} type='button' size='lg' className={className} variant='outline'>
+      <GoogleLogoIcon className='h-[18px]' />
       <Text as='p' fontWeight='bold' styleVariant='body-normal'>
         {buttonText}
       </Text>

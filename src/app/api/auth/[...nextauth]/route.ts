@@ -25,8 +25,8 @@ const handler = NextAuth({
     redirect: async (params) => {
       const url = new URL(params.url)
       const redirectTo = url.searchParams.get(REDIRECT_TO_KEY) ?? ''
-      if (params.url.includes(RoutePath.Register)) {
-        return `${params.baseUrl}${redirectTo || RoutePath.Home}`
+      if (url.pathname === RoutePath.Register && !redirectTo) {
+        return `${params.baseUrl}${RoutePath.Home}`
       }
       return redirectTo ? `${params.baseUrl}${redirectTo}` : params.url
     },

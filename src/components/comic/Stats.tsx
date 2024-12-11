@@ -14,16 +14,13 @@ export const ComicStats: React.FC<Props> = ({ comic }) => {
         <CollectionStatusItem label='readers' value={comic.stats?.readersCount} />
         <CollectionStatusItem label='ongoing' value={comic.isCompleted ? 'no ' : 'yes'} />
       </InfoList>
-
-      {!!comic.myStats ? (
-        <InfoListActions
-          averageRating={comic.stats?.averageRating}
-          comicSlug={comic.slug}
-          favouritesCount={comic.stats?.favouritesCount}
-          isFavourite={comic.myStats?.isFavourite}
-          rating={comic.myStats?.rating}
-        />
-      ) : null}
+      <InfoListActions
+        averageRating={comic.stats?.averageRating}
+        comicSlug={comic.slug}
+        favouritesCount={comic.stats?.favouritesCount}
+        isFavourite={comic.myStats?.isFavourite}
+        rating={comic.myStats?.rating}
+      />
     </div>
   )
 }

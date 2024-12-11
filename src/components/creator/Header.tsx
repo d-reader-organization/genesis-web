@@ -26,11 +26,7 @@ const LeftSection: React.FC<Props> = ({ creator }) => {
         {creator.description}
       </Text>
       <div className='flex gap-2 items-center'>
-        <FollowCreatorButton
-          isFollowing={creator.myStats.isFollowing}
-          creatorSlug={creator.slug}
-          className='max-h-10 sm:max-h-10 rounded-lg'
-        />
+        <FollowCreatorButton isFollowing={creator.myStats.isFollowing} creatorSlug={creator.slug} />
         <ShareButton title={creator.name} text={creator.description} />
       </div>
     </div>
