@@ -69,14 +69,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounc
       socket.off(`wallet/${walletAddress}/item-minted`)
       socket.disconnect()
     }
-  }, [
-    walletAddress,
-    isMintTransactionLoading,
-    timeoutId,
-    closeConfirmingTransaction,
-    toggleAssetMinted,
-    refetchCandyMachine,
-  ])
+  }, [walletAddress, isMintTransactionLoading, timeoutId, closeConfirmingTransaction, toggleAssetMinted])
 
   const handleMint = async () => {
     if (typeof onMint === 'function') onMint()
