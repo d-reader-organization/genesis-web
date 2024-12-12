@@ -1,34 +1,43 @@
 'use client'
 
-import { cn } from '@/lib/utils'
 import UserPlusIcon from 'public/assets/vector-icons/user-plus-icon.svg'
-import { Button, Text } from '@/components/ui'
+import { Button } from '@/components/ui/Button'
+import { Text } from '@/components/ui/Text'
 import { useRouter } from 'next/navigation'
 import { followCreator } from '@/app/lib/api/creator/mutations'
+import { useOptimistic, useTransition } from 'react'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   isFollowing: boolean
   creatorSlug: string
 }
 
-export const FollowCreatorButton: React.FC<Props> = ({ isFollowing, creatorSlug, className }) => {
+export const FollowCreatorButton: React.FC<Props> = ({ isFollowing, creatorSlug }) => {
+  const [, startTransition] = useTransition()
+  const [isFollowingState, setIsFollowingState] = useOptimistic(isFollowing, (state) => {
+    return !state
+  })
   const { refresh } = useRouter()
 
   const handleFollow = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    await followCreator(creatorSlug)
-    refresh()
+    startTransition(async () => {
+      setIsFollowingState(null)
+      await followCreator(creatorSlug)
+      refresh()
+    })
   }
 
   return (
     <Button
-      className={cn('rounded-lg w-[130px]', className)}
+      className='min-w-[124px]'
+      variant={isFollowingState ? 'white' : 'secondary'}
+      size='md'
       onClick={handleFollow}
-      variant={isFollowing ? 'outline' : 'white'}
     >
-      <UserPlusIcon className='w-[18px]' />
-      <Text as='span' styleVariant='body-small' fontWeight='bold' className='max-md:text-xs'>
-        {isFollowing ? 'Unfollow' : 'Follow'}
+      <UserPlusIcon className='w-4 sm:w-5' />
+      <Text as='span' styleVariant='body-small' fontWeight='medium' className='max-sm:text-xs'>
+        {isFollowingState ? 'Unfollow' : 'Follow'}
       </Text>
     </Button>
   )

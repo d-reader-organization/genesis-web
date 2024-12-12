@@ -2,7 +2,6 @@
 
 import React, { useOptimistic, useTransition } from 'react'
 import { InfoList } from './InfoList'
-import { Button } from '../ui/Button'
 import { StarIcon } from './icons/StarIcon'
 import { isNil } from 'lodash'
 import { roundNumber } from '@/utils/numbers'
@@ -13,6 +12,7 @@ import useToggle from '@/hooks/useToggle'
 import { useRouter } from 'next/navigation'
 import { favouritiseComic } from '@/app/lib/api/comic/mutations'
 import { favouritiseComicIssue } from '@/app/lib/api/comicIssue/mutations'
+import { RequireAuthWrapperButton } from './buttons/RequireAuthWrapperButton'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   averageRating?: Nullable<number>
@@ -38,10 +38,10 @@ export const InfoListActions: React.FC<Props> = ({
   return (
     <>
       <InfoList className={className} orientation={orientation}>
-        <Button className='rounded-none' onClick={toggleStarRating} variant='ghost'>
+        <RequireAuthWrapperButton className='rounded-none' onClick={() => toggleStarRating()} variant='ghost'>
           <StarIcon size='lg' solid={!isNil(rating)} />
           &nbsp;<span>{roundNumber(averageRating ?? null) || '-'}</span>
-        </Button>
+        </RequireAuthWrapperButton>
         <HeartIconButton
           comicIssueId={comicIssueId}
           comicSlug={comicSlug}
@@ -83,19 +83,21 @@ const HeartIconButton: React.FC<HeartIconButtonProps> = ({ comicIssueId, comicSl
   const { refresh } = useRouter()
 
   const handleSubmit = async () => {
-    startTransition(() => setNewState(null))
-    if (comicSlug) {
-      await favouritiseComic(comicSlug)
-    } else if (comicIssueId) {
-      await favouritiseComicIssue(comicIssueId)
-    }
-    refresh()
+    startTransition(async () => {
+      setNewState(null)
+      if (comicSlug) {
+        await favouritiseComic(comicSlug)
+      } else if (comicIssueId) {
+        await favouritiseComicIssue(comicIssueId)
+      }
+      refresh()
+    })
   }
 
   return (
-    <Button onClick={handleSubmit} variant='ghost'>
+    <RequireAuthWrapperButton onClick={handleSubmit} variant='ghost'>
       <HeartIcon solid={state.isFavourite} />
       &nbsp;<span>{state.count}</span>
-    </Button>
+    </RequireAuthWrapperButton>
   )
 }

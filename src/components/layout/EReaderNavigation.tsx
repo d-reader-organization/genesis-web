@@ -20,7 +20,7 @@ export const EReaderNavigation: React.FC<Props> = ({ comicIssue, hideNavigation 
   const navigationLinkStyle = 'hover:text-yellow-500 hover:[&>*]:text-yellow-500 text-lg'
   const arrowRightReversedStyle = 'h-[18px] text-text-color rotate-180'
   const { back } = useRouter()
-  const commands = !!comicIssue.myStats?.viewedAt ? (
+  const commands = (
     <div className='justify-end '>
       <InfoListActions
         className='flex flex-row-reverse border-none [&>*:not(:last-child)]:border-r-0'
@@ -32,7 +32,7 @@ export const EReaderNavigation: React.FC<Props> = ({ comicIssue, hideNavigation 
         rating={comicIssue.myStats?.rating}
       />
     </div>
-  ) : null
+  )
 
   return (
     <div

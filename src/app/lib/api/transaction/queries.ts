@@ -16,7 +16,7 @@ export const fetchMintTransaction = async (params: MintParams): Promise<{ data: 
   const response = await fetchWrapper<string[]>({
     path: `${TRANSACTION}/${MINT}`,
     params,
-    timeoutInMiliseconds: 30000,
+    timeoutInMiliseconds: 40000,
   })
   if (response.errorMessage) {
     return { data: [], error: response.errorMessage }

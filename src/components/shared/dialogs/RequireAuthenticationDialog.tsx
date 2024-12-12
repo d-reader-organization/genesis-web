@@ -1,3 +1,5 @@
+'use client'
+
 import { Text } from '@/components/ui/Text'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/Dialog'
 import { GoogleSignInButton } from '../buttons/GoogleSignInButton'
@@ -6,14 +8,25 @@ import Link from 'next/link'
 import { RoutePath } from '@/enums/routePath'
 import { ButtonLink } from '@/components/ui/ButtonLink'
 import { Divider } from '../Divider'
+import { usePathname } from 'next/navigation'
+import { withRedirect } from '@/lib/utils'
 
 type Props = {
   showDialog?: boolean
+  closeDialog: () => void
 }
 
-export const RequireAuthenticationDialog: React.FC<Props> = ({ showDialog = false }) => {
+export const RequireAuthDialog: React.FC<Props> = ({ showDialog = false, closeDialog }) => {
+  const pathname = usePathname()
   return (
-    <Dialog open={showDialog}>
+    <Dialog
+      open={showDialog}
+      onOpenChange={(open) => {
+        if (!open) {
+          closeDialog()
+        }
+      }}
+    >
       <DialogContent
         showCloseIcon={false}
         aria-describedby={undefined}
@@ -26,7 +39,13 @@ export const RequireAuthenticationDialog: React.FC<Props> = ({ showDialog = fals
         <div className='flex flex-col gap-6 w-full'>
           <div className='flex flex-col gap-4'>
             <GoogleSignInButton buttonText='Continue with Google' className='justify-start' />
-            <ButtonLink className='justify-start' href={RoutePath.Login} variant='outline' size='lg' icon={Mail}>
+            <ButtonLink
+              className='justify-start'
+              href={withRedirect(RoutePath.Login, pathname)}
+              variant='outline'
+              size='lg'
+              icon={Mail}
+            >
               Continue with Email
             </ButtonLink>
           </div>
@@ -49,7 +68,7 @@ export const RequireAuthenticationDialog: React.FC<Props> = ({ showDialog = fals
           <Text as='span' styleVariant='body-normal' fontWeight='bold' className='text-grey-100'>
             Already have an account?&nbsp;
           </Text>
-          <Link className='underline text-white' href={RoutePath.Login}>
+          <Link className='underline text-white' href={withRedirect(RoutePath.Login, pathname)}>
             Log in
           </Link>
         </div>

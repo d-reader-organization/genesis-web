@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import Link, { LinkProps } from 'next/link'
+import Link, { type LinkProps } from 'next/link'
 import { buttonVariants } from './Button'
 import { type VariantProps } from 'class-variance-authority'
 import { type LucideIcon } from 'lucide-react'
