@@ -7,5 +7,6 @@ declare global {
       app_id: string
     }
     Intercom: (command: string, settings?: unknown) => void
+    phantom?: unknown
   }
 }

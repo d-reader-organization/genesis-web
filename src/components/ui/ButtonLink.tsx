@@ -46,12 +46,7 @@ const ButtonLink = forwardRef<HTMLAnchorElement, Props>(
 
     const linkContent = (
       <>
-        {Icon && (
-          <Icon
-            size={iconSize}
-            className={cn('shrink-0', iconPosition === 'right' ? 'ml-2' : 'mr-2', iconOnly && 'mr-0')}
-          />
-        )}
+        {Icon && <Icon size={iconSize} className={cn('shrink-0')} />}
         {!iconOnly && children}
       </>
     )
