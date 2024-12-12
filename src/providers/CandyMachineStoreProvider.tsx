@@ -1,16 +1,15 @@
 'use client'
 
-import { type ReactNode, createContext, useRef, useContext, useEffect } from 'react'
+import { type ReactNode, createContext, useRef, useContext, useEffect, useCallback } from 'react'
 import { useStore } from 'zustand'
 import { type CandyMachineStore, createCandyMachineStore } from '@/stores/candy-machine-store'
-import { useFetchCandyMachine } from '@/api/candyMachine/queries/useFetchCandyMachine'
 import { ComicIssue } from '@/models/comicIssue'
 import { useWallet } from '@solana/wallet-adapter-react'
-import { useFetchSupportedTokens } from '@/api/settings/queries/useFetchSupportedTokens'
 import { CouponType } from '@/models/candyMachine/candyMachineCoupon'
 import { getDefaultCoupon, isComicVaultCoupon } from '@/utils/mint'
 import { WRAPPED_SOL_MINT } from '@metaplex-foundation/js'
-import React from 'react'
+import { fetchCandyMachine } from '@/app/lib/api/candyMachine/queries'
+import { fetchSupportedTokens } from '@/app/lib/api/settings/queries'
 
 export type CandyMachineStoreApi = ReturnType<typeof createCandyMachineStore>
 
@@ -28,60 +27,54 @@ export const CandyMachineStoreProvider = ({
   children,
 }: CandyMachineStoreProviderProps) => {
   const { publicKey } = useWallet()
-  const {
-    data: candyMachine,
-    refetch,
-    isLoading,
-  } = useFetchCandyMachine({
-    candyMachineAddress: comicIssue?.collectibleInfo?.activeCandyMachineAddress ?? '',
-    walletAddress: publicKey?.toBase58() ?? '',
-  })
-  const { data: supportedTokens = [] } = useFetchSupportedTokens()
   const storeRef = useRef<CandyMachineStoreApi>()
-  if (!storeRef.current) {
-    const defaultCoupon = getDefaultCoupon(candyMachine?.coupons ?? [], isAuthenticated)
 
-    const prices = defaultCoupon?.prices ?? []
-    const solCurrencySetting = prices.find((price) => price.splTokenAddress == WRAPPED_SOL_MINT.toString())
+  if (!storeRef.current) {
     storeRef.current = createCandyMachineStore({
       coupons: [],
-      isLoading,
+      isLoading: true,
       numberOfItems: 1,
-      supportedTokens: supportedTokens ?? [],
-      candyMachine: candyMachine ?? undefined,
-      selectedCoupon: defaultCoupon,
-      selectedCurrency: solCurrencySetting,
+      supportedTokens: [],
     })
   }
 
-  useEffect(() => {
-    refetch()
-  }, [isAuthenticated, refetch])
-
-  useEffect(() => {
-    storeRef.current?.setState({
-      candyMachine: candyMachine ?? undefined,
-      isLoading,
-      supportedTokens,
-      coupons: (candyMachine?.coupons ?? []).filter(
-        (coupon) => !(coupon.type === CouponType.PublicUser || isComicVaultCoupon(coupon))
-      ),
+  const refetchCandyMachine = useCallback(async () => {
+    const candyMachine = await fetchCandyMachine({
+      candyMachineAddress: comicIssue?.collectibleInfo?.activeCandyMachineAddress ?? '',
+      walletAddress: publicKey?.toBase58() ?? '',
     })
-  }, [candyMachine, isLoading, supportedTokens, supportedTokens.length])
+    storeRef.current?.setState({
+      candyMachine: candyMachine ?? storeRef.current.getState().candyMachine,
+    })
+    return candyMachine
+  }, [comicIssue?.collectibleInfo?.activeCandyMachineAddress, publicKey])
 
   useEffect(() => {
-    if (candyMachine) {
+    const fetchAndStoreData = async () => {
+      const candyMachine = await refetchCandyMachine()
+      const supportedTokens = await fetchSupportedTokens()
       const defaultCoupon = getDefaultCoupon(candyMachine?.coupons ?? [], isAuthenticated)
 
       const solCurrencySetting = defaultCoupon?.prices.find(
         (price) => price.splTokenAddress == WRAPPED_SOL_MINT.toString()
       )
+      const coupons = (candyMachine?.coupons ?? []).filter(
+        (coupon) => !(coupon.type === CouponType.PublicUser || isComicVaultCoupon(coupon))
+      )
+
       storeRef.current?.setState({
+        coupons,
+        isLoading: false,
+        numberOfItems: 1,
+        supportedTokens,
+        candyMachine: candyMachine ?? undefined,
         selectedCoupon: defaultCoupon,
         selectedCurrency: solCurrencySetting,
+        refetchCandyMachine,
       })
     }
-  }, [candyMachine, candyMachine?.coupons.length, isAuthenticated])
+    fetchAndStoreData()
+  }, [isAuthenticated, refetchCandyMachine])
 
   return <CandyMachineStoreContext.Provider value={storeRef.current}>{children}</CandyMachineStoreContext.Provider>
 }
