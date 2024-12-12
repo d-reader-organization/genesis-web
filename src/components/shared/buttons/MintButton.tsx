@@ -222,6 +222,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounc
       ) : (
         <ConnectButton
           disabled={!isLive}
+          aria-disabled={!isLive}
           variant='primary'
           subVariant={1}
           size='lg'
