@@ -7,6 +7,9 @@ export const refreshTokenKey = 'refresh_token'
 export const googleAccessTokenKey = 'google_access_token'
 export const SUCC_RESPONSE_STATUS_CODES = [200, 201]
 export const REDIRECT_TO_KEY = 'redirectTo'
+export const GLOBAL_RATE_LIMIT_STATUS_CODE = 999
+export const GLOBAL_RATE_LIMIT_MESSAGE =
+  'Too many users requesting for this resource, please try again in a couple of seconds'
 
 export const jwtCookieProps = {
   httpOnly: true,
