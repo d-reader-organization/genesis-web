@@ -12,8 +12,8 @@ type Props = {
 }
 
 export const EmailVerificationContent: React.FC<Props> = ({ redirectTo }) => (
-  <main className='container mb-4 md:mb-8 sm:p-0 flex flex-col max-w-md gap-4'>
-    <Text as='h3' styleVariant='primary-heading' fontWeight='semibold' className='text-center pt-8 sm:mb-8'>
+  <main className='container mb-4 md:mb-8 sm:p-0 flex flex-col max-w-md gap-4 items-center'>
+    <Text as='h3' styleVariant='primary-heading' fontWeight='semibold' className='text-center pt-4 sm:mb-4'>
       Check your mail
     </Text>
     <div className='flex justify-center'>
