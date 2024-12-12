@@ -7,8 +7,8 @@ import { Button } from '../../ui/Button'
 import { useSearchParams } from 'next/navigation'
 import { RoutePath } from '@/enums/routePath'
 import dynamic from 'next/dynamic'
-import Link from 'next/link'
 import { REDIRECT_TO_KEY } from '@/constants/general'
+import { ButtonLink } from '@/components/ui/ButtonLink'
 
 type Props = {
   isGoogleSignUp?: boolean
@@ -33,14 +33,11 @@ const ConnectWalletContent: React.FC<Props> = ({ isGoogleSignUp, onSkip }) => {
       </Text>
       <div className='flex justify-center gap-4 mt-2'>
         {isGoogleSignUp ? (
-          <Link
-            className='flex justify-center items-center min-w-40 p-2 text-base text-grey-100 rounded-lg bg-transparent border border-grey-300'
-            href={redirectTo ?? RoutePath.Home}
-          >
+          <ButtonLink className='h-[48px]' variant='outline' href={redirectTo ?? RoutePath.Home}>
             Skip
-          </Link>
+          </ButtonLink>
         ) : (
-          <Button className='w-[unset] min-w-40' onClick={onSkip} variant='outline'>
+          <Button className='w-[unset] min-w-40 h-[48px]' onClick={onSkip} variant='outline'>
             Skip
           </Button>
         )}

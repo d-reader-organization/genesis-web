@@ -26,7 +26,6 @@ import { useRouter } from 'next/navigation'
 import { useFetchMe } from '@/api/user/queries/useFetchMe'
 import { Loader } from 'lucide-react'
 import { LOCAL_STORAGE } from '@/constants/general'
-import { withRedirect } from '@/lib/utils'
 
 type Props = {
   comicIssue: ComicIssue
@@ -183,9 +182,9 @@ export const AssetMintedDialog: React.FC<Props & { assets: AssetEventData[] }> =
                     variant='primary'
                     size='lg'
                     className='w-full'
-                    href={withRedirect(RoutePath.Login, RoutePath.ReadComicIssue(comicIssue.id))}
+                    href={RoutePath.ReadComicIssue(comicIssue.id)}
                   >
-                    Login to Read
+                    Read
                   </ButtonLink>
                 )}
                 <Button

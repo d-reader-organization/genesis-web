@@ -46,7 +46,7 @@ const CreateAccountContent: React.FC<Props> = ({ isGoogleSignUp = false, onSucce
 const RegisterButton: React.FC = () => {
   const { pending } = useFormStatus()
   return (
-    <Button className='w-full' type='submit' aria-disabled={pending}>
+    <Button className='w-full' type='submit' size='lg' aria-disabled={pending}>
       {pending ? <Loader /> : <p>Register</p>}
     </Button>
   )
