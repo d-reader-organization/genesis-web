@@ -1,14 +1,29 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
+import React, { RefObject, useState } from 'react'
 import { cn } from '@/lib/utils'
+import { Text, TextProps, TextRef } from './Text'
 
-type Props = React.HTMLAttributes<HTMLDivElement> & {
-  text: string
+const createRefForVariant = (variant: TextProps['as']): RefObject<TextRef> => {
+  switch (variant) {
+    case 'span':
+      return React.createRef<HTMLSpanElement>()
+    case 'p':
+      return React.createRef<HTMLParagraphElement>()
+    case 'h1':
+    case 'h2':
+    case 'h3':
+    case 'h4':
+    case 'h5':
+    case 'h6':
+      return React.createRef<HTMLHeadingElement>()
+    default:
+      throw new Error('Unsupported variant: ' + variant)
+  }
 }
 
-export const TextWithOverflow: React.FC<Props> = ({ text, className }) => {
-  const textRef = useRef<HTMLSpanElement>(null)
+export const TextWithOverflow: React.FC<TextProps> = ({ as: variant, children, className, ...props }) => {
+  const textRef = createRefForVariant(variant)
   const [isOverflowing, setIsOverflowing] = useState(false)
 
   const handleMouseEnter = () => {
@@ -18,16 +33,16 @@ export const TextWithOverflow: React.FC<Props> = ({ text, className }) => {
     }
   }
 
-  // TODO: use this component on ComicIssue, Comic, and Creator cards (comic.title etc.)
-
   return (
-    <span
+    <Text
       ref={textRef}
+      as={variant}
       className={cn('line-clamp-1 overflow-ellipsis whitespace-nowrap block', className)}
       onMouseEnter={handleMouseEnter}
-      title={isOverflowing ? text : ''}
+      title={isOverflowing ? children?.toString() : ''}
+      {...props}
     >
-      {text}
-    </span>
+      {children}
+    </Text>
   )
 }

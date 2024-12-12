@@ -10,7 +10,7 @@ type Props = {
 }
 
 export const CreatorHeader: React.FC<Props> = ({ creator }) => (
-  <div className='flex flex-col w-full mt-5 gap-6 sm:gap-8 max-sm:items-center sm:flex-row sm:justify-between sm:mt-4'>
+  <div className='flex flex-col w-full mt-6 gap-6 sm:gap-8 max-sm:items-center sm:flex-row sm:justify-between sm:mt-4'>
     <LeftSection creator={creator} />
     <RightSection creator={creator} />
   </div>
@@ -22,14 +22,14 @@ const LeftSection: React.FC<Props> = ({ creator }) => {
       <Text as='h3' styleVariant='primary-heading' fontWeight='semibold'>
         {creator.name}
       </Text>
-      <Text as='p' className='whitespace-pre-wrap mb-2 text-grey-100' styleVariant='body-normal'>
+      <Text as='p' className='whitespace-pre-wrap mb-2 text-grey-100 max-md:text-sm' styleVariant='body-normal'>
         {creator.description}
       </Text>
       <div className='flex gap-2 items-center'>
         <FollowCreatorButton
           isFollowing={creator.myStats.isFollowing}
           creatorSlug={creator.slug}
-          className='max-h-10 sm:max-h-10 rounded-lg'
+          className=''
         />
         <ShareButton title={creator.name} text={creator.description} />
       </div>

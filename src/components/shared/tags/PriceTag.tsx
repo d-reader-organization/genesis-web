@@ -19,7 +19,7 @@ interface Props extends Partial<TextProps> {
   colorfulIcon?: boolean
   inline?: boolean
   maxDecimals?: number
-  iconSize: SolanaIconSize
+  size: SolanaIconSize
   iconClassName?: string
 }
 
@@ -41,11 +41,11 @@ export const PriceTag: React.FC<Props> = ({
   icon = false,
   colorfulIcon = false,
   maxDecimals,
-  as: as = 'p',
+  as = 'p',
   styleVariant = 'body-normal',
-  className,
-  iconSize,
+  size,
   iconClassName,
+  className,
   ...props
 }) => {
   const TypographyWrapper: React.FC<{ children: React.ReactNode }> = (tprops) => {
@@ -83,7 +83,7 @@ export const PriceTag: React.FC<Props> = ({
             marginLeft: reverse ? '0.2rem' : '0.5rem',
             marginRight: reverse ? '0.5rem' : '0.2rem',
           }}
-          className={cn(sizeVariants[iconSize], iconClassName)}
+          className={cn(sizeVariants[size], iconClassName)}
         />
       )}
       {colorfulIcon && (
@@ -92,7 +92,7 @@ export const PriceTag: React.FC<Props> = ({
             marginLeft: reverse ? '0.2rem' : '0.5rem',
             marginRight: reverse ? '0.5rem' : '0.2rem',
           }}
-          className={cn(sizeVariants[iconSize], iconClassName)}
+          className={cn(sizeVariants[size], iconClassName)}
         />
       )}
       {roundedPrice}

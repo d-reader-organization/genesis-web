@@ -6,6 +6,7 @@ import { ComicIssue } from '@/models/comicIssue'
 import { RoutePath } from '@/enums/routePath'
 import { cn } from '@/lib/utils'
 import { COMIC_ISSUE_COVER_SIZE } from '@/constants/imageSizes'
+import { TextWithOverflow } from '@/components/ui/TextWithOverflow'
 //import { TextWithOverflow } from '@/components/ui/TextWithOverflow'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
@@ -44,24 +45,16 @@ export const DefaultComicIssueCard: React.FC<Props> = ({ comicIssue, className }
           <Text
             as='span'
             styleVariant='body-small'
-            className='text-gray-100 line-clamp-1 overflow-ellipsis max-sm:text-xs'
+            className='text-grey-100 line-clamp-1 overflow-ellipsis max-sm:text-xs'
+            title={comicIssue.comic.title}
           >
             {comicIssue.comic.title}
           </Text>
         )}
-        {/* <TextWithOverflow text={comicIssue.title} className='text-lg font-bold max-sm:text-base' />  */}
-        <Text
-          as='span'
-          styleVariant='body-normal'
-          fontWeight='bold'
-          className='text-white line-clamp-1 overflow-ellipsis max-sm:text-sm'
-          title={comicIssue.title}
-        >
-          {comicIssue.title}
-        </Text>
+        <TextWithOverflow as='span' styleVariant='body-normal' fontWeight='bold'>{comicIssue.title}</TextWithOverflow>
         {comicIssue.stats && (
-          <div className='flex relative w-full justify-between text-gray-100'>
-            <Text as='span' styleVariant='body-small' className='text-gray-100 max-sm:text-xs'>
+          <div className='flex relative w-full justify-between text-white'>
+            <Text as='span' styleVariant='body-small' className='text-grey-100 max-sm:text-xs'>
               EP {comicIssue.number}/{comicIssue.stats.totalIssuesCount}
             </Text>
             {!isFree && (
@@ -71,7 +64,7 @@ export const DefaultComicIssueCard: React.FC<Props> = ({ comicIssue, className }
                 bold
                 icon
                 price={comicIssue.stats.price}
-                iconSize='medium'
+                size='medium'
               />
             )}
           </div>

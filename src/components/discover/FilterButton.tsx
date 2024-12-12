@@ -16,30 +16,28 @@ export const FilterButton: React.FC<FilterButtonProps> = ({
   activeFiltersCount,
   withLabel = false,
   className,
-}) => {
-  return (
-    <Button
-      className={cn('relative', className)}
-      variant='secondary'
-      size='md'
-      onClick={() => setFilterSheetOpen(!isFilterSheetOpen)}
-    >
-      <Settings2 className='w-4' />
-      {withLabel && (
-        <Text as='span' styleVariant='body-small'>
-          Filter
-        </Text>
-      )}
-      {activeFiltersCount !== 0 && (
-        <Text
-          as='span'
-          fontWeight='bold'
-          styleVariant='body-xsmall'
-          className='flex -top-1 -right-2 absolute justify-center items-center w-5 h-5 bg-white text-grey-600 rounded-full'
-        >
-          {activeFiltersCount}
-        </Text>
-      )}
-    </Button>
-  )
-}
+}) => (
+  <Button
+    className={cn('relative h-10 rounded-[10px]', withLabel ? 'min-w-[100px]': 'min-w-10', className)}
+    variant='secondary'
+    icon={Settings2}
+    size='sm'
+    onClick={() => setFilterSheetOpen(!isFilterSheetOpen)}
+  >
+    {withLabel && (
+      <Text as='span' styleVariant='body-small'>
+        Filter
+      </Text>
+    )}
+    {activeFiltersCount !== 0 && (
+      <Text
+        as='span'
+        fontWeight='bold'
+        styleVariant='body-xsmall'
+        className='flex -top-1 -right-1 absolute justify-center items-center w-4 h-4 bg-white text-grey-600 rounded-full leading-none'
+      >
+        {activeFiltersCount}
+      </Text>
+    )}
+  </Button>
+)

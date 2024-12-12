@@ -2,6 +2,7 @@ import React from 'react'
 import { cn } from '@/lib/utils'
 
 export type Variant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span'
+
 type StyleVariant =
   | 'primary-heading'
   | 'secondary-heading'
@@ -11,17 +12,8 @@ type StyleVariant =
   | 'body-small'
   | 'body-xsmall'
   | 'body-xxsmall'
-type FontWeight = 'bold' | 'semibold' | 'medium' | 'normal'
 
-export type TextProps = {
-  as: Variant
-  styleVariant: StyleVariant
-  className?: string
-  children: React.ReactNode
-  fontWeight?: FontWeight
-  italic?: boolean
-  title?: string
-}
+type FontWeight = 'bold' | 'semibold' | 'medium' | 'normal'
 
 const variantStyles: Record<Variant, string> = {
   h1: 'text-40 sm:text-48 tracking-0096',
@@ -52,27 +44,48 @@ const fontWeightVariants: Record<FontWeight, string> = {
   normal: 'font-normal',
 }
 
-export const Text: React.FC<TextProps> = ({
-  as: Component,
-  styleVariant,
-  className,
-  children,
-  fontWeight,
-  title,
-  italic = false,
-}) => {
-  return (
-    <Component
-      className={cn(
-        variantStyles[Component],
-        styleVariants[styleVariant],
-        fontWeight && fontWeightVariants[fontWeight],
-        italic && 'italic',
-        className
-      )}
-      title={title}
-    >
-      {children}
-    </Component>
-  )
+export const variantToElement = {
+  h1: 'h1',
+  h2: 'h2',
+  h3: 'h3',
+  h4: 'h4',
+  h5: 'h5',
+  h6: 'h6',
+  p: 'p',
+  span: 'span',
 }
+
+export type TextRef = HTMLSpanElement | HTMLParagraphElement | HTMLHeadingElement
+
+export type TextProps<T extends Variant = Variant> = {
+  as: T
+  styleVariant: StyleVariant
+  className?: string
+  children: React.ReactNode
+  fontWeight?: FontWeight
+  italic?: boolean
+} & React.HTMLAttributes<JSX.IntrinsicElements[T]>
+
+export const Text = React.forwardRef<TextRef, TextProps>(
+  ({ as, styleVariant, children, fontWeight, italic = false, className, ...props }, ref) => {
+    const Component = variantToElement[as] as React.ElementType
+
+    return (
+      <Component
+        ref={ref}
+        className={cn(
+          variantStyles[as],
+          styleVariants[styleVariant],
+          fontWeight && fontWeightVariants[fontWeight],
+          italic && 'italic',
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </Component>
+    )
+  }
+)
+
+Text.displayName = 'Text'

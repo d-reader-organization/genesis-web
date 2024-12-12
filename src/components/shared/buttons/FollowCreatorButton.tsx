@@ -22,15 +22,12 @@ export const FollowCreatorButton: React.FC<Props> = ({ isFollowing, creatorSlug,
 
   return (
     <Button
-      className={cn(
-        'flex items-center rounded-xl gap-2 p-3 max-h-9 sm:max-h-11 w-[110px]',
-        isFollowing ? 'bg-white text-black' : 'text-grey-100 bg-grey-300 bg-opacity-30',
-        className
-      )}
+      className={cn('rounded-lg w-[130px]', className)}
       onClick={handleFollow}
+      variant={isFollowing ? 'outline' : 'white'}
     >
-      <UserPlusIcon className='w-4 sm:w-5' />
-      <Text as='span' styleVariant='body-small' fontWeight='medium' className='max-sm:text-xs'>
+      <UserPlusIcon className='w-[18px]' />
+      <Text as='span' styleVariant='body-small' fontWeight='bold' className='max-md:text-xs'>
         {isFollowing ? 'Unfollow' : 'Follow'}
       </Text>
     </Button>

@@ -34,16 +34,16 @@ export const PreviewComicCard: React.FC<Props> = ({ className, comic }) => (
         )}
         {comic.genres && (
           <div className='flex flex-wrap gap-2'>
-            {comic.genres.map((name, index) => (
+            {comic.genres.map((genre, index) => (
               <div
                 className={cn(
                   'flex justify-center items-center px-2 py-[2px] rounded-lg',
                   index === 0 ? 'bg-transparent border border-grey-100' : 'bg-grey-300 bg-opacity-30'
                 )}
-                key={`${name}-${index}`}
+                key={`${genre}-${index}`}
               >
-                <Text as='span' styleVariant='body-normal' className='text-grey-100'>
-                  {name.name}
+                <Text as='span' styleVariant='body-normal' className='text-grey-100 max-sm:text-sm'>
+                  {genre.name}
                 </Text>
               </div>
             ))}
