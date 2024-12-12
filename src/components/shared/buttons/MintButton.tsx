@@ -11,7 +11,7 @@ import { ComicIssue } from '@/models/comicIssue'
 // import { NoWalletConnectedDialog } from './dialogs/NoWalletConnectedDialog'
 import { ConfirmingTransactionDialog } from '../dialogs/ConfirmingTransactionDialog'
 import { useToggle } from '@/hooks'
-import { Skeleton, toast } from '../../ui'
+import { toast } from '../../ui/toast'
 import { fetchMintTransaction } from '@/app/lib/api/transaction/queries'
 import { versionedTransactionFromBs64 } from '@/utils/transactions'
 import { io } from 'socket.io-client'
@@ -180,12 +180,14 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounc
   const price = getMintPrice(mintPrice * numberOfItems, splToken?.decimals ?? 1)
   const isFree = price == 0
 
-  return isLive ? (
+  return (
     <>
       {hasWalletConnected ? (
         isEligible ? (
           <Button
             className={cn('bg-important-color min-h-[52px] w-full', bounce && 'animate-bounce')}
+            disabled={!isLive}
+            aria-disabled={!isLive}
             onClick={handleMint}
           >
             {!isMintTransactionLoading ? (
@@ -218,7 +220,14 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounc
           </>
         )
       ) : (
-        <ConnectButton variant='primary' subVariant={1} size='lg' className='w-full max-md:w-[150px]' text='Connect' />
+        <ConnectButton
+          disabled={!isLive}
+          variant='primary'
+          subVariant={1}
+          size='lg'
+          className='w-full max-md:w-[150px]'
+          text='Connect'
+        />
       )}
       {assetMintEventData ? (
         <AssetMintedDialog
@@ -235,7 +244,5 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounc
       {/* <NoWalletConnectedDialog open={showWalletNotConnected} toggleDialog={toggleWalletNotConnected} /> */}
       <ConfirmingTransactionDialog open={showConfirmingTransaction} toggleDialog={toggleConfirmingTransaction} />
     </>
-  ) : (
-    <Skeleton className='h-[52px] w-40' />
   )
 }

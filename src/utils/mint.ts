@@ -104,3 +104,16 @@ export const getRaritySupply = (totalSupply: number, rarityShare: number) => {
 export const isComicVaultCoupon = (coupon: CandyMachineCoupon) => {
   return coupon.prices.some((currency) => currency.label == COMIC_VAULT_LABEL)
 }
+
+export const getCurrencySetting = ({
+  coupon,
+  splTokenAddress = WRAPPED_SOL_MINT.toString(),
+}: {
+  coupon?: CandyMachineCoupon
+  splTokenAddress?: string
+}) => {
+  return (
+    coupon?.prices.find((price) => price.splTokenAddress === splTokenAddress) ??
+    coupon?.prices.find((price) => price.splTokenAddress === WRAPPED_SOL_MINT.toString())
+  )
+}

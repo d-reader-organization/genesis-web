@@ -2,8 +2,7 @@ import { CandyMachine } from '@/models/candyMachine'
 import { CandyMachineCoupon, CouponCurrencySetting } from '@/models/candyMachine/candyMachineCoupon'
 import { Nullable } from '@/models/common'
 import { SplToken } from '@/models/settings/splToken'
-import { getPublicCoupon } from '@/utils/mint'
-import { WRAPPED_SOL_MINT } from '@metaplex-foundation/js'
+import { getCurrencySetting, getPublicCoupon } from '@/utils/mint'
 import { createStore } from 'zustand/vanilla'
 
 export type CandyMachineState = {
@@ -40,18 +39,20 @@ export const createCandyMachineStore = (initState: CandyMachineState = defaultIn
       set((state) => {
         if (state.selectedCoupon?.id === coupon.id) {
           const publicCoupon = getPublicCoupon(state.candyMachine?.coupons ?? [])
-          const solCurrencySetting = publicCoupon?.prices.find(
-            (price) => price.splTokenAddress == WRAPPED_SOL_MINT.toString()
-          )
           return {
             selectedCoupon: publicCoupon,
-            selectedCurrency: solCurrencySetting,
+            selectedCurrency: getCurrencySetting({
+              coupon: publicCoupon,
+              splTokenAddress: state.selectedCurrency?.splTokenAddress,
+            }),
           }
         }
-        const solCurrencySetting = coupon.prices.find((price) => price.splTokenAddress == WRAPPED_SOL_MINT.toString())
         return {
           selectedCoupon: coupon,
-          selectedCurrency: solCurrencySetting,
+          selectedCurrency: getCurrencySetting({
+            coupon,
+            splTokenAddress: state.selectedCurrency?.splTokenAddress,
+          }),
         }
       }),
     updateSelectedCurrency: (currency?: CouponCurrencySetting) => set(() => ({ selectedCurrency: currency })),
