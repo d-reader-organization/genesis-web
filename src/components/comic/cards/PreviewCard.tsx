@@ -24,9 +24,9 @@ export const PreviewComicCard: React.FC<Props> = ({ className, comic }) => (
       gradientClassName='from-grey-500'
       gradientDirectionClassName='bg-gradient-to-t'
     >
-      <div className='flex flex-col gap-2 absolute bottom-0 p-2 sm:p-4'>
+      <div className='flex flex-col w-full gap-2 absolute bottom-0 p-2 sm:p-4'>
         <TextWithOverflow as='h4' styleVariant='secondary-heading'>
-          {comic.title}AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          {comic.title}
         </TextWithOverflow>
         {comic.stats && (
           <Text
