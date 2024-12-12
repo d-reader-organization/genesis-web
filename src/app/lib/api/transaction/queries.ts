@@ -9,7 +9,6 @@ import { UseComicIssueAssetParams } from '@/models/transaction/useComicIssueAsse
 import { MintParams } from '@/models/transaction/mint'
 import { ExpressInterestParams } from '@/models/transaction/expressInterest'
 import { TRANSACTION_QUERY_KEYS } from './keys'
-import { GLOBAL_RATE_LIMIT_MESSAGE, GLOBAL_RATE_LIMIT_STATUS_CODE } from '@/constants/general'
 
 const { TRANSACTION, MINT, MULTIPLE_BUY, USE_COMIC_ISSUE_ASSET, EXPRESS_INTEREST } = TRANSACTION_QUERY_KEYS
 
@@ -20,9 +19,7 @@ export const fetchMintTransaction = async (params: MintParams): Promise<{ data: 
     timeoutInMiliseconds: 40000,
   })
   if (response.errorMessage) {
-    const errorMessage =
-      response.status === GLOBAL_RATE_LIMIT_STATUS_CODE ? GLOBAL_RATE_LIMIT_MESSAGE : response.errorMessage
-    return { data: [], error: errorMessage }
+    return { data: [], error: response.errorMessage }
   }
   return { data: JSON.parse(JSON.stringify(response.data ?? [])) }
 }
