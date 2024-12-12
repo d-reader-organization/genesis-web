@@ -11,7 +11,6 @@ import { cn } from '@/lib/utils'
 
 interface Props extends Partial<TextProps> {
   price?: number | null
-  bold?: boolean
   reverse?: boolean
   from?: boolean
   symbol?: boolean
@@ -26,14 +25,13 @@ interface Props extends Partial<TextProps> {
 export type SolanaIconSize = 'small' | 'medium' | 'large'
 
 const sizeVariants: Record<SolanaIconSize, string> = {
-  small: 'w-1 sm:w-2',
-  medium: 'w-2 sm:w-3',
-  large: 'w-3 sm:w-4',
+  small: 'w-[6px] sm:w-2',
+  medium: 'w-[10px] sm:w-3',
+  large: 'w-[14px] sm:w-4',
 }
 
 export const PriceTag: React.FC<Props> = ({
   price,
-  bold = false,
   reverse = false,
   from = false,
   inline = true,
@@ -43,6 +41,7 @@ export const PriceTag: React.FC<Props> = ({
   maxDecimals,
   as = 'p',
   styleVariant = 'body-normal',
+  fontWeight = 'bold',
   size,
   iconClassName,
   className,
@@ -53,11 +52,11 @@ export const PriceTag: React.FC<Props> = ({
       <Text
         as={as}
         styleVariant={styleVariant}
+        fontWeight={fontWeight}
         className={clsx(
           inline ? 'inline-flex' : 'flex',
           reverse ? 'flex-row-reverse' : 'flex-row',
           'items-center',
-          bold ? 'font-bold' : 'font-normal',
           className
         )}
         {...props}

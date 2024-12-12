@@ -11,7 +11,7 @@ export const ClearAllButton: React.FC<ClearAllButtonProps> = ({ className }) => 
   const clearAll = useDiscoverQueryStore((state) => state.resetToDefaultInitState)
 
   return (
-    <Button onClick={clearAll} variant='secondary' size='md' className={cn('h-10 min-w-[100px]',className)}>
+    <Button onClick={clearAll} variant='secondary' size='md' className={cn('h-10 min-w-[100px]', className)}>
       <Text as='span' styleVariant='body-small'>
         Clear all
       </Text>

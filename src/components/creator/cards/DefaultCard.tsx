@@ -39,19 +39,23 @@ export const DefaultCreatorCard: React.FC<Props> = ({ creator, className }) => (
         className='absolute max-md:-top-8 max-md:left-1/2 max-md:transform max-md:-translate-x-1/2 max-md:-translate-y-1/2 md:inset-x-6 md:-inset-y-14'
       />
       <div className='flex flex-col items-center gap-[2px] md:items-start'>
-        <div className='flex md:w-32 1160:w-40'>
+        <div className='flex md:w-28 1160:w-40'>
           <TextWithOverflow as='span' styleVariant='body-normal' fontWeight='bold' className='max-sm:text-sm'>
             {creator.name}
           </TextWithOverflow>
         </div>
-        <Text as='span' styleVariant='body-small' className='line-clamp-1 overflow-ellipsis max-sm:text-xs text-grey-100'>
+        <Text
+          as='span'
+          styleVariant='body-small'
+          className='line-clamp-1 overflow-ellipsis max-sm:text-xs text-grey-100'
+        >
           {creator.stats.followersCount + ' ' + pluralizeString('Follower', creator.stats.followersCount)}
         </Text>
       </div>
       <FollowCreatorButton
         creatorSlug={creator.slug}
         isFollowing={creator.myStats?.isFollowing}
-        className='max-md:h-9 max-md:w-[110px]'
+        className='max-sm:h-9 max-sm:min-w-[108px]'
       />
     </div>
   </Link>

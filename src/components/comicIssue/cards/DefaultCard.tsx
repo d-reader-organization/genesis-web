@@ -46,12 +46,13 @@ export const DefaultComicIssueCard: React.FC<Props> = ({ comicIssue, className }
             as='span'
             styleVariant='body-small'
             className='text-grey-100 line-clamp-1 overflow-ellipsis max-sm:text-xs'
-            title={comicIssue.comic.title}
           >
             {comicIssue.comic.title}
           </Text>
         )}
-        <TextWithOverflow as='span' styleVariant='body-normal' fontWeight='bold'>{comicIssue.title}</TextWithOverflow>
+        <TextWithOverflow as='span' styleVariant='body-normal' fontWeight='bold'>
+          {comicIssue.title}
+        </TextWithOverflow>
         {comicIssue.stats && (
           <div className='flex relative w-full justify-between text-white'>
             <Text as='span' styleVariant='body-small' className='text-grey-100 max-sm:text-xs'>
@@ -59,11 +60,12 @@ export const DefaultComicIssueCard: React.FC<Props> = ({ comicIssue, className }
             </Text>
             {!isFree && (
               <PriceTag
-                styleVariant='body-xsmall'
+                styleVariant='body-small'
+                fontWeight='bold'
                 inline={false}
-                bold
                 icon
                 price={comicIssue.stats.price}
+                className='max-sm:text-xs'
                 size='medium'
               />
             )}
