@@ -6,8 +6,8 @@ export enum CreatorFilterTag {
 }
 
 export enum CreatorSortTag {
-  Followers = 'followers',
   Name = 'name',
+  Followers = 'followers',
 }
 
 export type CreatorParams = Pagination & {
