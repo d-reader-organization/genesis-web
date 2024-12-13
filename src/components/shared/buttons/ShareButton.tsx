@@ -30,11 +30,10 @@ export const ShareButton: React.FC<Props> = ({ title = '', text = '' }) => {
   return (
     <Button
       onClick={handleShare}
-      size={'sm'}
+      size={'md'}
       icon={Share2}
       iconOnly
       variant='secondary'
-      className='h-[42px] rounded-[10px]'
     />
   )
 }
