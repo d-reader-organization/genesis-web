@@ -6,13 +6,14 @@ import { Text } from '@/components/ui/Text'
 import { useRouter } from 'next/navigation'
 import { followCreator } from '@/app/lib/api/creator/mutations'
 import { useOptimistic, useTransition } from 'react'
+import { cn } from '@/lib/utils'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   isFollowing: boolean
   creatorSlug: string
 }
 
-export const FollowCreatorButton: React.FC<Props> = ({ isFollowing, creatorSlug }) => {
+export const FollowCreatorButton: React.FC<Props> = ({ isFollowing, creatorSlug, className }) => {
   const [, startTransition] = useTransition()
   const [isFollowingState, setIsFollowingState] = useOptimistic(isFollowing, (state) => {
     return !state
@@ -30,13 +31,12 @@ export const FollowCreatorButton: React.FC<Props> = ({ isFollowing, creatorSlug 
 
   return (
     <Button
-      className='min-w-[124px]'
-      variant={isFollowingState ? 'white' : 'secondary'}
-      size='md'
+      className={cn('min-w-[124px]', className)}
+      variant={isFollowingState ? 'outline' : 'white'}
       onClick={handleFollow}
     >
-      <UserPlusIcon className='w-4 sm:w-5' />
-      <Text as='span' styleVariant='body-small' fontWeight='medium' className='max-sm:text-xs'>
+      <UserPlusIcon className='w-[18px]' />
+      <Text as='span' styleVariant='body-small' fontWeight='bold' className='max-sm:text-xs'>
         {isFollowingState ? 'Unfollow' : 'Follow'}
       </Text>
     </Button>

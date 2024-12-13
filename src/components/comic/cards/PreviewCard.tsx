@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import { Text } from '../../ui/Text'
 import { RoutePath } from '@/enums/routePath'
 import { pluralizeString } from '@/utils/helpers'
+import { TextWithOverflow } from '@/components/ui/TextWithOverflow'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comic: Comic
@@ -23,27 +24,31 @@ export const PreviewComicCard: React.FC<Props> = ({ className, comic }) => (
       gradientClassName='from-grey-500'
       gradientDirectionClassName='bg-gradient-to-t'
     >
-      <div className='flex flex-col gap-2 absolute bottom-0 p-2 sm:p-4'>
-        <Text as='h4' styleVariant='secondary-heading' className='line-clamp-1 overflow-ellipsis'>
+      <div className='flex flex-col w-full gap-2 absolute bottom-0 p-2 sm:p-4'>
+        <TextWithOverflow as='h4' styleVariant='secondary-heading'>
           {comic.title}
-        </Text>
+        </TextWithOverflow>
         {comic.stats && (
-          <Text as='span' styleVariant='body-normal' className='line-clamp-1 overflow-ellipsis text-grey-100'>
+          <Text
+            as='span'
+            styleVariant='body-normal'
+            className='max-sm:text-sm line-clamp-1 overflow-ellipsis text-grey-100'
+          >
             {comic.stats.issuesCount + ' ' + pluralizeString('Episode', comic.stats.issuesCount)}
           </Text>
         )}
         {comic.genres && (
           <div className='flex flex-wrap gap-2'>
-            {comic.genres.map((name, index) => (
+            {comic.genres.map((genre, index) => (
               <div
                 className={cn(
                   'flex justify-center items-center px-2 py-[2px] rounded-lg',
                   index === 0 ? 'bg-transparent border border-grey-100' : 'bg-grey-300 bg-opacity-30'
                 )}
-                key={`${name}-${index}`}
+                key={`${genre}-${index}`}
               >
-                <Text as='span' styleVariant='body-normal' className='text-grey-100'>
-                  {name.name}
+                <Text as='span' styleVariant='body-normal' className='text-grey-100 max-sm:text-sm'>
+                  {genre.name}
                 </Text>
               </div>
             ))}

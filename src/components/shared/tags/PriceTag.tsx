@@ -11,7 +11,6 @@ import { cn } from '@/lib/utils'
 
 interface Props extends Partial<TextProps> {
   price?: number | null
-  bold?: boolean
   reverse?: boolean
   from?: boolean
   symbol?: boolean
@@ -19,21 +18,20 @@ interface Props extends Partial<TextProps> {
   colorfulIcon?: boolean
   inline?: boolean
   maxDecimals?: number
-  iconSize: SolanaIconSize
+  size: SolanaIconSize
   iconClassName?: string
 }
 
 export type SolanaIconSize = 'small' | 'medium' | 'large'
 
 const sizeVariants: Record<SolanaIconSize, string> = {
-  small: 'w-1 sm:w-2',
-  medium: 'w-2 sm:w-3',
-  large: 'w-3 sm:w-4',
+  small: 'w-[6px] sm:w-2',
+  medium: 'w-[10px] sm:w-3',
+  large: 'w-[14px] sm:w-4',
 }
 
 export const PriceTag: React.FC<Props> = ({
   price,
-  bold = false,
   reverse = false,
   from = false,
   inline = true,
@@ -41,11 +39,12 @@ export const PriceTag: React.FC<Props> = ({
   icon = false,
   colorfulIcon = false,
   maxDecimals,
-  as: as = 'p',
+  as = 'p',
   styleVariant = 'body-normal',
-  className,
-  iconSize,
+  fontWeight = 'bold',
+  size,
   iconClassName,
+  className,
   ...props
 }) => {
   const TypographyWrapper: React.FC<{ children: React.ReactNode }> = (tprops) => {
@@ -53,11 +52,11 @@ export const PriceTag: React.FC<Props> = ({
       <Text
         as={as}
         styleVariant={styleVariant}
+        fontWeight={fontWeight}
         className={clsx(
           inline ? 'inline-flex' : 'flex',
           reverse ? 'flex-row-reverse' : 'flex-row',
           'items-center',
-          bold ? 'font-bold' : 'font-normal',
           className
         )}
         {...props}
@@ -83,7 +82,7 @@ export const PriceTag: React.FC<Props> = ({
             marginLeft: reverse ? '0.2rem' : '0.5rem',
             marginRight: reverse ? '0.5rem' : '0.2rem',
           }}
-          className={cn(sizeVariants[iconSize], iconClassName)}
+          className={cn(sizeVariants[size], iconClassName)}
         />
       )}
       {colorfulIcon && (
@@ -92,7 +91,7 @@ export const PriceTag: React.FC<Props> = ({
             marginLeft: reverse ? '0.2rem' : '0.5rem',
             marginRight: reverse ? '0.5rem' : '0.2rem',
           }}
-          className={cn(sizeVariants[iconSize], iconClassName)}
+          className={cn(sizeVariants[size], iconClassName)}
         />
       )}
       {roundedPrice}

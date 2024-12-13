@@ -8,13 +8,10 @@ import { Nullable } from '@/models/common'
 
 const { CREATOR, GET, SEARCH } = CREATOR_QUERY_KEYS
 
-// export const fetchCreator = async (slug: string): Promise<Nullable<Creator>> => {
-//   const response = await fetchWrapper<Creator>({ path: `${CREATOR}/${GET}/${slug}`, revalidateCacheInSeconds: 5 * 60 })
-//   return response.data
-// }
-
 export const fetchCreator = async (slug: string): Promise<Nullable<Creator>> => {
-  const response = await fetchWrapper<Creator>({ path: `${CREATOR}/${GET}/${slug}` })
+  const response = await fetchWrapper<Creator>({
+    path: `${CREATOR}/${GET}/${slug}`,
+  })
   return response.data
 }
 
@@ -22,7 +19,6 @@ export const fetchCreators = async (params: CreatorParams): Promise<Creator[]> =
   const { data } = await fetchWrapper<Creator[]>({
     params,
     path: `${CREATOR}/${GET}`,
-    revalidateCacheInSeconds: 15 * 60,
   })
   return data ?? []
 }

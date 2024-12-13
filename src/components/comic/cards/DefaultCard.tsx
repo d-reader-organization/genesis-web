@@ -6,6 +6,7 @@ import { RoutePath } from '@/enums/routePath'
 import { cn } from '@/lib/utils'
 import { COMIC_COVER_SIZE } from '@/constants/imageSizes'
 import { CopiesCount } from '@/components/shared/CopiesCount'
+import { TextWithOverflow } from '@/components/ui/TextWithOverflow'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comic: Comic
@@ -19,7 +20,7 @@ export const DefaultComicCard: React.FC<Props> = ({ comic, className }) => {
       href={RoutePath.Comic(comic.slug)}
       prefetch={false}
       className={cn(
-        'flex flex-col gap-3 relative hover:brightness-110 p-2 border border-grey-300 rounded-2xl',
+        'flex flex-col gap-3 relative w-full hover:brightness-110 p-2 border border-grey-300 rounded-2xl',
         className
       )}
     >
@@ -46,15 +47,9 @@ export const DefaultComicCard: React.FC<Props> = ({ comic, className }) => {
         <CopiesCount count={comic.stats?.issuesCount} withLabel />
       </div>
       <div className='flex flex-col px-2 pb-1 max-sm:gap-1'>
-        <Text
-          title={comic.title}
-          as='p'
-          styleVariant='body-normal'
-          fontWeight='bold'
-          className='line-clamp-1 overflow-ellipsis max-sm:text-sm'
-        >
+        <TextWithOverflow as='p' styleVariant='body-normal' fontWeight='bold' className='max-sm:text-sm'>
           {comic.title}
-        </Text>
+        </TextWithOverflow>
         <Text as='p' styleVariant='body-small' className='text-grey-100 line-clamp-1 overflow-ellipsis max-sm:text-xs'>
           {comic.creator ? 'by ' + comic.creator.name : ''}
         </Text>

@@ -26,11 +26,11 @@ export default async function CreatorReleasesPage({ params: { slug } }: Props) {
 
   return (
     <BaseLayout>
-      <div className='flex flex-col max-w-screen-xl w-full gap-4 sm:gap-7 md:gap-8'>
+      <div className='flex flex-col max-w-screen-xl w-full gap-4 sm:gap-6 md:gap-7'>
         <CreatorBanner creator={creator} />
         <CreatorHeader creator={creator} />
         <Tabs tabs={tabs} />
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-8 md:gap-9'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-7 md:gap-9'>
           {comics.map((comic) => (
             <PreviewComicCard key={comic.slug} comic={comic} />
           ))}
