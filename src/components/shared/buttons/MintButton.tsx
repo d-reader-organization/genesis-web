@@ -22,7 +22,6 @@ import Image from 'next/image'
 import { AssetMintEvent } from '@/models/asset/assetMintEvent'
 import { ConnectButton } from './ConnectButton'
 import { cn } from '@/lib/utils'
-import { sleep } from '@/utils/helpers'
 import { fetchCandyMachine } from '@/app/lib/api/candyMachine/queries'
 
 type Props = {
@@ -75,9 +74,6 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounc
     if (typeof onMint === 'function') onMint()
     if (!walletAddress || !selectedCurrency) return
     setIsMintTransactionLoading(true)
-
-    //todo: remove this
-    await sleep(Math.random() * 6000)
 
     // figure out what about this
     const updatedCandyMachine = await fetchCandyMachine({
