@@ -20,9 +20,9 @@ const buttonVariants = cva(
         3: '',
       },
       size: {
-        sm: 'h-9 min-w-[80px] text-xs py-1 px-4 rounded-lg gap-1',
-        md: 'h-[42px] min-w-[100px] text-sm py-2 px-5 rounded-[10px] gap-2',
-        lg: 'h-[52px] min-w-[110px] text-base py-4 px-6 rounded-xl gap-2',
+        sm: 'h-9 min-w-[80px] text-xs py-0.5 px-2 sm:py-1 sm:px-4 rounded-lg gap-1',
+        md: 'h-[42px] min-w-[100px] text-sm py-1 px-3 sm:py-2 sm:px-5 rounded-[10px] gap-2',
+        lg: 'h-[52px] min-w-[110px] text-base py-2 px-4 sm:py-4 sm:px-6 rounded-xl gap-2',
       },
       iconPosition: {
         left: 'flex-row',
@@ -98,13 +98,17 @@ export interface ButtonProps
  * <Button icon={Mail}>Send Email</Button>
  */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, subVariant, size, iconPosition, icon: Icon, iconOnly, children, ...props }, ref) => {
+  ({ className, variant, subVariant, size = 'md', iconPosition, icon: Icon, iconOnly, children, ...props }, ref) => {
     const iconSize = size === 'sm' ? 16 : size === 'md' ? 18 : 20
 
     if (iconOnly && Icon) {
       return (
         <button
-          className={cn(buttonVariants({ variant, subVariant, size, iconPosition, className }), 'min-w-fit')}
+          className={cn(
+            buttonVariants({ variant, subVariant, size, iconPosition, className }),
+            'min-w-9 px-0 py-0',
+            size === 'sm' ? 'size-9' : size === 'md' ? 'size-[42px]' : 'size-[52px]'
+          )}
           ref={ref}
           {...props}
         >
