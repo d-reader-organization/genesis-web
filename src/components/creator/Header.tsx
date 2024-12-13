@@ -18,13 +18,15 @@ export const CreatorHeader: React.FC<Props> = ({ creator }) => (
 
 const LeftSection: React.FC<Props> = ({ creator }) => {
   return (
-    <div className='flex flex-col gap-2 w-full text-center items-center sm:max-w-[500px] sm:items-start sm:text-start'>
-      <Text as='h3' styleVariant='primary-heading' fontWeight='semibold'>
-        {creator.name}
-      </Text>
-      <Text as='p' className='whitespace-pre-wrap mb-2 text-grey-100' styleVariant='body-normal'>
-        {creator.description}
-      </Text>
+    <div className='flex flex-col gap-3 w-full text-center items-center sm:max-w-[500px] sm:items-start sm:text-start'>
+      <div className='flex flex-col gap-5'>
+        <Text as='h3' styleVariant='primary-heading' fontWeight='semibold'>
+          {creator.name}
+        </Text>
+        <Text as='p' className='whitespace-pre-wrap mb-2 text-grey-100' styleVariant='body-normal'>
+          {creator.description}
+        </Text>
+      </div>
       <div className='flex gap-2 items-center'>
         <FollowCreatorButton isFollowing={creator.myStats.isFollowing} creatorSlug={creator.slug} />
         <ShareButton title={creator.name} text={creator.description} />

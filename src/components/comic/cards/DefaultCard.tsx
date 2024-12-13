@@ -20,7 +20,7 @@ export const DefaultComicCard: React.FC<Props> = ({ comic, className }) => {
       href={RoutePath.Comic(comic.slug)}
       prefetch={false}
       className={cn(
-        'flex flex-col gap-3 relative hover:brightness-110 p-2 border border-grey-300 rounded-2xl',
+        'flex flex-col gap-3 relative w-full hover:brightness-110 p-2 border border-grey-300 rounded-2xl',
         className
       )}
     >
