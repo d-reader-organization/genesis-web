@@ -18,10 +18,10 @@ export const FilterButton: React.FC<FilterButtonProps> = ({
   className,
 }) => (
   <Button
-    className={cn('relative h-10 rounded-[10px]', withLabel ? 'min-w-[100px]' : 'min-w-10 sm:px-0', className)}
+    className={cn('relative  rounded-[10px]', withLabel ? 'min-w-[100px]' : 'min-w-10 sm:px-0', className)}
     variant='secondary'
     icon={Settings2}
-    size='sm'
+    size='md'
     onClick={() => setFilterSheetOpen(!isFilterSheetOpen)}
   >
     {withLabel && (

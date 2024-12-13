@@ -36,7 +36,7 @@ export const FollowCreatorButton: React.FC<Props> = ({ isFollowing, creatorSlug,
       onClick={handleFollow}
     >
       <UserPlusIcon className='w-[18px]' />
-      <Text as='span' styleVariant='body-small' fontWeight='medium' className='max-sm:text-xs'>
+      <Text as='span' styleVariant='body-small' fontWeight='bold' className='max-sm:text-xs'>
         {isFollowingState ? 'Unfollow' : 'Follow'}
       </Text>
     </Button>
