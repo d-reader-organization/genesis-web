@@ -41,7 +41,10 @@ interface Props
  * <Link href="/contact" icon={Mail}>Contact Us</Link>
  */
 const ButtonLink = forwardRef<HTMLAnchorElement, Props>(
-  ({ className, variant, subVariant, size, iconPosition, icon: Icon, iconOnly, href, children, ...props }, ref) => {
+  (
+    { className, variant, subVariant, size = 'md', iconPosition, icon: Icon, iconOnly, href, children, ...props },
+    ref
+  ) => {
     const iconSize = size === 'sm' ? 16 : size === 'md' ? 18 : 20
 
     const linkContent = (
@@ -53,7 +56,11 @@ const ButtonLink = forwardRef<HTMLAnchorElement, Props>(
 
     return (
       <Link
-        className={cn(buttonVariants({ variant, subVariant, size, iconPosition, className }), iconOnly && 'min-w-fit')}
+        className={cn(
+          buttonVariants({ variant, subVariant, size, iconPosition, className }),
+          iconOnly && 'min-w-9 px-0 py-0',
+          iconOnly && (size === 'sm' ? 'size-9' : size === 'md' ? 'size-[42px]' : 'size-[52px]')
+        )}
         ref={ref}
         href={href}
         {...props}

@@ -17,7 +17,10 @@ export const ForgotPasswordDialog: React.FC = () => {
   return (
     <Dialog open={passwordDialogOpen} onOpenChange={togglePasswordDialog}>
       <DialogTrigger asChild>
-        <Button className='self-start text-grey-100 p-0 py-2 pr-2 w-fit hover:brightness-150' variant='ghost'>
+        <Button
+          className='self-start text-grey-100 p-0 py-2 pr-2 pl-0 sm:pl-0 w-fit hover:brightness-150'
+          variant='ghost'
+        >
           Forgot password?
         </Button>
       </DialogTrigger>

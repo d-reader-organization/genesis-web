@@ -63,7 +63,6 @@ export const OwnedComicCard: React.FC<Props> = ({ comic }) => {
           Read
         </ButtonLink>
         <ButtonLink
-          className='min-w-fit px-2.5'
           variant='outline'
           subVariant={1}
           href={RoutePath.OwnedAssets(comic.slug)}
