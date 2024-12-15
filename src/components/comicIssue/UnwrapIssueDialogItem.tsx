@@ -13,24 +13,20 @@ import { UnwrapWarningDialog } from '../shared/dialogs/UnwrapWarningDialog'
 import { cn } from '@/lib/utils'
 import { ComicRarity } from '@/enums/comicRarity'
 import { UnwrapButtonListItem } from '../shared/buttons/UnwrapButtonListItem'
-import dynamic from 'next/dynamic'
 import { LOCAL_STORAGE } from '@/constants/general'
-
-const BaseWalletMultiButtonDynamic = dynamic(
-  async () => (await import('@/components/shared/buttons/SolanaBaseWalletButton')).SolanaBaseWalletButton
-)
+import { ConnectButton } from '../shared/buttons/ConnectButton'
 
 export const UnwrapIssueDialogItem: React.FC<{ asset: Asset; closeDialog: VoidFunction }> = ({
   asset,
   closeDialog,
 }) => {
   const [isDialogRead] = useLocalStorage(LOCAL_STORAGE.IS_UNWRAP_HINT_READ, false)
-  const [unwrapWarningDialog, toggleUnwrapWarningDialog] = useToggle(false)
+  const [unwrapWarningDialog,toggleUnwrapWarningDialog, closeUnwrapWarningDialog] = useToggle(false)
 
   const { handleUnwrap, isUnwrapLoading } = useHandleUnwrap({
     asset,
     onSuccess: () => {
-      toggleUnwrapWarningDialog()
+      closeUnwrapWarningDialog()
       closeDialog()
     },
   })
@@ -71,9 +67,9 @@ export const UnwrapIssueDialogItem: React.FC<{ asset: Asset; closeDialog: VoidFu
         </div>
       </div>
       {isDialogRead ? (
-        <BaseWalletMultiButtonDynamic className={unwrapButtonStyle} onClick={handleUnwrap}>
+        <ConnectButton className={unwrapButtonStyle} onClick={handleUnwrap}>
           {isUnwrapLoading ? <Loader /> : 'Open'}
-        </BaseWalletMultiButtonDynamic>
+        </ConnectButton>
       ) : (
         <UnwrapButtonListItem isLoading={isUnwrapLoading} onClick={toggleUnwrapWarningDialog} />
       )}
