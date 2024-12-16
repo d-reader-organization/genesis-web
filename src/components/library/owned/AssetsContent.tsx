@@ -19,7 +19,7 @@ export const OwnedIssuesContent: React.FC<Props> = ({ ownedIssues }) => {
 
   return (
     <div className='flex flex-col items-start'>
-      <Button className='flex items-center gap-3 w-fit px-0 py-10' variant='ghost' onClick={back}>
+      <Button className='flex items-center gap-3 w-fit px-0 sm:px-0 py-4 sm:py-8' variant='ghost' onClick={back}>
         <ArrowLeft className='size-8' />
         <Text as='h3' styleVariant='secondary-heading'>
           {ownedIssues.at(0)?.collectibles.at(0)?.comicName}
