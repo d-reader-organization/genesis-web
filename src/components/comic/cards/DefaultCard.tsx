@@ -31,7 +31,13 @@ export const DefaultComicCard: React.FC<Props> = ({ comic, className }) => {
         {...COMIC_COVER_SIZE}
       />
       <div className='absolute w-[70%] m-auto -top-2 bottom-14 left-0 right-0 max-w-[180px] max-h-[180px]'>
-        <Image alt='' src={comic.logo} fill className='object-contain pointer-events-none' />
+        <Image
+          alt=''
+          src={comic.logo}
+          fill
+          className='object-contain pointer-events-none'
+          sizes='(max-width: 600px) 100%, 120px'
+        />
       </div>
       <div className='flex absolute top-3 right-3 gap-1'>
         {isFree && (
