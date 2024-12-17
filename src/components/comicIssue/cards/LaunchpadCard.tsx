@@ -1,5 +1,5 @@
 import { Text } from '@/components/ui'
-import { COMIC_ISSUE_COVER_SIZE } from '@/constants/imageSizes'
+import { COMIC_BANNER_SIZE } from '@/constants/imageSizes'
 import { RoutePath } from '@/enums/routePath'
 import { LaunchpadModel } from '@/models/candyMachine'
 import { abbreviateNumber } from '@/utils/numbers'
@@ -16,16 +16,17 @@ export const LaunchpadCard: React.FC<Props> = ({ launchpadItem }) => {
   return (
     <Link
       href={RoutePath.Mint(launchpadItem.id)}
-      className='flex flex-col gap-4 max-w-[488px] w-full p-2 rounded-2xl border border-grey-300  hover:brightness-110'
+      className='flex flex-col gap-4 min-w-[242px] max-w-[488px] w-full p-2 rounded-2xl border border-grey-300  hover:brightness-110'
     >
       <Image
         src={launchpadItem.image}
         alt={`Launchpad ${launchpadItem.issueTitle}`}
-        {...COMIC_ISSUE_COVER_SIZE}
-        className='rounded-xl max-h-[220px] h-full w-full aspect-comic-issue-cover'
+        {...COMIC_BANNER_SIZE}
+        className='rounded-xl max-h-[220px] h-auto w-full aspect-comic-banner'
       />
       <Text
         as='h4'
+        title={launchpadItem.issueTitle}
         styleVariant='secondary-heading'
         className='line-clamp-1 text-ellipsis text-base sm:text-base md:text-24'
       >
@@ -69,7 +70,7 @@ type StateProps = {
 }
 
 const LaunchpadState: React.FC<StateProps> = ({ startsAt }) => {
-  const { isDue, days, hours, minutes, seconds, countdownString } = formatTime(
+  const { isDue, days, hours, minutes, seconds } = formatTime(
     calculateRemaningSeconds(startsAt?.toString()),
     startsAt?.toString()
   )
