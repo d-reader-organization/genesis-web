@@ -12,6 +12,7 @@ export const RequireAuthWrapperButton: React.FC<Props> = ({ children, onClick, .
   const [showRequireAuthDialog, setShowRequireAuthDialog] = useState<boolean>(false)
   const [isDisabled, setIsDisabled] = useState<boolean>(false)
   const submitWrapper = async (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
     if (!onClick || isDisabled) {
       return
     }

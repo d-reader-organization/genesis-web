@@ -1,19 +1,19 @@
 'use client'
 
 import UserPlusIcon from 'public/assets/vector-icons/user-plus-icon.svg'
-import { Button } from '@/components/ui/Button'
 import { Text } from '@/components/ui/Text'
 import { useRouter } from 'next/navigation'
 import { followCreator } from '@/app/lib/api/creator/mutations'
 import { useOptimistic, useTransition } from 'react'
 import { cn } from '@/lib/utils'
+import { RequireAuthWrapperButton } from './RequireAuthWrapperButton'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
-  isFollowing: boolean
+  isFollowing?: boolean
   creatorSlug: string
 }
 
-export const FollowCreatorButton: React.FC<Props> = ({ isFollowing, creatorSlug, className }) => {
+export const FollowCreatorButton: React.FC<Props> = ({ isFollowing = false, creatorSlug, className }) => {
   const [, startTransition] = useTransition()
   const [isFollowingState, setIsFollowingState] = useOptimistic(isFollowing, (state) => {
     return !state
@@ -30,7 +30,7 @@ export const FollowCreatorButton: React.FC<Props> = ({ isFollowing, creatorSlug,
   }
 
   return (
-    <Button
+    <RequireAuthWrapperButton
       className={cn('min-w-[124px]', className)}
       variant={isFollowingState ? 'outline' : 'white'}
       onClick={handleFollow}
@@ -39,6 +39,6 @@ export const FollowCreatorButton: React.FC<Props> = ({ isFollowing, creatorSlug,
       <Text as='span' styleVariant='body-small' fontWeight='bold' className='max-sm:text-xs'>
         {isFollowingState ? 'Unfollow' : 'Follow'}
       </Text>
-    </Button>
+    </RequireAuthWrapperButton>
   )
 }
