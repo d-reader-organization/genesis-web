@@ -71,7 +71,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounc
   }, [walletAddress, socketInstance])
 
   useEffect(() => {
-    if (!walletAddress || !isMintTransactionLoading || !socketInstance) {
+    if (!walletAddress || !socketInstance) {
       return
     }
 
@@ -87,14 +87,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounc
     return () => {
       socketInstance.off(`wallet/${walletAddress}/item-minted`)
     }
-  }, [
-    walletAddress,
-    isMintTransactionLoading,
-    timeoutId,
-    closeConfirmingTransaction,
-    toggleAssetMinted,
-    socketInstance,
-  ])
+  }, [walletAddress, timeoutId, closeConfirmingTransaction, toggleAssetMinted, socketInstance])
 
   const handleMint = async () => {
     if (typeof onMint === 'function') onMint()
