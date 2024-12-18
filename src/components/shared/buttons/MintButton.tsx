@@ -14,7 +14,7 @@ import { useToggle } from '@/hooks'
 import { toast } from '../../ui/toast'
 import { fetchMintTransaction } from '@/app/lib/api/transaction/queries'
 import { versionedTransactionFromBs64 } from '@/utils/transactions'
-import { io } from 'socket.io-client'
+import { io, Socket } from 'socket.io-client'
 import { sendMintTransaction } from '@/app/lib/api/transaction/mutations'
 import { useCandyMachineStore } from '@/providers/CandyMachineStoreProvider'
 import { VersionedTransaction } from '@solana/web3.js'
@@ -41,6 +41,7 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounc
   const [isMintTransactionLoading, setIsMintTransactionLoading] = useState(false)
   const [assetMintEventData, setAssetMintEventData] = useState<AssetMintEvent>()
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>()
+  const [socketInstance, setSocket] = useState<Socket | null>()
 
   const { publicKey, signAllTransactions } = useWallet()
 
@@ -51,11 +52,30 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounc
   const isLive = selectedCoupon ? checkIfCouponIsActive(selectedCoupon) : false
 
   useEffect(() => {
-    if (!walletAddress && !isMintTransactionLoading) {
+    const socket = io(process.env.NEXT_PUBLIC_API_ENDPOINT || '')
+    setSocket(socket)
+
+    return () => {
+      setSocket(null)
+      socket.disconnect()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!walletAddress || !socketInstance) return
+    socketInstance.emit('join-room', { walletAddress })
+
+    return () => {
+      socketInstance.emit('leave-room', { walletAddress })
+    }
+  }, [walletAddress, socketInstance])
+
+  useEffect(() => {
+    if (!walletAddress || !isMintTransactionLoading || !socketInstance) {
       return
     }
-    const socket = io(process.env.NEXT_PUBLIC_API_ENDPOINT || '')
-    socket.on(`wallet/${walletAddress}/item-minted`, async (assetEventData: AssetMintEvent): Promise<void> => {
+
+    socketInstance.on(`wallet/${walletAddress}/item-minted`, async (assetEventData: AssetMintEvent): Promise<void> => {
       clearTimeout(timeoutId)
       setAssetMintEventData(assetEventData)
       closeConfirmingTransaction()
@@ -65,10 +85,16 @@ export const MintButton: React.FC<Props> = ({ comicIssue, isAuthenticated, bounc
     })
 
     return () => {
-      socket.off(`wallet/${walletAddress}/item-minted`)
-      socket.disconnect()
+      socketInstance.off(`wallet/${walletAddress}/item-minted`)
     }
-  }, [walletAddress, isMintTransactionLoading, timeoutId, closeConfirmingTransaction, toggleAssetMinted])
+  }, [
+    walletAddress,
+    isMintTransactionLoading,
+    timeoutId,
+    closeConfirmingTransaction,
+    toggleAssetMinted,
+    socketInstance,
+  ])
 
   const handleMint = async () => {
     if (typeof onMint === 'function') onMint()
