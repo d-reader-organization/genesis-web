@@ -2,6 +2,8 @@ import { OwnedComicCard } from '@/components/comic/cards/OwnedCard'
 import { Comic } from '@/models/comic'
 import { Text } from '@/components//ui/Text'
 import React from 'react'
+import { ButtonLink } from '@/components/ui/ButtonLink'
+import { RoutePath } from '@/enums/routePath'
 
 type Props = { comics: Comic[] }
 
@@ -34,10 +36,16 @@ const getSublistBoundaries = (
 export const OwnedComicsContent: React.FC<Props> = ({ comics }) => {
   if (!comics.length) {
     return (
-      <div className='flex justify-center items-center h-full mt-6 md:mt-10'>
-        <Text as='h5' styleVariant='primary-heading'>
-          Buy a comic episode first
+      <div className='flex flex-col gap-4 justify-center items-center h-full mt-6 md:mt-10'>
+        <Text as='h4' styleVariant='secondary-heading'>
+          Your library is empty
         </Text>
+        <Text as='p' styleVariant='body-normal' fontWeight='medium' className='text-grey-200'>
+          Owned collectibles will be shown here
+        </Text>
+        <ButtonLink href={RoutePath.DiscoverComics} variant='outline' size='lg'>
+          Discover Collectibles
+        </ButtonLink>
       </div>
     )
   }
