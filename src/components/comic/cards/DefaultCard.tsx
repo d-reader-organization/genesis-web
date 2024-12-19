@@ -53,15 +53,20 @@ export const DefaultComicCard: React.FC<Props> = ({ comic, className }) => {
       </div>
       <div className='flex flex-col px-2 pb-1 max-sm:gap-1'>
         <Text
-          title={comic.title}
           as='p'
           styleVariant='body-normal'
           fontWeight='bold'
           className='max-sm:text-sm line-clamp-1 overflow-ellipsis'
+          title={comic.title}
         >
           {comic.title}
         </Text>
-        <Text as='p' styleVariant='body-small' className='text-grey-100 line-clamp-1 overflow-ellipsis max-sm:text-xs'>
+        <Text
+          as='p'
+          styleVariant='body-small'
+          className='text-grey-100 line-clamp-1 overflow-ellipsis max-sm:text-xs'
+          title={comic.creator?.name ?? 'creator name'}
+        >
           {comic.creator ? 'by ' + comic.creator.name : ''}
         </Text>
       </div>

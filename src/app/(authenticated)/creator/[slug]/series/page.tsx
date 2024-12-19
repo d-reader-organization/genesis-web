@@ -8,6 +8,7 @@ import { getCreatorPageTabs } from '@/constants/tabs'
 import { PreviewComicCard } from '@/components/comic/cards/PreviewCard'
 import { fetchComics } from '@/app/lib/api/comic/queries'
 import { notFound } from 'next/navigation'
+import { getAccessToken } from '@/app/lib/utils/auth'
 
 type Props = {
   params: {
@@ -16,7 +17,7 @@ type Props = {
 }
 
 export default async function CreatorReleasesPage({ params: { slug } }: Props) {
-  const creator = await fetchCreator(slug)
+  const creator = await fetchCreator({ slug, accessToken: getAccessToken() })
   const comics = await fetchComics({ creatorSlug: slug, skip: 0, take: 4 })
   const tabs = getCreatorPageTabs(slug)
 
