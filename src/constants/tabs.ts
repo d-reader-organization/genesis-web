@@ -21,6 +21,21 @@ export const DISCOVER_PAGE_TABS: Tab[] = [
   },
 ]
 
+export const LIBRARY_PAGE_TABS: Tab[] = [
+  {
+    name: 'Owned',
+    url: RoutePath.LibraryOwned,
+  },
+  {
+    name: 'Favorites',
+    url: RoutePath.LibraryFavorites,
+  },
+  {
+    name: 'Creators',
+    url: RoutePath.LibraryCreators,
+  },
+]
+
 export const getCreatorPageTabs = (slug: string): Tab[] => [
   {
     name: 'Series',
