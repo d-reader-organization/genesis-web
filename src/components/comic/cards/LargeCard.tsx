@@ -15,7 +15,7 @@ export const LargeComicCard: React.FC<Props> = ({ className, comic, index }) => 
   <Link
     href={RoutePath.Comic(comic.slug)}
     prefetch={false}
-    className='flex flex-col justify-end h-full w-full p-2 border border-grey-300 rounded-2xl size-full'
+    className='flex flex-col justify-end max-md:min-w-[242px] max-w-[357px] h-full w-full p-2 border border-grey-300 rounded-2xl size-full'
   >
     <ContentWithGradientImageBg
       image={comic.cover}

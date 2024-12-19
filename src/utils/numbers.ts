@@ -36,3 +36,15 @@ export const roundNumber = (number: number | null, maxDecimals = 1) => {
 export const formatNumberWithCommas = (num: number): string => {
   return num.toLocaleString()
 }
+
+export const abbreviateNumber = (num: number) => {
+  const suffixes = ['', 'K', 'M', 'B', 'T']
+  const suffixNum = Math.floor(Math.log10(Math.abs(num)) / 3)
+
+  const shortValue = parseFloat((suffixNum !== 0 ? num / Math.pow(1000, suffixNum) : num).toPrecision(3))
+  if (shortValue % 1 !== 0) {
+    return shortValue.toFixed(1) + suffixes[suffixNum]
+  }
+
+  return shortValue + suffixes[suffixNum]
+}

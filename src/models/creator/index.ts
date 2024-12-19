@@ -21,7 +21,7 @@ export interface BasicCreator {
 
 export interface Creator extends BasicCreator {
   stats: CreatorStats
-  myStats: CreatorMyStats
+  myStats?: CreatorMyStats
 }
 
 export type UpdateCreatorData = Partial<

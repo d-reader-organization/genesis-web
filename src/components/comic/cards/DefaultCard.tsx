@@ -1,12 +1,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Text } from '../../ui'
+import { Text } from '../../ui/Text'
 import { Comic } from '@/models/comic'
 import { RoutePath } from '@/enums/routePath'
 import { cn } from '@/lib/utils'
 import { COMIC_COVER_SIZE } from '@/constants/imageSizes'
 import { CopiesCount } from '@/components/shared/CopiesCount'
-import { TextWithOverflow } from '@/components/ui/TextWithOverflow'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   comic: Comic
@@ -20,7 +19,7 @@ export const DefaultComicCard: React.FC<Props> = ({ comic, className }) => {
       href={RoutePath.Comic(comic.slug)}
       prefetch={false}
       className={cn(
-        'flex flex-col gap-3 relative w-full hover:brightness-110 p-2 border border-grey-300 rounded-2xl',
+        'flex flex-col gap-3 relative max-md:min-w-[156px] w-full h-full max-md:max-h-[222px] hover:brightness-110 p-2 border border-grey-300 rounded-2xl',
         className
       )}
     >
@@ -31,7 +30,13 @@ export const DefaultComicCard: React.FC<Props> = ({ comic, className }) => {
         {...COMIC_COVER_SIZE}
       />
       <div className='absolute w-[70%] m-auto -top-2 bottom-14 left-0 right-0 max-w-[180px] max-h-[180px]'>
-        <Image alt='' src={comic.logo} fill className='object-contain pointer-events-none' />
+        <Image
+          alt=''
+          src={comic.logo}
+          fill
+          className='object-contain pointer-events-none'
+          sizes='(max-width: 600px) 100%, 120px'
+        />
       </div>
       <div className='flex absolute top-3 right-3 gap-1'>
         {isFree && (
@@ -47,9 +52,15 @@ export const DefaultComicCard: React.FC<Props> = ({ comic, className }) => {
         <CopiesCount count={comic.stats?.issuesCount} withLabel />
       </div>
       <div className='flex flex-col px-2 pb-1 max-sm:gap-1'>
-        <TextWithOverflow as='p' styleVariant='body-normal' fontWeight='bold' className='max-sm:text-sm'>
+        <Text
+          title={comic.title}
+          as='p'
+          styleVariant='body-normal'
+          fontWeight='bold'
+          className='max-sm:text-sm line-clamp-1 overflow-ellipsis'
+        >
           {comic.title}
-        </TextWithOverflow>
+        </Text>
         <Text as='p' styleVariant='body-small' className='text-grey-100 line-clamp-1 overflow-ellipsis max-sm:text-xs'>
           {comic.creator ? 'by ' + comic.creator.name : ''}
         </Text>

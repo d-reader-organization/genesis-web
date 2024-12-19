@@ -27,7 +27,7 @@ const nextConfig = {
     TIPLINK_CLIENT_ID: process.env.TIPLINK_CLIENT_ID,
   },
   // Configure `pageExtensions` to include MDX files
-  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   // experimental: {
   // 	missingSuspenseWithCSRBailout: false,
   // },
@@ -69,9 +69,13 @@ const nextConfig = {
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     })
+    config.module.rules.push({
+      test: /\.md$/,
+      use: 'raw-loader',
+    })
 
     return config
   },
 }
 
-module.exports = withMDX(withPWA(nextConfig))
+module.exports = withPWA(withMDX(nextConfig))

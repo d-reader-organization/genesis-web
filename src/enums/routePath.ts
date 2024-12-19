@@ -26,6 +26,7 @@ export const RoutePath = Object.freeze({
   CreatorSeries: (creatorSlug: string) => `/creator/${creatorSlug}/series`,
   CreatorCollectibles: (creatorSlug: string) => `/creator/${creatorSlug}/collectibles`,
   PrivacyPolicy: '/privacy-policy',
+  TermsOfService: '/terms-of-service',
   Invest: '/invest',
   InvestDetails: (slug: string) => `/invest/${slug}`,
   Payout: (slug: string) => `/invest/payout/${slug}`,

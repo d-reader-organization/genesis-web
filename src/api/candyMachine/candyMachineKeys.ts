@@ -5,6 +5,7 @@ export const CANDY_MACHINE_QUERY_KEYS = Object.freeze({
   GET: 'get',
   ELIGIBLE_GROUPS: 'eligible-groups',
   GROUPS: 'groups',
+  LAUNCHPADS: 'launchpads',
 })
 
 export const candyMachineKeys = Object.freeze({

@@ -27,7 +27,7 @@ export const Footer: React.FC = () => (
           &#169; Decentralized Reader, ltd
         </Text>
         <div>
-          <Link href={RoutePath.PrivacyPolicy} target='_blank'>
+          <Link href={RoutePath.TermsOfService} target='_blank'>
             <Text as='span' className='text-grey-200 hover:text-white' styleVariant='body-normal'>
               Terms
             </Text>

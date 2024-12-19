@@ -57,7 +57,7 @@ export const RequireAuthDialog: React.FC<Props> = ({ showDialog = false, closeDi
               target='_blank'
               prefetch={false}
               className='text-xs font-medium text-grey-100 underline'
-              href={RoutePath.PrivacyPolicy}
+              href={RoutePath.TermsOfService}
             >
               terms
             </Link>
