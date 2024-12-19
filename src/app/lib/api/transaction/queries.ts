@@ -39,7 +39,6 @@ export const fetchUseComicIssueAssetTransaction = async ({
     path: `${TRANSACTION}/${USE_COMIC_ISSUE_ASSET}`,
     params,
   })
-  console.log(response)
   return response.data ? decodeTransaction(response.data, 'base64') : null
 }
 
