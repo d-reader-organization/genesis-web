@@ -13,7 +13,6 @@ import { PagesPreview } from '@/components/mint/PagesPreview'
 import Link from 'next/link'
 import { RoutePath } from '@/enums/routePath'
 import { ChevronRightIcon } from 'lucide-react'
-import { InfoListActions } from '@/components/shared/InfoListActions'
 import { Metadata } from 'next'
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
@@ -51,15 +50,7 @@ export default async function ComicIssuePage({ params: { id } }: ComicIssuePageP
             </Text>
             <ChevronRightIcon className='text-grey-600' />
           </Link>
-          <InfoListActions
-            averageRating={comicIssue.stats?.averageRating}
-            className='flex w-fit [&>*]:min-w-20'
-            comicIssueId={comicIssue.id}
-            favouritesCount={comicIssue.stats?.favouritesCount}
-            isFavourite={comicIssue.myStats?.isFavourite}
-            orientation='horizontal'
-            rating={comicIssue.myStats?.rating}
-          />
+
         </div>
         <div className='flex flex-col gap-6 w-full max-w-[800px] pb-20'>
           <div className='flex flex-col max-md:self-center gap-4'>

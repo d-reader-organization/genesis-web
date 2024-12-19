@@ -17,5 +17,5 @@ export const HeartIcon: React.FC<Props> = ({ solid = false, size = 'md', classNa
   }
 
   if (solid) return <HeartSolidIcon className={clsx(className, 'text-red-500', sharedClasses)} {...props} />
-  else return <HeartOutlinedIcon className={clsx(className, 'heart-icon--outlined', sharedClasses)} {...props} />
+  else return <HeartOutlinedIcon className={clsx(className, '', sharedClasses)} {...props} />
 }

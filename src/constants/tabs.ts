@@ -32,3 +32,15 @@ export const getCreatorPageTabs = (slug: string): Tab[] => [
     disabled: true,
   },
 ]
+
+export const getComicPageTabs = (slug: string): Tab[] => [
+  {
+    name: 'Episodes',
+    url: RoutePath.ComicEpisodes(slug),
+  },
+  {
+    name: 'Collectibles',
+    url: RoutePath.ComicCollectibles(slug),
+    disabled: true,
+  },
+]

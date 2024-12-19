@@ -6,7 +6,7 @@ import React from 'react'
 import ArrowRightIcon from 'public/assets/vector-icons/arrow-right.svg'
 import Link from 'next/link'
 import { RoutePath } from '@/enums/routePath'
-import { InfoListActions } from '../shared/InfoListActions'
+import { ComicActionButtons } from '../comic/ActionButtons'
 import { useRouter } from 'next/navigation'
 import { Button } from '../ui'
 import { cn } from '@/lib/utils'
@@ -22,7 +22,7 @@ export const EReaderNavigation: React.FC<Props> = ({ comicIssue, hideNavigation 
   const { back } = useRouter()
   const commands = (
     <div className='justify-end '>
-      <InfoListActions
+      <ComicActionButtons
         className='flex flex-row-reverse border-none [&>*:not(:last-child)]:border-r-0'
         orientation='horizontal'
         averageRating={comicIssue.stats?.averageRating}

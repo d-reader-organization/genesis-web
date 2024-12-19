@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/Dialog'
 import { StarIcon } from '../icons/StarIcon'
@@ -33,6 +35,8 @@ export const StarRatingDialog: React.FC<Props> = ({ comicIssueId, comicSlug, tog
         slug: comicSlug,
         request: { rating },
       })
+      console.log('rated comic')
+      console.log(rating)
     } else if (comicIssueId) {
       await rateComicIssue({
         id: comicIssueId,

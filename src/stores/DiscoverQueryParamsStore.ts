@@ -34,7 +34,7 @@ export const defaultInitState: DiscoverQueryParamsStoreState = {
     creatorSlug: undefined,
     search: undefined,
     filterTag: undefined,
-    sortTag: ComicSortTag.Title,
+    sortTag: undefined,
   },
   comicIssueParams: {
     skip: 0,
@@ -45,7 +45,7 @@ export const defaultInitState: DiscoverQueryParamsStoreState = {
     search: undefined,
     comicSlug: undefined,
     filterTag: undefined,
-    sortTag: ComicIssueSortTag.Title,
+    sortTag: undefined,
   },
   creatorParams: {
     skip: 0,
@@ -54,7 +54,7 @@ export const defaultInitState: DiscoverQueryParamsStoreState = {
     search: undefined,
     sortOrder: SortOrder.ASC,
     filterTag: undefined,
-    sortTag: CreatorSortTag.Name,
+    sortTag: undefined,
   },
 }
 
