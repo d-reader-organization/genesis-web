@@ -35,8 +35,6 @@ export const StarRatingDialog: React.FC<Props> = ({ comicIssueId, comicSlug, tog
         slug: comicSlug,
         request: { rating },
       })
-      console.log('rated comic')
-      console.log(rating)
     } else if (comicIssueId) {
       await rateComicIssue({
         id: comicIssueId,
