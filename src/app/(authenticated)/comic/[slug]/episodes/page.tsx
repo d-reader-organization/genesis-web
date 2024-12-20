@@ -1,5 +1,6 @@
 import { fetchComic } from '@/app/lib/api/comic/queries'
 import { fetchComicIssues } from '@/app/lib/api/comicIssue/queries'
+import { getAccessToken } from '@/app/lib/utils/auth'
 import { ComicBanner } from '@/components/comic/Banner'
 import { ComicHeader } from '@/components/comic/Header'
 import { DefaultComicIssueCard } from '@/components/comicIssue/cards/DefaultCard'
@@ -15,7 +16,7 @@ type Props = {
 }
 
 export default async function ComicEpisodesPage({ params: { slug } }: Props) {
-  const comic = await fetchComic(slug)
+  const comic = await fetchComic({ accessToken: getAccessToken(), slug })
   const tabs = getComicPageTabs(slug)
   const comicIssues = await fetchComicIssues({ comicSlug: slug, skip: 0, take: 6 })
 

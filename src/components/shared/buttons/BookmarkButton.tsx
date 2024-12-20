@@ -22,7 +22,7 @@ export const BookmarkButton: React.FC<Props> = ({ comicSlug, isBookmarked, class
 
   const handleSubmit = async () => {
     startTransition(async () => {
-      setIsBookmarkedState(false)
+      setIsBookmarkedState(null)
       await bookmarkComic(comicSlug)
       refresh()
     })

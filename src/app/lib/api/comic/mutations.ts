@@ -29,5 +29,11 @@ export const favouritiseComic = async (slug: string): Promise<void> => {
 }
 
 export const bookmarkComic = async (slug: string): Promise<void> => {
-  await fetchWrapper<void>({ path: `${COMIC}/${BOOKMARK}/${slug}`, method: 'PATCH', isTextResponse: true })
+  const accessToken = getAccessToken()
+  await fetchWrapper<void>({
+    accessToken,
+    path: `${COMIC}/${BOOKMARK}/${slug}`,
+    method: 'PATCH',
+    isTextResponse: true,
+  })
 }

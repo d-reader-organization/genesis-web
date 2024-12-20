@@ -24,7 +24,8 @@ export const ComicHeader: React.FC<Props> = ({ comic }) => (
 )
 
 const LeftSection: React.FC<Props> = ({ comic }) => (
-  <div className='flex flex-col gap-3 sm:gap-7 w-full sm:max-w-[500px] lg:max-w-[680px] justify-end'>
+  <div className='flex flex-col gap-3 sm:gap-7 w-full sm:max-w-[500px] lg:max-w-[680px] max-sm:items-start sm:justify-end'>
+    <Socials website={comic.website} instagram={comic.instagram} twitter={comic.twitter} className='sm:hidden' />
     <Text className='font-normal' as='h3' styleVariant='primary-heading'>
       {comic.title}
     </Text>
@@ -65,7 +66,7 @@ const LeftSection: React.FC<Props> = ({ comic }) => (
 
 const RightSection: React.FC<Props> = ({ comic }) => (
   <div className='flex flex-col w-full gap-3 sm:max-w-[282px] sm:gap-5 items-end'>
-    <Socials website={comic.website} instagram={comic.instagram} twitter={comic.twitter} className='max-md:hidden' />
+    <Socials website={comic.website} instagram={comic.instagram} twitter={comic.twitter} className='max-sm:hidden' />
     <div className='flex max-sm:gap-2 sm:justify-between w-full ACTIONBUTTONSWRAPPER'>
       <RateButton comicSlug={comic.slug} averageRating={comic.stats?.averageRating} rating={comic.myStats?.rating} />
       <FavouritiseButton

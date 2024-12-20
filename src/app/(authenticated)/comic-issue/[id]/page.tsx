@@ -17,6 +17,8 @@ import { Metadata } from 'next'
 import { RateButton } from '@/components/shared/buttons/RateButton'
 import { FavouritiseButton } from '@/components/shared/buttons/FavouritiseButton'
 import { ShareButton } from '@/components/shared/buttons/ShareButton'
+import { getAccessToken, isAuthenticatedUser } from '@/app/lib/utils/auth'
+import { fetchCandyMachine } from '@/app/lib/api/candyMachine/queries'
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const ogImagePath = `/api/og/${params.id}`
@@ -33,16 +35,20 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 }
 
 export default async function ComicIssuePage({ params: { id } }: ComicIssuePageParams) {
-  const comicIssue = await fetchComicIssue(id)
+  const accessToken = getAccessToken()
+  const comicIssue = await fetchComicIssue({ accessToken, id })
   if (!comicIssue || !comicIssue.stats) return null
-  const pages = await fetchComicIssuePages(comicIssue.id)
+  const pages = await fetchComicIssuePages({ accessToken, id: comicIssue.id })
+  const candyMachine = await fetchCandyMachine({
+    params: { candyMachineAddress: comicIssue.collectibleInfo?.activeCandyMachineAddress ?? '' },
+  })
 
   return (
     <BaseLayout>
       <ComicIssueBanner cover={comicIssue.cover} />
       <div className='flex flex-col max-md:items-center md:flex-row md:justify-center gap-6 md:gap-10 w-full mb-2'>
         <div className='flex flex-col gap-4'>
-          <CoverCarousel comicIssue={comicIssue} covers={comicIssue.statelessCovers ?? []} />
+          <CoverCarousel candyMachine={candyMachine} covers={comicIssue.statelessCovers ?? []} />
           <Link
             href={RoutePath.ReadComicIssue(comicIssue.id)}
             prefetch={false}
@@ -82,8 +88,12 @@ export default async function ComicIssuePage({ params: { id } }: ComicIssuePageP
             {pages.length ? <PagesPreview comicIssueId={comicIssue.id} pages={pages} /> : null}
           </div>
           <Divider className='max-md:hidden' />
-          <CandyMachineStoreProvider comicIssue={comicIssue} isAuthenticated>
-            <CandyMachineDetails comicIssue={comicIssue} isAuthenticated />
+          <CandyMachineStoreProvider comicIssue={comicIssue} accessToken={accessToken}>
+            <CandyMachineDetails
+              accessToken={accessToken}
+              comicIssue={comicIssue}
+              isAuthenticated={isAuthenticatedUser()}
+            />
           </CandyMachineStoreProvider>
         </div>
       </div>
