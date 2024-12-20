@@ -22,12 +22,9 @@ const agePerAudience = (audience: AudienceType) => {
 }
 
 export const AudienceWidget: React.FC<Props> = ({ audience }) => (
-  <Text
-    as='span'
-    styleVariant='body-xsmall'
-    fontWeight='bold'
-    className='flex items-center justify-center p-1 rounded-full border-2 border-orange-400 text-orange-400 size-6'
-  >
-    {agePerAudience(audience)}
-  </Text>
+  <div className='flex items-center justify-center p-1 rounded-full border-2 border-orange-400 size-6'>
+    <Text as='span' styleVariant='body-xsmall' fontWeight='bold' className='text-orange-400'>
+      {agePerAudience(audience)}
+    </Text>
+  </div>
 )

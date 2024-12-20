@@ -5,12 +5,13 @@ import { Socials } from '../shared/Socials'
 import { AvatarImage } from '../shared/AvatarImage'
 import { cn } from '@/lib/utils'
 import { AudienceWidget } from '../shared/AudienceWidget'
-import { StatsList } from '../shared/StatsList'
-import { StatsItem } from '../shared/StatsItem'
+import { StatsContainer, StatsItem } from '../shared/Stats'
 import { RateButton } from '../shared/buttons/RateButton'
 import { FavouritiseButton } from '../shared/buttons/FavouritiseButton'
 import { BookmarkButton } from '../shared/buttons/BookmarkButton'
 import { TextWithViewMoreButton } from '../ui/TextWithViewMoreButton'
+import Link from 'next/link'
+import { RoutePath } from '@/enums/routePath'
 
 type Props = {
   comic: Comic
@@ -26,7 +27,7 @@ export const ComicHeader: React.FC<Props> = ({ comic }) => (
 const LeftSection: React.FC<Props> = ({ comic }) => (
   <div className='flex flex-col gap-3 sm:gap-7 w-full sm:max-w-[500px] lg:max-w-[680px] max-sm:items-start sm:justify-end'>
     <Socials website={comic.website} instagram={comic.instagram} twitter={comic.twitter} className='sm:hidden' />
-    <Text className='font-normal' as='h3' styleVariant='primary-heading'>
+    <Text as='h3' styleVariant='primary-heading'>
       {comic.title}
     </Text>
     <div className='flex flex-col gap-3 sm:min-h-[124px] max-sm:pt-2'>
@@ -54,12 +55,12 @@ const LeftSection: React.FC<Props> = ({ comic }) => (
       </TextWithViewMoreButton>
     </div>
     {comic.creator && (
-      <div className='flex items-center gap-3'>
+      <Link prefetch={false} href={RoutePath.Creator(comic.creator.slug)} className='flex items-center gap-3 w-fit'>
         <AvatarImage src={comic.creator.avatar} size='small' className='border-grey-300 border max-sm:size-8' />
         <Text as='p' styleVariant='body-normal' fontWeight='bold'>
           {comic.creator.name}
         </Text>
-      </div>
+      </Link>
     )}
   </div>
 )
@@ -76,10 +77,10 @@ const RightSection: React.FC<Props> = ({ comic }) => (
       />
       <BookmarkButton comicSlug={comic.slug} isBookmarked={comic.myStats?.isBookmarked} />
     </div>
-    <StatsList>
+    <StatsContainer>
       <StatsItem label='Episodes' value={comic.stats?.issuesCount} />
       <StatsItem label='Readers' value={comic.stats?.readersCount} />
       <StatsItem label='Series' value={comic.isCompleted ? 'Completed' : 'Ongoing'} />
-    </StatsList>
+    </StatsContainer>
   </div>
 )

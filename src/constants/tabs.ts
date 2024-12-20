@@ -21,7 +21,7 @@ export const DISCOVER_PAGE_TABS: Tab[] = [
   },
 ]
 
-export const getCreatorPageTabs = (slug: string): Tab[] => [
+export const creatorPageTabs = (slug: string): Tab[] => [
   {
     name: 'Series',
     url: RoutePath.CreatorSeries(slug),
@@ -33,7 +33,7 @@ export const getCreatorPageTabs = (slug: string): Tab[] => [
   },
 ]
 
-export const getComicPageTabs = (slug: string): Tab[] => [
+export const comicPageTabs = (slug: string): Tab[] => [
   {
     name: 'Episodes',
     url: RoutePath.ComicEpisodes(slug),

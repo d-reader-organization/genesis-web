@@ -6,7 +6,7 @@ import { ComicHeader } from '@/components/comic/Header'
 import { DefaultComicIssueCard } from '@/components/comicIssue/cards/DefaultCard'
 import { BaseLayout } from '@/components/layout/BaseLayout'
 import { Tabs } from '@/components/shared/Tabs'
-import { getComicPageTabs } from '@/constants/tabs'
+import { comicPageTabs } from '@/constants/tabs'
 import React from 'react'
 
 type Props = {
@@ -17,12 +17,12 @@ type Props = {
 
 export default async function ComicEpisodesPage({ params: { slug } }: Props) {
   const comic = await fetchComic({ accessToken: getAccessToken(), slug })
-  const tabs = getComicPageTabs(slug)
-  const comicIssues = await fetchComicIssues({ comicSlug: slug, skip: 0, take: 6 })
-
   if (!comic || !comic.stats) {
     return null
   }
+
+  const tabs = comicPageTabs(slug)
+  const comicIssues = await fetchComicIssues({ comicSlug: slug, skip: 0, take: 6 })
 
   return (
     <BaseLayout>
