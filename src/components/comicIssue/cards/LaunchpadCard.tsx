@@ -1,5 +1,4 @@
 import { Text } from '@/components/ui'
-import { COMIC_BANNER_SIZE } from '@/constants/imageSizes'
 import { RoutePath } from '@/enums/routePath'
 import { LaunchpadModel } from '@/models/candyMachine'
 import { abbreviateNumber } from '@/utils/numbers'
@@ -21,7 +20,8 @@ export const LaunchpadCard: React.FC<Props> = ({ launchpadItem }) => {
       <Image
         src={launchpadItem.image}
         alt={`Launchpad ${launchpadItem.issueTitle}`}
-        {...COMIC_BANNER_SIZE}
+        width={470}
+        height={220}
         className='rounded-xl max-h-[220px] h-auto w-full aspect-comic-banner'
       />
       <Text
