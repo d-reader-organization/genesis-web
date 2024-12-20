@@ -26,10 +26,10 @@ export default async function ComicEpisodesPage({ params: { slug } }: Props) {
   return (
     <BaseLayout>
       <ComicBanner banner={comic.banner} cover={comic.cover} logo={comic.logo} />
-      <div className='flex flex-col px-4 md:px-8 w-full max-w-screen-xl -mt-[150px] gap-8'>
+      <div className='flex flex-col gap-3 px-1 w-full max-w-screen-xl -mt-[180px] sm:px-2 sm:-mt-[380px] sm:gap-7'>
         <ComicHeader comic={comic} />
         <Tabs tabs={tabs} />
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 xl:grid-cols-6 gap-4 sm:gap-7 md:gap-8'>
+        <div className='grid grid-cols-2 md:grid-cols-3 1160:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-9'>
           {comicIssues.map((comicIssue) => (
             <DefaultComicIssueCard key={comicIssue.slug} comicIssue={comicIssue} />
           ))}

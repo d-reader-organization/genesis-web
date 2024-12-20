@@ -36,12 +36,11 @@ export const Navigation: React.FC<Props> = ({ me, hideSearch = false }) => {
       <MobileNav user={me} />
       <div
         className={cn(
-          'max-md:hidden max-h-20 bg-grey-600 bg-opacity-85 backdrop-blur-[25px] flex w-full max-w-screen-xl justify-center',
-          'fixed top-0 left-1/2 transform -translate-x-1/2 z-50',
+          'max-md:hidden max-h-20 bg-grey-600 bg-opacity-85 backdrop-blur-[25px] flex w-full px-6 lg:px-8 justify-center',
+          'fixed top-0 z-50',
           isProfileSheetOpen && 'z-10'
         )}
       >
-        <div className='w-[50px]' />
         <div className='flex items-center justify-between py-4 max-w-screen-xl w-full'>
           <div className='flex items-center gap-8'>
             <Link href={RoutePath.Home} prefetch={false}>
@@ -93,9 +92,7 @@ export const Navigation: React.FC<Props> = ({ me, hideSearch = false }) => {
             </Button>
           )}
         </div>
-        <div className='w-[50px]' />
       </div>
-
       <ProfileSheet
         isOpen={isProfileSheetOpen}
         user={me}

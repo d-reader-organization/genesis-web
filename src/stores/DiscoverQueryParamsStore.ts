@@ -1,7 +1,7 @@
 import { SortOrder } from '@/enums/sortOrder'
-import { ComicParams, ComicSortTag } from '@/models/comic/comicParams'
-import { ComicIssueParams, ComicIssueSortTag } from '@/models/comicIssue/comicIssueParams'
-import { CreatorParams, CreatorSortTag } from '@/models/creator/creatorParams'
+import { ComicParams } from '@/models/comic/comicParams'
+import { ComicIssueParams } from '@/models/comicIssue/comicIssueParams'
+import { CreatorParams } from '@/models/creator/creatorParams'
 import { Genre } from '@/models/genre'
 import { createStore } from 'zustand/vanilla'
 

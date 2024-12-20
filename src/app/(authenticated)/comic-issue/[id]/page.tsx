@@ -14,6 +14,9 @@ import Link from 'next/link'
 import { RoutePath } from '@/enums/routePath'
 import { ChevronRightIcon } from 'lucide-react'
 import { Metadata } from 'next'
+import { RateButton } from '@/components/shared/buttons/RateButton'
+import { FavouritiseButton } from '@/components/shared/buttons/FavouritiseButton'
+import { ShareButton } from '@/components/shared/buttons/ShareButton'
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const ogImagePath = `/api/og/${params.id}`
@@ -50,7 +53,19 @@ export default async function ComicIssuePage({ params: { id } }: ComicIssuePageP
             </Text>
             <ChevronRightIcon className='text-grey-600' />
           </Link>
-
+          <div className='flex gap-1 md:gap-2 justify-between md:justify-around'>
+            <RateButton
+              comicIssueId={comicIssue.id}
+              averageRating={comicIssue.stats?.averageRating}
+              rating={comicIssue.myStats?.rating}
+            />
+            <FavouritiseButton
+              comicIssueId={comicIssue.id}
+              isFavourite={comicIssue.myStats?.isFavourite}
+              favouritesCount={comicIssue.stats?.favouritesCount}
+            />
+            <ShareButton title={comicIssue.title} text={comicIssue.description} />
+          </div>
         </div>
         <div className='flex flex-col gap-6 w-full max-w-[800px] pb-20'>
           <div className='flex flex-col max-md:self-center gap-4'>

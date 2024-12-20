@@ -7,31 +7,30 @@ import { cn } from '@/lib/utils'
 import { AudienceWidget } from '../shared/AudienceWidget'
 import { StatsList } from '../shared/StatsList'
 import { StatsItem } from '../shared/StatsItem'
-import { RateComicButton } from './RateButton'
-import { FavouritiseComicButton } from './FavouritiseButton'
-import { BookmarkComicButton } from './BookmarkButton'
-import { ViewMoreText } from '../ui/ViewMoreText'
+import { RateButton } from '../shared/buttons/RateButton'
+import { FavouritiseButton } from '../shared/buttons/FavouritiseButton'
+import { BookmarkButton } from '../shared/buttons/BookmarkButton'
+import { TextWithViewMoreButton } from '../ui/TextWithViewMoreButton'
 
 type Props = {
   comic: Comic
 }
 
 export const ComicHeader: React.FC<Props> = ({ comic }) => (
-  <div className='flex flex-col md:flex-row md:justify-between pb-8'>
+  <div className='flex flex-col items-center gap-3 sm:gap-8 sm:flex-row sm:justify-between sm:h-[500px] sm:pb-8 sm:items-end'>
     <LeftSection comic={comic} />
     <RightSection comic={comic} />
   </div>
 )
 
-const LeftSection: React.FC<Props> = ({ comic }) => {
-  return (
-    <div className='flex flex-col gap-7 w-full md:max-w-[680px] justify-end'>
-      <Text className='font-normal' as='h3' styleVariant='primary-heading'>
-        {comic.title}
-      </Text>
-      <div className='flex flex-col gap-3 pb-6'>
+const LeftSection: React.FC<Props> = ({ comic }) => (
+  <div className='flex flex-col gap-3 sm:gap-7 w-full sm:max-w-[500px] lg:max-w-[680px] justify-end'>
+    <Text className='font-normal' as='h3' styleVariant='primary-heading'>
+      {comic.title}
+    </Text>
+    <div className='flex flex-col gap-3 sm:min-h-[124px] max-sm:pt-2'>
       {comic.genres && (
-        <div className='flex flex-wrap gap-2'>
+        <div className='flex flex-wrap gap-[6px] sm:gap-2'>
           {comic.genres.map((genre, index) => (
             <div
               className={cn('flex justify-center items-center px-2 py-[2px] rounded-lg bg-grey-500')}
@@ -45,40 +44,38 @@ const LeftSection: React.FC<Props> = ({ comic }) => {
           <AudienceWidget audience={comic.audienceType} />
         </div>
       )}
-      <ViewMoreText as='p' className='whitespace-pre-wrap text-grey-100' styleVariant='body-normal'>
+      <TextWithViewMoreButton
+        as='p'
+        className='whitespace-pre-wrap text-grey-100 max-sm:text-sm'
+        styleVariant='body-normal'
+      >
         {comic.description}
-      </ViewMoreText>
-      </div>
-      {comic.creator && (
-        <div className='flex items-center gap-3 pt'>
-          <AvatarImage src={comic.creator.avatar} size='small' className='border-grey-300 border' />
-          <Text as='p' styleVariant='body-normal' fontWeight='bold'>
-            {comic.creator.name}
-          </Text>
-        </div>
-      )}
+      </TextWithViewMoreButton>
     </div>
-  )
-}
+    {comic.creator && (
+      <div className='flex items-center gap-3'>
+        <AvatarImage src={comic.creator.avatar} size='small' className='border-grey-300 border max-sm:size-8' />
+        <Text as='p' styleVariant='body-normal' fontWeight='bold'>
+          {comic.creator.name}
+        </Text>
+      </div>
+    )}
+  </div>
+)
 
 const RightSection: React.FC<Props> = ({ comic }) => (
-  <div className='flex flex-col w-full sm:max-w-[282px] gap-5 items-end'>
-    <Socials website={comic.website} instagram={comic.instagram} twitter={comic.twitter} />
-    <div className='flex justify-between w-full ACTIONBUTTONSWRAPPER'>
-      <RateComicButton
-        comicSlug={comic.slug}
-        averageRating={comic.stats?.averageRating}
-        rating={comic.myStats?.rating}
-      />
-      <FavouritiseComicButton
+  <div className='flex flex-col w-full gap-3 sm:max-w-[282px] sm:gap-5 items-end'>
+    <Socials website={comic.website} instagram={comic.instagram} twitter={comic.twitter} className='max-md:hidden' />
+    <div className='flex max-sm:gap-2 sm:justify-between w-full ACTIONBUTTONSWRAPPER'>
+      <RateButton comicSlug={comic.slug} averageRating={comic.stats?.averageRating} rating={comic.myStats?.rating} />
+      <FavouritiseButton
         comicSlug={comic.slug}
         isFavourite={comic.myStats?.isFavourite}
         favouritesCount={comic.stats?.favouritesCount}
       />
-      <BookmarkComicButton comicSlug={comic.slug} isBookmarked={comic.myStats?.isBookmarked} />
+      <BookmarkButton comicSlug={comic.slug} isBookmarked={comic.myStats?.isBookmarked} />
     </div>
-    <StatsList separator>
-      <StatsItem label='Episodes' value={comic.stats?.issuesCount} />
+    <StatsList>
       <StatsItem label='Episodes' value={comic.stats?.issuesCount} />
       <StatsItem label='Readers' value={comic.stats?.readersCount} />
       <StatsItem label='Series' value={comic.isCompleted ? 'Completed' : 'Ongoing'} />

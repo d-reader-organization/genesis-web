@@ -42,7 +42,7 @@ const RightSection: React.FC<Props> = ({ creator }) => (
     <StatsList>
       <StatsItem
         label='VOLUME'
-        value={formatCurrency({ value: creator.stats.totalVolume, currency: '$', fractionDigits: 0 })}
+        value={formatCurrency({ value: creator.stats.totalVolume, currency: '◎', fractionDigits: 0, divisor: 9 })}
       />
       <StatsItem label='EPISODES' value={creator.stats.comicIssuesCount} />
       <StatsItem label='followers' value={creator.stats.followersCount} />

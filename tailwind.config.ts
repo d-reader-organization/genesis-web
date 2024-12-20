@@ -20,7 +20,6 @@ const config = {
       1160: '1160px',
       lg: '1200px',
       xl: '1536px',
-      1700: '1600px'
     },
     extend: {
       aspectRatio: {

@@ -11,15 +11,21 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   twitter: string
 }
 
-export const Socials: React.FC<Props> = ({ website, instagram, twitter, className }) => (
-  <div
-    className={cn(
-      'flex border border-grey-300 text-white rounded-xl bg-grey-600 bg-opacity-10 backdrop-blur-xl',
-      className
-    )}
-  >
-    <IconLink className='rounded-lg' href={website} Icon={WebsiteIcon} blank />
-    <IconLink className='rounded-lg' href={instagram} Icon={InstagramIcon} blank />
-    <IconLink className='rounded-lg' href={twitter} Icon={TwitterIcon} blank />
-  </div>
-)
+export const Socials: React.FC<Props> = ({ website, instagram, twitter, className }) => {
+  if (website || instagram || twitter) {
+    return (
+      <div
+        className={cn(
+          'flex border border-grey-300 text-white rounded-xl bg-grey-600 bg-opacity-10 backdrop-blur-xl',
+          className
+        )}
+      >
+        <IconLink className='rounded-lg' href={website} Icon={WebsiteIcon} blank />
+        <IconLink className='rounded-lg' href={instagram} Icon={InstagramIcon} blank />
+        <IconLink className='rounded-lg' href={twitter} Icon={TwitterIcon} blank />
+      </div>
+    )
+  }
+
+  return null
+}

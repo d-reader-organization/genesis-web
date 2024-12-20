@@ -3,18 +3,27 @@
 import { useOptimistic, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { favouritiseComic } from '@/app/lib/api/comic/mutations'
-import { RequireAuthWrapperButton } from '../shared/buttons/RequireAuthWrapperButton'
+import { RequireAuthWrapperButton } from './RequireAuthWrapperButton'
 import { cn } from '@/lib/utils'
 import { Heart } from 'lucide-react'
 import { Text } from '@/components/ui'
+import { favouritiseComicIssue } from '@/app/lib/api/comicIssue/mutations'
 
-type Props = {
-  comicSlug: string
+interface Props extends React.HTMLAttributes<HTMLButtonElement> {
+  comicSlug?: string
+  comicIssueId?: number
   isFavourite?: boolean
   favouritesCount?: number
 }
 
-export const FavouritiseComicButton: React.FC<Props> = ({ comicSlug, isFavourite=false, favouritesCount=0 }) => {
+export const FavouritiseButton: React.FC<Props> = ({
+  comicSlug,
+  comicIssueId,
+  isFavourite = false,
+  favouritesCount = 0,
+  className,
+}) => {
+  const { refresh } = useRouter()
   const [, startTransition] = useTransition()
   const [state, setNewState] = useOptimistic(
     {
@@ -28,12 +37,15 @@ export const FavouritiseComicButton: React.FC<Props> = ({ comicSlug, isFavourite
       }
     }
   )
-  const { refresh } = useRouter()
 
   const handleSubmit = async () => {
     startTransition(async () => {
       setNewState(null)
-      await favouritiseComic(comicSlug)
+      if (comicSlug) {
+        await favouritiseComic(comicSlug)
+      } else if (comicIssueId) {
+        await favouritiseComicIssue(comicIssueId)
+      }
       refresh()
     })
   }
@@ -43,10 +55,14 @@ export const FavouritiseComicButton: React.FC<Props> = ({ comicSlug, isFavourite
       icon={Heart}
       variant='outline'
       onClick={handleSubmit}
-      className={cn('rounded-xl min-w-[80px]', state.isFavourite && 'bg-red-500 bg-opacity-40 text-red-500 border-0')}
+      className={cn(
+        'rounded-xl min-w-[80px] w-[80px]',
+        state.isFavourite && 'bg-red-500 bg-opacity-40 text-red-500 border-0',
+        className
+      )}
       iconClassname={cn(state.isFavourite && 'fill-red-500')}
     >
-      <Text as='span' styleVariant='body-large' className={cn(state.isFavourite && 'text-white')}>
+      <Text as='span' styleVariant='body-normal' className={cn('max-sm:text-xs', state.isFavourite && 'text-white')}>
         {state.favouritesCount}
       </Text>
     </RequireAuthWrapperButton>

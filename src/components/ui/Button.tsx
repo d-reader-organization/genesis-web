@@ -99,7 +99,21 @@ export interface ButtonProps
  * <Button icon={Mail}>Send Email</Button>
  */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, iconClassname, variant, subVariant, size = 'md', iconPosition, icon: Icon, iconOnly, children, ...props }, ref) => {
+  (
+    {
+      className,
+      iconClassname,
+      variant,
+      subVariant,
+      size = 'md',
+      iconPosition,
+      icon: Icon,
+      iconOnly,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     const iconSize = size === 'sm' ? 16 : size === 'md' ? 18 : 20
 
     if (iconOnly && Icon) {
