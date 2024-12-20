@@ -28,11 +28,11 @@ export const LaunchpadCard: React.FC<Props> = ({ launchpadItem }) => {
         as='h4'
         title={launchpadItem.issueTitle}
         styleVariant='secondary-heading'
-        className='line-clamp-1 text-ellipsis text-base sm:text-base md:text-24'
+        className='line-clamp-1 text-ellipsis text-base sm:text-base md:text-24 px-2 sm:px-4'
       >
         {launchpadItem.issueTitle}
       </Text>
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center px-2 sm:px-4'>
         <InfoStats value={launchpadItem.price} name='price' suffix='SOL' />
         <InfoStats value={abbreviateNumber(launchpadItem.supply)} name='supply' />
         <InfoStats value={`${launchpadItem.minted}%`} name='minted' />
